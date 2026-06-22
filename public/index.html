@@ -602,6 +602,263 @@
             max-width: 400px;
             line-height: 1.6;
         }
+
+        /* View Toggle styling */
+        .view-toggle {
+            display: flex;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            padding: 4px;
+            gap: 4px;
+        }
+        .view-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .view-btn:hover {
+            color: var(--text-main);
+            background: rgba(255, 255, 255, 0.03);
+        }
+        .view-btn.active {
+            color: var(--text-main);
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            box-shadow: 0 4px 12px var(--primary-glow);
+        }
+
+        /* Roadmap Tracks styling */
+        .roadmap-container {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            width: 100%;
+        }
+        .roadmap-track {
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.01);
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        .roadmap-track:hover {
+            border-color: rgba(255, 255, 255, 0.12);
+        }
+        .roadmap-track-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 2rem;
+            background: rgba(255, 255, 255, 0.02);
+            cursor: pointer;
+            user-select: none;
+        }
+        .roadmap-track-info {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            flex-grow: 1;
+        }
+        .roadmap-track-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .roadmap-track-title i {
+            color: var(--primary);
+        }
+        .roadmap-track-meta {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            flex-wrap: wrap;
+        }
+        .roadmap-progress-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            width: 200px;
+        }
+        .roadmap-progress-bar {
+            flex-grow: 1;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+        .roadmap-progress-fill {
+            height: 100%;
+            border-radius: 3px;
+            background: linear-gradient(90deg, var(--success), #34d399);
+            width: 0%;
+            transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .roadmap-track-toggle {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            margin-left: 1.5rem;
+            transition: transform 0.3s ease;
+        }
+        .roadmap-track.collapsed .roadmap-track-toggle {
+            transform: rotate(-90deg);
+        }
+        .roadmap-track-content {
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            max-height: 100000px;
+            transition: max-height 0.5s ease-in-out, padding 0.5s ease;
+        }
+        .roadmap-track.collapsed .roadmap-track-content {
+            max-height: 0;
+            padding-top: 0;
+            padding-bottom: 0;
+            overflow: hidden;
+        }
+        
+        /* Timeline line and nodes */
+        .roadmap-timeline {
+            position: absolute;
+            left: calc(2rem + 15px);
+            top: 2rem;
+            bottom: 2rem;
+            width: 2px;
+            background: repeating-linear-gradient(
+                to bottom,
+                transparent,
+                transparent 4px,
+                rgba(255, 255, 255, 0.1) 4px,
+                rgba(255, 255, 255, 0.1) 8px
+            );
+            z-index: 1;
+        }
+        .roadmap-step {
+            display: flex;
+            gap: 2rem;
+            position: relative;
+            padding-bottom: 1.5rem;
+            z-index: 2;
+        }
+        .roadmap-step:last-child {
+            padding-bottom: 0;
+        }
+        .roadmap-node-container {
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        .roadmap-node {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: var(--bg-color);
+            border: 2px solid var(--text-muted);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 0 0px transparent;
+            z-index: 3;
+        }
+        .roadmap-step.completed .roadmap-node {
+            width: 28px;
+            height: 28px;
+            background: var(--success);
+            border-color: var(--success);
+            color: #ffffff;
+            box-shadow: 0 0 10px var(--success-glow);
+        }
+        .roadmap-step.active .roadmap-node {
+            width: 32px;
+            height: 32px;
+            background: var(--primary);
+            border-color: var(--primary);
+            color: #ffffff;
+            animation: pulse-node 2s infinite;
+        }
+        .roadmap-step.pending .roadmap-node {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(255, 255, 255, 0.15);
+            color: var(--text-muted);
+        }
+        
+        @keyframes pulse-node {
+            0% { box-shadow: 0 0 0 0px var(--primary-glow); }
+            70% { box-shadow: 0 0 0 10px rgba(99, 102, 241, 0); }
+            100% { box-shadow: 0 0 0 0px rgba(99, 102, 241, 0); }
+        }
+
+        .roadmap-card {
+            flex-grow: 1;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 1.25rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1.5rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .roadmap-card:hover {
+            background: rgba(255, 255, 255, 0.04);
+            border-color: rgba(255, 255, 255, 0.15);
+            transform: translateX(6px);
+        }
+        .roadmap-step.active .roadmap-card {
+            background: rgba(99, 102, 241, 0.03);
+            border-color: rgba(99, 102, 241, 0.3);
+            box-shadow: 0 4px 20px rgba(99, 102, 241, 0.05);
+        }
+        .roadmap-step.completed .roadmap-card {
+            opacity: 0.85;
+        }
+        .roadmap-info {
+            display: flex;
+            flex-direction: column;
+            gap: 0.35rem;
+        }
+        .roadmap-name {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-main);
+        }
+        .roadmap-meta {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            flex-wrap: wrap;
+        }
+        .roadmap-badge {
+            padding: 2px 8px;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
     </style>
 </head>
 <body>
@@ -698,6 +955,14 @@
                     <div class="results-count" id="results-count">
                         Found <strong>0</strong> mocks
                     </div>
+                    <div class="view-toggle">
+                        <button class="view-btn active" id="view-grid-btn" title="Grid View">
+                            <i class="fa-solid fa-grip-vertical"></i> Grid
+                        </button>
+                        <button class="view-btn" id="view-roadmap-btn" title="Roadmap View">
+                            <i class="fa-solid fa-route"></i> Roadmap
+                        </button>
+                    </div>
                 </div>
 
                 <div class="grid" id="grid">
@@ -734,6 +999,7 @@
             sort: 'name-asc',
             page: 1,
             limit: 60,
+            viewMode: 'grid',
             completed: JSON.parse(localStorage.getItem('completedMocks') || '{}')
         };
 
@@ -751,7 +1017,9 @@
             statTotal: document.getElementById('stat-total'),
             statCompleted: document.getElementById('stat-completed'),
             statProgTxt: document.getElementById('stat-progress-txt'),
-            statProgBar: document.getElementById('stat-progress-bar')
+            statProgBar: document.getElementById('stat-progress-bar'),
+            viewGrid: document.getElementById('view-grid-btn'),
+            viewRoadmap: document.getElementById('view-roadmap-btn')
         };
 
         function assignColors() {
@@ -850,6 +1118,20 @@
                 state.page++;
                 render(true);
             });
+
+            DOM.viewGrid.addEventListener('click', () => {
+                DOM.viewGrid.classList.add('active');
+                DOM.viewRoadmap.classList.remove('active');
+                state.viewMode = 'grid';
+                resetAndRender();
+            });
+
+            DOM.viewRoadmap.addEventListener('click', () => {
+                DOM.viewRoadmap.classList.add('active');
+                DOM.viewGrid.classList.remove('active');
+                state.viewMode = 'roadmap';
+                resetAndRender();
+            });
         }
 
         function toggleComplete(path) {
@@ -873,9 +1155,161 @@
                 }
             });
 
-            if (state.status !== 'all') {
+            if (state.status !== 'all' || state.viewMode === 'roadmap') {
                 resetAndRender();
             }
+        }
+
+        // Export functions to global scope so inline onclick can access them
+        window.toggleComplete = toggleComplete;
+        
+        window.toggleTrack = function(trackId) {
+            const trackEl = document.getElementById(trackId);
+            if (trackEl) {
+                trackEl.classList.toggle('collapsed');
+            }
+        };
+
+        function getMockTrack(mock) {
+            const cat = mock.category.toLowerCase();
+            const name = mock.name.toLowerCase();
+            
+            if (cat.includes('chapter') || cat.includes('pyq') || name.includes('chapter') || name.includes('topic') || name.includes('wise')) {
+                return 'Chapter-wise & Topic Mocks';
+            } else if (cat.includes('speed') || cat.includes('boost') || cat.includes('prac') || cat.includes('sectional') || cat.includes('subject') || 
+                       ['quant', 'reasoning', 'english', 'general studies'].includes(mock.subject.toLowerCase())) {
+                if (mock.subject !== 'Full Mock' && mock.subject !== 'General') {
+                    return `${mock.subject} Sectional Tests`;
+                }
+                return 'Sectional & Practice Tests';
+            } else if (mock.subject === 'Full Mock' || cat.includes('tier') || cat.includes('full') || name.includes('full') || name.includes('pre')) {
+                return 'Full Syllabus Mocks';
+            } else {
+                return 'General Practice Tracks';
+            }
+        }
+
+        function renderRoadmap(filtered) {
+            const tracks = {};
+            filtered.forEach(mock => {
+                const trackName = getMockTrack(mock);
+                if (!tracks[trackName]) {
+                    tracks[trackName] = [];
+                }
+                tracks[trackName].push(mock);
+            });
+
+            DOM.grid.innerHTML = '<div class="roadmap-container"></div>';
+            const roadmapContainer = DOM.grid.querySelector('.roadmap-container');
+            
+            const sortedTrackNames = Object.keys(tracks).sort();
+            if (sortedTrackNames.length === 0) {
+                DOM.grid.innerHTML = `
+                    <div class="empty-state glass-panel">
+                        <i class="fa-solid fa-ghost"></i>
+                        <h3>No tracks found</h3>
+                        <p>We couldn't find any mock tests matching your current filters. Try adjusting your search criteria.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            sortedTrackNames.forEach((trackName, trackIdx) => {
+                const trackMocks = tracks[trackName];
+                const completedCount = trackMocks.filter(m => state.completed[m.path]).length;
+                const pct = trackMocks.length ? Math.round((completedCount / trackMocks.length) * 100) : 0;
+                const trackId = `track-${trackIdx}`;
+                
+                const firstUncompletedIndex = trackMocks.findIndex(m => !state.completed[m.path]);
+                
+                let stepsHTML = '';
+                trackMocks.forEach((mock, idx) => {
+                    const isComp = !!state.completed[mock.path];
+                    const isActive = idx === firstUncompletedIndex;
+                    const isPending = !isComp && !isActive;
+                    
+                    let stepClass = 'pending';
+                    let nodeContent = idx + 1;
+                    if (isComp) {
+                        stepClass = 'completed';
+                        nodeContent = '<i class="fa-solid fa-check"></i>';
+                    } else if (isActive) {
+                        stepClass = 'active';
+                        nodeContent = '<i class="fa-solid fa-play"></i>';
+                    }
+                    
+                    const pColor = providerColors[mock.provider];
+                    const sColor = subjectColors[mock.subject];
+                    
+                    stepsHTML += `
+                        <div class="roadmap-step ${stepClass}" data-card-path="${mock.path}">
+                            <div class="roadmap-node-container">
+                                <div class="roadmap-node" style="${isActive ? 'border-color: ' + pColor + '; background: ' + pColor : ''}">
+                                    ${nodeContent}
+                                </div>
+                            </div>
+                            <div class="roadmap-card">
+                                <div class="roadmap-info">
+                                    <div class="roadmap-name">${mock.name}</div>
+                                    <div class="roadmap-meta">
+                                        <span class="roadmap-badge" style="border-color: ${pColor}40; color: ${pColor}">
+                                            ${mock.provider}
+                                        </span>
+                                        <span class="roadmap-badge" style="border-color: ${sColor}40; color: ${sColor}">
+                                            ${mock.subject}
+                                        </span>
+                                        <span class="category-meta"><i class="fa-regular fa-folder-open"></i> ${mock.category}</span>
+                                    </div>
+                                </div>
+                                <div style="display: flex; gap: 0.75rem; align-items: center;">
+                                    <button class="toggle-btn ${isComp ? 'completed' : ''}" 
+                                            data-path="${mock.path}" 
+                                            onclick="window.toggleComplete('${mock.path.replace(/'/g, "\\'")}')"
+                                            title="Toggle Completion"
+                                            style="padding: 10px; width: 40px; height: 40px; border-radius: 10px;">
+                                        ${isComp ? '<i class="fa-solid fa-check"></i>' : '<i class="fa-regular fa-square"></i>'}
+                                    </button>
+                                    <a href="${mock.path}" target="_blank" class="launch-btn" style="background: linear-gradient(135deg, ${pColor}, ${sColor}); border-radius: 10px; padding: 10px 16px; font-size: 0.9rem; font-weight: 600; text-decoration: none; color: white; display: inline-flex; align-items: center; gap: 8px;">
+                                        <i class="fa-solid fa-play"></i> Launch
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                });
+                
+                const trackHTML = `
+                    <div class="roadmap-track" id="${trackId}">
+                        <div class="roadmap-track-header" onclick="window.toggleTrack('${trackId}')">
+                            <div class="roadmap-track-info">
+                                <div class="roadmap-track-title">
+                                    <i class="fa-solid fa-route"></i> ${trackName}
+                                </div>
+                                <div class="roadmap-track-meta">
+                                    <span><strong>${trackMocks.length}</strong> Mocks</span>
+                                    <span>•</span>
+                                    <span><strong>${completedCount}</strong> Completed</span>
+                                    <span>•</span>
+                                    <div class="roadmap-progress-container">
+                                        <div class="roadmap-progress-bar">
+                                            <div class="roadmap-progress-fill" style="width: ${pct}%"></div>
+                                        </div>
+                                        <span>${pct}%</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="roadmap-track-toggle">
+                                <i class="fa-solid fa-chevron-down"></i>
+                            </div>
+                        </div>
+                        <div class="roadmap-track-content">
+                            <div class="roadmap-timeline"></div>
+                            ${stepsHTML}
+                        </div>
+                    </div>
+                `;
+                roadmapContainer.insertAdjacentHTML('beforeend', trackHTML);
+            });
         }
 
         // Export toggleComplete to global scope so inline onclick can access it
@@ -929,6 +1363,12 @@
 
             DOM.count.innerHTML = `Found <strong>${filtered.length.toLocaleString()}</strong> mocks`;
 
+            if (state.viewMode === 'roadmap') {
+                DOM.loadMoreWrap.style.display = 'none';
+                renderRoadmap(filtered);
+                return;
+            }
+
             const start = 0;
             const end = state.page * state.limit;
             const sliced = filtered.slice(start, end);
@@ -978,6 +1418,9 @@
                     <h3 class="card-title" title="${mock.name}">${mock.name}</h3>
                     <div class="card-meta">
                         <i class="fa-regular fa-folder-open"></i> ${mock.category}
+                    </div>
+                    <div class="card-meta" style="margin-top: -0.5rem; font-size: 0.8rem; opacity: 0.8;">
+                        <i class="fa-solid fa-route"></i> Track: ${getMockTrack(mock)}
                     </div>
                     <div class="card-footer">
                         <button class="toggle-btn ${isComp ? 'completed' : ''}" 
