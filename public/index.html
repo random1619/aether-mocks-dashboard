@@ -603,6 +603,132 @@
             line-height: 1.6;
         }
 
+        /* Subject Cards & Chapter selection portal */
+        .subject-select-portal {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.5rem;
+            padding: 1rem 0;
+            width: 100%;
+        }
+        .portal-instruction {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+        .subject-cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            width: 100%;
+            max-width: 900px;
+        }
+        .subject-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 1.5rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+        }
+        .subject-card:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: var(--primary);
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(99, 102, 241, 0.15);
+        }
+        .subject-card-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            background: rgba(99, 102, 241, 0.1);
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+        }
+        .subject-card:hover .subject-card-icon {
+            background: var(--primary);
+            color: white;
+            transform: scale(1.1);
+        }
+        .subject-card-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--text-main);
+        }
+        .subject-card-count {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            background: rgba(255, 255, 255, 0.04);
+            padding: 2px 10px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .chapter-roadmap-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            width: 100%;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            padding-bottom: 1rem;
+        }
+        .back-btn {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--glass-border);
+            color: var(--text-main);
+            padding: 8px 16px;
+            border-radius: 10px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s;
+        }
+        .back-btn:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.15);
+            transform: translateX(-4px);
+        }
+        .active-subject-badge {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+        }
+        .active-subject-badge strong {
+            color: var(--primary);
+        }
+        .chapter-section {
+            margin-bottom: 2.5rem;
+            position: relative;
+        }
+        .chapter-section:last-child {
+            margin-bottom: 0;
+        }
+        .chapter-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 1.25rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.02);
+            padding: 8px 16px;
+            border-radius: 10px;
+            border-left: 3px solid var(--primary);
+        }
+
         /* View Toggle styling */
         .view-toggle {
             display: flex;
@@ -1000,6 +1126,7 @@
             page: 1,
             limit: 60,
             viewMode: 'grid',
+            chapterSubject: null,
             completed: JSON.parse(localStorage.getItem('completedMocks') || '{}')
         };
 
@@ -1189,6 +1316,22 @@
             }
         }
 
+        function extractChapterName(name) {
+            let clean = name.replace(/^Paid\s+/i, '');
+            let parts = clean.split(/PART|Part|part/i);
+            if (parts.length > 0) {
+                let chap = parts[0].trim();
+                chap = chap.replace(/[\s\-_]+$/, '').trim();
+                return chap;
+            }
+            return "General Topic";
+        }
+
+        window.setChapterSubject = function(subj) {
+            state.chapterSubject = subj;
+            render();
+        };
+
         function renderRoadmap(filtered) {
             const tracks = {};
             filtered.forEach(mock => {
@@ -1221,6 +1364,176 @@
                 const trackId = `track-${trackIdx}`;
                 
                 const firstUncompletedIndex = trackMocks.findIndex(m => !state.completed[m.path]);
+                
+                if (trackName === 'Chapter-wise & Topic Mocks') {
+                    const availableSubjects = [...new Set(trackMocks.map(m => m.subject))].sort();
+                    let trackContentHTML = '';
+                    
+                    if (!state.chapterSubject) {
+                        let cardsHTML = '';
+                        const subjectIcons = {
+                            'Quant': 'fa-calculator',
+                            'Reasoning': 'fa-brain',
+                            'English': 'fa-book',
+                            'General Studies': 'fa-globe',
+                            'General': 'fa-graduation-cap'
+                        };
+                        
+                        availableSubjects.forEach(subj => {
+                            const count = trackMocks.filter(m => m.subject === subj).length;
+                            const completed = trackMocks.filter(m => m.subject === subj && state.completed[m.path]).length;
+                            const icon = subjectIcons[subj] || 'fa-graduation-cap';
+                            const color = subjectColors[subj] || '#6366f1';
+                            
+                            cardsHTML += `
+                                <div class="subject-card" onclick="window.setChapterSubject('${subj}')">
+                                    <div class="subject-card-icon" style="background: ${color}15; color: ${color}">
+                                        <i class="fa-solid ${icon}"></i>
+                                    </div>
+                                    <div class="subject-card-title">${subj}</div>
+                                    <div class="subject-card-count">${completed}/${count} Completed</div>
+                                </div>
+                            `;
+                        });
+                        
+                        trackContentHTML = `
+                            <div class="subject-select-portal">
+                                <div class="portal-instruction">Choose a subject to explore chapter-wise roadmaps:</div>
+                                <div class="subject-cards-grid">
+                                    ${cardsHTML}
+                                </div>
+                            </div>
+                        `;
+                    } else {
+                        const subjectMocks = trackMocks.filter(m => m.subject === state.chapterSubject);
+                        const chapters = {};
+                        subjectMocks.forEach(mock => {
+                            const chap = extractChapterName(mock.name);
+                            if (!chapters[chap]) chapters[chap] = [];
+                            chapters[chap].push(mock);
+                        });
+                        
+                        let chaptersHTML = '';
+                        Object.keys(chapters).sort().forEach((chapName, chapIdx) => {
+                            const chapMocks = chapters[chapName];
+                            const firstUncompletedIndex = chapMocks.findIndex(m => !state.completed[m.path]);
+                            
+                            let stepsHTML = '';
+                            chapMocks.forEach((mock, idx) => {
+                                const isComp = !!state.completed[mock.path];
+                                const isActive = idx === firstUncompletedIndex;
+                                const isPending = !isComp && !isActive;
+                                
+                                let stepClass = 'pending';
+                                let nodeContent = idx + 1;
+                                if (isComp) {
+                                    stepClass = 'completed';
+                                    nodeContent = '<i class="fa-solid fa-check"></i>';
+                                } else if (isActive) {
+                                    stepClass = 'active';
+                                    nodeContent = '<i class="fa-solid fa-play"></i>';
+                                }
+                                
+                                const pColor = providerColors[mock.provider];
+                                const sColor = subjectColors[mock.subject];
+                                
+                                stepsHTML += `
+                                    <div class="roadmap-step ${stepClass}" data-card-path="${mock.path}">
+                                        <div class="roadmap-node-container">
+                                            <div class="roadmap-node" style="${isActive ? 'border-color: ' + pColor + '; background: ' + pColor : ''}">
+                                                ${nodeContent}
+                                            </div>
+                                        </div>
+                                        <div class="roadmap-card">
+                                            <div class="roadmap-info">
+                                                <div class="roadmap-name">${mock.name}</div>
+                                                <div class="roadmap-meta">
+                                                    <span class="roadmap-badge" style="border-color: ${pColor}40; color: ${pColor}">
+                                                        ${mock.provider}
+                                                    </span>
+                                                    <span class="roadmap-badge" style="border-color: ${sColor}40; color: ${sColor}">
+                                                        ${mock.subject}
+                                                    </span>
+                                                    <span class="category-meta"><i class="fa-regular fa-folder-open"></i> ${mock.category}</span>
+                                                </div>
+                                            </div>
+                                            <div style="display: flex; gap: 0.75rem; align-items: center;">
+                                                <button class="toggle-btn ${isComp ? 'completed' : ''}" 
+                                                        data-path="${mock.path}" 
+                                                        onclick="window.toggleComplete('${mock.path.replace(/'/g, "\\'")}')"
+                                                        title="Toggle Completion"
+                                                        style="padding: 10px; width: 40px; height: 40px; border-radius: 10px;">
+                                                    ${isComp ? '<i class="fa-solid fa-check"></i>' : '<i class="fa-regular fa-square"></i>'}
+                                                </button>
+                                                <a href="${mock.path}" target="_blank" class="launch-btn" style="background: linear-gradient(135deg, ${pColor}, ${sColor}); border-radius: 10px; padding: 10px 16px; font-size: 0.9rem; font-weight: 600; text-decoration: none; color: white; display: inline-flex; align-items: center; gap: 8px;">
+                                                    <i class="fa-solid fa-play"></i> Launch
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                `;
+                            });
+                            
+                            chaptersHTML += `
+                                <div class="chapter-section">
+                                    <div class="chapter-title">
+                                        <i class="fa-solid fa-book-open"></i> Topic: ${chapName} (${chapMocks.length} Mocks)
+                                    </div>
+                                    <div style="position: relative; display: flex; flex-direction: column;">
+                                        <div class="roadmap-timeline"></div>
+                                        ${stepsHTML}
+                                    </div>
+                                </div>
+                            `;
+                        });
+                        
+                        trackContentHTML = `
+                            <div class="chapter-roadmap-header">
+                                <button class="back-btn" onclick="window.setChapterSubject(null)">
+                                    <i class="fa-solid fa-arrow-left"></i> Back to Subjects
+                                </button>
+                                <div class="active-subject-badge">
+                                    Active Subject: <strong>${state.chapterSubject}</strong>
+                                </div>
+                            </div>
+                            <div class="chapters-roadmap-list" style="display: flex; flex-direction: column; gap: 2rem;">
+                                ${chaptersHTML}
+                            </div>
+                        `;
+                    }
+                    
+                    const trackHTML = `
+                        <div class="roadmap-track" id="${trackId}">
+                            <div class="roadmap-track-header" onclick="window.toggleTrack('${trackId}')">
+                                <div class="roadmap-track-info">
+                                    <div class="roadmap-track-title">
+                                        <i class="fa-solid fa-route"></i> ${trackName}
+                                    </div>
+                                    <div class="roadmap-track-meta">
+                                        <span><strong>${trackMocks.length}</strong> Mocks</span>
+                                        <span>•</span>
+                                        <span><strong>${completedCount}</strong> Completed</span>
+                                        <span>•</span>
+                                        <div class="roadmap-progress-container">
+                                            <div class="roadmap-progress-bar">
+                                                <div class="roadmap-progress-fill" style="width: ${pct}%"></div>
+                                            </div>
+                                            <span>${pct}%</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="roadmap-track-toggle">
+                                    <i class="fa-solid fa-chevron-down"></i>
+                                </div>
+                            </div>
+                            <div class="roadmap-track-content">
+                                ${trackContentHTML}
+                            </div>
+                        </div>
+                    `;
+                    roadmapContainer.insertAdjacentHTML('beforeend', trackHTML);
+                    return;
+                }
                 
                 let stepsHTML = '';
                 trackMocks.forEach((mock, idx) => {
