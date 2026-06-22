@@ -1688,393 +1688,393 @@ const MOCK_DATA = [
     "subject": "General Studies"
   },
   {
-    "path": "Oliiveboardd/CGL tier 1/@SSC_CGL_MOCKS_2025_SSC CGL10.html",
-    "name": "@SSC CGL MOCKS 2025 SSC CGL10",
+    "path": "Oliiveboardd/CGL tier 1/SSC_CGL_Tier_1_Mock_01.html",
+    "name": "SSC CGL Tier 1 Mock 01",
     "provider": "Oliiveboardd",
     "category": "CGL tier 1",
     "subject": "Full Mock"
   },
   {
-    "path": "Oliiveboardd/CGL tier 1/@SSC_CGL_MOCKS_2025_SSC CGL11.html",
-    "name": "@SSC CGL MOCKS 2025 SSC CGL11",
+    "path": "Oliiveboardd/CGL tier 1/SSC_CGL_Tier_1_Mock_02.html",
+    "name": "SSC CGL Tier 1 Mock 02",
     "provider": "Oliiveboardd",
     "category": "CGL tier 1",
     "subject": "Full Mock"
   },
   {
-    "path": "Oliiveboardd/CGL tier 1/@SSC_CGL_MOCKS_2025_SSC CGL12.html",
-    "name": "@SSC CGL MOCKS 2025 SSC CGL12",
+    "path": "Oliiveboardd/CGL tier 1/SSC_CGL_Tier_1_Mock_03.html",
+    "name": "SSC CGL Tier 1 Mock 03",
     "provider": "Oliiveboardd",
     "category": "CGL tier 1",
     "subject": "Full Mock"
   },
   {
-    "path": "Oliiveboardd/CGL tier 1/@SSC_CGL_MOCKS_2025_SSC CGL13.html",
-    "name": "@SSC CGL MOCKS 2025 SSC CGL13",
+    "path": "Oliiveboardd/CGL tier 1/SSC_CGL_Tier_1_Mock_04.html",
+    "name": "SSC CGL Tier 1 Mock 04",
     "provider": "Oliiveboardd",
     "category": "CGL tier 1",
     "subject": "Full Mock"
   },
   {
-    "path": "Oliiveboardd/CGL tier 1/@SSC_CGL_MOCKS_2025_SSC CGL14.html",
-    "name": "@SSC CGL MOCKS 2025 SSC CGL14",
+    "path": "Oliiveboardd/CGL tier 1/SSC_CGL_Tier_1_Mock_05.html",
+    "name": "SSC CGL Tier 1 Mock 05",
     "provider": "Oliiveboardd",
     "category": "CGL tier 1",
     "subject": "Full Mock"
   },
   {
-    "path": "Oliiveboardd/CGL tier 1/@SSC_CGL_MOCKS_2025_SSC CGL15.html",
-    "name": "@SSC CGL MOCKS 2025 SSC CGL15",
+    "path": "Oliiveboardd/CGL tier 1/SSC_CGL_Tier_1_Mock_06.html",
+    "name": "SSC CGL Tier 1 Mock 06",
     "provider": "Oliiveboardd",
     "category": "CGL tier 1",
     "subject": "Full Mock"
   },
   {
-    "path": "Oliiveboardd/CGL tier 1/@SSC_CGL_MOCKS_2025_SSC CGL16.html",
-    "name": "@SSC CGL MOCKS 2025 SSC CGL16",
+    "path": "Oliiveboardd/CGL tier 1/SSC_CGL_Tier_1_Mock_07.html",
+    "name": "SSC CGL Tier 1 Mock 07",
     "provider": "Oliiveboardd",
     "category": "CGL tier 1",
     "subject": "Full Mock"
   },
   {
-    "path": "Oliiveboardd/CGL tier 1/@SSC_CGL_MOCKS_2025_SSC CGL17.html",
-    "name": "@SSC CGL MOCKS 2025 SSC CGL17",
+    "path": "Oliiveboardd/CGL tier 1/SSC_CGL_Tier_1_Mock_08.html",
+    "name": "SSC CGL Tier 1 Mock 08",
     "provider": "Oliiveboardd",
     "category": "CGL tier 1",
     "subject": "Full Mock"
   },
   {
-    "path": "Oliiveboardd/CGL tier 1/@SSC_CGL_MOCKS_2025_SSC CGL18.html",
-    "name": "@SSC CGL MOCKS 2025 SSC CGL18",
+    "path": "Oliiveboardd/CGL tier 1/SSC_CGL_Tier_1_Mock_09.html",
+    "name": "SSC CGL Tier 1 Mock 09",
     "provider": "Oliiveboardd",
     "category": "CGL tier 1",
     "subject": "Full Mock"
   },
   {
-    "path": "Oliiveboardd/CGL tier 1/@SSC_CGL_MOCKS_2025_SSC CGL19.html",
-    "name": "@SSC CGL MOCKS 2025 SSC CGL19",
+    "path": "Oliiveboardd/CGL tier 1/SSC_CGL_Tier_1_Mock_10.html",
+    "name": "SSC CGL Tier 1 Mock 10",
     "provider": "Oliiveboardd",
     "category": "CGL tier 1",
     "subject": "Full Mock"
   },
   {
-    "path": "Oliiveboardd/CGL tier 1/@SSC_CGL_MOCKS_2025_SSC CGL20.html",
-    "name": "@SSC CGL MOCKS 2025 SSC CGL20",
+    "path": "Oliiveboardd/CGL tier 1/SSC_CGL_Tier_1_Mock_11.html",
+    "name": "SSC CGL Tier 1 Mock 11",
     "provider": "Oliiveboardd",
     "category": "CGL tier 1",
     "subject": "Full Mock"
   },
   {
-    "path": "Oliiveboardd/CGL tier 1/@SSC_CGL_MOCKS_2025_SSC CGL21.html",
-    "name": "@SSC CGL MOCKS 2025 SSC CGL21",
+    "path": "Oliiveboardd/CGL tier 1/SSC_CGL_Tier_1_Mock_12.html",
+    "name": "SSC CGL Tier 1 Mock 12",
     "provider": "Oliiveboardd",
     "category": "CGL tier 1",
     "subject": "Full Mock"
   },
   {
-    "path": "Oliiveboardd/CGL tier 1/@SSC_CGL_MOCKS_2025_SSC CGL22.html",
-    "name": "@SSC CGL MOCKS 2025 SSC CGL22",
+    "path": "Oliiveboardd/CGL tier 1/SSC_CGL_Tier_1_Mock_13.html",
+    "name": "SSC CGL Tier 1 Mock 13",
     "provider": "Oliiveboardd",
     "category": "CGL tier 1",
     "subject": "Full Mock"
   },
   {
-    "path": "Oliiveboardd/CGL tier 1/@SSC_CGL_MOCKS_2025_SSC CGL24.html",
-    "name": "@SSC CGL MOCKS 2025 SSC CGL24",
+    "path": "Oliiveboardd/CGL tier 1/SSC_CGL_Tier_1_Mock_14.html",
+    "name": "SSC CGL Tier 1 Mock 14",
     "provider": "Oliiveboardd",
     "category": "CGL tier 1",
     "subject": "Full Mock"
   },
   {
-    "path": "Oliiveboardd/CGL tier 1/@SSC_CGL_MOCKS_2025_SSC CGL25.html",
-    "name": "@SSC CGL MOCKS 2025 SSC CGL25",
+    "path": "Oliiveboardd/CGL tier 1/SSC_CGL_Tier_1_Mock_15.html",
+    "name": "SSC CGL Tier 1 Mock 15",
     "provider": "Oliiveboardd",
     "category": "CGL tier 1",
     "subject": "Full Mock"
   },
   {
-    "path": "Oliiveboardd/CGL tier 1/@SSC_CGL_MOCKS_2025_SSC CGL31.html",
-    "name": "@SSC CGL MOCKS 2025 SSC CGL31",
+    "path": "Oliiveboardd/CGL tier 1/SSC_CGL_Tier_1_Mock_16.html",
+    "name": "SSC CGL Tier 1 Mock 16",
     "provider": "Oliiveboardd",
     "category": "CGL tier 1",
     "subject": "Full Mock"
   },
   {
-    "path": "Oliiveboardd/CGL tier 1/@SSC_CGL_MOCKS_2025_SSC CGL32.html",
-    "name": "@SSC CGL MOCKS 2025 SSC CGL32",
+    "path": "Oliiveboardd/CGL tier 1/SSC_CGL_Tier_1_Mock_17.html",
+    "name": "SSC CGL Tier 1 Mock 17",
     "provider": "Oliiveboardd",
     "category": "CGL tier 1",
     "subject": "Full Mock"
   },
   {
-    "path": "Oliiveboardd/CGL tier 1/@SSC_CGL_MOCKS_2025_SSC CGL33.html",
-    "name": "@SSC CGL MOCKS 2025 SSC CGL33",
+    "path": "Oliiveboardd/CGL tier 1/SSC_CGL_Tier_1_Mock_18.html",
+    "name": "SSC CGL Tier 1 Mock 18",
     "provider": "Oliiveboardd",
     "category": "CGL tier 1",
     "subject": "Full Mock"
   },
   {
-    "path": "Oliiveboardd/CGL tier 1/@SSC_CGL_MOCKS_2025_SSC CGL34.html",
-    "name": "@SSC CGL MOCKS 2025 SSC CGL34",
+    "path": "Oliiveboardd/CGL tier 1/SSC_CGL_Tier_1_Mock_19.html",
+    "name": "SSC CGL Tier 1 Mock 19",
     "provider": "Oliiveboardd",
     "category": "CGL tier 1",
     "subject": "Full Mock"
   },
   {
-    "path": "Oliiveboardd/CGL tier 1/@SSC_CGL_MOCKS_2025_SSC CGL35.html",
-    "name": "@SSC CGL MOCKS 2025 SSC CGL35",
+    "path": "Oliiveboardd/CGL tier 1/SSC_CGL_Tier_1_Mock_20.html",
+    "name": "SSC CGL Tier 1 Mock 20",
     "provider": "Oliiveboardd",
     "category": "CGL tier 1",
     "subject": "Full Mock"
   },
   {
-    "path": "Oliiveboardd/CGL tier 1/@SSC_CGL_MOCKS_2025_SSC CGL36.html",
-    "name": "@SSC CGL MOCKS 2025 SSC CGL36",
+    "path": "Oliiveboardd/CGL tier 1/SSC_CGL_Tier_1_Mock_21.html",
+    "name": "SSC CGL Tier 1 Mock 21",
     "provider": "Oliiveboardd",
     "category": "CGL tier 1",
     "subject": "Full Mock"
   },
   {
-    "path": "Oliiveboardd/CGL tier 1/@SSC_CGL_MOCKS_2025_SSC CGL37.html",
-    "name": "@SSC CGL MOCKS 2025 SSC CGL37",
+    "path": "Oliiveboardd/CGL tier 1/SSC_CGL_Tier_1_Mock_22.html",
+    "name": "SSC CGL Tier 1 Mock 22",
     "provider": "Oliiveboardd",
     "category": "CGL tier 1",
     "subject": "Full Mock"
   },
   {
-    "path": "Oliiveboardd/CGL tier 1/@SSC_CGL_MOCKS_2025_SSC CGL38.html",
-    "name": "@SSC CGL MOCKS 2025 SSC CGL38",
+    "path": "Oliiveboardd/CGL tier 1/SSC_CGL_Tier_1_Mock_23.html",
+    "name": "SSC CGL Tier 1 Mock 23",
     "provider": "Oliiveboardd",
     "category": "CGL tier 1",
     "subject": "Full Mock"
   },
   {
-    "path": "Oliiveboardd/CGL tier 1/@SSC_CGL_MOCKS_2025_SSC CGL39.html",
-    "name": "@SSC CGL MOCKS 2025 SSC CGL39",
+    "path": "Oliiveboardd/CGL tier 1/SSC_CGL_Tier_1_Mock_24.html",
+    "name": "SSC CGL Tier 1 Mock 24",
     "provider": "Oliiveboardd",
     "category": "CGL tier 1",
     "subject": "Full Mock"
   },
   {
-    "path": "Oliiveboardd/CGL tier 1/@SSC_CGL_MOCKS_2025_SSC CGL4.html",
-    "name": "@SSC CGL MOCKS 2025 SSC CGL4",
+    "path": "Oliiveboardd/CGL tier 1/SSC_CGL_Tier_1_Mock_25.html",
+    "name": "SSC CGL Tier 1 Mock 25",
     "provider": "Oliiveboardd",
     "category": "CGL tier 1",
     "subject": "Full Mock"
   },
   {
-    "path": "Oliiveboardd/CGL tier 1/@SSC_CGL_MOCKS_2025_SSC CGL40.html",
-    "name": "@SSC CGL MOCKS 2025 SSC CGL40",
+    "path": "Oliiveboardd/CGL tier 1/SSC_CGL_Tier_1_Mock_26.html",
+    "name": "SSC CGL Tier 1 Mock 26",
     "provider": "Oliiveboardd",
     "category": "CGL tier 1",
     "subject": "Full Mock"
   },
   {
-    "path": "Oliiveboardd/CGL tier 1/@SSC_CGL_MOCKS_2025_SSC CGL41.html",
-    "name": "@SSC CGL MOCKS 2025 SSC CGL41",
+    "path": "Oliiveboardd/CGL tier 1/SSC_CGL_Tier_1_Mock_27.html",
+    "name": "SSC CGL Tier 1 Mock 27",
     "provider": "Oliiveboardd",
     "category": "CGL tier 1",
     "subject": "Full Mock"
   },
   {
-    "path": "Oliiveboardd/CGL tier 1/@SSC_CGL_MOCKS_2025_SSC CGL42.html",
-    "name": "@SSC CGL MOCKS 2025 SSC CGL42",
+    "path": "Oliiveboardd/CGL tier 1/SSC_CGL_Tier_1_Mock_28.html",
+    "name": "SSC CGL Tier 1 Mock 28",
     "provider": "Oliiveboardd",
     "category": "CGL tier 1",
     "subject": "Full Mock"
   },
   {
-    "path": "Oliiveboardd/CGL tier 1/@SSC_CGL_MOCKS_2025_SSC CGL43.html",
-    "name": "@SSC CGL MOCKS 2025 SSC CGL43",
+    "path": "Oliiveboardd/CGL tier 1/SSC_CGL_Tier_1_Mock_29.html",
+    "name": "SSC CGL Tier 1 Mock 29",
     "provider": "Oliiveboardd",
     "category": "CGL tier 1",
     "subject": "Full Mock"
   },
   {
-    "path": "Oliiveboardd/CGL tier 1/@SSC_CGL_MOCKS_2025_SSC CGL44.html",
-    "name": "@SSC CGL MOCKS 2025 SSC CGL44",
+    "path": "Oliiveboardd/CGL tier 1/SSC_CGL_Tier_1_Mock_30.html",
+    "name": "SSC CGL Tier 1 Mock 30",
     "provider": "Oliiveboardd",
     "category": "CGL tier 1",
     "subject": "Full Mock"
   },
   {
-    "path": "Oliiveboardd/CGL tier 1/@SSC_CGL_MOCKS_2025_SSC CGL45.html",
-    "name": "@SSC CGL MOCKS 2025 SSC CGL45",
+    "path": "Oliiveboardd/CGL tier 1/SSC_CGL_Tier_1_Mock_31.html",
+    "name": "SSC CGL Tier 1 Mock 31",
     "provider": "Oliiveboardd",
     "category": "CGL tier 1",
     "subject": "Full Mock"
   },
   {
-    "path": "Oliiveboardd/CGL tier 1/@SSC_CGL_MOCKS_2025_SSC CGL46.html",
-    "name": "@SSC CGL MOCKS 2025 SSC CGL46",
+    "path": "Oliiveboardd/CGL tier 1/SSC_CGL_Tier_1_Mock_32.html",
+    "name": "SSC CGL Tier 1 Mock 32",
     "provider": "Oliiveboardd",
     "category": "CGL tier 1",
     "subject": "Full Mock"
   },
   {
-    "path": "Oliiveboardd/CGL tier 1/@SSC_CGL_MOCKS_2025_SSC CGL47.html",
-    "name": "@SSC CGL MOCKS 2025 SSC CGL47",
+    "path": "Oliiveboardd/CGL tier 1/SSC_CGL_Tier_1_Mock_33.html",
+    "name": "SSC CGL Tier 1 Mock 33",
     "provider": "Oliiveboardd",
     "category": "CGL tier 1",
     "subject": "Full Mock"
   },
   {
-    "path": "Oliiveboardd/CGL tier 1/@SSC_CGL_MOCKS_2025_SSC CGL48.html",
-    "name": "@SSC CGL MOCKS 2025 SSC CGL48",
+    "path": "Oliiveboardd/CGL tier 1/SSC_CGL_Tier_1_Mock_34.html",
+    "name": "SSC CGL Tier 1 Mock 34",
     "provider": "Oliiveboardd",
     "category": "CGL tier 1",
     "subject": "Full Mock"
   },
   {
-    "path": "Oliiveboardd/CGL tier 1/@SSC_CGL_MOCKS_2025_SSC CGL49.html",
-    "name": "@SSC CGL MOCKS 2025 SSC CGL49",
+    "path": "Oliiveboardd/CGL tier 1/SSC_CGL_Tier_1_Mock_35.html",
+    "name": "SSC CGL Tier 1 Mock 35",
     "provider": "Oliiveboardd",
     "category": "CGL tier 1",
     "subject": "Full Mock"
   },
   {
-    "path": "Oliiveboardd/CGL tier 1/@SSC_CGL_MOCKS_2025_SSC CGL5.html",
-    "name": "@SSC CGL MOCKS 2025 SSC CGL5",
+    "path": "Oliiveboardd/CGL tier 1/SSC_CGL_Tier_1_Mock_36.html",
+    "name": "SSC CGL Tier 1 Mock 36",
     "provider": "Oliiveboardd",
     "category": "CGL tier 1",
     "subject": "Full Mock"
   },
   {
-    "path": "Oliiveboardd/CGL tier 1/@SSC_CGL_MOCKS_2025_SSC CGL50.html",
-    "name": "@SSC CGL MOCKS 2025 SSC CGL50",
+    "path": "Oliiveboardd/CGL tier 1/SSC_CGL_Tier_1_Mock_37.html",
+    "name": "SSC CGL Tier 1 Mock 37",
     "provider": "Oliiveboardd",
     "category": "CGL tier 1",
     "subject": "Full Mock"
   },
   {
-    "path": "Oliiveboardd/CGL tier 1/@SSC_CGL_MOCKS_2025_SSC CGL51.html",
-    "name": "@SSC CGL MOCKS 2025 SSC CGL51",
+    "path": "Oliiveboardd/CGL tier 1/SSC_CGL_Tier_1_Mock_38.html",
+    "name": "SSC CGL Tier 1 Mock 38",
     "provider": "Oliiveboardd",
     "category": "CGL tier 1",
     "subject": "Full Mock"
   },
   {
-    "path": "Oliiveboardd/CGL tier 1/@SSC_CGL_MOCKS_2025_SSC CGL52.html",
-    "name": "@SSC CGL MOCKS 2025 SSC CGL52",
+    "path": "Oliiveboardd/CGL tier 1/SSC_CGL_Tier_1_Mock_39.html",
+    "name": "SSC CGL Tier 1 Mock 39",
     "provider": "Oliiveboardd",
     "category": "CGL tier 1",
     "subject": "Full Mock"
   },
   {
-    "path": "Oliiveboardd/CGL tier 1/@SSC_CGL_MOCKS_2025_SSC CGL53.html",
-    "name": "@SSC CGL MOCKS 2025 SSC CGL53",
+    "path": "Oliiveboardd/CGL tier 1/SSC_CGL_Tier_1_Mock_40.html",
+    "name": "SSC CGL Tier 1 Mock 40",
     "provider": "Oliiveboardd",
     "category": "CGL tier 1",
     "subject": "Full Mock"
   },
   {
-    "path": "Oliiveboardd/CGL tier 1/@SSC_CGL_MOCKS_2025_SSC CGL54.html",
-    "name": "@SSC CGL MOCKS 2025 SSC CGL54",
+    "path": "Oliiveboardd/CGL tier 1/SSC_CGL_Tier_1_Mock_41.html",
+    "name": "SSC CGL Tier 1 Mock 41",
     "provider": "Oliiveboardd",
     "category": "CGL tier 1",
     "subject": "Full Mock"
   },
   {
-    "path": "Oliiveboardd/CGL tier 1/@SSC_CGL_MOCKS_2025_SSC CGL55.html",
-    "name": "@SSC CGL MOCKS 2025 SSC CGL55",
+    "path": "Oliiveboardd/CGL tier 1/SSC_CGL_Tier_1_Mock_42.html",
+    "name": "SSC CGL Tier 1 Mock 42",
     "provider": "Oliiveboardd",
     "category": "CGL tier 1",
     "subject": "Full Mock"
   },
   {
-    "path": "Oliiveboardd/CGL tier 1/@SSC_CGL_MOCKS_2025_SSC CGL56.html",
-    "name": "@SSC CGL MOCKS 2025 SSC CGL56",
+    "path": "Oliiveboardd/CGL tier 1/SSC_CGL_Tier_1_Mock_43.html",
+    "name": "SSC CGL Tier 1 Mock 43",
     "provider": "Oliiveboardd",
     "category": "CGL tier 1",
     "subject": "Full Mock"
   },
   {
-    "path": "Oliiveboardd/CGL tier 1/@SSC_CGL_MOCKS_2025_SSC CGL57.html",
-    "name": "@SSC CGL MOCKS 2025 SSC CGL57",
+    "path": "Oliiveboardd/CGL tier 1/SSC_CGL_Tier_1_Mock_44.html",
+    "name": "SSC CGL Tier 1 Mock 44",
     "provider": "Oliiveboardd",
     "category": "CGL tier 1",
     "subject": "Full Mock"
   },
   {
-    "path": "Oliiveboardd/CGL tier 1/@SSC_CGL_MOCKS_2025_SSC CGL6.html",
-    "name": "@SSC CGL MOCKS 2025 SSC CGL6",
+    "path": "Oliiveboardd/CGL tier 1/SSC_CGL_Tier_1_Mock_45.html",
+    "name": "SSC CGL Tier 1 Mock 45",
     "provider": "Oliiveboardd",
     "category": "CGL tier 1",
     "subject": "Full Mock"
   },
   {
-    "path": "Oliiveboardd/CGL tier 1/@SSC_CGL_MOCKS_2025_SSC CGL7.html",
-    "name": "@SSC CGL MOCKS 2025 SSC CGL7",
+    "path": "Oliiveboardd/CGL tier 1/SSC_CGL_Tier_1_Mock_46.html",
+    "name": "SSC CGL Tier 1 Mock 46",
     "provider": "Oliiveboardd",
     "category": "CGL tier 1",
     "subject": "Full Mock"
   },
   {
-    "path": "Oliiveboardd/CGL tier 1/@SSC_CGL_MOCKS_2025_SSC CGL8.html",
-    "name": "@SSC CGL MOCKS 2025 SSC CGL8",
+    "path": "Oliiveboardd/CGL tier 1/SSC_CGL_Tier_1_Mock_47.html",
+    "name": "SSC CGL Tier 1 Mock 47",
     "provider": "Oliiveboardd",
     "category": "CGL tier 1",
     "subject": "Full Mock"
   },
   {
-    "path": "Oliiveboardd/CGL tier 1/@SSC_CGL_MOCKS_2025_SSC CGL9.html",
-    "name": "@SSC CGL MOCKS 2025 SSC CGL9",
+    "path": "Oliiveboardd/CGL tier 1/SSC_CGL_Tier_1_Mock_48.html",
+    "name": "SSC CGL Tier 1 Mock 48",
     "provider": "Oliiveboardd",
     "category": "CGL tier 1",
     "subject": "Full Mock"
   },
   {
-    "path": "Oliiveboardd/CGL tier 1/@SSC_CGL_MOCKS_2025SSC CGL_58.html",
-    "name": "@SSC CGL MOCKS 2025SSC CGL 58",
+    "path": "Oliiveboardd/CGL tier 1/SSC_CGL_Tier_1_Mock_49.html",
+    "name": "SSC CGL Tier 1 Mock 49",
     "provider": "Oliiveboardd",
     "category": "CGL tier 1",
     "subject": "Full Mock"
   },
   {
-    "path": "Oliiveboardd/CGL tier 1/@SSC_CGL_MOCKS_2025SSC CGL_59.html",
-    "name": "@SSC CGL MOCKS 2025SSC CGL 59",
+    "path": "Oliiveboardd/CGL tier 1/SSC_CGL_Tier_1_Mock_50.html",
+    "name": "SSC CGL Tier 1 Mock 50",
     "provider": "Oliiveboardd",
     "category": "CGL tier 1",
     "subject": "Full Mock"
   },
   {
-    "path": "Oliiveboardd/CGL tier 1/@SSC_CGL_MOCKS_2025SSC CGL_60.html",
-    "name": "@SSC CGL MOCKS 2025SSC CGL 60",
+    "path": "Oliiveboardd/CGL tier 1/SSC_CGL_Tier_1_Mock_51.html",
+    "name": "SSC CGL Tier 1 Mock 51",
     "provider": "Oliiveboardd",
     "category": "CGL tier 1",
     "subject": "Full Mock"
   },
   {
-    "path": "Oliiveboardd/CGL tier 1/@SSC_CGL_MOCKS_2025SSC CGL_61.html",
-    "name": "@SSC CGL MOCKS 2025SSC CGL 61",
+    "path": "Oliiveboardd/CGL tier 1/SSC_CGL_Tier_1_Mock_52.html",
+    "name": "SSC CGL Tier 1 Mock 52",
     "provider": "Oliiveboardd",
     "category": "CGL tier 1",
     "subject": "Full Mock"
   },
   {
-    "path": "Oliiveboardd/CGL tier 1/@SSC_CGL_MOCKS_2025SSC CGL_62.html",
-    "name": "@SSC CGL MOCKS 2025SSC CGL 62",
+    "path": "Oliiveboardd/CGL tier 1/SSC_CGL_Tier_1_Mock_53.html",
+    "name": "SSC CGL Tier 1 Mock 53",
     "provider": "Oliiveboardd",
     "category": "CGL tier 1",
     "subject": "Full Mock"
   },
   {
-    "path": "Oliiveboardd/CGL tier 1/@mocks_wallah_cgl1_1 .html",
-    "name": "@mocks wallah cgl1 1",
+    "path": "Oliiveboardd/CGL tier 1/SSC_CGL_Tier_1_Mock_54.html",
+    "name": "SSC CGL Tier 1 Mock 54",
     "provider": "Oliiveboardd",
     "category": "CGL tier 1",
     "subject": "Full Mock"
   },
   {
-    "path": "Oliiveboardd/CGL tier 1/@mocks_wallah_cgl1_2 .html",
-    "name": "@mocks wallah cgl1 2",
+    "path": "Oliiveboardd/CGL tier 1/SSC_CGL_Tier_1_Mock_55.html",
+    "name": "SSC CGL Tier 1 Mock 55",
     "provider": "Oliiveboardd",
     "category": "CGL tier 1",
     "subject": "Full Mock"
   },
   {
-    "path": "Oliiveboardd/CGL tier 1/@mocks_wallah_cgl1_3 .html",
-    "name": "@mocks wallah cgl1 3",
+    "path": "Oliiveboardd/CGL tier 1/SSC_CGL_Tier_1_Mock_56.html",
+    "name": "SSC CGL Tier 1 Mock 56",
     "provider": "Oliiveboardd",
     "category": "CGL tier 1",
     "subject": "Full Mock"

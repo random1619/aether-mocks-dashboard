@@ -2,7 +2,7 @@ import os
 import json
 import re
 
-root_dir = r"c:\Users\gagan\Downloads\Finally"
+root_dir = r"c:\Users\gagan\Downloads\Finally\public"
 mocks = []
 
 # Regex patterns to clean up filenames
