@@ -1,0 +1,1109 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Oliveboard Mock Exams Tracker & Roadmap</title>
+  
+  <!-- Premium Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS is avoided, Vanilla CSS is compiled from SCSS components -->
+  <link rel="stylesheet" href="dashboard.css">
+  
+  <!-- Third-party Engagement Libraries -->
+  <!-- Chart.js for stats graphs -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <!-- GSAP for micro-interactions & entrance animations -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <!-- Canvas Confetti for completion celebration -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+
+  <div class="app-container">
+    
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="logo-icon">
+          <i data-lucide="award"></i>
+        </div>
+        <div class="brand-title">
+          OLIVEBOARD
+          <span>Premium Mock Hub</span>
+        </div>
+      </div>
+      
+      <div class="sidebar-nav">
+        <div class="sidebar-search">
+          <i data-lucide="search"></i>
+          <input type="text" id="search-categories" placeholder="Filter categories...">
+        </div>
+        <div class="nav-header">CATEGORIES</div>
+        <nav id="category-list-nav">
+          <!-- Dynamically populated categories -->
+        </nav>
+      </div>
+      
+      <div class="sidebar-footer">
+        <button class="theme-toggle-btn" id="theme-toggle">
+          <i data-lucide="sun" id="theme-icon-sun" style="display:none;"></i>
+          <i data-lucide="moon" id="theme-icon-moon"></i>
+          <span id="theme-text">Dark Mode</span>
+        </button>
+        
+        <div class="backup-buttons">
+          <button id="btn-export" title="Export Progress Backup">
+            <i data-lucide="download"></i> Export
+          </button>
+          <button id="btn-import" title="Import Progress Backup">
+            <i data-lucide="upload"></i> Import
+          </button>
+        </div>
+      </div>
+    </aside>
+    
+    <!-- Main Content Area -->
+    <main class="main-content">
+      
+      <!-- Top Title Bar -->
+      <header class="animate-fade-in" style="display:flex; justify-content:space-between; align-items:center;">
+        <div>
+          <h1 style="font-size:1.8rem; font-weight:800; letter-spacing:-0.5px;">Dashboard overview</h1>
+          <p style="color:var(--text-secondary); font-size:0.9rem; margin-top:0.25rem;">Monitor your exam preparation progress and roadmap milestones.</p>
+        </div>
+      </header>
+      
+      <!-- Stats Dashboard Cards -->
+      <section class="stats-grid animate-fade-in" style="animation-delay:0.1s;">
+        <div class="stat-card glass-panel card-total">
+          <div class="stat-info">
+            <span class="stat-label">Total Mocks</span>
+            <span class="stat-value" id="stats-total">0</span>
+            <span class="stat-desc">across all directories</span>
+          </div>
+          <div class="stat-icon-wrapper">
+            <i data-lucide="book-open"></i>
+          </div>
+        </div>
+        
+        <div class="stat-card glass-panel card-completed">
+          <div class="stat-info">
+            <span class="stat-label">Completed</span>
+            <span class="stat-value" id="stats-completed">0</span>
+            <span class="stat-desc" id="stats-completed-pct">0% success rate</span>
+          </div>
+          <div class="stat-icon-wrapper">
+            <i data-lucide="check-circle-2"></i>
+          </div>
+        </div>
+        
+        <div class="stat-card glass-panel card-progress">
+          <div class="stat-info">
+            <span class="stat-label">In Progress</span>
+            <span class="stat-value" id="stats-progress">0</span>
+            <span class="stat-desc">currently working on</span>
+          </div>
+          <div class="stat-icon-wrapper">
+            <i data-lucide="clock"></i>
+          </div>
+        </div>
+        
+        <div class="stat-card glass-panel card-todo">
+          <div class="stat-info">
+            <span class="stat-label">Remaining</span>
+            <span class="stat-value" id="stats-todo">0</span>
+            <span class="stat-desc">unstarted exams</span>
+          </div>
+          <div class="stat-icon-wrapper">
+            <i data-lucide="help-circle"></i>
+          </div>
+        </div>
+      </section>
+      
+      <!-- Analytics Charts Panel -->
+      <section class="analytics-grid animate-fade-in" style="animation-delay:0.15s;">
+        <div class="analytics-card glass-panel">
+          <div class="card-header-row">
+            <span class="card-title"><i data-lucide="trending-up"></i> Score Performance Analytics</span>
+            <span class="card-subtitle">Showing score trends of completed mocks</span>
+          </div>
+          <div class="chart-container">
+            <canvas id="scoreTrendChart"></canvas>
+          </div>
+        </div>
+        
+        <div class="analytics-card glass-panel">
+          <div class="card-header-row">
+            <span class="card-title"><i data-lucide="pie-chart"></i> Success Distribution</span>
+            <span class="card-subtitle">Overall progress ratio</span>
+          </div>
+          <div class="chart-container">
+            <canvas id="distributionChart"></canvas>
+          </div>
+        </div>
+      </section>
+      
+      <!-- Insights section -->
+      <section class="insights-grid animate-fade-in" style="animation-delay:0.18s;">
+        <!-- Weekly Target Tracker -->
+        <div class="insight-card glass-panel">
+          <div class="insight-header">
+            <span class="insight-title"><i data-lucide="target"></i> Weekly Target Planner</span>
+            <span class="card-subtitle" style="font-size:0.8rem; color:var(--text-muted);" id="weekly-target-percentage">0% of weekly goal</span>
+          </div>
+          <div class="target-control-row">
+            <span style="font-weight:600; font-size:0.85rem; color:var(--text-secondary);">Set your target mocks this week:</span>
+            <div class="target-value-set">
+              <button onclick="changeWeeklyTarget(-1)">-</button>
+              <span id="weekly-target-val">4</span>
+              <button onclick="changeWeeklyTarget(1)">+</button>
+            </div>
+          </div>
+          <div style="display:flex; justify-content:space-between; align-items:center; font-size:0.8rem; font-weight:600; color:var(--text-secondary); margin-top:0.25rem;">
+            <span>Completed this week: <span id="weekly-completed-val">0</span></span>
+            <span id="weekly-target-status" style="color:var(--accent-primary);">Keep it up!</span>
+          </div>
+          <div class="target-progress-bar">
+            <div class="progress-fill" id="weekly-progress-fill"></div>
+          </div>
+        </div>
+        
+        <!-- AI Performance Recommendations -->
+        <div class="insight-card glass-panel">
+          <div class="insight-header">
+            <span class="insight-title"><i data-lucide="sparkles"></i> Study Recommendations</span>
+            <span class="card-subtitle" style="font-size:0.8rem; color:var(--text-muted);">Dynamic insights</span>
+          </div>
+          <div class="recommendations-box" id="ai-recommendations-list">
+            <!-- Dynamically populated recommendations -->
+          </div>
+        </div>
+      </section>
+      
+      <!-- Category Roadmap Visualizer -->
+      <section class="roadmap-panel glass-panel animate-fade-in" style="animation-delay:0.2s;">
+        <div class="roadmap-header">
+          <span class="roadmap-title">
+            <i data-lucide="milestone"></i> Roadmap Milestones
+          </span>
+          <span class="roadmap-progress-info" id="roadmap-general-progress">0 / 9 Subjects Complete</span>
+        </div>
+        <div class="roadmap-container" id="roadmap-track">
+          <div class="roadmap-track-fill" id="roadmap-progress-line"></div>
+          <!-- Dynamically populated Roadmap nodes -->
+        </div>
+      </section>
+      
+      <!-- Mock Exams Checklist -->
+      <section class="checklist-panel glass-panel animate-fade-in" style="animation-delay:0.25s;">
+        <div class="checklist-header">
+          <div class="category-title-area">
+            <span class="current-category-name" id="current-category-display">Select a category</span>
+            <span class="category-meta" id="category-completion-display">0 mocks | 0% complete</span>
+          </div>
+          
+          <div class="search-filter-controls">
+            <div class="search-input-wrapper">
+              <i data-lucide="search"></i>
+              <input type="text" id="search-mocks" placeholder="Search mocks by title...">
+            </div>
+            
+            <div class="filter-pills">
+              <button class="filter-pill active" data-filter="all">All</button>
+              <button class="filter-pill" data-filter="todo">To Do</button>
+              <button class="filter-pill" data-filter="progress">In Progress</button>
+              <button class="filter-pill" data-filter="completed">Completed</button>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Mock Exams Table -->
+        <div class="mock-table-wrapper">
+          <table class="mock-table" id="mock-data-table">
+            <thead>
+              <tr>
+                <th class="col-index">#</th>
+                <th class="col-name">Mock Exam Title</th>
+                <th class="col-status">Status</th>
+                <th class="col-score">Score Tracker</th>
+                <th class="col-date">Date Saved</th>
+                <th class="col-notes">Notes</th>
+              </tr>
+            </thead>
+            <tbody id="mock-list-tbody">
+              <!-- Dynamically populated mock lists -->
+            </tbody>
+          </table>
+          <div id="checklist-empty-state" class="empty-state" style="display:none;">
+            <i data-lucide="folder-open"></i>
+            <p>No mock exams match the filters.</p>
+          </div>
+        </div>
+      </section>
+      
+    </main>
+  </div>
+  
+  <!-- Premium Import/Export Modal Overlay -->
+  <div class="modal-overlay" id="backup-modal">
+    <div class="modal-container glass-panel">
+      <div class="modal-header">
+        <span class="modal-title" id="modal-title-text"><i data-lucide="database"></i> Backup & Restore</span>
+        <button class="modal-close" id="modal-close-btn">&times;</button>
+      </div>
+      <div class="modal-body" id="modal-body-content">
+        <!-- Render contents dynamically -->
+      </div>
+      <div class="modal-footer" id="modal-footer-content">
+        <!-- Buttons rendered dynamically -->
+      </div>
+    </div>
+  </div>
+  
+  <!-- Import data from compiled js script -->
+  <script src="mocks_data.js"></script>
+  
+  <!-- Main logic script -->
+  <script>
+    // Initial State & Config
+    let currentCategory = Object.keys(window.mocksData)[0] || '';
+    let trackerState = {};
+    let activeFilter = 'all';
+    let charts = {};
+    let weeklyTarget = 4;
+    let categorySearchQuery = '';
+    
+    // Web Audio Synthesizer chime sound (runs locally without any external file dependency)
+    function playChime() {
+      try {
+        const ctx = new (window.AudioContext || window.webkitAudioContext)();
+        const now = ctx.currentTime;
+        
+        const osc1 = ctx.createOscillator();
+        const osc2 = ctx.createOscillator();
+        const gain = ctx.createGain();
+        
+        osc1.type = 'sine';
+        osc1.frequency.setValueAtTime(523.25, now); // C5
+        osc1.frequency.exponentialRampToValueAtTime(880.00, now + 0.12); // A5
+        
+        osc2.type = 'sine';
+        osc2.frequency.setValueAtTime(659.25, now); // E5
+        osc2.frequency.exponentialRampToValueAtTime(1046.50, now + 0.12); // C6
+        
+        gain.gain.setValueAtTime(0.12, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.7);
+        
+        osc1.connect(gain);
+        osc2.connect(gain);
+        gain.connect(ctx.destination);
+        
+        osc1.start(now);
+        osc2.start(now);
+        osc1.stop(now + 0.7);
+        osc2.stop(now + 0.7);
+      } catch(e) {
+        console.log("AudioContext blocked/unsupported", e);
+      }
+    }
+    
+    // Load state from localStorage
+    function loadState() {
+      const saved = localStorage.getItem('oliveboard_mocks_status');
+      if (saved) {
+        try {
+          trackerState = JSON.parse(saved);
+        } catch(e) {
+          trackerState = {};
+        }
+      } else {
+        trackerState = {};
+      }
+      
+      // Load weekly target setting
+      weeklyTarget = parseInt(localStorage.getItem('weekly_target') || '4');
+      document.getElementById('weekly-target-val').innerText = weeklyTarget;
+    }
+    
+    // Save state to localStorage
+    function saveState() {
+      localStorage.setItem('oliveboard_mocks_status', JSON.stringify(trackerState));
+      updateDashboardData();
+    }
+    
+    // Initialize Dashboard UI & Events
+    document.addEventListener("DOMContentLoaded", () => {
+      loadState();
+      
+      // Load current theme
+      const savedTheme = localStorage.getItem('theme') || 'dark';
+      document.documentElement.setAttribute('data-theme', savedTheme);
+      updateThemeUI(savedTheme);
+      
+      // Initialize layout & sidebar nav
+      renderSidebar();
+      renderRoadmap();
+      selectCategory(currentCategory);
+      
+      // Initialize Charts
+      initCharts();
+      updateDashboardData();
+      
+      // Setup UI events
+      document.getElementById('theme-toggle').addEventListener('click', toggleTheme);
+      document.getElementById('search-mocks').addEventListener('input', handleSearch);
+      document.getElementById('search-categories').addEventListener('input', handleCategorySearch);
+      
+      document.querySelectorAll('.filter-pill').forEach(pill => {
+        pill.addEventListener('click', (e) => {
+          document.querySelectorAll('.filter-pill').forEach(p => p.classList.remove('active'));
+          pill.classList.add('active');
+          activeFilter = pill.getAttribute('data-filter');
+          renderMockList();
+        });
+      });
+      
+      document.getElementById('btn-export').addEventListener('click', openExportModal);
+      document.getElementById('btn-import').addEventListener('click', openImportModal);
+      document.getElementById('modal-close-btn').addEventListener('click', closeModal);
+      
+      // Setup Lucide icons
+      lucide.createIcons();
+      
+      // Dashboard Entrance Animation
+      gsap.from(".sidebar", { duration: 0.8, x: -100, opacity: 0, ease: "power4.out" });
+      gsap.from("header", { duration: 0.8, y: -40, opacity: 0, ease: "power4.out", delay: 0.1 });
+      gsap.from(".stats-grid .stat-card", { duration: 0.6, scale: 0.9, opacity: 0, stagger: 0.1, ease: "back.out(1.2)", delay: 0.2 });
+      gsap.from(".insights-grid .insight-card", { duration: 0.6, scale: 0.95, opacity: 0, stagger: 0.1, ease: "power3.out", delay: 0.3 });
+      gsap.from(".analytics-card", { duration: 0.6, y: 30, opacity: 0, stagger: 0.1, ease: "power3.out", delay: 0.45 });
+      gsap.from(".roadmap-panel", { duration: 0.8, y: 30, opacity: 0, ease: "power3.out", delay: 0.6 });
+      gsap.from(".checklist-panel", { duration: 0.8, y: 30, opacity: 0, ease: "power3.out", delay: 0.7 });
+    });
+    
+    // Theme Toggling
+    function toggleTheme() {
+      const current = document.documentElement.getAttribute('data-theme');
+      const target = current === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', target);
+      localStorage.setItem('theme', target);
+      updateThemeUI(target);
+      
+      // Update chart colors based on theme change
+      updateChartThemes(target);
+    }
+    
+    function updateThemeUI(theme) {
+      const sun = document.getElementById('theme-icon-sun');
+      const moon = document.getElementById('theme-icon-moon');
+      const text = document.getElementById('theme-text');
+      
+      if (theme === 'dark') {
+        sun.style.display = 'none';
+        moon.style.display = 'inline-block';
+        text.innerText = "Dark Mode";
+      } else {
+        sun.style.display = 'inline-block';
+        moon.style.display = 'none';
+        text.innerText = "Light Mode";
+      }
+    }
+    
+    // Render Left Sidebar Categories
+    function renderSidebar() {
+      const navContainer = document.getElementById('category-list-nav');
+      navContainer.innerHTML = '';
+      
+      Object.keys(window.mocksData).forEach(cat => {
+        if (categorySearchQuery && !cat.toLowerCase().includes(categorySearchQuery)) {
+          return; // Skip if does not match category search query
+        }
+        
+        const mocks = window.mocksData[cat];
+        const completed = mocks.filter(m => {
+          const key = `${cat}/${m.name}`;
+          return trackerState[key] && trackerState[key].status === 'completed';
+        }).length;
+        
+        const link = document.createElement('a');
+        link.className = `category-link ${cat === currentCategory ? 'active' : ''}`;
+        link.onclick = () => selectCategory(cat);
+        link.innerHTML = `
+          <div class="link-info">
+            <i data-lucide="folder"></i>
+            <span>${cat}</span>
+          </div>
+          <span class="link-badge">${completed}/${mocks.length}</span>
+        `;
+        navContainer.appendChild(link);
+      });
+      
+      lucide.createIcons({ attrs: { class: 'nav-icon' } });
+    }
+    
+    // Select specific category
+    function selectCategory(catName) {
+      currentCategory = catName;
+      document.querySelectorAll('.category-link').forEach(link => {
+        const textNode = link.querySelector('.link-info span');
+        if (textNode && textNode.innerText === catName) {
+          link.classList.add('active');
+        } else {
+          link.classList.remove('active');
+        }
+      });
+      
+      document.getElementById('current-category-display').innerText = catName;
+      
+      // Visual switch effect
+      gsap.fromTo("#mock-data-table tbody tr", 
+        { opacity: 0, x: -10 }, 
+        { opacity: 1, x: 0, stagger: 0.03, duration: 0.4, ease: "power2.out" }
+      );
+      
+      renderMockList();
+      updateRoadmapNodes();
+    }
+    
+    // Render table row items
+    function renderMockList() {
+      const tbody = document.getElementById('mock-list-tbody');
+      tbody.innerHTML = '';
+      const mocks = window.mocksData[currentCategory] || [];
+      const searchQuery = document.getElementById('search-mocks').value.toLowerCase();
+      
+      let filteredMocks = mocks.filter(m => {
+        const key = `${currentCategory}/${m.name}`;
+        const itemState = trackerState[key] || { status: 'todo' };
+        
+        const matchesSearch = m.name.toLowerCase().includes(searchQuery);
+        const matchesFilter = activeFilter === 'all' || itemState.status === activeFilter;
+        
+        return matchesSearch && matchesFilter;
+      });
+      
+      // Update completion details header
+      const totalCount = mocks.length;
+      const completedCount = mocks.filter(m => {
+        const key = `${currentCategory}/${m.name}`;
+        return trackerState[key] && trackerState[key].status === 'completed';
+      }).length;
+      const pct = totalCount > 0 ? Math.round((completedCount / totalCount) * 100) : 0;
+      document.getElementById('category-completion-display').innerText = `${totalCount} Mock exams | ${completedCount} Completed (${pct}%)`;
+      
+      if (filteredMocks.length === 0) {
+        document.getElementById('checklist-empty-state').style.display = 'flex';
+        document.getElementById('mock-data-table').style.display = 'none';
+        return;
+      }
+      
+      document.getElementById('checklist-empty-state').style.display = 'none';
+      document.getElementById('mock-data-table').style.display = 'table';
+      
+      filteredMocks.forEach((mock, idx) => {
+        const key = `${currentCategory}/${mock.name}`;
+        const state = trackerState[key] || { status: 'todo', score: '', outOf: '', date: '' };
+        
+        const tr = document.createElement('tr');
+        
+        // Calculate dynamic percentage score if available
+        let pctText = '-';
+        if (state.score !== undefined && state.score !== null && state.score !== '' && state.outOf) {
+          const scoreVal = parseFloat(state.score);
+          const outOfVal = parseFloat(state.outOf);
+          if (outOfVal > 0) {
+            pctText = `${Math.round((scoreVal / outOfVal) * 100)}%`;
+          }
+        }
+        
+        const dateText = state.date ? new Date(state.date).toLocaleDateString() : '-';
+        
+        // Clean display name of mock by removing extension and junk prefixes
+        const displayName = mock.name.replace('.html', '').replace(/[@_]/g, ' ');
+        
+        tr.innerHTML = `
+          <td class="col-index">${idx + 1}</td>
+          <td class="col-name">
+            <a href="${mock.path}" target="_blank" class="mock-link">
+              ${displayName} <i data-lucide="external-link"></i>
+            </a>
+          </td>
+          <td class="col-status">
+            <select class="status-select status-select-${state.status}" onchange="changeStatus('${mock.name}', this.value)">
+              <option value="todo" ${state.status === 'todo' ? 'selected' : ''}>To Do</option>
+              <option value="progress" ${state.status === 'progress' ? 'selected' : ''}>In Progress</option>
+              <option value="completed" ${state.status === 'completed' ? 'selected' : ''}>Completed</option>
+            </select>
+          </td>
+          <td class="col-score">
+            <div class="score-input-group">
+              <input type="number" step="0.01" class="score-current" placeholder="Score" value="${state.score || ''}" onblur="saveScore('${mock.name}', this)">
+              <span class="score-divider">/</span>
+              <input type="number" step="0.01" class="score-total" placeholder="Max" value="${state.outOf || ''}" onblur="saveScore('${mock.name}', this)">
+              <span class="score-percent">${pctText}</span>
+              <button class="btn-save-score" onclick="triggerSaveScoreButton(this)" title="Save Score"><i data-lucide="check"></i></button>
+            </div>
+          </td>
+          <td class="col-date">${dateText}</td>
+          <td class="col-notes">
+            <button class="btn-note-trigger ${state.note ? 'has-note' : ''}" onclick="openNoteModal('${mock.name}')" title="Edit Mock Notes">
+              <i data-lucide="file-text"></i>
+            </button>
+          </td>
+        `;
+        
+        tbody.appendChild(tr);
+      });
+      
+      lucide.createIcons();
+    }
+    
+    // Change exam status
+    function changeStatus(mockName, val) {
+      const key = `${currentCategory}/${mockName}`;
+      if (!trackerState[key]) {
+        trackerState[key] = { status: 'todo', score: '', outOf: '', date: '' };
+      }
+      
+      const prevStatus = trackerState[key].status;
+      trackerState[key].status = val;
+      
+      if (val === 'completed' && prevStatus !== 'completed') {
+        trackerState[key].date = new Date().toISOString();
+        
+        // Play premium sound effect
+        playChime();
+        
+        // Fire confetti on individual completions!
+        confetti({
+          particleCount: 80,
+          spread: 60,
+          origin: { y: 0.8 },
+          colors: ['#6366f1', '#8b5cf6', '#10b981']
+        });
+      }
+      
+      saveState();
+      renderSidebar();
+      renderMockList();
+      renderRoadmap();
+    }
+    
+    // Save exam score
+    function saveScore(mockName, inputEl) {
+      const key = `${currentCategory}/${mockName}`;
+      const parent = inputEl.closest('.score-input-group');
+      const scoreVal = parent.querySelector('.score-current').value;
+      const outOfVal = parent.querySelector('.score-total').value;
+      
+      if (!trackerState[key]) {
+        trackerState[key] = { status: 'todo', score: '', outOf: '', date: '' };
+      }
+      
+      trackerState[key].score = scoreVal !== '' ? parseFloat(scoreVal) : '';
+      trackerState[key].outOf = outOfVal !== '' ? parseFloat(outOfVal) : '';
+      
+      if (trackerState[key].score !== '' && trackerState[key].outOf !== '') {
+        // If they logged a score, implicitly set status to in-progress or completed if they logged higher marks
+        const isCompleted = trackerState[key].status === 'completed';
+        if (trackerState[key].status === 'todo') {
+          trackerState[key].status = 'progress';
+        }
+        trackerState[key].date = new Date().toISOString();
+        if (!isCompleted && trackerState[key].status === 'completed') {
+          playChime();
+        }
+      }
+      
+      saveState();
+      renderSidebar();
+      renderMockList();
+    }
+    
+    function triggerSaveScoreButton(btn) {
+      const input = btn.closest('.score-input-group').querySelector('.score-current');
+      saveScore(btn.closest('tr').querySelector('.mock-link').getAttribute('href').split('/').pop(), input);
+    }
+    
+    function handleSearch() {
+      renderMockList();
+    }
+    
+    function handleCategorySearch() {
+      categorySearchQuery = document.getElementById('search-categories').value.toLowerCase();
+      renderSidebar();
+    }
+    
+    // Adjust Weekly target setting
+    window.changeWeeklyTarget = function(dir) {
+      weeklyTarget = Math.max(1, weeklyTarget + dir);
+      document.getElementById('weekly-target-val').innerText = weeklyTarget;
+      localStorage.setItem('weekly_target', weeklyTarget);
+      updateDashboardData();
+    };
+    
+    // Personal notes management modal
+    window.openNoteModal = function(mockName) {
+      const key = `${currentCategory}/${mockName}`;
+      const state = trackerState[key] || { note: '' };
+      const displayName = mockName.replace('.html', '').replace(/[@_]/g, ' ');
+      
+      document.getElementById('modal-title-text').innerHTML = `<i data-lucide="file-text"></i> Mock Notes - ${displayName}`;
+      
+      document.getElementById('modal-body-content').innerHTML = `
+        <p>Save personal study notes, focus areas, or math shortcuts for this test paper below.</p>
+        <div class="form-group">
+          <textarea id="mock-note-textarea" style="min-height:180px; background:var(--input-bg); border:1px solid var(--input-border); color:var(--text-primary); border-radius:10px; padding:10px; width:100%;" placeholder="e.g. Got stuck on ages question, revise ratios...">${state.note || ''}</textarea>
+        </div>
+      `;
+      
+      document.getElementById('modal-footer-content').innerHTML = `
+        <button class="btn btn-secondary" onclick="closeModal()">Cancel</button>
+        <button class="btn btn-primary" onclick="saveMockNote('${mockName}')">Save Notes</button>
+      `;
+      
+      openModal();
+      lucide.createIcons();
+      document.getElementById('mock-note-textarea').focus();
+    };
+    
+    window.saveMockNote = function(mockName) {
+      const key = `${currentCategory}/${mockName}`;
+      const text = document.getElementById('mock-note-textarea').value.trim();
+      
+      if (!trackerState[key]) {
+        trackerState[key] = { status: 'todo', score: '', outOf: '', date: '' };
+      }
+      
+      trackerState[key].note = text;
+      
+      saveState();
+      renderMockList();
+      closeModal();
+    };
+    
+    // Initialize Dashboard Statistics & Graph Charts
+    function initCharts() {
+      // Success distribution doughnut
+      const distCtx = document.getElementById('distributionChart').getContext('2d');
+      charts.distribution = new Chart(distCtx, {
+        type: 'doughnut',
+        data: {
+          labels: ['Completed', 'In Progress', 'To Do'],
+          datasets: [{
+            data: [0, 0, 0],
+            backgroundColor: ['#10b981', '#f59e0b', '#64748b'],
+            borderWidth: 0
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: {
+              position: 'bottom',
+              labels: {
+                color: document.documentElement.getAttribute('data-theme') === 'dark' ? '#94a3b8' : '#475569',
+                font: { family: 'Outfit', size: 11 }
+              }
+            }
+          },
+          cutout: '75%'
+        }
+      });
+      
+      // Score trend over time (bar/line combination)
+      const trendCtx = document.getElementById('scoreTrendChart').getContext('2d');
+      charts.trend = new Chart(trendCtx, {
+        type: 'line',
+        data: {
+          labels: [],
+          datasets: [{
+            label: 'Accuracy (%)',
+            data: [],
+            borderColor: '#6366f1',
+            backgroundColor: 'rgba(99, 102, 241, 0.1)',
+            fill: true,
+            tension: 0.4,
+            borderWidth: 3,
+            pointBackgroundColor: '#8b5cf6',
+            pointRadius: 4
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          scales: {
+            y: {
+              min: 0,
+              max: 100,
+              grid: { color: 'rgba(255, 255, 255, 0.05)' },
+              ticks: { color: '#94a3b8', font: { family: 'Outfit' } }
+            },
+            x: {
+              grid: { display: false },
+              ticks: { color: '#94a3b8', font: { family: 'Outfit' } }
+            }
+          },
+          plugins: {
+            legend: { display: false }
+          }
+        }
+      });
+    }
+    
+    // Update chart layouts on theme switches
+    function updateChartThemes(theme) {
+      const textColor = theme === 'dark' ? '#94a3b8' : '#475569';
+      const gridColor = theme === 'dark' ? 'rgba(255, 255, 255, 0.05)' : 'rgba(0, 0, 0, 0.05)';
+      
+      charts.distribution.options.plugins.legend.labels.color = textColor;
+      charts.distribution.update();
+      
+      charts.trend.options.scales.y.grid.color = gridColor;
+      charts.trend.options.scales.y.ticks.color = textColor;
+      charts.trend.options.scales.x.ticks.color = textColor;
+      charts.trend.update();
+    }
+    
+    // Recalculate stats and refresh graphics
+    function updateDashboardData() {
+      let total = 0;
+      let completed = 0;
+      let progress = 0;
+      let todo = 0;
+      
+      let completedScores = []; // Array of { name, pct }
+      let weeklyCompleted = 0;
+      const oneWeekAgo = Date.now() - (7 * 24 * 60 * 60 * 1000);
+      
+      let categoryProgress = {}; // Maps category -> { total, completed, pct }
+      
+      Object.keys(window.mocksData).forEach(cat => {
+        let catTotal = 0;
+        let catCompleted = 0;
+        
+        window.mocksData[cat].forEach(m => {
+          total++;
+          catTotal++;
+          const key = `${cat}/${m.name}`;
+          const state = trackerState[key] || { status: 'todo' };
+          
+          if (state.status === 'completed') {
+            completed++;
+            catCompleted++;
+            
+            // Check if completed in the last 7 days
+            if (state.date) {
+              const compDate = new Date(state.date).getTime();
+              if (compDate >= oneWeekAgo) {
+                weeklyCompleted++;
+              }
+            }
+            
+            if (state.score !== undefined && state.score !== '' && state.outOf) {
+              const pct = Math.round((state.score / state.outOf) * 100);
+              completedScores.push({ name: m.name.replace('.html', '').replace(/[@_]/g, ' '), pct: pct });
+            }
+          } else if (state.status === 'progress') {
+            progress++;
+          } else {
+            todo++;
+          }
+        });
+        
+        categoryProgress[cat] = {
+          total: catTotal,
+          completed: catCompleted,
+          pct: catTotal > 0 ? Math.round((catCompleted / catTotal) * 100) : 0
+        };
+      });
+      
+      const completedPct = total > 0 ? Math.round((completed / total) * 100) : 0;
+      
+      // Update DOM values
+      document.getElementById('stats-total').innerText = total;
+      document.getElementById('stats-completed').innerText = completed;
+      document.getElementById('stats-progress').innerText = progress;
+      document.getElementById('stats-todo').innerText = todo;
+      document.getElementById('stats-completed-pct').innerText = `${completedPct}% of target completed`;
+      
+      // Update distribution charts
+      if (charts.distribution) {
+        charts.distribution.data.datasets[0].data = [completed, progress, todo];
+        charts.distribution.update();
+      }
+      
+      // Update score trend line chart (last 8 completed score-logged mocks)
+      if (charts.trend) {
+        const lastScores = completedScores.slice(-8);
+        charts.trend.data.labels = lastScores.map(s => s.name.substring(0, 15) + '...');
+        charts.trend.data.datasets[0].data = lastScores.map(s => s.pct);
+        charts.trend.update();
+      }
+      
+      // Update Weekly Planner Widget
+      document.getElementById('weekly-completed-val').innerText = weeklyCompleted;
+      const targetPct = Math.min(100, Math.round((weeklyCompleted / weeklyTarget) * 100));
+      document.getElementById('weekly-target-percentage').innerText = `${targetPct}% of weekly goal`;
+      document.getElementById('weekly-progress-fill').style.width = `${targetPct}%`;
+      
+      const targetStatusEl = document.getElementById('weekly-target-status');
+      if (weeklyCompleted >= weeklyTarget) {
+        targetStatusEl.innerText = "Goal Achieved! 🎉";
+        targetStatusEl.style.color = "var(--status-completed)";
+      } else {
+        const diff = weeklyTarget - weeklyCompleted;
+        targetStatusEl.innerText = `${diff} more mock${diff > 1 ? 's' : ''} to go!`;
+        targetStatusEl.style.color = "var(--accent-primary)";
+      }
+      
+      // Generate AI Recommendations
+      generateRecommendations(categoryProgress, completedScores, weeklyCompleted);
+      
+      // Update Roadmap Milestones Progress header
+      const categories = Object.keys(window.mocksData);
+      let completedCategoriesCount = 0;
+      categories.forEach(cat => {
+        const p = categoryProgress[cat];
+        if (p.completed === p.total && p.total > 0) {
+          completedCategoriesCount++;
+        }
+      });
+      
+      document.getElementById('roadmap-general-progress').innerText = `${completedCategoriesCount} / ${categories.length} Subjects Complete`;
+      
+      // Visual feedback: if all elements are complete, celebrate!
+      if (completed === total && total > 0) {
+        confetti({
+          particleCount: 150,
+          spread: 80,
+          origin: { y: 0.6 }
+        });
+      }
+    }
+    
+    // Help AI Recommendations engine
+    function generateRecommendations(catProgress, completedScores, weeklyCompleted) {
+      const recContainer = document.getElementById('ai-recommendations-list');
+      recContainer.innerHTML = '';
+      
+      let recommendations = [];
+      
+      // Target advice
+      if (weeklyCompleted < weeklyTarget) {
+        const diff = weeklyTarget - weeklyCompleted;
+        recommendations.push({
+          type: 'info',
+          text: `Set a daily study block to complete <strong>${diff} more test${diff > 1 ? 's' : ''}</strong> and hit your weekly goal.`
+        });
+      } else {
+        recommendations.push({
+          type: 'success',
+          text: `Outstanding! You met your weekly target of <strong>${weeklyTarget} mocks</strong>. Keep this momentum!`
+        });
+      }
+      
+      // Find low score trends
+      const lowScores = completedScores.filter(s => s.pct < 60);
+      if (lowScores.length > 0) {
+        recommendations.push({
+          type: 'warning',
+          text: `You scored below 60% in <strong>${lowScores[0].name.substring(0, 18)}...</strong>. Re-evaluate formulas and take revision tests.`
+        });
+      }
+      
+      // Find categories with 0% progress
+      let zeroProgressCats = Object.keys(catProgress).filter(cat => catProgress[cat].pct === 0);
+      if (zeroProgressCats.length > 0) {
+        recommendations.push({
+          type: 'info',
+          text: `You haven't started <strong>${zeroProgressCats[0]}</strong>. Dedicate a study slot to break the ice.`
+        });
+      }
+      
+      // Find highly progressed categories
+      let highProgressCats = Object.keys(catProgress).filter(cat => catProgress[cat].pct > 75 && catProgress[cat].pct < 100);
+      if (highProgressCats.length > 0) {
+        recommendations.push({
+          type: 'success',
+          text: `You are close to mastering <strong>${highProgressCats[0]}</strong> (${catProgress[highProgressCats[0]].pct}%). Finish the last remaining mocks!`
+        });
+      }
+      
+      // Add general placeholder if empty
+      if (recommendations.length === 0) {
+        recommendations.push({
+          type: 'success',
+          text: `Your preparation roadmap is in excellent shape. Track regular scores and log formulas in notes.`
+        });
+      }
+      
+      // Render
+      recommendations.forEach(rec => {
+        const div = document.createElement('div');
+        div.className = `rec-item rec-${rec.type}`;
+        
+        let icon = 'info';
+        if (rec.type === 'success') icon = 'sparkles';
+        if (rec.type === 'warning') icon = 'alert-triangle';
+        
+        div.innerHTML = `
+          <i data-lucide="${icon}"></i>
+          <span class="rec-text">${rec.text}</span>
+        `;
+        recContainer.appendChild(div);
+      });
+      
+      lucide.createIcons();
+    }
+    
+    // Render the Interactive Roadmap Milestones
+    function renderRoadmap() {
+      const container = document.getElementById('roadmap-track');
+      // Save nodes elements
+      const categories = Object.keys(window.mocksData);
+      
+      // Remove all elements except progress line
+      const nodes = container.querySelectorAll('.roadmap-node');
+      nodes.forEach(n => n.remove());
+      
+      let completedNodesCount = 0;
+      
+      categories.forEach((cat, idx) => {
+        const mocks = window.mocksData[cat];
+        const completedCount = mocks.filter(m => {
+          const key = `${cat}/${m.name}`;
+          return trackerState[key] && trackerState[key].status === 'completed';
+        }).length;
+        const pct = mocks.length > 0 ? Math.round((completedCount / mocks.length) * 100) : 0;
+        
+        // svg offset circumference calculation (diameter=50, radius=25. Circumference = 2 * PI * r = 157)
+        const offset = 164 - (164 * pct) / 100;
+        
+        const node = document.createElement('div');
+        node.className = `roadmap-node ${cat === currentCategory ? 'active' : ''} ${pct === 100 ? 'completed' : ''}`;
+        node.onclick = () => selectCategory(cat);
+        node.innerHTML = `
+          <div class="node-bubble">
+            <svg class="node-progress-svg">
+              <circle cx="28" cy="28" r="26" style="stroke-dashoffset: ${offset};"></circle>
+            </svg>
+            <span class="node-num-text">${idx + 1}</span>
+            <i class="node-icon-check" data-lucide="check"></i>
+          </div>
+          <span class="node-label" title="${cat}">${cat}</span>
+          <span class="node-percentage">${pct}%</span>
+        `;
+        
+        if (pct === 100) completedNodesCount++;
+        
+        container.appendChild(node);
+      });
+      
+      // Update progress line length
+      const ratio = categories.length > 1 ? completedNodesCount / (categories.length - 1) : 0;
+      document.getElementById('roadmap-progress-line').style.width = `${Math.min(100, ratio * 90)}%`;
+      
+      lucide.createIcons();
+    }
+    
+    // Update active class state on roadmap bubbles
+    function updateRoadmapNodes() {
+      const nodes = document.querySelectorAll('.roadmap-node');
+      const categories = Object.keys(window.mocksData);
+      
+      nodes.forEach((node, idx) => {
+        if (categories[idx] === currentCategory) {
+          node.classList.add('active');
+        } else {
+          node.classList.remove('active');
+        }
+      });
+    }
+    
+    // Backup & Restore functionality Modals
+    function openModal() {
+      document.getElementById('backup-modal').classList.add('active');
+    }
+    
+    function closeModal() {
+      document.getElementById('backup-modal').classList.remove('active');
+    }
+    
+    function openExportModal() {
+      document.getElementById('modal-title-text').innerHTML = `<i data-lucide="download"></i> Export Progress Data`;
+      
+      const payload = JSON.stringify(trackerState, null, 2);
+      
+      document.getElementById('modal-body-content').innerHTML = `
+        <p>Copy the tracking data payload below. You can save this to a text file to backup your progress state.</p>
+        <div class="form-group">
+          <textarea class="backup-preview" id="export-area" readonly>${payload}</textarea>
+        </div>
+      `;
+      
+      document.getElementById('modal-footer-content').innerHTML = `
+        <button class="btn btn-secondary" onclick="closeModal()">Close</button>
+        <button class="btn btn-primary" onclick="copyExportText()">Copy Data</button>
+      `;
+      
+      openModal();
+      lucide.createIcons();
+    }
+    
+    function copyExportText() {
+      const el = document.getElementById('export-area');
+      el.select();
+      document.execCommand('copy');
+      alert("Backup data copied to clipboard successfully!");
+      closeModal();
+    }
+    
+    function openImportModal() {
+      document.getElementById('modal-title-text').innerHTML = `<i data-lucide="upload"></i> Restore Backup Progress`;
+      
+      document.getElementById('modal-body-content').innerHTML = `
+        <p>Paste your previously copied backup payload code below to restore your progress states and exam score values.</p>
+        <div class="form-group">
+          <textarea class="form-control" id="import-area" style="min-height:150px; background:var(--input-bg); border:1px solid var(--input-border); color:var(--text-primary); border-radius:10px; padding:10px;" placeholder="Paste JSON here..."></textarea>
+        </div>
+      `;
+      
+      document.getElementById('modal-footer-content').innerHTML = `
+        <button class="btn btn-secondary" onclick="closeModal()">Cancel</button>
+        <button class="btn btn-primary" onclick="executeImport()">Restore data</button>
+      `;
+      
+      openModal();
+      lucide.createIcons();
+    }
+    
+    function executeImport() {
+      const json = document.getElementById('import-area').value;
+      if (!json) {
+        alert("Please paste a backup JSON payload first.");
+        return;
+      }
+      
+      try {
+        const obj = JSON.parse(json);
+        trackerState = obj;
+        saveState();
+        renderSidebar();
+        renderRoadmap();
+        selectCategory(currentCategory);
+        alert("Restore completed successfully! Your progress has been updated.");
+        closeModal();
+      } catch(e) {
+        alert("Invalid backup configuration. Please verify that you copied the complete text correctly.");
+      }
+    }
+  </script>
+</body>
+</html>

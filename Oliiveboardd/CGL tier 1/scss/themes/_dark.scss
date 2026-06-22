@@ -1,0 +1,265 @@
+// =============================================================================
+// THEMES / _dark.scss  (PREMIUM OVERHAUL — Rich Depth Edition)
+// Deep navy with ambient glow, layered gradients, and premium token overrides
+// =============================================================================
+
+// ─── CSS Variable Overrides ───────────────────────────────────────────────────
+
+.dark-mode,
+body.dark-mode {
+  // Surfaces
+  --bg:         #080d1a;
+  --bg-alt:     #0d1324;
+  --bg2:        #0d1324;
+  --card:       #131c30;
+  --card-hover: #192035;
+  --overlay:    rgba(0, 0, 0, 0.75);
+
+  // Text
+  --txt:        #dde4f2;
+  --txtL:       #6e7d96;
+  --txt-muted:  #49586e;
+
+  // Borders
+  --brd:        rgba(255, 255, 255, 0.07);
+  --bdr:        rgba(255, 255, 255, 0.07);
+  --bdrD:       rgba(255, 255, 255, 0.13);
+  --brd-dark:   rgba(255, 255, 255, 0.11);
+
+  // Primaries — vivid for dark bg
+  --pri:        #60a5fa;
+  --priD:       #3b82f6;
+  --priL:       rgba(96, 165, 250, 0.12);
+  --p:          #818cf8;
+  --p-dark:     #6366f1;
+  --p-light:    rgba(129, 140, 248, 0.12);
+  --s:          #34d399;
+  --s-light:    rgba(52, 211, 153, 0.1);
+  --d:          #f87171;
+  --suc:        #22c55e;
+  --err:        #f87171;
+  --war:        #fbbf24;
+
+  // Enhanced shadows
+  --shadow-xs:  0 1px 3px rgba(0,0,0,0.5);
+  --shadow-sm:  0 2px 6px rgba(0,0,0,0.5), 0 1px 2px rgba(0,0,0,0.4);
+  --shadow:     0 4px 12px rgba(0,0,0,0.55), 0 2px 4px rgba(0,0,0,0.4);
+  --shadow-md:  0 8px 20px rgba(0,0,0,0.55);
+  --shadow-lg:  0 16px 32px rgba(0,0,0,0.6);
+  --shadow-xl:  0 24px 48px rgba(0,0,0,0.65);
+  --shadow-2xl: 0 36px 72px rgba(0,0,0,0.7);
+  --shadow-primary: 0 4px 20px rgba(96, 165, 250, 0.25);
+  --shadow-indigo:  0 4px 20px rgba(129, 140, 248, 0.25);
+}
+
+// ─── Body — Rich Ambient Background ───────────────────────────────────────────
+
+body.dark-mode {
+  color: var(--txt);
+
+  // Multi-layer fixed background: deep navy + ambient radial glows
+  background:
+    radial-gradient(ellipse 80% 50% at 20% 0%,   rgba(79, 70, 229, 0.12) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 40% at 80% 10%,  rgba(37, 99, 235, 0.09) 0%, transparent 55%),
+    radial-gradient(ellipse 50% 60% at 50% 100%, rgba(16, 185, 129, 0.06) 0%, transparent 55%),
+    linear-gradient(180deg, #070c18 0%, #080d1a 40%, #06091200 100%),
+    #080d1a;
+  background-attachment: fixed;
+}
+
+// ─── Flat Header ──────────────────────────────────────────────────────────────
+
+.dark-mode .hdr {
+  background: rgba(8, 13, 26, 0.92);
+  border-bottom-color: rgba(255, 255, 255, 0.06);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.04),
+    0 2px 20px rgba(0, 0, 0, 0.5),
+    0 0 40px rgba(129, 140, 248, 0.03);
+}
+
+// ─── Sectioned Header ─────────────────────────────────────────────────────────
+
+.dark-mode .header {
+  background: linear-gradient(135deg, #04091a 0%, #0a1632 50%, #112060 100%);
+  box-shadow: 0 4px 32px rgba(0, 0, 0, 0.6), 0 0 60px rgba(37, 99, 235, 0.05);
+}
+
+// ─── Question Card ────────────────────────────────────────────────────────────
+
+.dark-mode .q-card {
+  background: linear-gradient(145deg, #131c30 0%, #1a2440 50%, #121b2e 100%);
+  border-color: rgba(255, 255, 255, 0.07);
+  box-shadow:
+    0 2px 4px rgba(0,0,0,0.5),
+    0 8px 24px rgba(0,0,0,0.4),
+    0 24px 48px rgba(0,0,0,0.3),
+    0 0 0 1px rgba(255,255,255,0.04) inset,
+    0 0 80px rgba(129, 140, 248, 0.04);
+}
+
+// ─── Options ──────────────────────────────────────────────────────────────────
+
+.dark-mode .opt {
+  background: rgba(255, 255, 255, 0.03);
+  border-color: rgba(255, 255, 255, 0.08);
+  box-shadow:
+    0 1px 2px rgba(0,0,0,0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
+// ─── Solution Panel ───────────────────────────────────────────────────────────
+
+.dark-mode .sol {
+  background: rgba(52, 211, 153, 0.07);
+  border-color: rgba(52, 211, 153, 0.2);
+  border-left-color: var(--suc);
+  box-shadow: 0 4px 20px rgba(52, 211, 153, 0.08);
+}
+
+.dark-mode .solution-area {
+  background: rgba(255, 255, 255, 0.025);
+  border-color: rgba(52, 211, 153, 0.18);
+  border-left-color: var(--suc);
+}
+
+// ─── Bottom Bar ───────────────────────────────────────────────────────────────
+
+.dark-mode .btm,
+.dark-mode .nav {
+  background: rgba(8, 13, 26, 0.96);
+  border-top-color: rgba(255, 255, 255, 0.06);
+  box-shadow:
+    0 -1px 0 rgba(255, 255, 255, 0.04),
+    0 -6px 30px rgba(0, 0, 0, 0.5),
+    0 -12px 60px rgba(129, 140, 248, 0.04);
+}
+
+// ─── Desktop Sidebar ──────────────────────────────────────────────────────────
+
+.dark-mode .desktop-sidebar {
+  background: #0d1324;
+  border-color: rgba(255, 255, 255, 0.07);
+  box-shadow: -4px 0 24px rgba(0, 0, 0, 0.4);
+}
+
+// ─── Panel (Mobile slide-in) ──────────────────────────────────────────────────
+
+.dark-mode .panel {
+  background: #0f1829;
+  border-left-color: rgba(255, 255, 255, 0.08);
+  box-shadow: -8px 0 40px rgba(0, 0, 0, 0.55);
+}
+
+// ─── Left/Right Panels (sectioned) ────────────────────────────────────────────
+
+.dark-mode .left-panel,
+.dark-mode .right-panel {
+  background: #0a1020;
+  border-color: rgba(255, 255, 255, 0.07);
+}
+
+.dark-mode .controls-bar {
+  background: rgba(255, 255, 255, 0.02);
+  border-bottom-color: rgba(255, 255, 255, 0.06);
+}
+
+// ─── Modals ───────────────────────────────────────────────────────────────────
+
+.dark-mode .modal-box,
+.dark-mode .result {
+  background: linear-gradient(145deg, #131c30 0%, #1a2440 100%);
+  border-color: rgba(255, 255, 255, 0.08);
+  box-shadow:
+    0 4px 6px rgba(0,0,0,0.4),
+    0 32px 80px rgba(0,0,0,0.65),
+    0 0 0 1px rgba(255,255,255,0.04) inset;
+}
+
+// ─── Question Number Badges ───────────────────────────────────────────────────
+
+.dark-mode .q-num {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(255, 255, 255, 0.09);
+  color: var(--txtL);
+
+  &:hover {
+    background: rgba(129, 140, 248, 0.1);
+    border-color: rgba(129, 140, 248, 0.4);
+    box-shadow:
+      0 0 0 1px rgba(129, 140, 248, 0.2),
+      0 4px 12px rgba(129, 140, 248, 0.15);
+    color: var(--p);
+  }
+
+  &.cur, &.current {
+    background: var(--pri);
+    border-color: var(--pri);
+    color: white !important;
+    box-shadow:
+      0 4px 12px rgba(96, 165, 250, 0.45),
+      0 0 20px rgba(96, 165, 250, 0.2);
+  }
+}
+
+// ─── Stat Cards ───────────────────────────────────────────────────────────────
+
+.dark-mode .stat-card,
+.dark-mode .res-card,
+.dark-mode .stat,
+.dark-mode .detail-item {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(255, 255, 255, 0.07);
+}
+
+// ─── Section Tabs ─────────────────────────────────────────────────────────────
+
+.dark-mode .sections-tabs {
+  background: rgba(255, 255, 255, 0.02);
+  border-bottom-color: rgba(255, 255, 255, 0.06);
+}
+
+.dark-mode .nav-header {
+  border-bottom-color: rgba(255, 255, 255, 0.06);
+}
+
+// ─── Timer ────────────────────────────────────────────────────────────────────
+
+.dark-mode .timer {
+  background: linear-gradient(135deg, rgba(78, 40, 5, 0.6), rgba(120, 53, 15, 0.5));
+  color: #fde68a;
+  border-color: rgba(252, 211, 77, 0.3);
+  box-shadow:
+    0 2px 10px rgba(252, 211, 77, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+// ─── Scrollbar (dark) ─────────────────────────────────────────────────────────
+
+.dark-mode ::-webkit-scrollbar-track { background: rgba(255,255,255,0.03); }
+.dark-mode ::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.12);
+  &:hover { background: rgba(255,255,255,0.2); }
+}
+
+// ─── Smooth Transitions (during theme switch) ─────────────────────────────────
+
+body,
+.hdr, .header,
+.btm, .nav,
+.q-card,
+.opt,
+.panel, .desktop-sidebar,
+.left-panel, .right-panel, .controls-bar,
+.modal-box, .result, .modal, .modal-over,
+.stat-card, .res-card, .stat, .detail-item,
+.welcome-screen .welcome-container,
+.welcome-screen .welcome-content,
+.q-num {
+  transition:
+    background 0.35s ease,
+    background-color 0.35s ease,
+    border-color 0.35s ease,
+    color 0.35s ease,
+    box-shadow 0.35s ease;
+}

@@ -1,0 +1,175 @@
+// ============================================================
+//  _controls.scss
+//  Global Control Buttons — Theme Toggle & Fullscreen
+// ============================================================
+
+// ── Floating Controls Bar ────────────────────────────────────
+// Always visible on top of both welcome screen and exam
+.global-controls {
+  position: fixed;
+  top:      $spacing-md;
+  right:    $spacing-md;
+  z-index:  $z-tooltip;
+  display:  flex;
+  gap:      $spacing-xs;
+  align-items: center;
+}
+
+// ── Control Button ───────────────────────────────────────────
+.ctrl-btn {
+  width:         38px;
+  height:        38px;
+  border:        none;
+  border-radius: $radius-md;
+  cursor:        pointer;
+  @include flex-center;
+  font-size:     15px;
+  transition:    $transition-base;
+  position:      relative;
+  overflow:      hidden;
+
+  // Default (on welcome screen — over dark gradient)
+  background:   rgba(255, 255, 255, 0.12);
+  color:        rgba(255, 255, 255, 0.90);
+  border:       1px solid rgba(255, 255, 255, 0.20);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+
+  &:hover {
+    background:   rgba(255, 255, 255, 0.22);
+    border-color: rgba(255, 255, 255, 0.35);
+    transform:    translateY(-1px) scale(1.05);
+    box-shadow:   0 4px 16px rgba(0, 0, 0, 0.25);
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+
+  // Icon transitions for theme button
+  .icon-sun,
+  .icon-moon {
+    position:   absolute;
+    transition: $transition-slow;
+  }
+
+  .icon-sun {
+    opacity:   0;
+    transform: rotate(90deg) scale(0.5);
+  }
+
+  .icon-moon {
+    opacity:   1;
+    transform: rotate(0deg) scale(1);
+  }
+
+  // When exam container is active (light bg context)
+  .exam-container.active ~ .global-controls &,
+  .exam-active & {
+    background:   rgba(15, 23, 42, 0.08);
+    color:        $text-muted;
+    border-color: $border;
+
+    &:hover {
+      background:   rgba(15, 23, 42, 0.14);
+      border-color: $border-dark;
+      color:        $text;
+    }
+  }
+}
+
+// ── Theme toggle — dark mode active state ────────────────────
+[data-theme="dark"] {
+  // Ctrl buttons adapt to dark bg
+  .ctrl-btn {
+    background:   rgba(30, 41, 59, 0.85);
+    color:        #94a3b8;
+    border-color: #334155;
+
+    &:hover {
+      background:   #334155;
+      color:        #f1f5f9;
+      border-color: #475569;
+    }
+  }
+
+  // Moon → Sun swap when dark is active
+  #themeToggleBtn {
+    .icon-sun {
+      opacity:   1;
+      transform: rotate(0deg) scale(1);
+      color:     #fbbf24;
+    }
+    .icon-moon {
+      opacity:   0;
+      transform: rotate(-90deg) scale(0.5);
+    }
+  }
+}
+
+// ── Fullscreen active state ──────────────────────────────────
+.ctrl-btn.fullscreen-active i {
+  color: $primary-light;
+}
+
+// ── Smooth theme transition on all elements ──────────────────
+*,
+*::before,
+*::after {
+  transition-property: background-color, border-color, color, box-shadow, opacity;
+  transition-duration: 0.2s;
+  transition-timing-function: ease;
+}
+
+// Override — don't transition things that need instant response
+.option,
+.nav-question,
+.timer-box {
+  transition: all 0.2s ease !important;
+}
+
+// Animations should never be affected by theme transition
+@keyframes gradientShift, @keyframes pulse, @keyframes timerPulse {
+  transition: none;
+}
+
+// ── Tooltip on ctrl button hover ────────────────────────────
+.ctrl-btn[title] {
+  &::after {
+    content:       attr(title);
+    position:      absolute;
+    bottom:        calc(100% + 8px);
+    left:          50%;
+    transform:     translateX(-50%) scale(0.85);
+    background:    rgba(15, 23, 42, 0.9);
+    color:         white;
+    font-size:     $font-size-xs;
+    font-weight:   $font-weight-medium;
+    font-family:   $font-family;
+    padding:       4px 8px;
+    border-radius: $radius-xs;
+    white-space:   nowrap;
+    pointer-events: none;
+    opacity:       0;
+    transition:    opacity 0.15s ease, transform 0.15s ease;
+  }
+
+  &:hover::after {
+    opacity:   1;
+    transform: translateX(-50%) scale(1);
+  }
+}
+
+// ── Responsive — smaller on mobile ──────────────────────────
+@include sm {
+  .global-controls {
+    top:   $spacing-sm;
+    right: $spacing-sm;
+  }
+
+  .ctrl-btn {
+    width:  34px;
+    height: 34px;
+    font-size: 13px;
+  }
+}

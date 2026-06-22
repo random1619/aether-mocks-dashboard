@@ -1,0 +1,99 @@
+// UI Keyframe Animations and Helper Classes
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes scaleUp {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes pulseLowTime {
+  0% {
+    box-shadow: 0 0 0 0 rgba($danger-color, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 6px rgba($danger-color, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba($danger-color, 0);
+  }
+}
+
+@keyframes floatSoft {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-4px); }
+  75% { transform: translateX(4px); }
+}
+
+// Animation utility classes
+.animate-fade-in {
+  animation: fadeIn 0.3s ease-out forwards;
+}
+
+.animate-scale-up {
+  animation: scaleUp 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+.animate-slide-down {
+  animation: slideDown 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-slide-in {
+  animation: slideInRight 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-float {
+  animation: floatSoft 3s ease-in-out infinite;
+}
+
+.animate-shake {
+  animation: shake 0.2s ease-in-out;
+}
+
+// Low time timer alert class
+.timer-danger {
+  background: $danger-light !important;
+  color: $danger-color !important;
+  border-color: rgba($danger-color, 0.3) !important;
+  animation: pulseLowTime 1.5s infinite;
+}

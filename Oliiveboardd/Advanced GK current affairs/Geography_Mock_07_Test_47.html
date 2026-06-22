@@ -1,0 +1,1348 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Geography Mock 07 Test 47</title>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+
+<link href="assets/css/main.css" rel="stylesheet"/></head>
+<body>
+<!-- Welcome Screen -->
+<div class="welcome-screen" id="welcomeScreen">
+<h1 class="welcome-title">Exam ID : gktests</h1>
+<div class="welcome-details">
+<div class="welcome-detail">
+<span class="welcome-detail-label">Test ID</span>
+<span class="welcome-detail-value">47 </span>
+</div>
+<div class="welcome-detail">
+<span class="welcome-detail-label">Total Questions:</span>
+<span class="welcome-detail-value">30</span>
+</div>
+<div class="welcome-detail">
+<span class="welcome-detail-label">Total Marks:</span>
+<span class="welcome-detail-value">30</span>
+</div>
+<div class="welcome-detail">
+<span class="welcome-detail-label">Duration:</span>
+<span class="welcome-detail-value">60 minutes</span>
+</div>
+<div class="welcome-detail">
+<span class="welcome-detail-label">Marking:</span>
+<span class="welcome-detail-value">+1 / -0.25</span>
+</div>
+</div>
+<div class="welcome-instructions">
+<h3>Instructions</h3>
+<ul>
+<li>Read each question carefully before answering</li>
+<li>You can mark questions for review and come back later</li>
+<li>The timer will automatically submit the test when time is up</li>
+<li>Negative marking applies for wrong answers</li>
+</ul>
+</div>
+<div class="welcome-buttons">
+<button class="welcome-button" id="startTestBtn">
+<i class="fas fa-play"></i> Start Test
+        </button>
+<a class="join-channel" href="https://t.me/mocks_wallah_again" target="_blank">
+<i class="fab fa-telegram"></i> Join Our Channel
+        </a>
+</div>
+</div>
+<!-- Main Test Interface (hidden initially) -->
+<div id="mainTestInterface" style="display:none">
+<div class="hdr">
+<div class="hdr-l">
+<div class="q-info" id="qInfo">Q1/30</div>
+<div class="timer" id="timer">60:00</div>
+</div>
+<div class="hdr-c">Mocks Wallah</div>
+<div class="hdr-r">
+<button class="theme-toggle" id="themeToggle"><i class="fas fa-moon"></i></button>
+<button class="btn btn-o btn-sm" id="menuBtn"><i class="fas fa-th"></i></button>
+<button class="btn btn-p btn-sm" id="subBtn">Submit</button>
+</div>
+</div>
+<div class="cont">
+<div class="q-card">
+<div class="lang">
+<button class="lang-btn active" id="engBtn">English</button>
+<button class="lang-btn" id="hinBtn">हिंदी</button>
+</div>
+<div class="comp" id="compSec" style="display:none">
+<h4><i class="fas fa-book"></i> Comprehension</h4>
+<div id="compCont"></div>
+</div>
+<div class="q-txt" id="qTxt"></div>
+<div class="opts" id="opts"></div>
+<div class="sol" id="sol">
+<div class="sol-info" id="solInfo"></div>
+<h4><i class="fas fa-lightbulb"></i> Solution</h4>
+<div id="solCont"></div>
+</div>
+</div>
+</div>
+<div class="nav">
+<button class="btn btn-o nav-btn" id="prevBtn"><i class="fas fa-chevron-left"></i> Prev</button>
+<button class="btn btn-w nav-btn" id="reviewBtn"><i class="fas fa-flag"></i> Review</button>
+<div class="prog">
+<div id="progTxt">1 of 30</div>
+<div style="font-size:11px">Answered: <span id="ansCnt">0</span> | <a href="https://t.me/mocks_wallah_again">Mocks Wallah</a></div>
+</div>
+<button class="btn btn-p nav-btn" id="nextBtn">Next <i class="fas fa-chevron-right"></i></button>
+</div>
+<div class="desktop-sidebar" id="desktopSidebar">
+<h3>Questions Navigator</h3>
+<div class="q-grid" id="desktopQGrid"></div>
+<div style="margin-top:20px;font-size:12px;color:var(--txtL)">
+<div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
+<div class="q-num ans" style="width:24px;height:24px">✓</div><span>Answered</span>
+</div>
+<div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
+<div class="q-num review" style="width:24px;height:24px">!</div><span>Marked for Review</span>
+</div>
+<div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
+<div class="q-num wrong" style="width:24px;height:24px">✗</div><span>Incorrect</span>
+</div>
+<div style="display:flex;align-items:center;gap:8px">
+<div class="q-num unattempted" style="width:24px;height:24px">?</div><span>Unattempted</span>
+</div>
+</div>
+</div>
+<div class="panel" id="panel">
+<div class="panel-hdr">
+<h3>All Questions</h3>
+<button class="panel-close" id="panelClose"><i class="fas fa-times"></i></button>
+</div>
+<div class="q-grid" id="qGrid"></div>
+<div style="padding:20px;font-size:12px;color:var(--txtL)">
+<div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
+<div class="q-num ans" style="width:24px;height:24px">✓</div><span>Answered</span>
+</div>
+<div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
+<div class="q-num review" style="width:24px;height:24px">!</div><span>Marked for Review</span>
+</div>
+<div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
+<div class="q-num wrong" style="width:24px;height:24px">✗</div><span>Incorrect</span>
+</div>
+<div style="display:flex;align-items:center;gap:8px">
+<div class="q-num unattempted" style="width:24px;height:24px">?</div><span>Unattempted</span>
+</div>
+</div>
+</div>
+<button class="print-btn" id="printBtn" style="display:none">
+<i class="fas fa-print"></i>
+</button>
+<div class="modal" id="modalOver">
+<div class="result">
+<h2>Test Complete!</h2>
+<div class="score" id="scoreDisp">0/30</div>
+<div class="stats">
+<div class="stat c"><div class="stat-val" id="corrStat">0</div><div class="stat-lbl">Correct</div></div>
+<div class="stat w"><div class="stat-val" id="incStat">0</div><div class="stat-lbl">Incorrect</div></div>
+<div class="stat"><div class="stat-val" id="unaStat">0</div><div class="stat-lbl">Unattempted</div></div>
+<div class="stat"><div class="stat-val" id="timeStat">0</div><div class="stat-lbl">Minutes</div></div>
+</div>
+<div class="modal-acts">
+<button class="btn btn-o modal-btn" id="closeModal">Close</button>
+<button class="btn btn-p modal-btn" id="revBtn">Review</button>
+</div>
+</div>
+</div>
+</div>
+<script>
+        class TestApp {
+            constructor() {
+            this.qs = [
+  {
+    "question": "<p>The Ten Degree Channel separates-</p>",
+    "options": [
+      "Indian mainland and North Andaman",
+      "Little Andaman and Car Nicobar",
+      "South Andaman and Little Andaman",
+      "Little Nicobar and Great Nicobar"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p><b>The Ten Degree Channel is a channel that separates the Little Andaman and Car Nicobar </b>in the Bay of Bengal. The two sets of islands together form the Indian Union Territory (UT) of Andaman and Nicobar Islands. This channel is 150 km wide. The Channel is approximately 10 km wide, running essentially along an east-west orientation. It is so named as it lies on the 10-degree line of latitude, north of the equator.</p>",
+    "question_index": 0
+  },
+  {
+    "question": "<p>Manipur does NOT share a boundary with which of the following states?</p>",
+    "options": [
+      "Nagaland",
+      "Mizoram",
+      "Tripura",
+      "Assam"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p>Manipur is a state in northeastern India, with the city of <b>Imphal</b> as its capital. Manipur is sometimes called alternative names such as Kangleipak or Sanaleibak. It is bounded by <b>Nagaland </b>to the north, <b>Mizoram </b>to the south, and <b>Assam</b> to the west; <b>Burma </b>lies to its east. Its people include the <b>Meetei, Kuki, Naga, and Pangal peoples, who speak Sino-Tibetan languages.</b></p>",
+    "question_index": 1
+  },
+  {
+    "question": "<p>Which is the northernmost range of the Himalayas?</p>",
+    "options": [
+      "Shiwaliks",
+      "Himadri",
+      "Himachal",
+      "Ladhak Range"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p><b>Greater Himalayas or Himadri</b> is the northernmost mountain range of the Himalayas. Among the three parallel ranges of the Himalayas, the Greater Himalaya is the highest. The average height of the Greater Himalaya belt is 6000 m. </p>",
+    "question_index": 2
+  },
+  {
+    "question": "<p>Which of the following does NOT share a boundary with China?</p>",
+    "options": [
+      "Iran",
+      "Afghanistan",
+      "Mongolia",
+      "Kazakhstan"
+    ],
+    "correct_option_id": 0,
+    "solution": "<p>China has the longest combined land border in the world. China borders 14 nations, more than any other country except Russia, which also borders 14. <b>China extends across much of East Asia, bordering Vietnam, Laos, and Myanmar (Burma) in Southeast Asia; India, Bhutan, Nepal and Pakistan (through PoK) in South Asia; Afghanistan, Tajikistan, Kyrgyzstan and Kazakhstan in Central Asia; and Russia, Mongolia, and North Korea in Inner Asia and Northeast Asia. Additionally, China shares maritime boundaries with South Korea, Japan, Vietnam, and the Philippines.</b></p>",
+    "question_index": 3
+  },
+  {
+    "question": "<p>The continent in the picture is South America. Which latitude is pointed out in the picture given below?</p><p><img width=431 height=245 id=\"Picture 20\" src=\"https://u1.oliveboard.in/exams/solution/gkimg/geo/07/image001.jpg\" > </p>",
+    "options": [
+      "Equator",
+      "Antarctic Circle",
+      "Tropic of Cancer",
+      "Tropic of Capricorn"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p><img width=411 height=294 id=\"Picture 19\" src=\"https://u1.oliveboard.in/exams/solution/gkimg/geo/07/image002.jpg\" ></p>",
+    "question_index": 4
+  },
+  {
+    "question": "<p>The Lakshdweep Islands are of ________ origin.</p>",
+    "options": [
+      "Volcanic",
+      "Coral",
+      "Metamorphic",
+      "None of the above"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p>Lakshadweep is an archipelago of <b>twelve atolls</b>, <b>three reefs</b> and <b>five submerged banks</b>, with a total of about thirty-nine islands and islets. The <b>reefs are in fact also atolls</b>, although mostly submerged, with only small unvegetated sand cays above the high-water mark. <b>The submerged banks are sunken atolls</b>. Almost all the atolls have a northeast-southwest orientation with the islands lying on the eastern rim, and a mostly submerged reef on the western rim, enclosing a lagoon. It has 10 inhabited islands, 17 uninhabited islands, attached islets, 4 newly formed islets and 5 submerged reefs. The main islands are <b>Kavaratti, Agatti, Minicoy, and Amini</b>. </p> <p><b>An atoll is a ring-shaped coral reef, island, or series of islets.</b> An atoll surrounds a body of water called a lagoon. Sometimes, atolls and lagoons protect a central island. Channels between islets connect a lagoon to the Open Ocean or sea.</p>",
+    "question_index": 5
+  },
+  {
+    "question": "<p>Where is the capital of Malaysia located?</p>",
+    "options": [
+      "Jakarta",
+      "Madura",
+      "Kuala Lumpur",
+      "Pinang"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p>Malaysia is a federal constitutional monarchy located in Southeast Asia. It consists of thirteen states and three federal territories Peninsular Malaysia shares a land and maritime border with Thailand and maritime borders with Singapore, Vietnam, and Indonesia. East Malaysia shares land and maritime borders with Brunei and Indonesia and a maritime border with the Philippines and Vietnam. <b>The capital city is Kuala Lumpur, while Putrajaya is the seat of the federal government.</b></p>",
+    "question_index": 6
+  },
+  {
+    "question": "<p>Which of the following does NOT touch Greece?</p>",
+    "options": [
+      "Macedonia",
+      "The Mediterranean",
+      "Albania",
+      "Serbia"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p>Greece is strategically located at the crossroads of Europe, Asia, and Africa. Situated on the southern tip of the Balkan Peninsula, it shares land borders with <b>Albania</b> to the northwest, the <b>Republic of Macedonia and Bulgaria</b> to the north <b>and Turkey</b> to the northeast. Greece consists of nine geographic regions: Macedonia, Central Greece, the Peloponnese, Thessaly, Epirus, the Aegean Islands (including the Dodecanese and Cyclades), Thrace, Crete, and the Ionian Islands. The <b>Aegean Sea </b>lies to the east of the mainland, the <b>Ionian Sea</b> to the west, and the <b>Mediterranean Sea</b> to the south. Greece has the longest coastline on the Mediterranean Basin and the 11th longest coastline in the world at 13,676 km (8,498 mi) in length, featuring a vast number of islands, of which 227 are inhabited. Eighty percent of Greece is mountainous, with <b>Mount Olympus</b> being the highest peak at 2,918 meters (9,573 ft).</p>",
+    "question_index": 7
+  },
+  {
+    "question": "<p>In which is the Pong Reservoir situated?</p>",
+    "options": [
+      "Uttrakhand",
+      "Assam",
+      "Sikkim",
+      "Himanchal Pradesh"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p><b>Maharana Pratap Sagar</b>, in India, also known as <b>Pong Reservoir</b> or <b>Pong Dam Lake</b> was created in 1975, by building the highest earth fill dam in India on the Beas River in the wetland zone of the Siwalik Hills of the <b>Kangra district</b> of the state of Himachal Pradesh. The reservoir or the lake is a well-known wildlife sanctuary and one of the 25 international wetland sites declared in India by the Ramsar Convention. The reservoir covers an area of 24,529 hectares (60,610 acres), and the wetlands portion is 15,662 hectares (38,700 acres). The Pong Reservoir and Gobindsagar Reservoir are the two most important fishing reservoirs in the Himalayan foothills of Himachal Pradesh. These reservoirs are the leading sources of fish within the Himalayan states.</p>",
+    "question_index": 8
+  },
+  {
+    "question": "<p>Which of the following is a plateau?</p>",
+    "options": [
+      "Ganghkar Puensun",
+      "Bolan",
+      "Pothohar",
+      "Kula Kangri"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p><b>The Pothohar Plateau is a plateau in north-eastern Pakistan, forming the northern part of Punjab. </b>It borders the western parts of Azad Kashmir and the southern parts of Khyber Pakhtunkhwa. The region was once the home of the ancient Soanian culture, which is evidenced by the discovery of fossils, tools, coins, and remains of ancient archaeological sites.</p>",
+    "question_index": 9
+  },
+  {
+    "question": "<p>Which of the following does NOT touch France?</p>",
+    "options": [
+      "The Mediterranean",
+      "The Bay of Biscay",
+      "The Black Sea",
+      "The North Sea"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p>Metropolitan France extends from the <b>Mediterranean Sea</b> to the English Channel and the <b>North Sea</b>, and from the Rhine to the <b>Atlantic Ocean through the Bay of Biscay</b>; due to its shape, it is often referred to in French as l'Hexagone (\"The Hexagon\"). France is one of only three countries (with Morocco and Spain) to have both Atlantic and Mediterranean coastlines.</p>",
+    "question_index": 10
+  },
+  {
+    "question": "<p>In which of the following can the Sangai Deer be found?</p>",
+    "options": [
+      "Singalila National Prak",
+      "Pobitro Wildlife Sanctury",
+      "Kishtwar National Park",
+      "Keibul Lamjao National Park"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p>The sangai is an <b>endemic, rare and endangered</b> subspecies of brow-antlered deer found only in Manipur, India. Its common English name is Manipur brow-antlered deer and the scientific name, <b>Rucervus eldii eldii McClelland. </b>It lives in the marshy wetland in Keibul Lamjao about 45 km from Imphal. Its habitat is located in the southern parts of the Loktak Lake, which is the largest freshwater lake in eastern India. The habitat of the sangai is now protected as the <b>Keibul Lamjao National Park</b>. <b>The sangai is also the state animal of Manipur.</b></p>",
+    "question_index": 11
+  },
+  {
+    "question": "<p>Which is the highest mountain peak in Europe?</p>",
+    "options": [
+      "Mont Blanc",
+      "Mount Elbrus",
+      "Janga",
+      "Kazbek"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p><b>Mount Elbrus</b> is a dormant volcano located in the northern Caucasus Mountains, in Kabardino-Balkaria and Karachay - Cherkessia of <b>Russia</b>, near the border with Georgia. Elbrus' peak is the highest in the Caucasus Mountains, in Russia, and in Europe; and it is the tenth most prominent in the world.</p>",
+    "question_index": 12
+  },
+  {
+    "question": "<p>Read the statements given below and answer the following question.</p> <p>1. The Gulf Stream is a cold current, near the Gulf of Mexico.</p> <p>2. Peru Current is a cold current.</p> <p>3. Equatorial current is a cold current.</p><p>Which of the following options lists the incorrect statements?</p>",
+    "options": [
+      "1 and 2",
+      "1 and 3",
+      "Only 2",
+      "2 and 3"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p><b>The Gulf Stream,</b> together with its northern extension towards Europe, the North Atlantic Drift, <b>is a powerful, warm, and swift Atlantic ocean current that originates at the tip of Florida, and follows the eastern coastlines of the United States and Newfoundland before crossing the Atlantic Ocean.</b></p> <p><b>The Humboldt Current is a cold, low-salinity ocean current that flows north along the west coast of South America from the southern tip of Chile to northern Peru. </b>Also called the<b> Peru Current</b>, it is an eastern boundary current flowing in the direction of the equator, and can extend 1,000 kilometers offshore.</p> <p><b>Equatorial current is a warm ocean current flowing westward near the equator, predominantly controlled by the winds.</b> Characteristically, equatorial-current systems consist of two westward-flowing currents approximately 600 miles (1,000 km) wide (North and South equatorial currents) separated by an eastward-flowing countercurrent only 300 miles (480 km) wide. Usually flowing at depths of less than 1,650 feet (500 m), equatorial currents travel at rates of 10 to 40 inches per second (25 to 100 cm per second). Equatorial undercurrents, centered on the equator at depths of 160 to 500 feet (49 to 152 m), flow eastward at rates up to 5 feet/s (1.5 m/s) and are approximately 1,000 feet (305 m) deep and 640 miles (1,030 km) wide.</p>",
+    "question_index": 13
+  },
+  {
+    "question": "<p>The Dihang Dibang Biosphere Reserve lies in __________ .</p>",
+    "options": [
+      "Arunachal Pradesh",
+      "Assam",
+      "Manipur",
+      "Mizoram"
+    ],
+    "correct_option_id": 0,
+    "solution": "<p><b>Dihang-Dibang or Dehang-Debang is a biosphere reserve constituted in 1998</b>. It is in the Indian state of Arunachal Pradesh. <b>The Mouling National Park</b> and the <b>Dibang Wildlife Sanctuary</b> are located fully or partly within this biosphere reserve. The reserve spreads over three districts: Dibang Valley, Upper Siang, and West Siang. It covers high mountains of Eastern Himalaya and Mishmi Hills. The habitat in Dihang-Dibang ranges <b>from tropical wet evergreen in the river gorges to subtropical, temperate, alpine and permanent snow. </b>The reserve is rich in wildlife. Rare mammals such as <b>Mishmi takin, red goral, musk deer (at least two sub-species), red panda, Asiatic black bear, occasional tiger and Gongshan muntjac</b> occur, while among birds there are the rare <b>Sclater's monal and Blyth's tragopan</b>. Two flying squirrels have been discovered from the vicinity of this reserve. These are named as <b>Mechuka giant flying squirrel</b> (Petaurista mechukaensis) <b>and Mishmi Hills giant flying squirrel</b> (Petaurista mishmiensis).</p>",
+    "question_index": 14
+  },
+  {
+    "question": "<p>In which of the following landforms can an ox bow lake be formed?</p>",
+    "options": [
+      "Mountains",
+      "Deserts",
+      "Valleys",
+      "Low lying plains"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p>When a river reaches <b>a low-lying plain, often in its final course to the sea or a lake, it meanders widely.</b> In the vicinity of a river bend, deposition occurs on the convex bank (the bank with the smaller radius). In contrast, both lateral erosion and undercutting occur on the cut bank or concave bank (the bank with the greater radius.) Continuous deposition on the convex bank and erosion of the concave bank of a meandering river cause the formation of a very pronounced meander with two concave banks getting closer. The narrow neck of land between the two neighboring concave banks is finally cut through, either by lateral erosion of the two concave banks or by the strong currents of a flood. When this happens, a new straighter river channel is created and an abandoned meander loop, called a cutoff, is formed. When deposition finally seals off the cutoff from the river channel, an oxbow lake is formed. This process can occur over a time scale from a few years to several decades and may sometimes become essentially static.</p>",
+    "question_index": 15
+  },
+  {
+    "question": "<p>Which of the following is called the 'Lighthouse of the Mediterranean'?</p>",
+    "options": [
+      "Mt. Fuji",
+      "Mt. Strombli",
+      "Mt. Etna",
+      "Mt. Pelee"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p>Stromboli is a small island in the Tyrrhenian Sea, off the north coast of Sicily, containing one of the three active volcanoes in Italy. It is one of the eight Aeolian Islands, a volcanic arc north of Sicily. The volcano has erupted many times and is constantly active with minor eruptions, often visible from many points on the island and from the surrounding sea<b>, giving rise to the island's nickname \"Lighthouse of the Mediterranean\". The most recent major eruption was on 13 April 2009.</b></p>",
+    "question_index": 16
+  },
+  {
+    "question": "<p>In which region is the language Dogri spoken?</p>",
+    "options": [
+      "Chhattisgarh",
+      "Rajasthan",
+      "Odisha",
+      "Jammu and Kashmir"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p>Dogri is an Indo-Aryan language spoken by about five million people in India and Pakistan, <b>chiefly in the Jammu region of Jammu and Kashmir and Himachal Pradesh,</b> but also in <b>northern Punjab</b>, other parts of Jammu and Kashmir, and elsewhere. <b>Dogri speakers are called Dogras, and the Dogri-speaking region is called Duggar.</b></p>",
+    "question_index": 17
+  },
+  {
+    "question": "<p>Plateaus formed due to the movements of the Earth are called ________.</p>",
+    "options": [
+      "Intermontane Plateaus",
+      "Volcanic Plateaus",
+      "Tectonic Plateaus",
+      "Dissected Plateaus"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p><b>Tectonic landform</b>, any of the relief features that are produced chiefly by uplift or subsidence of the Earth's crust or by upward magmatic movements. <b>They include mountains, plateaus, and rift valleys</b>. Tectonic processes build landforms mainly by causing the uplift or subsidence of rock material - blocks, layers, or slices of the Earth's crust, molten lavas, and even large masses that include the entire crust and uppermost part of the planet's mantle. In some areas, these processes create and maintain high elevations such as mountains and plateaus. In others, they produce topographic depressions, as exemplified by Death Valley in the western United States, the Dead Sea in the Middle East, or the Turfan Depression in western China. Virtually all areas below sea level have been formed by tectonic processes</p>",
+    "question_index": 18
+  },
+  {
+    "question": "<p>The volcanic rocks belong to which of the following categories?</p>",
+    "options": [
+      "Sedimentary rocks",
+      "Intrusive rock",
+      "Extrusive rocks",
+      "Metamorphic rocks"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p>Volcanic rocks are molten rocks poured out of volcanoes as lavas. They solidify rapidly on the Earth's surface and have crystals. <b>These are formed above the surface of the Earth and hence are called Extrusive Rocks. Basalt is a common example of Extrusive rock.</b></p>",
+    "question_index": 19
+  },
+  {
+    "question": "<p>The Jarawas are indigenous to which region of India?</p>",
+    "options": [
+      "Andaman Islands",
+      "Jharkhand",
+      "Andhra Pradesh",
+      "Chhattisgarh"
+    ],
+    "correct_option_id": 0,
+    "solution": "<p>The <b>Jarawa (also J&#228;rawa, Jarwa) are one of the Adivasi indigenous peoples of the Andaman Islands</b> in India. Their present numbers are estimated at between 250 - 400 individuals. Since they have largely shunned interactions with outsiders, many particulars of their society, culture and traditions are poorly understood.</p>",
+    "question_index": 20
+  },
+  {
+    "question": "<p>Which of the following roughly coincides with the International Date Line?</p>",
+    "options": [
+      "Equator",
+      "Prime Meridian",
+      "180&deg; East",
+      "80.5&deg; West"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p>The <b>International Date Line (IDL)</b> is an imaginary line of navigation on the surface of the Earth that runs from the North Pole to the South Pole and <b>demarcates the change of one calendar day to the next</b>. It passes through the middle of the Pacific Ocean, roughly following the <b>180&deg; line of longitude( East and West are coincident) </b>but deviating to pass around some territories and island groups.</p>",
+    "question_index": 21
+  },
+  {
+    "question": "<p>Which is the largest country in North America, by total area?</p>",
+    "options": [
+      "United States",
+      "Canada",
+      "Mexico",
+      "Greenland"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p>Canada is a country in the northern part of North America. Its ten provinces and three territories extend from the Atlantic to the Pacific and northward into the Arctic Ocean, covering 9.98 million square kilometers (3.85 million square miles), making it the world's <b>second-largest</b> country by total area and the <b>fourth-largest</b> country by land area. The largest country by total area is Russia, which is located in Asia and Europe. This makes Canada the largest country in North America, by total area. As per land area United States would be the largest country in North America. Canada's border with the United States is the world's longest land border. Canada is sparsely populated, the majority of its land territory being dominated by forest and tundra and the Rocky Mountains; about four-fifths of the country's population of 35 million people live near the southern border. The majority of Canada has a cold or severely cold winter climate, but southerly areas are warm in summer.</p> <p><b>Total area</b>: the sum of land and water areas within international boundaries and coastlines.</p> <p><b>Land area</b>: the aggregate of all land within international boundaries and coastlines, excluding water area.</p> <p><b>Water area</b>: the sum of the surface areas of all inland water bodies (lakes, reservoirs, and rivers) within international boundaries and coastlines. Territorial waters are not included unless otherwise noted. Exclusive economic zones are not included.</p>",
+    "question_index": 22
+  },
+  {
+    "question": "<p>Which state is not a major producer of rice?</p>",
+    "options": [
+      "Punjab",
+      "Uttar Pradesh",
+      "Bihar",
+      "Mizoram"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p>Rice is produced majorly in the Gangetic plains, in the states of <b>Uttar Pradesh, Bihar, Madhya Pradesh, West Bengal, Odisha. </b>It is also produced in <b>Punjab</b> due to widespread irrigation. It is also produced along the <b>east coast</b> and the Malabar<b> Coast</b>. In the Northeast rice is produced in <b>parts of Assam</b> and <b>Tripura,</b> but not in Mizoram. The production of rice by Jhumming is insignificant.</p>",
+    "question_index": 23
+  },
+  {
+    "question": "<p>Which port is a terminal of the proposed Western Dedicated Freight Corridor?</p>",
+    "options": [
+      "Kandla port",
+      "Mumbai port",
+      "Jawaharlal Nehru port",
+      "Kochi port"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p><b>Jawaharlal Nehru Port, also known as Nhava Sheva</b>, is the largest container port in India. Located east of Mumbai in Maharashtra, the port on the Arabian Sea is accessed via Thane Creek. Its common name derives from the names of Nhava and Sheva villages that were situated here. <b>This port is also the terminal of Western Dedicated Freight Corridor proposed by Indian Railways.</b></p>",
+    "question_index": 24
+  },
+  {
+    "question": "<p>In which of the following does the St Lawrence River drain?</p>",
+    "options": [
+      "Pacific Ocean",
+      "Atlantic Ocean",
+      "Mediterranean Sea",
+      "Arabian Sea"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p>The Saint Lawrence River is a large river in the middle latitudes of North America. The Saint Lawrence River flows in a roughly north-easterly direction, <b>connecting the Great Lakes with the Atlantic Ocean and forming the primary drainage outflow of the Great Lakes Basin.</b> It traverses the Canadian provinces of Quebec and Ontario, and is part of the international boundary between Ontario, Canada, and the U.S. state of New York. This river also provides the basis of the commercial Saint Lawrence Seaway.</p>",
+    "question_index": 25
+  },
+  {
+    "question": "<p>Which metal is found in the monazite sands of Kerala?</p>",
+    "options": [
+      "Uranium",
+      "Iron",
+      "Zinc",
+      "Thorium"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p>Monazite is an important ore for thorium, lanthanum, and cerium. It is often found in placer deposits. India, Madagascar, and South Africa have large deposits of monazite sands. <b>The deposits in India are particularly rich in monazite. The beach sands of the coastal tracts of Kerala and Tamil Nadu are very rich in monazite. Monazite is radioactive due to the presence of thorium and, less commonly, uranium.</b> Because of its radioactive nature, monazite is a <b>useful for radiometric dating of geological events, such as crystallization, heating, or deformation of the rocks containing monazite</b>.</p>",
+    "question_index": 26
+  },
+  {
+    "question": "<p>What is the name of the encircled island,in the picture given below?</p><p><img width=451 height=317 id=\"Picture 14\" src=\"https://u1.oliveboard.in/exams/solution/gkimg/geo/07/image003.jpg\" > </p>",
+    "options": [
+      "Costa Rica",
+      "Cuba",
+      "Mexico",
+      "Belize"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p><img width=438 height=261 id=\"Picture 15\" src=\"https://u1.oliveboard.in/exams/solution/gkimg/geo/07/image004.jpg\" ></p>",
+    "question_index": 27
+  },
+  {
+    "question": "<p>Which of the following is a landlocked country in South America?</p>",
+    "options": [
+      "Brazil",
+      "Chile",
+      "Argentina",
+      "Paraguay"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p>South America has only two landlocked countries <b> -  Paraguay and Bolivia.</b></p>",
+    "question_index": 28
+  },
+  {
+    "question": "<p>Which of the following gold mines was auctioned in 2016?</p>",
+    "options": [
+      "Matiya",
+      "Mansa",
+      "Baghmara",
+      "Sonadih"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p>London-listed Vedanta Resources Inc bagged a gold mine in <b>Chhattisgarh</b> in February, 2016. It was put up for auction by the state government. The company quoted the highest price to get the <b>Baghmara (Sonakhan) gold mine</b>, which became country's first mine carrying the yellow metal to be auctioned. The company would be granted the composite license that includes both prospecting license and cum-mining lease.</p>",
+    "question_index": 29
+  }
+];
+            this.sections = null;
+            this.curQ = 0;
+            this.ans = new Array(this.qs.length).fill(null);
+            this.reviewed = new Array(this.qs.length).fill(false);
+            this.startT = Date.now();
+            this.timeLeft = 60 * 60;
+            this.timeSpent = new Array(this.qs.length).fill(0);
+            this.lastQTime = this.startT;
+            this.sub = false;
+            this.eng = true;
+            this.darkMode = false;
+            this.timer = null;
+            this.sectionTimer = null;
+            this.currentSection = this.sections ? 0 : null;
+            this.initEls();
+            this.setupWelcomeScreen();
+            this.validateData();
+            this.setupBeforeUnload();
+        }
+            
+            setupWelcomeScreen() {
+                document.getElementById('startTestBtn').addEventListener('click', () => {
+                    // Hide welcome screen
+                    document.getElementById('welcomeScreen').classList.add('hidden');
+                    
+                    // Show main test interface
+                    document.getElementById('mainTestInterface').style.display = '';
+                    
+                    // Initialize the test
+                    setTimeout(() => {
+                        this.init();
+                    }, 300);
+                });
+            }
+            
+            setupBeforeUnload() {
+                window.addEventListener('beforeunload', (e) => {
+                    if (!this.sub) {
+                        e.preventDefault();
+                        e.returnValue = 'Are you sure you want to leave? Your test progress will be lost.';
+                        return e.returnValue;
+                    }
+                });
+            }
+            
+            validateData() {
+                console.log('Validating question data...');
+                this.qs.forEach((q, idx) => {
+                    if (q.correct_option_id !== undefined) {
+                        console.log(`Q${idx + 1}: correct_option_id = ${q.correct_option_id}, options count = ${q.options ? q.options.length : 0}`);
+                        
+                        if (q.options && (q.correct_option_id < 0 || q.correct_option_id >= q.options.length)) {
+                            console.warn(`Q${idx + 1}: Invalid correct_option_id ${q.correct_option_id} for ${q.options.length} options`);
+                        }
+                    }
+                });
+            }
+            
+            initEls() {
+                this.els = {
+                    qInfo: document.getElementById('qInfo'),
+                    progTxt: document.getElementById('progTxt'),
+                    ansCnt: document.getElementById('ansCnt'),
+                    timer: document.getElementById('timer'),
+                    qTxt: document.getElementById('qTxt'),
+                    compSec: document.getElementById('compSec'),
+                    compCont: document.getElementById('compCont'),
+                    opts: document.getElementById('opts'),
+                    sol: document.getElementById('sol'),
+                    solCont: document.getElementById('solCont'),
+                    solInfo: document.getElementById('solInfo'),
+                    qGrid: document.getElementById('qGrid'),
+                    desktopQGrid: document.getElementById('desktopQGrid'),
+                    panel: document.getElementById('panel'),
+                    modalOver: document.getElementById('modalOver'),
+                    scoreDisp: document.getElementById('scoreDisp'),
+                    corrStat: document.getElementById('corrStat'),
+                    incStat: document.getElementById('incStat'),
+                    unaStat: document.getElementById('unaStat'),
+                    timeStat: document.getElementById('timeStat'),
+                    printBtn: document.getElementById('printBtn'),
+                    desktopSidebar: document.getElementById('desktopSidebar'),
+                    reviewBtn: document.getElementById('reviewBtn'),
+                    themeToggle: document.getElementById('themeToggle'),
+                    sectionHeader: this.sections ? document.getElementById('sectionHeader') : null,
+                    sectionTitle: this.sections ? document.getElementById('sectionTitle') : null,
+                    sectionTimer: this.sections ? document.getElementById('sectionTimer') : null
+                };
+            }
+            
+            init() {
+                this.createGrid();
+                this.startTimer();
+                if (this.sections) {
+                    this.startSectionTimer();
+                    this.updateSectionHeader();
+                }
+                this.loadQ(0);
+                this.setupEvents();
+                this.updatePrintButton();
+                this.updateThemeToggleIcon();
+            }
+            
+            setupEvents() {
+                document.getElementById('menuBtn').onclick = () => this.togglePanel();
+                document.getElementById('subBtn').onclick = () => this.confirmSub();
+                document.getElementById('prevBtn').onclick = () => this.nav(-1);
+                document.getElementById('nextBtn').onclick = () => this.nav(1);
+                document.getElementById('reviewBtn').onclick = () => this.toggleReview();
+                document.getElementById('engBtn').onclick = () => this.setLang(true);
+                document.getElementById('hinBtn').onclick = () => this.setLang(false);
+                document.getElementById('panelClose').onclick = () => this.closePanel();
+                document.getElementById('closeModal').onclick = () => this.closeModal();
+                document.getElementById('revBtn').onclick = () => this.review();
+                document.getElementById('printBtn').onclick = () => this.printTest();
+                document.getElementById('themeToggle').onclick = () => this.toggleTheme();
+            }
+            
+            // IMPROVED: Better handling of complex HTML content including math expressions
+            extractTxt(html, isEng) {
+                if (!html) return '';
+                
+                // Create a temporary div to parse the HTML
+                const tempDiv = document.createElement('div');
+                tempDiv.innerHTML = html;
+                
+                // Process math expressions - convert them to proper HTML structure
+                const mathExps = tempDiv.querySelectorAll('div[style*="inline-block"][style*="vertical-align: middle"]');
+                mathExps.forEach(mathExp => {
+                    // Create a new math expression container
+                    const newMathExp = document.createElement('div');
+                    newMathExp.className = 'math-exp';
+                    
+                    // Get numerator and denominator
+                    const spans = mathExp.querySelectorAll('span');
+                    if (spans.length >= 3) {
+                        const numerator = spans[0].cloneNode(true);
+                        const line = spans[1].cloneNode(true);
+                        const denominator = spans[2].cloneNode(true);
+                        
+                        // Clean up the numerator
+                        const numDiv = document.createElement('div');
+                        numDiv.className = 'math-num';
+                        numDiv.innerHTML = numerator.innerHTML;
+                        
+                        // Create the dividing line
+                        const lineDiv = document.createElement('div');
+                        lineDiv.className = 'math-line';
+                        
+                        // Clean up the denominator
+                        const denDiv = document.createElement('div');
+                        denDiv.className = 'math-num';
+                        denDiv.innerHTML = denominator.innerHTML;
+                        
+                        // Build the new math expression
+                        newMathExp.appendChild(numDiv);
+                        newMathExp.appendChild(lineDiv);
+                        newMathExp.appendChild(denDiv);
+                        
+                        // Replace the original with our new structure
+                        mathExp.parentNode.replaceChild(newMathExp, mathExp);
+                    }
+                });
+                
+                // Handle language selection - show/hide appropriate spans
+                const langSpans = tempDiv.querySelectorAll('span.eqt, span.hqt');
+                langSpans.forEach(span => {
+                    if ((isEng && span.classList.contains('hqt')) || 
+                        (!isEng && span.classList.contains('eqt'))) {
+                        span.style.display = 'none';
+                    } else {
+                        span.style.display = '';
+                        // Remove the class to prevent future hiding
+                        span.classList.remove('eqt', 'hqt');
+                    }
+                });
+                
+                // Clean up any remaining display:none styles
+                const hiddenElements = tempDiv.querySelectorAll('[style*="display:none"]');
+                hiddenElements.forEach(el => {
+                    if (el.style.display === 'none' && 
+                        !el.classList.contains('hqt') && 
+                        !el.classList.contains('eqt')) {
+                        el.style.display = '';
+                    }
+                });
+                
+                // Handle tables - wrap them in a scrollable container
+                const tables = tempDiv.querySelectorAll('table');
+                tables.forEach(table => {
+                    const container = document.createElement('div');
+                    container.className = 'table-container';
+                    table.parentNode.insertBefore(container, table);
+                    container.appendChild(table);
+                });
+                
+                return tempDiv.innerHTML;
+            }
+            
+            createGrid() {
+                this.els.qGrid.innerHTML = '';
+                this.els.desktopQGrid.innerHTML = '';
+                
+                this.qs.forEach((_, i) => {
+                    // Create mobile grid element
+                    const mobileDiv = document.createElement('div');
+                    mobileDiv.className = 'q-num';
+                    mobileDiv.textContent = i + 1;
+                    mobileDiv.onclick = () => this.goToQ(i);
+                    this.els.qGrid.appendChild(mobileDiv);
+                    
+                    // Create desktop grid element
+                    const desktopDiv = document.createElement('div');
+                    desktopDiv.className = 'q-num';
+                    desktopDiv.textContent = i + 1;
+                    desktopDiv.onclick = () => this.goToQ(i);
+                    this.els.desktopQGrid.appendChild(desktopDiv);
+                });
+            }
+            
+            loadQ(idx) {
+                // Update time spent on previous question
+                if (this.curQ !== idx) {
+                    const now = Date.now();
+                    this.timeSpent[this.curQ] += (now - this.lastQTime) / 1000;
+                    this.lastQTime = now;
+                }
+                
+                this.curQ = idx;
+                const q = this.qs[idx];
+                
+                // Check if question is in current section (if sections exist)
+                if (this.sections) {
+                    const inCurrentSection = this.isInCurrentSection(idx);
+                    if (!inCurrentSection) {
+                        // Find the section this question belongs to
+                        const sectionIdx = this.findSectionForQuestion(idx);
+                        if (sectionIdx !== null && !this.sections[sectionIdx].submitted) {
+                            this.currentSection = sectionIdx;
+                            this.startSectionTimer();
+                            this.updateSectionHeader();
+                        }
+                    }
+                }
+                
+                this.els.qInfo.textContent = `Q${idx + 1}/${this.qs.length}`;
+                this.els.progTxt.textContent = `${idx + 1} of ${this.qs.length}`;
+                this.updateAnsCnt();
+                this.updateNav();
+                this.updateGrid();
+                this.updateReviewButton();
+                
+                if (q.comp) {
+                    this.els.compSec.style.display = 'block';
+                    this.els.compCont.innerHTML = this.extractTxt(q.comp, this.eng);
+                } else {
+                    this.els.compSec.style.display = 'none';
+                }
+                
+                this.els.qTxt.innerHTML = this.extractTxt(q.question, this.eng);
+                this.loadOpts(q, idx);
+                
+                if (this.sub && q.solution) {
+                    // Show time spent on question in solution
+                    const timeSpent = Math.round(this.timeSpent[idx]);
+                    const minutes = Math.floor(timeSpent / 60);
+                    const seconds = timeSpent % 60;
+                    const timeStr = minutes > 0 
+                        ? `${minutes}m ${seconds}s` 
+                        : `${seconds}s`;
+                    
+                    this.els.solInfo.innerHTML = `
+                        <span><i class="fas fa-clock"></i> Time spent: ${timeStr}</span>
+                        <span><i class="fas fa-check-circle"></i> Correct answer: ${String.fromCharCode(65 + q.correct_option_id)}</span>
+                    `;
+                    
+                    this.els.solCont.innerHTML = this.extractTxt(q.solution, this.eng);
+                    this.els.sol.classList.add('show');
+                } else {
+                    this.els.sol.classList.remove('show');
+                }
+            }
+            
+            loadOpts(q, qIdx) {
+                this.els.opts.innerHTML = '';
+                const userAnswer = this.ans[qIdx];
+                const correctAnswer = q.correct_option_id;
+                
+                console.log(`Loading Q${qIdx + 1} options:`, {
+                    userAnswer: userAnswer,
+                    correctAnswer: correctAnswer,
+                    submitted: this.sub,
+                    optionsCount: q.options ? q.options.length : 0
+                });
+                
+                if (!q.options || !Array.isArray(q.options)) {
+                    console.error(`Q${qIdx + 1}: No valid options array`);
+                    return;
+                }
+                
+                q.options.forEach((opt, i) => {
+                    const div = document.createElement('div');
+                    let cls = 'opt';
+                    
+                    if (this.sub) {
+                        cls += ' submitted';
+                    }
+                    
+                    if (userAnswer === i) {
+                        cls += ' sel';
+                        console.log(`Q${qIdx + 1}: User selected option ${i}`);
+                    }
+                    
+                    if (this.sub && correctAnswer !== undefined && correctAnswer !== null) {
+                        if (i === correctAnswer) {
+                            cls += ' correct';
+                            console.log(`Q${qIdx + 1}: Option ${i} marked as correct (is correct answer)`);
+                        } else if (userAnswer === i && userAnswer !== correctAnswer) {
+                            cls += ' wrong';
+                            console.log(`Q${qIdx + 1}: Option ${i} marked as wrong (user selected but incorrect)`);
+                        }
+                    }
+                    
+                    div.className = cls;
+                    div.innerHTML = `
+                        <div class="opt-radio"></div>
+                        <div class="opt-txt">${this.extractTxt(opt, this.eng)}</div>
+                    `;
+                    
+                    if (!this.sub) {
+                        div.onclick = () => this.selOpt(i, qIdx);
+                    }
+                    
+                    this.els.opts.appendChild(div);
+                });
+            }
+            
+            selOpt(optIdx, qIdx) {
+                if (this.sub) return;
+                this.ans[qIdx] = this.ans[qIdx] === optIdx ? null : optIdx;
+                console.log(`Q${qIdx + 1}: Selected option ${optIdx}, answer array:`, this.ans[qIdx]);
+                this.loadOpts(this.qs[qIdx], qIdx);
+                this.updateAnsCnt();
+                this.updateGrid();
+            }
+            
+            toggleReview() {
+                if (this.sub) return;
+                this.reviewed[this.curQ] = !this.reviewed[this.curQ];
+                this.updateGrid();
+                this.updateReviewButton();
+            }
+            
+            updateReviewButton() {
+                const btn = this.els.reviewBtn;
+                if (this.reviewed[this.curQ]) {
+                    btn.classList.add('active');
+                    btn.innerHTML = '<i class="fas fa-flag"></i>';
+                } else {
+                    btn.classList.remove('active');
+                    btn.innerHTML = '<i class="fas fa-flag"></i>';
+                }
+            }
+            
+           nav(dir) {
+            const newIdx = this.curQ + dir;
+            
+            // If test is submitted, allow free navigation for review
+            if (this.sub) {
+                if (newIdx >= 0 && newIdx < this.qs.length) {
+                    this.loadQ(newIdx);
+                }
+                return;
+            }
+            
+            // During test, enforce section boundaries
+            if (this.sections) {
+                const currentSection = this.sections[this.currentSection];
+                if (newIdx < currentSection.start || newIdx > currentSection.end) {
+                    return; // Don't allow navigation outside current section
+                }
+            }
+            
+            if (newIdx >= 0 && newIdx < this.qs.length) {
+                this.loadQ(newIdx);
+            }
+        }
+        
+        goToQ(idx) {
+            // Always allow navigation when reviewing after submission
+            if (this.sub) {
+                this.loadQ(idx);
+                this.closePanel();
+                return;
+            }
+            
+            // During test, only allow navigation within current section
+            if (this.sections) {
+                const currentSection = this.sections[this.currentSection];
+                if (idx < currentSection.start || idx > currentSection.end) {
+                    return; // Block navigation outside current section
+                }
+            }
+            
+            this.loadQ(idx);
+            this.closePanel();
+        }
+        
+        updateGrid() {
+            const nums = this.els.qGrid.querySelectorAll('.q-num');
+            const desktopNums = this.els.desktopQGrid.querySelectorAll('.q-num');
+            
+            const updateNum = (el, i) => {
+                el.className = 'q-num';
+                
+                // Reset all special classes
+                el.classList.remove('cur', 'ans', 'wrong', 'review', 'unattempted', 'disabled');
+                
+                if (i === this.curQ) {
+                    el.classList.add('cur');
+                } else if (this.sub) {
+                    // After submission - prioritize correct/wrong over review status
+                    if (this.ans[i] !== null && this.qs[i].correct_option_id !== undefined) {
+                        if (this.ans[i] === this.qs[i].correct_option_id) {
+                            el.classList.add('ans');
+                        } else {
+                            el.classList.add('wrong');
+                        }
+                    } else if (this.ans[i] === null) {
+                        el.classList.add('unattempted');
+                    }
+                } else {
+                    // Before submission
+                    if (this.reviewed[i]) {
+                        el.classList.add('review');
+                    } else if (this.ans[i] !== null) {
+                        el.classList.add('ans');
+                    }
+                    
+                    // Disable questions from other sections (only if sections exist)
+                    if (this.sections) {
+                        const currentSection = this.sections[this.currentSection];
+                        if (i < currentSection.start || i > currentSection.end) {
+                            el.classList.add('disabled');
+                        }
+                    }
+                }
+            };
+            
+            nums.forEach(updateNum);
+            desktopNums.forEach(updateNum);
+        }
+        
+        updateNav() {
+            // Basic navigation limits
+            document.getElementById('prevBtn').disabled = this.curQ === 0;
+            document.getElementById('nextBtn').disabled = this.curQ === this.qs.length - 1;
+            document.getElementById('reviewBtn').style.display = this.sub ? 'none' : 'inline-flex';
+            
+            // Additional navigation restrictions for sections during test
+            if (this.sections && !this.sub) {
+                const currentSection = this.sections[this.currentSection];
+                document.getElementById('prevBtn').disabled = document.getElementById('prevBtn').disabled || 
+                    (this.curQ === currentSection.start);
+                document.getElementById('nextBtn').disabled = document.getElementById('nextBtn').disabled || 
+                    (this.curQ === currentSection.end);
+            }
+        }
+            
+            updateAnsCnt() {
+                const cnt = this.ans.filter(a => a !== null).length;
+                this.els.ansCnt.textContent = cnt;
+            }
+            
+            updatePrintButton() {
+                this.els.printBtn.style.display = this.sub ? 'flex' : 'none';
+            }
+            
+            updateThemeToggleIcon() {
+                const icon = this.darkMode ? 'fa-sun' : 'fa-moon';
+                this.els.themeToggle.innerHTML = `<i class="fas ${icon}"></i>`;
+            }
+            
+            updateSectionHeader() {
+                if (!this.sections || !this.els.sectionHeader) return;
+                
+                const section = this.sections[this.currentSection];
+                this.els.sectionTitle.textContent = section.name;
+                this.els.sectionTimer.textContent = this.formatTime(section.time_left);
+                
+                // Show the section header if we have sections
+                this.els.sectionHeader.style.display = 'flex';
+            }
+            
+            setLang(eng) {
+                this.eng = eng;
+                document.getElementById('engBtn').classList.toggle('active', eng);
+                document.getElementById('hinBtn').classList.toggle('active', !eng);
+                this.loadQ(this.curQ);
+            }
+            
+            toggleTheme() {
+                this.darkMode = !this.darkMode;
+                document.body.classList.toggle('dark-mode', this.darkMode);
+                this.updateThemeToggleIcon();
+                this.loadQ(this.curQ); // Refresh to apply dark mode styles
+            }
+            
+            startTimer() {
+                this.timer = setInterval(() => {
+                    this.timeLeft--;
+                    if (this.timeLeft <= 0) {
+                        clearInterval(this.timer);
+                        this.subTest();
+                        return;
+                    }
+                    const mins = Math.floor(this.timeLeft / 60);
+                    const secs = this.timeLeft % 60;
+                    this.els.timer.textContent = `${mins}:${secs.toString().padStart(2, '0')}`;
+                }, 1000);
+            }
+            
+            startSectionTimer() {
+                if (!this.sections) return;
+                
+                // Clear any existing section timer
+                if (this.sectionTimer) clearInterval(this.sectionTimer);
+                
+                const section = this.sections[this.currentSection];
+                section.time_left = section.timer; // Reset to initial time
+                
+                this.sectionTimer = setInterval(() => {
+                    section.time_left--;
+                    this.els.sectionTimer.textContent = this.formatTime(section.time_left);
+                    
+                    if (section.time_left <= 0) {
+                        clearInterval(this.sectionTimer);
+                        this.submitCurrentSection();
+                    }
+                }, 1000);
+            }
+            
+            formatTime(seconds) {
+                const mins = Math.floor(seconds / 60);
+                const secs = seconds % 60;
+                return `${mins}:${secs.toString().padStart(2, '0')}`;
+            }
+            
+            stopTimers() {
+                if (this.timer) clearInterval(this.timer);
+                if (this.sectionTimer) clearInterval(this.sectionTimer);
+            }
+            
+            togglePanel() {
+                this.els.panel.classList.toggle('open');
+            }
+            
+            closePanel() {
+                this.els.panel.classList.remove('open');
+            }
+            
+            confirmSub() {
+                if (this.sections) {
+                    const section = this.sections[this.currentSection];
+                    const unanswered = this.ans.slice(section.start, section.end + 1)
+                        .filter(a => a === null).length;
+                    const reviewed = this.reviewed.slice(section.start, section.end + 1)
+                        .filter(r => r).length;
+                    
+                    let msg = '';
+                    
+                    if (unanswered > 0 && reviewed > 0) {
+                        msg = `You have ${unanswered} unanswered questions and ${reviewed} marked for review in this section. Submit anyway?`;
+                    } else if (unanswered > 0) {
+                        msg = `You have ${unanswered} unanswered questions in this section. Submit anyway?`;
+                    } else if (reviewed > 0) {
+                        msg = `You have ${reviewed} questions marked for review in this section. Submit anyway?`;
+                    } else {
+                        msg = 'Submit this section?';
+                    }
+                    
+                    if (confirm(msg)) this.submitCurrentSection();
+                } else {
+                    const unanswered = this.ans.filter(a => a === null).length;
+                    const reviewed = this.reviewed.filter(r => r).length;
+                    let msg = '';
+                    
+                    if (unanswered > 0 && reviewed > 0) {
+                        msg = `You have ${unanswered} unanswered questions and ${reviewed} marked for review. Submit anyway?`;
+                    } else if (unanswered > 0) {
+                        msg = `You have ${unanswered} unanswered questions. Submit anyway?`;
+                    } else if (reviewed > 0) {
+                        msg = `You have ${reviewed} questions marked for review. Submit anyway?`;
+                    } else {
+                        msg = 'Submit test?';
+                    }
+                    
+                    if (confirm(msg)) this.subTest();
+                }
+            }
+            
+            submitCurrentSection() {
+                if (!this.sections) return;
+                
+                const section = this.sections[this.currentSection];
+                section.submitted = true;
+                clearInterval(this.sectionTimer);
+                
+                // Move to the next section if available
+                const nextSectionIdx = this.currentSection + 1;
+                if (nextSectionIdx < this.sections.length) {
+                    this.currentSection = nextSectionIdx;
+                    this.startSectionTimer();
+                    this.updateSectionHeader();
+                    this.loadQ(this.sections[nextSectionIdx].start);
+                } else {
+                    // All sections completed
+                    this.subTest();
+                }
+                
+                this.updateGrid();
+            }
+            
+            subTest() {
+                if (this.sub) return;
+                
+                // Record time spent on current question
+                const now = Date.now();
+                this.timeSpent[this.curQ] += (now - this.lastQTime) / 1000;
+                
+                console.log('Submitting test. Final answers:', this.ans);
+                this.sub = true;
+                this.stopTimers();
+                document.getElementById('subBtn').style.display = 'none';
+                document.getElementById('reviewBtn').style.display = 'none';
+                const results = this.calcResults();
+                this.showResults(results);
+                this.loadQ(this.curQ);
+                this.updateGrid();
+                this.updatePrintButton();
+                
+                // Hide section header if it exists
+                if (this.els.sectionHeader) {
+                    this.els.sectionHeader.style.display = 'none';
+                }
+            }
+            
+            calcResults() {
+                const timeTaken = Math.round((Date.now() - this.startT) / 60000);
+                let correct = 0, incorrect = 0, unattempted = 0, score = 0;
+                
+                console.log('Calculating results...');
+                this.qs.forEach((q, i) => {
+                    const userAns = this.ans[i];
+                    const correctAns = q.correct_option_id;
+                    
+                    console.log(`Q${i + 1}: user=${userAns}, correct=${correctAns}`);
+                    
+                    if (userAns === null || userAns === undefined) {
+                        unattempted++;
+                    } else if (correctAns !== undefined && correctAns !== null && userAns === correctAns) {
+                        correct++;
+                        score += 1;
+                        console.log(`Q${i + 1}: CORRECT (+1 marks)`);
+                    } else {
+                        incorrect++;
+                        score -= 0.25;
+                        console.log(`Q${i + 1}: INCORRECT (-0.25 marks)`);
+                    }
+                });
+                
+                const results = { 
+                    score: Math.max(0, score), 
+                    correct, 
+                    incorrect, 
+                    unattempted, 
+                    timeTaken,
+                    timePerQ: this.timeSpent.map(t => Math.round(t))
+                };
+                console.log('Final results:', results);
+                return results;
+            }
+            
+            showResults(results) {
+                this.els.scoreDisp.textContent = `${results.score}/30`;
+                this.els.corrStat.textContent = results.correct;
+                this.els.incStat.textContent = results.incorrect;
+                this.els.unaStat.textContent = results.unattempted;
+                this.els.timeStat.textContent = results.timeTaken;
+                this.els.modalOver.classList.add('show');
+            }
+            
+            closeModal() {
+                this.els.modalOver.classList.remove('show');
+            }
+            
+            review() {
+                this.closeModal();
+                this.loadQ(0);
+            }
+            
+            isNavigationAllowed(idx) {
+            // Always allow navigation after submission
+            if (this.sub) return true;
+            
+            // During test, only allow within current section
+            if (this.sections) {
+                const currentSection = this.sections[this.currentSection];
+                return idx >= currentSection.start && idx <= currentSection.end;
+            }
+            
+            // If no sections, allow all navigation
+            return true;
+            }
+            
+            printTest() {
+                const printWindow = window.open('', '_blank');
+                const testTitle = document.title;
+                const questionsHtml = this.qs.map((q, i) => {
+                    const userAns = this.ans[i];
+                    const correctAns = q.correct_option_id;
+                    const isCorrect = userAns !== null && correctAns !== undefined && userAns === correctAns;
+                    const timeSpent = Math.round(this.timeSpent[i]);
+                    const wasReviewed = this.reviewed[i];
+                    const sectionName = this.sections ? this.getSectionNameForQuestion(i) : '';
+                    
+                    return `
+                        <div style="page-break-inside:avoid;margin-bottom:30px;border-bottom:1px solid #eee;padding-bottom:20px">
+                            <h3 style="color:#4F46E5">Question ${i + 1} ${wasReviewed ? '<span style="color:#F59E0B">(Marked for Review)</span>' : ''}</h3>
+                            ${sectionName ? `<div style="font-size:14px;color:#6B7280;margin-bottom:8px">Section: ${sectionName}</div>` : ''}
+                            ${q.comp ? `<div>${q.comp}</div>` : ''}
+                            <div>${q.question}</div>
+                            <div style="margin-top:15px">
+                                ${q.options.map((opt, j) => `
+                                    <div style="margin:5px 0;padding:5px;border-left:3px solid ${ 
+                                        j === correctAns ? '#10B981' : 
+                                        j === userAns ? '#EF4444' : '#E5E7EB' 
+                                    }">
+                                        ${opt}
+                                    </div>
+                                `).join('')}
+                            </div>
+                            <div style="margin-top:15px;font-size:14px;color:#666">
+                                <strong>Your answer:</strong> ${userAns !== null ? String.fromCharCode(65 + userAns) : 'Not attempted'}
+                                ${userAns !== null && correctAns !== undefined ? 
+                                    `(<span style="color:${isCorrect ? '#10B981' : '#EF4444'}">${isCorrect ? 'Correct' : 'Incorrect'}</span>)` : ''}
+                                <br>
+                                <strong>Time spent:</strong> ${timeSpent} seconds
+                            </div>
+                            ${q.solution ? `
+                                <div style="margin-top:15px;background:#f0fdf4;padding:15px;border-radius:8px">
+                                    <h4 style="color:#10B981;margin-top:0">Solution</h4>
+                                    ${q.solution}
+                                </div>
+                            ` : ''}
+                        </div>
+                    `;
+                }).join('');
+                
+                printWindow.document.write(`
+                    <!DOCTYPE html>
+                    <html>
+                    <head>
+                        <title>${testTitle} - Results</title>
+                        <style>
+                            body { font-family: Arial, sans-serif; line-height: 1.6; padding: 20px; }
+                            h2 { color: #4F46E5; border-bottom: 1px solid #E5E7EB; padding-bottom: 10px; }
+                            .math-exp { display: inline-block; vertical-align: middle; position: relative; margin: 0 2px; }
+                            .math-num { text-align: center; display: block; padding: 0; }
+                            .math-line { display: block; border-top: 1px solid; padding: 0; text-align: center; }
+                            .table-container { width: 100%; overflow-x: auto; margin: 12px 0; }
+                            table { width: 100%; border-collapse: collapse; margin: 8px 0; }
+                            table, th, td { border: 1px solid #E5E7EB; }
+                            th, td { padding: 8px 12px; text-align: left; }
+                            @media print {
+                                body { padding: 0; }
+                                .page-break { page-break-after: always; }
+                            }
+                        </style>
+                    </head>
+                    <body>
+                        <h2>Mocks Wallah - Analysis</h2>
+                        <div style="margin-bottom:30px">
+                            <div><strong>Score:</strong> ${this.els.scoreDisp.textContent}</div>
+                            <div><strong>Correct:</strong> ${this.els.corrStat.textContent}</div>
+                            <div><strong>Incorrect:</strong> ${this.els.incStat.textContent}</div>
+                            <div><strong>Unattempted:</strong> ${this.els.unaStat.textContent}</div>
+                            <div><strong>Time taken:</strong> ${this.els.timeStat.textContent} minutes</div>
+                        </div>
+                        ${questionsHtml}
+                        <script>
+                            setTimeout(() => { window.print(); }, 500);
+                        <\/script>
+                    </body>
+                    </html>
+                `);
+                printWindow.document.close();
+            }
+            
+            // Section-related helper methods
+            isInCurrentSection(qIdx) {
+                if (!this.sections) return true;
+                const section = this.sections[this.currentSection];
+                return qIdx >= section.start && qIdx <= section.end;
+            }
+            
+            findSectionForQuestion(qIdx) {
+                if (!this.sections) return null;
+                for (let i = 0; i < this.sections.length; i++) {
+                    const section = this.sections[i];
+                    if (qIdx >= section.start && qIdx <= section.end) {
+                        return i;
+                    }
+                }
+                return null;
+            }
+            
+            getSectionNameForQuestion(qIdx) {
+                if (!this.sections) return '';
+                const sectionIdx = this.findSectionForQuestion(qIdx);
+                return sectionIdx !== null ? this.sections[sectionIdx].name : '';
+            }
+        }
+        
+        document.addEventListener('DOMContentLoaded', () => new TestApp());
+    </script>
+</body>
+</html>

@@ -1,0 +1,550 @@
+// ============================================================
+//  _question-panel.scss
+//  Question Area, Options, Navigation Bar, Sidebar, Mobile Nav
+// ============================================================
+
+// ── Main Layout ──────────────────────────────────────────────
+.exam-main {
+  display:    flex;
+  flex:       1;
+  overflow:   hidden;
+  min-height: 0;
+}
+
+// ── Question Area ────────────────────────────────────────────
+.question-area {
+  flex:           1;
+  @include flex-col;
+  background:     $bg;
+  min-width:      0;
+  @include custom-scrollbar;
+}
+
+.question-scroll {
+  flex:       1;
+  overflow-y: auto;
+  padding:    $spacing-lg $spacing-xl;
+  @include custom-scrollbar;
+}
+
+// ── Question Card ────────────────────────────────────────────
+.question-card {
+  @include card($radius-lg, $shadow-sm);
+  padding: $spacing-xl;
+  border:  1px solid $border;
+  transition: $transition-base;
+  animation: fadeSlideUp 0.25s ease both;
+
+  &:hover {
+    box-shadow: $shadow-md;
+  }
+}
+
+.question-header {
+  @include flex-between;
+  margin-bottom:  $spacing-lg;
+  padding-bottom: $spacing-md;
+  border-bottom:  2px solid $bg;
+  gap:            $spacing-md;
+  flex-wrap:      wrap;
+}
+
+.question-number {
+  font-size:   $font-size-md;
+  font-weight: $font-weight-bold;
+  color:       $primary;
+  background:  $primary-faint;
+  padding:     4px 12px;
+  border-radius: $radius-full;
+  border:      1px solid rgba($primary, 0.15);
+}
+
+.question-marks {
+  font-size:   $font-size-xs;
+  color:       $text-muted;
+  font-weight: $font-weight-medium;
+  background:  $bg;
+  padding:     4px 10px;
+  border-radius: $radius-full;
+  border:      1px solid $border;
+}
+
+// ── Language Toggle ─────────────────────────────────────────
+.lang-toggle {
+  display:       flex;
+  gap:           $spacing-2xs;
+  background:    $bg;
+  padding:       3px;
+  border-radius: $radius-sm;
+  border:        1px solid $border;
+}
+
+.lang-btn {
+  padding:       5px 14px;
+  border:        none;
+  background:    transparent;
+  border-radius: $radius-xs;
+  cursor:        pointer;
+  font-size:     $font-size-xs;
+  font-weight:   $font-weight-medium;
+  color:         $text-muted;
+  transition:    $transition-fast;
+  font-family:   $font-family;
+
+  &.active {
+    background:  $card;
+    color:       $primary;
+    font-weight: $font-weight-semi;
+    box-shadow:  $shadow-xs;
+  }
+
+  &:hover:not(.active) {
+    color:      $text;
+    background: rgba($card, 0.6);
+  }
+}
+
+// ── Comprehension Passage ────────────────────────────────────
+.comprehension {
+  background:    $primary-faint;
+  border-left:   3px solid $primary-light;
+  padding:       $spacing-md $spacing-lg;
+  margin-bottom: $spacing-lg;
+  border-radius: $radius-sm;
+  border-top-left-radius:    0;
+  border-bottom-left-radius: 0;
+
+  h4 {
+    color:         $primary;
+    margin-bottom: $spacing-sm;
+    font-size:     $font-size-sm;
+    font-weight:   $font-weight-semi;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  p {
+    font-size:   $font-size-base;
+    line-height: $line-height-loose;
+    color:       $text;
+  }
+}
+
+// ── Question Text ────────────────────────────────────────────
+.question-text {
+  font-size:     $font-size-base;
+  line-height:   $line-height-loose;
+  margin-bottom: $spacing-lg;
+  color:         $text;
+
+  img {
+    margin: $spacing-md 0;
+    border-radius: $radius-sm;
+    max-width: 100%;
+  }
+}
+
+// ── Options ─────────────────────────────────────────────────
+.options-list {
+  @include flex-col;
+  gap: $spacing-sm;
+}
+
+.option {
+  display:       flex;
+  align-items:   flex-start;
+  padding:       $spacing-md;
+  border:        2px solid $border;
+  border-radius: $radius-md;
+  cursor:        pointer;
+  transition:    $transition-base;
+  background:    $card;
+  position:      relative;
+  overflow:      hidden;
+
+  &::before {
+    content:    '';
+    position:   absolute;
+    inset:      0;
+    background: transparent;
+    transition: $transition-fast;
+  }
+
+  &:hover:not(.submitted) {
+    border-color: $primary-light;
+    background:   $primary-faint;
+    transform:    translateX(4px);
+    box-shadow:   $shadow-sm;
+  }
+
+  &.selected {
+    border-color: $primary;
+    background:   $primary-faint;
+    box-shadow:   0 0 0 3px rgba($primary, 0.08);
+    animation:    optionSelect 0.2s ease;
+  }
+
+  &.correct {
+    border-color: $success;
+    background:   $success-light;
+    box-shadow:   0 0 0 3px rgba($success, 0.1);
+  }
+
+  &.wrong {
+    border-color: $danger;
+    background:   $danger-light;
+    box-shadow:   0 0 0 3px rgba($danger, 0.1);
+  }
+}
+
+.option-indicator {
+  width:         24px;
+  height:        24px;
+  border:        2px solid $border;
+  border-radius: $radius-full;
+  margin-right:  $spacing-md;
+  flex-shrink:   0;
+  @include flex-center;
+  margin-top:    2px;
+  transition:    $transition-base;
+  font-size:     $font-size-xs;
+  font-weight:   $font-weight-bold;
+
+  .option.selected & {
+    border-color: $primary;
+    background:   $primary;
+    color:        white;
+    box-shadow:   0 2px 8px rgba($primary, 0.4);
+  }
+
+  .option.correct & {
+    border-color: $success;
+    background:   $success;
+    color:        white;
+    box-shadow:   0 2px 8px rgba($success, 0.4);
+  }
+
+  .option.wrong & {
+    border-color: $danger;
+    background:   $danger;
+    color:        white;
+    box-shadow:   0 2px 8px rgba($danger, 0.3);
+  }
+}
+
+.option-text {
+  flex:        1;
+  font-size:   $font-size-base;
+  line-height: $line-height-base;
+  color:       $text;
+}
+
+// ── Solution Box ─────────────────────────────────────────────
+.solution-box {
+  background:    $success-light;
+  border-left:   3px solid $success;
+  border-radius: $radius-sm;
+  border-top-left-radius:    0;
+  border-bottom-left-radius: 0;
+  padding:       $spacing-md $spacing-lg;
+  margin-top:    $spacing-lg;
+  display:       none;
+  animation:     fadeSlideDown 0.2s ease;
+
+  &.show {
+    display: block;
+  }
+}
+
+.solution-header {
+  color:         $success-dark;
+  font-weight:   $font-weight-semi;
+  margin-bottom: $spacing-sm;
+  display:       flex;
+  align-items:   center;
+  gap:           $spacing-sm;
+  font-size:     $font-size-sm;
+}
+
+.solution-stats {
+  display:       flex;
+  gap:           $spacing-md;
+  font-size:     $font-size-xs;
+  color:         $text-muted;
+  margin-bottom: $spacing-sm;
+  flex-wrap:     wrap;
+
+  span {
+    background:    rgba($success, 0.1);
+    padding:       2px 8px;
+    border-radius: $radius-full;
+  }
+}
+
+// ── Navigation Bar (fixed bottom of question area) ──────────
+.navigation-bar {
+  background:  $card;
+  padding:     $spacing-md $spacing-xl;
+  border-top:  2px solid $border;
+  @include flex-between;
+  box-shadow:  0 -4px 16px rgba(0, 0, 0, 0.07);
+  flex-shrink: 0;
+  gap:         $spacing-sm;
+  flex-wrap:   wrap;
+}
+
+.nav-btn {
+  @include btn-base;
+  padding:      10px $spacing-md;
+  font-size:    $font-size-sm;
+  border-radius: $radius-sm;
+}
+
+.btn-prev {
+  background: $bg;
+  color:      $text;
+  border:     1px solid $border;
+
+  &:hover:not(:disabled) {
+    background: $bg-2;
+  }
+}
+
+.btn-next {
+  background:  $gradient-primary;
+  color:       white;
+  box-shadow:  $shadow-primary;
+
+  &:hover:not(:disabled) {
+    box-shadow: 0 6px 20px rgba($primary, 0.4);
+    transform:  translateY(-1px);
+  }
+}
+
+.btn-review {
+  background: linear-gradient(135deg, $warning, $warning-dark);
+  color:      white;
+
+  &.marked {
+    background: linear-gradient(135deg, $warning-dark, #6b3308);
+  }
+
+  &:hover:not(:disabled) {
+    box-shadow: 0 4px 16px rgba($warning, 0.4);
+    transform:  translateY(-1px);
+  }
+}
+
+.btn-submit {
+  background: $gradient-success;
+  color:      white;
+  box-shadow: $shadow-success;
+
+  &:hover:not(:disabled) {
+    box-shadow: 0 6px 20px rgba($success, 0.4);
+    transform:  translateY(-1px);
+  }
+}
+
+.progress-info {
+  text-align:  center;
+  font-size:   $font-size-xs;
+  color:       $text-muted;
+  font-weight: $font-weight-medium;
+  line-height: $line-height-tight;
+}
+
+// ── Navigator Sidebar ────────────────────────────────────────
+.navigator-sidebar {
+  width:       280px;
+  background:  $card;
+  border-left: 1px solid $border;
+  display:     none;
+  @include flex-col;
+  overflow:    hidden;
+  flex-shrink: 0;
+
+  @include min-lg {
+    display: flex;
+  }
+}
+
+.navigator-header {
+  padding:       $spacing-md;
+  background:    linear-gradient(to bottom, $bg, $bg-2);
+  border-bottom: 1px solid $border;
+  font-weight:   $font-weight-semi;
+  font-size:     $font-size-sm;
+  color:         $text;
+  flex-shrink:   0;
+  letter-spacing: 0.3px;
+}
+
+.navigator-grid {
+  display:               grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap:                   $spacing-sm;
+  padding:               $spacing-md;
+  overflow-y:            auto;
+  flex:                  1;
+  @include custom-scrollbar;
+}
+
+.nav-question {
+  aspect-ratio:  1;
+  @include flex-center;
+  border:        2px solid $border;
+  border-radius: $radius-sm;
+  font-size:     $font-size-xs;
+  font-weight:   $font-weight-semi;
+  cursor:        pointer;
+  background:    $card;
+  transition:    $transition-fast;
+  color:         $text-muted;
+
+  &:hover {
+    background:   $bg;
+    border-color: $border-dark;
+    transform:    scale(1.05);
+  }
+
+  &.current {
+    background:   $gradient-primary;
+    color:        white;
+    border-color: $primary;
+    box-shadow:   $shadow-primary;
+    transform:    scale(1.08);
+  }
+
+  &.answered {
+    background:   $gradient-success;
+    color:        white;
+    border-color: $success;
+    box-shadow:   $shadow-success;
+  }
+
+  &.review {
+    background:   linear-gradient(135deg, $warning, $warning-dark);
+    color:        white;
+    border-color: $warning;
+  }
+
+  &.wrong {
+    background:   $gradient-danger;
+    color:        white;
+    border-color: $danger;
+  }
+
+  &.disabled {
+    opacity:        0.25;
+    cursor:         not-allowed;
+    pointer-events: none;
+  }
+}
+
+// ── Navigator Legend ─────────────────────────────────────────
+.navigator-legend {
+  padding:     $spacing-md;
+  border-top:  1px solid $border;
+  font-size:   $font-size-xs;
+  flex-shrink: 0;
+  background:  $card;
+  @include flex-col;
+  gap:         $spacing-xs;
+}
+
+.legend-item {
+  display:     flex;
+  align-items: center;
+  gap:         $spacing-sm;
+  color:       $text-muted;
+  font-weight: $font-weight-medium;
+}
+
+.legend-box {
+  width:         18px;
+  height:        18px;
+  border-radius: $radius-xs;
+  flex-shrink:   0;
+
+  &.legend-current  { background: $gradient-primary; }
+  &.legend-answered { background: $gradient-success; }
+  &.legend-review   { background: linear-gradient(135deg, $warning, $warning-dark); }
+  &.legend-wrong    { background: $gradient-danger; }
+  &.legend-skipped  { background: $bg-2; border: 1px solid $border; }
+}
+
+// ── Mobile Navigator Panel ───────────────────────────────────
+.mobile-navigator {
+  position:   fixed;
+  inset:      0;
+  background: $card;
+  z-index:    $z-nav-panel;
+  transform:  translateY(100%);
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  overflow-y: auto;
+
+  &.open {
+    transform: translateY(0);
+  }
+}
+
+.mobile-nav-header {
+  background:  $gradient-primary;
+  color:       white;
+  padding:     $spacing-md;
+  @include flex-between;
+  position:    sticky;
+  top:         0;
+  z-index:     $z-raised;
+}
+
+.close-nav {
+  background:  none;
+  border:      none;
+  color:       white;
+  font-size:   $font-size-xl;
+  cursor:      pointer;
+  padding:     $spacing-xs;
+  border-radius: $radius-sm;
+  transition:  $transition-fast;
+  line-height: 1;
+
+  &:hover {
+    background: rgba(white, 0.15);
+  }
+}
+
+// ── Responsive ──────────────────────────────────────────────
+@include lg {
+  .question-scroll {
+    padding: $spacing-md $spacing-lg;
+  }
+
+  .question-card {
+    padding: $spacing-lg;
+  }
+
+  .navigation-bar {
+    padding: $spacing-sm $spacing-md;
+  }
+}
+
+@include sm {
+  .question-scroll {
+    padding: $spacing-sm $spacing-md;
+  }
+
+  .question-card {
+    padding: $spacing-md;
+  }
+
+  .navigator-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .nav-btn {
+    padding:   8px $spacing-sm;
+    font-size: $font-size-xs;
+  }
+}

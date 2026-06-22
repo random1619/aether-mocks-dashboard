@@ -1,0 +1,239 @@
+@import '../abstracts/variables';
+
+.exam-main {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+    min-height: 0;
+}
+
+.question-area {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background: $bg;
+    min-width: 0;
+}
+
+.question-scroll {
+    flex: 1;
+    overflow-y: auto;
+    padding: 24px;
+}
+
+.question-card {
+    background: $card;
+    border-radius: $border-radius-md;
+    padding: 30px;
+    box-shadow: $shadow-md;
+    border: 1px solid rgba($border, 0.5);
+    margin-bottom: 20px;
+}
+
+.question-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+    padding-bottom: 18px;
+    border-bottom: 2px solid $bg;
+}
+
+.question-number {
+    font-size: 18px;
+    font-weight: 700;
+    color: $primary;
+}
+
+.question-marks {
+    font-size: 13px;
+    font-weight: 600;
+    color: $text-light;
+    background: rgba($text-light, 0.1);
+    padding: 4px 10px;
+    border-radius: $border-radius-sm;
+}
+
+.lang-toggle {
+    display: flex;
+    gap: 4px;
+    background: $bg;
+    padding: 4px;
+    border-radius: $border-radius-sm;
+    border: 1px solid $border;
+}
+
+.lang-btn {
+    padding: 6px 16px;
+    border: none;
+    background: transparent;
+    border-radius: $border-radius-sm;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 600;
+    color: $text-light;
+    transition: $transition-fast;
+
+    &.active {
+        background: $card;
+        color: $primary;
+        box-shadow: $shadow-sm;
+    }
+}
+
+.comprehension {
+    background: rgba($primary, 0.04);
+    border-left: 4px solid $primary;
+    padding: 20px;
+    margin-bottom: 24px;
+    border-radius: $border-radius-sm;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.02);
+
+    h4 {
+        color: $primary;
+        margin-bottom: 10px;
+        font-size: 15px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+}
+
+.question-text {
+    font-size: 16px;
+    line-height: 1.8;
+    margin-bottom: 24px;
+    color: $text;
+}
+
+.options-list {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.option {
+    display: flex;
+    align-items: flex-start;
+    padding: 16px 20px;
+    border: 2px solid $border;
+    border-radius: $border-radius-md;
+    cursor: pointer;
+    transition: $transition-smooth;
+    background: $card;
+    box-shadow: $shadow-sm;
+
+    &:hover:not(.submitted) {
+        border-color: $primary;
+        background: rgba($primary, 0.02);
+        transform: translateX(4px);
+    }
+
+    &.selected {
+        border-color: $primary;
+        background: $primary-light;
+        box-shadow: $shadow-md;
+    }
+
+    &.correct {
+        border-color: $success;
+        background: $success-bg;
+        box-shadow: 0 4px 12px rgba($success, 0.15);
+    }
+
+    &.wrong {
+        border-color: $danger;
+        background: $danger-bg;
+        box-shadow: 0 4px 12px rgba($danger, 0.15);
+    }
+}
+
+.option-indicator {
+    width: 24px;
+    height: 24px;
+    border: 2px solid $border;
+    border-radius: 50%;
+    margin-right: 14px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2px;
+    font-size: 12px;
+    font-weight: 700;
+    transition: $transition-fast;
+    background: $card;
+    color: transparent;
+}
+
+.option.selected .option-indicator {
+    border-color: $primary;
+    background: $primary;
+    color: white;
+}
+
+.option.correct .option-indicator {
+    border-color: $success;
+    background: $success;
+    color: white;
+}
+
+.option.wrong .option-indicator {
+    border-color: $danger;
+    background: $danger;
+    color: white;
+}
+
+.option-text {
+    flex: 1;
+    font-size: 15px;
+    font-weight: 500;
+    color: $text;
+    line-height: 1.5;
+}
+
+.solution-box {
+    background: $success-bg;
+    border-left: 4px solid $success;
+    padding: 20px;
+    margin-top: 24px;
+    border-radius: $border-radius-sm;
+    display: none;
+    box-shadow: $shadow-sm;
+
+    &.show {
+        display: block;
+        animation: slideDown 0.3s ease-out;
+    }
+}
+
+.solution-header {
+    color: $success;
+    font-weight: 700;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 16px;
+}
+
+.solution-stats {
+    display: flex;
+    gap: 16px;
+    font-size: 13px;
+    color: $text-light;
+    margin-bottom: 12px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid rgba($success, 0.2);
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

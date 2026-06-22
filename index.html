@@ -1,0 +1,1013 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aether Mocks - Premium Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --bg-color: #030712;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            
+            --glass-bg: rgba(255, 255, 255, 0.02);
+            --glass-border: rgba(255, 255, 255, 0.06);
+            --glass-hover: rgba(255, 255, 255, 0.05);
+            --glass-border-hover: rgba(255, 255, 255, 0.15);
+            
+            --primary: #6366f1;
+            --primary-glow: rgba(99, 102, 241, 0.3);
+            --secondary: #8b5cf6;
+            --accent: #ec4899;
+            --success: #10b981;
+            --success-glow: rgba(16, 185, 129, 0.3);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Animated Background Orbs */
+        .bg-orbs {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
+            overflow: hidden;
+            pointer-events: none;
+        }
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(100px);
+            opacity: 0.4;
+            animation: float 20s infinite ease-in-out alternate;
+        }
+        .orb-1 { width: 50vw; height: 50vw; background: var(--primary); top: -20vw; left: -10vw; }
+        .orb-2 { width: 40vw; height: 40vw; background: var(--secondary); bottom: -10vw; right: -10vw; animation-delay: -5s; }
+        .orb-3 { width: 45vw; height: 45vw; background: var(--accent); top: 30vh; left: 20vw; opacity: 0.2; animation-delay: -10s; }
+
+        @keyframes float {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(5vw, 5vh) scale(1.1); }
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.1); border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: rgba(255, 255, 255, 0.2); }
+
+        .dashboard {
+            max-width: 1800px;
+            margin: 0 auto;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .glass-panel {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
+        }
+
+        /* Header */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 2rem 2.5rem;
+            flex-wrap: wrap;
+            gap: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; height: 2px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent));
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 1.25rem;
+        }
+
+        .logo {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: white;
+            box-shadow: 0 0 30px var(--primary-glow);
+        }
+
+        .brand-text h1 {
+            font-size: 2rem;
+            font-weight: 800;
+            background: linear-gradient(to right, #fff, #a5b4fc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.2rem;
+        }
+        
+        .brand-text p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        .stats-wrapper {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.01);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 1.2rem 1.8rem;
+            min-width: 150px;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            transition: all 0.3s;
+        }
+        
+        .stat-card:hover {
+            border-color: var(--glass-border-hover);
+            transform: translateY(-2px);
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+
+        .stat-val {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        .progress-bar-bg {
+            width: 100%;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 3px;
+            overflow: hidden;
+            margin-top: 0.5rem;
+        }
+
+        .progress-bar-fill {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, var(--secondary), var(--success));
+            border-radius: 3px;
+            transition: width 1s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        /* Layout */
+        .main-layout {
+            display: grid;
+            grid-template-columns: 360px 1fr;
+            gap: 2.5rem;
+            align-items: start;
+        }
+
+        @media (max-width: 1200px) {
+            .main-layout { grid-template-columns: 1fr; }
+        }
+
+        /* Sidebar */
+        .sidebar {
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            position: sticky;
+            top: 2rem;
+        }
+
+        .filter-section {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .filter-title {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .filter-title i { color: var(--secondary); }
+
+        /* Inputs & Selects */
+        .search-box {
+            position: relative;
+        }
+
+        .search-box i {
+            position: absolute;
+            left: 1.2rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+        }
+
+        .search-input {
+            width: 100%;
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--glass-border);
+            border-radius: 14px;
+            padding: 1rem 1rem 1rem 3rem;
+            color: white;
+            font-size: 1rem;
+            transition: all 0.3s;
+            outline: none;
+        }
+
+        .search-input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 20px var(--primary-glow);
+            background: rgba(0, 0, 0, 0.4);
+        }
+
+        .custom-select {
+            width: 100%;
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--glass-border);
+            border-radius: 14px;
+            padding: 1rem;
+            color: white;
+            font-size: 0.95rem;
+            cursor: pointer;
+            outline: none;
+            transition: all 0.3s;
+            appearance: none;
+        }
+        
+        .custom-select option { background: var(--bg-color); }
+        .custom-select:focus { border-color: var(--secondary); }
+
+        /* Filter Pills */
+        .pills-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+        }
+
+        .pill {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--glass-border);
+            color: var(--text-muted);
+            padding: 0.6rem 1.2rem;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .pill:hover {
+            background: var(--glass-hover);
+            color: white;
+            border-color: var(--glass-border-hover);
+            transform: translateY(-1px);
+        }
+
+        .pill.active {
+            background: var(--primary-glow);
+            color: white;
+            border-color: var(--primary);
+            box-shadow: 0 0 15px var(--primary-glow);
+        }
+
+        .color-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            box-shadow: 0 0 10px currentColor;
+        }
+
+        /* Switch Group */
+        .switch-group {
+            display: flex;
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--glass-border);
+            border-radius: 14px;
+            padding: 0.3rem;
+        }
+
+        .switch-btn {
+            flex: 1;
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            padding: 0.8rem;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .switch-btn.active {
+            background: rgba(255, 255, 255, 0.08);
+            color: white;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Content Area */
+        .content-area {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .content-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 0.5rem;
+        }
+
+        .results-count {
+            color: var(--text-muted);
+            font-size: 1.05rem;
+        }
+        .results-count strong { color: white; font-weight: 700; }
+
+        /* Grid */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            gap: 1.5rem;
+        }
+
+        /* Card */
+        .card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 1.8rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            animation: fadeIn 0.5s ease-out forwards;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        @keyframes fadeIn {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(135deg, rgba(255,255,255,0.05) 0%, transparent 100%);
+            opacity: 0;
+            transition: opacity 0.4s;
+            pointer-events: none;
+        }
+
+        .card:hover {
+            transform: translateY(-6px) scale(1.01);
+            border-color: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.5), 0 0 20px var(--glass-border-hover);
+            background: rgba(255, 255, 255, 0.04);
+        }
+        .card:hover::before { opacity: 1; }
+
+        .card-accent {
+            position: absolute;
+            top: 0; left: 0; right: 0; height: 4px;
+            background: var(--primary);
+            opacity: 0.8;
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+
+        .badge {
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 0.4rem 0.8rem;
+            border-radius: 30px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .badge-provider {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+
+        .badge-subject {
+            background: transparent;
+            border: 1px solid var(--glass-border);
+            color: var(--text-muted);
+        }
+
+        .card-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            line-height: 1.4;
+            color: white;
+            min-height: 3.36rem;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            margin-top: 0.5rem;
+        }
+
+        .card-meta {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: auto;
+            padding-top: 1.25rem;
+            border-top: 1px solid var(--glass-border);
+            position: relative;
+            z-index: 2;
+        }
+
+        .toggle-btn {
+            width: 42px;
+            height: 42px;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--glass-border);
+            color: var(--text-muted);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+        }
+
+        .toggle-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+
+        .toggle-btn.completed {
+            background: var(--success-glow);
+            border-color: var(--success);
+            color: var(--success);
+            box-shadow: 0 0 15px var(--success-glow);
+        }
+
+        .launch-btn {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border: none;
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px var(--primary-glow);
+        }
+
+        .launch-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(139, 92, 246, 0.4);
+            filter: brightness(1.1);
+        }
+
+        /* Load More */
+        .load-more-wrapper {
+            display: flex;
+            justify-content: center;
+            margin-top: 2rem;
+            padding-bottom: 2rem;
+        }
+
+        .load-more-btn {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--glass-border);
+            color: white;
+            padding: 1rem 2.5rem;
+            border-radius: 14px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .load-more-btn:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        /* Empty State */
+        .empty-state {
+            grid-column: 1 / -1;
+            padding: 6rem 2rem;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .empty-state i {
+            font-size: 4rem;
+            color: var(--text-muted);
+            opacity: 0.5;
+        }
+
+        .empty-state h3 {
+            font-size: 1.8rem;
+            color: white;
+        }
+
+        .empty-state p {
+            color: var(--text-muted);
+            max-width: 400px;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-orbs">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+    </div>
+
+    <div class="dashboard">
+        <!-- Header -->
+        <header class="glass-panel">
+            <div class="brand">
+                <div class="logo"><i class="fa-solid fa-layer-group"></i></div>
+                <div class="brand-text">
+                    <h1>Aether Mocks</h1>
+                    <p>Premium Mock Tests Explorer & Tracker</p>
+                </div>
+            </div>
+            
+            <div class="stats-wrapper">
+                <div class="stat-card">
+                    <span class="stat-label">Total Tests</span>
+                    <span class="stat-val" id="stat-total">0</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-label">Completed</span>
+                    <span class="stat-val" id="stat-completed" style="color: var(--success);">0</span>
+                </div>
+                <div class="stat-card" style="min-width: 200px;">
+                    <span class="stat-label">Progress</span>
+                    <span class="stat-val" id="stat-progress-txt">0%</span>
+                    <div class="progress-bar-bg">
+                        <div class="progress-bar-fill" id="stat-progress-bar"></div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <div class="main-layout">
+            <!-- Sidebar -->
+            <aside class="sidebar glass-panel">
+                <div class="filter-section">
+                    <label class="filter-title"><i class="fa-solid fa-magnifying-glass"></i> Search</label>
+                    <div class="search-box">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <input type="text" class="search-input" id="search-box" placeholder="Search mocks...">
+                    </div>
+                </div>
+
+                <div class="filter-section">
+                    <label class="filter-title"><i class="fa-solid fa-building-columns"></i> Provider</label>
+                    <div class="pills-container" id="provider-filters">
+                        <!-- Dynamic pills injected here -->
+                    </div>
+                </div>
+
+                <div class="filter-section">
+                    <label class="filter-title"><i class="fa-solid fa-graduation-cap"></i> Subject</label>
+                    <div class="pills-container" id="subject-filters">
+                        <!-- Dynamic pills injected here -->
+                    </div>
+                </div>
+
+                <div class="filter-section">
+                    <label class="filter-title"><i class="fa-solid fa-folder-open"></i> Category</label>
+                    <select class="custom-select" id="category-filter">
+                        <option value="all">All Categories</option>
+                    </select>
+                </div>
+
+                <div class="filter-section">
+                    <label class="filter-title"><i class="fa-solid fa-circle-check"></i> Status</label>
+                    <div class="switch-group" id="status-filters">
+                        <button class="switch-btn active" data-status="all">All</button>
+                        <button class="switch-btn" data-status="completed">Completed</button>
+                        <button class="switch-btn" data-status="pending">Pending</button>
+                    </div>
+                </div>
+
+                <div class="filter-section">
+                    <label class="filter-title"><i class="fa-solid fa-sort"></i> Sort By</label>
+                    <select class="custom-select" id="sort-select">
+                        <option value="name-asc">Alphabetical (A-Z)</option>
+                        <option value="name-desc">Alphabetical (Z-A)</option>
+                        <option value="provider-asc">Provider</option>
+                    </select>
+                </div>
+            </aside>
+
+            <!-- Content Area -->
+            <main class="content-area">
+                <div class="content-header">
+                    <div class="results-count" id="results-count">
+                        Found <strong>0</strong> mocks
+                    </div>
+                </div>
+
+                <div class="grid" id="grid">
+                    <!-- Cards injected here -->
+                </div>
+
+                <div class="load-more-wrapper" id="load-more-wrapper" style="display: none;">
+                    <button class="load-more-btn" id="load-more-btn">
+                        <i class="fa-solid fa-arrow-down"></i> Load More
+                    </button>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script src="mocks-data.js"></script>
+    <script>
+        // Colors palette for dynamic pills/badges
+        const colorPalette = [
+            '#3b82f6', '#ec4899', '#f59e0b', '#10b981', 
+            '#8b5cf6', '#ef4444', '#14b8a6', '#f97316'
+        ];
+        
+        let providerColors = {};
+        let subjectColors = {};
+
+        // Application State
+        let state = {
+            searchQuery: '',
+            provider: 'all',
+            subject: 'all',
+            category: 'all',
+            status: 'all',
+            sort: 'name-asc',
+            page: 1,
+            limit: 60,
+            completed: JSON.parse(localStorage.getItem('completedMocks') || '{}')
+        };
+
+        const DOM = {
+            search: document.getElementById('search-box'),
+            providers: document.getElementById('provider-filters'),
+            subjects: document.getElementById('subject-filters'),
+            category: document.getElementById('category-filter'),
+            status: document.getElementById('status-filters'),
+            sort: document.getElementById('sort-select'),
+            grid: document.getElementById('grid'),
+            count: document.getElementById('results-count'),
+            loadMoreBtn: document.getElementById('load-more-btn'),
+            loadMoreWrap: document.getElementById('load-more-wrapper'),
+            statTotal: document.getElementById('stat-total'),
+            statCompleted: document.getElementById('stat-completed'),
+            statProgTxt: document.getElementById('stat-progress-txt'),
+            statProgBar: document.getElementById('stat-progress-bar')
+        };
+
+        function assignColors() {
+            const providers = [...new Set(MOCK_DATA.map(m => m.provider))].sort();
+            const subjects = [...new Set(MOCK_DATA.map(m => m.subject))].sort();
+            
+            providers.forEach((p, i) => {
+                providerColors[p] = colorPalette[i % colorPalette.length];
+            });
+            subjects.forEach((s, i) => {
+                subjectColors[s] = colorPalette[(i + 3) % colorPalette.length]; // offset colors
+            });
+        }
+
+        function initFilters() {
+            // Providers
+            const providers = [...new Set(MOCK_DATA.map(m => m.provider))].sort();
+            DOM.providers.innerHTML = `<button class="pill active" data-val="all">All Providers</button>`;
+            providers.forEach(p => {
+                const color = providerColors[p];
+                DOM.providers.innerHTML += `
+                    <button class="pill" data-val="${p}">
+                        <div class="color-dot" style="color: ${color}; background: ${color}"></div> ${p}
+                    </button>
+                `;
+            });
+
+            // Subjects
+            const subjects = [...new Set(MOCK_DATA.map(m => m.subject))].sort();
+            DOM.subjects.innerHTML = `<button class="pill active" data-val="all">All Subjects</button>`;
+            subjects.forEach(s => {
+                const color = subjectColors[s];
+                DOM.subjects.innerHTML += `
+                    <button class="pill" data-val="${s}">
+                        <div class="color-dot" style="color: ${color}; background: ${color}"></div> ${s}
+                    </button>
+                `;
+            });
+
+            // Categories
+            const categories = [...new Set(MOCK_DATA.map(m => m.category))].sort();
+            categories.forEach(c => {
+                const opt = document.createElement('option');
+                opt.value = c;
+                opt.textContent = c;
+                DOM.category.appendChild(opt);
+            });
+
+            bindEvents();
+        }
+
+        function bindEvents() {
+            DOM.search.addEventListener('input', (e) => {
+                state.searchQuery = e.target.value.toLowerCase();
+                resetAndRender();
+            });
+
+            DOM.providers.addEventListener('click', (e) => {
+                const btn = e.target.closest('.pill');
+                if (!btn) return;
+                Array.from(DOM.providers.children).forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                state.provider = btn.dataset.val;
+                resetAndRender();
+            });
+
+            DOM.subjects.addEventListener('click', (e) => {
+                const btn = e.target.closest('.pill');
+                if (!btn) return;
+                Array.from(DOM.subjects.children).forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                state.subject = btn.dataset.val;
+                resetAndRender();
+            });
+
+            DOM.category.addEventListener('change', (e) => {
+                state.category = e.target.value;
+                resetAndRender();
+            });
+
+            DOM.sort.addEventListener('change', (e) => {
+                state.sort = e.target.value;
+                resetAndRender();
+            });
+
+            DOM.status.addEventListener('click', (e) => {
+                const btn = e.target.closest('.switch-btn');
+                if (!btn) return;
+                Array.from(DOM.status.children).forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                state.status = btn.dataset.status;
+                resetAndRender();
+            });
+
+            DOM.loadMoreBtn.addEventListener('click', () => {
+                state.page++;
+                render(true);
+            });
+        }
+
+        function toggleComplete(path) {
+            if (state.completed[path]) {
+                delete state.completed[path];
+            } else {
+                state.completed[path] = true;
+            }
+            localStorage.setItem('completedMocks', JSON.stringify(state.completed));
+            updateStats();
+
+            // Update UI
+            const btns = document.querySelectorAll(`[data-path="${CSS.escape(path)}"]`);
+            btns.forEach(btn => {
+                if (state.completed[path]) {
+                    btn.classList.add('completed');
+                    btn.innerHTML = '<i class="fa-solid fa-check"></i>';
+                } else {
+                    btn.classList.remove('completed');
+                    btn.innerHTML = '<i class="fa-regular fa-square"></i>';
+                }
+            });
+
+            if (state.status !== 'all') {
+                resetAndRender();
+            }
+        }
+
+        // Export toggleComplete to global scope so inline onclick can access it
+        window.toggleComplete = toggleComplete;
+
+        function updateStats() {
+            const total = MOCK_DATA.length;
+            const comp = Object.keys(state.completed).length;
+            const pct = total ? Math.round((comp / total) * 100) : 0;
+
+            DOM.statTotal.textContent = total.toLocaleString();
+            DOM.statCompleted.textContent = comp.toLocaleString();
+            DOM.statProgTxt.textContent = pct + '%';
+            DOM.statProgBar.style.width = pct + '%';
+        }
+
+        function resetAndRender() {
+            state.page = 1;
+            render(false);
+        }
+
+        function render(append = false) {
+            let filtered = MOCK_DATA.filter(m => {
+                if (state.provider !== 'all' && m.provider !== state.provider) return false;
+                if (state.subject !== 'all' && m.subject !== state.subject) return false;
+                if (state.category !== 'all' && m.category !== state.category) return false;
+                
+                const isComp = !!state.completed[m.path];
+                if (state.status === 'completed' && !isComp) return false;
+                if (state.status === 'pending' && isComp) return false;
+
+                if (state.searchQuery) {
+                    const q = state.searchQuery;
+                    if (!m.name.toLowerCase().includes(q) && 
+                        !m.category.toLowerCase().includes(q) && 
+                        !m.provider.toLowerCase().includes(q)) return false;
+                }
+
+                return true;
+            });
+
+            filtered.sort((a, b) => {
+                if (state.sort === 'name-asc') return a.name.localeCompare(b.name);
+                if (state.sort === 'name-desc') return b.name.localeCompare(a.name);
+                if (state.sort === 'provider-asc') {
+                    const diff = a.provider.localeCompare(b.provider);
+                    return diff !== 0 ? diff : a.name.localeCompare(b.name);
+                }
+                return 0;
+            });
+
+            DOM.count.innerHTML = `Found <strong>${filtered.length.toLocaleString()}</strong> mocks`;
+
+            const start = 0;
+            const end = state.page * state.limit;
+            const sliced = filtered.slice(start, end);
+
+            DOM.loadMoreWrap.style.display = end < filtered.length ? 'flex' : 'none';
+
+            if (!append) DOM.grid.innerHTML = '';
+
+            if (filtered.length === 0) {
+                DOM.grid.innerHTML = `
+                    <div class="empty-state glass-panel">
+                        <i class="fa-solid fa-ghost"></i>
+                        <h3>No mocks found</h3>
+                        <p>We couldn't find any mock tests matching your current filters. Try adjusting your search criteria.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            const currentPaths = append ? new Set(Array.from(DOM.grid.children).map(c => c.dataset.cardPath)) : new Set();
+            const frag = document.createDocumentFragment();
+
+            sliced.forEach((mock, index) => {
+                if (currentPaths.has(mock.path)) return;
+
+                const isComp = !!state.completed[mock.path];
+                const pColor = providerColors[mock.provider];
+                const sColor = subjectColors[mock.subject];
+                
+                const delay = append ? (index % state.limit) * 0.02 : index * 0.02;
+
+                const div = document.createElement('div');
+                div.className = 'card';
+                div.dataset.cardPath = mock.path;
+                div.style.animationDelay = `${delay}s`;
+
+                div.innerHTML = `
+                    <div class="card-accent" style="background: ${pColor}"></div>
+                    <div class="card-header">
+                        <span class="badge badge-provider" style="border-color: ${pColor}40">
+                            <div class="color-dot" style="color: ${pColor}; background: ${pColor}"></div> ${mock.provider}
+                        </span>
+                        <span class="badge badge-subject">
+                            ${mock.subject}
+                        </span>
+                    </div>
+                    <h3 class="card-title" title="${mock.name}">${mock.name}</h3>
+                    <div class="card-meta">
+                        <i class="fa-regular fa-folder-open"></i> ${mock.category}
+                    </div>
+                    <div class="card-footer">
+                        <button class="toggle-btn ${isComp ? 'completed' : ''}" 
+                                data-path="${mock.path}" 
+                                onclick="window.toggleComplete('${mock.path.replace(/'/g, "\\'")}')"
+                                title="Toggle Completion">
+                            ${isComp ? '<i class="fa-solid fa-check"></i>' : '<i class="fa-regular fa-square"></i>'}
+                        </button>
+                        <a href="${mock.path}" target="_blank" class="launch-btn" style="background: linear-gradient(135deg, ${pColor}, ${sColor})">
+                            <i class="fa-solid fa-play"></i> Start Test
+                        </a>
+                    </div>
+                `;
+                frag.appendChild(div);
+            });
+
+            DOM.grid.appendChild(frag);
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            if (typeof MOCK_DATA === 'undefined') {
+                console.error("MOCK_DATA is not defined. Ensure mocks-data.js is loaded.");
+                return;
+            }
+            assignColors();
+            initFilters();
+            updateStats();
+            render();
+        });
+    </script>
+</body>
+</html>

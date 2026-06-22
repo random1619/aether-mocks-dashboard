@@ -1,0 +1,199 @@
+// ============================================================
+//  _mixins.scss
+//  Reusable SCSS Mixins
+// ============================================================
+
+// ── Flexbox Helpers ─────────────────────────────────────────
+@mixin flex-center {
+  display:         flex;
+  align-items:     center;
+  justify-content: center;
+}
+
+@mixin flex-between {
+  display:         flex;
+  align-items:     center;
+  justify-content: space-between;
+}
+
+@mixin flex-col {
+  display:        flex;
+  flex-direction: column;
+}
+
+// ── Glassmorphism ───────────────────────────────────────────
+@mixin glass($bg: rgba(255,255,255,0.85), $blur: 20px, $border: rgba(255,255,255,0.25)) {
+  background:             $bg;
+  backdrop-filter:        blur($blur);
+  -webkit-backdrop-filter: blur($blur);
+  border:                 1px solid $border;
+}
+
+@mixin glass-dark($bg: rgba(15, 23, 42, 0.6), $blur: 20px) {
+  background:             $bg;
+  backdrop-filter:        blur($blur);
+  -webkit-backdrop-filter: blur($blur);
+  border:                 1px solid rgba(255, 255, 255, 0.08);
+}
+
+// ── Typography ──────────────────────────────────────────────
+@mixin gradient-text($gradient: $gradient-primary) {
+  background:                $gradient;
+  -webkit-background-clip:   text;
+  -webkit-text-fill-color:   transparent;
+  background-clip:           text;
+}
+
+@mixin text-truncate {
+  overflow:      hidden;
+  text-overflow: ellipsis;
+  white-space:   nowrap;
+}
+
+// ── Buttons ─────────────────────────────────────────────────
+@mixin btn-base {
+  display:      inline-flex;
+  align-items:  center;
+  gap:          $spacing-sm;
+  padding:      $spacing-sm $spacing-md;
+  border:       none;
+  border-radius: $radius-sm;
+  font-family:  $font-family;
+  font-size:    $font-size-sm;
+  font-weight:  $font-weight-semi;
+  cursor:       pointer;
+  transition:   $transition-base;
+  white-space:  nowrap;
+  line-height:  1;
+
+  &:disabled {
+    opacity:        0.5;
+    cursor:         not-allowed;
+    pointer-events: none;
+  }
+}
+
+@mixin btn-primary {
+  @include btn-base;
+  background:  $gradient-primary;
+  color:       white;
+  box-shadow:  $shadow-primary;
+
+  &:hover:not(:disabled) {
+    transform:  translateY(-1px);
+    box-shadow: 0 8px 24px rgba($primary, 0.4);
+  }
+
+  &:active:not(:disabled) {
+    transform: translateY(0);
+  }
+}
+
+@mixin btn-ghost {
+  @include btn-base;
+  background:   transparent;
+  color:        $primary;
+  border:       2px solid $primary;
+
+  &:hover:not(:disabled) {
+    background: $primary;
+    color:      white;
+  }
+}
+
+// ── Cards ───────────────────────────────────────────────────
+@mixin card($radius: $radius-md, $shadow: $shadow-md) {
+  background:    $card;
+  border-radius: $radius;
+  box-shadow:    $shadow;
+}
+
+@mixin card-hover {
+  transition: $transition-base;
+
+  &:hover {
+    transform:  translateY(-2px);
+    box-shadow: $shadow-lg;
+  }
+}
+
+// ── Status Colors ───────────────────────────────────────────
+@mixin status-success {
+  background:   $success-faint;
+  border-color: $success;
+  color:        $success-dark;
+}
+
+@mixin status-danger {
+  background:   $danger-faint;
+  border-color: $danger;
+  color:        $danger-dark;
+}
+
+@mixin status-warning {
+  background:   $warning-faint;
+  border-color: $warning;
+  color:        $warning-dark;
+}
+
+// ── Responsive Breakpoints ──────────────────────────────────
+@mixin sm {
+  @media (max-width: $bp-sm) { @content; }
+}
+
+@mixin md {
+  @media (max-width: $bp-md) { @content; }
+}
+
+@mixin lg {
+  @media (max-width: $bp-lg) { @content; }
+}
+
+@mixin min-lg {
+  @media (min-width: $bp-lg) { @content; }
+}
+
+@mixin xl {
+  @media (max-width: $bp-xl) { @content; }
+}
+
+// ── Shimmer / Loading ───────────────────────────────────────
+@mixin shimmer-effect {
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.3) 50%,
+    transparent 100%
+  );
+  background-size: 400px 100%;
+  animation:       shimmer 2s ease-in-out infinite;
+}
+
+// ── Focus Ring ──────────────────────────────────────────────
+@mixin focus-ring($color: $primary) {
+  outline:        2px solid $color;
+  outline-offset: 2px;
+  border-radius:  $radius-sm;
+}
+
+// ── Scrollbar ───────────────────────────────────────────────
+@mixin custom-scrollbar($width: 6px, $track: $bg, $thumb: $border-dark) {
+  &::-webkit-scrollbar        { width: $width; height: $width; }
+  &::-webkit-scrollbar-track  { background: $track; border-radius: $radius-full; }
+  &::-webkit-scrollbar-thumb  { background: $thumb; border-radius: $radius-full;
+    &:hover { background: $text-light; }
+  }
+}
+
+// ── Absolute Cover ──────────────────────────────────────────
+@mixin cover($position: absolute) {
+  position: $position;
+  inset:    0;
+}
+
+// ── Divider Line ────────────────────────────────────────────
+@mixin divider($color: $border, $width: 100%, $height: 1px) {
+  width:      $width;
+  height:     $height;
+  background: $color;
+}

@@ -1,0 +1,179 @@
+// =============================================================================
+// flat-layout.scss  (PREMIUM OVERHAUL — Visual Effects Edition)
+// Entry point for Flat Layout (Mocks 1-3, 52-56)
+// =============================================================================
+
+// ── Abstracts ──────────────────────────────────────────────────────────────
+@import 'abstracts/variables';
+@import 'abstracts/functions';
+@import 'abstracts/mixins';
+
+// ── Base ───────────────────────────────────────────────────────────────────
+@import 'base/reset';
+@import 'base/typography';
+@import 'base/math';
+
+// ── Components ─────────────────────────────────────────────────────────────
+@import 'components/scrollbar';
+@import 'components/buttons';
+@import 'components/options';
+@import 'components/modals';
+@import 'components/results';
+@import 'components/timer';
+
+// ── Layout ─────────────────────────────────────────────────────────────────
+@import 'layout/header';
+@import 'layout/sidebar';
+@import 'layout/footer';
+
+// ── Themes ─────────────────────────────────────────────────────────────────
+@import 'themes/dark';
+
+// =============================================================================
+// FLAT LAYOUT — SPECIFIC OVERRIDES  (Indigo primary color scheme)
+// =============================================================================
+
+// ── Body ──
+
+body {
+  background: var(--bg);
+  color: var(--txt);
+  padding-bottom: 0;
+  transition: background 0.35s ease, color 0.35s ease;
+}
+
+// ── Light mode: subtle mesh bg ──
+
+body:not(.dark-mode) {
+  background:
+    radial-gradient(ellipse 60% 40% at 80% 0%, rgba(79, 70, 229, 0.04) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 60% at 10% 100%, rgba(37, 99, 235, 0.03) 0%, transparent 55%),
+    #f5f7fc;
+  background-attachment: fixed;
+}
+
+// ── Flat layout primary: indigo ──
+
+.btn-p {
+  background: linear-gradient(135deg, var(--p) 0%, var(--p-dark) 100%);
+  color: white;
+  box-shadow: 0 3px 12px rgba(79, 70, 229, 0.35), 0 1px 0 rgba(255,255,255,0.15) inset;
+
+  &:hover:not(:disabled) {
+    background: linear-gradient(135deg, #6056e8 0%, var(--p-dark) 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(79, 70, 229, 0.48), 0 1px 0 rgba(255,255,255,0.15) inset;
+  }
+
+  &:active:not(:disabled) { transform: translateY(0) scale(0.97); }
+}
+
+// ── Language toggle — Indigo ──
+
+.lang .lang-btn.active {
+  color: var(--p);
+  box-shadow: var(--shadow-sm), 0 0 0 1px rgba(79, 70, 229, 0.15);
+}
+
+// ── Welcome screen — Indigo ──
+
+.welcome-screen {
+  .welcome-header {
+    h1, .welcome-title {
+      background: linear-gradient(135deg, var(--p) 0%, var(--pri) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+  }
+
+  .welcome-details {
+    background: rgba(79, 70, 229, 0.04);
+    border-color: rgba(79, 70, 229, 0.15);
+  }
+}
+
+.start-btn {
+  background: linear-gradient(135deg, var(--p) 0%, var(--p-dark) 100%);
+  box-shadow:
+    0 6px 20px rgba(79, 70, 229, 0.4),
+    0 1px 0 rgba(255,255,255,0.15) inset;
+
+  &:hover {
+    background: linear-gradient(135deg, var(--p-dark) 0%, #4338ca 100%);
+    box-shadow: 0 10px 32px rgba(79, 70, 229, 0.55), 0 1px 0 rgba(255,255,255,0.15) inset;
+    transform: translateY(-2px);
+  }
+}
+
+// ── Options — Indigo selection ──
+
+.opt.sel {
+  border-color: var(--p) !important;
+  background: linear-gradient(135deg, rgba(79, 70, 229, 0.08) 0%, rgba(99, 102, 241, 0.05) 100%) !important;
+  box-shadow:
+    0 0 0 3px rgba(79, 70, 229, 0.14),
+    0 6px 24px rgba(79, 70, 229, 0.16) !important;
+
+  &::before { background: var(--p) !important; }
+
+  .opt-radio, .opt-indicator {
+    border-color: var(--p) !important;
+    background: var(--p) !important;
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.22) !important;
+  }
+
+  .dark-mode & {
+    background: linear-gradient(135deg, rgba(129, 140, 248, 0.16) 0%, rgba(99, 102, 241, 0.1) 100%) !important;
+    box-shadow:
+      0 0 0 3px rgba(129, 140, 248, 0.22),
+      0 8px 32px rgba(129, 140, 248, 0.22) !important;
+  }
+}
+
+.opt:hover:not(.submitted):not(.correct):not(.wrong):not(.correct-answer):not(.incorrect-answer) {
+  border-color: rgba(79, 70, 229, 0.45) !important;
+  background: rgba(79, 70, 229, 0.04) !important;
+  &::before { background: var(--p) !important; }
+
+  .dark-mode & {
+    border-color: rgba(129, 140, 248, 0.45) !important;
+    background: rgba(129, 140, 248, 0.07) !important;
+    box-shadow:
+      0 4px 20px rgba(129, 140, 248, 0.15),
+      0 0 0 1px rgba(129, 140, 248, 0.2) !important;
+  }
+}
+
+// ── Question number current — Indigo ──
+
+.q-num.cur {
+  background: var(--p) !important;
+  border-color: var(--p) !important;
+  box-shadow:
+    0 4px 14px rgba(79, 70, 229, 0.5),
+    0 0 20px rgba(129, 140, 248, 0.2) !important;
+  transform: scale(1.1) !important;
+}
+
+// ── Dark mode q-num current — brighter glow ──
+
+.dark-mode .q-num.cur {
+  box-shadow:
+    0 4px 14px rgba(129, 140, 248, 0.55),
+    0 0 28px rgba(129, 140, 248, 0.3) !important;
+}
+
+// ── Solution title ──
+
+.sol-title { color: var(--suc); }
+
+// ── Results modal h2 ──
+
+.result h2,
+.modal-box h2 {
+  background: linear-gradient(135deg, var(--p) 0%, var(--pri) 60%, var(--suc) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}

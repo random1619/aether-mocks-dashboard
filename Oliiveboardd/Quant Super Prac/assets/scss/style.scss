@@ -1,0 +1,44 @@
+@use 'variables' as *;
+@use 'welcome';
+@use 'test';
+
+// CSS Custom Properties mapping for dynamic dark/light theme switching
+:root {
+    --theme-bg: #{$bg-light};
+    --theme-card: #{$card-light};
+    --theme-text: #{$text-light};
+    --theme-text-muted: #{$text-muted-light};
+    --theme-border: #{$border-light};
+    --theme-shadow-sm: #{$shadow-sm-light};
+    --theme-shadow-md: #{$shadow-md-light};
+    --theme-shadow-lg: #{$shadow-lg-light};
+    --theme-header-bg: rgba(255, 255, 255, 0.8);
+}
+
+body.dark-mode {
+    --theme-bg: #{$bg-dark};
+    --theme-card: #{$card-dark};
+    --theme-text: #{$text-dark};
+    --theme-text-muted: #{$text-muted-dark};
+    --theme-border: #{$border-dark};
+    --theme-shadow-sm: #{$shadow-sm-dark};
+    --theme-shadow-md: #{$shadow-md-dark};
+    --theme-shadow-lg: #{$shadow-lg-dark};
+    --theme-header-bg: rgba(15, 23, 42, 0.85);
+}
+
+// Reset and Base layout
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: $font-primary;
+    background: var(--theme-bg);
+    color: var(--theme-text);
+    line-height: 1.5;
+    padding-bottom: 0;
+    transition: $transition-smooth;
+}

@@ -1,0 +1,98 @@
+// ============================================================
+//  _instructions.scss
+//  Instructions / Warning Box Styles
+// ============================================================
+
+.welcome-instructions {
+  background:    linear-gradient(135deg, $warning-faint 0%, $warning-light 100%);
+  border:        1px solid rgba($warning, 0.25);
+  border-left:   4px solid $warning;
+  padding:       $spacing-lg;
+  border-radius: $radius-md;
+  margin-bottom: $spacing-xl;
+  position:      relative;
+  overflow:      hidden;
+
+  // Subtle pattern overlay
+  &::before {
+    content:       '';
+    position:      absolute;
+    top:           -20px;
+    right:         -20px;
+    width:         100px;
+    height:        100px;
+    border-radius: $radius-full;
+    background:    rgba($warning, 0.08);
+    pointer-events: none;
+  }
+
+  h3 {
+    color:         $warning-dark;
+    font-size:     $font-size-md;
+    font-weight:   $font-weight-bold;
+    margin-bottom: $spacing-md;
+    display:       flex;
+    align-items:   center;
+    gap:           $spacing-sm;
+
+    i {
+      font-size:     $font-size-lg;
+      color:         $warning;
+      animation:     pulse 2.5s ease-in-out infinite;
+    }
+  }
+
+  ul {
+    padding-left: $spacing-lg;
+    list-style:   none;
+    display:      flex;
+    flex-direction: column;
+    gap:          $spacing-xs;
+
+    li {
+      font-size:   $font-size-sm;
+      color:       $text;
+      position:    relative;
+      padding-left: $spacing-md;
+      line-height: $line-height-base;
+
+      &::before {
+        content:     '•';
+        color:       $warning;
+        position:    absolute;
+        left:        0;
+        font-weight: $font-weight-bold;
+        font-size:   $font-size-md;
+        line-height: $line-height-tight;
+        top:         2px;
+      }
+
+      strong {
+        color:       $warning-dark;
+        font-weight: $font-weight-semi;
+      }
+    }
+  }
+}
+
+// ── Info Box (general use) ───────────────────────────────────
+.info-box {
+  background:    $primary-faint;
+  border:        1px solid rgba($primary, 0.2);
+  border-left:   4px solid $primary;
+  padding:       $spacing-md $spacing-lg;
+  border-radius: $radius-md;
+  margin-bottom: $spacing-lg;
+  font-size:     $font-size-sm;
+  color:         $text-muted;
+  display:       flex;
+  align-items:   flex-start;
+  gap:           $spacing-md;
+
+  i {
+    color:      $primary-light;
+    font-size:  $font-size-lg;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+}

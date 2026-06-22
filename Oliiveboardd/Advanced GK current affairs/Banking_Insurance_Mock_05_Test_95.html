@@ -1,0 +1,1378 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Banking Insurance Mock 05 Test 95</title>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+
+<link href="assets/css/main.css" rel="stylesheet"/></head>
+<body>
+<!-- Welcome Screen -->
+<div class="welcome-screen" id="welcomeScreen">
+<h1 class="welcome-title">Exam ID : gktests</h1>
+<div class="welcome-details">
+<div class="welcome-detail">
+<span class="welcome-detail-label">Test ID</span>
+<span class="welcome-detail-value">95 </span>
+</div>
+<div class="welcome-detail">
+<span class="welcome-detail-label">Total Questions:</span>
+<span class="welcome-detail-value">30</span>
+</div>
+<div class="welcome-detail">
+<span class="welcome-detail-label">Total Marks:</span>
+<span class="welcome-detail-value">30</span>
+</div>
+<div class="welcome-detail">
+<span class="welcome-detail-label">Duration:</span>
+<span class="welcome-detail-value">60 minutes</span>
+</div>
+<div class="welcome-detail">
+<span class="welcome-detail-label">Marking:</span>
+<span class="welcome-detail-value">+1 / -0.25</span>
+</div>
+</div>
+<div class="welcome-instructions">
+<h3>Instructions</h3>
+<ul>
+<li>Read each question carefully before answering</li>
+<li>You can mark questions for review and come back later</li>
+<li>The timer will automatically submit the test when time is up</li>
+<li>Negative marking applies for wrong answers</li>
+</ul>
+</div>
+<div class="welcome-buttons">
+<button class="welcome-button" id="startTestBtn">
+<i class="fas fa-play"></i> Start Test
+        </button>
+<a class="join-channel" href="https://t.me/mocks_wallah_again" target="_blank">
+<i class="fab fa-telegram"></i> Join Our Channel
+        </a>
+</div>
+</div>
+<!-- Main Test Interface (hidden initially) -->
+<div id="mainTestInterface" style="display:none">
+<div class="hdr">
+<div class="hdr-l">
+<div class="q-info" id="qInfo">Q1/30</div>
+<div class="timer" id="timer">60:00</div>
+</div>
+<div class="hdr-c">Mocks Wallah</div>
+<div class="hdr-r">
+<button class="theme-toggle" id="themeToggle"><i class="fas fa-moon"></i></button>
+<button class="btn btn-o btn-sm" id="menuBtn"><i class="fas fa-th"></i></button>
+<button class="btn btn-p btn-sm" id="subBtn">Submit</button>
+</div>
+</div>
+<div class="cont">
+<div class="q-card">
+<div class="lang">
+<button class="lang-btn active" id="engBtn">English</button>
+<button class="lang-btn" id="hinBtn">हिंदी</button>
+</div>
+<div class="comp" id="compSec" style="display:none">
+<h4><i class="fas fa-book"></i> Comprehension</h4>
+<div id="compCont"></div>
+</div>
+<div class="q-txt" id="qTxt"></div>
+<div class="opts" id="opts"></div>
+<div class="sol" id="sol">
+<div class="sol-info" id="solInfo"></div>
+<h4><i class="fas fa-lightbulb"></i> Solution</h4>
+<div id="solCont"></div>
+</div>
+</div>
+</div>
+<div class="nav">
+<button class="btn btn-o nav-btn" id="prevBtn"><i class="fas fa-chevron-left"></i> Prev</button>
+<button class="btn btn-w nav-btn" id="reviewBtn"><i class="fas fa-flag"></i> Review</button>
+<div class="prog">
+<div id="progTxt">1 of 30</div>
+<div style="font-size:11px">Answered: <span id="ansCnt">0</span> | <a href="https://t.me/mocks_wallah_again">Mocks Wallah</a></div>
+</div>
+<button class="btn btn-p nav-btn" id="nextBtn">Next <i class="fas fa-chevron-right"></i></button>
+</div>
+<div class="desktop-sidebar" id="desktopSidebar">
+<h3>Questions Navigator</h3>
+<div class="q-grid" id="desktopQGrid"></div>
+<div style="margin-top:20px;font-size:12px;color:var(--txtL)">
+<div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
+<div class="q-num ans" style="width:24px;height:24px">✓</div><span>Answered</span>
+</div>
+<div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
+<div class="q-num review" style="width:24px;height:24px">!</div><span>Marked for Review</span>
+</div>
+<div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
+<div class="q-num wrong" style="width:24px;height:24px">✗</div><span>Incorrect</span>
+</div>
+<div style="display:flex;align-items:center;gap:8px">
+<div class="q-num unattempted" style="width:24px;height:24px">?</div><span>Unattempted</span>
+</div>
+</div>
+</div>
+<div class="panel" id="panel">
+<div class="panel-hdr">
+<h3>All Questions</h3>
+<button class="panel-close" id="panelClose"><i class="fas fa-times"></i></button>
+</div>
+<div class="q-grid" id="qGrid"></div>
+<div style="padding:20px;font-size:12px;color:var(--txtL)">
+<div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
+<div class="q-num ans" style="width:24px;height:24px">✓</div><span>Answered</span>
+</div>
+<div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
+<div class="q-num review" style="width:24px;height:24px">!</div><span>Marked for Review</span>
+</div>
+<div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
+<div class="q-num wrong" style="width:24px;height:24px">✗</div><span>Incorrect</span>
+</div>
+<div style="display:flex;align-items:center;gap:8px">
+<div class="q-num unattempted" style="width:24px;height:24px">?</div><span>Unattempted</span>
+</div>
+</div>
+</div>
+<button class="print-btn" id="printBtn" style="display:none">
+<i class="fas fa-print"></i>
+</button>
+<div class="modal" id="modalOver">
+<div class="result">
+<h2>Test Complete!</h2>
+<div class="score" id="scoreDisp">0/30</div>
+<div class="stats">
+<div class="stat c"><div class="stat-val" id="corrStat">0</div><div class="stat-lbl">Correct</div></div>
+<div class="stat w"><div class="stat-val" id="incStat">0</div><div class="stat-lbl">Incorrect</div></div>
+<div class="stat"><div class="stat-val" id="unaStat">0</div><div class="stat-lbl">Unattempted</div></div>
+<div class="stat"><div class="stat-val" id="timeStat">0</div><div class="stat-lbl">Minutes</div></div>
+</div>
+<div class="modal-acts">
+<button class="btn btn-o modal-btn" id="closeModal">Close</button>
+<button class="btn btn-p modal-btn" id="revBtn">Review</button>
+</div>
+</div>
+</div>
+</div>
+<script>
+        class TestApp {
+            constructor() {
+            this.qs = [
+  {
+    "question": "<p>In which among the following locations, RBI does not have its zonal office?</p>",
+    "options": [
+      "Chennai",
+      "Delhi",
+      "Kolkata",
+      "Pune",
+      "Mumbai"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p>The RBI has four zonal offices at Chennai, Delhi, Kolkata and Mumbai. It has 19 regional offices and 11 sub-offices. Regional offices are located in Ahmedabad, Bangalore, Bhopal, Bhubaneswar, Chandigarh, Chennai, Delhi, Guwahati, Hyderabad, Jaipur, Jammu, Kanpur, Kochi, Kolkata, Lucknow, Mumbai, Nagpur, Patna and Thiruvananthapuram and sub-offices are located in Agartala, Aizawal, Dehradun, Gangtok, Imphal, Panaji, Raipur, Ranchi, Shillong, Shimla and Srinagar.</p>",
+    "question_index": 0
+  },
+  {
+    "question": "<p>The Reserve Bank Staff College is located in</p>",
+    "options": [
+      "Pune",
+      "Hyderabad",
+      "Kolkata",
+      "Lucknow",
+      "Chennai"
+    ],
+    "correct_option_id": 4,
+    "solution": "<p>The Reserve Bank of India has two training colleges for its officers, viz. Reserve Bank Staff College in Chennai and College of Agricultural Banking in Pune.</p>",
+    "question_index": 1
+  },
+  {
+    "question": "<p>Which among the following was the first small finance bank in India?</p>",
+    "options": [
+      "Au Financiers",
+      "Capital Small Finance Bank",
+      "Disha Microfin",
+      "Equitas",
+      "Janalakshmi Financial Services"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p>Capital Small Finance Bank, India's first small finance bank, was launched in April 2016. It has opened 10 new branches on its inaugural day. The Jalandhar-headquartered bank had been operating as Capital Local Area Bank since January 2000 with 47 branches in five districts of Punjab. It was among the 10 entities that were given the in-principle approval by the Reserve Bank of India (RBI) to set up small finance banks.</p><p>Small finance banks are a type of niche banks in India. Banks with a small finance bank license can provide basic banking service of acceptance of deposits and lending. The aim behind these to provide financial inclusion to sections of the economy not being served by other banks, such as small business units, small and marginal farmers, micro and small industries and unorganised sector entities.</p>",
+    "question_index": 2
+  },
+  {
+    "question": "<p>Manipur Rural Bank is sponsored by which bank?</p>",
+    "options": [
+      "Andhra Bank",
+      "Punjab National Bank",
+      "State Bank of India",
+      "Syndicate Bank",
+      "United Bank of India"
+    ],
+    "correct_option_id": 4,
+    "solution": "<p>Manipur Rural Bank was established on 28th May 1981 as a joint undertaking of Government of India, Government of Manipur and United bank of India by contributing share capital at the ratio 50: 15: 35 respectively.</p>",
+    "question_index": 3
+  },
+  {
+    "question": "<p>Small Industries Development Bank of India (SIDBI) was set up in which year?</p>",
+    "options": [
+      "1978",
+      "1985",
+      "1988",
+      "1990",
+      "1994"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p>Small Industries Development Bank of India, is an independent financial institution aimed to aid the growth and development of micro, small and medium-scale enterprises (MSME) in India. Set up on April 2, 1990 through an act of parliament, it was incorporated initially as a wholly owned subsidiary of Industrial Development Bank of India.</p>",
+    "question_index": 4
+  },
+  {
+    "question": "<p>The first three digits of MICR code represents the</p>",
+    "options": [
+      "Bank",
+      "Branch",
+      "State",
+      "District",
+      "City"
+    ],
+    "correct_option_id": 4,
+    "solution": "<p>MICR is an acronym for Magnetic Ink Character Recognition. The MICR Code is a numeric code that uniquely identifies a bank-branch participating in the ECS Credit scheme. This is a 9 digit code to identify the location of the bank branch; the first 3 characters represent the city, the next 3 the bank and the last 3 the branch. The MICR Code allotted to a bank branch is printed on the MICR band of cheques issued by bank branches.</p>",
+    "question_index": 5
+  },
+  {
+    "question": "<p>What is the upper limit for RTGS transaction?</p>",
+    "options": [
+      "5,00,000",
+      "10,00,000",
+      "25,00,000",
+      "50,00,000",
+      "No upper limit"
+    ],
+    "correct_option_id": 4,
+    "solution": "<p>The RTGS system is primarily meant for large value transactions. The minimum amount to be remitted through RTGS is Rs. 2 lakh. There is no upper ceiling for RTGS transactions.</p>",
+    "question_index": 6
+  },
+  {
+    "question": "<p>Who appoints the Banking Ombudsman?</p>",
+    "options": [
+      "President of India",
+      "Finance Ministry",
+      "NABARD",
+      "CAG",
+      "RBI"
+    ],
+    "correct_option_id": 4,
+    "solution": "<p>The Banking Ombudsman is a senior official appointed by the Reserve Bank of India to redress customer complaints against deficiency in certain banking services covered under the grounds of complaint specified under Clause 8 of the Banking Ombudsman Scheme 2006.</p>",
+    "question_index": 7
+  },
+  {
+    "question": "<p>What does 'Y' stands for in 'KYC'?</p>",
+    "options": [
+      "Yield",
+      "Yearly",
+      "Yen",
+      "Your",
+      "Yankee"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p>KYC means \"Know Your Customer\". It is a process by which banks obtain information about the identity and address of the customers. This process helps to ensure that banks' services are not misused. The KYC procedure is to be completed by the banks while opening accounts. Banks are also required to periodically update their customers' KYC details.</p>",
+    "question_index": 8
+  },
+  {
+    "question": "<p>Banks Board Bureau is an autonomous body of</p>",
+    "options": [
+      "Reserve Bank of India",
+      "Asian Clearing Union",
+      "World Bank",
+      "Union Government",
+      "SEBI"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p>Banks Board Bureau is housed in RBI's Central Office in Mumbai. BBB is an autonomous body of Union Government of India tasked to improve the governance of Public Sector Banks, recommend selection of chiefs of government owned banks and financial institutions and to help banks in developing strategies and capital raising plans.</p>",
+    "question_index": 9
+  },
+  {
+    "question": "<p>Credit Rating agency, Fitch Ratings is head-quartered in</p>",
+    "options": [
+      "London",
+      "New York",
+      "Tokyo",
+      "Shanghai",
+      "Both (1) and (2)"
+    ],
+    "correct_option_id": 4,
+    "solution": "<p>Fitch Ratings Inc. is one of the \"Big Three credit rating agencies\", the other two being Moody's and Standard &amp; Poor's. It is one of the three nationally recognized statistical rating organizations (NRSRO) designated by the U.S. Securities and Exchange Commission in 1975. Fitch Ratings is dual-headquartered in New York, USA, and London, UK.</p>",
+    "question_index": 10
+  },
+  {
+    "question": "<p>What does 'E' stands for in 'CAMELS rating'?</p>",
+    "options": [
+      "Early",
+      "Earnings",
+      "Equated",
+      "Easy",
+      "External"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p>The CELS ratings or Camels rating is a supervisory rating system originally developed in the U.S. to classify a bank's overall condition. It is applied to every bank and credit union in the U.S. (approximately 8,000 institutions) and is also implemented outside the U.S. by various banking supervisory regulators.</p><p>The components of a bank's condition that are assessed:</p><p>&#8226; (C)apital adequacy</p><p>&#8226; (A)ssets</p><p>&#8226; (M)anagement Capability</p><p>&#8226; (E)arnings</p><p>&#8226; (L)iquidity (also called asset liability management)</p><p>&#8226; (S)ensitivity (sensitivity to market risk, especially interest rate risk)</p><p>Ratings are given from 1 (best) to 5 (worst) in each of the above categories.</p>",
+    "question_index": 11
+  },
+  {
+    "question": "<p>Vananchal Gramin Bank is sponsored by which of the following public sector banks?</p>",
+    "options": [
+      "Punjab National Bank",
+      "Bank of Baroda",
+      "State Bank of India",
+      "Canara Bank",
+      "Syndicate Bank"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p>Vananchal Gramin Bank (VGB) is a Regional Rural Bank (RRB). The bank was established on 30 June 2006 with the amalgamation of the erstwhile Santhal Parganas Gramin Bank and erstwhile Palamau Kshetriya Gramin Bank under the provisions of RRB Act 1976. This bank is sponsored by State Bank of India &amp; is jointly Owned by the Government of India, Government of Jharkhand and State Bank of India.</p>",
+    "question_index": 12
+  },
+  {
+    "question": "<p>What is the strength of Governing council of BCSBI?</p>",
+    "options": [
+      "3",
+      "4",
+      "5",
+      "6",
+      "7"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p>The Banking Codes and Standards Board of India (BCSBI) is an independent banking industry watchdog that protects consumers of banking services in India. The board oversee compliance with the \"Code of Bank's Commitment to Customers\". It is not a compensation mechanism and looks into an individual complaint only to the extent it points to any systemic compliance failure. It is an independent and autonomous body, registered as a separate society under the Societies Registration Act, 1860 on February 18, 2006. The Reserve Bank of India extended financial support to the Board, meeting its expenses for the first five years. The board is governed by a six-member governing Council including one Chairman.</p>",
+    "question_index": 13
+  },
+  {
+    "question": "<p>Payments banks are set up on the recommendations of which of the following committees?</p>",
+    "options": [
+      "Nadkarni Committee",
+      "Mahadevan Committee",
+      "Rangrajan Committee",
+      "Wanchoo Committee",
+      "Nachiket Mor Committee"
+    ],
+    "correct_option_id": 4,
+    "solution": "<p>According to Nachiket Mor, RBI should give licenses for a new type of banks known as 'payment bank', which will be similar to the pre-paid instrument providers (PPI) operating currently. These payment banks will provide payment services and deposit products to its target customers which will be small businesses and low income households. However, the payment banks will not be allowed to give loan.</p>",
+    "question_index": 14
+  },
+  {
+    "question": "<p>The SARFAESI Act was enacted in</p>",
+    "options": [
+      "2000",
+      "2001",
+      "2002",
+      "2003",
+      "2004"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p>The Securitisation and Reconstruction of Financial Assets and Enforcement of Security Interest Act, 2002 (also known as the SARFAESI Act) is an Indian law. It allows banks and other financial institution to auction residential or commercial properties to recover loans. The first asset reconstruction company (ARC) of India, ARCIL, was set up under this act.</p>",
+    "question_index": 15
+  },
+  {
+    "question": "<p>Where is NPCI head-quartered?</p>",
+    "options": [
+      "New Delhi",
+      "Mumbai",
+      "Bengaluru",
+      "Hyderabad",
+      "Kolkata"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p>National Payments Corporation of India (NPCI) is the umbrella organisation for all retail payment systems in India, which aims to allow all Indian citizens to have unrestricted access to e-payment services.</p><p>Founded in 2008, NPCI is a not-for-profit organisation registered under section 8 of the Companies Act 2013. The organisation is owned by a consortium of major banks,[3] and has been promoted by the country's central bank, the Reserve Bank of India. Its recent work of developing Unified Payments Interface aims to move India to a cashless society with only digital transactions. It is head-quartered in Mumbai.</p>",
+    "question_index": 16
+  },
+  {
+    "question": "<p>What does 'I' stands for in 'BHIM App'?</p>",
+    "options": [
+      "Investment",
+      "Instant",
+      "Immediate",
+      "Intelligence",
+      "Interface"
+    ],
+    "correct_option_id": 4,
+    "solution": "<p>BHIM (Bharat Interface for Money) is a Mobile App developed by National Payments Corporation of India (NPCI), based on the Unified Payment Interface (UPI). It was launched by Narendra Modi, the Prime Minister of India, at a Digi Dhan mela at Talkatora Stadium in New Delhi on 30 December 2016. It has been named after Dr. Bhimrao Ambedkar and is intended to facilitate e-payments directly through banks as part of the 2016 Indian banknote demonetisation and drive towards cashless transactions.</p>",
+    "question_index": 17
+  },
+  {
+    "question": "<p>What is the validity period of Kisan Credit Card?</p>",
+    "options": [
+      "1 year",
+      "2 years",
+      "3 years",
+      "5 years",
+      "10 years"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p>The validity period of KCC is five years, with an option to extend for up to three more years and subject to annual renewals. Kisan Credit Card (KCC) offering credit to the farmers in two types viz, 1. Cash Credit 2. Term Credit (for allied activities such as pump sets, land development, plantation, drip irrigation )</p>",
+    "question_index": 18
+  },
+  {
+    "question": "<p>MMID is of how many digits code?</p>",
+    "options": [
+      "5",
+      "7",
+      "9",
+      "11",
+      "12"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p>Mobile Money Identifier is a 7 digit number, issued by banks. MMID is one of the input which when clubbed with mobile number facilitates fund transfer. Combination of Mobile no. &amp; MMID is uniquely linked with an Account number and helps in identifying the beneficiary details. Different MMID's can be linked to same Mobile Number.</p>",
+    "question_index": 19
+  },
+  {
+    "question": "<p>Which of the following banks is/are head-quartered in Thrissur?</p>",
+    "options": [
+      "Dhanlaxmi Bank",
+      "South Indian Bank",
+      "Catholic Syrian Bank",
+      "Only (1) and (2)",
+      "All (1), (2) and (3)"
+    ],
+    "correct_option_id": 4,
+    "solution": "<p>Dhanlaxmi bank, South Indian Bank and Catholic Syrian Banks are head-quartered in Thrissur, Kerala.</p>",
+    "question_index": 20
+  },
+  {
+    "question": "<p>The Life Insurance Corporation Act, 1956 is NOT applicable to 'Post office life insurance' under which section of the act?</p>",
+    "options": [
+      "Section 44(a)",
+      "Section 44(b)",
+      "Section 44(c)",
+      "Section 44(d)",
+      "Section 44(e)"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p>Section 44 in The Life Insurance Corporation Act, 1956: Act not to apply in certain cases. - Nothing contained in this Act shall apply in relation to - </p><p>(a) any insurer whose business is being voluntarily wound up or is being wound up under the orders of the court;</p><p>(b) any insurer to whom the Insurance Act does not apply by reason of the provisions contained in section 2E thereof;</p><p>(c) any composite insurer in respect of the management of whose affairs an Administrator has been appointed under section 52A of the Insurance Act;</p><p>(d) the scheme run by the Central Government known as the Post Office Life Insurance Fund;</p><p>(e) any approved superannuation fund as defined in clause (a) of section 58N of the Indian Income-tax Act, 1922 (11 of 1922), which is in existence on the appointed day;</p>",
+    "question_index": 21
+  },
+  {
+    "question": "<p>'Centre for Insurance Studies and Research' is located in which among the following places?</p>",
+    "options": [
+      "Pune",
+      "Mysuru",
+      "Mumbai",
+      "Jodhpur",
+      "Kanpur"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p>The Centre for Insurance Studies and Research (CISR) started in 2002 and is an education and training centre at the National Law University, Jodhpur. It offers Postgraduate and Research programs. National Law University, Jodhpur was established in 2001. Other specialized and comprehensive centres of learning that the National Law University, Jodhpur includes are: the Centre for Law and Management, Centre for Insurance, and Centre for Banking and Finance.</p>",
+    "question_index": 22
+  },
+  {
+    "question": "<p>Which Insurance company's tagline is 'Ek shagun zindagi ke naam'?</p>",
+    "options": [
+      "Bajaj Allianz Life Insurance",
+      "Birla Sun Life Insurance Company Limited",
+      "Exide Life Insurance",
+      "Future Generali Life Insurance",
+      "India First Life Insurance Company"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p>'Ek Shagun Zindagi Ke Naam' is the tagline of Future Generali Life Insurance. Generali is an Italian insurance company, having business in India through a joint venture with Future Group under the brand name Future Generali Insurance. Future Generali operates in India having through two primary legal entities namely Generali India Life Insurance Co. Ltd.(Life Insurance) and Generali India Insurance Co. Ltd.(Non-Life Insurance).</p>",
+    "question_index": 23
+  },
+  {
+    "question": "<p>The provision of 'Appointment of Managing Directors by a corporation' is mentioned in which section of 'Life Insurance Corporation Act, 1956?</p>",
+    "options": [
+      "Section 18",
+      "Section 22",
+      "Section 16",
+      "Section 25",
+      "Section 20"
+    ],
+    "correct_option_id": 4,
+    "solution": "<p>Section 20 in The Life Insurance Corporation Act, 1956: Managing Directors  -  The Corporation may appoint one or more persons to be the Managing Director or Directors of the Corporation, and every Managing Director shall be a whole-time officer of the Corporation, and shall exercise such powers and perform such duties as may be entrusted or delegated to him by the Executive Committee or the Corporation.</p>",
+    "question_index": 24
+  },
+  {
+    "question": "<p>Which among the following is NOT a function of Insurance Regulatory and Development Authority of India?</p>",
+    "options": [
+      "Specifying qualifications, the code of conduct and training for intermediaries and agents",
+      "Specifying the code of conduct for surveyors and loss assessors",
+      "Appointing Chairpersons, Managing Directors for state owned insurance corporations",
+      "Adjudicating disputes between insurers and intermediaries or insurance intermediaries",
+      "Supervising the Tariff Advisory Committee"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p>The functions of the IRDAI are defined in Section 14 of the IRDAI Act, 1999, and include:</p><p>&#8226; Issuing, renewing, modifying, withdrawing, suspending or cancelling registrations</p><p>&#8226; Protecting policyholder interests</p><p>&#8226; Specifying qualifications, the code of conduct and training for intermediaries and agents</p><p>&#8226; Specifying the code of conduct for surveyors and loss assessors</p><p>&#8226; Promoting efficiency</p><p>&#8226; Promoting and regulating professional organisations connected with the insurance and re-insurance industry</p><p>&#8226; Levying fees and other charges</p><p>&#8226; Inspecting and investigating insurers, intermediaries and other relevant organisations</p><p>&#8226; Regulating rates, advantages, terms and conditions which may be offered by insurers not covered by the Tariff Advisory Committee under section 64U of the Insurance Act, 1938 (4 of 1938)</p><p>&#8226; Specifying how books should be kept</p><p>&#8226; Regulating company investment of funds</p><p>&#8226; Regulating a margin of solvency</p><p>&#8226; Adjudicating disputes between insurers and intermediaries or insurance intermediaries</p><p>&#8226; Supervising the Tariff Advisory Committee</p><p>&#8226; Specifying the percentage of premium income to finance schemes for promoting and regulating professional organisations</p><p>&#8226; Specifying the percentage of life- and general-insurance business undertaken in the rural or social sector</p><p>&#8226; Specifying the form and the manner in which books of accounts shall be maintained, and statement of accounts shall be rendered by insurers and other insurer intermediaries.</p>",
+    "question_index": 25
+  },
+  {
+    "question": "<p>Usually what is the term period of 'Term Life Insurance plans'?</p>",
+    "options": [
+      "5  -  10 years",
+      "10  -  20 years",
+      "10  -  30 years",
+      "10  -  40 years",
+      "20  -  30 years"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p>Term life insurance or term assurance is life insurance that provides coverage at a fixed rate of payments for a limited period of time, the relevant term. Some term insurance policies can be extended or converted into another type of coverage. Term Insurance is the simplest form of life insurance. It pays only if death occurs during the term of the policy, which is usually from 10 to 30 years. Most term policies have no other benefit provisions.</p>",
+    "question_index": 26
+  },
+  {
+    "question": "<p>Which among the following is an endowment plan of LIC?</p>",
+    "options": [
+      "New Jeevan Anand",
+      "New Bima Bachat",
+      "Amulya Jeevan",
+      "Jeevan Akshay",
+      "New Jeevan Mangal"
+    ],
+    "correct_option_id": 0,
+    "solution": "<p>An endowment policy is a life insurance contract designed to pay a lump sum after a specific term (on its 'maturity') or on death. Typical maturities are ten, fifteen or twenty years up to a certain age limit. Some policies also pay out in the case of critical illness. Policies are typically traditional with-profits or unit-linked (including those with unitised with-profits funds). Endowments can be cashed in early (or surrendered) and the holder then receives the surrender value which is determined by the insurance company depending on how long the policy has been running and how much has been paid into it.</p><p>New Jeevan Anand  -  Endowment Plan</p><p>New Bima Bachat  -  Money Back Plan</p><p>Amulya Jeevan  -  Term Assurance Plan</p><p>Jeevan Akshay  -  Pension Plan</p><p>New Jeevan Mangal  -  Micro Insurance Plan</p>",
+    "question_index": 27
+  },
+  {
+    "question": "<p>Which of the following acts has the provision of establishing 'Insurance Advisory Committee'?</p>",
+    "options": [
+      "The Insurance Act, 1938",
+      "The Life insurance companies act, 1912",
+      "The Life Insurance Corporation Act, 1956",
+      "Insurance Regulatory and Development Authority Act, 1999",
+      "Indian Insurance Companies Act, 1928"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p>Section 25 of Insurance Regulatory and Development Authority Act, 1999: Establishment of Insurance Advisory Committee.</p><p>&#8226; The Authority may, by notification, establish with effect from such date as it may specify in such notification, a Committee to be known as the Insurance Advisory Committee.</p><p>&#8226; The Insurance Advisory Committee shall consist of not more than twenty-five members excluding ex- officio members to represent the interests of commerce, industry, transport, agriculture, consumer fora, surveyors, agents, intermediaries, organizations engaged in safety and loss prevention, research bodies and employees' association in the insurance sector.</p><p>&#8226; The Chairperson and the members of the Authority shall be the ex-officio Chairperson and ex officio members of the Insurance Advisory Committee.</p><p>&#8226; The objects of the Insurance Advisory Committee shall be to advise the Authority on matters related to insurance.</p><p>&#8226; The Insurance Advisory Committee may advise the Authority on such other matters as may be prescribed.</p>",
+    "question_index": 28
+  },
+  {
+    "question": "<p>In which year Liberty Videocon got the approval by IRDA to run the General Insurance operations in India?</p>",
+    "options": [
+      "2001",
+      "2013",
+      "2004",
+      "2010",
+      "2016"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p>Liberty Videocon General Insurance is an Indian insurance company. It is a joint venture between the Boston-based insurance company Liberty Mutual Insurance Group and India-based Videocon Industries. Liberty Videocon got approved by IRDA in the Year 2013 to run the General Insurance operations in India.</p>",
+    "question_index": 29
+  }
+];
+            this.sections = null;
+            this.curQ = 0;
+            this.ans = new Array(this.qs.length).fill(null);
+            this.reviewed = new Array(this.qs.length).fill(false);
+            this.startT = Date.now();
+            this.timeLeft = 60 * 60;
+            this.timeSpent = new Array(this.qs.length).fill(0);
+            this.lastQTime = this.startT;
+            this.sub = false;
+            this.eng = true;
+            this.darkMode = false;
+            this.timer = null;
+            this.sectionTimer = null;
+            this.currentSection = this.sections ? 0 : null;
+            this.initEls();
+            this.setupWelcomeScreen();
+            this.validateData();
+            this.setupBeforeUnload();
+        }
+            
+            setupWelcomeScreen() {
+                document.getElementById('startTestBtn').addEventListener('click', () => {
+                    // Hide welcome screen
+                    document.getElementById('welcomeScreen').classList.add('hidden');
+                    
+                    // Show main test interface
+                    document.getElementById('mainTestInterface').style.display = '';
+                    
+                    // Initialize the test
+                    setTimeout(() => {
+                        this.init();
+                    }, 300);
+                });
+            }
+            
+            setupBeforeUnload() {
+                window.addEventListener('beforeunload', (e) => {
+                    if (!this.sub) {
+                        e.preventDefault();
+                        e.returnValue = 'Are you sure you want to leave? Your test progress will be lost.';
+                        return e.returnValue;
+                    }
+                });
+            }
+            
+            validateData() {
+                console.log('Validating question data...');
+                this.qs.forEach((q, idx) => {
+                    if (q.correct_option_id !== undefined) {
+                        console.log(`Q${idx + 1}: correct_option_id = ${q.correct_option_id}, options count = ${q.options ? q.options.length : 0}`);
+                        
+                        if (q.options && (q.correct_option_id < 0 || q.correct_option_id >= q.options.length)) {
+                            console.warn(`Q${idx + 1}: Invalid correct_option_id ${q.correct_option_id} for ${q.options.length} options`);
+                        }
+                    }
+                });
+            }
+            
+            initEls() {
+                this.els = {
+                    qInfo: document.getElementById('qInfo'),
+                    progTxt: document.getElementById('progTxt'),
+                    ansCnt: document.getElementById('ansCnt'),
+                    timer: document.getElementById('timer'),
+                    qTxt: document.getElementById('qTxt'),
+                    compSec: document.getElementById('compSec'),
+                    compCont: document.getElementById('compCont'),
+                    opts: document.getElementById('opts'),
+                    sol: document.getElementById('sol'),
+                    solCont: document.getElementById('solCont'),
+                    solInfo: document.getElementById('solInfo'),
+                    qGrid: document.getElementById('qGrid'),
+                    desktopQGrid: document.getElementById('desktopQGrid'),
+                    panel: document.getElementById('panel'),
+                    modalOver: document.getElementById('modalOver'),
+                    scoreDisp: document.getElementById('scoreDisp'),
+                    corrStat: document.getElementById('corrStat'),
+                    incStat: document.getElementById('incStat'),
+                    unaStat: document.getElementById('unaStat'),
+                    timeStat: document.getElementById('timeStat'),
+                    printBtn: document.getElementById('printBtn'),
+                    desktopSidebar: document.getElementById('desktopSidebar'),
+                    reviewBtn: document.getElementById('reviewBtn'),
+                    themeToggle: document.getElementById('themeToggle'),
+                    sectionHeader: this.sections ? document.getElementById('sectionHeader') : null,
+                    sectionTitle: this.sections ? document.getElementById('sectionTitle') : null,
+                    sectionTimer: this.sections ? document.getElementById('sectionTimer') : null
+                };
+            }
+            
+            init() {
+                this.createGrid();
+                this.startTimer();
+                if (this.sections) {
+                    this.startSectionTimer();
+                    this.updateSectionHeader();
+                }
+                this.loadQ(0);
+                this.setupEvents();
+                this.updatePrintButton();
+                this.updateThemeToggleIcon();
+            }
+            
+            setupEvents() {
+                document.getElementById('menuBtn').onclick = () => this.togglePanel();
+                document.getElementById('subBtn').onclick = () => this.confirmSub();
+                document.getElementById('prevBtn').onclick = () => this.nav(-1);
+                document.getElementById('nextBtn').onclick = () => this.nav(1);
+                document.getElementById('reviewBtn').onclick = () => this.toggleReview();
+                document.getElementById('engBtn').onclick = () => this.setLang(true);
+                document.getElementById('hinBtn').onclick = () => this.setLang(false);
+                document.getElementById('panelClose').onclick = () => this.closePanel();
+                document.getElementById('closeModal').onclick = () => this.closeModal();
+                document.getElementById('revBtn').onclick = () => this.review();
+                document.getElementById('printBtn').onclick = () => this.printTest();
+                document.getElementById('themeToggle').onclick = () => this.toggleTheme();
+            }
+            
+            // IMPROVED: Better handling of complex HTML content including math expressions
+            extractTxt(html, isEng) {
+                if (!html) return '';
+                
+                // Create a temporary div to parse the HTML
+                const tempDiv = document.createElement('div');
+                tempDiv.innerHTML = html;
+                
+                // Process math expressions - convert them to proper HTML structure
+                const mathExps = tempDiv.querySelectorAll('div[style*="inline-block"][style*="vertical-align: middle"]');
+                mathExps.forEach(mathExp => {
+                    // Create a new math expression container
+                    const newMathExp = document.createElement('div');
+                    newMathExp.className = 'math-exp';
+                    
+                    // Get numerator and denominator
+                    const spans = mathExp.querySelectorAll('span');
+                    if (spans.length >= 3) {
+                        const numerator = spans[0].cloneNode(true);
+                        const line = spans[1].cloneNode(true);
+                        const denominator = spans[2].cloneNode(true);
+                        
+                        // Clean up the numerator
+                        const numDiv = document.createElement('div');
+                        numDiv.className = 'math-num';
+                        numDiv.innerHTML = numerator.innerHTML;
+                        
+                        // Create the dividing line
+                        const lineDiv = document.createElement('div');
+                        lineDiv.className = 'math-line';
+                        
+                        // Clean up the denominator
+                        const denDiv = document.createElement('div');
+                        denDiv.className = 'math-num';
+                        denDiv.innerHTML = denominator.innerHTML;
+                        
+                        // Build the new math expression
+                        newMathExp.appendChild(numDiv);
+                        newMathExp.appendChild(lineDiv);
+                        newMathExp.appendChild(denDiv);
+                        
+                        // Replace the original with our new structure
+                        mathExp.parentNode.replaceChild(newMathExp, mathExp);
+                    }
+                });
+                
+                // Handle language selection - show/hide appropriate spans
+                const langSpans = tempDiv.querySelectorAll('span.eqt, span.hqt');
+                langSpans.forEach(span => {
+                    if ((isEng && span.classList.contains('hqt')) || 
+                        (!isEng && span.classList.contains('eqt'))) {
+                        span.style.display = 'none';
+                    } else {
+                        span.style.display = '';
+                        // Remove the class to prevent future hiding
+                        span.classList.remove('eqt', 'hqt');
+                    }
+                });
+                
+                // Clean up any remaining display:none styles
+                const hiddenElements = tempDiv.querySelectorAll('[style*="display:none"]');
+                hiddenElements.forEach(el => {
+                    if (el.style.display === 'none' && 
+                        !el.classList.contains('hqt') && 
+                        !el.classList.contains('eqt')) {
+                        el.style.display = '';
+                    }
+                });
+                
+                // Handle tables - wrap them in a scrollable container
+                const tables = tempDiv.querySelectorAll('table');
+                tables.forEach(table => {
+                    const container = document.createElement('div');
+                    container.className = 'table-container';
+                    table.parentNode.insertBefore(container, table);
+                    container.appendChild(table);
+                });
+                
+                return tempDiv.innerHTML;
+            }
+            
+            createGrid() {
+                this.els.qGrid.innerHTML = '';
+                this.els.desktopQGrid.innerHTML = '';
+                
+                this.qs.forEach((_, i) => {
+                    // Create mobile grid element
+                    const mobileDiv = document.createElement('div');
+                    mobileDiv.className = 'q-num';
+                    mobileDiv.textContent = i + 1;
+                    mobileDiv.onclick = () => this.goToQ(i);
+                    this.els.qGrid.appendChild(mobileDiv);
+                    
+                    // Create desktop grid element
+                    const desktopDiv = document.createElement('div');
+                    desktopDiv.className = 'q-num';
+                    desktopDiv.textContent = i + 1;
+                    desktopDiv.onclick = () => this.goToQ(i);
+                    this.els.desktopQGrid.appendChild(desktopDiv);
+                });
+            }
+            
+            loadQ(idx) {
+                // Update time spent on previous question
+                if (this.curQ !== idx) {
+                    const now = Date.now();
+                    this.timeSpent[this.curQ] += (now - this.lastQTime) / 1000;
+                    this.lastQTime = now;
+                }
+                
+                this.curQ = idx;
+                const q = this.qs[idx];
+                
+                // Check if question is in current section (if sections exist)
+                if (this.sections) {
+                    const inCurrentSection = this.isInCurrentSection(idx);
+                    if (!inCurrentSection) {
+                        // Find the section this question belongs to
+                        const sectionIdx = this.findSectionForQuestion(idx);
+                        if (sectionIdx !== null && !this.sections[sectionIdx].submitted) {
+                            this.currentSection = sectionIdx;
+                            this.startSectionTimer();
+                            this.updateSectionHeader();
+                        }
+                    }
+                }
+                
+                this.els.qInfo.textContent = `Q${idx + 1}/${this.qs.length}`;
+                this.els.progTxt.textContent = `${idx + 1} of ${this.qs.length}`;
+                this.updateAnsCnt();
+                this.updateNav();
+                this.updateGrid();
+                this.updateReviewButton();
+                
+                if (q.comp) {
+                    this.els.compSec.style.display = 'block';
+                    this.els.compCont.innerHTML = this.extractTxt(q.comp, this.eng);
+                } else {
+                    this.els.compSec.style.display = 'none';
+                }
+                
+                this.els.qTxt.innerHTML = this.extractTxt(q.question, this.eng);
+                this.loadOpts(q, idx);
+                
+                if (this.sub && q.solution) {
+                    // Show time spent on question in solution
+                    const timeSpent = Math.round(this.timeSpent[idx]);
+                    const minutes = Math.floor(timeSpent / 60);
+                    const seconds = timeSpent % 60;
+                    const timeStr = minutes > 0 
+                        ? `${minutes}m ${seconds}s` 
+                        : `${seconds}s`;
+                    
+                    this.els.solInfo.innerHTML = `
+                        <span><i class="fas fa-clock"></i> Time spent: ${timeStr}</span>
+                        <span><i class="fas fa-check-circle"></i> Correct answer: ${String.fromCharCode(65 + q.correct_option_id)}</span>
+                    `;
+                    
+                    this.els.solCont.innerHTML = this.extractTxt(q.solution, this.eng);
+                    this.els.sol.classList.add('show');
+                } else {
+                    this.els.sol.classList.remove('show');
+                }
+            }
+            
+            loadOpts(q, qIdx) {
+                this.els.opts.innerHTML = '';
+                const userAnswer = this.ans[qIdx];
+                const correctAnswer = q.correct_option_id;
+                
+                console.log(`Loading Q${qIdx + 1} options:`, {
+                    userAnswer: userAnswer,
+                    correctAnswer: correctAnswer,
+                    submitted: this.sub,
+                    optionsCount: q.options ? q.options.length : 0
+                });
+                
+                if (!q.options || !Array.isArray(q.options)) {
+                    console.error(`Q${qIdx + 1}: No valid options array`);
+                    return;
+                }
+                
+                q.options.forEach((opt, i) => {
+                    const div = document.createElement('div');
+                    let cls = 'opt';
+                    
+                    if (this.sub) {
+                        cls += ' submitted';
+                    }
+                    
+                    if (userAnswer === i) {
+                        cls += ' sel';
+                        console.log(`Q${qIdx + 1}: User selected option ${i}`);
+                    }
+                    
+                    if (this.sub && correctAnswer !== undefined && correctAnswer !== null) {
+                        if (i === correctAnswer) {
+                            cls += ' correct';
+                            console.log(`Q${qIdx + 1}: Option ${i} marked as correct (is correct answer)`);
+                        } else if (userAnswer === i && userAnswer !== correctAnswer) {
+                            cls += ' wrong';
+                            console.log(`Q${qIdx + 1}: Option ${i} marked as wrong (user selected but incorrect)`);
+                        }
+                    }
+                    
+                    div.className = cls;
+                    div.innerHTML = `
+                        <div class="opt-radio"></div>
+                        <div class="opt-txt">${this.extractTxt(opt, this.eng)}</div>
+                    `;
+                    
+                    if (!this.sub) {
+                        div.onclick = () => this.selOpt(i, qIdx);
+                    }
+                    
+                    this.els.opts.appendChild(div);
+                });
+            }
+            
+            selOpt(optIdx, qIdx) {
+                if (this.sub) return;
+                this.ans[qIdx] = this.ans[qIdx] === optIdx ? null : optIdx;
+                console.log(`Q${qIdx + 1}: Selected option ${optIdx}, answer array:`, this.ans[qIdx]);
+                this.loadOpts(this.qs[qIdx], qIdx);
+                this.updateAnsCnt();
+                this.updateGrid();
+            }
+            
+            toggleReview() {
+                if (this.sub) return;
+                this.reviewed[this.curQ] = !this.reviewed[this.curQ];
+                this.updateGrid();
+                this.updateReviewButton();
+            }
+            
+            updateReviewButton() {
+                const btn = this.els.reviewBtn;
+                if (this.reviewed[this.curQ]) {
+                    btn.classList.add('active');
+                    btn.innerHTML = '<i class="fas fa-flag"></i>';
+                } else {
+                    btn.classList.remove('active');
+                    btn.innerHTML = '<i class="fas fa-flag"></i>';
+                }
+            }
+            
+           nav(dir) {
+            const newIdx = this.curQ + dir;
+            
+            // If test is submitted, allow free navigation for review
+            if (this.sub) {
+                if (newIdx >= 0 && newIdx < this.qs.length) {
+                    this.loadQ(newIdx);
+                }
+                return;
+            }
+            
+            // During test, enforce section boundaries
+            if (this.sections) {
+                const currentSection = this.sections[this.currentSection];
+                if (newIdx < currentSection.start || newIdx > currentSection.end) {
+                    return; // Don't allow navigation outside current section
+                }
+            }
+            
+            if (newIdx >= 0 && newIdx < this.qs.length) {
+                this.loadQ(newIdx);
+            }
+        }
+        
+        goToQ(idx) {
+            // Always allow navigation when reviewing after submission
+            if (this.sub) {
+                this.loadQ(idx);
+                this.closePanel();
+                return;
+            }
+            
+            // During test, only allow navigation within current section
+            if (this.sections) {
+                const currentSection = this.sections[this.currentSection];
+                if (idx < currentSection.start || idx > currentSection.end) {
+                    return; // Block navigation outside current section
+                }
+            }
+            
+            this.loadQ(idx);
+            this.closePanel();
+        }
+        
+        updateGrid() {
+            const nums = this.els.qGrid.querySelectorAll('.q-num');
+            const desktopNums = this.els.desktopQGrid.querySelectorAll('.q-num');
+            
+            const updateNum = (el, i) => {
+                el.className = 'q-num';
+                
+                // Reset all special classes
+                el.classList.remove('cur', 'ans', 'wrong', 'review', 'unattempted', 'disabled');
+                
+                if (i === this.curQ) {
+                    el.classList.add('cur');
+                } else if (this.sub) {
+                    // After submission - prioritize correct/wrong over review status
+                    if (this.ans[i] !== null && this.qs[i].correct_option_id !== undefined) {
+                        if (this.ans[i] === this.qs[i].correct_option_id) {
+                            el.classList.add('ans');
+                        } else {
+                            el.classList.add('wrong');
+                        }
+                    } else if (this.ans[i] === null) {
+                        el.classList.add('unattempted');
+                    }
+                } else {
+                    // Before submission
+                    if (this.reviewed[i]) {
+                        el.classList.add('review');
+                    } else if (this.ans[i] !== null) {
+                        el.classList.add('ans');
+                    }
+                    
+                    // Disable questions from other sections (only if sections exist)
+                    if (this.sections) {
+                        const currentSection = this.sections[this.currentSection];
+                        if (i < currentSection.start || i > currentSection.end) {
+                            el.classList.add('disabled');
+                        }
+                    }
+                }
+            };
+            
+            nums.forEach(updateNum);
+            desktopNums.forEach(updateNum);
+        }
+        
+        updateNav() {
+            // Basic navigation limits
+            document.getElementById('prevBtn').disabled = this.curQ === 0;
+            document.getElementById('nextBtn').disabled = this.curQ === this.qs.length - 1;
+            document.getElementById('reviewBtn').style.display = this.sub ? 'none' : 'inline-flex';
+            
+            // Additional navigation restrictions for sections during test
+            if (this.sections && !this.sub) {
+                const currentSection = this.sections[this.currentSection];
+                document.getElementById('prevBtn').disabled = document.getElementById('prevBtn').disabled || 
+                    (this.curQ === currentSection.start);
+                document.getElementById('nextBtn').disabled = document.getElementById('nextBtn').disabled || 
+                    (this.curQ === currentSection.end);
+            }
+        }
+            
+            updateAnsCnt() {
+                const cnt = this.ans.filter(a => a !== null).length;
+                this.els.ansCnt.textContent = cnt;
+            }
+            
+            updatePrintButton() {
+                this.els.printBtn.style.display = this.sub ? 'flex' : 'none';
+            }
+            
+            updateThemeToggleIcon() {
+                const icon = this.darkMode ? 'fa-sun' : 'fa-moon';
+                this.els.themeToggle.innerHTML = `<i class="fas ${icon}"></i>`;
+            }
+            
+            updateSectionHeader() {
+                if (!this.sections || !this.els.sectionHeader) return;
+                
+                const section = this.sections[this.currentSection];
+                this.els.sectionTitle.textContent = section.name;
+                this.els.sectionTimer.textContent = this.formatTime(section.time_left);
+                
+                // Show the section header if we have sections
+                this.els.sectionHeader.style.display = 'flex';
+            }
+            
+            setLang(eng) {
+                this.eng = eng;
+                document.getElementById('engBtn').classList.toggle('active', eng);
+                document.getElementById('hinBtn').classList.toggle('active', !eng);
+                this.loadQ(this.curQ);
+            }
+            
+            toggleTheme() {
+                this.darkMode = !this.darkMode;
+                document.body.classList.toggle('dark-mode', this.darkMode);
+                this.updateThemeToggleIcon();
+                this.loadQ(this.curQ); // Refresh to apply dark mode styles
+            }
+            
+            startTimer() {
+                this.timer = setInterval(() => {
+                    this.timeLeft--;
+                    if (this.timeLeft <= 0) {
+                        clearInterval(this.timer);
+                        this.subTest();
+                        return;
+                    }
+                    const mins = Math.floor(this.timeLeft / 60);
+                    const secs = this.timeLeft % 60;
+                    this.els.timer.textContent = `${mins}:${secs.toString().padStart(2, '0')}`;
+                }, 1000);
+            }
+            
+            startSectionTimer() {
+                if (!this.sections) return;
+                
+                // Clear any existing section timer
+                if (this.sectionTimer) clearInterval(this.sectionTimer);
+                
+                const section = this.sections[this.currentSection];
+                section.time_left = section.timer; // Reset to initial time
+                
+                this.sectionTimer = setInterval(() => {
+                    section.time_left--;
+                    this.els.sectionTimer.textContent = this.formatTime(section.time_left);
+                    
+                    if (section.time_left <= 0) {
+                        clearInterval(this.sectionTimer);
+                        this.submitCurrentSection();
+                    }
+                }, 1000);
+            }
+            
+            formatTime(seconds) {
+                const mins = Math.floor(seconds / 60);
+                const secs = seconds % 60;
+                return `${mins}:${secs.toString().padStart(2, '0')}`;
+            }
+            
+            stopTimers() {
+                if (this.timer) clearInterval(this.timer);
+                if (this.sectionTimer) clearInterval(this.sectionTimer);
+            }
+            
+            togglePanel() {
+                this.els.panel.classList.toggle('open');
+            }
+            
+            closePanel() {
+                this.els.panel.classList.remove('open');
+            }
+            
+            confirmSub() {
+                if (this.sections) {
+                    const section = this.sections[this.currentSection];
+                    const unanswered = this.ans.slice(section.start, section.end + 1)
+                        .filter(a => a === null).length;
+                    const reviewed = this.reviewed.slice(section.start, section.end + 1)
+                        .filter(r => r).length;
+                    
+                    let msg = '';
+                    
+                    if (unanswered > 0 && reviewed > 0) {
+                        msg = `You have ${unanswered} unanswered questions and ${reviewed} marked for review in this section. Submit anyway?`;
+                    } else if (unanswered > 0) {
+                        msg = `You have ${unanswered} unanswered questions in this section. Submit anyway?`;
+                    } else if (reviewed > 0) {
+                        msg = `You have ${reviewed} questions marked for review in this section. Submit anyway?`;
+                    } else {
+                        msg = 'Submit this section?';
+                    }
+                    
+                    if (confirm(msg)) this.submitCurrentSection();
+                } else {
+                    const unanswered = this.ans.filter(a => a === null).length;
+                    const reviewed = this.reviewed.filter(r => r).length;
+                    let msg = '';
+                    
+                    if (unanswered > 0 && reviewed > 0) {
+                        msg = `You have ${unanswered} unanswered questions and ${reviewed} marked for review. Submit anyway?`;
+                    } else if (unanswered > 0) {
+                        msg = `You have ${unanswered} unanswered questions. Submit anyway?`;
+                    } else if (reviewed > 0) {
+                        msg = `You have ${reviewed} questions marked for review. Submit anyway?`;
+                    } else {
+                        msg = 'Submit test?';
+                    }
+                    
+                    if (confirm(msg)) this.subTest();
+                }
+            }
+            
+            submitCurrentSection() {
+                if (!this.sections) return;
+                
+                const section = this.sections[this.currentSection];
+                section.submitted = true;
+                clearInterval(this.sectionTimer);
+                
+                // Move to the next section if available
+                const nextSectionIdx = this.currentSection + 1;
+                if (nextSectionIdx < this.sections.length) {
+                    this.currentSection = nextSectionIdx;
+                    this.startSectionTimer();
+                    this.updateSectionHeader();
+                    this.loadQ(this.sections[nextSectionIdx].start);
+                } else {
+                    // All sections completed
+                    this.subTest();
+                }
+                
+                this.updateGrid();
+            }
+            
+            subTest() {
+                if (this.sub) return;
+                
+                // Record time spent on current question
+                const now = Date.now();
+                this.timeSpent[this.curQ] += (now - this.lastQTime) / 1000;
+                
+                console.log('Submitting test. Final answers:', this.ans);
+                this.sub = true;
+                this.stopTimers();
+                document.getElementById('subBtn').style.display = 'none';
+                document.getElementById('reviewBtn').style.display = 'none';
+                const results = this.calcResults();
+                this.showResults(results);
+                this.loadQ(this.curQ);
+                this.updateGrid();
+                this.updatePrintButton();
+                
+                // Hide section header if it exists
+                if (this.els.sectionHeader) {
+                    this.els.sectionHeader.style.display = 'none';
+                }
+            }
+            
+            calcResults() {
+                const timeTaken = Math.round((Date.now() - this.startT) / 60000);
+                let correct = 0, incorrect = 0, unattempted = 0, score = 0;
+                
+                console.log('Calculating results...');
+                this.qs.forEach((q, i) => {
+                    const userAns = this.ans[i];
+                    const correctAns = q.correct_option_id;
+                    
+                    console.log(`Q${i + 1}: user=${userAns}, correct=${correctAns}`);
+                    
+                    if (userAns === null || userAns === undefined) {
+                        unattempted++;
+                    } else if (correctAns !== undefined && correctAns !== null && userAns === correctAns) {
+                        correct++;
+                        score += 1;
+                        console.log(`Q${i + 1}: CORRECT (+1 marks)`);
+                    } else {
+                        incorrect++;
+                        score -= 0.25;
+                        console.log(`Q${i + 1}: INCORRECT (-0.25 marks)`);
+                    }
+                });
+                
+                const results = { 
+                    score: Math.max(0, score), 
+                    correct, 
+                    incorrect, 
+                    unattempted, 
+                    timeTaken,
+                    timePerQ: this.timeSpent.map(t => Math.round(t))
+                };
+                console.log('Final results:', results);
+                return results;
+            }
+            
+            showResults(results) {
+                this.els.scoreDisp.textContent = `${results.score}/30`;
+                this.els.corrStat.textContent = results.correct;
+                this.els.incStat.textContent = results.incorrect;
+                this.els.unaStat.textContent = results.unattempted;
+                this.els.timeStat.textContent = results.timeTaken;
+                this.els.modalOver.classList.add('show');
+            }
+            
+            closeModal() {
+                this.els.modalOver.classList.remove('show');
+            }
+            
+            review() {
+                this.closeModal();
+                this.loadQ(0);
+            }
+            
+            isNavigationAllowed(idx) {
+            // Always allow navigation after submission
+            if (this.sub) return true;
+            
+            // During test, only allow within current section
+            if (this.sections) {
+                const currentSection = this.sections[this.currentSection];
+                return idx >= currentSection.start && idx <= currentSection.end;
+            }
+            
+            // If no sections, allow all navigation
+            return true;
+            }
+            
+            printTest() {
+                const printWindow = window.open('', '_blank');
+                const testTitle = document.title;
+                const questionsHtml = this.qs.map((q, i) => {
+                    const userAns = this.ans[i];
+                    const correctAns = q.correct_option_id;
+                    const isCorrect = userAns !== null && correctAns !== undefined && userAns === correctAns;
+                    const timeSpent = Math.round(this.timeSpent[i]);
+                    const wasReviewed = this.reviewed[i];
+                    const sectionName = this.sections ? this.getSectionNameForQuestion(i) : '';
+                    
+                    return `
+                        <div style="page-break-inside:avoid;margin-bottom:30px;border-bottom:1px solid #eee;padding-bottom:20px">
+                            <h3 style="color:#4F46E5">Question ${i + 1} ${wasReviewed ? '<span style="color:#F59E0B">(Marked for Review)</span>' : ''}</h3>
+                            ${sectionName ? `<div style="font-size:14px;color:#6B7280;margin-bottom:8px">Section: ${sectionName}</div>` : ''}
+                            ${q.comp ? `<div>${q.comp}</div>` : ''}
+                            <div>${q.question}</div>
+                            <div style="margin-top:15px">
+                                ${q.options.map((opt, j) => `
+                                    <div style="margin:5px 0;padding:5px;border-left:3px solid ${ 
+                                        j === correctAns ? '#10B981' : 
+                                        j === userAns ? '#EF4444' : '#E5E7EB' 
+                                    }">
+                                        ${opt}
+                                    </div>
+                                `).join('')}
+                            </div>
+                            <div style="margin-top:15px;font-size:14px;color:#666">
+                                <strong>Your answer:</strong> ${userAns !== null ? String.fromCharCode(65 + userAns) : 'Not attempted'}
+                                ${userAns !== null && correctAns !== undefined ? 
+                                    `(<span style="color:${isCorrect ? '#10B981' : '#EF4444'}">${isCorrect ? 'Correct' : 'Incorrect'}</span>)` : ''}
+                                <br>
+                                <strong>Time spent:</strong> ${timeSpent} seconds
+                            </div>
+                            ${q.solution ? `
+                                <div style="margin-top:15px;background:#f0fdf4;padding:15px;border-radius:8px">
+                                    <h4 style="color:#10B981;margin-top:0">Solution</h4>
+                                    ${q.solution}
+                                </div>
+                            ` : ''}
+                        </div>
+                    `;
+                }).join('');
+                
+                printWindow.document.write(`
+                    <!DOCTYPE html>
+                    <html>
+                    <head>
+                        <title>${testTitle} - Results</title>
+                        <style>
+                            body { font-family: Arial, sans-serif; line-height: 1.6; padding: 20px; }
+                            h2 { color: #4F46E5; border-bottom: 1px solid #E5E7EB; padding-bottom: 10px; }
+                            .math-exp { display: inline-block; vertical-align: middle; position: relative; margin: 0 2px; }
+                            .math-num { text-align: center; display: block; padding: 0; }
+                            .math-line { display: block; border-top: 1px solid; padding: 0; text-align: center; }
+                            .table-container { width: 100%; overflow-x: auto; margin: 12px 0; }
+                            table { width: 100%; border-collapse: collapse; margin: 8px 0; }
+                            table, th, td { border: 1px solid #E5E7EB; }
+                            th, td { padding: 8px 12px; text-align: left; }
+                            @media print {
+                                body { padding: 0; }
+                                .page-break { page-break-after: always; }
+                            }
+                        </style>
+                    </head>
+                    <body>
+                        <h2>Mocks Wallah - Analysis</h2>
+                        <div style="margin-bottom:30px">
+                            <div><strong>Score:</strong> ${this.els.scoreDisp.textContent}</div>
+                            <div><strong>Correct:</strong> ${this.els.corrStat.textContent}</div>
+                            <div><strong>Incorrect:</strong> ${this.els.incStat.textContent}</div>
+                            <div><strong>Unattempted:</strong> ${this.els.unaStat.textContent}</div>
+                            <div><strong>Time taken:</strong> ${this.els.timeStat.textContent} minutes</div>
+                        </div>
+                        ${questionsHtml}
+                        <script>
+                            setTimeout(() => { window.print(); }, 500);
+                        <\/script>
+                    </body>
+                    </html>
+                `);
+                printWindow.document.close();
+            }
+            
+            // Section-related helper methods
+            isInCurrentSection(qIdx) {
+                if (!this.sections) return true;
+                const section = this.sections[this.currentSection];
+                return qIdx >= section.start && qIdx <= section.end;
+            }
+            
+            findSectionForQuestion(qIdx) {
+                if (!this.sections) return null;
+                for (let i = 0; i < this.sections.length; i++) {
+                    const section = this.sections[i];
+                    if (qIdx >= section.start && qIdx <= section.end) {
+                        return i;
+                    }
+                }
+                return null;
+            }
+            
+            getSectionNameForQuestion(qIdx) {
+                if (!this.sections) return '';
+                const sectionIdx = this.findSectionForQuestion(qIdx);
+                return sectionIdx !== null ? this.sections[sectionIdx].name : '';
+            }
+        }
+        
+        document.addEventListener('DOMContentLoaded', () => new TestApp());
+    </script>
+</body>
+</html>

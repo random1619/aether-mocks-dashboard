@@ -1,0 +1,1377 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Culture Books Awards Mock 06 Test 56</title>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+<link href="assets/css/main.css" rel="stylesheet"/></head>
+<body>
+<!-- Welcome Screen -->
+<div class="welcome-screen" id="welcomeScreen">
+<h1 class="welcome-title">Exam ID : gktests</h1>
+<div class="welcome-details">
+<div class="welcome-detail">
+<span class="welcome-detail-label">Test ID</span>
+<span class="welcome-detail-value">56 </span>
+</div>
+<div class="welcome-detail">
+<span class="welcome-detail-label">Total Questions:</span>
+<span class="welcome-detail-value">30</span>
+</div>
+<div class="welcome-detail">
+<span class="welcome-detail-label">Total Marks:</span>
+<span class="welcome-detail-value">30</span>
+</div>
+<div class="welcome-detail">
+<span class="welcome-detail-label">Duration:</span>
+<span class="welcome-detail-value">60 minutes</span>
+</div>
+<div class="welcome-detail">
+<span class="welcome-detail-label">Marking:</span>
+<span class="welcome-detail-value">+1 / -0.25</span>
+</div>
+</div>
+<div class="welcome-instructions">
+<h3>Instructions</h3>
+<ul>
+<li>Read each question carefully before answering</li>
+<li>You can mark questions for review and come back later</li>
+<li>The timer will automatically submit the test when time is up</li>
+<li>Negative marking applies for wrong answers</li>
+</ul>
+</div>
+<div class="welcome-buttons">
+<button class="welcome-button" id="startTestBtn">
+<i class="fas fa-play"></i> Start Test
+        </button>
+<a class="join-channel" href="https://t.me/mocks_wallah_again" target="_blank">
+<i class="fab fa-telegram"></i> Join Our Channel
+        </a>
+</div>
+</div>
+<!-- Main Test Interface (hidden initially) -->
+<div id="mainTestInterface" style="display:none">
+<div class="hdr">
+<div class="hdr-l">
+<div class="q-info" id="qInfo">Q1/30</div>
+<div class="timer" id="timer">60:00</div>
+</div>
+<div class="hdr-c">Mocks Wallah</div>
+<div class="hdr-r">
+<button class="theme-toggle" id="themeToggle"><i class="fas fa-moon"></i></button>
+<button class="btn btn-o btn-sm" id="menuBtn"><i class="fas fa-th"></i></button>
+<button class="btn btn-p btn-sm" id="subBtn">Submit</button>
+</div>
+</div>
+<div class="cont">
+<div class="q-card">
+<div class="lang">
+<button class="lang-btn active" id="engBtn">English</button>
+<button class="lang-btn" id="hinBtn">हिंदी</button>
+</div>
+<div class="comp" id="compSec" style="display:none">
+<h4><i class="fas fa-book"></i> Comprehension</h4>
+<div id="compCont"></div>
+</div>
+<div class="q-txt" id="qTxt"></div>
+<div class="opts" id="opts"></div>
+<div class="sol" id="sol">
+<div class="sol-info" id="solInfo"></div>
+<h4><i class="fas fa-lightbulb"></i> Solution</h4>
+<div id="solCont"></div>
+</div>
+</div>
+</div>
+<div class="nav">
+<button class="btn btn-o nav-btn" id="prevBtn"><i class="fas fa-chevron-left"></i> Prev</button>
+<button class="btn btn-w nav-btn" id="reviewBtn"><i class="fas fa-flag"></i> Review</button>
+<div class="prog">
+<div id="progTxt">1 of 30</div>
+<div style="font-size:11px">Answered: <span id="ansCnt">0</span> | <a href="https://t.me/mocks_wallah_again">Mocks Wallah</a></div>
+</div>
+<button class="btn btn-p nav-btn" id="nextBtn">Next <i class="fas fa-chevron-right"></i></button>
+</div>
+<div class="desktop-sidebar" id="desktopSidebar">
+<h3>Questions Navigator</h3>
+<div class="q-grid" id="desktopQGrid"></div>
+<div style="margin-top:20px;font-size:12px;color:var(--txtL)">
+<div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
+<div class="q-num ans" style="width:24px;height:24px">✓</div><span>Answered</span>
+</div>
+<div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
+<div class="q-num review" style="width:24px;height:24px">!</div><span>Marked for Review</span>
+</div>
+<div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
+<div class="q-num wrong" style="width:24px;height:24px">✗</div><span>Incorrect</span>
+</div>
+<div style="display:flex;align-items:center;gap:8px">
+<div class="q-num unattempted" style="width:24px;height:24px">?</div><span>Unattempted</span>
+</div>
+</div>
+</div>
+<div class="panel" id="panel">
+<div class="panel-hdr">
+<h3>All Questions</h3>
+<button class="panel-close" id="panelClose"><i class="fas fa-times"></i></button>
+</div>
+<div class="q-grid" id="qGrid"></div>
+<div style="padding:20px;font-size:12px;color:var(--txtL)">
+<div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
+<div class="q-num ans" style="width:24px;height:24px">✓</div><span>Answered</span>
+</div>
+<div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
+<div class="q-num review" style="width:24px;height:24px">!</div><span>Marked for Review</span>
+</div>
+<div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
+<div class="q-num wrong" style="width:24px;height:24px">✗</div><span>Incorrect</span>
+</div>
+<div style="display:flex;align-items:center;gap:8px">
+<div class="q-num unattempted" style="width:24px;height:24px">?</div><span>Unattempted</span>
+</div>
+</div>
+</div>
+<button class="print-btn" id="printBtn" style="display:none">
+<i class="fas fa-print"></i>
+</button>
+<div class="modal" id="modalOver">
+<div class="result">
+<h2>Test Complete!</h2>
+<div class="score" id="scoreDisp">0/30</div>
+<div class="stats">
+<div class="stat c"><div class="stat-val" id="corrStat">0</div><div class="stat-lbl">Correct</div></div>
+<div class="stat w"><div class="stat-val" id="incStat">0</div><div class="stat-lbl">Incorrect</div></div>
+<div class="stat"><div class="stat-val" id="unaStat">0</div><div class="stat-lbl">Unattempted</div></div>
+<div class="stat"><div class="stat-val" id="timeStat">0</div><div class="stat-lbl">Minutes</div></div>
+</div>
+<div class="modal-acts">
+<button class="btn btn-o modal-btn" id="closeModal">Close</button>
+<button class="btn btn-p modal-btn" id="revBtn">Review</button>
+</div>
+</div>
+</div>
+</div>
+<script>
+        class TestApp {
+            constructor() {
+            this.qs = [
+  {
+    "question": "<p>Who among the following was the first women on whom Jnanpith award was conferred?</p>",
+    "options": [
+      "Ashapoorna Devi",
+      "Mahasweta Devi",
+      "Amrita Pritam",
+      "Mahadevi Varma",
+      "Indira Goswami"
+    ],
+    "correct_option_id": 0,
+    "solution": "<p>In 1976, Bengali novelist Ashapoorna Devi became the first woman to win the award and was honoured for the 1965 novel Pratham Pratisruti. The other women recipients of the award are Amrita Pritam, Qurratulain Hyder, Mahadevi Varma, Indira Goswami, Mahasweta Devi, Pratibha ray.</p>",
+    "question_index": 0
+  },
+  {
+    "question": "<p>Who among the following was the first Indian to secure an Olympic medal in Individual sport?</p>",
+    "options": [
+      "Rajyavardhan Singh Rathore",
+      "Vijaya Kumar",
+      "Karnam Malleshwari",
+      "Leander Peas",
+      "K.D. Jadhav"
+    ],
+    "correct_option_id": 4,
+    "solution": "<p>K.D. Jadhav was the first individual athlete from India to win a medal at the Olympics. He won a bronze medal in wrestling at the 1952 Summer Olympics in Helsinki. Prior to him India has own gold medals in team sport- Hockey.</p>",
+    "question_index": 1
+  },
+  {
+    "question": "<p>Which among the following organization/Institution confers Pulitzer Prize?</p>",
+    "options": [
+      "Pulitzer Publishing Association",
+      "Columbia University",
+      "Man Group",
+      "Swansea university",
+      "Publishers Association Of USA"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p>The award is administered by Columbia University in New York City. The award is presented for achievements in the field of newspaper, magazine and online journalism, literature, and musical composition in the United States. The award comprises 21 categories. The awards are presented in memory of Newspaper publisher Joseph Pulitzer.</p>",
+    "question_index": 2
+  },
+  {
+    "question": "<p>For which of his works was Rabindranath Tagore awarded Nobel Prize?</p>",
+    "options": [
+      "Chaturanga",
+      "Gora",
+      "Noukadubi",
+      "Gitanjali",
+      "Chandalika"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p>Gitanjali, also called as Song Offerings (English Translation) received Nobel Prize in literature in the year 1913. It is also a part of the Collection from the UNESCO of Representative Works. Tagore was the first Indian and first non- European to receive Nobel Prize in literature. He is referred to as \"the Bard of Bengal\". He is the composer of national anthem of India and Bangladesh.</p>",
+    "question_index": 3
+  },
+  {
+    "question": "<p>Which among the following organization established Florence Nightingale Medal?</p>",
+    "options": [
+      "International Conference of Red Cross",
+      "Amnesty International",
+      "Human Right watch",
+      "International Federation for Human Rights",
+      "UN Watch"
+    ],
+    "correct_option_id": 0,
+    "solution": "<p>Florence Nightingale Medal was instituted in 1912 by the International Committee of the Red Cross. The ICRC is an independent, neutral organization ensuring humanitarian protection and assistance for victims of armed conflict and other situations of violence. It also acts in response to emergencies. It was established in 1863.</p>",
+    "question_index": 4
+  },
+  {
+    "question": "<p>International Gandhi Peace Prize was established in which year?</p>",
+    "options": [
+      "1965",
+      "1975",
+      "1985",
+      "1995",
+      "1955"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p>International Gandhi Peace Prize was established in the year 1995 by Government of India. This is an annual award given to individuals and institutions for their contributions towards social, economic and political transformation through non-violence and other Gandhian methods. It is open to all persons regardless of nationality, race, creed or sex.</p>",
+    "question_index": 5
+  },
+  {
+    "question": "<p>Which among the following is the highest Military Award in India?</p>",
+    "options": [
+      "Maha Vir Chakra",
+      "Param Vir Chakra",
+      "Ashok Chakra",
+      "Kirti Chakra",
+      "Shaurya Chakra"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p>Param Vir Chakra is India's highest military decoration awarded for the displaying distinguished acts of valor during wartime. It is awarded to officers or enlisted personnel from all branches of the Indian military.</p>",
+    "question_index": 6
+  },
+  {
+    "question": "<p>Which among the following organization was the first recipient of the Indira Gandhi Peace Prize?</p>",
+    "options": [
+      "United Nations Children's Emergency Fund",
+      "Medecins Sans Frontieres",
+      "Bill and Melinda Gates Foundation",
+      "United Nations High Commissioner for Refugees",
+      "Parliamentarians for Global Action"
+    ],
+    "correct_option_id": 4,
+    "solution": "<p>Parliamentarians for Global Action was the first recipient of the award in the year 1986. It is a prestigious award accorded annually by India to individuals or organizations in recognition of creative efforts toward promoting international peace, development and a new international economic order.</p>",
+    "question_index": 7
+  },
+  {
+    "question": "<p>Which among the following is the highest sporting honor in India?</p>",
+    "options": [
+      "Rajiv Gandhi Khel Ratna",
+      "Dronacharya Award",
+      "Arjuna Award",
+      "Dhyan Chand Award",
+      "Bharat Award"
+    ],
+    "correct_option_id": 0,
+    "solution": "<p>It is the highest sporting honor in India. It is awarded annually by the Ministry of Youth Affairs and Sports. The award comprises a medallion, a certificate, and a cash prize of &#8377;7.5 lakh. The performance of the sportsperson over a period of four years taken into consideration for conferring the award.</p>",
+    "question_index": 8
+  },
+  {
+    "question": "<p>The Dhyan Chand Award was instituted in which year?</p>",
+    "options": [
+      "1995",
+      "2000",
+      "2007",
+      "2002",
+      "2005"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p>The award was first instituted in the year 2002. The first recipients of the award were Shahuraj Birajdar (Boxing), Ashok Diwan (Hockey), and Aparna Ghosh (Basketball). The award is the lifetime achievement sporting honour presented in India.</p>",
+    "question_index": 9
+  },
+  {
+    "question": "<p>Which among the following book was the last work of Dr. A.P.J Abdul Kalam?</p>",
+    "options": [
+      "Target 3 Billion",
+      "A manifesto for change",
+      "Beyond 2020",
+      "Advantage India",
+      "Reignited"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p>'Advantage India-From Challenge to Opportunity' was the last work of Dr. A.P.J Abdul kalam. It was coauthored by Srijan Pal Singh. He has also coauthored Kalam's Target 3 Billion. This book provide insight into how can the new initiatives, such as 'Make in India', 'Swachh Bharat', skill development and 'Smart Cities', can be used to unleash the country's vast potential.</p>",
+    "question_index": 10
+  },
+  {
+    "question": "<p>Who among the following co-authored the book \"Rebooting India\" along with Nandan Nilekani?</p>",
+    "options": [
+      "Viral Shah",
+      "Vinay Satpati",
+      "Kishwar Desai",
+      "Bhim Singh",
+      "Raghav Bahl"
+    ],
+    "correct_option_id": 0,
+    "solution": "<p>Rebooting India: Realizing A Billion Aspirations was authored by Nandan Nilekani and Viral Shah. The book suggests a road map for a \"technology-enabled social transformation of India\". It tries to reshape government through technology.</p>",
+    "question_index": 11
+  },
+  {
+    "question": "<p>Which among the following works of Premchand was translated into English as \"The Second Wife\"?</p>",
+    "options": [
+      "Kaayakalp",
+      "Gaban",
+      "Godaan",
+      "Nirmala",
+      "Mangalsootra"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p>Nirmala is a Hindi fiction novel written in Hindi and Urdu writer Munshi Premchand. It was first translated in 1988 as The Second Wife by David Rubin, and in 1999 as Nirmala by Alok Rai, Premchand's grandson.</p>",
+    "question_index": 12
+  },
+  {
+    "question": "<p>Who among the following was the author of the Book Jungle Stories?</p>",
+    "options": [
+      "Rudyard Kipling",
+      "Jim Corbett",
+      "R.K.Narayan",
+      "John Masters",
+      "Muhammed Basheer"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p>Jungle stories was written by Jim Corbett. He was a British-Indian hunter and tracker-turned-conservationist, author and naturalist, who hunted many man-eating tigers and leopards in India.</p><p>The Jungle Book was written by Rudyard Kipling.</p>",
+    "question_index": 13
+  },
+  {
+    "question": "<p>The book \"Advice and Dissent\" deals with the life of which among the following professional?</p>",
+    "options": [
+      "Politician",
+      "Public Servant",
+      "Doctor",
+      "Musician",
+      "Social Activist"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p>Advice and Dissent was written by Y.V. Reddy Harper. The book deals with the professional life of the author, who was a Public Servant.</p>",
+    "question_index": 14
+  },
+  {
+    "question": "<p>Who co-authored the book \"Option B: Facing Adversity, Building Resilience, and Finding Joy\" with Adam Grant?</p>",
+    "options": [
+      "Denise Robbins",
+      "David Cesarini",
+      "Bibek Debroy",
+      "Sheryl Sandberg",
+      "Joan Didion"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p>The book was written by Sherly Sandberg and Adam Grant. The book deals with loss of loved ones, the grief and the joy one finds in their life.</p><p>Sheryl Kara Sandberg is an American technology executive, activist, and author. She is the chief operating officer of Facebook and founder of Leanin.org. In June 2012, she was elected to the board of directors by the existing board members, becoming the first woman to serve on Facebook's board.</p>",
+    "question_index": 15
+  },
+  {
+    "question": "<p>The book \"Final Solution\" deals with history of which of the following?</p>",
+    "options": [
+      "Holocaust of Jews",
+      "Industrial Revolution",
+      "Nuclear attack on Japan",
+      "Indian Independence movement",
+      "Cold War"
+    ],
+    "correct_option_id": 0,
+    "solution": "<p>The book was written by David Cesarini. It gives an integrated history of the period between 1933 and 1949 that debunks traditional concepts that have framed conventional Holocaust narratives.</p>",
+    "question_index": 16
+  },
+  {
+    "question": "<p>Who among the following created the character Sherlock Holmes in their work?</p>",
+    "options": [
+      "Sidney Sheldon",
+      "Sir Arthur Canon Doyle",
+      "Sir Lothian Hume",
+      "Emile Gaboriau",
+      "Iain Banks"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p>Sherlock Holmes is a fictional private detective created by British author Sir Arthur Conan Doyle. He is Known as a \"consulting detective\" in the stories.</p>",
+    "question_index": 17
+  },
+  {
+    "question": "<p>Which among the following is an autobiography of Sidney Sheldon?</p>",
+    "options": [
+      "No Questions Asked",
+      "The other side of me",
+      "Memories of Midnight",
+      "A stranger in the mirror",
+      "Bloodline"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p>The Other Side of Me is the autobiographical memoirs of American writer Sidney Sheldon published in 2005. It was also his final book. In this book, Sheldon reveals that he was subject to frequent mood swings and often felt inappropriate emotions for his circumstances.</p>",
+    "question_index": 18
+  },
+  {
+    "question": "<p>\"Long Walk to Freedom\" is the autobiography of who among the following?</p>",
+    "options": [
+      "Jawaharlal Nehru",
+      "Muhammed Ali",
+      "Milkha Singh",
+      "Nelson Mandela",
+      "Hellen Keller"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p>Long Walk to Freedom is an autobiographical work written by South African President Nelson Mandela, and first published in 1994. The book profiles his early life, coming of age, education and 27 years in prison. Under the apartheid government, Mandela was regarded as a terrorist and jailed on the infamous Robben Island for his role as a leader of the then-outlawed ANC.</p>",
+    "question_index": 19
+  },
+  {
+    "question": "<p>Ramakant Pathak is famous for which of the following musical instrument?</p>",
+    "options": [
+      "Sitar",
+      "Mridang",
+      "Phakwaj",
+      "Shenani",
+      "Tabla"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p>Ramakant Pathak was a Phakwaj player. He was awarded Fellowship of Snageet Natak Academy. Pakhawaj is essentially a north Indian version of the mridangam. Pakhawaj is also very much used for Orissi dancers and occasionally for kathak. It is also found in a classical form from Rajasthan known as Haveli Sangeet.</p>",
+    "question_index": 20
+  },
+  {
+    "question": "<p>Which among the following folk dances doesn't belong to state of Bihar?</p>",
+    "options": [
+      "Jat- Jatin",
+      "Kajari",
+      "Sohar- Kilouna",
+      "Dindi",
+      "Jhumar"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p>Dindi is folk dance of Maharashtra. It is a religious devotional dance. The musicians for this dance comprise of a `Mridangam` player and a vocalist who give the dancers the necessary musical background. Dindi is a widely popular in Varkari people. This dance is usually performed on the Ekadashi day in the month of Kartik.</p>",
+    "question_index": 21
+  },
+  {
+    "question": "<p>Which among the following is NOT a folk culture of Gujarat?</p>",
+    "options": [
+      "Tippani",
+      "Saang",
+      "Dandia-Ras",
+      "Garba Dance",
+      "Bhavai"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p>Saang dance is a dance form of Haryana. A group comprising in even numbers such as ten or twelve persons performs it. The dance is mainly reflecting religious stories and folk tales. Some of the male participants dress as women to perform the female casting in dance. The meaning of `Saang` or `Swang` is disguise or `to impersonate`.</p>",
+    "question_index": 22
+  },
+  {
+    "question": "<p>Government of India follows which of the following era as reference for official purpose?</p>",
+    "options": [
+      "Vikramadhitya Era",
+      "Gupta Era",
+      "Saka Era",
+      "Anglo Era",
+      "Magadhan Era"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p>Saka Era was adopted by Government of India as reference period. It was first started by King Kanishka of Kushan Dynasty. Indian National Calendar is based Saka era.</p>",
+    "question_index": 23
+  },
+  {
+    "question": "<p>Kailashanatha temple is in which among the following caves?</p>",
+    "options": [
+      "Elephanta caves",
+      "Ajantha Caves",
+      "Ellora caves",
+      "Khandagiri Caves",
+      "Badami Caves"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p>Kailasanatha temple is one of the largest rock-cut ancient Hindu temples located in Ellora, Maharashtra, India. The construction of the temple was commissioned under Rashtrakuta dynasty. It was carved out of one single rock.</p>",
+    "question_index": 24
+  },
+  {
+    "question": "<p>Which among the following community practices Tangalia Weaving?</p>",
+    "options": [
+      "Bharwad Community",
+      "Dangasia Community",
+      "Chakma Community",
+      "Hakka Pikki Community",
+      "Badagas Community"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p>Tangaliya shawl uses a unique weaving technique and it is only practiced by the Dangasia community of Gujarat. It was also given Geographical Indications recognition. Tangalia textiles are usually worn as a shawl and wraparound skirt by the women of the Bharwad shepherd community.</p>",
+    "question_index": 25
+  },
+  {
+    "question": "<p>Yak Dance is performed in which state?</p>",
+    "options": [
+      "Sikkim",
+      "Uttarakhand",
+      "Jammu &amp; Kashmir",
+      "Arunachal Pradesh",
+      "Himachal Pradesh"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p>Yak dance is a famous among Mahayana sect of Buddhism and performed in Arunachal Pradesh. The masked dancer represents the members of a family who are said to have discovered the Yak with the help of a magical bird hundreds of years ago. Performed during Losar festival, the dance represents the joy of the people upon finding the yak and their belief that performing the dance would relieve them of all their complications and anxieties.</p>",
+    "question_index": 26
+  },
+  {
+    "question": "<p>Which among the following is NOT associated with art form of Karnataka?</p>",
+    "options": [
+      "Nagamandala Dance",
+      "Yakshagana Dance",
+      "Bayalata Dance",
+      "Dollu Kunitha",
+      "Karagatam Dance"
+    ],
+    "correct_option_id": 4,
+    "solution": "<p>It is a popular folk dance originated from Thanjavur and spread to the neighbouring areas. It is a ritualistic dance involving acrobatics feats performed during the month of August. It is dedicated to the goddess of health and rain Mariamman. It is performed by an individual or two persons.</p>",
+    "question_index": 27
+  },
+  {
+    "question": "<p>Which among the following is an embroidery art form?</p>",
+    "options": [
+      "Chamba Rumal",
+      "Hojagiri",
+      "Sangodd",
+      "Dollu Kuntia",
+      "Vaidyas"
+    ],
+    "correct_option_id": 0,
+    "solution": "<p>Chamba Rumal is the finest specimen of Pahari art flourishing in Chamba town of Himachal Pradesh during late 18th century. Hand woven satin cloth is embroidered with untwisted silken thread in double stitch that comes the same on both sides known as do-rukha. Rasleela, Astanayika and scenes from ancient legends and myths are generally depicted on Rumal.</p>",
+    "question_index": 28
+  },
+  {
+    "question": "<p>Hornbill festival is celebrated in which of the following state?</p>",
+    "options": [
+      "Andaman &amp; Nicobar Islands",
+      "Nagaland",
+      "Sikkim",
+      "Manipur",
+      "Mizoram"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p>Hornbill festival is celebrated in Nagaland. The festival is a tribute to the \"Hornbill\" bird of Nagaland. It is organized by the State Tourism and Art &amp; Culture Departments. It is celebrated by all Naga tribes at one place- Naga Heritage Village, Kisama.</p>",
+    "question_index": 29
+  }
+];
+            this.sections = null;
+            this.curQ = 0;
+            this.ans = new Array(this.qs.length).fill(null);
+            this.reviewed = new Array(this.qs.length).fill(false);
+            this.startT = Date.now();
+            this.timeLeft = 60 * 60;
+            this.timeSpent = new Array(this.qs.length).fill(0);
+            this.lastQTime = this.startT;
+            this.sub = false;
+            this.eng = true;
+            this.darkMode = false;
+            this.timer = null;
+            this.sectionTimer = null;
+            this.currentSection = this.sections ? 0 : null;
+            this.initEls();
+            this.setupWelcomeScreen();
+            this.validateData();
+            this.setupBeforeUnload();
+        }
+            
+            setupWelcomeScreen() {
+                document.getElementById('startTestBtn').addEventListener('click', () => {
+                    // Hide welcome screen
+                    document.getElementById('welcomeScreen').classList.add('hidden');
+                    
+                    // Show main test interface
+                    document.getElementById('mainTestInterface').style.display = '';
+                    
+                    // Initialize the test
+                    setTimeout(() => {
+                        this.init();
+                    }, 300);
+                });
+            }
+            
+            setupBeforeUnload() {
+                window.addEventListener('beforeunload', (e) => {
+                    if (!this.sub) {
+                        e.preventDefault();
+                        e.returnValue = 'Are you sure you want to leave? Your test progress will be lost.';
+                        return e.returnValue;
+                    }
+                });
+            }
+            
+            validateData() {
+                console.log('Validating question data...');
+                this.qs.forEach((q, idx) => {
+                    if (q.correct_option_id !== undefined) {
+                        console.log(`Q${idx + 1}: correct_option_id = ${q.correct_option_id}, options count = ${q.options ? q.options.length : 0}`);
+                        
+                        if (q.options && (q.correct_option_id < 0 || q.correct_option_id >= q.options.length)) {
+                            console.warn(`Q${idx + 1}: Invalid correct_option_id ${q.correct_option_id} for ${q.options.length} options`);
+                        }
+                    }
+                });
+            }
+            
+            initEls() {
+                this.els = {
+                    qInfo: document.getElementById('qInfo'),
+                    progTxt: document.getElementById('progTxt'),
+                    ansCnt: document.getElementById('ansCnt'),
+                    timer: document.getElementById('timer'),
+                    qTxt: document.getElementById('qTxt'),
+                    compSec: document.getElementById('compSec'),
+                    compCont: document.getElementById('compCont'),
+                    opts: document.getElementById('opts'),
+                    sol: document.getElementById('sol'),
+                    solCont: document.getElementById('solCont'),
+                    solInfo: document.getElementById('solInfo'),
+                    qGrid: document.getElementById('qGrid'),
+                    desktopQGrid: document.getElementById('desktopQGrid'),
+                    panel: document.getElementById('panel'),
+                    modalOver: document.getElementById('modalOver'),
+                    scoreDisp: document.getElementById('scoreDisp'),
+                    corrStat: document.getElementById('corrStat'),
+                    incStat: document.getElementById('incStat'),
+                    unaStat: document.getElementById('unaStat'),
+                    timeStat: document.getElementById('timeStat'),
+                    printBtn: document.getElementById('printBtn'),
+                    desktopSidebar: document.getElementById('desktopSidebar'),
+                    reviewBtn: document.getElementById('reviewBtn'),
+                    themeToggle: document.getElementById('themeToggle'),
+                    sectionHeader: this.sections ? document.getElementById('sectionHeader') : null,
+                    sectionTitle: this.sections ? document.getElementById('sectionTitle') : null,
+                    sectionTimer: this.sections ? document.getElementById('sectionTimer') : null
+                };
+            }
+            
+            init() {
+                this.createGrid();
+                this.startTimer();
+                if (this.sections) {
+                    this.startSectionTimer();
+                    this.updateSectionHeader();
+                }
+                this.loadQ(0);
+                this.setupEvents();
+                this.updatePrintButton();
+                this.updateThemeToggleIcon();
+            }
+            
+            setupEvents() {
+                document.getElementById('menuBtn').onclick = () => this.togglePanel();
+                document.getElementById('subBtn').onclick = () => this.confirmSub();
+                document.getElementById('prevBtn').onclick = () => this.nav(-1);
+                document.getElementById('nextBtn').onclick = () => this.nav(1);
+                document.getElementById('reviewBtn').onclick = () => this.toggleReview();
+                document.getElementById('engBtn').onclick = () => this.setLang(true);
+                document.getElementById('hinBtn').onclick = () => this.setLang(false);
+                document.getElementById('panelClose').onclick = () => this.closePanel();
+                document.getElementById('closeModal').onclick = () => this.closeModal();
+                document.getElementById('revBtn').onclick = () => this.review();
+                document.getElementById('printBtn').onclick = () => this.printTest();
+                document.getElementById('themeToggle').onclick = () => this.toggleTheme();
+            }
+            
+            // IMPROVED: Better handling of complex HTML content including math expressions
+            extractTxt(html, isEng) {
+                if (!html) return '';
+                
+                // Create a temporary div to parse the HTML
+                const tempDiv = document.createElement('div');
+                tempDiv.innerHTML = html;
+                
+                // Process math expressions - convert them to proper HTML structure
+                const mathExps = tempDiv.querySelectorAll('div[style*="inline-block"][style*="vertical-align: middle"]');
+                mathExps.forEach(mathExp => {
+                    // Create a new math expression container
+                    const newMathExp = document.createElement('div');
+                    newMathExp.className = 'math-exp';
+                    
+                    // Get numerator and denominator
+                    const spans = mathExp.querySelectorAll('span');
+                    if (spans.length >= 3) {
+                        const numerator = spans[0].cloneNode(true);
+                        const line = spans[1].cloneNode(true);
+                        const denominator = spans[2].cloneNode(true);
+                        
+                        // Clean up the numerator
+                        const numDiv = document.createElement('div');
+                        numDiv.className = 'math-num';
+                        numDiv.innerHTML = numerator.innerHTML;
+                        
+                        // Create the dividing line
+                        const lineDiv = document.createElement('div');
+                        lineDiv.className = 'math-line';
+                        
+                        // Clean up the denominator
+                        const denDiv = document.createElement('div');
+                        denDiv.className = 'math-num';
+                        denDiv.innerHTML = denominator.innerHTML;
+                        
+                        // Build the new math expression
+                        newMathExp.appendChild(numDiv);
+                        newMathExp.appendChild(lineDiv);
+                        newMathExp.appendChild(denDiv);
+                        
+                        // Replace the original with our new structure
+                        mathExp.parentNode.replaceChild(newMathExp, mathExp);
+                    }
+                });
+                
+                // Handle language selection - show/hide appropriate spans
+                const langSpans = tempDiv.querySelectorAll('span.eqt, span.hqt');
+                langSpans.forEach(span => {
+                    if ((isEng && span.classList.contains('hqt')) || 
+                        (!isEng && span.classList.contains('eqt'))) {
+                        span.style.display = 'none';
+                    } else {
+                        span.style.display = '';
+                        // Remove the class to prevent future hiding
+                        span.classList.remove('eqt', 'hqt');
+                    }
+                });
+                
+                // Clean up any remaining display:none styles
+                const hiddenElements = tempDiv.querySelectorAll('[style*="display:none"]');
+                hiddenElements.forEach(el => {
+                    if (el.style.display === 'none' && 
+                        !el.classList.contains('hqt') && 
+                        !el.classList.contains('eqt')) {
+                        el.style.display = '';
+                    }
+                });
+                
+                // Handle tables - wrap them in a scrollable container
+                const tables = tempDiv.querySelectorAll('table');
+                tables.forEach(table => {
+                    const container = document.createElement('div');
+                    container.className = 'table-container';
+                    table.parentNode.insertBefore(container, table);
+                    container.appendChild(table);
+                });
+                
+                return tempDiv.innerHTML;
+            }
+            
+            createGrid() {
+                this.els.qGrid.innerHTML = '';
+                this.els.desktopQGrid.innerHTML = '';
+                
+                this.qs.forEach((_, i) => {
+                    // Create mobile grid element
+                    const mobileDiv = document.createElement('div');
+                    mobileDiv.className = 'q-num';
+                    mobileDiv.textContent = i + 1;
+                    mobileDiv.onclick = () => this.goToQ(i);
+                    this.els.qGrid.appendChild(mobileDiv);
+                    
+                    // Create desktop grid element
+                    const desktopDiv = document.createElement('div');
+                    desktopDiv.className = 'q-num';
+                    desktopDiv.textContent = i + 1;
+                    desktopDiv.onclick = () => this.goToQ(i);
+                    this.els.desktopQGrid.appendChild(desktopDiv);
+                });
+            }
+            
+            loadQ(idx) {
+                // Update time spent on previous question
+                if (this.curQ !== idx) {
+                    const now = Date.now();
+                    this.timeSpent[this.curQ] += (now - this.lastQTime) / 1000;
+                    this.lastQTime = now;
+                }
+                
+                this.curQ = idx;
+                const q = this.qs[idx];
+                
+                // Check if question is in current section (if sections exist)
+                if (this.sections) {
+                    const inCurrentSection = this.isInCurrentSection(idx);
+                    if (!inCurrentSection) {
+                        // Find the section this question belongs to
+                        const sectionIdx = this.findSectionForQuestion(idx);
+                        if (sectionIdx !== null && !this.sections[sectionIdx].submitted) {
+                            this.currentSection = sectionIdx;
+                            this.startSectionTimer();
+                            this.updateSectionHeader();
+                        }
+                    }
+                }
+                
+                this.els.qInfo.textContent = `Q${idx + 1}/${this.qs.length}`;
+                this.els.progTxt.textContent = `${idx + 1} of ${this.qs.length}`;
+                this.updateAnsCnt();
+                this.updateNav();
+                this.updateGrid();
+                this.updateReviewButton();
+                
+                if (q.comp) {
+                    this.els.compSec.style.display = 'block';
+                    this.els.compCont.innerHTML = this.extractTxt(q.comp, this.eng);
+                } else {
+                    this.els.compSec.style.display = 'none';
+                }
+                
+                this.els.qTxt.innerHTML = this.extractTxt(q.question, this.eng);
+                this.loadOpts(q, idx);
+                
+                if (this.sub && q.solution) {
+                    // Show time spent on question in solution
+                    const timeSpent = Math.round(this.timeSpent[idx]);
+                    const minutes = Math.floor(timeSpent / 60);
+                    const seconds = timeSpent % 60;
+                    const timeStr = minutes > 0 
+                        ? `${minutes}m ${seconds}s` 
+                        : `${seconds}s`;
+                    
+                    this.els.solInfo.innerHTML = `
+                        <span><i class="fas fa-clock"></i> Time spent: ${timeStr}</span>
+                        <span><i class="fas fa-check-circle"></i> Correct answer: ${String.fromCharCode(65 + q.correct_option_id)}</span>
+                    `;
+                    
+                    this.els.solCont.innerHTML = this.extractTxt(q.solution, this.eng);
+                    this.els.sol.classList.add('show');
+                } else {
+                    this.els.sol.classList.remove('show');
+                }
+            }
+            
+            loadOpts(q, qIdx) {
+                this.els.opts.innerHTML = '';
+                const userAnswer = this.ans[qIdx];
+                const correctAnswer = q.correct_option_id;
+                
+                console.log(`Loading Q${qIdx + 1} options:`, {
+                    userAnswer: userAnswer,
+                    correctAnswer: correctAnswer,
+                    submitted: this.sub,
+                    optionsCount: q.options ? q.options.length : 0
+                });
+                
+                if (!q.options || !Array.isArray(q.options)) {
+                    console.error(`Q${qIdx + 1}: No valid options array`);
+                    return;
+                }
+                
+                q.options.forEach((opt, i) => {
+                    const div = document.createElement('div');
+                    let cls = 'opt';
+                    
+                    if (this.sub) {
+                        cls += ' submitted';
+                    }
+                    
+                    if (userAnswer === i) {
+                        cls += ' sel';
+                        console.log(`Q${qIdx + 1}: User selected option ${i}`);
+                    }
+                    
+                    if (this.sub && correctAnswer !== undefined && correctAnswer !== null) {
+                        if (i === correctAnswer) {
+                            cls += ' correct';
+                            console.log(`Q${qIdx + 1}: Option ${i} marked as correct (is correct answer)`);
+                        } else if (userAnswer === i && userAnswer !== correctAnswer) {
+                            cls += ' wrong';
+                            console.log(`Q${qIdx + 1}: Option ${i} marked as wrong (user selected but incorrect)`);
+                        }
+                    }
+                    
+                    div.className = cls;
+                    div.innerHTML = `
+                        <div class="opt-radio"></div>
+                        <div class="opt-txt">${this.extractTxt(opt, this.eng)}</div>
+                    `;
+                    
+                    if (!this.sub) {
+                        div.onclick = () => this.selOpt(i, qIdx);
+                    }
+                    
+                    this.els.opts.appendChild(div);
+                });
+            }
+            
+            selOpt(optIdx, qIdx) {
+                if (this.sub) return;
+                this.ans[qIdx] = this.ans[qIdx] === optIdx ? null : optIdx;
+                console.log(`Q${qIdx + 1}: Selected option ${optIdx}, answer array:`, this.ans[qIdx]);
+                this.loadOpts(this.qs[qIdx], qIdx);
+                this.updateAnsCnt();
+                this.updateGrid();
+            }
+            
+            toggleReview() {
+                if (this.sub) return;
+                this.reviewed[this.curQ] = !this.reviewed[this.curQ];
+                this.updateGrid();
+                this.updateReviewButton();
+            }
+            
+            updateReviewButton() {
+                const btn = this.els.reviewBtn;
+                if (this.reviewed[this.curQ]) {
+                    btn.classList.add('active');
+                    btn.innerHTML = '<i class="fas fa-flag"></i>';
+                } else {
+                    btn.classList.remove('active');
+                    btn.innerHTML = '<i class="fas fa-flag"></i>';
+                }
+            }
+            
+           nav(dir) {
+            const newIdx = this.curQ + dir;
+            
+            // If test is submitted, allow free navigation for review
+            if (this.sub) {
+                if (newIdx >= 0 && newIdx < this.qs.length) {
+                    this.loadQ(newIdx);
+                }
+                return;
+            }
+            
+            // During test, enforce section boundaries
+            if (this.sections) {
+                const currentSection = this.sections[this.currentSection];
+                if (newIdx < currentSection.start || newIdx > currentSection.end) {
+                    return; // Don't allow navigation outside current section
+                }
+            }
+            
+            if (newIdx >= 0 && newIdx < this.qs.length) {
+                this.loadQ(newIdx);
+            }
+        }
+        
+        goToQ(idx) {
+            // Always allow navigation when reviewing after submission
+            if (this.sub) {
+                this.loadQ(idx);
+                this.closePanel();
+                return;
+            }
+            
+            // During test, only allow navigation within current section
+            if (this.sections) {
+                const currentSection = this.sections[this.currentSection];
+                if (idx < currentSection.start || idx > currentSection.end) {
+                    return; // Block navigation outside current section
+                }
+            }
+            
+            this.loadQ(idx);
+            this.closePanel();
+        }
+        
+        updateGrid() {
+            const nums = this.els.qGrid.querySelectorAll('.q-num');
+            const desktopNums = this.els.desktopQGrid.querySelectorAll('.q-num');
+            
+            const updateNum = (el, i) => {
+                el.className = 'q-num';
+                
+                // Reset all special classes
+                el.classList.remove('cur', 'ans', 'wrong', 'review', 'unattempted', 'disabled');
+                
+                if (i === this.curQ) {
+                    el.classList.add('cur');
+                } else if (this.sub) {
+                    // After submission - prioritize correct/wrong over review status
+                    if (this.ans[i] !== null && this.qs[i].correct_option_id !== undefined) {
+                        if (this.ans[i] === this.qs[i].correct_option_id) {
+                            el.classList.add('ans');
+                        } else {
+                            el.classList.add('wrong');
+                        }
+                    } else if (this.ans[i] === null) {
+                        el.classList.add('unattempted');
+                    }
+                } else {
+                    // Before submission
+                    if (this.reviewed[i]) {
+                        el.classList.add('review');
+                    } else if (this.ans[i] !== null) {
+                        el.classList.add('ans');
+                    }
+                    
+                    // Disable questions from other sections (only if sections exist)
+                    if (this.sections) {
+                        const currentSection = this.sections[this.currentSection];
+                        if (i < currentSection.start || i > currentSection.end) {
+                            el.classList.add('disabled');
+                        }
+                    }
+                }
+            };
+            
+            nums.forEach(updateNum);
+            desktopNums.forEach(updateNum);
+        }
+        
+        updateNav() {
+            // Basic navigation limits
+            document.getElementById('prevBtn').disabled = this.curQ === 0;
+            document.getElementById('nextBtn').disabled = this.curQ === this.qs.length - 1;
+            document.getElementById('reviewBtn').style.display = this.sub ? 'none' : 'inline-flex';
+            
+            // Additional navigation restrictions for sections during test
+            if (this.sections && !this.sub) {
+                const currentSection = this.sections[this.currentSection];
+                document.getElementById('prevBtn').disabled = document.getElementById('prevBtn').disabled || 
+                    (this.curQ === currentSection.start);
+                document.getElementById('nextBtn').disabled = document.getElementById('nextBtn').disabled || 
+                    (this.curQ === currentSection.end);
+            }
+        }
+            
+            updateAnsCnt() {
+                const cnt = this.ans.filter(a => a !== null).length;
+                this.els.ansCnt.textContent = cnt;
+            }
+            
+            updatePrintButton() {
+                this.els.printBtn.style.display = this.sub ? 'flex' : 'none';
+            }
+            
+            updateThemeToggleIcon() {
+                const icon = this.darkMode ? 'fa-sun' : 'fa-moon';
+                this.els.themeToggle.innerHTML = `<i class="fas ${icon}"></i>`;
+            }
+            
+            updateSectionHeader() {
+                if (!this.sections || !this.els.sectionHeader) return;
+                
+                const section = this.sections[this.currentSection];
+                this.els.sectionTitle.textContent = section.name;
+                this.els.sectionTimer.textContent = this.formatTime(section.time_left);
+                
+                // Show the section header if we have sections
+                this.els.sectionHeader.style.display = 'flex';
+            }
+            
+            setLang(eng) {
+                this.eng = eng;
+                document.getElementById('engBtn').classList.toggle('active', eng);
+                document.getElementById('hinBtn').classList.toggle('active', !eng);
+                this.loadQ(this.curQ);
+            }
+            
+            toggleTheme() {
+                this.darkMode = !this.darkMode;
+                document.body.classList.toggle('dark-mode', this.darkMode);
+                this.updateThemeToggleIcon();
+                this.loadQ(this.curQ); // Refresh to apply dark mode styles
+            }
+            
+            startTimer() {
+                this.timer = setInterval(() => {
+                    this.timeLeft--;
+                    if (this.timeLeft <= 0) {
+                        clearInterval(this.timer);
+                        this.subTest();
+                        return;
+                    }
+                    const mins = Math.floor(this.timeLeft / 60);
+                    const secs = this.timeLeft % 60;
+                    this.els.timer.textContent = `${mins}:${secs.toString().padStart(2, '0')}`;
+                }, 1000);
+            }
+            
+            startSectionTimer() {
+                if (!this.sections) return;
+                
+                // Clear any existing section timer
+                if (this.sectionTimer) clearInterval(this.sectionTimer);
+                
+                const section = this.sections[this.currentSection];
+                section.time_left = section.timer; // Reset to initial time
+                
+                this.sectionTimer = setInterval(() => {
+                    section.time_left--;
+                    this.els.sectionTimer.textContent = this.formatTime(section.time_left);
+                    
+                    if (section.time_left <= 0) {
+                        clearInterval(this.sectionTimer);
+                        this.submitCurrentSection();
+                    }
+                }, 1000);
+            }
+            
+            formatTime(seconds) {
+                const mins = Math.floor(seconds / 60);
+                const secs = seconds % 60;
+                return `${mins}:${secs.toString().padStart(2, '0')}`;
+            }
+            
+            stopTimers() {
+                if (this.timer) clearInterval(this.timer);
+                if (this.sectionTimer) clearInterval(this.sectionTimer);
+            }
+            
+            togglePanel() {
+                this.els.panel.classList.toggle('open');
+            }
+            
+            closePanel() {
+                this.els.panel.classList.remove('open');
+            }
+            
+            confirmSub() {
+                if (this.sections) {
+                    const section = this.sections[this.currentSection];
+                    const unanswered = this.ans.slice(section.start, section.end + 1)
+                        .filter(a => a === null).length;
+                    const reviewed = this.reviewed.slice(section.start, section.end + 1)
+                        .filter(r => r).length;
+                    
+                    let msg = '';
+                    
+                    if (unanswered > 0 && reviewed > 0) {
+                        msg = `You have ${unanswered} unanswered questions and ${reviewed} marked for review in this section. Submit anyway?`;
+                    } else if (unanswered > 0) {
+                        msg = `You have ${unanswered} unanswered questions in this section. Submit anyway?`;
+                    } else if (reviewed > 0) {
+                        msg = `You have ${reviewed} questions marked for review in this section. Submit anyway?`;
+                    } else {
+                        msg = 'Submit this section?';
+                    }
+                    
+                    if (confirm(msg)) this.submitCurrentSection();
+                } else {
+                    const unanswered = this.ans.filter(a => a === null).length;
+                    const reviewed = this.reviewed.filter(r => r).length;
+                    let msg = '';
+                    
+                    if (unanswered > 0 && reviewed > 0) {
+                        msg = `You have ${unanswered} unanswered questions and ${reviewed} marked for review. Submit anyway?`;
+                    } else if (unanswered > 0) {
+                        msg = `You have ${unanswered} unanswered questions. Submit anyway?`;
+                    } else if (reviewed > 0) {
+                        msg = `You have ${reviewed} questions marked for review. Submit anyway?`;
+                    } else {
+                        msg = 'Submit test?';
+                    }
+                    
+                    if (confirm(msg)) this.subTest();
+                }
+            }
+            
+            submitCurrentSection() {
+                if (!this.sections) return;
+                
+                const section = this.sections[this.currentSection];
+                section.submitted = true;
+                clearInterval(this.sectionTimer);
+                
+                // Move to the next section if available
+                const nextSectionIdx = this.currentSection + 1;
+                if (nextSectionIdx < this.sections.length) {
+                    this.currentSection = nextSectionIdx;
+                    this.startSectionTimer();
+                    this.updateSectionHeader();
+                    this.loadQ(this.sections[nextSectionIdx].start);
+                } else {
+                    // All sections completed
+                    this.subTest();
+                }
+                
+                this.updateGrid();
+            }
+            
+            subTest() {
+                if (this.sub) return;
+                
+                // Record time spent on current question
+                const now = Date.now();
+                this.timeSpent[this.curQ] += (now - this.lastQTime) / 1000;
+                
+                console.log('Submitting test. Final answers:', this.ans);
+                this.sub = true;
+                this.stopTimers();
+                document.getElementById('subBtn').style.display = 'none';
+                document.getElementById('reviewBtn').style.display = 'none';
+                const results = this.calcResults();
+                this.showResults(results);
+                this.loadQ(this.curQ);
+                this.updateGrid();
+                this.updatePrintButton();
+                
+                // Hide section header if it exists
+                if (this.els.sectionHeader) {
+                    this.els.sectionHeader.style.display = 'none';
+                }
+            }
+            
+            calcResults() {
+                const timeTaken = Math.round((Date.now() - this.startT) / 60000);
+                let correct = 0, incorrect = 0, unattempted = 0, score = 0;
+                
+                console.log('Calculating results...');
+                this.qs.forEach((q, i) => {
+                    const userAns = this.ans[i];
+                    const correctAns = q.correct_option_id;
+                    
+                    console.log(`Q${i + 1}: user=${userAns}, correct=${correctAns}`);
+                    
+                    if (userAns === null || userAns === undefined) {
+                        unattempted++;
+                    } else if (correctAns !== undefined && correctAns !== null && userAns === correctAns) {
+                        correct++;
+                        score += 1;
+                        console.log(`Q${i + 1}: CORRECT (+1 marks)`);
+                    } else {
+                        incorrect++;
+                        score -= 0.25;
+                        console.log(`Q${i + 1}: INCORRECT (-0.25 marks)`);
+                    }
+                });
+                
+                const results = { 
+                    score: Math.max(0, score), 
+                    correct, 
+                    incorrect, 
+                    unattempted, 
+                    timeTaken,
+                    timePerQ: this.timeSpent.map(t => Math.round(t))
+                };
+                console.log('Final results:', results);
+                return results;
+            }
+            
+            showResults(results) {
+                this.els.scoreDisp.textContent = `${results.score}/30`;
+                this.els.corrStat.textContent = results.correct;
+                this.els.incStat.textContent = results.incorrect;
+                this.els.unaStat.textContent = results.unattempted;
+                this.els.timeStat.textContent = results.timeTaken;
+                this.els.modalOver.classList.add('show');
+            }
+            
+            closeModal() {
+                this.els.modalOver.classList.remove('show');
+            }
+            
+            review() {
+                this.closeModal();
+                this.loadQ(0);
+            }
+            
+            isNavigationAllowed(idx) {
+            // Always allow navigation after submission
+            if (this.sub) return true;
+            
+            // During test, only allow within current section
+            if (this.sections) {
+                const currentSection = this.sections[this.currentSection];
+                return idx >= currentSection.start && idx <= currentSection.end;
+            }
+            
+            // If no sections, allow all navigation
+            return true;
+            }
+            
+            printTest() {
+                const printWindow = window.open('', '_blank');
+                const testTitle = document.title;
+                const questionsHtml = this.qs.map((q, i) => {
+                    const userAns = this.ans[i];
+                    const correctAns = q.correct_option_id;
+                    const isCorrect = userAns !== null && correctAns !== undefined && userAns === correctAns;
+                    const timeSpent = Math.round(this.timeSpent[i]);
+                    const wasReviewed = this.reviewed[i];
+                    const sectionName = this.sections ? this.getSectionNameForQuestion(i) : '';
+                    
+                    return `
+                        <div style="page-break-inside:avoid;margin-bottom:30px;border-bottom:1px solid #eee;padding-bottom:20px">
+                            <h3 style="color:#4F46E5">Question ${i + 1} ${wasReviewed ? '<span style="color:#F59E0B">(Marked for Review)</span>' : ''}</h3>
+                            ${sectionName ? `<div style="font-size:14px;color:#6B7280;margin-bottom:8px">Section: ${sectionName}</div>` : ''}
+                            ${q.comp ? `<div>${q.comp}</div>` : ''}
+                            <div>${q.question}</div>
+                            <div style="margin-top:15px">
+                                ${q.options.map((opt, j) => `
+                                    <div style="margin:5px 0;padding:5px;border-left:3px solid ${ 
+                                        j === correctAns ? '#10B981' : 
+                                        j === userAns ? '#EF4444' : '#E5E7EB' 
+                                    }">
+                                        ${opt}
+                                    </div>
+                                `).join('')}
+                            </div>
+                            <div style="margin-top:15px;font-size:14px;color:#666">
+                                <strong>Your answer:</strong> ${userAns !== null ? String.fromCharCode(65 + userAns) : 'Not attempted'}
+                                ${userAns !== null && correctAns !== undefined ? 
+                                    `(<span style="color:${isCorrect ? '#10B981' : '#EF4444'}">${isCorrect ? 'Correct' : 'Incorrect'}</span>)` : ''}
+                                <br>
+                                <strong>Time spent:</strong> ${timeSpent} seconds
+                            </div>
+                            ${q.solution ? `
+                                <div style="margin-top:15px;background:#f0fdf4;padding:15px;border-radius:8px">
+                                    <h4 style="color:#10B981;margin-top:0">Solution</h4>
+                                    ${q.solution}
+                                </div>
+                            ` : ''}
+                        </div>
+                    `;
+                }).join('');
+                
+                printWindow.document.write(`
+                    <!DOCTYPE html>
+                    <html>
+                    <head>
+                        <title>${testTitle} - Results</title>
+                        <style>
+                            body { font-family: Arial, sans-serif; line-height: 1.6; padding: 20px; }
+                            h2 { color: #4F46E5; border-bottom: 1px solid #E5E7EB; padding-bottom: 10px; }
+                            .math-exp { display: inline-block; vertical-align: middle; position: relative; margin: 0 2px; }
+                            .math-num { text-align: center; display: block; padding: 0; }
+                            .math-line { display: block; border-top: 1px solid; padding: 0; text-align: center; }
+                            .table-container { width: 100%; overflow-x: auto; margin: 12px 0; }
+                            table { width: 100%; border-collapse: collapse; margin: 8px 0; }
+                            table, th, td { border: 1px solid #E5E7EB; }
+                            th, td { padding: 8px 12px; text-align: left; }
+                            @media print {
+                                body { padding: 0; }
+                                .page-break { page-break-after: always; }
+                            }
+                        </style>
+                    </head>
+                    <body>
+                        <h2>Mocks Wallah - Analysis</h2>
+                        <div style="margin-bottom:30px">
+                            <div><strong>Score:</strong> ${this.els.scoreDisp.textContent}</div>
+                            <div><strong>Correct:</strong> ${this.els.corrStat.textContent}</div>
+                            <div><strong>Incorrect:</strong> ${this.els.incStat.textContent}</div>
+                            <div><strong>Unattempted:</strong> ${this.els.unaStat.textContent}</div>
+                            <div><strong>Time taken:</strong> ${this.els.timeStat.textContent} minutes</div>
+                        </div>
+                        ${questionsHtml}
+                        <script>
+                            setTimeout(() => { window.print(); }, 500);
+                        <\/script>
+                    </body>
+                    </html>
+                `);
+                printWindow.document.close();
+            }
+            
+            // Section-related helper methods
+            isInCurrentSection(qIdx) {
+                if (!this.sections) return true;
+                const section = this.sections[this.currentSection];
+                return qIdx >= section.start && qIdx <= section.end;
+            }
+            
+            findSectionForQuestion(qIdx) {
+                if (!this.sections) return null;
+                for (let i = 0; i < this.sections.length; i++) {
+                    const section = this.sections[i];
+                    if (qIdx >= section.start && qIdx <= section.end) {
+                        return i;
+                    }
+                }
+                return null;
+            }
+            
+            getSectionNameForQuestion(qIdx) {
+                if (!this.sections) return '';
+                const sectionIdx = this.findSectionForQuestion(qIdx);
+                return sectionIdx !== null ? this.sections[sectionIdx].name : '';
+            }
+        }
+        
+        document.addEventListener('DOMContentLoaded', () => new TestApp());
+    </script>
+</body>
+</html>

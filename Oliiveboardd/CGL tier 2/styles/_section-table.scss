@@ -1,0 +1,130 @@
+// ============================================================
+//  _section-table.scss
+//  Section Details Table & Subsection Rows
+// ============================================================
+
+// ── Section Info Wrapper ─────────────────────────────────────
+.section-info {
+  margin-bottom: $spacing-xl;
+
+  h3 {
+    font-size:     $font-size-md;
+    font-weight:   $font-weight-bold;
+    color:         $text;
+    margin-bottom: $spacing-md;
+    @include flex-center;
+    justify-content: flex-start;
+    gap: $spacing-sm;
+
+    i {
+      @include flex-center;
+      color:         $primary;
+      background:    $primary-faint;
+      padding:       7px;
+      border-radius: $radius-sm;
+      font-size:     $font-size-sm;
+      width:         30px;
+      height:        30px;
+    }
+  }
+}
+
+// ── Section Table ────────────────────────────────────────────
+.section-table {
+  width:           100%;
+  border-collapse: separate;
+  border-spacing:  0;
+  border:          1px solid $border;
+  border-radius:   $radius-md;
+  overflow:        hidden;
+  background:      $card;
+  box-shadow:      $shadow-sm;
+
+  th {
+    background:     linear-gradient(to bottom, #f8fafc, #f1f5f9);
+    font-weight:    $font-weight-semi;
+    font-size:      $font-size-sm;
+    color:          $text;
+    padding:        $spacing-md;
+    text-align:     left;
+    border-bottom:  2px solid $border;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+
+    // Column separators
+    &:not(:last-child) {
+      border-right: 1px solid $border;
+    }
+  }
+
+  td {
+    padding:        $spacing-md;
+    text-align:     left;
+    border-bottom:  1px solid $border;
+    font-size:      $font-size-sm;
+    vertical-align: top;
+    color:          $text;
+    transition:     $transition-fast;
+
+    &:not(:last-child) {
+      border-right: 1px solid $bg-2;
+    }
+
+    strong {
+      font-weight:   $font-weight-semi;
+      color:         $text;
+      display:       block;
+      margin-bottom: 2px;
+    }
+
+    // Badge-style Q range column
+    &:nth-child(2) {
+      font-variant-numeric: tabular-nums;
+      font-weight:          $font-weight-medium;
+      color:                $primary;
+      white-space:          nowrap;
+    }
+
+    // Time column
+    &:nth-child(3) {
+      font-weight:  $font-weight-semi;
+      color:        $success-dark;
+      white-space:  nowrap;
+    }
+  }
+
+  tr:last-child td {
+    border-bottom: none;
+  }
+
+  tr:hover td {
+    background: $primary-faint;
+  }
+}
+
+// ── Subsection Rows ─────────────────────────────────────────
+.subsec-container {
+  margin-top:  $spacing-xs;
+  padding-left: $spacing-md;
+  display:     flex;
+  flex-direction: column;
+  gap:         $spacing-2xs;
+}
+
+.subsec-row {
+  font-size:   $font-size-xs;
+  color:       $text-muted;
+  display:     flex;
+  align-items: center;
+  gap:         $spacing-xs;
+  line-height: 1.5;
+
+  &::before {
+    content:       '›';
+    color:         $primary-light;
+    font-weight:   $font-weight-bold;
+    font-size:     $font-size-md;
+    line-height:   1;
+    flex-shrink:   0;
+  }
+}

@@ -1,0 +1,1378 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Sports Mock 06 Test 86</title>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+
+<link href="assets/css/main.css" rel="stylesheet"/></head>
+<body>
+<!-- Welcome Screen -->
+<div class="welcome-screen" id="welcomeScreen">
+<h1 class="welcome-title">Exam ID : gktests</h1>
+<div class="welcome-details">
+<div class="welcome-detail">
+<span class="welcome-detail-label">Test ID</span>
+<span class="welcome-detail-value">86 </span>
+</div>
+<div class="welcome-detail">
+<span class="welcome-detail-label">Total Questions:</span>
+<span class="welcome-detail-value">30</span>
+</div>
+<div class="welcome-detail">
+<span class="welcome-detail-label">Total Marks:</span>
+<span class="welcome-detail-value">30</span>
+</div>
+<div class="welcome-detail">
+<span class="welcome-detail-label">Duration:</span>
+<span class="welcome-detail-value">60 minutes</span>
+</div>
+<div class="welcome-detail">
+<span class="welcome-detail-label">Marking:</span>
+<span class="welcome-detail-value">+1 / -0.25</span>
+</div>
+</div>
+<div class="welcome-instructions">
+<h3>Instructions</h3>
+<ul>
+<li>Read each question carefully before answering</li>
+<li>You can mark questions for review and come back later</li>
+<li>The timer will automatically submit the test when time is up</li>
+<li>Negative marking applies for wrong answers</li>
+</ul>
+</div>
+<div class="welcome-buttons">
+<button class="welcome-button" id="startTestBtn">
+<i class="fas fa-play"></i> Start Test
+        </button>
+<a class="join-channel" href="https://t.me/mocks_wallah_again" target="_blank">
+<i class="fab fa-telegram"></i> Join Our Channel
+        </a>
+</div>
+</div>
+<!-- Main Test Interface (hidden initially) -->
+<div id="mainTestInterface" style="display:none">
+<div class="hdr">
+<div class="hdr-l">
+<div class="q-info" id="qInfo">Q1/30</div>
+<div class="timer" id="timer">60:00</div>
+</div>
+<div class="hdr-c">Mocks Wallah</div>
+<div class="hdr-r">
+<button class="theme-toggle" id="themeToggle"><i class="fas fa-moon"></i></button>
+<button class="btn btn-o btn-sm" id="menuBtn"><i class="fas fa-th"></i></button>
+<button class="btn btn-p btn-sm" id="subBtn">Submit</button>
+</div>
+</div>
+<div class="cont">
+<div class="q-card">
+<div class="lang">
+<button class="lang-btn active" id="engBtn">English</button>
+<button class="lang-btn" id="hinBtn">हिंदी</button>
+</div>
+<div class="comp" id="compSec" style="display:none">
+<h4><i class="fas fa-book"></i> Comprehension</h4>
+<div id="compCont"></div>
+</div>
+<div class="q-txt" id="qTxt"></div>
+<div class="opts" id="opts"></div>
+<div class="sol" id="sol">
+<div class="sol-info" id="solInfo"></div>
+<h4><i class="fas fa-lightbulb"></i> Solution</h4>
+<div id="solCont"></div>
+</div>
+</div>
+</div>
+<div class="nav">
+<button class="btn btn-o nav-btn" id="prevBtn"><i class="fas fa-chevron-left"></i> Prev</button>
+<button class="btn btn-w nav-btn" id="reviewBtn"><i class="fas fa-flag"></i> Review</button>
+<div class="prog">
+<div id="progTxt">1 of 30</div>
+<div style="font-size:11px">Answered: <span id="ansCnt">0</span> | <a href="https://t.me/mocks_wallah_again">Mocks Wallah</a></div>
+</div>
+<button class="btn btn-p nav-btn" id="nextBtn">Next <i class="fas fa-chevron-right"></i></button>
+</div>
+<div class="desktop-sidebar" id="desktopSidebar">
+<h3>Questions Navigator</h3>
+<div class="q-grid" id="desktopQGrid"></div>
+<div style="margin-top:20px;font-size:12px;color:var(--txtL)">
+<div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
+<div class="q-num ans" style="width:24px;height:24px">✓</div><span>Answered</span>
+</div>
+<div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
+<div class="q-num review" style="width:24px;height:24px">!</div><span>Marked for Review</span>
+</div>
+<div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
+<div class="q-num wrong" style="width:24px;height:24px">✗</div><span>Incorrect</span>
+</div>
+<div style="display:flex;align-items:center;gap:8px">
+<div class="q-num unattempted" style="width:24px;height:24px">?</div><span>Unattempted</span>
+</div>
+</div>
+</div>
+<div class="panel" id="panel">
+<div class="panel-hdr">
+<h3>All Questions</h3>
+<button class="panel-close" id="panelClose"><i class="fas fa-times"></i></button>
+</div>
+<div class="q-grid" id="qGrid"></div>
+<div style="padding:20px;font-size:12px;color:var(--txtL)">
+<div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
+<div class="q-num ans" style="width:24px;height:24px">✓</div><span>Answered</span>
+</div>
+<div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
+<div class="q-num review" style="width:24px;height:24px">!</div><span>Marked for Review</span>
+</div>
+<div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
+<div class="q-num wrong" style="width:24px;height:24px">✗</div><span>Incorrect</span>
+</div>
+<div style="display:flex;align-items:center;gap:8px">
+<div class="q-num unattempted" style="width:24px;height:24px">?</div><span>Unattempted</span>
+</div>
+</div>
+</div>
+<button class="print-btn" id="printBtn" style="display:none">
+<i class="fas fa-print"></i>
+</button>
+<div class="modal" id="modalOver">
+<div class="result">
+<h2>Test Complete!</h2>
+<div class="score" id="scoreDisp">0/30</div>
+<div class="stats">
+<div class="stat c"><div class="stat-val" id="corrStat">0</div><div class="stat-lbl">Correct</div></div>
+<div class="stat w"><div class="stat-val" id="incStat">0</div><div class="stat-lbl">Incorrect</div></div>
+<div class="stat"><div class="stat-val" id="unaStat">0</div><div class="stat-lbl">Unattempted</div></div>
+<div class="stat"><div class="stat-val" id="timeStat">0</div><div class="stat-lbl">Minutes</div></div>
+</div>
+<div class="modal-acts">
+<button class="btn btn-o modal-btn" id="closeModal">Close</button>
+<button class="btn btn-p modal-btn" id="revBtn">Review</button>
+</div>
+</div>
+</div>
+</div>
+<script>
+        class TestApp {
+            constructor() {
+            this.qs = [
+  {
+    "question": "<p>ICC is head-quartered in</p>",
+    "options": [
+      "London",
+      "Doha",
+      "New Delhi",
+      "Dubai",
+      "Melbourne"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p>The International Cricket Council (ICC) is the international governing body of cricket. It was founded as the Imperial Cricket Conference in 1909 by representatives from England, Australia and South Africa, renamed the International Cricket Conference in 1965, and took up its current name in 1989. The ICC has 105 members: 12 Full Members that play Test matches, 37 Associate Members, and 56 Affiliate Members. The ICC is responsible for the organisation and governance of cricket's major international tournaments, most notably the Cricket World Cup. It is head-quartered in Dubai, United Arab Emirates.</p>",
+    "question_index": 0
+  },
+  {
+    "question": "<p>Where is ICC Global Cricket Academy situated?</p>",
+    "options": [
+      "Doha",
+      "London",
+      "Melbourne",
+      "Dubai",
+      "Perth"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p>The ICC Academy or ICC Global Cricket Academy is a cricket academy located at Dubai Sports City, United Arab Emirates, and is managed and administered by International Cricket Council It was scheduled to open in 2008 and Rod Marsh has been appointed as the Academy's Director of Coaching.</p>",
+    "question_index": 1
+  },
+  {
+    "question": "<p>What does 'E' stands for in 'ECB'?</p>",
+    "options": [
+      "European",
+      "England",
+      "Emirates",
+      "External",
+      "Equestrian"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p>The England and Wales Cricket Board (ECB) is the governing body of cricket in England and Wales It was created on 1 January 1997 combining the roles of the Test and County Cricket Board, the National Cricket Association and the Cricket Council. Like many sports governing bodies in the United Kingdom it is a company limited by guarantee, a legal status which enables it to concentrate on maximising its funding of the sport rather than making a return for investors.</p>",
+    "question_index": 2
+  },
+  {
+    "question": "<p>The Rajiv Gandhi Khel Ratna award was instituted in</p>",
+    "options": [
+      "1984-85",
+      "1991-92",
+      "1995-96",
+      "1998-99",
+      "2002-03"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p>The Rajiv Gandhi Khel Ratna, officially known as Rajiv Gandhi Khel Ratna Award in Sports and Games, is the highest sporting honour of the Republic of India. Instituted in 1991 - 92, the award was given for the performance by a sportsperson in a year.</p>",
+    "question_index": 3
+  },
+  {
+    "question": "<p>Which among the following sports is associated with Irani Cup?</p>",
+    "options": [
+      "Kabaddi",
+      "Tennis",
+      "Volleyball",
+      "Cricket",
+      "Hockey"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p>The Irani Cup (earlier called Irani Trophy) tournament was conceived during the 1959-60 season to mark the completion of 25 years of the Ranji Trophy championship and was named after the late Z.R. Irani, who was associated with the Board of Control for Cricket in India (BCCI) from its inception in 1928, till his death in 1970. The fixture is played annually between the incumbent Ranji Trophy winners and the Rest of India Team.</p>",
+    "question_index": 4
+  },
+  {
+    "question": "<p>The Sultan Azlan Shah cup is associated with which among the following sports?</p>",
+    "options": [
+      "Football",
+      "Hockey",
+      "Rugby",
+      "Cricket",
+      "Tennis"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p>The Sultan Azlan Shah Cup is an annual international men's field hockey tournament held in Malaysia. It began in 1983 as a biennial contest. The tournament became an annual event after 1998, following its growth and popularity. The tournament is named after the ninth Yang di-Pertuan Agong (King) of Malaysia, Sultan Azlan Shah, an avid fan of field hockey.</p>",
+    "question_index": 5
+  },
+  {
+    "question": "<p>Governing body of Fencing, Federation Internationale d'Escrime (FIE) is head-quartered in which among the following places?</p>",
+    "options": [
+      "paris",
+      "Brussels",
+      "Lausanne",
+      "Tokyo",
+      "Tehran"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p><b>Fencing</b> is a sport in which two competitors fight using 'rapier-style' swords, called the foil, the epee, and the sabre; winning points are made through the contact with an opponent. Fencing was one of the first sports to be played in the Olympics. </p><p>Fencing is governed by Federation Internationale d'Escrime (FIE). Today, its head office is in Lausanne, Switzerland. The FIE is composed of 145 national federations, each of which is recognised by its state Olympic Committee as the sole representative of Olympic-style fencing in that country.</p>",
+    "question_index": 6
+  },
+  {
+    "question": "<p>Which of the following country was the highest medal winner in 2010 commonwealth games?</p>",
+    "options": [
+      "Australia",
+      "India",
+      "England",
+      "Canada",
+      "South Africa"
+    ],
+    "correct_option_id": 0,
+    "solution": "<p>The final medal tally of 2010 commonwealth games was led by Australia (177). The host nation India (101) achieved its best performance ever at the Games, finishing second overall.</p>",
+    "question_index": 7
+  },
+  {
+    "question": "<p>What is the height of the wooden stumps in cricket?</p>",
+    "options": [
+      "28 inches",
+      "32 inches",
+      "25 inches",
+      "30 inches",
+      "24 inches"
+    ],
+    "correct_option_id": 0,
+    "solution": "<p>The wicket consists of three wooden stumps that are 28 inches (71.12 cm) tall. The stumps are placed along the batting crease with equal distances between each stump. They are positioned so that the wicket is 9 inches (22.86 cm) wide. Two wooden bails are placed on top of the stumps. The bails must not project more than 0.5 inches (1.27 cm) above the stumps, and must, for men's cricket, be 4.31 inches (10.95 cm) long.</p>",
+    "question_index": 8
+  },
+  {
+    "question": "<p>Which among the following countries has won the first ever FIFA world cup tournament?</p>",
+    "options": [
+      "Brazil",
+      "Argentina",
+      "Germany",
+      "France",
+      "Uruguay"
+    ],
+    "correct_option_id": 4,
+    "solution": "<p>Argentina, Uruguay, the United States and Yugoslavia each won their respective groups to qualify for the semi-finals of first FIFA world cup. In the final, hosts and pre-tournament favourites Uruguay defeated Argentina 4 - 2, and became the first nation to win the World Cup.</p>",
+    "question_index": 9
+  },
+  {
+    "question": "<p>What is the national sport of Nepal?</p>",
+    "options": [
+      "Football",
+      "Field hockey",
+      "Volleyball",
+      "Kabaddi",
+      "Cricket"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p>Dandi Biyo is a game usually played in rural Nepal and was considered the national game unofficially till May 23, 2017, when officially Volleyball was declared as the national sports.</p>",
+    "question_index": 10
+  },
+  {
+    "question": "<p>Arnis is the national sport of which among the following countries?</p>",
+    "options": [
+      "Australia",
+      "New Zealand",
+      "Malaysia",
+      "Philippines",
+      "Japan"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p>Arnis, also known as Kali or Eskrima, is the national sport and martial art of the Philippines. The three are roughly interchangeable umbrella terms for the traditional martial arts of the Philippines (\"Filipino Martial Arts\", or FMA) that emphasize weapon-based fighting with sticks, knives, bladed weapons and various improvised weapons as well as \"open hand\" or techniques without weapons.</p>",
+    "question_index": 11
+  },
+  {
+    "question": "<p>Pato is the national sport of</p>",
+    "options": [
+      "Colombia",
+      "Brazil",
+      "Chile",
+      "Peru",
+      "Argentina"
+    ],
+    "correct_option_id": 4,
+    "solution": "<p>Pato, also called juego del pato, literally \"duck game\"), is a game played on horseback that combines elements from polo and basketball. It is the national sport of Argentina since 1953.</p>",
+    "question_index": 12
+  },
+  {
+    "question": "<p>Who among the following was the youngest women to win an Olympic medal?</p>",
+    "options": [
+      "PV Sindhu",
+      "Saina Nehwal",
+      "Sakshi Malik",
+      "Mary Kom",
+      "PT Usha"
+    ],
+    "correct_option_id": 0,
+    "solution": "<p>P.V. Sindhu became the first ever Indian woman to win the Silver medal at the Olympics, by reaching the Badminton final at Rio Olympics 2016. However, she lost to Carolina Mar&#237;n of Spain in the final on 19 August 2016. She became the youngest Indian woman to win an Olympic medal.</p>",
+    "question_index": 13
+  },
+  {
+    "question": "<p>Which among the following countries has hosted the Olympic games for maximum number of times?</p>",
+    "options": [
+      "Greece",
+      "France",
+      "Japan",
+      "USA",
+      "Russia"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p>&bull; USA  -  5 times</p><p>&bull; France  -  3 times</p><p>&bull; Japan  -  2 times</p><p>&bull; Greece  -  2 times</p><p>&bull; Russia  -  1 time</p>",
+    "question_index": 14
+  },
+  {
+    "question": "<p>A team of Rugby football game consists of how many players?</p>",
+    "options": [
+      "8",
+      "9",
+      "11",
+      "12",
+      "15"
+    ],
+    "correct_option_id": 4,
+    "solution": "<p>Rugby football is played on a field by two teams of 15 people. The objective of the game is to obtain more points than the opposing team within 80 minutes of playing time. Points are gained through scoring tries or kicking goals.</p>",
+    "question_index": 15
+  },
+  {
+    "question": "<p>Anjali Bhagwat is associated with which among the following sports?</p>",
+    "options": [
+      "Archery",
+      "Shooting",
+      "Wrestling",
+      "Boxing",
+      "Tennis"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p>Anjali Bhagwat is a professional Indian shooter. She became the World Number One in 10m Air Rifle in 2002. She also won her first World Cup Final in Milan, in 2003, with a score of 399/400. Bhagwat won the ISSF Champion of Champions award and is the only Indian to win the ISSF Champions' Trophy in Air Rifle Men &amp; Women mixed event at Munich in 2002.</p>",
+    "question_index": 16
+  },
+  {
+    "question": "<p>Commonwealth games Gold medallist Jitu Rai has represented India in which among the following sports?</p>",
+    "options": [
+      "Athletics",
+      "Shooting",
+      "Archery",
+      "Boxing",
+      "Wrestling"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p>Jitu Rai is an Indian shooter of Indian Gorkha ethnic group who competes in the 10 metre air pistol and 50 metre pistol events. Government of India announced Khel Ratna Award for him in 2016.</p>",
+    "question_index": 17
+  },
+  {
+    "question": "<p>Sardara Singh has been honoured with Rajiv Gandhi Khel Ratna award 2017 for his contribution in which among the following sports?</p>",
+    "options": [
+      "Archery",
+      "Kabaddi",
+      "Field hockey",
+      "Boxing",
+      "Wrestling"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p>Sardara Singh sometimes referred as Sardar Singh, is an Indian professional field hockey player. He was the captain of the Indian national team till Hockey India named senior goalkeeper P. R. Shreejesh as the captain of the national team for the Rio Olympics. Sardara became the youngest player to captain the Indian team when he led the side at the 2008 Sultan Azlan Shah Cup. He was awarded Padma Shri, the fourth highest civilian award of India, in 2015.</p>",
+    "question_index": 18
+  },
+  {
+    "question": "<p>The Birsa Munda Athletics Stadium is located in</p>",
+    "options": [
+      "Raipur",
+      "Jamshedpur",
+      "Ranchi",
+      "Patna",
+      "Bhubaneshwar"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p>Birsa Munda Athletics Stadium is a stadium in Ranchi, India, used mostly for association football matches and for athletics. It hosted the opening and closing ceremonies of the 2011 National Games of India. It has seating capacity of 35,000 spectators.</p>",
+    "question_index": 19
+  },
+  {
+    "question": "<p>In which among the following locations CB Patel International Cricket Stadium is located?</p>",
+    "options": [
+      "Ahmedabad",
+      "Nagpur",
+      "Rajkot",
+      "Surat",
+      "Vadodara"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p>CB Patel International Cricket Stadium is cricket stadium in Surat, Gujarat. The stadium is named as CB Patel. The ground is constructed by Bharthana's leading farmer Raju Giju Kamlesh Patel in the year and half period on the 3.75 sq. ft land of Veer Narmad South Gujarat University in Surat. The ground is developed with 2 lakh sq. ft according to the standards of international stadium. The stadium can accommodate 35,000 people.</p>",
+    "question_index": 20
+  },
+  {
+    "question": "<p>The Wembley Stadium is located in</p>",
+    "options": [
+      "South Africa",
+      "Australia",
+      "England",
+      "New Zealand",
+      "Germany"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p>Wembley Stadium is a football stadium in Wembley, London, England, which opened in 2007, on the site of the original Wembley Stadium, which was demolished from 2002 - 2003. The stadium hosts major football matches including home matches of the England national football team, and the FA Cup Final. The stadium is also the temporary home of Premier League football club Tottenham Hotspur while White Hart Lane is being demolished and their new stadium is being constructed.</p>",
+    "question_index": 21
+  },
+  {
+    "question": "<p>Camp Nou is the largest stadium of</p>",
+    "options": [
+      "Germany",
+      "England",
+      "Spain",
+      "France",
+      "Portugal"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p>Camp Nou is the home stadium of FC Barcelona since its completion in 1957. With a seating capacity of 99,354, it is the largest stadium in Spain and Europe, and the second largest association football stadium in the world in terms of capacity. It has hosted two European Cup/Champions League finals in 1989 and 1999, five matches including the opening game of the 1982 FIFA World Cup and the football competition final at the 1992 Summer Olympics.</p>",
+    "question_index": 22
+  },
+  {
+    "question": "<p>The FNB Stadium is located in which among the following countries?</p>",
+    "options": [
+      "South Africa",
+      "Belgium",
+      "France",
+      "Italy",
+      "Brazil"
+    ],
+    "correct_option_id": 0,
+    "solution": "<p>First National Bank Stadium or simply FNB Stadium, also known as Soccer City and The Calabash, is a stadium located in Nasrec, bordering the Soweto area of Johannesburg, South Africa. The venue is managed by Stadium Management South Africa (SMSA) and is a home ground of Kaizer Chiefs F.C. in the South African Premier Soccer League as well as key fixtures for the South African national football team (Bafana Bafana).</p>",
+    "question_index": 23
+  },
+  {
+    "question": "<p>Estadio Azteca is the soccer stadium of which country?</p>",
+    "options": [
+      "Chile",
+      "Mexico",
+      "Brazil",
+      "Argentina",
+      "Colombia"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p>The Estadio Azteca is a football stadium located in the suburb of Santa Ursula in Mexico City, Mexico. Since its opening in 1966, the stadium has been the official home stadium of the professional Mexican football team Am&#233;rica and the official national stadium of the Mexico national football team. With an official capacity of 87,000, it is the largest stadium in Mexico. The stadium sits at an altitude of 7,200 feet above sea level.</p>",
+    "question_index": 24
+  },
+  {
+    "question": "<p>Which among the following is the last Grand Slam event of the year?</p>",
+    "options": [
+      "Australian Open",
+      "French Open",
+      "Wimbledon",
+      "US Open",
+      "Madrid Open"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p>The United States Open Tennis Championships is a hard court tennis tournament. The tournament is the modern version of one of the oldest tennis championships in the world, the U.S. National Championship, for which men's singles was first contested in 1881. Since 1987, the US Open has been chronologically the fourth and final tennis major comprising the Grand Slam each year; the other three, in chronological order, are the Australian Open, the French Open and Wimbledon.</p>",
+    "question_index": 25
+  },
+  {
+    "question": "<p>'Serve and volley' is the term is commonly used in</p>",
+    "options": [
+      "Football",
+      "Volleyball",
+      "Baseball",
+      "Tennis",
+      "Cricket"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p>Serve and volley is a style of play in tennis where the player serving moves quickly towards the net after hitting a serve. The server then attempts to hit a volley (a shot where the ball is struck without allowing it to bounce), as opposed to the baseline style, where the server stays back following the serve and attempts to hit a ground stroke (a shot where the ball is allowed to bounce before contact is made).</p>",
+    "question_index": 26
+  },
+  {
+    "question": "<p>The ATP Finals tennis tournament is held annually in which among the following locations?</p>",
+    "options": [
+      "Paris",
+      "London",
+      "Melbourne",
+      "New York",
+      "Shanghai"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p>The ATP Finals is the second highest tier of men's tennis tournament after the four Grand Slam tournaments. A week-long event, the tournament is held annually each November at the O2 Arena in London, United Kingdom.</p>",
+    "question_index": 27
+  },
+  {
+    "question": "<p>Who among the following tennis players has won the maximum titles across all the formats?</p>",
+    "options": [
+      "Roy Emerson",
+      "Bob Bryan",
+      "Margaret Court",
+      "Martina Navratilova",
+      "Serena Williams"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p>Margaret Court, also known as Margaret Smith Court, is a retired Australian tennis player and former world No. 1. In 1970, Court became the first woman during the open era (and the second woman in history) to win the singles Grand Slam (all four major tournaments in the same calendar year). She won 24 of those titles (11 in the Open era), a record that still stands. She also won 19 women's doubles and 21 mixed doubles titles, giving her a record 64 major titles overall.</p>",
+    "question_index": 28
+  },
+  {
+    "question": "<p>The term 'standing eight count' is associated with which sport?</p>",
+    "options": [
+      "Wrestling",
+      "Boxing",
+      "Karate",
+      "Judo",
+      "Squash"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p>A standing eight count, also known as a protection count, is a boxing judgment call made by a referee during a bout. When invoked, the referee stops the action and counts to eight. Typically, a boxer can take 3 standing eight counts in a round. During that time the referee will determine if the boxer can continue.</p>",
+    "question_index": 29
+  }
+];
+            this.sections = null;
+            this.curQ = 0;
+            this.ans = new Array(this.qs.length).fill(null);
+            this.reviewed = new Array(this.qs.length).fill(false);
+            this.startT = Date.now();
+            this.timeLeft = 60 * 60;
+            this.timeSpent = new Array(this.qs.length).fill(0);
+            this.lastQTime = this.startT;
+            this.sub = false;
+            this.eng = true;
+            this.darkMode = false;
+            this.timer = null;
+            this.sectionTimer = null;
+            this.currentSection = this.sections ? 0 : null;
+            this.initEls();
+            this.setupWelcomeScreen();
+            this.validateData();
+            this.setupBeforeUnload();
+        }
+            
+            setupWelcomeScreen() {
+                document.getElementById('startTestBtn').addEventListener('click', () => {
+                    // Hide welcome screen
+                    document.getElementById('welcomeScreen').classList.add('hidden');
+                    
+                    // Show main test interface
+                    document.getElementById('mainTestInterface').style.display = '';
+                    
+                    // Initialize the test
+                    setTimeout(() => {
+                        this.init();
+                    }, 300);
+                });
+            }
+            
+            setupBeforeUnload() {
+                window.addEventListener('beforeunload', (e) => {
+                    if (!this.sub) {
+                        e.preventDefault();
+                        e.returnValue = 'Are you sure you want to leave? Your test progress will be lost.';
+                        return e.returnValue;
+                    }
+                });
+            }
+            
+            validateData() {
+                console.log('Validating question data...');
+                this.qs.forEach((q, idx) => {
+                    if (q.correct_option_id !== undefined) {
+                        console.log(`Q${idx + 1}: correct_option_id = ${q.correct_option_id}, options count = ${q.options ? q.options.length : 0}`);
+                        
+                        if (q.options && (q.correct_option_id < 0 || q.correct_option_id >= q.options.length)) {
+                            console.warn(`Q${idx + 1}: Invalid correct_option_id ${q.correct_option_id} for ${q.options.length} options`);
+                        }
+                    }
+                });
+            }
+            
+            initEls() {
+                this.els = {
+                    qInfo: document.getElementById('qInfo'),
+                    progTxt: document.getElementById('progTxt'),
+                    ansCnt: document.getElementById('ansCnt'),
+                    timer: document.getElementById('timer'),
+                    qTxt: document.getElementById('qTxt'),
+                    compSec: document.getElementById('compSec'),
+                    compCont: document.getElementById('compCont'),
+                    opts: document.getElementById('opts'),
+                    sol: document.getElementById('sol'),
+                    solCont: document.getElementById('solCont'),
+                    solInfo: document.getElementById('solInfo'),
+                    qGrid: document.getElementById('qGrid'),
+                    desktopQGrid: document.getElementById('desktopQGrid'),
+                    panel: document.getElementById('panel'),
+                    modalOver: document.getElementById('modalOver'),
+                    scoreDisp: document.getElementById('scoreDisp'),
+                    corrStat: document.getElementById('corrStat'),
+                    incStat: document.getElementById('incStat'),
+                    unaStat: document.getElementById('unaStat'),
+                    timeStat: document.getElementById('timeStat'),
+                    printBtn: document.getElementById('printBtn'),
+                    desktopSidebar: document.getElementById('desktopSidebar'),
+                    reviewBtn: document.getElementById('reviewBtn'),
+                    themeToggle: document.getElementById('themeToggle'),
+                    sectionHeader: this.sections ? document.getElementById('sectionHeader') : null,
+                    sectionTitle: this.sections ? document.getElementById('sectionTitle') : null,
+                    sectionTimer: this.sections ? document.getElementById('sectionTimer') : null
+                };
+            }
+            
+            init() {
+                this.createGrid();
+                this.startTimer();
+                if (this.sections) {
+                    this.startSectionTimer();
+                    this.updateSectionHeader();
+                }
+                this.loadQ(0);
+                this.setupEvents();
+                this.updatePrintButton();
+                this.updateThemeToggleIcon();
+            }
+            
+            setupEvents() {
+                document.getElementById('menuBtn').onclick = () => this.togglePanel();
+                document.getElementById('subBtn').onclick = () => this.confirmSub();
+                document.getElementById('prevBtn').onclick = () => this.nav(-1);
+                document.getElementById('nextBtn').onclick = () => this.nav(1);
+                document.getElementById('reviewBtn').onclick = () => this.toggleReview();
+                document.getElementById('engBtn').onclick = () => this.setLang(true);
+                document.getElementById('hinBtn').onclick = () => this.setLang(false);
+                document.getElementById('panelClose').onclick = () => this.closePanel();
+                document.getElementById('closeModal').onclick = () => this.closeModal();
+                document.getElementById('revBtn').onclick = () => this.review();
+                document.getElementById('printBtn').onclick = () => this.printTest();
+                document.getElementById('themeToggle').onclick = () => this.toggleTheme();
+            }
+            
+            // IMPROVED: Better handling of complex HTML content including math expressions
+            extractTxt(html, isEng) {
+                if (!html) return '';
+                
+                // Create a temporary div to parse the HTML
+                const tempDiv = document.createElement('div');
+                tempDiv.innerHTML = html;
+                
+                // Process math expressions - convert them to proper HTML structure
+                const mathExps = tempDiv.querySelectorAll('div[style*="inline-block"][style*="vertical-align: middle"]');
+                mathExps.forEach(mathExp => {
+                    // Create a new math expression container
+                    const newMathExp = document.createElement('div');
+                    newMathExp.className = 'math-exp';
+                    
+                    // Get numerator and denominator
+                    const spans = mathExp.querySelectorAll('span');
+                    if (spans.length >= 3) {
+                        const numerator = spans[0].cloneNode(true);
+                        const line = spans[1].cloneNode(true);
+                        const denominator = spans[2].cloneNode(true);
+                        
+                        // Clean up the numerator
+                        const numDiv = document.createElement('div');
+                        numDiv.className = 'math-num';
+                        numDiv.innerHTML = numerator.innerHTML;
+                        
+                        // Create the dividing line
+                        const lineDiv = document.createElement('div');
+                        lineDiv.className = 'math-line';
+                        
+                        // Clean up the denominator
+                        const denDiv = document.createElement('div');
+                        denDiv.className = 'math-num';
+                        denDiv.innerHTML = denominator.innerHTML;
+                        
+                        // Build the new math expression
+                        newMathExp.appendChild(numDiv);
+                        newMathExp.appendChild(lineDiv);
+                        newMathExp.appendChild(denDiv);
+                        
+                        // Replace the original with our new structure
+                        mathExp.parentNode.replaceChild(newMathExp, mathExp);
+                    }
+                });
+                
+                // Handle language selection - show/hide appropriate spans
+                const langSpans = tempDiv.querySelectorAll('span.eqt, span.hqt');
+                langSpans.forEach(span => {
+                    if ((isEng && span.classList.contains('hqt')) || 
+                        (!isEng && span.classList.contains('eqt'))) {
+                        span.style.display = 'none';
+                    } else {
+                        span.style.display = '';
+                        // Remove the class to prevent future hiding
+                        span.classList.remove('eqt', 'hqt');
+                    }
+                });
+                
+                // Clean up any remaining display:none styles
+                const hiddenElements = tempDiv.querySelectorAll('[style*="display:none"]');
+                hiddenElements.forEach(el => {
+                    if (el.style.display === 'none' && 
+                        !el.classList.contains('hqt') && 
+                        !el.classList.contains('eqt')) {
+                        el.style.display = '';
+                    }
+                });
+                
+                // Handle tables - wrap them in a scrollable container
+                const tables = tempDiv.querySelectorAll('table');
+                tables.forEach(table => {
+                    const container = document.createElement('div');
+                    container.className = 'table-container';
+                    table.parentNode.insertBefore(container, table);
+                    container.appendChild(table);
+                });
+                
+                return tempDiv.innerHTML;
+            }
+            
+            createGrid() {
+                this.els.qGrid.innerHTML = '';
+                this.els.desktopQGrid.innerHTML = '';
+                
+                this.qs.forEach((_, i) => {
+                    // Create mobile grid element
+                    const mobileDiv = document.createElement('div');
+                    mobileDiv.className = 'q-num';
+                    mobileDiv.textContent = i + 1;
+                    mobileDiv.onclick = () => this.goToQ(i);
+                    this.els.qGrid.appendChild(mobileDiv);
+                    
+                    // Create desktop grid element
+                    const desktopDiv = document.createElement('div');
+                    desktopDiv.className = 'q-num';
+                    desktopDiv.textContent = i + 1;
+                    desktopDiv.onclick = () => this.goToQ(i);
+                    this.els.desktopQGrid.appendChild(desktopDiv);
+                });
+            }
+            
+            loadQ(idx) {
+                // Update time spent on previous question
+                if (this.curQ !== idx) {
+                    const now = Date.now();
+                    this.timeSpent[this.curQ] += (now - this.lastQTime) / 1000;
+                    this.lastQTime = now;
+                }
+                
+                this.curQ = idx;
+                const q = this.qs[idx];
+                
+                // Check if question is in current section (if sections exist)
+                if (this.sections) {
+                    const inCurrentSection = this.isInCurrentSection(idx);
+                    if (!inCurrentSection) {
+                        // Find the section this question belongs to
+                        const sectionIdx = this.findSectionForQuestion(idx);
+                        if (sectionIdx !== null && !this.sections[sectionIdx].submitted) {
+                            this.currentSection = sectionIdx;
+                            this.startSectionTimer();
+                            this.updateSectionHeader();
+                        }
+                    }
+                }
+                
+                this.els.qInfo.textContent = `Q${idx + 1}/${this.qs.length}`;
+                this.els.progTxt.textContent = `${idx + 1} of ${this.qs.length}`;
+                this.updateAnsCnt();
+                this.updateNav();
+                this.updateGrid();
+                this.updateReviewButton();
+                
+                if (q.comp) {
+                    this.els.compSec.style.display = 'block';
+                    this.els.compCont.innerHTML = this.extractTxt(q.comp, this.eng);
+                } else {
+                    this.els.compSec.style.display = 'none';
+                }
+                
+                this.els.qTxt.innerHTML = this.extractTxt(q.question, this.eng);
+                this.loadOpts(q, idx);
+                
+                if (this.sub && q.solution) {
+                    // Show time spent on question in solution
+                    const timeSpent = Math.round(this.timeSpent[idx]);
+                    const minutes = Math.floor(timeSpent / 60);
+                    const seconds = timeSpent % 60;
+                    const timeStr = minutes > 0 
+                        ? `${minutes}m ${seconds}s` 
+                        : `${seconds}s`;
+                    
+                    this.els.solInfo.innerHTML = `
+                        <span><i class="fas fa-clock"></i> Time spent: ${timeStr}</span>
+                        <span><i class="fas fa-check-circle"></i> Correct answer: ${String.fromCharCode(65 + q.correct_option_id)}</span>
+                    `;
+                    
+                    this.els.solCont.innerHTML = this.extractTxt(q.solution, this.eng);
+                    this.els.sol.classList.add('show');
+                } else {
+                    this.els.sol.classList.remove('show');
+                }
+            }
+            
+            loadOpts(q, qIdx) {
+                this.els.opts.innerHTML = '';
+                const userAnswer = this.ans[qIdx];
+                const correctAnswer = q.correct_option_id;
+                
+                console.log(`Loading Q${qIdx + 1} options:`, {
+                    userAnswer: userAnswer,
+                    correctAnswer: correctAnswer,
+                    submitted: this.sub,
+                    optionsCount: q.options ? q.options.length : 0
+                });
+                
+                if (!q.options || !Array.isArray(q.options)) {
+                    console.error(`Q${qIdx + 1}: No valid options array`);
+                    return;
+                }
+                
+                q.options.forEach((opt, i) => {
+                    const div = document.createElement('div');
+                    let cls = 'opt';
+                    
+                    if (this.sub) {
+                        cls += ' submitted';
+                    }
+                    
+                    if (userAnswer === i) {
+                        cls += ' sel';
+                        console.log(`Q${qIdx + 1}: User selected option ${i}`);
+                    }
+                    
+                    if (this.sub && correctAnswer !== undefined && correctAnswer !== null) {
+                        if (i === correctAnswer) {
+                            cls += ' correct';
+                            console.log(`Q${qIdx + 1}: Option ${i} marked as correct (is correct answer)`);
+                        } else if (userAnswer === i && userAnswer !== correctAnswer) {
+                            cls += ' wrong';
+                            console.log(`Q${qIdx + 1}: Option ${i} marked as wrong (user selected but incorrect)`);
+                        }
+                    }
+                    
+                    div.className = cls;
+                    div.innerHTML = `
+                        <div class="opt-radio"></div>
+                        <div class="opt-txt">${this.extractTxt(opt, this.eng)}</div>
+                    `;
+                    
+                    if (!this.sub) {
+                        div.onclick = () => this.selOpt(i, qIdx);
+                    }
+                    
+                    this.els.opts.appendChild(div);
+                });
+            }
+            
+            selOpt(optIdx, qIdx) {
+                if (this.sub) return;
+                this.ans[qIdx] = this.ans[qIdx] === optIdx ? null : optIdx;
+                console.log(`Q${qIdx + 1}: Selected option ${optIdx}, answer array:`, this.ans[qIdx]);
+                this.loadOpts(this.qs[qIdx], qIdx);
+                this.updateAnsCnt();
+                this.updateGrid();
+            }
+            
+            toggleReview() {
+                if (this.sub) return;
+                this.reviewed[this.curQ] = !this.reviewed[this.curQ];
+                this.updateGrid();
+                this.updateReviewButton();
+            }
+            
+            updateReviewButton() {
+                const btn = this.els.reviewBtn;
+                if (this.reviewed[this.curQ]) {
+                    btn.classList.add('active');
+                    btn.innerHTML = '<i class="fas fa-flag"></i>';
+                } else {
+                    btn.classList.remove('active');
+                    btn.innerHTML = '<i class="fas fa-flag"></i>';
+                }
+            }
+            
+           nav(dir) {
+            const newIdx = this.curQ + dir;
+            
+            // If test is submitted, allow free navigation for review
+            if (this.sub) {
+                if (newIdx >= 0 && newIdx < this.qs.length) {
+                    this.loadQ(newIdx);
+                }
+                return;
+            }
+            
+            // During test, enforce section boundaries
+            if (this.sections) {
+                const currentSection = this.sections[this.currentSection];
+                if (newIdx < currentSection.start || newIdx > currentSection.end) {
+                    return; // Don't allow navigation outside current section
+                }
+            }
+            
+            if (newIdx >= 0 && newIdx < this.qs.length) {
+                this.loadQ(newIdx);
+            }
+        }
+        
+        goToQ(idx) {
+            // Always allow navigation when reviewing after submission
+            if (this.sub) {
+                this.loadQ(idx);
+                this.closePanel();
+                return;
+            }
+            
+            // During test, only allow navigation within current section
+            if (this.sections) {
+                const currentSection = this.sections[this.currentSection];
+                if (idx < currentSection.start || idx > currentSection.end) {
+                    return; // Block navigation outside current section
+                }
+            }
+            
+            this.loadQ(idx);
+            this.closePanel();
+        }
+        
+        updateGrid() {
+            const nums = this.els.qGrid.querySelectorAll('.q-num');
+            const desktopNums = this.els.desktopQGrid.querySelectorAll('.q-num');
+            
+            const updateNum = (el, i) => {
+                el.className = 'q-num';
+                
+                // Reset all special classes
+                el.classList.remove('cur', 'ans', 'wrong', 'review', 'unattempted', 'disabled');
+                
+                if (i === this.curQ) {
+                    el.classList.add('cur');
+                } else if (this.sub) {
+                    // After submission - prioritize correct/wrong over review status
+                    if (this.ans[i] !== null && this.qs[i].correct_option_id !== undefined) {
+                        if (this.ans[i] === this.qs[i].correct_option_id) {
+                            el.classList.add('ans');
+                        } else {
+                            el.classList.add('wrong');
+                        }
+                    } else if (this.ans[i] === null) {
+                        el.classList.add('unattempted');
+                    }
+                } else {
+                    // Before submission
+                    if (this.reviewed[i]) {
+                        el.classList.add('review');
+                    } else if (this.ans[i] !== null) {
+                        el.classList.add('ans');
+                    }
+                    
+                    // Disable questions from other sections (only if sections exist)
+                    if (this.sections) {
+                        const currentSection = this.sections[this.currentSection];
+                        if (i < currentSection.start || i > currentSection.end) {
+                            el.classList.add('disabled');
+                        }
+                    }
+                }
+            };
+            
+            nums.forEach(updateNum);
+            desktopNums.forEach(updateNum);
+        }
+        
+        updateNav() {
+            // Basic navigation limits
+            document.getElementById('prevBtn').disabled = this.curQ === 0;
+            document.getElementById('nextBtn').disabled = this.curQ === this.qs.length - 1;
+            document.getElementById('reviewBtn').style.display = this.sub ? 'none' : 'inline-flex';
+            
+            // Additional navigation restrictions for sections during test
+            if (this.sections && !this.sub) {
+                const currentSection = this.sections[this.currentSection];
+                document.getElementById('prevBtn').disabled = document.getElementById('prevBtn').disabled || 
+                    (this.curQ === currentSection.start);
+                document.getElementById('nextBtn').disabled = document.getElementById('nextBtn').disabled || 
+                    (this.curQ === currentSection.end);
+            }
+        }
+            
+            updateAnsCnt() {
+                const cnt = this.ans.filter(a => a !== null).length;
+                this.els.ansCnt.textContent = cnt;
+            }
+            
+            updatePrintButton() {
+                this.els.printBtn.style.display = this.sub ? 'flex' : 'none';
+            }
+            
+            updateThemeToggleIcon() {
+                const icon = this.darkMode ? 'fa-sun' : 'fa-moon';
+                this.els.themeToggle.innerHTML = `<i class="fas ${icon}"></i>`;
+            }
+            
+            updateSectionHeader() {
+                if (!this.sections || !this.els.sectionHeader) return;
+                
+                const section = this.sections[this.currentSection];
+                this.els.sectionTitle.textContent = section.name;
+                this.els.sectionTimer.textContent = this.formatTime(section.time_left);
+                
+                // Show the section header if we have sections
+                this.els.sectionHeader.style.display = 'flex';
+            }
+            
+            setLang(eng) {
+                this.eng = eng;
+                document.getElementById('engBtn').classList.toggle('active', eng);
+                document.getElementById('hinBtn').classList.toggle('active', !eng);
+                this.loadQ(this.curQ);
+            }
+            
+            toggleTheme() {
+                this.darkMode = !this.darkMode;
+                document.body.classList.toggle('dark-mode', this.darkMode);
+                this.updateThemeToggleIcon();
+                this.loadQ(this.curQ); // Refresh to apply dark mode styles
+            }
+            
+            startTimer() {
+                this.timer = setInterval(() => {
+                    this.timeLeft--;
+                    if (this.timeLeft <= 0) {
+                        clearInterval(this.timer);
+                        this.subTest();
+                        return;
+                    }
+                    const mins = Math.floor(this.timeLeft / 60);
+                    const secs = this.timeLeft % 60;
+                    this.els.timer.textContent = `${mins}:${secs.toString().padStart(2, '0')}`;
+                }, 1000);
+            }
+            
+            startSectionTimer() {
+                if (!this.sections) return;
+                
+                // Clear any existing section timer
+                if (this.sectionTimer) clearInterval(this.sectionTimer);
+                
+                const section = this.sections[this.currentSection];
+                section.time_left = section.timer; // Reset to initial time
+                
+                this.sectionTimer = setInterval(() => {
+                    section.time_left--;
+                    this.els.sectionTimer.textContent = this.formatTime(section.time_left);
+                    
+                    if (section.time_left <= 0) {
+                        clearInterval(this.sectionTimer);
+                        this.submitCurrentSection();
+                    }
+                }, 1000);
+            }
+            
+            formatTime(seconds) {
+                const mins = Math.floor(seconds / 60);
+                const secs = seconds % 60;
+                return `${mins}:${secs.toString().padStart(2, '0')}`;
+            }
+            
+            stopTimers() {
+                if (this.timer) clearInterval(this.timer);
+                if (this.sectionTimer) clearInterval(this.sectionTimer);
+            }
+            
+            togglePanel() {
+                this.els.panel.classList.toggle('open');
+            }
+            
+            closePanel() {
+                this.els.panel.classList.remove('open');
+            }
+            
+            confirmSub() {
+                if (this.sections) {
+                    const section = this.sections[this.currentSection];
+                    const unanswered = this.ans.slice(section.start, section.end + 1)
+                        .filter(a => a === null).length;
+                    const reviewed = this.reviewed.slice(section.start, section.end + 1)
+                        .filter(r => r).length;
+                    
+                    let msg = '';
+                    
+                    if (unanswered > 0 && reviewed > 0) {
+                        msg = `You have ${unanswered} unanswered questions and ${reviewed} marked for review in this section. Submit anyway?`;
+                    } else if (unanswered > 0) {
+                        msg = `You have ${unanswered} unanswered questions in this section. Submit anyway?`;
+                    } else if (reviewed > 0) {
+                        msg = `You have ${reviewed} questions marked for review in this section. Submit anyway?`;
+                    } else {
+                        msg = 'Submit this section?';
+                    }
+                    
+                    if (confirm(msg)) this.submitCurrentSection();
+                } else {
+                    const unanswered = this.ans.filter(a => a === null).length;
+                    const reviewed = this.reviewed.filter(r => r).length;
+                    let msg = '';
+                    
+                    if (unanswered > 0 && reviewed > 0) {
+                        msg = `You have ${unanswered} unanswered questions and ${reviewed} marked for review. Submit anyway?`;
+                    } else if (unanswered > 0) {
+                        msg = `You have ${unanswered} unanswered questions. Submit anyway?`;
+                    } else if (reviewed > 0) {
+                        msg = `You have ${reviewed} questions marked for review. Submit anyway?`;
+                    } else {
+                        msg = 'Submit test?';
+                    }
+                    
+                    if (confirm(msg)) this.subTest();
+                }
+            }
+            
+            submitCurrentSection() {
+                if (!this.sections) return;
+                
+                const section = this.sections[this.currentSection];
+                section.submitted = true;
+                clearInterval(this.sectionTimer);
+                
+                // Move to the next section if available
+                const nextSectionIdx = this.currentSection + 1;
+                if (nextSectionIdx < this.sections.length) {
+                    this.currentSection = nextSectionIdx;
+                    this.startSectionTimer();
+                    this.updateSectionHeader();
+                    this.loadQ(this.sections[nextSectionIdx].start);
+                } else {
+                    // All sections completed
+                    this.subTest();
+                }
+                
+                this.updateGrid();
+            }
+            
+            subTest() {
+                if (this.sub) return;
+                
+                // Record time spent on current question
+                const now = Date.now();
+                this.timeSpent[this.curQ] += (now - this.lastQTime) / 1000;
+                
+                console.log('Submitting test. Final answers:', this.ans);
+                this.sub = true;
+                this.stopTimers();
+                document.getElementById('subBtn').style.display = 'none';
+                document.getElementById('reviewBtn').style.display = 'none';
+                const results = this.calcResults();
+                this.showResults(results);
+                this.loadQ(this.curQ);
+                this.updateGrid();
+                this.updatePrintButton();
+                
+                // Hide section header if it exists
+                if (this.els.sectionHeader) {
+                    this.els.sectionHeader.style.display = 'none';
+                }
+            }
+            
+            calcResults() {
+                const timeTaken = Math.round((Date.now() - this.startT) / 60000);
+                let correct = 0, incorrect = 0, unattempted = 0, score = 0;
+                
+                console.log('Calculating results...');
+                this.qs.forEach((q, i) => {
+                    const userAns = this.ans[i];
+                    const correctAns = q.correct_option_id;
+                    
+                    console.log(`Q${i + 1}: user=${userAns}, correct=${correctAns}`);
+                    
+                    if (userAns === null || userAns === undefined) {
+                        unattempted++;
+                    } else if (correctAns !== undefined && correctAns !== null && userAns === correctAns) {
+                        correct++;
+                        score += 1;
+                        console.log(`Q${i + 1}: CORRECT (+1 marks)`);
+                    } else {
+                        incorrect++;
+                        score -= 0.25;
+                        console.log(`Q${i + 1}: INCORRECT (-0.25 marks)`);
+                    }
+                });
+                
+                const results = { 
+                    score: Math.max(0, score), 
+                    correct, 
+                    incorrect, 
+                    unattempted, 
+                    timeTaken,
+                    timePerQ: this.timeSpent.map(t => Math.round(t))
+                };
+                console.log('Final results:', results);
+                return results;
+            }
+            
+            showResults(results) {
+                this.els.scoreDisp.textContent = `${results.score}/30`;
+                this.els.corrStat.textContent = results.correct;
+                this.els.incStat.textContent = results.incorrect;
+                this.els.unaStat.textContent = results.unattempted;
+                this.els.timeStat.textContent = results.timeTaken;
+                this.els.modalOver.classList.add('show');
+            }
+            
+            closeModal() {
+                this.els.modalOver.classList.remove('show');
+            }
+            
+            review() {
+                this.closeModal();
+                this.loadQ(0);
+            }
+            
+            isNavigationAllowed(idx) {
+            // Always allow navigation after submission
+            if (this.sub) return true;
+            
+            // During test, only allow within current section
+            if (this.sections) {
+                const currentSection = this.sections[this.currentSection];
+                return idx >= currentSection.start && idx <= currentSection.end;
+            }
+            
+            // If no sections, allow all navigation
+            return true;
+            }
+            
+            printTest() {
+                const printWindow = window.open('', '_blank');
+                const testTitle = document.title;
+                const questionsHtml = this.qs.map((q, i) => {
+                    const userAns = this.ans[i];
+                    const correctAns = q.correct_option_id;
+                    const isCorrect = userAns !== null && correctAns !== undefined && userAns === correctAns;
+                    const timeSpent = Math.round(this.timeSpent[i]);
+                    const wasReviewed = this.reviewed[i];
+                    const sectionName = this.sections ? this.getSectionNameForQuestion(i) : '';
+                    
+                    return `
+                        <div style="page-break-inside:avoid;margin-bottom:30px;border-bottom:1px solid #eee;padding-bottom:20px">
+                            <h3 style="color:#4F46E5">Question ${i + 1} ${wasReviewed ? '<span style="color:#F59E0B">(Marked for Review)</span>' : ''}</h3>
+                            ${sectionName ? `<div style="font-size:14px;color:#6B7280;margin-bottom:8px">Section: ${sectionName}</div>` : ''}
+                            ${q.comp ? `<div>${q.comp}</div>` : ''}
+                            <div>${q.question}</div>
+                            <div style="margin-top:15px">
+                                ${q.options.map((opt, j) => `
+                                    <div style="margin:5px 0;padding:5px;border-left:3px solid ${ 
+                                        j === correctAns ? '#10B981' : 
+                                        j === userAns ? '#EF4444' : '#E5E7EB' 
+                                    }">
+                                        ${opt}
+                                    </div>
+                                `).join('')}
+                            </div>
+                            <div style="margin-top:15px;font-size:14px;color:#666">
+                                <strong>Your answer:</strong> ${userAns !== null ? String.fromCharCode(65 + userAns) : 'Not attempted'}
+                                ${userAns !== null && correctAns !== undefined ? 
+                                    `(<span style="color:${isCorrect ? '#10B981' : '#EF4444'}">${isCorrect ? 'Correct' : 'Incorrect'}</span>)` : ''}
+                                <br>
+                                <strong>Time spent:</strong> ${timeSpent} seconds
+                            </div>
+                            ${q.solution ? `
+                                <div style="margin-top:15px;background:#f0fdf4;padding:15px;border-radius:8px">
+                                    <h4 style="color:#10B981;margin-top:0">Solution</h4>
+                                    ${q.solution}
+                                </div>
+                            ` : ''}
+                        </div>
+                    `;
+                }).join('');
+                
+                printWindow.document.write(`
+                    <!DOCTYPE html>
+                    <html>
+                    <head>
+                        <title>${testTitle} - Results</title>
+                        <style>
+                            body { font-family: Arial, sans-serif; line-height: 1.6; padding: 20px; }
+                            h2 { color: #4F46E5; border-bottom: 1px solid #E5E7EB; padding-bottom: 10px; }
+                            .math-exp { display: inline-block; vertical-align: middle; position: relative; margin: 0 2px; }
+                            .math-num { text-align: center; display: block; padding: 0; }
+                            .math-line { display: block; border-top: 1px solid; padding: 0; text-align: center; }
+                            .table-container { width: 100%; overflow-x: auto; margin: 12px 0; }
+                            table { width: 100%; border-collapse: collapse; margin: 8px 0; }
+                            table, th, td { border: 1px solid #E5E7EB; }
+                            th, td { padding: 8px 12px; text-align: left; }
+                            @media print {
+                                body { padding: 0; }
+                                .page-break { page-break-after: always; }
+                            }
+                        </style>
+                    </head>
+                    <body>
+                        <h2>Mocks Wallah - Analysis</h2>
+                        <div style="margin-bottom:30px">
+                            <div><strong>Score:</strong> ${this.els.scoreDisp.textContent}</div>
+                            <div><strong>Correct:</strong> ${this.els.corrStat.textContent}</div>
+                            <div><strong>Incorrect:</strong> ${this.els.incStat.textContent}</div>
+                            <div><strong>Unattempted:</strong> ${this.els.unaStat.textContent}</div>
+                            <div><strong>Time taken:</strong> ${this.els.timeStat.textContent} minutes</div>
+                        </div>
+                        ${questionsHtml}
+                        <script>
+                            setTimeout(() => { window.print(); }, 500);
+                        <\/script>
+                    </body>
+                    </html>
+                `);
+                printWindow.document.close();
+            }
+            
+            // Section-related helper methods
+            isInCurrentSection(qIdx) {
+                if (!this.sections) return true;
+                const section = this.sections[this.currentSection];
+                return qIdx >= section.start && qIdx <= section.end;
+            }
+            
+            findSectionForQuestion(qIdx) {
+                if (!this.sections) return null;
+                for (let i = 0; i < this.sections.length; i++) {
+                    const section = this.sections[i];
+                    if (qIdx >= section.start && qIdx <= section.end) {
+                        return i;
+                    }
+                }
+                return null;
+            }
+            
+            getSectionNameForQuestion(qIdx) {
+                if (!this.sections) return '';
+                const sectionIdx = this.findSectionForQuestion(qIdx);
+                return sectionIdx !== null ? this.sections[sectionIdx].name : '';
+            }
+        }
+        
+        document.addEventListener('DOMContentLoaded', () => new TestApp());
+    </script>
+</body>
+</html>

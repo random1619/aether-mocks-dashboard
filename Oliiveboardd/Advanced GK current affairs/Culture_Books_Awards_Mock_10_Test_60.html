@@ -1,0 +1,1377 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Culture Books Awards Mock 10 Test 60</title>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+<link href="assets/css/main.css" rel="stylesheet"/></head>
+<body>
+<!-- Welcome Screen -->
+<div class="welcome-screen" id="welcomeScreen">
+<h1 class="welcome-title">Exam ID : gktests</h1>
+<div class="welcome-details">
+<div class="welcome-detail">
+<span class="welcome-detail-label">Test ID</span>
+<span class="welcome-detail-value">60 </span>
+</div>
+<div class="welcome-detail">
+<span class="welcome-detail-label">Total Questions:</span>
+<span class="welcome-detail-value">30</span>
+</div>
+<div class="welcome-detail">
+<span class="welcome-detail-label">Total Marks:</span>
+<span class="welcome-detail-value">30</span>
+</div>
+<div class="welcome-detail">
+<span class="welcome-detail-label">Duration:</span>
+<span class="welcome-detail-value">60 minutes</span>
+</div>
+<div class="welcome-detail">
+<span class="welcome-detail-label">Marking:</span>
+<span class="welcome-detail-value">+1 / -0.25</span>
+</div>
+</div>
+<div class="welcome-instructions">
+<h3>Instructions</h3>
+<ul>
+<li>Read each question carefully before answering</li>
+<li>You can mark questions for review and come back later</li>
+<li>The timer will automatically submit the test when time is up</li>
+<li>Negative marking applies for wrong answers</li>
+</ul>
+</div>
+<div class="welcome-buttons">
+<button class="welcome-button" id="startTestBtn">
+<i class="fas fa-play"></i> Start Test
+        </button>
+<a class="join-channel" href="https://t.me/mocks_wallah_again" target="_blank">
+<i class="fab fa-telegram"></i> Join Our Channel
+        </a>
+</div>
+</div>
+<!-- Main Test Interface (hidden initially) -->
+<div id="mainTestInterface" style="display:none">
+<div class="hdr">
+<div class="hdr-l">
+<div class="q-info" id="qInfo">Q1/30</div>
+<div class="timer" id="timer">60:00</div>
+</div>
+<div class="hdr-c">Mocks Wallah</div>
+<div class="hdr-r">
+<button class="theme-toggle" id="themeToggle"><i class="fas fa-moon"></i></button>
+<button class="btn btn-o btn-sm" id="menuBtn"><i class="fas fa-th"></i></button>
+<button class="btn btn-p btn-sm" id="subBtn">Submit</button>
+</div>
+</div>
+<div class="cont">
+<div class="q-card">
+<div class="lang">
+<button class="lang-btn active" id="engBtn">English</button>
+<button class="lang-btn" id="hinBtn">हिंदी</button>
+</div>
+<div class="comp" id="compSec" style="display:none">
+<h4><i class="fas fa-book"></i> Comprehension</h4>
+<div id="compCont"></div>
+</div>
+<div class="q-txt" id="qTxt"></div>
+<div class="opts" id="opts"></div>
+<div class="sol" id="sol">
+<div class="sol-info" id="solInfo"></div>
+<h4><i class="fas fa-lightbulb"></i> Solution</h4>
+<div id="solCont"></div>
+</div>
+</div>
+</div>
+<div class="nav">
+<button class="btn btn-o nav-btn" id="prevBtn"><i class="fas fa-chevron-left"></i> Prev</button>
+<button class="btn btn-w nav-btn" id="reviewBtn"><i class="fas fa-flag"></i> Review</button>
+<div class="prog">
+<div id="progTxt">1 of 30</div>
+<div style="font-size:11px">Answered: <span id="ansCnt">0</span> | <a href="https://t.me/mocks_wallah_again">Mocks Wallah</a></div>
+</div>
+<button class="btn btn-p nav-btn" id="nextBtn">Next <i class="fas fa-chevron-right"></i></button>
+</div>
+<div class="desktop-sidebar" id="desktopSidebar">
+<h3>Questions Navigator</h3>
+<div class="q-grid" id="desktopQGrid"></div>
+<div style="margin-top:20px;font-size:12px;color:var(--txtL)">
+<div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
+<div class="q-num ans" style="width:24px;height:24px">✓</div><span>Answered</span>
+</div>
+<div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
+<div class="q-num review" style="width:24px;height:24px">!</div><span>Marked for Review</span>
+</div>
+<div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
+<div class="q-num wrong" style="width:24px;height:24px">✗</div><span>Incorrect</span>
+</div>
+<div style="display:flex;align-items:center;gap:8px">
+<div class="q-num unattempted" style="width:24px;height:24px">?</div><span>Unattempted</span>
+</div>
+</div>
+</div>
+<div class="panel" id="panel">
+<div class="panel-hdr">
+<h3>All Questions</h3>
+<button class="panel-close" id="panelClose"><i class="fas fa-times"></i></button>
+</div>
+<div class="q-grid" id="qGrid"></div>
+<div style="padding:20px;font-size:12px;color:var(--txtL)">
+<div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
+<div class="q-num ans" style="width:24px;height:24px">✓</div><span>Answered</span>
+</div>
+<div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
+<div class="q-num review" style="width:24px;height:24px">!</div><span>Marked for Review</span>
+</div>
+<div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
+<div class="q-num wrong" style="width:24px;height:24px">✗</div><span>Incorrect</span>
+</div>
+<div style="display:flex;align-items:center;gap:8px">
+<div class="q-num unattempted" style="width:24px;height:24px">?</div><span>Unattempted</span>
+</div>
+</div>
+</div>
+<button class="print-btn" id="printBtn" style="display:none">
+<i class="fas fa-print"></i>
+</button>
+<div class="modal" id="modalOver">
+<div class="result">
+<h2>Test Complete!</h2>
+<div class="score" id="scoreDisp">0/30</div>
+<div class="stats">
+<div class="stat c"><div class="stat-val" id="corrStat">0</div><div class="stat-lbl">Correct</div></div>
+<div class="stat w"><div class="stat-val" id="incStat">0</div><div class="stat-lbl">Incorrect</div></div>
+<div class="stat"><div class="stat-val" id="unaStat">0</div><div class="stat-lbl">Unattempted</div></div>
+<div class="stat"><div class="stat-val" id="timeStat">0</div><div class="stat-lbl">Minutes</div></div>
+</div>
+<div class="modal-acts">
+<button class="btn btn-o modal-btn" id="closeModal">Close</button>
+<button class="btn btn-p modal-btn" id="revBtn">Review</button>
+</div>
+</div>
+</div>
+</div>
+<script>
+        class TestApp {
+            constructor() {
+            this.qs = [
+  {
+    "question": "<p>Which among the following form of painting is basically a religious art?</p>",
+    "options": [
+      "Kalamkari",
+      "Kangra",
+      "Mithila",
+      "Nathdwara",
+      "Thangka"
+    ],
+    "correct_option_id": 4,
+    "solution": "<p>Thangka is a traditional Tibetan form of religious art originating in India. It is related to Buddhism. They are scroll paintings usually framed in colorful silk brocade and have a thin silk veil covering the front surface. They are highly religious, and possess a unique art style of their own.</p>",
+    "question_index": 0
+  },
+  {
+    "question": "<p>Which among the following traditional dance belongs to state of Jammu &amp; Kashmir?</p>",
+    "options": [
+      "Kud",
+      "Rauf",
+      "Jabro",
+      "Mayur",
+      "Rathwa"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p>Rauf is traditional dance of J&amp;K. It is performed by a group of women facing each other lined up in two lines and dressed in beautiful costumes. The dance has simple footwork which also called as Chakri in local language. The dance is often performed in spring season to celebrate good weather.</p>",
+    "question_index": 1
+  },
+  {
+    "question": "<p>Kalaripayattu is a martial art form of which of the following state?</p>",
+    "options": [
+      "Kerala",
+      "Goa",
+      "Assam",
+      "Sikkim",
+      "Nagaland"
+    ],
+    "correct_option_id": 0,
+    "solution": "<p>Kalarippayattu is the indigenous martial art of Kerala. Kalaripayattu techniques are a combination of steps (Chuvatu) and postures (Vadivu). It has reference in Tamil Sangam Literature. Each stance has its own style, power combination, function and effectiveness.</p>",
+    "question_index": 2
+  },
+  {
+    "question": "<p>Ambubhachi Festival is associated with which state?</p>",
+    "options": [
+      "Andhra Pradesh",
+      "Assam",
+      "Arunachal Pradesh",
+      "Maharashtra",
+      "Rajasthan"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p>It is a festival of Kamakhya temple, Guwhati, Assam. It is celebrated every year during monsoon season and ambubachi mela is also held. The Kamakhya Temple is known to be one of the 52 shakti peethas of goddess Shakti. It is associated with tantric cult and this festival is also known as \"mahakumbh of east\".</p>",
+    "question_index": 3
+  },
+  {
+    "question": "<p>Which among the following festival is associated with agricultural practice Jhumming?</p>",
+    "options": [
+      "Chapchar Kut",
+      "Nabakalebar",
+      "Saga Dawa",
+      "Medaram Jathara",
+      "Dola Melana"
+    ],
+    "correct_option_id": 0,
+    "solution": "<p>Chapchar Kut festival held during the period when the bamboos and trees that have been cut down are being awaited to dry to be burnt for jhumming. It marked the end of the Jhum clearing, readying the field for sowing and the festive spirit lasts from three to seven days in March. The traditional costume parades, showcasing dances like cheraw, chai, chheihlam, sarlamkai and musical performances by groups, among others, are part of the celebrations.</p>",
+    "question_index": 4
+  },
+  {
+    "question": "<p>Which among the art form is related to mimicry?</p>",
+    "options": [
+      "Thang Ta",
+      "Mallakhamb",
+      "Bahurupiya",
+      "Zardozi",
+      "None of the above"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p>The art of the bahurupiya is the ability to create convincing impersonations of identifiable types. It is associated with Bhands, but formerly members of various castes, including Brahmans, practiced this art in villages as well as courts.</p>",
+    "question_index": 5
+  },
+  {
+    "question": "<p>Lad Khan Temple is situated in which of the following state?</p>",
+    "options": [
+      "Andhra Pradesh",
+      "Uttar Pradesh",
+      "Gujarat",
+      "Karnataka",
+      "Rajasthan"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p>The Lad Khan Temple, dedicated to Shiva, is located in Aihole in the state of Karnataka. The temple was built in a Panchayatana style. The temple is named after a person named Lad khan, who turned this temple into his residence for a short period.</p>",
+    "question_index": 6
+  },
+  {
+    "question": "<p>Which among the following temple is NOT a part of UNESCO World Heritage Site?</p>",
+    "options": [
+      "Bodh Gaya",
+      "Konark Sun Temple",
+      "Brihadisvara Temple",
+      "Ratha Temple",
+      "Tungnath Temple"
+    ],
+    "correct_option_id": 4,
+    "solution": "<p>Tungnath is the highest Shiva temple in the world and is the highest of the five Panch Kedar temples, in Uttrakhand. It is linked to the origin of the Panch Kedar temples built by the Pandavas. It is made of black rock, and the construction style is similar to the temple in Kedarnath.</p>",
+    "question_index": 7
+  },
+  {
+    "question": "<p>Teppotsavam is celebrated in which of the following state?</p>",
+    "options": [
+      "Bihar",
+      "Uttarakhand",
+      "Assam",
+      "Punjab",
+      "Telangana"
+    ],
+    "correct_option_id": 4,
+    "solution": "<p>It is a 5-day annual float festival held in Telangana celebrated in month of Chaitra. In this festival, a Hamsavahanam' (swan-shaped boat), carried the processional idols of Lord Rama and His consort Sita in Godavari river.</p>",
+    "question_index": 8
+  },
+  {
+    "question": "<p>Jallikattu event is a part of which of the following festival?</p>",
+    "options": [
+      "Thaipusam",
+      "Pongal",
+      "Mahamaham",
+      "Karthigai Deepam",
+      "Vishu"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p>Jallikattu is a bull-vaulting event practised in Tamil Nadu as a part of Pongal celebrations on Mattu Pongal day. Participants tackle the bull in an arena by its hump and try to hang on till they cross the finishing line. It is an ancient sport having references in Sangam literature. It is also called as Eru Thazhuvuthal (hugging the bull).</p>",
+    "question_index": 9
+  },
+  {
+    "question": "<p>\"Joseph Anton\" is the autobiography of who among the following?</p>",
+    "options": [
+      "V.S. Naipaul",
+      "Arundhati Roy",
+      "Vinod Rai",
+      "Salman Rushdie",
+      "Kiran Bedi"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p>Joseph Anton: A Memoir is an autobiographical book by Salman Rushdie. The memoir is unusual in the sense that Rushdie writes about his life as 'Joseph Anton' in the third person rather than the first person. He chose the name to honor the writers Joseph Conrad and Anton Chekhov.</p>",
+    "question_index": 10
+  },
+  {
+    "question": "<p>The movie Slumdog Millionaire was based on which among the following book?</p>",
+    "options": [
+      "Lucky Indian",
+      "Prince of Mumbai",
+      "Q&amp;A",
+      "One Million",
+      "Richie Rich"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p>The movie was based on the book Q&amp;A. It was written by Vikas Swarup. Q &amp; A won the South Africa's Boeke Prize 2006. It was also nominated for the Best First Book by the Commonwealth Writers' Prize and won the Prix Grand Public at the 2007 Paris Book Fair.</p>",
+    "question_index": 11
+  },
+  {
+    "question": "<p>\"Indian Parliamentary Diplomacy\" was written by?</p>",
+    "options": [
+      "Meira Kumar",
+      "Sushma Swaraj",
+      "Venkaiah Naidu",
+      "Sumitra Mahajan",
+      "Shashi Tharoor"
+    ],
+    "correct_option_id": 0,
+    "solution": "<p>The book \"Indian Parliamentary Diplomacy\" written by Smt. Meira Kumar, former Speaker, Lok Sabha. The book is an account of the role of parliamentary diplomacy in furthering foreign policy and strengthening international relations. The volume is a collection of reports and select speeches that Smt. Kumar as Lok Sabha Speaker and leader of Indian Parliamentary Delegations delivered at international conferences and during her visits abroad.</p>",
+    "question_index": 12
+  },
+  {
+    "question": "<p>The book \"Fragile Frontiers\" deals with which of the following?</p>",
+    "options": [
+      "Kargil Attack",
+      "Mumbai Terror Attack",
+      "Indo-China border tensions",
+      "Illegal migration of Bangladeshis",
+      "Issue of Jammu and Kashmir"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p>Fragile Frontiers: The Secret History of Mumbai Terror Attacks is a book by Indian writer Saroj Kumar Rath. The book is about terrorism in South Asia, centering on the 2008 Mumbai attacks.</p>",
+    "question_index": 13
+  },
+  {
+    "question": "<p>The book \"The Crisis Within\" deals with which of the following?</p>",
+    "options": [
+      "Environment",
+      "Politics",
+      "Poverty",
+      "Education",
+      "Economy"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p>The book was authored by Ganesh Devy. It deals with Knowledge and Education in India. It points out the lack of infrastructure, adequate funding and genuine autonomy within educational institutions, departments within those institutions and individuals who teach in those departments.</p>",
+    "question_index": 14
+  },
+  {
+    "question": "<p>Who is the author of the book \"The people's President: Dr. A.P.J.Abdul Kalam\"?</p>",
+    "options": [
+      "Rajdeep Sardesai",
+      "Vijay Darda",
+      "Vir Sanghvi",
+      "Uma Lele",
+      "S.M.Khan"
+    ],
+    "correct_option_id": 4,
+    "solution": "<p>It was authored by S.M.Khan. The book gives a comprehensive compendium of Dr Kalam's experiences as the President of India and his post-presidency days.</p>",
+    "question_index": 15
+  },
+  {
+    "question": "<p>Who among the following current/former Chief Minister of Indian State is the author of the book \"My Unforgettable Memories\"?</p>",
+    "options": [
+      "Chandrababu Naidu",
+      "Mamatha Banerjee",
+      "Mehbooba Mufti",
+      "Vasundhara Raje",
+      "Yogi Adityanath"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p>West Bengal Chief Minster Mamatha Banerjee is the author of the book \"My Unforgettable Memories\". It gives an account of her life, right from her youth to her political career.</p>",
+    "question_index": 16
+  },
+  {
+    "question": "<p>\"My Favourite Nature Stories\" was authored by?</p>",
+    "options": [
+      "Khaled Hosseini",
+      "Chris Cleave",
+      "Jessa Crispin",
+      "Ruskin Bond",
+      "Salman Rushdie"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p>The book was written by Ruskin Bond. It talks about his various encounters with the natural world. It also gives a picture of his life in Mussoorie, India.</p>",
+    "question_index": 17
+  },
+  {
+    "question": "<p>Which among the following is the final part of JK Rowling's Harry Potter Series?</p>",
+    "options": [
+      "Harry Potter and the Half-Blood Prince",
+      "Harry Potter and the Philosopher's Stone",
+      "Harry Potter and the Cursed Child",
+      "Harry Potter and the Prisoner of Azkaban",
+      "Harry Potter and the Deathly Hallows"
+    ],
+    "correct_option_id": 4,
+    "solution": "<p>Harry Potter is a series of fantasy novels written by British author J. K. Rowling. The first novel, Harry Potter and the Philosopher's Stone and last one of the series was Harry Potter and the Deathly Hallows.</p>",
+    "question_index": 18
+  },
+  {
+    "question": "<p>Apart from JK Rowling, who among the following has co-authored the new story \"Harry Potter and the Cursed Child\"?</p>",
+    "options": [
+      "John Tiffany",
+      "Sam Clemmett",
+      "Anthony Boyle",
+      "Jamie Parker",
+      "Paul Thornley"
+    ],
+    "correct_option_id": 0,
+    "solution": "<p>Harry Potter and the Cursed Child is a two-part stage play written by Jack Thorne based on an original new story by Thorne, J. K. Rowling and John Tiffany. The story begins nineteen years after the events of Harry Potter and the Deathly Hallows.</p>",
+    "question_index": 19
+  },
+  {
+    "question": "<p>Which among the following sporting awards are given for lifetime achievements?</p>",
+    "options": [
+      "Arjuna Award",
+      "Rajiv Gandhi Khel Ratan",
+      "Dronacharya Award",
+      "Dyanchand Award",
+      "Bharat Award"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p>The Dhyan Chand Award is the lifetime achievement sporting honour presented in India. It is also known as Dhyan Chand Award for Lifetime Achievement in Sports and Games. It is awarded annually by the Ministry of Youth Affairs and Sports. The award is given only to the disciplines included in the events like Olympic Games, Paralympic Games, Asian Games, Commonwealth Games, World Championship and World Cup along with Cricket, Indigenous Games, and Parasports.</p>",
+    "question_index": 20
+  },
+  {
+    "question": "<p>Dhronacharya award was first instituted in which year?</p>",
+    "options": [
+      "1975",
+      "1980",
+      "1985",
+      "1990",
+      "1995"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p>Dhronacharya award was first instituted in the year 1985. It is awarded to honor sport coaches in India. The award is given only to the disciplines included in the events like Olympic Games, Paralympic Games, Asian Games, Commonwealth Games, World Championship and World Cup along with Cricket, Indigenous Games, and Parasports. The first recipients of the award were Bhalachandra Bhaskar Bhagwat (Wrestling), Om Prakash Bhardwaj (Boxing), and O. M. Nambiar (Athletics).</p>",
+    "question_index": 21
+  },
+  {
+    "question": "<p>Who among the following is the first woman recipient of Fields Medal?</p>",
+    "options": [
+      "Mary Cartwright",
+      "Ingrid Daubechies",
+      "Ada Lovelace",
+      "Maryam Mirzakhani",
+      "Leonre Blum"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p>Maryam Mirzakhani, an Iranian mathematician who was the only woman ever to win a Fields Medal. She has also won the gold medal in the International Mathematical Olympiad.</p><p>Fields Medal is associated with Mathematics. It is the highest scientific award for mathematicians, and is presented every four years at the International Congress of Mathematicians. The awards recognize both existing work and the promise of future achievement, presented to mathematicians not over forty at the year of the Congress.</p>",
+    "question_index": 22
+  },
+  {
+    "question": "<p>DSC Prize is associated with which field?</p>",
+    "options": [
+      "Literature",
+      "Sports",
+      "Music",
+      "Medicine",
+      "Bravery"
+    ],
+    "correct_option_id": 0,
+    "solution": "<p>The DSC Prize for South Asian Literature is an international literary prize awarded annually to writers of any ethnicity or nationality writing about South Asia themes such as culture, politics, history, or people. It is for an original full-length novel written in English, or translated into English.</p>",
+    "question_index": 23
+  },
+  {
+    "question": "<p>DSC Prize was first awarded in the year?</p>",
+    "options": [
+      "2000",
+      "2007",
+      "2011",
+      "2005",
+      "2015"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p>The DSC Prize was instituted by Surina Narula and Manhad Narula in 2010 and was first awarded in the year 2011. It was presented to H.M.Naqvi for his work Home Boy. The winner receives 25,000 USD.</p>",
+    "question_index": 24
+  },
+  {
+    "question": "<p>Who is the first Indian to receive DSC Prize?</p>",
+    "options": [
+      "Arundhati Roy",
+      "Jeet Thayil",
+      "Cyrus Mistry",
+      "Manju Kapur",
+      "Chandrakanta"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p>Jeet Thayil is an Indian poet, novelist, librettist and musician. He was the first Indian to receive the award for his work Narcopolis. The DSC Prize for South Asian Literature is an international literary prize awarded annually to writers of any ethnicity or nationality writing about South Asia themes such as culture, politics, history, or people.</p>",
+    "question_index": 25
+  },
+  {
+    "question": "<p>Which among the following awards are instituted by Ministry of Labour &amp; Employment?</p>",
+    "options": [
+      "Prime Minister's Shram Awards",
+      "National Safety Awards (Mines)",
+      "Vishwakarma Rashtriya Puraskar",
+      "Both 1 &amp; 3",
+      "All 1, 2 &amp; 3"
+    ],
+    "correct_option_id": 4,
+    "solution": "<p>All the above-mentioned awards along with National Safety Awards (Factories) are also instituted by Ministry of Labour &amp; Employment. The objective of the Prime Ministers Shram Awards is to recognize the outstanding contributions made by workmen as defined in the Industrial Dispute Act, 1947 in organizations both in public and private sector and who have distinguished record of performance, devotion to duty of a high order, specific contribution in the field of productivity, proven innovative abilities, presence of mind and exceptional courage and also to the workmen who have made supreme sacrifice of laying down their lives in the conscientious discharge of their duties.</p><p>Vishwakarma Rashtriya Purashkar is for rewarding &amp; recognizing the efforts of workers from the industrial undertakings at the national level.</p><p>National Safety Awards to promote a competitive spirit amongst mine/factory operators for the betterment of safety standards in mines/factories and to give due recognition to outstanding safety performance at national level.</p>",
+    "question_index": 26
+  },
+  {
+    "question": "<p>Medini Purashkar Award is presented by which among the following ministry?</p>",
+    "options": [
+      "Ministry of Corporate Affairs",
+      "Ministry of Environment, Forest and Climate Change",
+      "Ministry of Human Resource Development",
+      "Ministry of Women and Child Development",
+      "Ministry of Social Justice and Empowerment"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p>It is presented by Ministry of Environment, Forest and Climate Change. This award is given to Indian authors each year to encourage original works in Hindi on environment and its related subjects such as wildlife, water resources and conservation. Four cash awards are presented under this category.</p>",
+    "question_index": 27
+  },
+  {
+    "question": "<p>National Photography Award is instituted by which ministry?</p>",
+    "options": [
+      "Ministry of Electronics and Information Technology",
+      "Ministry of Communications",
+      "Ministry of Information and Broadcasting",
+      "Ministry of Culture",
+      "Ministry of Tourism"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p>The award is instituted by Ministry of information and Broadcasting. The objective is to promote Nation's, Art, Culture, Development, Heritage, History, Life, People, Society, Traditions, etc with art and technique of photography and to encourage professional and amateur photographers from all corners of the country.</p>",
+    "question_index": 28
+  },
+  {
+    "question": "<p>The book \"Fearless in Opposition: Power and Accountability\" was authored by?</p>",
+    "options": [
+      "P. Chidambaram",
+      "Pranab Mukherjee",
+      "Mallikarjun Kharge",
+      "Ghulam Nabi Azad",
+      "Sonia Gandhi"
+    ],
+    "correct_option_id": 0,
+    "solution": "<p>It was written by P. Chidambaram, former Finance Minister. It is a collection of the finest and most incisive essays published as a weekly column in the Indian EXPRESS by the author. He answers questions to some contentious issues under the rule of NDA government.</p>",
+    "question_index": 29
+  }
+];
+            this.sections = null;
+            this.curQ = 0;
+            this.ans = new Array(this.qs.length).fill(null);
+            this.reviewed = new Array(this.qs.length).fill(false);
+            this.startT = Date.now();
+            this.timeLeft = 60 * 60;
+            this.timeSpent = new Array(this.qs.length).fill(0);
+            this.lastQTime = this.startT;
+            this.sub = false;
+            this.eng = true;
+            this.darkMode = false;
+            this.timer = null;
+            this.sectionTimer = null;
+            this.currentSection = this.sections ? 0 : null;
+            this.initEls();
+            this.setupWelcomeScreen();
+            this.validateData();
+            this.setupBeforeUnload();
+        }
+            
+            setupWelcomeScreen() {
+                document.getElementById('startTestBtn').addEventListener('click', () => {
+                    // Hide welcome screen
+                    document.getElementById('welcomeScreen').classList.add('hidden');
+                    
+                    // Show main test interface
+                    document.getElementById('mainTestInterface').style.display = '';
+                    
+                    // Initialize the test
+                    setTimeout(() => {
+                        this.init();
+                    }, 300);
+                });
+            }
+            
+            setupBeforeUnload() {
+                window.addEventListener('beforeunload', (e) => {
+                    if (!this.sub) {
+                        e.preventDefault();
+                        e.returnValue = 'Are you sure you want to leave? Your test progress will be lost.';
+                        return e.returnValue;
+                    }
+                });
+            }
+            
+            validateData() {
+                console.log('Validating question data...');
+                this.qs.forEach((q, idx) => {
+                    if (q.correct_option_id !== undefined) {
+                        console.log(`Q${idx + 1}: correct_option_id = ${q.correct_option_id}, options count = ${q.options ? q.options.length : 0}`);
+                        
+                        if (q.options && (q.correct_option_id < 0 || q.correct_option_id >= q.options.length)) {
+                            console.warn(`Q${idx + 1}: Invalid correct_option_id ${q.correct_option_id} for ${q.options.length} options`);
+                        }
+                    }
+                });
+            }
+            
+            initEls() {
+                this.els = {
+                    qInfo: document.getElementById('qInfo'),
+                    progTxt: document.getElementById('progTxt'),
+                    ansCnt: document.getElementById('ansCnt'),
+                    timer: document.getElementById('timer'),
+                    qTxt: document.getElementById('qTxt'),
+                    compSec: document.getElementById('compSec'),
+                    compCont: document.getElementById('compCont'),
+                    opts: document.getElementById('opts'),
+                    sol: document.getElementById('sol'),
+                    solCont: document.getElementById('solCont'),
+                    solInfo: document.getElementById('solInfo'),
+                    qGrid: document.getElementById('qGrid'),
+                    desktopQGrid: document.getElementById('desktopQGrid'),
+                    panel: document.getElementById('panel'),
+                    modalOver: document.getElementById('modalOver'),
+                    scoreDisp: document.getElementById('scoreDisp'),
+                    corrStat: document.getElementById('corrStat'),
+                    incStat: document.getElementById('incStat'),
+                    unaStat: document.getElementById('unaStat'),
+                    timeStat: document.getElementById('timeStat'),
+                    printBtn: document.getElementById('printBtn'),
+                    desktopSidebar: document.getElementById('desktopSidebar'),
+                    reviewBtn: document.getElementById('reviewBtn'),
+                    themeToggle: document.getElementById('themeToggle'),
+                    sectionHeader: this.sections ? document.getElementById('sectionHeader') : null,
+                    sectionTitle: this.sections ? document.getElementById('sectionTitle') : null,
+                    sectionTimer: this.sections ? document.getElementById('sectionTimer') : null
+                };
+            }
+            
+            init() {
+                this.createGrid();
+                this.startTimer();
+                if (this.sections) {
+                    this.startSectionTimer();
+                    this.updateSectionHeader();
+                }
+                this.loadQ(0);
+                this.setupEvents();
+                this.updatePrintButton();
+                this.updateThemeToggleIcon();
+            }
+            
+            setupEvents() {
+                document.getElementById('menuBtn').onclick = () => this.togglePanel();
+                document.getElementById('subBtn').onclick = () => this.confirmSub();
+                document.getElementById('prevBtn').onclick = () => this.nav(-1);
+                document.getElementById('nextBtn').onclick = () => this.nav(1);
+                document.getElementById('reviewBtn').onclick = () => this.toggleReview();
+                document.getElementById('engBtn').onclick = () => this.setLang(true);
+                document.getElementById('hinBtn').onclick = () => this.setLang(false);
+                document.getElementById('panelClose').onclick = () => this.closePanel();
+                document.getElementById('closeModal').onclick = () => this.closeModal();
+                document.getElementById('revBtn').onclick = () => this.review();
+                document.getElementById('printBtn').onclick = () => this.printTest();
+                document.getElementById('themeToggle').onclick = () => this.toggleTheme();
+            }
+            
+            // IMPROVED: Better handling of complex HTML content including math expressions
+            extractTxt(html, isEng) {
+                if (!html) return '';
+                
+                // Create a temporary div to parse the HTML
+                const tempDiv = document.createElement('div');
+                tempDiv.innerHTML = html;
+                
+                // Process math expressions - convert them to proper HTML structure
+                const mathExps = tempDiv.querySelectorAll('div[style*="inline-block"][style*="vertical-align: middle"]');
+                mathExps.forEach(mathExp => {
+                    // Create a new math expression container
+                    const newMathExp = document.createElement('div');
+                    newMathExp.className = 'math-exp';
+                    
+                    // Get numerator and denominator
+                    const spans = mathExp.querySelectorAll('span');
+                    if (spans.length >= 3) {
+                        const numerator = spans[0].cloneNode(true);
+                        const line = spans[1].cloneNode(true);
+                        const denominator = spans[2].cloneNode(true);
+                        
+                        // Clean up the numerator
+                        const numDiv = document.createElement('div');
+                        numDiv.className = 'math-num';
+                        numDiv.innerHTML = numerator.innerHTML;
+                        
+                        // Create the dividing line
+                        const lineDiv = document.createElement('div');
+                        lineDiv.className = 'math-line';
+                        
+                        // Clean up the denominator
+                        const denDiv = document.createElement('div');
+                        denDiv.className = 'math-num';
+                        denDiv.innerHTML = denominator.innerHTML;
+                        
+                        // Build the new math expression
+                        newMathExp.appendChild(numDiv);
+                        newMathExp.appendChild(lineDiv);
+                        newMathExp.appendChild(denDiv);
+                        
+                        // Replace the original with our new structure
+                        mathExp.parentNode.replaceChild(newMathExp, mathExp);
+                    }
+                });
+                
+                // Handle language selection - show/hide appropriate spans
+                const langSpans = tempDiv.querySelectorAll('span.eqt, span.hqt');
+                langSpans.forEach(span => {
+                    if ((isEng && span.classList.contains('hqt')) || 
+                        (!isEng && span.classList.contains('eqt'))) {
+                        span.style.display = 'none';
+                    } else {
+                        span.style.display = '';
+                        // Remove the class to prevent future hiding
+                        span.classList.remove('eqt', 'hqt');
+                    }
+                });
+                
+                // Clean up any remaining display:none styles
+                const hiddenElements = tempDiv.querySelectorAll('[style*="display:none"]');
+                hiddenElements.forEach(el => {
+                    if (el.style.display === 'none' && 
+                        !el.classList.contains('hqt') && 
+                        !el.classList.contains('eqt')) {
+                        el.style.display = '';
+                    }
+                });
+                
+                // Handle tables - wrap them in a scrollable container
+                const tables = tempDiv.querySelectorAll('table');
+                tables.forEach(table => {
+                    const container = document.createElement('div');
+                    container.className = 'table-container';
+                    table.parentNode.insertBefore(container, table);
+                    container.appendChild(table);
+                });
+                
+                return tempDiv.innerHTML;
+            }
+            
+            createGrid() {
+                this.els.qGrid.innerHTML = '';
+                this.els.desktopQGrid.innerHTML = '';
+                
+                this.qs.forEach((_, i) => {
+                    // Create mobile grid element
+                    const mobileDiv = document.createElement('div');
+                    mobileDiv.className = 'q-num';
+                    mobileDiv.textContent = i + 1;
+                    mobileDiv.onclick = () => this.goToQ(i);
+                    this.els.qGrid.appendChild(mobileDiv);
+                    
+                    // Create desktop grid element
+                    const desktopDiv = document.createElement('div');
+                    desktopDiv.className = 'q-num';
+                    desktopDiv.textContent = i + 1;
+                    desktopDiv.onclick = () => this.goToQ(i);
+                    this.els.desktopQGrid.appendChild(desktopDiv);
+                });
+            }
+            
+            loadQ(idx) {
+                // Update time spent on previous question
+                if (this.curQ !== idx) {
+                    const now = Date.now();
+                    this.timeSpent[this.curQ] += (now - this.lastQTime) / 1000;
+                    this.lastQTime = now;
+                }
+                
+                this.curQ = idx;
+                const q = this.qs[idx];
+                
+                // Check if question is in current section (if sections exist)
+                if (this.sections) {
+                    const inCurrentSection = this.isInCurrentSection(idx);
+                    if (!inCurrentSection) {
+                        // Find the section this question belongs to
+                        const sectionIdx = this.findSectionForQuestion(idx);
+                        if (sectionIdx !== null && !this.sections[sectionIdx].submitted) {
+                            this.currentSection = sectionIdx;
+                            this.startSectionTimer();
+                            this.updateSectionHeader();
+                        }
+                    }
+                }
+                
+                this.els.qInfo.textContent = `Q${idx + 1}/${this.qs.length}`;
+                this.els.progTxt.textContent = `${idx + 1} of ${this.qs.length}`;
+                this.updateAnsCnt();
+                this.updateNav();
+                this.updateGrid();
+                this.updateReviewButton();
+                
+                if (q.comp) {
+                    this.els.compSec.style.display = 'block';
+                    this.els.compCont.innerHTML = this.extractTxt(q.comp, this.eng);
+                } else {
+                    this.els.compSec.style.display = 'none';
+                }
+                
+                this.els.qTxt.innerHTML = this.extractTxt(q.question, this.eng);
+                this.loadOpts(q, idx);
+                
+                if (this.sub && q.solution) {
+                    // Show time spent on question in solution
+                    const timeSpent = Math.round(this.timeSpent[idx]);
+                    const minutes = Math.floor(timeSpent / 60);
+                    const seconds = timeSpent % 60;
+                    const timeStr = minutes > 0 
+                        ? `${minutes}m ${seconds}s` 
+                        : `${seconds}s`;
+                    
+                    this.els.solInfo.innerHTML = `
+                        <span><i class="fas fa-clock"></i> Time spent: ${timeStr}</span>
+                        <span><i class="fas fa-check-circle"></i> Correct answer: ${String.fromCharCode(65 + q.correct_option_id)}</span>
+                    `;
+                    
+                    this.els.solCont.innerHTML = this.extractTxt(q.solution, this.eng);
+                    this.els.sol.classList.add('show');
+                } else {
+                    this.els.sol.classList.remove('show');
+                }
+            }
+            
+            loadOpts(q, qIdx) {
+                this.els.opts.innerHTML = '';
+                const userAnswer = this.ans[qIdx];
+                const correctAnswer = q.correct_option_id;
+                
+                console.log(`Loading Q${qIdx + 1} options:`, {
+                    userAnswer: userAnswer,
+                    correctAnswer: correctAnswer,
+                    submitted: this.sub,
+                    optionsCount: q.options ? q.options.length : 0
+                });
+                
+                if (!q.options || !Array.isArray(q.options)) {
+                    console.error(`Q${qIdx + 1}: No valid options array`);
+                    return;
+                }
+                
+                q.options.forEach((opt, i) => {
+                    const div = document.createElement('div');
+                    let cls = 'opt';
+                    
+                    if (this.sub) {
+                        cls += ' submitted';
+                    }
+                    
+                    if (userAnswer === i) {
+                        cls += ' sel';
+                        console.log(`Q${qIdx + 1}: User selected option ${i}`);
+                    }
+                    
+                    if (this.sub && correctAnswer !== undefined && correctAnswer !== null) {
+                        if (i === correctAnswer) {
+                            cls += ' correct';
+                            console.log(`Q${qIdx + 1}: Option ${i} marked as correct (is correct answer)`);
+                        } else if (userAnswer === i && userAnswer !== correctAnswer) {
+                            cls += ' wrong';
+                            console.log(`Q${qIdx + 1}: Option ${i} marked as wrong (user selected but incorrect)`);
+                        }
+                    }
+                    
+                    div.className = cls;
+                    div.innerHTML = `
+                        <div class="opt-radio"></div>
+                        <div class="opt-txt">${this.extractTxt(opt, this.eng)}</div>
+                    `;
+                    
+                    if (!this.sub) {
+                        div.onclick = () => this.selOpt(i, qIdx);
+                    }
+                    
+                    this.els.opts.appendChild(div);
+                });
+            }
+            
+            selOpt(optIdx, qIdx) {
+                if (this.sub) return;
+                this.ans[qIdx] = this.ans[qIdx] === optIdx ? null : optIdx;
+                console.log(`Q${qIdx + 1}: Selected option ${optIdx}, answer array:`, this.ans[qIdx]);
+                this.loadOpts(this.qs[qIdx], qIdx);
+                this.updateAnsCnt();
+                this.updateGrid();
+            }
+            
+            toggleReview() {
+                if (this.sub) return;
+                this.reviewed[this.curQ] = !this.reviewed[this.curQ];
+                this.updateGrid();
+                this.updateReviewButton();
+            }
+            
+            updateReviewButton() {
+                const btn = this.els.reviewBtn;
+                if (this.reviewed[this.curQ]) {
+                    btn.classList.add('active');
+                    btn.innerHTML = '<i class="fas fa-flag"></i>';
+                } else {
+                    btn.classList.remove('active');
+                    btn.innerHTML = '<i class="fas fa-flag"></i>';
+                }
+            }
+            
+           nav(dir) {
+            const newIdx = this.curQ + dir;
+            
+            // If test is submitted, allow free navigation for review
+            if (this.sub) {
+                if (newIdx >= 0 && newIdx < this.qs.length) {
+                    this.loadQ(newIdx);
+                }
+                return;
+            }
+            
+            // During test, enforce section boundaries
+            if (this.sections) {
+                const currentSection = this.sections[this.currentSection];
+                if (newIdx < currentSection.start || newIdx > currentSection.end) {
+                    return; // Don't allow navigation outside current section
+                }
+            }
+            
+            if (newIdx >= 0 && newIdx < this.qs.length) {
+                this.loadQ(newIdx);
+            }
+        }
+        
+        goToQ(idx) {
+            // Always allow navigation when reviewing after submission
+            if (this.sub) {
+                this.loadQ(idx);
+                this.closePanel();
+                return;
+            }
+            
+            // During test, only allow navigation within current section
+            if (this.sections) {
+                const currentSection = this.sections[this.currentSection];
+                if (idx < currentSection.start || idx > currentSection.end) {
+                    return; // Block navigation outside current section
+                }
+            }
+            
+            this.loadQ(idx);
+            this.closePanel();
+        }
+        
+        updateGrid() {
+            const nums = this.els.qGrid.querySelectorAll('.q-num');
+            const desktopNums = this.els.desktopQGrid.querySelectorAll('.q-num');
+            
+            const updateNum = (el, i) => {
+                el.className = 'q-num';
+                
+                // Reset all special classes
+                el.classList.remove('cur', 'ans', 'wrong', 'review', 'unattempted', 'disabled');
+                
+                if (i === this.curQ) {
+                    el.classList.add('cur');
+                } else if (this.sub) {
+                    // After submission - prioritize correct/wrong over review status
+                    if (this.ans[i] !== null && this.qs[i].correct_option_id !== undefined) {
+                        if (this.ans[i] === this.qs[i].correct_option_id) {
+                            el.classList.add('ans');
+                        } else {
+                            el.classList.add('wrong');
+                        }
+                    } else if (this.ans[i] === null) {
+                        el.classList.add('unattempted');
+                    }
+                } else {
+                    // Before submission
+                    if (this.reviewed[i]) {
+                        el.classList.add('review');
+                    } else if (this.ans[i] !== null) {
+                        el.classList.add('ans');
+                    }
+                    
+                    // Disable questions from other sections (only if sections exist)
+                    if (this.sections) {
+                        const currentSection = this.sections[this.currentSection];
+                        if (i < currentSection.start || i > currentSection.end) {
+                            el.classList.add('disabled');
+                        }
+                    }
+                }
+            };
+            
+            nums.forEach(updateNum);
+            desktopNums.forEach(updateNum);
+        }
+        
+        updateNav() {
+            // Basic navigation limits
+            document.getElementById('prevBtn').disabled = this.curQ === 0;
+            document.getElementById('nextBtn').disabled = this.curQ === this.qs.length - 1;
+            document.getElementById('reviewBtn').style.display = this.sub ? 'none' : 'inline-flex';
+            
+            // Additional navigation restrictions for sections during test
+            if (this.sections && !this.sub) {
+                const currentSection = this.sections[this.currentSection];
+                document.getElementById('prevBtn').disabled = document.getElementById('prevBtn').disabled || 
+                    (this.curQ === currentSection.start);
+                document.getElementById('nextBtn').disabled = document.getElementById('nextBtn').disabled || 
+                    (this.curQ === currentSection.end);
+            }
+        }
+            
+            updateAnsCnt() {
+                const cnt = this.ans.filter(a => a !== null).length;
+                this.els.ansCnt.textContent = cnt;
+            }
+            
+            updatePrintButton() {
+                this.els.printBtn.style.display = this.sub ? 'flex' : 'none';
+            }
+            
+            updateThemeToggleIcon() {
+                const icon = this.darkMode ? 'fa-sun' : 'fa-moon';
+                this.els.themeToggle.innerHTML = `<i class="fas ${icon}"></i>`;
+            }
+            
+            updateSectionHeader() {
+                if (!this.sections || !this.els.sectionHeader) return;
+                
+                const section = this.sections[this.currentSection];
+                this.els.sectionTitle.textContent = section.name;
+                this.els.sectionTimer.textContent = this.formatTime(section.time_left);
+                
+                // Show the section header if we have sections
+                this.els.sectionHeader.style.display = 'flex';
+            }
+            
+            setLang(eng) {
+                this.eng = eng;
+                document.getElementById('engBtn').classList.toggle('active', eng);
+                document.getElementById('hinBtn').classList.toggle('active', !eng);
+                this.loadQ(this.curQ);
+            }
+            
+            toggleTheme() {
+                this.darkMode = !this.darkMode;
+                document.body.classList.toggle('dark-mode', this.darkMode);
+                this.updateThemeToggleIcon();
+                this.loadQ(this.curQ); // Refresh to apply dark mode styles
+            }
+            
+            startTimer() {
+                this.timer = setInterval(() => {
+                    this.timeLeft--;
+                    if (this.timeLeft <= 0) {
+                        clearInterval(this.timer);
+                        this.subTest();
+                        return;
+                    }
+                    const mins = Math.floor(this.timeLeft / 60);
+                    const secs = this.timeLeft % 60;
+                    this.els.timer.textContent = `${mins}:${secs.toString().padStart(2, '0')}`;
+                }, 1000);
+            }
+            
+            startSectionTimer() {
+                if (!this.sections) return;
+                
+                // Clear any existing section timer
+                if (this.sectionTimer) clearInterval(this.sectionTimer);
+                
+                const section = this.sections[this.currentSection];
+                section.time_left = section.timer; // Reset to initial time
+                
+                this.sectionTimer = setInterval(() => {
+                    section.time_left--;
+                    this.els.sectionTimer.textContent = this.formatTime(section.time_left);
+                    
+                    if (section.time_left <= 0) {
+                        clearInterval(this.sectionTimer);
+                        this.submitCurrentSection();
+                    }
+                }, 1000);
+            }
+            
+            formatTime(seconds) {
+                const mins = Math.floor(seconds / 60);
+                const secs = seconds % 60;
+                return `${mins}:${secs.toString().padStart(2, '0')}`;
+            }
+            
+            stopTimers() {
+                if (this.timer) clearInterval(this.timer);
+                if (this.sectionTimer) clearInterval(this.sectionTimer);
+            }
+            
+            togglePanel() {
+                this.els.panel.classList.toggle('open');
+            }
+            
+            closePanel() {
+                this.els.panel.classList.remove('open');
+            }
+            
+            confirmSub() {
+                if (this.sections) {
+                    const section = this.sections[this.currentSection];
+                    const unanswered = this.ans.slice(section.start, section.end + 1)
+                        .filter(a => a === null).length;
+                    const reviewed = this.reviewed.slice(section.start, section.end + 1)
+                        .filter(r => r).length;
+                    
+                    let msg = '';
+                    
+                    if (unanswered > 0 && reviewed > 0) {
+                        msg = `You have ${unanswered} unanswered questions and ${reviewed} marked for review in this section. Submit anyway?`;
+                    } else if (unanswered > 0) {
+                        msg = `You have ${unanswered} unanswered questions in this section. Submit anyway?`;
+                    } else if (reviewed > 0) {
+                        msg = `You have ${reviewed} questions marked for review in this section. Submit anyway?`;
+                    } else {
+                        msg = 'Submit this section?';
+                    }
+                    
+                    if (confirm(msg)) this.submitCurrentSection();
+                } else {
+                    const unanswered = this.ans.filter(a => a === null).length;
+                    const reviewed = this.reviewed.filter(r => r).length;
+                    let msg = '';
+                    
+                    if (unanswered > 0 && reviewed > 0) {
+                        msg = `You have ${unanswered} unanswered questions and ${reviewed} marked for review. Submit anyway?`;
+                    } else if (unanswered > 0) {
+                        msg = `You have ${unanswered} unanswered questions. Submit anyway?`;
+                    } else if (reviewed > 0) {
+                        msg = `You have ${reviewed} questions marked for review. Submit anyway?`;
+                    } else {
+                        msg = 'Submit test?';
+                    }
+                    
+                    if (confirm(msg)) this.subTest();
+                }
+            }
+            
+            submitCurrentSection() {
+                if (!this.sections) return;
+                
+                const section = this.sections[this.currentSection];
+                section.submitted = true;
+                clearInterval(this.sectionTimer);
+                
+                // Move to the next section if available
+                const nextSectionIdx = this.currentSection + 1;
+                if (nextSectionIdx < this.sections.length) {
+                    this.currentSection = nextSectionIdx;
+                    this.startSectionTimer();
+                    this.updateSectionHeader();
+                    this.loadQ(this.sections[nextSectionIdx].start);
+                } else {
+                    // All sections completed
+                    this.subTest();
+                }
+                
+                this.updateGrid();
+            }
+            
+            subTest() {
+                if (this.sub) return;
+                
+                // Record time spent on current question
+                const now = Date.now();
+                this.timeSpent[this.curQ] += (now - this.lastQTime) / 1000;
+                
+                console.log('Submitting test. Final answers:', this.ans);
+                this.sub = true;
+                this.stopTimers();
+                document.getElementById('subBtn').style.display = 'none';
+                document.getElementById('reviewBtn').style.display = 'none';
+                const results = this.calcResults();
+                this.showResults(results);
+                this.loadQ(this.curQ);
+                this.updateGrid();
+                this.updatePrintButton();
+                
+                // Hide section header if it exists
+                if (this.els.sectionHeader) {
+                    this.els.sectionHeader.style.display = 'none';
+                }
+            }
+            
+            calcResults() {
+                const timeTaken = Math.round((Date.now() - this.startT) / 60000);
+                let correct = 0, incorrect = 0, unattempted = 0, score = 0;
+                
+                console.log('Calculating results...');
+                this.qs.forEach((q, i) => {
+                    const userAns = this.ans[i];
+                    const correctAns = q.correct_option_id;
+                    
+                    console.log(`Q${i + 1}: user=${userAns}, correct=${correctAns}`);
+                    
+                    if (userAns === null || userAns === undefined) {
+                        unattempted++;
+                    } else if (correctAns !== undefined && correctAns !== null && userAns === correctAns) {
+                        correct++;
+                        score += 1;
+                        console.log(`Q${i + 1}: CORRECT (+1 marks)`);
+                    } else {
+                        incorrect++;
+                        score -= 0.25;
+                        console.log(`Q${i + 1}: INCORRECT (-0.25 marks)`);
+                    }
+                });
+                
+                const results = { 
+                    score: Math.max(0, score), 
+                    correct, 
+                    incorrect, 
+                    unattempted, 
+                    timeTaken,
+                    timePerQ: this.timeSpent.map(t => Math.round(t))
+                };
+                console.log('Final results:', results);
+                return results;
+            }
+            
+            showResults(results) {
+                this.els.scoreDisp.textContent = `${results.score}/30`;
+                this.els.corrStat.textContent = results.correct;
+                this.els.incStat.textContent = results.incorrect;
+                this.els.unaStat.textContent = results.unattempted;
+                this.els.timeStat.textContent = results.timeTaken;
+                this.els.modalOver.classList.add('show');
+            }
+            
+            closeModal() {
+                this.els.modalOver.classList.remove('show');
+            }
+            
+            review() {
+                this.closeModal();
+                this.loadQ(0);
+            }
+            
+            isNavigationAllowed(idx) {
+            // Always allow navigation after submission
+            if (this.sub) return true;
+            
+            // During test, only allow within current section
+            if (this.sections) {
+                const currentSection = this.sections[this.currentSection];
+                return idx >= currentSection.start && idx <= currentSection.end;
+            }
+            
+            // If no sections, allow all navigation
+            return true;
+            }
+            
+            printTest() {
+                const printWindow = window.open('', '_blank');
+                const testTitle = document.title;
+                const questionsHtml = this.qs.map((q, i) => {
+                    const userAns = this.ans[i];
+                    const correctAns = q.correct_option_id;
+                    const isCorrect = userAns !== null && correctAns !== undefined && userAns === correctAns;
+                    const timeSpent = Math.round(this.timeSpent[i]);
+                    const wasReviewed = this.reviewed[i];
+                    const sectionName = this.sections ? this.getSectionNameForQuestion(i) : '';
+                    
+                    return `
+                        <div style="page-break-inside:avoid;margin-bottom:30px;border-bottom:1px solid #eee;padding-bottom:20px">
+                            <h3 style="color:#4F46E5">Question ${i + 1} ${wasReviewed ? '<span style="color:#F59E0B">(Marked for Review)</span>' : ''}</h3>
+                            ${sectionName ? `<div style="font-size:14px;color:#6B7280;margin-bottom:8px">Section: ${sectionName}</div>` : ''}
+                            ${q.comp ? `<div>${q.comp}</div>` : ''}
+                            <div>${q.question}</div>
+                            <div style="margin-top:15px">
+                                ${q.options.map((opt, j) => `
+                                    <div style="margin:5px 0;padding:5px;border-left:3px solid ${ 
+                                        j === correctAns ? '#10B981' : 
+                                        j === userAns ? '#EF4444' : '#E5E7EB' 
+                                    }">
+                                        ${opt}
+                                    </div>
+                                `).join('')}
+                            </div>
+                            <div style="margin-top:15px;font-size:14px;color:#666">
+                                <strong>Your answer:</strong> ${userAns !== null ? String.fromCharCode(65 + userAns) : 'Not attempted'}
+                                ${userAns !== null && correctAns !== undefined ? 
+                                    `(<span style="color:${isCorrect ? '#10B981' : '#EF4444'}">${isCorrect ? 'Correct' : 'Incorrect'}</span>)` : ''}
+                                <br>
+                                <strong>Time spent:</strong> ${timeSpent} seconds
+                            </div>
+                            ${q.solution ? `
+                                <div style="margin-top:15px;background:#f0fdf4;padding:15px;border-radius:8px">
+                                    <h4 style="color:#10B981;margin-top:0">Solution</h4>
+                                    ${q.solution}
+                                </div>
+                            ` : ''}
+                        </div>
+                    `;
+                }).join('');
+                
+                printWindow.document.write(`
+                    <!DOCTYPE html>
+                    <html>
+                    <head>
+                        <title>${testTitle} - Results</title>
+                        <style>
+                            body { font-family: Arial, sans-serif; line-height: 1.6; padding: 20px; }
+                            h2 { color: #4F46E5; border-bottom: 1px solid #E5E7EB; padding-bottom: 10px; }
+                            .math-exp { display: inline-block; vertical-align: middle; position: relative; margin: 0 2px; }
+                            .math-num { text-align: center; display: block; padding: 0; }
+                            .math-line { display: block; border-top: 1px solid; padding: 0; text-align: center; }
+                            .table-container { width: 100%; overflow-x: auto; margin: 12px 0; }
+                            table { width: 100%; border-collapse: collapse; margin: 8px 0; }
+                            table, th, td { border: 1px solid #E5E7EB; }
+                            th, td { padding: 8px 12px; text-align: left; }
+                            @media print {
+                                body { padding: 0; }
+                                .page-break { page-break-after: always; }
+                            }
+                        </style>
+                    </head>
+                    <body>
+                        <h2>Mocks Wallah - Analysis</h2>
+                        <div style="margin-bottom:30px">
+                            <div><strong>Score:</strong> ${this.els.scoreDisp.textContent}</div>
+                            <div><strong>Correct:</strong> ${this.els.corrStat.textContent}</div>
+                            <div><strong>Incorrect:</strong> ${this.els.incStat.textContent}</div>
+                            <div><strong>Unattempted:</strong> ${this.els.unaStat.textContent}</div>
+                            <div><strong>Time taken:</strong> ${this.els.timeStat.textContent} minutes</div>
+                        </div>
+                        ${questionsHtml}
+                        <script>
+                            setTimeout(() => { window.print(); }, 500);
+                        <\/script>
+                    </body>
+                    </html>
+                `);
+                printWindow.document.close();
+            }
+            
+            // Section-related helper methods
+            isInCurrentSection(qIdx) {
+                if (!this.sections) return true;
+                const section = this.sections[this.currentSection];
+                return qIdx >= section.start && qIdx <= section.end;
+            }
+            
+            findSectionForQuestion(qIdx) {
+                if (!this.sections) return null;
+                for (let i = 0; i < this.sections.length; i++) {
+                    const section = this.sections[i];
+                    if (qIdx >= section.start && qIdx <= section.end) {
+                        return i;
+                    }
+                }
+                return null;
+            }
+            
+            getSectionNameForQuestion(qIdx) {
+                if (!this.sections) return '';
+                const sectionIdx = this.findSectionForQuestion(qIdx);
+                return sectionIdx !== null ? this.sections[sectionIdx].name : '';
+            }
+        }
+        
+        document.addEventListener('DOMContentLoaded', () => new TestApp());
+    </script>
+</body>
+</html>

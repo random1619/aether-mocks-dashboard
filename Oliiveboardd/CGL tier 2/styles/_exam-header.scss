@@ -1,0 +1,204 @@
+// ============================================================
+//  _exam-header.scss
+//  Top Header, Timer, Candidate Bar, Section Badge
+// ============================================================
+
+// ── Exam Container ───────────────────────────────────────────
+.exam-container {
+  display:        none;
+  height:         100vh;
+  flex-direction: column;
+  overflow:       hidden;
+
+  &.active {
+    display: flex;
+  }
+}
+
+// ── Top Header ───────────────────────────────────────────────
+.exam-header {
+  background:      $gradient-primary;
+  background-size: 200% 200%;
+  animation:       gradientShift 8s ease infinite;
+  color:           $text-inverse;
+  padding:         14px $spacing-lg;
+  @include flex-between;
+  box-shadow:      0 2px 16px rgba($primary-dark, 0.45);
+  flex-shrink:     0;
+  position:        relative;
+  z-index:         $z-raised;
+  overflow:        hidden;
+
+  // Glass gloss overlay
+  &::before {
+    content:        '';
+    @include cover;
+    background:     linear-gradient(135deg, rgba(255,255,255,0.08) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  // Bottom glow line
+  &::after {
+    content:    '';
+    position:   absolute;
+    bottom:     0;
+    left:       0;
+    right:      0;
+    height:     1px;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+  }
+}
+
+.exam-title {
+  font-size:      $font-size-md;
+  font-weight:    $font-weight-bold;
+  letter-spacing: 0.3px;
+  display:        flex;
+  align-items:    center;
+  gap:            $spacing-sm;
+  position:       relative;
+  z-index:        1;
+
+  // Live indicator dot
+  &::before {
+    content:       '';
+    display:       inline-block;
+    width:         9px;
+    height:        9px;
+    border-radius: $radius-full;
+    background:    #4ade80;
+    box-shadow:    0 0 10px rgba(74, 222, 128, 0.9);
+    animation:     pulse 2s ease-in-out infinite;
+    flex-shrink:   0;
+  }
+}
+
+.exam-timer {
+  display:   flex;
+  align-items: center;
+  gap:       $spacing-md;
+  position:  relative;
+  z-index:   1;
+}
+
+.timer-box {
+  @include glass(rgba(255, 255, 255, 0.15), 8px, rgba(255, 255, 255, 0.22));
+  padding:              8px $spacing-md;
+  border-radius:        $radius-sm;
+  font-weight:          $font-weight-bold;
+  font-size:            $font-size-md;
+  font-variant-numeric: tabular-nums;
+  letter-spacing:       2px;
+  transition:           $transition-base;
+  min-width:            88px;
+  text-align:           center;
+  color:                white;
+
+  // Warn state — JS adds .warning class at 10 min remaining
+  &.warning {
+    background:   rgba($danger, 0.3);
+    border-color: rgba($danger, 0.65);
+    animation:    timerPulse 1s ease-in-out infinite;
+    box-shadow:   0 0 16px rgba($danger, 0.4);
+  }
+}
+
+// ── Candidate Info Bar ───────────────────────────────────────
+.candidate-bar {
+  background:      $card;
+  padding:         10px $spacing-lg;
+  border-bottom:   1px solid $border;
+  @include flex-between;
+  flex-shrink:     0;
+  box-shadow:      $shadow-xs;
+}
+
+.candidate-info {
+  display:     flex;
+  align-items: center;
+  gap:         $spacing-md;
+}
+
+.candidate-photo {
+  width:           44px;
+  height:          44px;
+  border-radius:   $radius-sm;
+  background:      linear-gradient(135deg, $primary-faint, $bg);
+  @include flex-center;
+  font-size:       20px;
+  color:           $primary;
+  border:          2px solid rgba($primary, 0.18);
+  box-shadow:      $shadow-xs;
+  flex-shrink:     0;
+}
+
+.candidate-details {
+  @include flex-col;
+  gap: 2px;
+}
+
+.candidate-name {
+  font-weight: $font-weight-bold;
+  font-size:   $font-size-sm;
+  color:       $text;
+}
+
+.candidate-id {
+  font-size:   $font-size-xs;
+  color:       $text-muted;
+  font-weight: $font-weight-medium;
+}
+
+// ── Section Badge ────────────────────────────────────────────
+.section-badge {
+  background:     $gradient-success;
+  color:          $text-inverse;
+  padding:        7px $spacing-md;
+  border-radius:  $radius-full;
+  font-size:      $font-size-xs;
+  font-weight:    $font-weight-bold;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  display:        flex;
+  align-items:    center;
+  gap:            $spacing-sm;
+  box-shadow:     $shadow-success;
+  transition:     $transition-base;
+
+  &:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba($success, 0.35);
+  }
+
+  #sectionTimer {
+    @include glass(rgba(255, 255, 255, 0.2), 4px, rgba(255,255,255,0.3));
+    padding:              2px 8px;
+    border-radius:        $radius-full;
+    font-variant-numeric: tabular-nums;
+    letter-spacing:       1px;
+  }
+}
+
+// ── Responsive ──────────────────────────────────────────────
+@include sm {
+  .exam-header {
+    padding: 10px $spacing-md;
+  }
+
+  .exam-title {
+    font-size: $font-size-sm;
+  }
+
+  .timer-box {
+    padding:  6px $spacing-sm;
+    font-size: $font-size-sm;
+    min-width: 72px;
+  }
+
+  .candidate-bar {
+    flex-direction: column;
+    gap:            $spacing-sm;
+    align-items:    flex-start;
+    padding:        $spacing-sm $spacing-md;
+  }
+}

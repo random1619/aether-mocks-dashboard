@@ -1,0 +1,35 @@
+// =============================================================================
+// ABSTRACTS / _functions.scss
+// Utility SCSS functions
+// =============================================================================
+
+// ─── Unit Conversion ──────────────────────────────────────────────────────────
+
+/// Convert px to rem (assumes 16px base)
+@function rem($px) {
+  @return #{$px / 16}rem;
+}
+
+/// Convert px to em relative to a context
+@function em($px, $context: 16) {
+  @return #{$px / $context}em;
+}
+
+// ─── Color Utilities ──────────────────────────────────────────────────────────
+
+/// Lighten a color toward white by a percentage
+@function tint($color, $percentage) {
+  @return mix(white, $color, $percentage);
+}
+
+/// Darken a color toward black by a percentage
+@function shade($color, $percentage) {
+  @return mix(black, $color, $percentage);
+}
+
+// ─── Math ─────────────────────────────────────────────────────────────────────
+
+/// Strip unit from a value
+@function strip-unit($value) {
+  @return $value / ($value * 0 + 1);
+}

@@ -1,0 +1,597 @@
+// =============================================================================
+// LAYOUT / _sidebar.scss  (UPDATED)
+// Left panel navigator, question grid, right panel candidate card, mobile drawer
+// =============================================================================
+
+// ─── Main 3-Column Layout ─────────────────────────────────────────────────────
+
+.main-layout {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+  height: calc(100vh - var(--header-h));
+  position: relative;
+}
+
+// ─── Left Panel (Question Navigator) ─────────────────────────────────────────
+
+.left-panel {
+  width: var(--leftW);
+  background: var(--bg-alt);
+  border-right: 1px solid var(--brd);
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  transition: left 0.3s ease, box-shadow 0.3s ease;
+
+  // Mobile: slide-in drawer
+  position: absolute;
+  top: 0;
+  left: calc(-1 * var(--leftW) - 4px);
+  height: 100%;
+  z-index: var(--z-sticky);
+  box-shadow: none;
+
+  &.show {
+    left: 0;
+    box-shadow: 4px 0 24px rgba(0, 0, 0, 0.15);
+  }
+
+  .dark-mode & {
+    background: rgba(255, 255, 255, 0.025);
+    border-right-color: rgba(255, 255, 255, 0.08);
+  }
+
+  @media (min-width: 992px) {
+    position: static;
+    box-shadow: none;
+  }
+}
+
+// ── Nav Header ──
+
+.nav-header {
+  padding: var(--space-5) var(--space-5) var(--space-4);
+  border-bottom: 1px solid var(--brd);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-shrink: 0;
+
+  .dark-mode & {
+    border-bottom-color: rgba(255, 255, 255, 0.06);
+  }
+
+  .nav-title {
+    font-weight: var(--fw-bold);
+    font-size: var(--text-lg);
+    color: var(--pri);
+    letter-spacing: -0.01em;
+  }
+}
+
+// ── Section Tabs ──
+
+.sections-tabs {
+  display: flex;
+  overflow-x: auto;
+  background: var(--card);
+  border-bottom: 1px solid var(--brd);
+  padding: 0 var(--space-2);
+  flex-shrink: 0;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar { display: none; }
+
+  .dark-mode & {
+    background: rgba(255, 255, 255, 0.03);
+    border-bottom-color: rgba(255, 255, 255, 0.06);
+  }
+}
+
+.section-tab {
+  padding: 12px var(--space-4);
+  cursor: pointer;
+  border-bottom: 3px solid transparent;
+  font-weight: var(--fw-semi);
+  font-size: var(--text-xs);
+  transition: var(--transition);
+  white-space: nowrap;
+  color: var(--txtL);
+  user-select: none;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+
+  &:hover {
+    color: var(--txt);
+    background: var(--bg-alt);
+  }
+
+  &.active {
+    color: var(--pri);
+    border-bottom-color: var(--pri);
+    background: rgba(37, 99, 235, 0.06);
+  }
+
+  .dark-mode & {
+    &:hover { background: rgba(255, 255, 255, 0.05); }
+    &.active { background: rgba(96, 165, 250, 0.1); }
+  }
+}
+
+// ── Question Navigation Grid ──
+
+.question-nav {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--space-4);
+  scrollbar-width: thin;
+}
+
+.q-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 8px;
+  align-content: start;
+}
+
+// ─── Question Number Badge (shared: flat desktop sidebar + sectioned panel) ───
+
+.q-num {
+  width: 100%;
+  aspect-ratio: 1;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius);
+  font-size: var(--text-sm);
+  font-weight: var(--fw-semi);
+  cursor: pointer;
+  border: 1.5px solid var(--bdr);
+  background: var(--card);
+  color: var(--txt);
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+  user-select: none;
+  position: relative;
+
+  &:hover {
+    transform: translateY(-2px) scale(1.06);
+    box-shadow: var(--shadow-md);
+    border-color: var(--pri);
+    z-index: 1;
+  }
+
+  // ── States ──
+  &.cur,
+  &.current {
+    background: var(--pri);
+    border-color: var(--pri);
+    color: white !important;
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.4);
+    transform: scale(1.08);
+  }
+
+  &.ans,
+  &.answered,
+  &.lnkgreen {
+    background: #dcfce7;
+    color: #166534;
+    border-color: #bbf7d0;
+
+    .dark-mode & {
+      background: rgba(22, 163, 74, 0.22);
+      color: #86efac;
+      border-color: rgba(22, 163, 74, 0.35);
+    }
+  }
+
+  &.wrong,
+  &.lnkred {
+    background: #fee2e2;
+    color: #991b1b;
+    border-color: #fecaca;
+
+    .dark-mode & {
+      background: rgba(220, 38, 38, 0.22);
+      color: #fca5a5;
+      border-color: rgba(220, 38, 38, 0.35);
+    }
+  }
+
+  &.review,
+  &.lnkyellow {
+    background: #fef9c3;
+    color: #854d0e;
+    border-color: #fde047;
+
+    .dark-mode & {
+      background: rgba(234, 179, 8, 0.22);
+      color: #fde047;
+      border-color: rgba(234, 179, 8, 0.35);
+    }
+  }
+
+  &.unattempted,
+  &.lnkblack {
+    background: var(--bg-alt);
+    border-color: var(--brd);
+    color: var(--txtL);
+
+    .dark-mode & {
+      background: rgba(255, 255, 255, 0.04);
+      border-color: rgba(255, 255, 255, 0.08);
+      color: var(--txtL);
+    }
+  }
+
+  // Review mode overrides
+  &.review-correct    { @extend .ans; }
+  &.review-incorrect  { @extend .wrong; }
+  &.review-unattempted { @extend .unattempted; }
+}
+
+// ── Status Legend ──
+
+.status-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: var(--space-4);
+  border-top: 1px solid var(--brd);
+  flex-shrink: 0;
+
+  .dark-mode & { border-top-color: rgba(255, 255, 255, 0.06); }
+
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: var(--text-xs);
+    color: var(--txtL);
+    font-weight: var(--fw-medium);
+  }
+
+  .legend-color {
+    width: 14px;
+    height: 14px;
+    border-radius: var(--radius-sm);
+    flex-shrink: 0;
+    border: 1px solid transparent;
+
+    &.green  { background: #dcfce7; border-color: #bbf7d0; }
+    &.red    { background: #fee2e2; border-color: #fecaca; }
+    &.yellow { background: #fef9c3; border-color: #fde047; }
+    &.gray   { background: var(--bg-alt); border-color: var(--brd); }
+    &.blue   { background: var(--pri); border-color: var(--pri); }
+  }
+}
+
+// ─── Center Panel (Question Area) ─────────────────────────────────────────────
+
+.center-panel {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  min-width: 0;
+}
+
+.controls-bar {
+  background: var(--card);
+  border-bottom: 1px solid var(--brd);
+  padding: var(--space-3) var(--space-8);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  flex-shrink: 0;
+
+  .dark-mode & {
+    background: rgba(255, 255, 255, 0.02);
+    border-bottom-color: rgba(255, 255, 255, 0.06);
+  }
+}
+
+.nav-buttons {
+  display: flex;
+  gap: var(--space-2);
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.question-area {
+  flex: 1;
+  padding: var(--space-8);
+  overflow-y: auto;
+  background: var(--bg);
+
+  .dark-mode & { background: var(--bg); }
+}
+
+.question-text {
+  font-size: var(--text-lg);
+  line-height: var(--lh-relaxed);
+  margin-bottom: var(--space-6);
+  color: var(--txt);
+  font-weight: var(--fw-medium);
+}
+
+// ─── Right Panel (Candidate Info) ─────────────────────────────────────────────
+
+.right-panel {
+  width: var(--rightW);
+  background: var(--bg-alt);
+  border-left: 1px solid var(--brd);
+  display: none;
+  flex-direction: column;
+  flex-shrink: 0;
+  overflow-y: auto;
+
+  .dark-mode & {
+    background: rgba(255, 255, 255, 0.02);
+    border-left-color: rgba(255, 255, 255, 0.06);
+  }
+
+  @media (min-width: 992px) { display: flex; }
+}
+
+.candidate-header {
+  padding: var(--space-5);
+  border-bottom: 1px solid var(--brd);
+  text-align: center;
+
+  .dark-mode & { border-bottom-color: rgba(255, 255, 255, 0.06); }
+}
+
+.candidate-image {
+  width: 100px;
+  height: 125px;
+  background: linear-gradient(135deg, var(--bg-alt), var(--brd));
+  border: 3px solid var(--pri);
+  border-radius: var(--radius-md);
+  margin: 0 auto var(--space-4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3rem;
+  color: var(--pri);
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.12);
+
+  &::before {
+    content: '\f007';
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    opacity: 0.4;
+  }
+}
+
+.candidate-name {
+  font-weight: var(--fw-bold);
+  font-size: var(--text-base);
+  color: var(--txt);
+  margin-bottom: 4px;
+}
+
+.candidate-info {
+  background: var(--card);
+  padding: var(--space-4);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--brd);
+  margin: var(--space-4);
+
+  .dark-mode & {
+    background: rgba(255, 255, 255, 0.04);
+    border-color: rgba(255, 255, 255, 0.06);
+  }
+}
+
+.info-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 7px 0;
+  border-bottom: 1px solid var(--brd);
+  font-size: var(--text-sm);
+
+  &:last-child { border-bottom: none; padding-bottom: 0; }
+
+  .dark-mode & { border-bottom-color: rgba(255, 255, 255, 0.05); }
+}
+
+.info-label { color: var(--txtL); font-size: var(--text-xs); }
+.info-value { font-weight: var(--fw-semi); font-size: var(--text-sm); }
+
+.exam-stats {
+  padding: 0 var(--space-4) var(--space-4);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-3);
+}
+
+.stat-card {
+  background: var(--card);
+  border: 1px solid var(--brd);
+  border-radius: var(--radius-md);
+  padding: var(--space-4);
+  text-align: center;
+  transition: var(--transition);
+
+  &:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+
+  .dark-mode & {
+    background: rgba(255, 255, 255, 0.04);
+    border-color: rgba(255, 255, 255, 0.06);
+  }
+}
+
+.stat-number {
+  font-size: var(--text-2xl);
+  font-weight: var(--fw-extrabold);
+  color: var(--pri);
+  line-height: 1;
+  margin-bottom: 4px;
+
+  &.correct   { color: var(--suc); }
+  &.incorrect { color: var(--err); }
+  &.review    { color: var(--war); }
+  &.total     { color: var(--pri); }
+}
+
+.stat-label {
+  font-size: var(--text-xs);
+  color: var(--txtL);
+  font-weight: var(--fw-medium);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+// ─── Flat Layout Panel (Mobile Slide-in Drawer) ───────────────────────────────
+
+.panel {
+  position: fixed;
+  top: 0;
+  right: -340px;
+  width: 320px;
+  height: 100vh;
+  background: var(--card);
+  box-shadow: -6px 0 30px rgba(0, 0, 0, 0.15);
+  z-index: var(--z-overlay);
+  transition: right 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  flex-direction: column;
+  border-left: 1px solid var(--brd);
+
+  &.open { right: 0; }
+
+  .dark-mode & {
+    background: #1a2035;
+    border-left-color: rgba(255, 255, 255, 0.08);
+    box-shadow: -6px 0 30px rgba(0, 0, 0, 0.45);
+  }
+}
+
+.panel-hdr {
+  padding: var(--space-4) var(--space-5);
+  border-bottom: 1px solid var(--brd);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-shrink: 0;
+  background: linear-gradient(135deg, rgba(79, 70, 229, 0.06), rgba(37, 99, 235, 0.04));
+
+  h3 {
+    font-size: var(--text-base);
+    font-weight: var(--fw-bold);
+    color: var(--p);
+  }
+
+  .dark-mode & {
+    border-bottom-color: rgba(255, 255, 255, 0.08);
+    background: rgba(129, 140, 248, 0.06);
+  }
+}
+
+.panel-close {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-alt);
+  border: 1px solid var(--brd);
+  color: var(--txtL);
+  cursor: pointer;
+  transition: var(--transition);
+  font-size: var(--text-base);
+
+  &:hover { background: var(--brd); color: var(--txt); }
+
+  .dark-mode & {
+    background: rgba(255, 255, 255, 0.06);
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+}
+
+// ─── Desktop Sidebar (Flat Layout) ────────────────────────────────────────────
+// CRITICAL FIX: top starts below header (~52px), bottom stops above nav bar (~68px)
+
+.desktop-sidebar {
+  display: none;
+  position: fixed;
+  top: 52px;               // ← below .hdr sticky header
+  right: 0;
+  bottom: 68px;            // ← above .nav bottom bar (leaves room for Next button)
+  width: 280px;
+  height: auto;            // ← NOT 100vh (was covering bottom nav!)
+  background: var(--card);
+  border-left: 1px solid var(--brd);
+  border-bottom: 1px solid var(--brd);
+  padding: var(--space-3) var(--space-3) var(--space-2);
+  overflow-y: auto;
+  z-index: 90;             // ← lower than nav bar (z-index: 200)
+
+  h3 {
+    font-size: var(--text-sm);
+    font-weight: var(--fw-bold);
+    color: var(--p);
+    margin-bottom: var(--space-3);
+    padding-bottom: var(--space-2);
+    border-bottom: 1px solid var(--brd);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+
+  .dark-mode & {
+    background: #1a2035;
+    border-color: rgba(255, 255, 255, 0.08);
+  }
+
+  @media (min-width: 992px) {
+    display: block;
+  }
+}
+
+// Question grid inside desktop sidebar
+.desktop-sidebar .q-grid {
+  grid-template-columns: repeat(5, 1fr);
+  gap: 6px;
+}
+
+.desktop-sidebar .q-num {
+  font-size: 12px;
+  border-radius: var(--radius-sm);
+}
+
+// ─── Mobile Menu FAB ──────────────────────────────────────────────────────────
+
+.mobile-menu-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  bottom: calc(var(--bottom-bar-h) + var(--space-3));
+  right: var(--space-4);
+  width: var(--mobile-menu-sz);
+  height: var(--mobile-menu-sz);
+  background: var(--pri);
+  color: white;
+  border: none;
+  border-radius: var(--radius-full);
+  font-size: var(--text-lg);
+  cursor: pointer;
+  box-shadow: var(--shadow-primary), var(--shadow-lg);
+  z-index: var(--z-sticky);
+  transition: var(--transition-bounce);
+
+  &:hover {
+    transform: scale(1.08);
+    box-shadow: 0 8px 24px rgba(37, 99, 235, 0.5);
+  }
+
+  @media (min-width: 992px) { display: none; }
+}

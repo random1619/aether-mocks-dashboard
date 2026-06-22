@@ -1,0 +1,203 @@
+// ============================================================
+//  _utilities.scss
+//  Helper Classes — Visibility, Layout, Badges, States
+// ============================================================
+
+// ── Visibility ───────────────────────────────────────────────
+.hidden {
+  display: none !important;
+}
+
+.invisible {
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.mobile-only {
+  @include min-lg {
+    display: none !important;
+  }
+}
+
+.desktop-only {
+  @include lg {
+    display: none !important;
+  }
+}
+
+// ── Flex Helpers ─────────────────────────────────────────────
+.flex         { display: flex; }
+.flex-col     { display: flex; flex-direction: column; }
+.flex-center  { @include flex-center; }
+.flex-between { @include flex-between; }
+.flex-wrap    { flex-wrap: wrap; }
+.flex-1       { flex: 1; }
+.flex-shrink-0 { flex-shrink: 0; }
+
+// ── Gap Utilities ────────────────────────────────────────────
+.gap-xs  { gap: $spacing-xs; }
+.gap-sm  { gap: $spacing-sm; }
+.gap-md  { gap: $spacing-md; }
+.gap-lg  { gap: $spacing-lg; }
+
+// ── Text Alignment ───────────────────────────────────────────
+.text-center { text-align: center; }
+.text-left   { text-align: left; }
+.text-right  { text-align: right; }
+
+// ── Font Weights ─────────────────────────────────────────────
+.font-normal  { font-weight: $font-weight-normal; }
+.font-medium  { font-weight: $font-weight-medium; }
+.font-semi    { font-weight: $font-weight-semi; }
+.font-bold    { font-weight: $font-weight-bold; }
+
+// ── Font Sizes ───────────────────────────────────────────────
+.text-xs   { font-size: $font-size-xs; }
+.text-sm   { font-size: $font-size-sm; }
+.text-base { font-size: $font-size-base; }
+.text-md   { font-size: $font-size-md; }
+.text-lg   { font-size: $font-size-lg; }
+
+// ── Text Colors ──────────────────────────────────────────────
+.text-primary { color: $primary; }
+.text-success { color: $success; }
+.text-danger  { color: $danger; }
+.text-warning { color: $warning; }
+.text-muted   { color: $text-muted; }
+.text-light   { color: $text-light; }
+
+// ── Spacing Utilities ────────────────────────────────────────
+.mt-xs  { margin-top: $spacing-xs; }
+.mt-sm  { margin-top: $spacing-sm; }
+.mt-md  { margin-top: $spacing-md; }
+.mt-lg  { margin-top: $spacing-lg; }
+.mb-xs  { margin-bottom: $spacing-xs; }
+.mb-sm  { margin-bottom: $spacing-sm; }
+.mb-md  { margin-bottom: $spacing-md; }
+.mb-lg  { margin-bottom: $spacing-lg; }
+
+// ── Badges ───────────────────────────────────────────────────
+.badge {
+  display:        inline-flex;
+  align-items:    center;
+  gap:            $spacing-xs;
+  padding:        3px 10px;
+  border-radius:  $radius-full;
+  font-size:      $font-size-xs;
+  font-weight:    $font-weight-semi;
+  line-height:    1;
+  letter-spacing: 0.3px;
+  white-space:    nowrap;
+
+  &.badge-primary {
+    background: $primary-faint;
+    color:      $primary-dark;
+    border:     1px solid rgba($primary, 0.2);
+  }
+
+  &.badge-success {
+    background: $success-light;
+    color:      $success-dark;
+    border:     1px solid rgba($success, 0.2);
+  }
+
+  &.badge-danger {
+    background: $danger-light;
+    color:      $danger-dark;
+    border:     1px solid rgba($danger, 0.2);
+  }
+
+  &.badge-warning {
+    background: $warning-light;
+    color:      $warning-dark;
+    border:     1px solid rgba($warning, 0.2);
+  }
+
+  &.badge-neutral {
+    background: $bg-2;
+    color:      $text-muted;
+    border:     1px solid $border;
+  }
+}
+
+// ── Pill Tags ───────────────────────────────────────────────
+.tag {
+  display:       inline-flex;
+  align-items:   center;
+  padding:       2px 8px;
+  border-radius: $radius-full;
+  font-size:     $font-size-xs;
+  font-weight:   $font-weight-medium;
+  background:    $bg-2;
+  color:         $text-muted;
+  border:        1px solid $border;
+}
+
+// ── Dividers ────────────────────────────────────────────────
+.divider {
+  width:      100%;
+  height:     1px;
+  background: $border;
+  margin:     $spacing-md 0;
+
+  &.divider-gradient {
+    background: linear-gradient(90deg, transparent, $border, transparent);
+  }
+}
+
+// ── Loading Spinner ──────────────────────────────────────────
+.spinner {
+  width:         24px;
+  height:        24px;
+  border:        2px solid $border;
+  border-top:    2px solid $primary;
+  border-radius: $radius-full;
+  animation:     spin 0.7s linear infinite;
+  flex-shrink:   0;
+}
+
+// ── Overflow ─────────────────────────────────────────────────
+.overflow-hidden { overflow: hidden; }
+.overflow-auto   { overflow: auto; }
+
+// ── Position ─────────────────────────────────────────────────
+.relative { position: relative; }
+.absolute { position: absolute; }
+.fixed    { position: fixed; }
+
+// ── Cursor ───────────────────────────────────────────────────
+.cursor-pointer { cursor: pointer; }
+.cursor-default { cursor: default; }
+
+// ── Border Radius ────────────────────────────────────────────
+.rounded-sm   { border-radius: $radius-sm; }
+.rounded-md   { border-radius: $radius-md; }
+.rounded-lg   { border-radius: $radius-lg; }
+.rounded-full { border-radius: $radius-full; }
+
+// ── Opacity ──────────────────────────────────────────────────
+.opacity-50 { opacity: 0.5; }
+.opacity-75 { opacity: 0.75; }
+
+// ── Transition ───────────────────────────────────────────────
+.transition      { transition: $transition-base; }
+.transition-fast { transition: $transition-fast; }
+.transition-slow { transition: $transition-slow; }
+
+// ── Shadow Utilities ─────────────────────────────────────────
+.shadow-xs { box-shadow: $shadow-xs; }
+.shadow-sm { box-shadow: $shadow-sm; }
+.shadow-md { box-shadow: $shadow-md; }
+.shadow-lg { box-shadow: $shadow-lg; }
+
+// ── Truncation ───────────────────────────────────────────────
+.truncate {
+  @include text-truncate;
+}
+
+// ── Width / Max-width ────────────────────────────────────────
+.w-full   { width: 100%; }
+.w-auto   { width: auto; }
+.max-w-sm { max-width: 480px; }
+.max-w-md { max-width: 640px; }
+.max-w-lg { max-width: 860px; }

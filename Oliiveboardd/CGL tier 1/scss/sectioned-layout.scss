@@ -1,0 +1,99 @@
+// =============================================================================
+// sectioned-layout.scss
+// Entry point for Sectioned Layout (Mocks 4-51)
+// Imports all partials and applies sectioned-specific overrides
+// =============================================================================
+
+// ── Abstracts ──────────────────────────────────────────────────────────────
+@import 'abstracts/variables';
+@import 'abstracts/functions';
+@import 'abstracts/mixins';
+
+// ── Base ───────────────────────────────────────────────────────────────────
+@import 'base/reset';
+@import 'base/typography';
+@import 'base/math';
+
+// ── Components ─────────────────────────────────────────────────────────────
+@import 'components/scrollbar';
+@import 'components/buttons';
+@import 'components/options';
+@import 'components/modals';
+@import 'components/results';
+@import 'components/timer';
+
+// ── Layout ─────────────────────────────────────────────────────────────────
+@import 'layout/header';
+@import 'layout/sidebar';
+@import 'layout/footer';
+
+// ── Themes ─────────────────────────────────────────────────────────────────
+@import 'themes/dark';
+
+// =============================================================================
+// SECTIONED LAYOUT — SPECIFIC OVERRIDES
+// (Unique to the 3-column desktop exam interface with sections)
+// =============================================================================
+
+// ── Body — full-height flex column ──
+
+body {
+  background: var(--bg);
+  color: var(--txt);
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+// ── Desktop layout ──
+
+@media (min-width: 992px) {
+  .left-panel {
+    position: static;
+    left: 0;
+  }
+
+  .right-panel {
+    display: flex;
+  }
+
+  .mobile-menu-btn {
+    display: none;
+  }
+}
+
+// ── Sectioned welcome screen: uses flat welcome-content class ──
+
+.welcome-screen .welcome-content {
+  max-width: 520px;
+
+  .welcome-title {
+    font-size: var(--text-2xl);
+    font-weight: var(--fw-extrabold);
+    color: var(--pri);
+    margin-bottom: var(--space-1);
+  }
+}
+
+// ── Question area padding adjustment for 3-column layout ──
+
+.question-area {
+  padding: var(--space-8) var(--space-10);
+
+  @media (max-width: 992px) {
+    padding: var(--space-5) var(--space-4);
+  }
+}
+
+// ── Theme toggle button icon ──
+
+#themeToggleBtn {
+  .icon-sun  { display: none; }
+  .icon-moon { display: block; }
+
+  .dark-mode & {
+    .icon-sun  { display: block; }
+    .icon-moon { display: none; }
+  }
+}

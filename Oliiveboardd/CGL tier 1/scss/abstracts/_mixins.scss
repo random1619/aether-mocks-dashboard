@@ -1,0 +1,184 @@
+// =============================================================================
+// ABSTRACTS / _mixins.scss
+// Reusable SCSS mixins for layout, theming, interactions
+// =============================================================================
+
+// ─── Layout Helpers ───────────────────────────────────────────────────────────
+
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+@mixin flex-start {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+@mixin grid-center {
+  display: grid;
+  place-items: center;
+}
+
+@mixin absolute-fill {
+  position: absolute;
+  inset: 0;
+}
+
+@mixin fixed-fill {
+  position: fixed;
+  inset: 0;
+}
+
+// ─── Responsive Breakpoints ───────────────────────────────────────────────────
+
+$breakpoints: (
+  'sm': 480px,
+  'md': 768px,
+  'lg': 992px,
+  'xl': 1200px,
+  '2xl': 1400px
+);
+
+@mixin respond-to($bp) {
+  @if map-has-key($breakpoints, $bp) {
+    @media (min-width: #{map-get($breakpoints, $bp)}) {
+      @content;
+    }
+  } @else {
+    @warn "Breakpoint `#{$bp}` not found in $breakpoints map.";
+  }
+}
+
+@mixin respond-below($bp) {
+  @if map-has-key($breakpoints, $bp) {
+    @media (max-width: #{map-get($breakpoints, $bp) - 1px}) {
+      @content;
+    }
+  }
+}
+
+// ─── Dark Mode ────────────────────────────────────────────────────────────────
+
+@mixin dark {
+  .dark-mode & {
+    @content;
+  }
+}
+
+@mixin dark-root {
+  body.dark-mode &,
+  .dark-mode & {
+    @content;
+  }
+}
+
+// ─── Interactions ─────────────────────────────────────────────────────────────
+
+@mixin hover-lift($y: -2px, $shadow: var(--shadow-md)) {
+  transition: var(--transition);
+
+  &:hover:not(:disabled) {
+    transform: translateY($y);
+    box-shadow: $shadow;
+  }
+
+  &:active:not(:disabled) {
+    transform: translateY(0);
+  }
+}
+
+@mixin hover-scale($scale: 1.02) {
+  transition: var(--transition);
+
+  &:hover:not(:disabled) {
+    transform: scale($scale);
+  }
+
+  &:active:not(:disabled) {
+    transform: scale(0.98);
+  }
+}
+
+@mixin focus-ring($color: var(--pri)) {
+  &:focus-visible {
+    outline: 2px solid $color;
+    outline-offset: 2px;
+  }
+}
+
+// ─── Typography ───────────────────────────────────────────────────────────────
+
+@mixin truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@mixin line-clamp($lines) {
+  display: -webkit-box;
+  -webkit-line-clamp: $lines;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+// ─── Visual Effects ───────────────────────────────────────────────────────────
+
+@mixin glass($bg: rgba(255, 255, 255, 0.85), $blur: 12px) {
+  background: $bg;
+  backdrop-filter: blur($blur);
+  -webkit-backdrop-filter: blur($blur);
+}
+
+@mixin glass-dark($bg: rgba(22, 33, 62, 0.88), $blur: 12px) {
+  background: $bg;
+  backdrop-filter: blur($blur);
+  -webkit-backdrop-filter: blur($blur);
+}
+
+@mixin gradient-text($from, $to, $angle: 135deg) {
+  background: linear-gradient($angle, $from, $to);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+@mixin card-border($color: var(--brd)) {
+  border: 1px solid $color;
+  border-radius: var(--radius-md);
+}
+
+// ─── Scrollbar ────────────────────────────────────────────────────────────────
+
+@mixin scrollbar($width: 6px, $thumb: var(--bdrD), $track: transparent) {
+  scrollbar-width: thin;
+  scrollbar-color: $thumb $track;
+
+  &::-webkit-scrollbar {
+    width: $width;
+    height: $width;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: $track;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: $thumb;
+    border-radius: var(--radius-full);
+  }
+}
+
+// ─── Animation Keyframe Helpers ───────────────────────────────────────────────
+
+@mixin pulse-animation($name: pulse-ring, $scale: 1.05) {
+  animation: #{$name} 2s ease-in-out infinite;
+}

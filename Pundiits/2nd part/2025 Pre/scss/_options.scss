@@ -1,0 +1,108 @@
+// Option Selection and Verification List Styles
+
+.options-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.option {
+  display: flex;
+  align-items: flex-start;
+  padding: 16px 20px;
+  border: 1px solid $border-color;
+  border-radius: 10px;
+  background: $card-bg;
+  transition: $transition-fast;
+  user-select: none;
+  
+  &:hover:not(.submitted) {
+    border-color: $primary-color;
+    background: lighten($primary-color, 48%);
+    transform: translateX(3px);
+  }
+  
+  &.selected {
+    border-color: $primary-color;
+    background: lighten($primary-color, 45%);
+    box-shadow: 0 0 0 1px $primary-color;
+    animation: bounceSelect 0.2s ease-out;
+  }
+  
+  &.correct {
+    border-color: $success-color;
+    background: $success-light;
+    box-shadow: 0 0 0 1px $success-color;
+  }
+  
+  &.wrong {
+    border-color: $danger-color;
+    background: $danger-light;
+    box-shadow: 0 0 0 1px $danger-color;
+    animation: shakeOption 0.2s ease-in-out;
+  }
+}
+
+.option-indicator {
+  width: 24px;
+  height: 24px;
+  border: 2px solid $border-hover;
+  border-radius: 50%;
+  margin-right: 14px;
+  flex-shrink: 0;
+  @include flex-center;
+  margin-top: 2px;
+  font-size: 11px;
+  font-weight: 700;
+  color: $text-muted;
+  background: $card-bg;
+  transition: $transition-fast;
+  
+  .option.selected & {
+    border-color: $primary-color;
+    background: $primary-color;
+    color: white;
+  }
+  
+  .option.correct & {
+    border-color: $success-color;
+    background: $success-color;
+    color: white;
+    &::after {
+      content: "\f00c";
+      font-family: "Font Awesome 6 Free";
+      font-weight: 900;
+    }
+  }
+  
+  .option.wrong & {
+    border-color: $danger-color;
+    background: $danger-color;
+    color: white;
+    &::after {
+      content: "\f00d";
+      font-family: "Font Awesome 6 Free";
+      font-weight: 900;
+    }
+  }
+}
+
+.option-text {
+  flex: 1;
+  font-size: 14px;
+  color: $text-dark;
+  font-weight: 500;
+  line-height: 1.6;
+}
+
+@keyframes bounceSelect {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.015); }
+  100% { transform: scale(1); }
+}
+
+@keyframes shakeOption {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-4px); }
+  75% { transform: translateX(4px); }
+}

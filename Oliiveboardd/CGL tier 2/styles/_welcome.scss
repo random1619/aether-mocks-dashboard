@@ -1,0 +1,276 @@
+// ============================================================
+//  _welcome.scss
+//  Welcome / Instruction Screen — Premium Glassmorphism Design
+// ============================================================
+
+// ── Wrapper ──────────────────────────────────────────────────
+.welcome-screen {
+  position:        fixed;
+  inset:           0;
+  background:      $gradient-welcome-bg;
+  background-size: 300% 300%;
+  animation:       gradientShift 12s ease infinite;
+  z-index:         $z-welcome;
+  overflow-y:      auto;
+  display:         flex;
+  justify-content: center;
+  align-items:     flex-start;
+  padding:         $spacing-xl $spacing-md;
+
+  // Floating orbs for depth
+  &::before,
+  &::after {
+    content:       '';
+    position:      fixed;
+    border-radius: $radius-full;
+    pointer-events: none;
+    filter:        blur(60px);
+    opacity:       0.25;
+    z-index:       0;
+  }
+
+  &::before {
+    width:      400px;
+    height:     400px;
+    background: $primary-light;
+    top:        -100px;
+    right:      -80px;
+  }
+
+  &::after {
+    width:      320px;
+    height:     320px;
+    background: $accent;
+    bottom:     -80px;
+    left:       -60px;
+  }
+
+  &.hidden {
+    display: none;
+  }
+}
+
+// ── Card Container ───────────────────────────────────────────
+.welcome-container {
+  @include glass($glass-bg, 24px, $glass-border);
+  border-radius: $radius-xl;
+  box-shadow:    $shadow-glass;
+  max-width:     860px;
+  width:         100%;
+  padding:       $spacing-xl $spacing-xl;
+  margin:        $spacing-md auto;
+  position:      relative;
+  z-index:       1;
+  animation:     fadeSlideUp 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+
+  // Subtle top shimmer bar
+  &::before {
+    content:    '';
+    position:   absolute;
+    top:        0;
+    left:       10%;
+    right:      10%;
+    height:     2px;
+    background: linear-gradient(90deg, transparent, $primary-light, $primary, $accent-light, transparent);
+    border-radius: $radius-full;
+    opacity:    0.7;
+  }
+}
+
+// ── Header ───────────────────────────────────────────────────
+.welcome-header {
+  text-align:     center;
+  padding-bottom: $spacing-lg;
+  margin-bottom:  $spacing-lg;
+  position:       relative;
+
+  // Gradient underline
+  &::after {
+    content:       '';
+    position:      absolute;
+    bottom:        0;
+    left:          50%;
+    transform:     translateX(-50%);
+    width:         100px;
+    height:        3px;
+    background:    linear-gradient(90deg, $accent-light, $primary-light, $primary, $primary-dark);
+    border-radius: $radius-full;
+    opacity:       0.85;
+  }
+
+  h1 {
+    font-size:      $font-size-2xl;
+    font-weight:    $font-weight-xbold;
+    letter-spacing: -0.8px;
+    margin-bottom:  $spacing-xs;
+
+    // Premium gradient text
+    background:              linear-gradient(135deg, $primary-dark, $primary-light, $accent);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip:         text;
+
+    i {
+      -webkit-text-fill-color: initial;
+      color:                   $primary-light;
+      margin-right:            $spacing-sm;
+      animation:               float 3s ease-in-out infinite;
+      display:                 inline-block;
+    }
+  }
+
+  p {
+    font-size:      $font-size-xs;
+    color:          $text-muted;
+    font-weight:    $font-weight-semi;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-top:     $spacing-xs;
+  }
+}
+
+// ── Detail Cards Grid ────────────────────────────────────────
+.test-details {
+  display:               grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap:                   $spacing-md;
+  margin-bottom:         $spacing-xl;
+}
+
+.detail-item {
+  background:    $gradient-card-top;
+  padding:       $spacing-md;
+  border-radius: $radius-md;
+  border:        1px solid rgba($primary, 0.1);
+  border-left:   4px solid $primary;
+  transition:    $transition-slow;
+  position:      relative;
+  overflow:      hidden;
+
+  // Shimmer overlay on hover
+  &::after {
+    content:    '';
+    position:   absolute;
+    top:        0;
+    left:       -100%;
+    width:      60%;
+    height:     100%;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.5),
+      transparent
+    );
+    transition: $transition-slow;
+    transform:  skewX(-20deg);
+  }
+
+  &:hover {
+    transform:        translateY(-3px);
+    box-shadow:       $shadow-md;
+    border-left-color: $primary-light;
+
+    &::after {
+      left: 150%;
+    }
+  }
+
+  // Color variants per detail type (nth-child alternation)
+  &:nth-child(2) { border-left-color: $accent; }
+  &:nth-child(3) { border-left-color: $success; }
+  &:nth-child(4) { border-left-color: $warning; }
+  &:nth-child(5) { border-left-color: $danger; }
+}
+
+.detail-label {
+  font-size:      $font-size-xs;
+  font-weight:    $font-weight-semi;
+  color:          $text-muted;
+  margin-bottom:  $spacing-xs;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+}
+
+.detail-value {
+  font-size:   $font-size-xl;
+  font-weight: $font-weight-bold;
+  color:       $text;
+  line-height: $line-height-tight;
+}
+
+// ── Action Buttons ───────────────────────────────────────────
+.welcome-actions {
+  @include flex-center;
+  gap:         $spacing-md;
+  flex-wrap:   wrap;
+  padding-top: $spacing-lg;
+  position:    relative;
+
+  &::before {
+    content:   '';
+    position:  absolute;
+    top:       0;
+    left:      0;
+    right:     0;
+    height:    1px;
+    background: linear-gradient(90deg, transparent, $border, transparent);
+  }
+}
+
+.start-btn {
+  @include btn-primary;
+  padding:        $spacing-md $spacing-2xl;
+  font-size:      $font-size-md;
+  font-weight:    $font-weight-bold;
+  border-radius:  $radius-md;
+  letter-spacing: 0.3px;
+  position:       relative;
+  overflow:       hidden;
+
+  // Gloss overlay
+  &::before {
+    content:    '';
+    position:   absolute;
+    inset:      0;
+    background: linear-gradient(135deg, rgba(255,255,255,0.18) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  i { font-size: $font-size-md; }
+}
+
+.channel-link {
+  @include btn-ghost;
+  padding:      $spacing-md $spacing-lg;
+  border-radius: $radius-md;
+  font-size:    $font-size-sm;
+  font-weight:  $font-weight-semi;
+
+  i { font-size: $font-size-md; }
+}
+
+// ── Responsive ──────────────────────────────────────────────
+@include sm {
+  .welcome-container {
+    padding: $spacing-lg $spacing-md;
+  }
+
+  .welcome-header h1 {
+    font-size: $font-size-xl;
+  }
+
+  .test-details {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .start-btn {
+    padding: $spacing-md $spacing-xl;
+    width:   100%;
+    justify-content: center;
+  }
+
+  .channel-link {
+    width:           100%;
+    justify-content: center;
+  }
+}

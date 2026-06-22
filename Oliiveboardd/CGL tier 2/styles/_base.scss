@@ -1,0 +1,140 @@
+// ============================================================
+//  _base.scss
+//  Global Reset, Body, Typography, Images, Tables, Scrollbar
+// ============================================================
+
+*,
+*::before,
+*::after {
+  margin:     0;
+  padding:    0;
+  box-sizing: border-box;
+}
+
+:root {
+  // CSS custom properties (used by JS-driven inline styles)
+  --primary:       #{$primary};
+  --primary-dark:  #{$primary-dark};
+  --primary-light: #{$primary-light};
+  --success:       #{$success};
+  --danger:        #{$danger};
+  --warning:       #{$warning};
+  --bg:            #{$bg};
+  --card:          #{$card};
+  --text:          #{$text};
+  --text-light:    #{$text-muted};
+  --border:        #{$border};
+  --radius-sm:     #{$radius-sm};
+  --radius-md:     #{$radius-md};
+  --shadow-md:     #{$shadow-md};
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size:       16px;
+}
+
+body {
+  font-family:              $font-family;
+  background:               $bg;
+  color:                    $text;
+  line-height:              $line-height-base;
+  font-size:                $font-size-base;
+  font-weight:              $font-weight-normal;
+  -webkit-font-smoothing:   antialiased;
+  -moz-osx-font-smoothing:  grayscale;
+  text-rendering:           optimizeLegibility;
+}
+
+// ── Headings ────────────────────────────────────────────────
+h1, h2, h3, h4, h5, h6 {
+  line-height:  $line-height-tight;
+  font-weight:  $font-weight-bold;
+  color:        $text;
+  margin:       0;
+}
+
+// ── Links ───────────────────────────────────────────────────
+a {
+  color:           $primary;
+  text-decoration: none;
+  transition:      $transition-fast;
+
+  &:hover {
+    color: $primary-light;
+  }
+}
+
+// ── Images ──────────────────────────────────────────────────
+img {
+  max-width: 100%;
+  height:    auto;
+  display:   block;
+}
+
+// ── Inline Tables (question content) ────────────────────────
+table {
+  width:           100%;
+  border-collapse: collapse;
+  margin:          $spacing-sm 0;
+
+  th,
+  td {
+    padding:    $spacing-sm $spacing-md;
+    text-align: left;
+    border:     1px solid $border;
+    font-size:  $font-size-sm;
+  }
+
+  th {
+    background:  $bg;
+    font-weight: $font-weight-semi;
+    color:       $text;
+  }
+
+  tr:hover td {
+    background: $card-hover;
+  }
+}
+
+// ── Scrollbar (WebKit) ──────────────────────────────────────
+::-webkit-scrollbar {
+  width:  6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background:    $bg;
+  border-radius: $radius-full;
+}
+
+::-webkit-scrollbar-thumb {
+  background:    $border-dark;
+  border-radius: $radius-full;
+
+  &:hover {
+    background: $text-light;
+  }
+}
+
+// ── Selection ───────────────────────────────────────────────
+::selection {
+  background: rgba($primary, 0.15);
+  color:      $text;
+}
+
+// ── Focus Ring ──────────────────────────────────────────────
+:focus-visible {
+  @include focus-ring;
+}
+
+// ── Strong / Bold ───────────────────────────────────────────
+strong {
+  font-weight: $font-weight-semi;
+  color:       $text;
+}
+
+// ── Paragraph spacing in question content ───────────────────
+p {
+  line-height: $line-height-base;
+}

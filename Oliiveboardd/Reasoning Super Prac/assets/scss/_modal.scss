@@ -1,0 +1,160 @@
+@import 'variables';
+
+// Result display Modal
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(15, 23, 42, 0.6); // semi-transparent Slate 900
+    backdrop-filter: blur(8px);
+    z-index: 300;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    opacity: 0;
+    transition: opacity 0.25s ease;
+
+    &.show {
+        display: flex;
+        opacity: 1;
+    }
+}
+
+.result {
+    background: $card-bg;
+    border-radius: $radius-lg;
+    padding: 32px;
+    width: 100%;
+    max-width: 440px;
+    text-align: center;
+    box-shadow: $shadow-xl;
+    border: 1px solid $border-color;
+    transform: translateY(20px);
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+
+    .modal.show & {
+        transform: translateY(0);
+    }
+
+    h2 {
+        font-size: 1.6rem;
+        font-weight: 700;
+        color: $primary-dark;
+        margin-bottom: 8px;
+    }
+
+    .dark-mode & {
+        background: $dark-card;
+        border-color: $dark-border;
+        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        
+        h2 {
+            color: white;
+        }
+    }
+}
+
+.score {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: $primary-color;
+    margin: 16px 0;
+    font-family: $font-sans;
+    letter-spacing: -0.03em;
+    background: rgba($primary-color, 0.05);
+    display: inline-block;
+    padding: 8px 24px;
+    border-radius: 40px;
+    border: 1px solid rgba($primary-color, 0.1);
+
+    .dark-mode & {
+        background: rgba($primary-color, 0.15);
+        color: lighten($primary-color, 15%);
+        border-color: rgba($primary-color, 0.2);
+    }
+}
+
+.stats {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    margin: 24px 0;
+}
+
+.stat {
+    text-align: center;
+    padding: 14px;
+    border-radius: $radius-md;
+    border: 1.5px solid $border-color;
+    background: $body-bg;
+    transition: $transition-smooth;
+
+    .dark-mode & {
+        border-color: $dark-border;
+        background: $dark-bg;
+    }
+
+    &.c {
+        border-color: rgba($success-color, 0.2);
+        background: rgba($success-color, 0.02);
+
+        .stat-val {
+            color: $success-color;
+        }
+
+        .dark-mode & {
+            background: rgba($success-color, 0.04);
+            border-color: rgba($success-color, 0.3);
+        }
+    }
+
+    &.w {
+        border-color: rgba($danger-color, 0.2);
+        background: rgba($danger-color, 0.02);
+
+        .stat-val {
+            color: $danger-color;
+        }
+
+        .dark-mode & {
+            background: rgba($danger-color, 0.04);
+            border-color: rgba($danger-color, 0.3);
+        }
+    }
+}
+
+.stat-val {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 2px;
+    font-family: $font-mono;
+}
+
+.stat-lbl {
+    font-size: 11px;
+    font-weight: 600;
+    color: $text-muted;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+
+    .dark-mode & {
+        color: $dark-text-muted;
+    }
+}
+
+.modal-acts {
+    display: flex;
+    gap: 12px;
+    margin-top: 24px;
+}
+
+.modal-btn {
+    flex: 1;
+    padding: 12px;
+    border-radius: $radius-md;
+    font-size: 14px;
+    font-weight: 600;
+}

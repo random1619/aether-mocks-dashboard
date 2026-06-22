@@ -1,0 +1,213 @@
+// =============================================================================
+// ABSTRACTS / _variables.scss
+// Design Token System — Single source of truth for all design decisions
+// =============================================================================
+
+// ─── Google Fonts ─────────────────────────────────────────────────────────────
+// Imported via _typography.scss
+
+// ─── Primitive Color Palette (HSL) ────────────────────────────────────────────
+// Indigo (Flat layout primary)
+$indigo-50:  hsl(240, 100%, 97%);
+$indigo-100: hsl(240, 100%, 94%);
+$indigo-200: hsl(237,  87%, 87%);
+$indigo-500: hsl(239,  84%, 57%);   // #4F46E5
+$indigo-600: hsl(243,  75%, 59%);
+$indigo-700: hsl(244,  58%, 51%);
+
+// Blue (Sectioned layout primary)
+$blue-50:   hsl(214, 100%, 97%);
+$blue-100:  hsl(214, 95%, 93%);
+$blue-200:  hsl(213, 97%, 87%);
+$blue-400:  hsl(213, 94%, 68%);
+$blue-500:  hsl(217, 91%, 60%);
+$blue-600:  hsl(221, 83%, 53%);   // #2563eb
+$blue-700:  hsl(224, 76%, 48%);   // #1d4ed8
+$blue-800:  hsl(226, 71%, 40%);   // #1e3a8a-ish
+$blue-900:  hsl(224, 64%, 33%);   // #1e3a8a
+
+// Emerald / Green (success)
+$green-50:  hsl(152, 81%, 96%);
+$green-100: hsl(149, 80%, 90%);
+$green-500: hsl(160, 84%, 39%);   // #10B981
+$green-600: hsl(161, 94%, 30%);   // #059669
+$green-700: hsl(162, 93%, 24%);   // #166534
+
+// Red / Rose (error / danger)
+$red-50:   hsl(0, 86%, 97%);
+$red-100:  hsl(0, 93%, 94%);
+$red-500:  hsl(0, 84%, 60%);    // #EF4444
+$red-600:  hsl(0, 72%, 51%);    // #dc2626
+$red-700:  hsl(0, 63%, 31%);    // #991b1b
+
+// Amber / Yellow (warning / review)
+$amber-50:  hsl(48, 100%, 96%);
+$amber-100: hsl(48, 97%, 89%);
+$amber-400: hsl(43, 96%, 56%);   // #FCD34D
+$amber-500: hsl(38, 92%, 50%);   // #F59E0B
+$amber-700: hsl(26, 90%, 37%);   // #92400E
+$amber-800: hsl(23, 83%, 28%);   // #78350F
+
+// Neutral (backgrounds, text, borders)
+$gray-50:  hsl(210, 40%, 98%);   // #F8FAFC
+$gray-100: hsl(210, 40%, 96%);   // #F3F4F6
+$gray-200: hsl(214, 32%, 91%);   // #E5E7EB
+$gray-300: hsl(213, 27%, 84%);   // #D1D5DB
+$gray-400: hsl(215, 20%, 65%);   // #9CA3AF
+$gray-500: hsl(220, 9%, 46%);    // #6B7280
+$gray-700: hsl(215, 19%, 35%);   // #374151
+$gray-800: hsl(215, 28%, 17%);   // #1F2937
+$gray-900: hsl(222, 47%, 11%);   // #0F172A
+
+// Dark mode neutral
+$dark-950: hsl(230, 35%, 7%);    // #0d0f1a deepest bg
+$dark-900: hsl(230, 39%, 11%);   // #1a1a2e
+$dark-800: hsl(225, 41%, 18%);   // #16213e
+$dark-700: hsl(220, 17%, 23%);   // #2d3748
+$dark-600: hsl(220, 13%, 28%);   // #374151
+$dark-400: hsl(218, 11%, 65%);   // #9aa0b4
+$dark-300: hsl(220, 14%, 75%);   // #b8bfcc
+$dark-200: hsl(220, 20%, 85%);   // #ccd2e0
+$dark-100: hsl(220, 26%, 91%);   // #dde2ee
+
+// ─── CSS Custom Properties (Runtime Design Tokens) ────────────────────────────
+:root {
+  // === Primitive Colors ===
+  --color-indigo-500: #{$indigo-500};
+  --color-blue-600:   #{$blue-600};
+  --color-blue-900:   #{$blue-900};
+
+  // === Semantic - Flat Layout (Mocks 1-3, 52-56) ===
+  --p:          #{$indigo-500};
+  --p-dark:     #{$indigo-700};
+  --p-light:    #{$indigo-100};
+  --s:          #{$green-500};
+  --s-light:    #{$green-50};
+  --d:          #{$red-500};
+  --d-light:    #{$red-50};
+  --w:          #{$amber-500};
+  --y:          #{$amber-400};
+
+  // === Semantic - Sectioned Layout (Mocks 4-51) ===
+  --pri:        #{$blue-600};
+  --priD:       #{$blue-700};
+  --priL:       #{$blue-100};
+  --suc:        #{$green-600};
+  --war:        #{$amber-500};
+  --err:        #{$red-600};
+
+  // === Surface / Background ===
+  --bg:         #{$gray-50};
+  --bg-alt:     #{$gray-100};
+  --bg2:        #{$gray-100};
+  --card:       #ffffff;
+  --card-hover: #{$gray-50};
+  --overlay:    rgba(0, 0, 0, 0.45);
+
+  // === Text ===
+  --txt:        #{$gray-800};
+  --txtL:       #{$gray-500};
+  --txt-muted:  #{$gray-400};
+  --txt-on-primary: #ffffff;
+
+  // === Borders ===
+  --brd:        #{$gray-200};
+  --bdr:        #{$gray-200};
+  --bdrD:       #{$gray-300};
+  --brd-dark:   #{$gray-300};
+
+  // === Spacing Scale (4px base) ===
+  --space-0:   0;
+  --space-1:   4px;
+  --space-2:   8px;
+  --space-3:   12px;
+  --space-4:   16px;
+  --space-5:   20px;
+  --space-6:   24px;
+  --space-8:   32px;
+  --space-10:  40px;
+  --space-12:  48px;
+  --space-16:  64px;
+
+  // === Border Radius ===
+  --radius-xs: 4px;
+  --radius-sm: 6px;
+  --radius:    10px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 20px;
+  --radius-2xl:24px;
+  --radius-full: 9999px;
+
+  // === Type Scale ===
+  --text-xs:   0.6875rem;  // 11px
+  --text-sm:   0.8125rem;  // 13px
+  --text-base: 0.9375rem;  // 15px
+  --text-md:   1rem;       // 16px
+  --text-lg:   1.125rem;   // 18px
+  --text-xl:   1.25rem;    // 20px
+  --text-2xl:  1.5rem;     // 24px
+  --text-3xl:  1.875rem;   // 30px
+  --text-4xl:  2.25rem;    // 36px
+
+  // === Font Weights ===
+  --fw-normal:  400;
+  --fw-medium:  500;
+  --fw-semi:    600;
+  --fw-bold:    700;
+  --fw-extrabold: 800;
+  --fw-black:   900;
+
+  // === Line Heights ===
+  --lh-tight:  1.25;
+  --lh-snug:   1.375;
+  --lh-normal: 1.5;
+  --lh-relaxed:1.625;
+  --lh-loose:  2;
+
+  // === Elevation / Shadow ===
+  --shadow-xs:  0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-sm:  0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06);
+  --shadow:     0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-md:  0 4px 6px -1px rgba(0,0,0,0.12), 0 2px 4px -1px rgba(0,0,0,0.08);
+  --shadow-lg:  0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --shadow-xl:  0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  --shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+
+  // Primary-colored shadow for CTAs
+  --shadow-primary: 0 4px 14px rgba(37, 99, 235, 0.35);
+  --shadow-indigo:  0 4px 14px rgba(79, 70, 229, 0.35);
+
+  // === Transitions ===
+  --transition-fast:   all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition:        all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow:   all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-bounce: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  // === Z-index Scale ===
+  --z-base:     1;
+  --z-dropdown: 100;
+  --z-sticky:   200;
+  --z-overlay:  500;
+  --z-modal:    600;
+  --z-toast:    700;
+  --z-welcome:  1000;
+
+  // === Layout Dimensions ===
+  --header-h:        70px;
+  --timer-bar-h:     50px;
+  --controls-bar-h:  60px;
+  --bottom-bar-h:    68px;
+  --leftW:           272px;
+  --rightW:          300px;
+  --mobile-menu-sz:  52px;
+  --max-content-w:   860px;
+
+  // === Legacy compat (avoid breaking JS references) ===
+  --bg-alt: var(--bg2);
+  --txt-light: var(--txtL);
+  --brd-dark: var(--bdrD);
+  --radius-sm: 6px;
+  --shadow-sm: var(--shadow-sm);
+  --transition-fast: var(--transition-fast);
+}
