@@ -39,13 +39,26 @@ def get_subject(category, name):
     return 'General'
 
 for root, dirs, files in os.walk(root_dir):
+    # Prune unwanted directories so os.walk does not descend into them
+    dirs[:] = [d for d in dirs if d.lower() not in ['backup', 'node_modules', 'styles', 'scss', 'css', '.git', '.firebase']]
+    
     for file in files:
         if file.lower().endswith('.html') and file.lower() != 'index.html':
             full_path = os.path.join(root, file)
             rel_path = os.path.relpath(full_path, root_dir).replace('\\', '/')
             parts = rel_path.split('/')
             
-            provider = parts[0]
+            raw_provider = parts[0]
+            # Normalize provider names
+            if raw_provider.lower() in ['oliiveboardd', 'oliveboard']:
+                provider = 'Oliveboard'
+            elif raw_provider.lower() in ['pundiits', 'pundits']:
+                provider = 'Pundits'
+            elif raw_provider.lower() == 'the solver':
+                provider = 'The Solver'
+            else:
+                provider = raw_provider
+                
             category = "/".join(parts[1:-1]) if len(parts) > 2 else (parts[1] if len(parts) > 1 else "General")
             
             cleaned = clean_name(file)
