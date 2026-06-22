@@ -1300,20 +1300,34 @@
         function getMockTrack(mock) {
             const cat = mock.category.toLowerCase();
             const name = mock.name.toLowerCase();
+            const subj = mock.subject.toLowerCase();
             
+            // 1. Chapter-wise tests
             if (cat.includes('chapter') || cat.includes('pyq') || name.includes('chapter') || name.includes('topic') || name.includes('wise')) {
-                return 'Chapter-wise & Topic Mocks';
-            } else if (cat.includes('speed') || cat.includes('boost') || cat.includes('prac') || cat.includes('sectional') || cat.includes('subject') || 
-                       ['quant', 'reasoning', 'english', 'general studies'].includes(mock.subject.toLowerCase())) {
-                if (mock.subject !== 'Full Mock' && mock.subject !== 'General') {
-                    return `${mock.subject} Sectional Tests`;
-                }
-                return 'Sectional & Practice Tests';
-            } else if (mock.subject === 'Full Mock' || cat.includes('tier') || cat.includes('full') || name.includes('full') || name.includes('pre')) {
-                return 'Full Syllabus Mocks';
-            } else {
-                return 'General Practice Tracks';
+                return 'Chapter-wise Mocks';
             }
+            
+            // 2. Full Syllabus Mocks
+            if (mock.subject === 'Full Mock' || cat.includes('full') || name.includes('full') || cat.includes('pre') || name.includes('pre') || cat.includes('tier') || name.includes('tier') || name.includes('cgl 2026 pre')) {
+                return 'Full Mocks';
+            }
+            
+            // 3. Subject Tracks
+            if (subj === 'quant' || cat.includes('quant') || name.includes('quant') || cat.includes('math') || name.includes('math') || name.includes('calc')) {
+                return 'Quant Mocks';
+            }
+            if (subj === 'english' || cat.includes('english') || name.includes('english') || name.includes('vocab') || name.includes('grammar')) {
+                return 'English Mocks';
+            }
+            if (subj === 'reasoning' || cat.includes('reasoning') || name.includes('reasoning') || name.includes('analog') || name.includes('speed')) {
+                return 'Reasoning Mocks';
+            }
+            if (subj === 'general studies' || subj === 'gs' || cat.includes('gs') || name.includes('gs') || cat.includes('gk') || name.includes('gk') || cat.includes('current affairs') || name.includes('current affairs') || cat.includes('history') || cat.includes('geography') || cat.includes('polity') || cat.includes('science')) {
+                return 'GS Mocks';
+            }
+            
+            // 4. Default fallback
+            return 'General Practice Mocks';
         }
 
         function extractChapterName(name) {
@@ -1345,7 +1359,24 @@
             DOM.grid.innerHTML = '<div class="roadmap-container"></div>';
             const roadmapContainer = DOM.grid.querySelector('.roadmap-container');
             
-            const sortedTrackNames = Object.keys(tracks).sort();
+            const trackOrder = [
+                'Full Mocks',
+                'Quant Mocks',
+                'English Mocks',
+                'Reasoning Mocks',
+                'GS Mocks',
+                'Chapter-wise Mocks',
+                'General Practice Mocks'
+            ];
+
+            const sortedTrackNames = Object.keys(tracks).sort((a, b) => {
+                let idxA = trackOrder.indexOf(a);
+                let idxB = trackOrder.indexOf(b);
+                if (idxA === -1) idxA = 99;
+                if (idxB === -1) idxB = 99;
+                return idxA - idxB;
+            });
+
             if (sortedTrackNames.length === 0) {
                 DOM.grid.innerHTML = `
                     <div class="empty-state glass-panel">
@@ -1365,7 +1396,7 @@
                 
                 const firstUncompletedIndex = trackMocks.findIndex(m => !state.completed[m.path]);
                 
-                if (trackName === 'Chapter-wise & Topic Mocks') {
+                if (trackName === 'Chapter-wise Mocks') {
                     const availableSubjects = [...new Set(trackMocks.map(m => m.subject))].sort();
                     let trackContentHTML = '';
                     
