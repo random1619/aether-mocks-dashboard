@@ -1,0 +1,1409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aether Mocks</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
+
+        :root {
+            --primary: #6366f1;
+            --primary-light: #818cf8;
+            --primary-dark: #4f46e5;
+            --secondary: #8b5cf6;
+            --accent: #ec4899;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --light: #1e293b;
+            --dark: #0f172a;
+            --gray: #64748b;
+            --light-gray: rgba(255, 255, 255, 0.08);
+            --card-bg: rgba(255, 255, 255, 0.03);
+            --body-bg: #030712;
+            --header-bg: rgba(15, 23, 42, 0.6);
+            --footer-bg: rgba(15, 23, 42, 0.8);
+            --box-shadow: 0 8px 32px 0 rgba(0,0,0,0.3);
+            --box-shadow-sm: 0 4px 16px rgba(0,0,0,0.2);
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Outfit', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        body {
+            background-color: var(--body-bg);
+            color: #f8fafc;
+            line-height: 1.6;
+            padding-bottom: 80px; /* Space for fixed navigation */
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(99, 102, 241, 0.15) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(139, 92, 246, 0.15) 0px, transparent 50%);
+            background-attachment: fixed;
+        }
+        
+        /* Header Styles */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 60px;
+            background: var(--header-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            color: #f8fafc;
+            display: flex;
+            align-items: center;
+            padding: 0 16px;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+            box-shadow: var(--box-shadow-sm);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+        }
+        
+        .header-brand {
+            display: flex;
+            align-items: center;
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: #f8fafc;
+            text-decoration: none;
+            gap: 8px;
+        }
+        
+        .header-brand i {
+            font-size: 1.2rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .header-controls {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .control-btn {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.08);
+            color: #f8fafc;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .control-btn:hover {
+            background: rgba(255,255,255,0.12);
+            border-color: rgba(255,255,255,0.2);
+            transform: translateY(-1px);
+        }
+        
+        .control-btn.active {
+            background: var(--primary);
+            border-color: var(--primary-light);
+        }
+        
+        .timer-display {
+            background: rgba(0,0,0,0.3);
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 18px;
+            padding: 4px 12px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            white-space: nowrap;
+            color: #f8fafc;
+        }
+        
+        .timer-display i {
+            margin-right: 6px;
+            color: var(--accent);
+        }
+        
+        /* Main Content */
+        .main-content {
+            margin-top: 60px;
+            padding: 16px;
+            min-height: calc(100vh - 140px);
+        }
+        
+        .question-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(8px);
+            border: 1px solid var(--light-gray);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 16px;
+            box-shadow: var(--box-shadow-sm);
+            transition: var(--transition);
+        }
+        
+        .question-counter {
+            font-size: 0.9rem;
+            color: var(--gray);
+            text-align: center;
+            margin-bottom: 16px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+        
+        .question-text {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 24px;
+            color: #f8fafc;
+            overflow-wrap: break-word;
+            word-wrap: break-word;
+            hyphens: auto;
+            max-width: 100%;
+        }
+        
+        .option-item {
+            margin-bottom: 12px;
+            position: relative;
+        }
+        
+        .option-input {
+            position: absolute;
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        
+        .question-text img,
+        .option-label img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 8px 0;
+            border-radius: 8px;
+        }
+        
+        .option-label {
+            display: block;
+            padding: 14px 16px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            color: #f8fafc;
+        }
+        
+        .option-label:hover {
+            border-color: rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.05);
+            transform: translateY(-2px);
+            box-shadow: var(--box-shadow-sm);
+        }
+        
+        .option-input:checked + .option-label {
+            border-color: var(--primary);
+            background: rgba(99, 102, 241, 0.08);
+            box-shadow: 0 0 12px var(--primary-glow);
+        }
+        
+        .option-input:checked + .option-label::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 3px;
+            height: 100%;
+            background: var(--primary);
+        }
+        
+        /* When reviewing answers */
+        .review-mode .option-input:checked + .option-label.correct {
+            border-color: var(--success);
+            background: rgba(16, 185, 129, 0.08);
+            box-shadow: 0 0 12px var(--success-glow);
+        }
+        
+        .review-mode .option-input:checked + .option-label.correct::after {
+            background: var(--success);
+        }
+        
+        .review-mode .option-input:checked + .option-label.incorrect {
+            border-color: var(--danger);
+            background: rgba(239, 68, 68, 0.08);
+            box-shadow: 0 0 12px var(--danger-glow);
+        }
+        
+        .review-mode .option-input:checked + .option-label.incorrect::after {
+            background: var(--danger);
+        }
+        
+        .review-mode .option-label.correct-answer {
+            border-color: var(--success);
+            background: rgba(16, 185, 129, 0.08);
+            box-shadow: 0 0 12px var(--success-glow);
+        }
+        
+        .review-mode .option-label.correct-answer::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 3px;
+            height: 100%;
+            background: var(--success);
+        }
+        
+        .solution-container {
+            margin-top: 24px;
+            padding: 18px;
+            background: rgba(99, 102, 241, 0.05);
+            border-radius: 12px;
+            border-left: 3px solid var(--primary);
+            border-top: 1px solid rgba(255,255,255,0.03);
+            border-right: 1px solid rgba(255,255,255,0.03);
+            border-bottom: 1px solid rgba(255,255,255,0.03);
+        }
+        
+        .solution-title {
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--primary-light);
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        /* Question Navigation */
+        .question-nav {
+            position: fixed;
+            top: 60px;
+            right: 0;
+            bottom: 80px;
+            width: 100%;
+            max-width: 320px;
+            background: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-left: 1px solid rgba(255,255,255,0.06);
+            box-shadow: var(--box-shadow);
+            transform: translateX(100%);
+            transition: var(--transition);
+            z-index: 900;
+            overflow-y: auto;
+            padding: 16px;
+        }
+        
+        .question-nav.show {
+            transform: translateX(0);
+        }
+        
+        .nav-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+        
+        .nav-title {
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin: 0;
+            color: #f8fafc;
+        }
+        
+        .question-stats {
+            display: flex;
+            gap: 8px;
+        }
+        
+        .stat-badge {
+            font-size: 0.75rem;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-weight: 500;
+            color: white;
+        }
+        
+        .section-selector {
+            width: 100%;
+            margin-bottom: 16px;
+            border-radius: 12px;
+            padding: 10px 16px;
+            border: 1px solid rgba(255,255,255,0.08);
+            background: rgba(0, 0, 0, 0.3);
+            color: #f8fafc;
+            font-size: 0.9rem;
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 10px center;
+            background-size: 16px;
+        }
+        
+        .question-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(40px, 1fr));
+            gap: 8px;
+        }
+        
+        .q-box {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 500;
+            border: 1px solid rgba(255,255,255,0.08);
+            background: rgba(255,255,255,0.02);
+            color: #94a3b8;
+            transition: var(--transition);
+            position: relative;
+        }
+        
+        .q-box:hover {
+            transform: translateY(-2px);
+            border-color: rgba(255,255,255,0.2);
+            color: #f8fafc;
+        }
+        
+        .q-box.attempted {
+            background-color: var(--primary);
+            color: white;
+            border-color: var(--primary);
+            box-shadow: 0 0 8px var(--primary-glow);
+        }
+        
+        .q-box.correct {
+            background-color: var(--success);
+            color: white;
+            border-color: var(--success);
+            box-shadow: 0 0 8px var(--success-glow);
+        }
+        
+        .q-box.incorrect {
+            background-color: var(--danger);
+            color: white;
+            border-color: var(--danger);
+            box-shadow: 0 0 8px var(--danger-glow);
+        }
+        
+        .q-box.current {
+            border: 2px solid var(--accent) !important;
+            transform: translateY(-3px);
+            box-shadow: 0 4px 12px rgba(236, 72, 153, 0.3);
+            color: #f8fafc;
+        }
+        
+        .q-box.unattempted {
+            background-color: var(--gray);
+            color: white;
+            border-color: var(--gray);
+        }
+        
+        /* Bottom Navigation */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 80px;
+            background: var(--footer-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-top: 1px solid rgba(255,255,255,0.06);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 16px;
+            z-index: 800;
+        }
+        
+        .nav-btn {
+            height: 48px;
+            border-radius: 12px;
+            border: none;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 20px;
+            transition: var(--transition);
+            gap: 8px;
+            cursor: pointer;
+        }
+        
+        .nav-btn i {
+            font-size: 1rem;
+        }
+        
+        .nav-btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .nav-btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px var(--primary-glow);
+        }
+        
+        .nav-btn-outline {
+            background: rgba(255,255,255,0.02);
+            color: #f8fafc;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .nav-btn-outline:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+        
+        .nav-btn:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+            transform: none !important;
+            box-shadow: none !important;
+        }
+        
+        /* Overlay when nav is open */
+        .nav-overlay {
+            position: fixed;
+            top: 60px;
+            left: 0;
+            right: 0;
+            bottom: 80px;
+            background: rgba(0,0,0,0.6);
+            backdrop-filter: blur(4px);
+            z-index: 800;
+            opacity: 0;
+            pointer-events: none;
+            transition: var(--transition);
+        }
+        
+        .nav-overlay.show {
+            opacity: 1;
+            pointer-events: all;
+        }
+        
+        /* Results Modal */
+        .results-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(3, 7, 18, 0.8);
+            backdrop-filter: blur(8px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1100;
+            opacity: 0;
+            pointer-events: none;
+            transition: var(--transition);
+            padding: 16px;
+        }
+        
+        .results-modal.show {
+            opacity: 1;
+            pointer-events: all;
+        }
+        
+        .results-card {
+            background: #0f172a;
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 24px;
+            width: 100%;
+            max-width: 500px;
+            overflow: hidden;
+            transform: translateY(20px);
+            transition: var(--transition);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+        }
+        
+        .results-modal.show .results-card {
+            transform: translateY(0);
+        }
+        
+        .results-header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 24px 20px;
+            text-align: center;
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+        }
+        
+        .results-title {
+            margin: 0;
+            font-weight: 600;
+            font-size: 1.4rem;
+        }
+        
+        .results-body {
+            padding: 24px;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+        
+        .stat-card {
+            padding: 16px;
+            border-radius: 16px;
+            text-align: center;
+            color: white;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+        
+        .stat-value {
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+        
+        .stat-label {
+            font-size: 0.8rem;
+            opacity: 0.8;
+            font-weight: 500;
+        }
+        
+        .results-footer {
+            padding: 18px 24px;
+            display: flex;
+            justify-content: center;
+            border-top: 1px solid rgba(255,255,255,0.06);
+            background: rgba(0,0,0,0.1);
+        }
+        
+        /* MathJax Styling Override */
+        .MathJax, .mjx-chtml {
+            overflow-x: auto;
+            max-width: 100%;
+            display: inline-block;
+        }
+        
+        /* Responsive Adjustments */
+        @media (min-width: 992px) {
+            .question-nav {
+                transform: translateX(0);
+            }
+            
+            .main-content {
+                margin-right: 320px;
+            }
+            
+            .nav-overlay {
+                display: none;
+            }
+            
+            .bottom-nav {
+                display: none;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .question-grid {
+                grid-template-columns: repeat(auto-fill, minmax(36px, 1fr));
+                gap: 6px;
+            }
+            
+            .q-box {
+                width: 36px;
+                height: 36px;
+                font-size: 0.9rem;
+            }
+            
+            .option-label {
+                padding: 12px 14px;
+            }
+            
+            .question-text {
+                font-size: 1rem;
+            }
+            
+            .header-brand {
+                font-size: 1rem;
+            }
+            
+            .control-btn {
+                width: 32px;
+                height: 32px;
+            }
+            
+            .timer-display {
+                font-size: 0.8rem;
+                padding: 4px 10px;
+            }
+            
+            .nav-btn {
+                height: 44px;
+                padding: 0 16px;
+                font-size: 0.9rem;
+            }
+        }
+</style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <a href="#" class="header-brand">
+                <i class="fas fa-graduation-cap"></i>
+                <span>Aether Mocks</span>
+            </a>
+            
+            <div class="header-controls">
+                <!-- Timer -->
+                <div class="timer-display">
+                    <i class="far fa-clock"></i>
+                    <span id="timer-display">8:00</span>
+                </div>
+                
+                                <!-- Full Screen Button -->
+                <button class="control-btn" id="fullscreen-btn" onclick="toggleFullscreen()" title="Toggle Fullscreen">
+                    <i class="fas fa-expand"></i>
+                </button>
+                
+                <!-- Language toggle -->
+                <button class="control-btn" id="lang-btn" onclick="toggleLanguage()">
+                    <span id="lang-text">En</span>
+                </button>
+                
+                <!-- Submit button -->
+                <button class="control-btn" id="submit-btn" onclick="confirmSubmit()">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+                
+                <!-- Questions toggle for mobile -->
+                <button class="control-btn nav-toggle-btn" id="nav-toggle" onclick="toggleNav()">
+                    <i class="fas fa-th"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Main content -->
+    <main class="main-content" id="main-content">
+        <div class="question-counter" id="question-counter">Question 1 of 15</div>
+        
+        <!-- Questions will be displayed here -->
+        <div id="questions-container"></div>
+    </main>
+    
+    <!-- Overlay for mobile nav -->
+    <div class="nav-overlay" id="nav-overlay" onclick="toggleNav(false)"></div>
+    
+    <!-- Question navigation sidebar -->
+    <aside class="question-nav" id="question-nav">
+        <div class="nav-header">
+            <h3 class="nav-title">Questions</h3>
+            <div class="question-stats">
+                <span class="stat-badge bg-primary" id="attempted-count">0</span>
+                <span class="stat-badge bg-gray" id="total-count">15</span>
+                <button class="control-btn d-lg-none" onclick="toggleNav(false)">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Section selector -->
+        <select class="section-selector" id="section-selector" onchange="switchSection(this.value)">
+            <option value="all">All Sections</option>
+        </select>
+        
+        <!-- Question grid -->
+        <div class="question-grid" id="question-boxes"></div>
+    </aside>
+    
+    <!-- Bottom navigation for mobile -->
+    <nav class="bottom-nav d-lg-none">
+        <button class="nav-btn nav-btn-outline" onclick="prevQuestion()">
+            <i class="fas fa-chevron-left"></i>
+            <span>Previous</span>
+        </button>
+        <button class="nav-btn nav-btn-outline" onclick="nextQuestion()">
+            <span>Next</span>
+            <i class="fas fa-chevron-right"></i>
+        </button>
+    </nav>
+    
+    <!-- Results modal -->
+    <div class="results-modal" id="results-modal">
+        <div class="results-card">
+            <div class="results-header">
+                <h3 class="results-title">Test Results</h3>
+            </div>
+            <div class="results-body">
+                <div class="stats-grid">
+                    <div class="stat-card" style="background: linear-gradient(135deg, var(--primary), var(--primary-dark))">
+                        <div class="stat-value" id="score-value">0</div>
+                        <div class="stat-label">Score</div>
+                    </div>
+                    <div class="stat-card" style="background: linear-gradient(135deg, var(--success), #1b9aaa)">
+                        <div class="stat-value" id="correct-value">0</div>
+                        <div class="stat-label">Correct</div>
+                    </div>
+                    <div class="stat-card" style="background: linear-gradient(135deg, var(--danger), var(--accent))">
+                        <div class="stat-value" id="incorrect-value">0</div>
+                        <div class="stat-label">Incorrect</div>
+                    </div>
+                    <div class="stat-card" style="background: linear-gradient(135deg, var(--gray), var(--dark))">
+                        <div class="stat-value" id="unattempted-value">0</div>
+                        <div class="stat-label">Unattempted</div>
+                    </div>
+                </div>
+            </div>
+            <div class="results-footer">
+                <button class="nav-btn nav-btn-primary" onclick="reviewTest()">
+                    <i class="fas fa-search me-1"></i>
+                    <span>Review Test</span>
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Questions data
+        const questions = [];
+        const sections = {};
+        let currentLang = "en";
+        let currentQuestion = 0;
+        let answers = {};
+        let submitted = false;
+        let totalTime = 8 * 60;
+        
+                function toggleFullscreen() {
+            const btn = document.getElementById('fullscreen-btn');
+            if (!btn) return;
+            const icon = btn.querySelector('i');
+            if (!document.fullscreenElement) {
+                document.documentElement.requestFullscreen().then(() => {
+                    icon.className = 'fas fa-compress';
+                }).catch(err => {
+                    console.error("Fullscreen error: ", err);
+                });
+            } else {
+                document.exitFullscreen().then(() => {
+                    icon.className = 'fas fa-expand';
+                });
+            }
+        }
+        
+        document.addEventListener('fullscreenchange', () => {
+            const btn = document.getElementById('fullscreen-btn');
+            if (btn) {
+                const icon = btn.querySelector('i');
+                if (document.fullscreenElement) {
+                    icon.className = 'fas fa-compress';
+                } else {
+                    icon.className = 'fas fa-expand';
+                }
+            }
+        });
+
+        // Initialize the test
+        window.onload = function() {
+            initializeTest();
+            startTimer();
+            
+            // If on desktop, show the question navigation by default
+            if (window.innerWidth >= 992) {
+                document.getElementById('question-nav').classList.add('show');
+                document.getElementById('main-content').classList.add('with-nav');
+            }
+        };
+        
+        // Initialize test data
+        function initializeTest() {
+            // Add sections and questions
+            
+            sections["18"] = {
+                name: "General Awareness",
+                start: 0,
+                end: 13
+            };
+            
+            document.getElementById('section-selector').innerHTML += 
+                `<option value="18">General Awareness</option>`;
+            
+            sections["misc"] = {
+                name: "Miscellaneous",
+                start: 14,
+                end: 14
+            };
+            
+            document.getElementById('section-selector').innerHTML += 
+                `<option value="misc">Miscellaneous</option>`;
+            
+            
+                questions.push({
+                    id: "1",
+                    section: "18",
+                    question_en: "<p>1. Giddha dance is a folk dance of which of the following states?</p>",
+                    question_hi: "<p>1. गिद्दा नृत्य निम्नलिखित में से किस राज्य का लोक नृत्य है?</p>",
+                    options_en: ["<p>Manipur</p>", "<p>Punjab</p>", 
+                                "<p>Nagaland</p>", "<p>Odisha</p>"],
+                    options_hi: ["<p>मणिपुर</p>", "<p>पंजाब</p>",
+                                "<p>नागालैंड</p>", "<p>ओडिशा</p>"],
+                    solution_en: "<p>1.(b) <strong>Punjab.</strong> Gidda is performed by women during social gatherings. Other folk dances of Punjab : Bhangra, Daff, Luddi, Jaago, Dhamal. Manipur - Khamba Thoibi, Pung Cholom, Nupa Pala. Nagaland - Kuki, Rengma Naga, Konyak. Odisha - Ghumura, Sambalpuri, Ranappa, Gotipua.</p>",
+                    solution_hi: "<p>1.(b) <strong>पंजाब।</strong> गिद्दा सामाजिक समारोहों के दौरान महिलाओं द्वारा किया जाता है। पंजाब के अन्य लोक नृत्य: भांगड़ा, डफ, लुड्डी, जागो, धमाल। मणिपुर - खंबा थोइबी, पुंग चोलोम, नुपा पाला। नागालैंड - कुकी, रेंगमा नागा, कोन्याक। ओडिशा - घुमुरा, संबलपुरी, रानप्पा, गोटीपुआ।</p>",
+                    correct: "b",
+                    pos_marks: 2.0,
+                    neg_marks: 0.5
+                });
+                questions.push({
+                    id: "2",
+                    section: "18",
+                    question_en: "<p>2. Which of the following occupies less memory when saving an MS-Word file?</p>",
+                    question_hi: "<p>2. एमएस-वर्ड (MS-Word) फ़ाइल को सेव करते समय निम्नलिखित में से कौन कम मेमोरी का उपयोग करता है?</p>",
+                    options_en: ["<p>.docx</p>", "<p>.docm</p>", 
+                                "<p>.doc</p>", "<p>.docc</p>"],
+                    options_hi: ["<p>.docx</p>", "<p>.docm</p>",
+                                "<p>.doc</p>", "<p>.docc</p>"],
+                    solution_en: "<p>2.(a) <strong>.docx</strong> file is a Microsoft Word document saved in the Open XML format. The .docx file extension is a combination of the words \"doc\" and \"xml\" and is an evolution of the older .doc format.</p>",
+                    solution_hi: "<p>2.(a) <strong>.docx</strong> फ़ाइल एक माइक्रोसॉफ्ट वर्ड डाक्यूमेंट है जिसे Open XML फ़ॉर्मेट में सेव किया जाता है। .docx फ़ाइल एक्सटेंशन \"doc\" और \"xml\" शब्दों का संयोजन है और पुराने .doc फ़ॉर्मेट का इवोल्यूशन है।</p>",
+                    correct: "a",
+                    pos_marks: 2.0,
+                    neg_marks: 0.5
+                });
+                questions.push({
+                    id: "3",
+                    section: "18",
+                    question_en: "<p>3. According to the International Football Association Board (IFAB), which colour must the football goal post be?</p>",
+                    question_hi: "<p>3. इंटरनेशनल फुटबॉल एसोसिएशन बोर्ड (International Football Association Board - IFAB) के अनुसार फुटबॉल का गोल पोस्ट (goal post) किस रंग का होना चाहिए?</p>",
+                    options_en: ["<p>Blue</p>", "<p>White</p>", 
+                                "<p>Red</p>", "<p>Black</p>"],
+                    options_hi: ["<p>नीला</p>", "<p>सफ़ेद</p>",
+                                "<p>लाल</p>", "<p>काला</p>"],
+                    solution_en: "<p>3.(b) <strong>White.</strong> Goal-posts and cross-bars must be made of wood, metal or other approved materials. They may be square, rectangular, round, half-round or elliptical in shape. The International Football Association Board (IFAB) is an international self-regulatory body of association football that is known for determining the Laws of the Game, the regulations for the gameplay of football.</p>",
+                    solution_hi: "<p>3.(b) <strong>सफ़ेद।</strong> गोल-पोस्ट और क्रॉस-बार लकड़ी, धातु या अन्य अनुमोदित सामग्री से बने होने चाहिए। वे चौकोर, आयताकार, गोल, अर्ध-गोल या अण्डाकार आकार के हो सकते हैं। इंटरनेशनल फुटबॉल एसोसिएशन बोर्ड (IFAB) एसोसिएशन फ़ुटबॉल का एक अन्तर्राष्ट्रीय स्व-नियामक निकाय है जो खेल के नियमों, फ़ुटबॉल के गेमप्ले के लिए नियमों को निर्धारित करने के लिए जाना जाता है।</p>",
+                    correct: "b",
+                    pos_marks: 2.0,
+                    neg_marks: 0.5
+                });
+                questions.push({
+                    id: "4",
+                    section: "18",
+                    question_en: "<p>4. Who is the Indian batsman after whom the Ranji Trophy is named?</p>",
+                    question_hi: "<p>4. रणजी ट्रॉफी का नाम किस भारतीय बल्लेबाज के नाम पर रखा गया है?</p>",
+                    options_en: ["<p>Ranjit Singh Bedi</p>", "<p>Ranjit Sinhji</p>", 
+                                "<p>Ranjit Patel</p>", "<p>Ranjit Wadekar</p>"],
+                    options_hi: ["<p>रणजीत सिंह बेदी</p>", "<p>रणजीत सिंह जी</p>",
+                                "<p>रंजीत पटेल</p>", "<p>रंजीत वाडेकर</p>"],
+                    solution_en: "<p>4.(b) <strong>Ranjit Sinhji.</strong> He was ruler of the princely state of Nawanagar (Gujarat) from 1907 to 1933. Ranji Trophy was started by the Board of Control for Cricket in India (BCCI) in 1934 after his death in 1933. The Ranji Trophy is a premier domestic first-class cricket championship played in India and organized annually by the BCCI (Headquarters - Mumbai).</p>",
+                    solution_hi: "<p>4.(b) <strong>रणजीत सिंह जी। </strong>वे 1907 से 1933 तक नवानगर (गुजरात) रियासत के शासक थे। 1933 में उनकी मृत्यु के बाद 1934 में भारतीय क्रिकेट कंट्रोल बोर्ड (BCCI) द्वारा रणजी ट्रॉफी की शुरुआत की गई थी। रणजी ट्रॉफी भारत में खेली जाने वाली एक प्रमुख घरेलू प्रथम श्रेणी क्रिकेट चैंपियनशिप है और इसका आयोजन BCCI (मुख्यालय - मुंबई) द्वारा प्रतिवर्ष किया जाता है।</p>",
+                    correct: "b",
+                    pos_marks: 2.0,
+                    neg_marks: 0.5
+                });
+                questions.push({
+                    id: "5",
+                    section: "18",
+                    question_en: "<p>5. Where is the ITC Sangeet Research Academy located?</p>",
+                    question_hi: "<p>5. आईटीसी संगीत अनुसंधान अकादमी (ITC Sangeet Research Academy) कहाँ स्थित है?</p>",
+                    options_en: ["<p>Kolkata</p>", "<p>Delhi</p>", 
+                                "<p>Bengaluru</p>", "<p>Indore</p>"],
+                    options_hi: ["<p>कोलकाता</p>", "<p>दिल्ली</p>",
+                                "<p>बेंगलुरु</p>", "<p>इंदौर</p>"],
+                    solution_en: "<p>5.(a) <strong>Kolkata.</strong> ITC Sangeet Research Academy (ITCSRA) is a Hindustani classical music academy run by the corporate house, ITC Limited. Formation - 1978. Objective - The creation of an effective training system, to rationalise traditional data with the help of modern research methods.</p>",
+                    solution_hi: "<p>5.(a) <strong>कोलकाता।</strong> ITC संगीत अनुसंधान अकादमी (ITCSRA) कॉरपोरेट हाउस ITC लिमिटेड द्वारा संचालित एक हिंदुस्तानी शास्त्रीय संगीत अकादमी है। स्थापना - 1978। उद्देश्य - आधुनिक शोध विधियों की मदद से पारंपरिक डेटा को तर्कसंगत बनाने के लिए एक प्रभावी प्रशिक्षण प्रणाली का निर्माण करना।</p>",
+                    correct: "a",
+                    pos_marks: 2.0,
+                    neg_marks: 0.5
+                });
+                questions.push({
+                    id: "6",
+                    section: "18",
+                    question_en: "<p>6. What is the minimum over rate per hour in a test match?</p>",
+                    question_hi: "<p>6. टेस्ट मैच में प्रति घंटा न्यूनतम ओवरों की दर क्या है?</p>",
+                    options_en: ["<p>17 overs per hour</p>", "<p>13 overs per hour</p>", 
+                                "<p>15 over per hour</p>", "<p>10 overs per hour</p>"],
+                    options_hi: ["<p>17 ओवर प्रति घंटा</p>", "<p>13 ओवर प्रति घंटा</p>",
+                                "<p>15 ओवर प्रति घंटा</p>", "<p>10 ओवर प्रति घंटा</p>"],
+                    solution_en: "<p>6.(c) <strong>15 over per hour.</strong> In ODIs, bowling teams must complete the required 50 overs in 3.5 hours, or a minimum of 14.28 overs per hour. For T20s, the requirement is 14.11 overs per hour, according to ICC&rsquo;s rules.</p>",
+                    solution_hi: "<p>6.(c) <strong>15 ओवर प्रति घंटे।</strong> वनडे में, गेंदबाजी करने वाली टीमों को 3.5 घंटे में आवश्यक 50 ओवर पूरे करने होते हैं, या प्रति घंटे कम से कम 14.28 ओवर। ICC के नियमों के अनुसार, टी20 के लिए यह आवश्यकता 14.11 ओवर प्रति घंटे है।</p>",
+                    correct: "c",
+                    pos_marks: 2.0,
+                    neg_marks: 0.5
+                });
+                questions.push({
+                    id: "7",
+                    section: "18",
+                    question_en: "<p>7. Bharat Muni, in his Natya Shastra, categorises musical instruments into four different&nbsp;parts. What is the categorisation of musical instruments by Bharat Muni based on?</p>",
+                    question_hi: "<p>7. भरत मुनि ने अपने नाट्य शास्त्र में संगीत-वाद्ययंत्रों को चार अलग-अलग भागों में वर्गीकृत किया है। भरत मुनि ने इन वाद्ययंत्रों का वर्गीकरण किस आधार पर किया है?</p>",
+                    options_en: ["<p>Different sounds of the musical instruments</p>", "<p>The shape of the musical instruments</p>", 
+                                "<p>Different materials used in the musical instruments</p>", "<p>The uses of the musical instruments in different occasions, such as wedding, festivals and public gathering</p>"],
+                    options_hi: ["<p>वाद्ययंत्रों की विभिन्न ध्वनियों</p>", "<p>वाद्ययंत्रों की आकृति</p>",
+                                "<p>संगीत-वाद्ययंत्रों में प्रयुक्त विभिन्न सामग्रियों</p>", "<p>विभिन्न अवसरों जैसे शादी, त्यौहार और सार्वजनिक समारोहों में संगीत वाद्ययंत्रों के उपयोग</p>"],
+                    solution_en: "<p>7.(a) <strong>Different sounds of the musical instruments.</strong> Musical Instruments were categorised into four groups in Bharat Muni\'s Natya Shastra (written between 200 BC and 200 AD): Avanaddha Vadya (membranophones or percussion instruments), Ghan Vadya (idiophones or solid instruments), Sushir Vadya (aerophones or wind instruments), and Tat Vadya (chordophones or stringed instruments).</p>",
+                    solution_hi: "<p>7.(a) <strong>वाद्ययंत्रों की विभिन्न ध्वनियों।</strong> भरत मुनि के नाट्य शास्त्र (200 ईसा पूर्व और 200 ईस्वी के बीच लिखे गए) में संगीत वाद्ययंत्रों को चार समूहों में वर्गीकृत किया गया था: अवनद्ध वाद्य (मेम्ब्रेनोफ़ोन या ताल वाद्य यंत्र), घन वाद्य (इडियोफोन या ठोस वाद्य यंत्र), सुषिर वाद्य (एरोफोन या वायु वाद्य यंत्र) और तत वाद्य (कॉर्डोफ़ोन या तार वाद्य यंत्र)।</p>",
+                    correct: "a",
+                    pos_marks: 2.0,
+                    neg_marks: 0.5
+                });
+                questions.push({
+                    id: "8",
+                    section: "18",
+                    question_en: "<p>8. Which was the first programmable general purpose computer in the world?</p>",
+                    question_hi: "<p>8. विश्व का पहला प्रोग्रामयोग्य सामान्य प्रयोजन कंप्यूटर (programmable general purpose computer) कौन-सा था?</p>",
+                    options_en: ["<p>ENIAC</p>", "<p>Mark I</p>", 
+                                "<p>Napier\'s bones</p>", "<p>Pascaline</p>"],
+                    options_hi: ["<p>एनियाक (ENIAC)</p>", "<p>मार्क I (Mark I)</p>",
+                                "<p>नेपियर्स बोन्स (Napier\'s bones)</p>", "<p>पास्कलाइन (Pascaline)</p>"],
+                    solution_en: "<p>8.(a) <strong>ENIAC.</strong> Designed by John Mauchly and J. Presper Eckert. Mark I was designed in 1937 by Harvard graduate student Howard H. Aiken to solve advanced mathematical physics problems. Napier\'s bones is a manually-operated calculating device created by John Napier. Pascaline world\'s first calculator invented by mathematician Pascal.</p>",
+                    solution_hi: "<p>8.(a) <strong>एनियाक (ENIAC). </strong>जॉन मौचली और जे. प्रेस्पर एकर्ट द्वारा डिज़ाइन किया गया। मार्क प्रथम को 1937 में हार्वर्ड के स्नातक छात्र हॉवर्ड एच. ऐकेन द्वारा उन्नत गणितीय भौतिकी समस्याओं को हल करने के लिए डिज़ाइन किया गया था। नेपियर बोन्स जॉन नेपियर द्वारा बनाई गई एक मैन्युअल रूप से संचालित गणना करने वाली डिवाइस है। पास्कलीन विश्व का प्रथम कैलकुलेटर है जिसका आविष्कार गणितज्ञ पास्कल ने किया था।</p>",
+                    correct: "a",
+                    pos_marks: 2.0,
+                    neg_marks: 0.5
+                });
+                questions.push({
+                    id: "9",
+                    section: "18",
+                    question_en: "<p>9. Which classical dance was introduced by the great Vaishnava saint and reformer of Assam?</p>",
+                    question_hi: "<p>9. असम के महान वैष्णव संत और सुधारक द्वारा किस शास्त्रीय नृत्य की शुरुआत की गई थी?</p>",
+                    options_en: ["<p>Kathak</p>", "<p>Kuchipudi</p>", 
+                                "<p>Sattriya</p>", "<p>Odissi</p>"],
+                    options_hi: ["<p>कथक</p>", "<p>कुचिपुड़ी</p>",
+                                "<p>सत्त्रिया</p>", "<p>ओडिसी</p>"],
+                    solution_en: "<p>9.(c) <strong>Sattriya.</strong> The Sattriya dance form was introduced in the 15th century A.D by Mahapurusha Sankaradeva. It became popular as a part of the Vaishnava Bhakti Movement in Sattra (Hindu monasteries). Famous Sattriya Dancers: Late Pradip Chaliha, Jatin Goswami, Anita Sharma, Guru Indira P.P Bora. Costumes used in Sattriya: The male dancer wears a dhoti, chadar, and pagri (turban). The female dancer wears white flowers, chadar, ghuri, kanchi (waist cloth).</p>",
+                    solution_hi: "<p>9.(c) <strong>सत्त्रिया।</strong> सत्त्रिया नृत्य शैली की शुरुआत 15वीं शताब्दी में महापुरुष शंकरदेव ने की थी। यह सत्त्र (हिंदू मठों) में वैष्णव भक्ति आंदोलन के एक भाग के रूप में लोकप्रिय हुआ। प्रसिद्ध सत्त्रिया नर्तक: स्वर्गीय प्रदीप चलीहा, जतिन गोस्वामी, अनीता शर्मा, गुरु इंदिरा पी.पी. बोरा। सत्त्रिया में प्रयुक्त वेशभूषा: पुरुष नर्तक धोती, चादर और पगड़ी पहनता है। महिला नर्तक सफेद फूल, चादर, घुरी, कांची (कमर का कपड़ा) पहनती हैं।</p>",
+                    correct: "c",
+                    pos_marks: 2.0,
+                    neg_marks: 0.5
+                });
+                questions.push({
+                    id: "10",
+                    section: "18",
+                    question_en: "<p>10. Which country&rsquo;s national game is Chinlone (Caneball)?</p>",
+                    question_hi: "<p>10. चिनलोन (केन बॉल) किस देश का राष्ट्रीय खेल है?</p>",
+                    options_en: ["<p>Myanmar</p>", "<p>China</p>", 
+                                "<p>Afghanistan</p>", "<p>Bhutan</p>"],
+                    options_hi: ["<p>म्यांमार</p>", "<p>चीन</p>",
+                                "<p>अफ़गानिस्तान</p>", "<p>भूटान</p>"],
+                    solution_en: "<p>10.(a) <strong>Myanmar.</strong> The Chinlone game is non-competitive, with typically six people playing together as one team. Other countries\' National Game : China - Table tennis; Afghanistan - Buzkashi; Bhutan - Archery; Pakistan - Field Hockey; Bangladesh - Kabaddi; Nepal - Volleyball. India had not declared any sport or game as the national sport.</p>",
+                    solution_hi: "<p>10.(a) <strong>म्यांमार।</strong> चिनलोन खेल गैर-प्रतिस्पर्धी है, जिसमें सामान्यतः छह व्यक्ति एक टीम के रूप में एक साथ खेलते हैं। अन्य देशों के राष्ट्रीय खेल: चीन - टेबल टेनिस; अफ़गानिस्तान - बुज़कशी; भूटान - तीरंदाजी; पाकिस्तान - फ़ील्ड हॉकी; बांग्लादेश - कबड्डी; नेपाल - वॉलीबॉल। भारत ने किसी भी खेल को राष्ट्रीय खेल घोषित नहीं किया है।</p>",
+                    correct: "a",
+                    pos_marks: 2.0,
+                    neg_marks: 0.5
+                });
+                questions.push({
+                    id: "11",
+                    section: "18",
+                    question_en: "<p>11. Which feature in MS Word allows you to see a document\'s layout and formatting as it will appear when printed?</p>",
+                    question_hi: "<p>11. एमएस वर्ड (MS Word) में किस फीचर की मदद से आप किसी डॉक्यूमेंट के उस लेआउट और फ़ॉर्मेटिंग को देख पाते हैं जैसा कि यह प्रिंट होने पर दिखाई देगा?</p>",
+                    options_en: ["<p>Screen View</p>", "<p>Draft View</p>", 
+                                "<p>Print Preview</p>", "<p>Reading View</p>"],
+                    options_hi: ["<p>स्क्रीन व्यू (Screen View)</p>", "<p>ड्राफ़्ट व्यू (Draft View)</p>",
+                                "<p>प्रिंट प्रिव्यू (Print Preview)</p>", "<p>रीडिंग व्यू ( Reading View)</p>"],
+                    solution_en: "<p>11.(c) <strong>Print Preview. </strong>Draft View: Simplified view for editing, without layout details. Reading View: Optimized for on-screen reading, not editing. Shortcut Keys : Open a document - Ctrl+O ; Create a new document - Ctrl+N ; Save the document - Ctrl+S ; Close the document - Ctrl+W.</p>",
+                    solution_hi: "<p>11.(c) <strong>प्रिंट प्रिव्यू</strong> (Print Preview)। ड्राफ्ट व्यू: लेआउट डिटेल के बिना एडिटिंग के लिए सरलीकृत दृश्य। रीडिंग व्यू: एडिटिंग के लिए नहीं, बल्कि ऑन-स्क्रीन रीडिंग के लिए अनुकूलित। शॉर्टकट कुंजियाँ: डॉक्यूमेंट खोलने के लिए - Ctrl+O; नया डॉक्यूमेंट बनाने के लिए - Ctrl+N; डॉक्यूमेंट सेव करने के लिए - Ctrl+S; डॉक्यूमेंट बंद करने के लिए - Ctrl+W.</p>",
+                    correct: "c",
+                    pos_marks: 2.0,
+                    neg_marks: 0.5
+                });
+                questions.push({
+                    id: "12",
+                    section: "18",
+                    question_en: "<p>12. On 12 September 2002, ISRO launched the Kalpana-1 satellite using the Polar Satellite Launch Vehicle. What is the application of this satellite?</p>",
+                    question_hi: "<p>12. 12 सितंबर 2002 को, इसरो (ISRO) ने ध्रुवीय उपग्रह प्रक्षेपण यान का उपयोग करके कल्पना -1 नामक उपग्रह प्रक्षेपित किया था। इस उपग्रह का अनुप्रयोग क्या है?</p>",
+                    options_en: ["<p>Earth observation</p>", "<p>Planetary observation</p>", 
+                                "<p>Climate &amp; environment communication</p>", "<p>Disaster management system</p>"],
+                    options_hi: ["<p>पृथ्वी का अवलोकन</p>", "<p>ग्रहों का अवलोकन</p>",
+                                "<p>जलवायु और पर्यावरण संचार</p>", "<p>आपदा प्रबंधन प्रणाली</p>"],
+                    solution_en: "<p>12.(c) <strong>Climate &amp; environment communication. </strong>Kalpana-1 satellite was originally known as MetSat-1. Launched by vehicle PSLV - C4. On February 5, 2003 it was renamed to Kalpana-1 by the Indian Prime Minister Atal Bihari Vajpayee in memory of Kalpana Chawla (NASA astronaut who perished in the Space Shuttle Columbia disaster).</p>",
+                    solution_hi: "<p>12.(c) <strong>जलवायु एवं पर्यावरण संचार।</strong> कल्पना-1 उपग्रह को मूल रूप से मेटसैट-1 के नाम से जाना जाता था। इसे PSLV-C4 यान द्वारा प्रक्षेपित किया गया। 5 फरवरी, 2003 को भारतीय प्रधानमंत्री अटल बिहारी वाजपेयी ने कल्पना चावला (नासा के अंतरिक्ष यात्री जिनकी अंतरिक्ष शटल कोलंबिया दुर्घटना में मृत्यु हो गई) की याद में इसका नाम बदलकर कल्पना-1 कर दिया।</p>",
+                    correct: "c",
+                    pos_marks: 2.0,
+                    neg_marks: 0.5
+                });
+                questions.push({
+                    id: "13",
+                    section: "18",
+                    question_en: "<p>13. What is the standard weight of hammer for women in the hammer throw event?</p>",
+                    question_hi: "<p>13. हैमर थ्रो स्पर्धा में महिलाओं के लिए हैमर का मानक वजन कितना होता है?</p>",
+                    options_en: ["<p>5 kg</p>", "<p>4 kg</p>", 
+                                "<p>8 kg</p>", "<p>6 kg</p>"],
+                    options_hi: ["<p>5 kg</p>", "<p>4 kg</p>",
+                                "<p>8 kg</p>", "<p>6 kg</p>"],
+                    solution_en: "<p>13.(b) <strong>4 kg.</strong> The hammer throw is one of the four throwing events in track and field, along with the discus throw, shot put, and javelin. The hammer consists of a metal ball attached to a grip by a steel wire, with the throw taking place within a 2.135-meter diameter circle. For the throw to be valid, the hammer must land within a 35-degree sector. The standard weight of hammer for men athletes is 7.26kg.</p>",
+                    solution_hi: "<p>13.(b) <strong>4 kg. </strong>हैमर थ्रो, डिस्कस थ्रो, शॉट पुट और जेवलिन के साथ ट्रैक और फील्ड में चार थ्रोइंग इवेंट में से एक है। हैमर थ्रो में एक धातु की गेंद होती है जिसे स्टील के तार द्वारा ग्रिप से जोड़ा जाता है, और थ्रो 2.135 मीटर व्यास के घेरे में होता है। थ्रो के वैध होने के लिए, हैमर को 35 डिग्री के क्षेत्र में गिरना चाहिए। पुरुष एथलीटों के लिए हैमर का मानक वजन 7.26 किग्रा है।</p>",
+                    correct: "b",
+                    pos_marks: 2.0,
+                    neg_marks: 0.5
+                });
+                questions.push({
+                    id: "14",
+                    section: "18",
+                    question_en: "<p>14. What does SAARC stand for?</p>",
+                    question_hi: "<p>14. सार्क (SAARC) का पूरा नाम क्या है?</p>",
+                    options_en: ["<p>South Asian Association of Regional Climate change</p>", "<p>South Asian Association for Regional Cooperation</p>", 
+                                "<p>South Asian Association of Regional Cartography</p>", "<p>South Asian Association of Regional Corporation</p>"],
+                    options_hi: ["<p>साउथ एशियन एसोसिएशन ऑफ रीजनल क्लाइमेट चेंज (South Asian Association of Regional Climate change)</p>", "<p>साउथ एशियन एसोसिएशन फॉर रीजनल कोऑपरेशन(South Asian Association for Regional Cooperation)</p>",
+                                "<p>साउथ एशियन एसोसिएशन ऑफ रीजनल कार्टोग्राफी (South Asian Association of Regional Cartography)</p>", "<p>साउथ एशियन एसोसिएशन ऑफ रीजनल कॉरपोरेशन (South Asian Association of Regional Corporation)</p>"],
+                    solution_en: "<p>14.(b) <strong>South Asian Association for Regional Cooperation </strong>- Established in Dhaka on 8 December 1985. Afghanistan became the newest member of SAARC at the 13th annual summit in 2005. Headquarters - Kathmandu, Nepal. Eight member States : Afghanistan, Bangladesh, Bhutan, India, Maldives, Nepal, Pakistan, Sri Lanka.</p>",
+                    solution_hi: "<p>14.(b) <strong>साउथ एशियन एसोसिएशन फॉर रीजनल कोऑपरेशन </strong>- 8 दिसंबर 1985 को ढाका में स्थापित। 2005 में 13वें वार्षिक शिखर सम्मेलन में अफ़गानिस्तान सार्क का सबसे नया सदस्य बना। मुख्यालय - काठमांडू, नेपाल। आठ सदस्य देश: अफ़गानिस्तान, बांग्लादेश, भूटान, भारत, मालदीव, नेपाल, पाकिस्तान, श्रीलंका।</p>",
+                    correct: "b",
+                    pos_marks: 2.0,
+                    neg_marks: 0.5
+                });
+                questions.push({
+                    id: "15",
+                    section: "misc",
+                    question_en: "<p>15. Dussehra festival is celebrated in which of the following Hindu months?</p>",
+                    question_hi: "<p>15. दशहरा उत्सव निम्नलिखित में से किस हिंदू महीने में मनाया जाता है?</p>",
+                    options_en: ["<p>Vaisakha</p>", "<p>Ashwin</p>", 
+                                "<p>Ashadha</p>", "<p>Chaitra</p>"],
+                    options_hi: ["<p>वैशाख</p>", "<p>अश्विन</p>",
+                                "<p>आषाढ़</p>", "<p>चैत्र</p>"],
+                    solution_en: "<p>15.(b) <strong>Ashwin.</strong> Other Hindu festivals according to the Hindu calendar : Holi is celebrated in the Phalguna month (February - March). Makar Sankranti is celebrated in the month of Magh (January). Raksha Bandhan is celebrated on the full moon day (Purnima) of the Shravana month (July - August). Deepawali is celebrated every year on the 15th lunar day of the Kartik month (October - November).</p>",
+                    solution_hi: "<p>15.(b) <strong>अश्विन।</strong> हिंदू कैलेंडर के अनुसार अन्य हिंदू त्योहार: होली फाल्गुन महीने (फरवरी-मार्च) में मनाई जाती है। मकर संक्रांति माघ (जनवरी) के महीने में मनाई जाती है। रक्षा बंधन श्रावण महीने (जुलाई-अगस्त) की पूर्णिमा के दिन मनाया जाता है। दीपावली प्रत्येक वर्ष कार्तिक महीने (अक्टूबर-नवंबर) के 15वें चंद्र दिवस पर मनाई जाती है।</p>",
+                    correct: "b",
+                    pos_marks: 2.0,
+                    neg_marks: 0.5
+                });
+            
+            // Generate question boxes
+            const boxesContainer = document.getElementById('question-boxes');
+            questions.forEach((q, index) => {
+                const box = document.createElement('div');
+                box.className = 'q-box';
+                box.textContent = index + 1;
+                box.onclick = () => showQuestion(index);
+                box.id = `box-${index}`;
+                boxesContainer.appendChild(box);
+            });
+            
+            // Show first question
+            showQuestion(0);
+            updateProgress();
+        }
+        
+        // Show a specific question
+        
+        function formatContent(text) {
+            if (!text) return '';
+            return text.replace(/<img/g, '<img style="max-width:100%;height:auto;"');
+        }
+        
+        function showQuestion(index) {
+            if (index < 0 || index >= questions.length) return;
+            
+            currentQuestion = index;
+            const question = questions[index];
+            
+            // Update question counter
+            document.getElementById('question-counter').textContent = `Question ${index + 1} of ${questions.length}`;
+            
+            // Update question boxes
+            document.querySelectorAll('.q-box').forEach(box => box.classList.remove('current'));
+            document.getElementById(`box-${index}`).classList.add('current');
+            
+            // Generate question HTML
+            let html = `
+                <div class="question-card">
+                    <div class="question-text">
+                        <div class="en">${formatContent(question.question_en)}</div>
+                        <div class="hi" style="display:none">${formatContent(question.question_hi)} </div>
+                    </div>
+                    <div class="options" id="options-container">`;
+            
+            // Add options
+            ['a', 'b', 'c', 'd'].forEach((opt, i) => {
+                let optionClass = '';
+                let isCorrectAnswer = opt === question.correct;
+                let isUserAnswer = answers[question.id] === opt;
+                
+                // When reviewing, add appropriate classes
+                if (submitted) {
+                    if (isCorrectAnswer) {
+                        optionClass += ' correct-answer';
+                    } else if (isUserAnswer && !isCorrectAnswer) {
+                        optionClass += ' incorrect';
+                    }
+                }
+                
+                html += `
+                    <div class="option-item">
+                        <input class="option-input" type="radio" name="q${index}" 
+                            id="opt-${index}-${opt}" value="${opt}" 
+                            ${isUserAnswer ? 'checked' : ''}
+                            onclick="selectAnswer('${question.id}', '${opt}')">
+                       <label class="option-label${optionClass}" for="opt-${index}-${opt}">
+                            <div class="en">${question.options_en[i]}</div>
+                            <div class="hi" style="display:none">${question.options_hi[i]}</div>
+                        </label>
+                    </div>`;
+            });
+            
+            // Add solution if submitted
+            if (submitted) {
+                const isCorrect = answers[question.id] === question.correct;
+                const resultText = answers[question.id] ? (isCorrect ? 'Correct!' : 'Incorrect!') : 'Not attempted';
+                
+                html += `
+                    <div class="solution-container">
+                        <div class="solution-title">${resultText}</div>
+                        <div class="solution-text">
+                            <div class="en">${question.solution_en}</div>
+                            <div class="hi" style="display:none">${question.solution_hi}</div>
+                        </div>
+                    </div>`;
+            }
+            
+            html += `</div></div>`;
+            
+            document.getElementById('questions-container').innerHTML = html;
+            
+            // Apply language settings
+            applyLanguage();
+            
+            // If in mobile view, close the menu
+            if (window.innerWidth < 992) {
+                toggleNav(false);
+            }
+            
+            // Add review mode class if submitted
+            if (submitted) {
+                document.getElementById('options-container').classList.add('review-mode');
+            }
+        }
+        
+        // Apply current language
+        function applyLanguage() {
+            document.querySelectorAll(`.${currentLang}`).forEach(el => el.style.display = 'block');
+            document.querySelectorAll(`.${currentLang === 'en' ? 'hi' : 'en'}`).forEach(el => el.style.display = 'none');
+            
+            // Update language button text
+            document.getElementById('lang-text').textContent = currentLang === 'en' ? 'Hi' : 'En';
+        }
+        
+        // Select an answer
+        function selectAnswer(qId, option) {
+            if (submitted) return;
+            
+            answers[qId] = option;
+            updateProgress();
+            
+            // Mark question as attempted in the navigation
+            const index = questions.findIndex(q => q.id === qId);
+            if (index >= 0) {
+                const box = document.getElementById(`box-${index}`);
+                box.classList.add('attempted');
+                box.classList.remove('unattempted');
+            }
+        }
+        
+        // Navigate to previous/next question
+        function prevQuestion() { 
+            if (currentQuestion > 0) showQuestion(currentQuestion - 1); 
+        }
+        
+        function nextQuestion() { 
+            if (currentQuestion < questions.length - 1) showQuestion(currentQuestion + 1); 
+        }
+        
+        // Switch section
+        function switchSection(sectionId) {
+            if (sectionId === 'all') {
+                showQuestion(0);
+                return;
+            }
+            
+            const section = sections[sectionId];
+            if (section) showQuestion(section.start);
+        }
+        
+        // Toggle language
+        function toggleLanguage() {
+            currentLang = currentLang === 'en' ? 'hi' : 'en';
+            applyLanguage();
+        }
+        
+        // Toggle navigation sidebar
+        function toggleNav(show) {
+            const nav = document.getElementById('question-nav');
+            const overlay = document.getElementById('nav-overlay');
+            
+            if (show === undefined) {
+                show = !nav.classList.contains('show');
+            }
+            
+            if (show) {
+                nav.classList.add('show');
+                overlay.classList.add('show');
+                document.body.style.overflow = 'hidden';
+            } else {
+                nav.classList.remove('show');
+                overlay.classList.remove('show');
+                document.body.style.overflow = '';
+            }
+        }
+        
+        // Update progress
+        function updateProgress() {
+            const attempted = Object.keys(answers).length;
+            document.getElementById('attempted-count').textContent = attempted;
+        }
+        
+        // Start timer
+        function startTimer() {
+            const timerDisplay = document.getElementById('timer-display');
+            let timeLeft = totalTime;
+            
+            const timerInterval = setInterval(() => {
+                if (timeLeft <= 0 || submitted) {
+                    clearInterval(timerInterval);
+                    if (!submitted) submitTest();
+                    return;
+                }
+                
+                const minutes = Math.floor(timeLeft / 60);
+                const seconds = timeLeft % 60;
+                timerDisplay.textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`;
+                timeLeft--;
+            }, 1000);
+        }
+        
+        // Confirm before submitting
+        function confirmSubmit() {
+            if (submitted) return;
+            
+            const attempted = Object.keys(answers).length;
+            const remaining = questions.length - attempted;
+            
+            // Create a more modern confirmation dialog
+            const confirmHtml = `
+                <div style="text-align: center; padding: 20px;">
+                    <h4 style="margin-bottom: 16px; color: var(--dark);">Confirm Submission</h4>
+                    <p style="margin-bottom: 24px; color: var(--gray);">
+                        You have attempted ${attempted} of ${questions.length} questions.<br>
+                        ${remaining} questions are unattempted.
+                    </p>
+                    <div style="display: flex; justify-content: center; gap: 12px;">
+                        <button onclick="this.closest('.modal').querySelector('.cancel-btn').click()" 
+                            style="padding: 8px 20px; border: 1px solid var(--light-gray); background: white; border-radius: 8px; cursor: pointer;">
+                            Cancel
+                        </button>
+                        <button onclick="submitTest(); this.closest('.modal').querySelector('.cancel-btn').click()" 
+                            style="padding: 8px 20px; background: var(--primary); color: white; border: none; border-radius: 8px; cursor: pointer;">
+                            Submit Test
+                        </button>
+                    </div>
+                </div>`;
+            
+            // Create modal element
+            const modal = document.createElement('div');
+            modal.className = 'results-modal show';
+            modal.innerHTML = `
+                <div class="results-card" style="max-width: 400px;">
+                    <button class="cancel-btn" style="position: absolute; top: 12px; right: 12px; background: none; border: none; font-size: 1.2rem; cursor: pointer; color: var(--gray);" onclick="this.closest('.results-modal').remove()">
+                        ×
+                    </button>
+                    ${confirmHtml}
+                </div>`;
+            
+            document.body.appendChild(modal);
+        }
+        
+        // Submit test
+        function submitTest() {
+            if (submitted) return;
+            
+            submitted = true;
+            
+            let score = 0;
+            let correctCount = 0;
+            let incorrectCount = 0;
+            let unattemptedCount = 0;
+            
+            questions.forEach((q, index) => {
+                const userAns = answers[q.id];
+                const box = document.getElementById(`box-${index}`);
+                
+                box.classList.remove('attempted');
+                
+                if (!userAns) {
+                    unattemptedCount++;
+                    box.classList.add('unattempted');
+                } else if (userAns === q.correct) {
+                    correctCount++;
+                    score += q.pos_marks;
+                    box.classList.add('correct');
+                } else {
+                    incorrectCount++;
+                    score -= q.neg_marks;
+                    box.classList.add('incorrect');
+                }
+            });
+            
+            // Update result values
+            document.getElementById('score-value').textContent = score.toFixed(2);
+            document.getElementById('correct-value').textContent = correctCount;
+            document.getElementById('incorrect-value').textContent = incorrectCount;
+            document.getElementById('unattempted-value').textContent = unattemptedCount;
+            
+            // Show the results modal
+            document.getElementById('results-modal').classList.add('show');
+            
+            // Disable submit button
+            const submitBtn = document.getElementById('submit-btn');
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<i class="fas fa-check"></i>';
+            submitBtn.style.backgroundColor = 'var(--success)';
+            
+            // Refresh current question view to show solution
+            showQuestion(currentQuestion);
+        }
+        
+        // Review test
+        function reviewTest() {
+            document.getElementById('results-modal').classList.remove('show');
+            showQuestion(0);
+        }
+        
+        // Close modal when clicking outside
+        window.addEventListener('click', function(event) {
+            if (event.target === document.getElementById('results-modal')) {
+                document.getElementById('results-modal').classList.remove('show');
+            }
+        });
+        
+        // Keyboard navigation
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowLeft') prevQuestion();
+            if (e.key === 'ArrowRight') nextQuestion();
+        });
+    </script>
+</body>
+</html>

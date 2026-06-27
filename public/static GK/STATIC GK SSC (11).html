@@ -1,0 +1,1409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aether Mocks</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
+
+        :root {
+            --primary: #6366f1;
+            --primary-light: #818cf8;
+            --primary-dark: #4f46e5;
+            --secondary: #8b5cf6;
+            --accent: #ec4899;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --light: #1e293b;
+            --dark: #0f172a;
+            --gray: #64748b;
+            --light-gray: rgba(255, 255, 255, 0.08);
+            --card-bg: rgba(255, 255, 255, 0.03);
+            --body-bg: #030712;
+            --header-bg: rgba(15, 23, 42, 0.6);
+            --footer-bg: rgba(15, 23, 42, 0.8);
+            --box-shadow: 0 8px 32px 0 rgba(0,0,0,0.3);
+            --box-shadow-sm: 0 4px 16px rgba(0,0,0,0.2);
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Outfit', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        body {
+            background-color: var(--body-bg);
+            color: #f8fafc;
+            line-height: 1.6;
+            padding-bottom: 80px; /* Space for fixed navigation */
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(99, 102, 241, 0.15) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(139, 92, 246, 0.15) 0px, transparent 50%);
+            background-attachment: fixed;
+        }
+        
+        /* Header Styles */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 60px;
+            background: var(--header-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            color: #f8fafc;
+            display: flex;
+            align-items: center;
+            padding: 0 16px;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+            box-shadow: var(--box-shadow-sm);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+        }
+        
+        .header-brand {
+            display: flex;
+            align-items: center;
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: #f8fafc;
+            text-decoration: none;
+            gap: 8px;
+        }
+        
+        .header-brand i {
+            font-size: 1.2rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .header-controls {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .control-btn {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.08);
+            color: #f8fafc;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .control-btn:hover {
+            background: rgba(255,255,255,0.12);
+            border-color: rgba(255,255,255,0.2);
+            transform: translateY(-1px);
+        }
+        
+        .control-btn.active {
+            background: var(--primary);
+            border-color: var(--primary-light);
+        }
+        
+        .timer-display {
+            background: rgba(0,0,0,0.3);
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 18px;
+            padding: 4px 12px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            white-space: nowrap;
+            color: #f8fafc;
+        }
+        
+        .timer-display i {
+            margin-right: 6px;
+            color: var(--accent);
+        }
+        
+        /* Main Content */
+        .main-content {
+            margin-top: 60px;
+            padding: 16px;
+            min-height: calc(100vh - 140px);
+        }
+        
+        .question-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(8px);
+            border: 1px solid var(--light-gray);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 16px;
+            box-shadow: var(--box-shadow-sm);
+            transition: var(--transition);
+        }
+        
+        .question-counter {
+            font-size: 0.9rem;
+            color: var(--gray);
+            text-align: center;
+            margin-bottom: 16px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+        
+        .question-text {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 24px;
+            color: #f8fafc;
+            overflow-wrap: break-word;
+            word-wrap: break-word;
+            hyphens: auto;
+            max-width: 100%;
+        }
+        
+        .option-item {
+            margin-bottom: 12px;
+            position: relative;
+        }
+        
+        .option-input {
+            position: absolute;
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        
+        .question-text img,
+        .option-label img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 8px 0;
+            border-radius: 8px;
+        }
+        
+        .option-label {
+            display: block;
+            padding: 14px 16px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            color: #f8fafc;
+        }
+        
+        .option-label:hover {
+            border-color: rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.05);
+            transform: translateY(-2px);
+            box-shadow: var(--box-shadow-sm);
+        }
+        
+        .option-input:checked + .option-label {
+            border-color: var(--primary);
+            background: rgba(99, 102, 241, 0.08);
+            box-shadow: 0 0 12px var(--primary-glow);
+        }
+        
+        .option-input:checked + .option-label::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 3px;
+            height: 100%;
+            background: var(--primary);
+        }
+        
+        /* When reviewing answers */
+        .review-mode .option-input:checked + .option-label.correct {
+            border-color: var(--success);
+            background: rgba(16, 185, 129, 0.08);
+            box-shadow: 0 0 12px var(--success-glow);
+        }
+        
+        .review-mode .option-input:checked + .option-label.correct::after {
+            background: var(--success);
+        }
+        
+        .review-mode .option-input:checked + .option-label.incorrect {
+            border-color: var(--danger);
+            background: rgba(239, 68, 68, 0.08);
+            box-shadow: 0 0 12px var(--danger-glow);
+        }
+        
+        .review-mode .option-input:checked + .option-label.incorrect::after {
+            background: var(--danger);
+        }
+        
+        .review-mode .option-label.correct-answer {
+            border-color: var(--success);
+            background: rgba(16, 185, 129, 0.08);
+            box-shadow: 0 0 12px var(--success-glow);
+        }
+        
+        .review-mode .option-label.correct-answer::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 3px;
+            height: 100%;
+            background: var(--success);
+        }
+        
+        .solution-container {
+            margin-top: 24px;
+            padding: 18px;
+            background: rgba(99, 102, 241, 0.05);
+            border-radius: 12px;
+            border-left: 3px solid var(--primary);
+            border-top: 1px solid rgba(255,255,255,0.03);
+            border-right: 1px solid rgba(255,255,255,0.03);
+            border-bottom: 1px solid rgba(255,255,255,0.03);
+        }
+        
+        .solution-title {
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--primary-light);
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        /* Question Navigation */
+        .question-nav {
+            position: fixed;
+            top: 60px;
+            right: 0;
+            bottom: 80px;
+            width: 100%;
+            max-width: 320px;
+            background: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-left: 1px solid rgba(255,255,255,0.06);
+            box-shadow: var(--box-shadow);
+            transform: translateX(100%);
+            transition: var(--transition);
+            z-index: 900;
+            overflow-y: auto;
+            padding: 16px;
+        }
+        
+        .question-nav.show {
+            transform: translateX(0);
+        }
+        
+        .nav-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+        
+        .nav-title {
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin: 0;
+            color: #f8fafc;
+        }
+        
+        .question-stats {
+            display: flex;
+            gap: 8px;
+        }
+        
+        .stat-badge {
+            font-size: 0.75rem;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-weight: 500;
+            color: white;
+        }
+        
+        .section-selector {
+            width: 100%;
+            margin-bottom: 16px;
+            border-radius: 12px;
+            padding: 10px 16px;
+            border: 1px solid rgba(255,255,255,0.08);
+            background: rgba(0, 0, 0, 0.3);
+            color: #f8fafc;
+            font-size: 0.9rem;
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 10px center;
+            background-size: 16px;
+        }
+        
+        .question-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(40px, 1fr));
+            gap: 8px;
+        }
+        
+        .q-box {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 500;
+            border: 1px solid rgba(255,255,255,0.08);
+            background: rgba(255,255,255,0.02);
+            color: #94a3b8;
+            transition: var(--transition);
+            position: relative;
+        }
+        
+        .q-box:hover {
+            transform: translateY(-2px);
+            border-color: rgba(255,255,255,0.2);
+            color: #f8fafc;
+        }
+        
+        .q-box.attempted {
+            background-color: var(--primary);
+            color: white;
+            border-color: var(--primary);
+            box-shadow: 0 0 8px var(--primary-glow);
+        }
+        
+        .q-box.correct {
+            background-color: var(--success);
+            color: white;
+            border-color: var(--success);
+            box-shadow: 0 0 8px var(--success-glow);
+        }
+        
+        .q-box.incorrect {
+            background-color: var(--danger);
+            color: white;
+            border-color: var(--danger);
+            box-shadow: 0 0 8px var(--danger-glow);
+        }
+        
+        .q-box.current {
+            border: 2px solid var(--accent) !important;
+            transform: translateY(-3px);
+            box-shadow: 0 4px 12px rgba(236, 72, 153, 0.3);
+            color: #f8fafc;
+        }
+        
+        .q-box.unattempted {
+            background-color: var(--gray);
+            color: white;
+            border-color: var(--gray);
+        }
+        
+        /* Bottom Navigation */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 80px;
+            background: var(--footer-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-top: 1px solid rgba(255,255,255,0.06);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 16px;
+            z-index: 800;
+        }
+        
+        .nav-btn {
+            height: 48px;
+            border-radius: 12px;
+            border: none;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 20px;
+            transition: var(--transition);
+            gap: 8px;
+            cursor: pointer;
+        }
+        
+        .nav-btn i {
+            font-size: 1rem;
+        }
+        
+        .nav-btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .nav-btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px var(--primary-glow);
+        }
+        
+        .nav-btn-outline {
+            background: rgba(255,255,255,0.02);
+            color: #f8fafc;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .nav-btn-outline:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+        
+        .nav-btn:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+            transform: none !important;
+            box-shadow: none !important;
+        }
+        
+        /* Overlay when nav is open */
+        .nav-overlay {
+            position: fixed;
+            top: 60px;
+            left: 0;
+            right: 0;
+            bottom: 80px;
+            background: rgba(0,0,0,0.6);
+            backdrop-filter: blur(4px);
+            z-index: 800;
+            opacity: 0;
+            pointer-events: none;
+            transition: var(--transition);
+        }
+        
+        .nav-overlay.show {
+            opacity: 1;
+            pointer-events: all;
+        }
+        
+        /* Results Modal */
+        .results-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(3, 7, 18, 0.8);
+            backdrop-filter: blur(8px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1100;
+            opacity: 0;
+            pointer-events: none;
+            transition: var(--transition);
+            padding: 16px;
+        }
+        
+        .results-modal.show {
+            opacity: 1;
+            pointer-events: all;
+        }
+        
+        .results-card {
+            background: #0f172a;
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 24px;
+            width: 100%;
+            max-width: 500px;
+            overflow: hidden;
+            transform: translateY(20px);
+            transition: var(--transition);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+        }
+        
+        .results-modal.show .results-card {
+            transform: translateY(0);
+        }
+        
+        .results-header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 24px 20px;
+            text-align: center;
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+        }
+        
+        .results-title {
+            margin: 0;
+            font-weight: 600;
+            font-size: 1.4rem;
+        }
+        
+        .results-body {
+            padding: 24px;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+        
+        .stat-card {
+            padding: 16px;
+            border-radius: 16px;
+            text-align: center;
+            color: white;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+        
+        .stat-value {
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+        
+        .stat-label {
+            font-size: 0.8rem;
+            opacity: 0.8;
+            font-weight: 500;
+        }
+        
+        .results-footer {
+            padding: 18px 24px;
+            display: flex;
+            justify-content: center;
+            border-top: 1px solid rgba(255,255,255,0.06);
+            background: rgba(0,0,0,0.1);
+        }
+        
+        /* MathJax Styling Override */
+        .MathJax, .mjx-chtml {
+            overflow-x: auto;
+            max-width: 100%;
+            display: inline-block;
+        }
+        
+        /* Responsive Adjustments */
+        @media (min-width: 992px) {
+            .question-nav {
+                transform: translateX(0);
+            }
+            
+            .main-content {
+                margin-right: 320px;
+            }
+            
+            .nav-overlay {
+                display: none;
+            }
+            
+            .bottom-nav {
+                display: none;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .question-grid {
+                grid-template-columns: repeat(auto-fill, minmax(36px, 1fr));
+                gap: 6px;
+            }
+            
+            .q-box {
+                width: 36px;
+                height: 36px;
+                font-size: 0.9rem;
+            }
+            
+            .option-label {
+                padding: 12px 14px;
+            }
+            
+            .question-text {
+                font-size: 1rem;
+            }
+            
+            .header-brand {
+                font-size: 1rem;
+            }
+            
+            .control-btn {
+                width: 32px;
+                height: 32px;
+            }
+            
+            .timer-display {
+                font-size: 0.8rem;
+                padding: 4px 10px;
+            }
+            
+            .nav-btn {
+                height: 44px;
+                padding: 0 16px;
+                font-size: 0.9rem;
+            }
+        }
+</style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <a href="#" class="header-brand">
+                <i class="fas fa-graduation-cap"></i>
+                <span>Aether Mocks</span>
+            </a>
+            
+            <div class="header-controls">
+                <!-- Timer -->
+                <div class="timer-display">
+                    <i class="far fa-clock"></i>
+                    <span id="timer-display">8:00</span>
+                </div>
+                
+                                <!-- Full Screen Button -->
+                <button class="control-btn" id="fullscreen-btn" onclick="toggleFullscreen()" title="Toggle Fullscreen">
+                    <i class="fas fa-expand"></i>
+                </button>
+                
+                <!-- Language toggle -->
+                <button class="control-btn" id="lang-btn" onclick="toggleLanguage()">
+                    <span id="lang-text">En</span>
+                </button>
+                
+                <!-- Submit button -->
+                <button class="control-btn" id="submit-btn" onclick="confirmSubmit()">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+                
+                <!-- Questions toggle for mobile -->
+                <button class="control-btn nav-toggle-btn" id="nav-toggle" onclick="toggleNav()">
+                    <i class="fas fa-th"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Main content -->
+    <main class="main-content" id="main-content">
+        <div class="question-counter" id="question-counter">Question 1 of 15</div>
+        
+        <!-- Questions will be displayed here -->
+        <div id="questions-container"></div>
+    </main>
+    
+    <!-- Overlay for mobile nav -->
+    <div class="nav-overlay" id="nav-overlay" onclick="toggleNav(false)"></div>
+    
+    <!-- Question navigation sidebar -->
+    <aside class="question-nav" id="question-nav">
+        <div class="nav-header">
+            <h3 class="nav-title">Questions</h3>
+            <div class="question-stats">
+                <span class="stat-badge bg-primary" id="attempted-count">0</span>
+                <span class="stat-badge bg-gray" id="total-count">15</span>
+                <button class="control-btn d-lg-none" onclick="toggleNav(false)">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Section selector -->
+        <select class="section-selector" id="section-selector" onchange="switchSection(this.value)">
+            <option value="all">All Sections</option>
+        </select>
+        
+        <!-- Question grid -->
+        <div class="question-grid" id="question-boxes"></div>
+    </aside>
+    
+    <!-- Bottom navigation for mobile -->
+    <nav class="bottom-nav d-lg-none">
+        <button class="nav-btn nav-btn-outline" onclick="prevQuestion()">
+            <i class="fas fa-chevron-left"></i>
+            <span>Previous</span>
+        </button>
+        <button class="nav-btn nav-btn-outline" onclick="nextQuestion()">
+            <span>Next</span>
+            <i class="fas fa-chevron-right"></i>
+        </button>
+    </nav>
+    
+    <!-- Results modal -->
+    <div class="results-modal" id="results-modal">
+        <div class="results-card">
+            <div class="results-header">
+                <h3 class="results-title">Test Results</h3>
+            </div>
+            <div class="results-body">
+                <div class="stats-grid">
+                    <div class="stat-card" style="background: linear-gradient(135deg, var(--primary), var(--primary-dark))">
+                        <div class="stat-value" id="score-value">0</div>
+                        <div class="stat-label">Score</div>
+                    </div>
+                    <div class="stat-card" style="background: linear-gradient(135deg, var(--success), #1b9aaa)">
+                        <div class="stat-value" id="correct-value">0</div>
+                        <div class="stat-label">Correct</div>
+                    </div>
+                    <div class="stat-card" style="background: linear-gradient(135deg, var(--danger), var(--accent))">
+                        <div class="stat-value" id="incorrect-value">0</div>
+                        <div class="stat-label">Incorrect</div>
+                    </div>
+                    <div class="stat-card" style="background: linear-gradient(135deg, var(--gray), var(--dark))">
+                        <div class="stat-value" id="unattempted-value">0</div>
+                        <div class="stat-label">Unattempted</div>
+                    </div>
+                </div>
+            </div>
+            <div class="results-footer">
+                <button class="nav-btn nav-btn-primary" onclick="reviewTest()">
+                    <i class="fas fa-search me-1"></i>
+                    <span>Review Test</span>
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Questions data
+        const questions = [];
+        const sections = {};
+        let currentLang = "en";
+        let currentQuestion = 0;
+        let answers = {};
+        let submitted = false;
+        let totalTime = 8 * 60;
+        
+                function toggleFullscreen() {
+            const btn = document.getElementById('fullscreen-btn');
+            if (!btn) return;
+            const icon = btn.querySelector('i');
+            if (!document.fullscreenElement) {
+                document.documentElement.requestFullscreen().then(() => {
+                    icon.className = 'fas fa-compress';
+                }).catch(err => {
+                    console.error("Fullscreen error: ", err);
+                });
+            } else {
+                document.exitFullscreen().then(() => {
+                    icon.className = 'fas fa-expand';
+                });
+            }
+        }
+        
+        document.addEventListener('fullscreenchange', () => {
+            const btn = document.getElementById('fullscreen-btn');
+            if (btn) {
+                const icon = btn.querySelector('i');
+                if (document.fullscreenElement) {
+                    icon.className = 'fas fa-compress';
+                } else {
+                    icon.className = 'fas fa-expand';
+                }
+            }
+        });
+
+        // Initialize the test
+        window.onload = function() {
+            initializeTest();
+            startTimer();
+            
+            // If on desktop, show the question navigation by default
+            if (window.innerWidth >= 992) {
+                document.getElementById('question-nav').classList.add('show');
+                document.getElementById('main-content').classList.add('with-nav');
+            }
+        };
+        
+        // Initialize test data
+        function initializeTest() {
+            // Add sections and questions
+            
+            sections["18"] = {
+                name: "General Awareness",
+                start: 0,
+                end: 13
+            };
+            
+            document.getElementById('section-selector').innerHTML += 
+                `<option value="18">General Awareness</option>`;
+            
+            sections["misc"] = {
+                name: "Miscellaneous",
+                start: 14,
+                end: 14
+            };
+            
+            document.getElementById('section-selector').innerHTML += 
+                `<option value="misc">Miscellaneous</option>`;
+            
+            
+                questions.push({
+                    id: "1",
+                    section: "18",
+                    question_en: "<p>1. In whose ashram did the Beatles compose rock music in 1968 influenced by classical music?</p>",
+                    question_hi: "<p>1. बीटल्स (Beatles) ने किसके आश्रम में शास्त्रीय संगीत से प्रभावित होकर 1968 में रॉक संगीत की रचना की थी?</p>",
+                    options_en: ["<p>Osho Rajnish Ashram</p>", "<p>Maharshi Aurobindo Ashram</p>", 
+                                "<p>Pandit Ravishankar Ashram</p>", "<p>Maharshi Mahesh Yogi Ashram</p>"],
+                    options_hi: ["<p>ओशो रजनीश आश्रम</p>", "<p>महर्षि अरबिंदो आश्रम</p>",
+                                "<p>पंडित रविशंकर आश्रम</p>", "<p>महर्षि महेश योगी आश्रम</p>"],
+                    solution_en: "<p>1.(d) <strong>Maharshi Mahesh Yogi Ashram</strong>. In February 1968, the English rock band the Beatles traveled to Rishikesh (Uttarakhand) to take part in a Transcendental Meditation (TM) training course at Maharshi Mahesh Yogi\'s Ashram. Maharshi Mahesh Yogi is the founder of the Transcendental Meditation technique.</p>",
+                    solution_hi: "<p>1.(d)<strong> महर्षि महेश योगी आश्रम।</strong> फरवरी 1968 में, अंग्रेजी रॉक बैंड बीटल्स महर्षि महेश योगी के आश्रम में ट्रांसेंडेंटल मेडिटेशन (TM) प्रशिक्षण कार्यप्रणाली में भाग लेने के लिए ऋषिकेश (उत्तराखंड) आए थे। महर्षि महेश योगी ट्रांसेंडेंटल मेडिटेशन प्रौद्योगिकी के संस्थापक हैं।</p>",
+                    correct: "d",
+                    pos_marks: 2.0,
+                    neg_marks: 0.5
+                });
+                questions.push({
+                    id: "2",
+                    section: "18",
+                    question_en: "<p>2. In classical Carnatic music, tempo is called as ________.</p>",
+                    question_hi: "<p>2. शास्त्रीय कर्नाटक संगीत में, ताल (tempo) को ________ कहा जाता है।</p>",
+                    options_en: ["<p>padam</p>", "<p>gita</p>", 
+                                "<p>laya</p>", "<p>achala</p>"],
+                    options_hi: ["<p>पदम</p>", "<p>गीता</p>",
+                                "<p>लय</p>", "<p>अचल</p>"],
+                    solution_en: "<p>2.(c) <strong>laya.</strong> Carnatic music originated in South India whereas Hindustani music originated in North India. Different forms of Carnatic Music: Gitam (simple composition), Swarajathi (devotional or heroic), Varnam (unique to Carnatic music), Kirtanam (focused on devotion), and Kriti (an evolved form of Kirtanam).</p>",
+                    solution_hi: "<p>2.(c) <strong>लय।</strong> कर्नाटक संगीत की उत्पत्ति दक्षिण भारत में हुई जबकि हिंदुस्तानी संगीत की उत्पत्ति उत्तर भारत में हुई। कर्नाटक संगीत के विभिन्न रूप: गीतम (सरलतम रचना), स्वराजति (भक्तिपूर्ण या वीरतापूर्ण), वर्णम (कर्नाटक संगीत के लिए अद्वितीय), कीर्तनम (भक्ति पर केंद्रित), और कृति (कीर्तनम का एक विकसित रूप)।</p>",
+                    correct: "c",
+                    pos_marks: 2.0,
+                    neg_marks: 0.5
+                });
+                questions.push({
+                    id: "3",
+                    section: "18",
+                    question_en: "<p>3. In a spreadsheet, page orientation is changed through ___________.</p>",
+                    question_hi: "<p>3. स्प्रेडशीट में, पेज ओरिएंटेशन (page orientation) को ___________ से बदला जाता है।</p>",
+                    options_en: ["<p>paper dialog box</p>", "<p>print dialog box</p>", 
+                                "<p>page setup dialog box</p>", "<p>format dialogue box </p>"],
+                    options_hi: ["<p>पेपर डायलॉग बॉक्स</p>", "<p>प्रिंट डायलॉग बॉक्स</p>",
+                                "<p>पेज सेटअप डायलॉग बॉक्स</p>", "<p>फॉर्मेट डायलॉग बॉक्स</p>"],
+                    solution_en: "<p>3.(c)<strong> page setup dialog box.</strong> This dialog box allows you to adjust various page settings, including: Page orientation (landscape or portrait), Paper size, Margins, Headers and footers, Print area. To access the Page Setup dialog box, you usually go to the File menu, select \"Page Setup\" or \"Print Setup\", or use a keyboard shortcut.</p>",
+                    solution_hi: "<p>3.(c) <strong>पेज सेटअप डायलॉग बॉक्स</strong>। यह डायलॉग बॉक्स आपको विभिन्न पेज सेटिंग्स को समायोजित (adjust) करने की अनुमति देता है, जिसमें शामिल हैं: पेज ओरिएंटेशन (लैंडस्केप या पोर्ट्रेट), पेपर साइज़, मार्जिन, हेडर और फ़ुटर, प्रिंट एरिया। पेज सेटअप डायलॉग बॉक्स तक पहुँचने के लिए, आप सामान्यतः फ़ाइल मेनू पर जाते हैं, \"पेज सेटअप\" या \"प्रिंट सेटअप\" चुनते हैं, या कीबोर्ड शॉर्टकट का उपयोग करते हैं।</p>",
+                    correct: "c",
+                    pos_marks: 2.0,
+                    neg_marks: 0.5
+                });
+                questions.push({
+                    id: "4",
+                    section: "18",
+                    question_en: "<p>4. Which of the following is NOT any position in the Basketball sport?</p>",
+                    question_hi: "<p>4. निम्नलिखित में से कौन-सी बास्केटबॉल खेल में एक स्थिति (position) नहीं है?</p>",
+                    options_en: ["<p>Point guard</p>", "<p>Shooting guard</p>", 
+                                "<p>Small forward</p>", "<p>All rounder</p>"],
+                    options_hi: ["<p>पॉइंट गार्ड (Point guard)</p>", "<p>शूटिंग गार्ड (Shooting guard)</p>",
+                                "<p>स्मॉल फ़ॉरवर्ड (Small forward)</p>", "<p>ऑल राउंडर (All rounder)</p>"],
+                    solution_en: "<p>4.(d) In basketball, the five positions on the court are: Point guard - Usually the team\'s best ball handler and playmaker. Shooting guard - A scoring specialist who can shoot from outside. Small forward - Often considered the most versatile player, responsible for scoring, rebounding, and defense. Power forward - Typically the strongest rebounder and post player. Center - The tallest player, responsible for defending the basket and rebounding.</p>",
+                    solution_hi: "<p>4.(d) बास्केटबॉल में, कोर्ट पर पाँच स्थिति हैं: पॉइंट गार्ड - सामान्यतः टीम का सबसे अच्छा बॉल हैंडलर और प्लेमेकर। शूटिंग गार्ड - एक स्कोरिंग विशेषज्ञ जो बाहर से शूट कर सकता है। स्मॉल फ़ॉरवर्ड - अक्सर सबसे प्रतिभाशाली खिलाड़ी माना जाता है, जो स्कोरिंग, रीबाउंडिंग और डिफेंस के लिए ज़िम्मेदार होता है। पावर फ़ॉरवर्ड - सामान्यतः सबसे सामर्थ्यवान रीबाउंडर और पोस्ट प्लेयर। सेंटर - सबसे लंबा खिलाड़ी, जो बास्केट को बचाने और रीबाउंडिंग के लिए ज़िम्मेदार होता है।</p>",
+                    correct: "d",
+                    pos_marks: 2.0,
+                    neg_marks: 0.5
+                });
+                questions.push({
+                    id: "5",
+                    section: "18",
+                    question_en: "<p>5. Which of the following steps is used to format a cell in an MS Excel Spreadsheet?</p>",
+                    question_hi: "<p>5. एमएस एक्सेल स्प्रेडशीट (MS Excel Spreadsheet) में किसी सेल को फॉर्मेट करने के लिए इनमें से किस चरण का उपयोग किया जाता है?</p>",
+                    options_en: ["<p>Select cell &rarr; Right click &rarr; Format cell</p>", "<p>View Select cell &rarr; Format</p>", 
+                                "<p>Select cell &rarr; View &rarr; Format cell</p>", "<p>Menu &rarr; Select cell &rarr; Format</p>"],
+                    options_hi: ["<p>सिलेक्ट सेल &rarr; राइट क्लिक &rarr; फॉर्मेट सेल</p>", "<p>व्यू सिलेक्ट सेल &rarr; फॉर्मेट</p>",
+                                "<p>सिलेक्ट सेल &rarr; व्यू &rarr; फॉर्मेट सेल</p>", "<p>मैन्यू &rarr; सिलेक्ट सेल &rarr; फॉर्मेट</p>"],
+                    solution_en: "<p>5.(a) <strong>Select cell &rarr; Right click &rarr; Format cell. </strong>In Excel, cell alignment is how your text or numbers are positioned in the cell. You can align vertically, meaning towards the top, the middle or the bottom. And also align horizontally, meaning to the left, the center or to the right.</p>",
+                    solution_hi: "<p>5.(a)<strong> सिलेक्ट सेल &rarr; राइट क्लिक &rarr; फॉर्मेट सेल।</strong> एक्सेल में, सेल अलाइनमेंट यह बताता है कि आपका टेक्स्ट या नंबर सेल में कैसे स्थित होता हैं। आप वर्टिकली अलाइन कर सकते हैं, जिसका अर्थ है टॉप, मिडिल या बॉटम की ओर। और हॉरिजॉन्टल अलाइन भी कर सकते हैं, जिसका अर्थ है लेफ्ट, सेंटर या राइट की ओर।</p>",
+                    correct: "a",
+                    pos_marks: 2.0,
+                    neg_marks: 0.5
+                });
+                questions.push({
+                    id: "6",
+                    section: "18",
+                    question_en: "<p>6. Jagoi and Cholom are two divisions in the Indian classical dance form of ________.</p>",
+                    question_hi: "<p>6. जगोई (Jagoi) और चोलोम (Cholom) भारतीय शास्त्रीय नृत्य ________ की दो शैलियां हैं।</p>",
+                    options_en: ["<p>Kathak</p>", "<p>Bharatanatyam</p>", 
+                                "<p>Manipuri</p>", "<p>Kathakali</p>"],
+                    options_hi: ["<p>कथक</p>", "<p>भरतनाट्यम</p>",
+                                "<p>मणिपुरी</p>", "<p>कथकली</p>"],
+                    solution_en: "<p>6.(c) <strong>Manipuri.</strong> Jagoi refers to the gentle and graceful movements, often depicting devotion and love. Cholom refers to the fast-paced and energetic movements, often depicting heroic and martial themes. Other dances and their division: Kathakali (Kerala) - Satvika, rajasika and tamasika. Bharatanatyam (Tamil Nadu) - Nritta, Nritya and Natya.</p>",
+                    solution_hi: "<p>6.(c) <strong>मणिपुरी।</strong> जगोई का अर्थ है कोमल और सुंदर गतिविधियाँ, जो अक्सर भक्ति और प्रेम को दर्शाती हैं। चोलोम का अर्थ है तेज-गति और ऊर्जावान गतिविधियाँ, जो अक्सर वीरता और युद्ध संबंधी विषयों को दर्शाती हैं। अन्य नृत्य एवं उनके विभाजन: कथकली (केरल) - सात्विक, राजसिक और तामसिक। भरतनाट्यम (तमिलनाडु) - नृत्ता, नृत्य और नाट्य।</p>",
+                    correct: "c",
+                    pos_marks: 2.0,
+                    neg_marks: 0.5
+                });
+                questions.push({
+                    id: "7",
+                    section: "18",
+                    question_en: "<p>7. In Hindustani classical music, according to Vishnu Narayana Bhatkhande, how many thaats are the origins of ragas?</p>",
+                    question_hi: "<p>7. हिन्दुस्तानी शास्त्रीय संगीत में विष्णु नारायण भातखंडे के अनुसार रागों की उत्पत्ति कितने थाटों से हुई है?</p>",
+                    options_en: ["<p>72</p>", "<p>52</p>", 
+                                "<p>10</p>", "<p>20</p>"],
+                    options_hi: ["<p>72</p>", "<p>52</p>",
+                                "<p>10</p>", "<p>20</p>"],
+                    solution_en: "<p>7.(c) <strong>10.</strong> These 10 thaats are: Bilawal, Khamaj, Kafi, Asavari, Bhairav, Bhairavi, Todi, Purvi, Marwa, Yaman. Each thaat has a specific arrangement of whole and half steps, and ragas are derived from these thaats by using different combinations of notes, ornamentations, and emotional expressions.</p>",
+                    solution_hi: "<p>7.(c) <strong>10.</strong> ये 10 थाट हैं: बिलावल, खमाज, काफी, आसावरी, भैरव, भैरवी, तोड़ी, पूर्वी, मारवा, यमन। प्रत्येक थाट में पूरे और आधे चरणों की एक विशिष्ट व्यवस्था होती है, तथा स्वरों, अलंकरणों और भावात्मक अभिव्यक्तियों के विभिन्न संयोजनों का उपयोग करके इन थाटों से रागों की उत्पत्ति होती है।</p>",
+                    correct: "c",
+                    pos_marks: 2.0,
+                    neg_marks: 0.5
+                });
+                questions.push({
+                    id: "8",
+                    section: "18",
+                    question_en: "<p>8. In which year was the &lsquo;Aatmanirbhar Bharat Rojgar&rsquo; Yojana launched by the Government of India?</p>",
+                    question_hi: "<p>8. भारत सरकार द्वारा \'आत्मनिर्भर भारत रोजगार योजना\' किस वर्ष शुरू की गई थी?</p>",
+                    options_en: ["<p>2020</p>", "<p>2022</p>", 
+                                "<p>2010</p>", "<p>2015</p>"],
+                    options_hi: ["<p>2020</p>", "<p>2022</p>",
+                                "<p>2010</p>", "<p>2015</p>"],
+                    solution_en: "<p>8.(a) <strong>2020.</strong> The \'Aatmanirbhar Bharat Rojgar\' Yojana has been launched with effect from 1st October, 2020 as part of Atmanirbhar Bharat package 3.0 to incentivize employers for creation of new employment along with social security benefits and restoration of loss of employment during Covid-19 pandemic.</p>",
+                    solution_hi: "<p>8.(a) <strong>2020.</strong> आत्मनिर्भर भारत पैकेज 3.0 के हिस्से के रूप में 1 अक्टूबर, 2020 से \'आत्मनिर्भर भारत रोजगार\' योजना शुरू की गई है, जिसका उद्देश्य कोविड-19 महामारी के दौरान सामाजिक सुरक्षा लाभ और रोजगार के नुकसान की बहाली के साथ-साथ नए रोजगार के सृजन के लिए नियोक्ताओं को प्रोत्साहित करना है।</p>",
+                    correct: "a",
+                    pos_marks: 2.0,
+                    neg_marks: 0.5
+                });
+                questions.push({
+                    id: "9",
+                    section: "18",
+                    question_en: "<p>9. The institute established by Kaka Hathrasi in 1932 is:</p>",
+                    question_hi: "<p>9. 1932 में काका हाथरसी (Kaka Hathrasi) द्वारा स्थापित संस्थान कौन सा है?</p>",
+                    options_en: ["<p>Sangeet Karyalaya</p>", "<p>Music Art Centre</p>", 
+                                "<p>Music Art Kendra</p>", "<p>Swar Sangam Kendra</p>"],
+                    options_hi: ["<p>संगीत कार्यालय</p>", "<p>म्यूजिक आर्ट सेंटर</p>",
+                                "<p>म्यूजिक आर्ट केंद्र</p>", "<p>स्वर संगम केंद्र</p>"],
+                    solution_en: "<p>9.(a) <strong>Sangeet Karyalaya</strong>: Located - Hathras (Uttar Pradesh). The institute was founded with the aim of promoting Indian classical music and preserving the cultural heritage of India. Kaka Hathrasi published the monthly magazine \"SANGEET\" in 1935.</p>",
+                    solution_hi: "<p>9.(a) <strong>संगीत कार्यालय</strong>: स्थित - हाथरस (उत्तर प्रदेश)। इस संस्थान की स्थापना भारतीय शास्त्रीय संगीत को बढ़ावा देने और भारत की सांस्कृतिक विरासत को संरक्षित करने के उद्देश्य से की गई थी। काका हाथरसी ने 1935 में मासिक पत्रिका \"संगीत\" प्रकाशित की।</p>",
+                    correct: "a",
+                    pos_marks: 2.0,
+                    neg_marks: 0.5
+                });
+                questions.push({
+                    id: "10",
+                    section: "18",
+                    question_en: "<p>10. The Chau dancers of ___________ organise a festival named Chau-Jhumur Utsav, where an open stage is designed for the performance by Chau groups.</p>",
+                    question_hi: "<p>10. _____________ के छउ नृत्य कलाकार, चौ-झुमुर उत्सव (Chau-Jhumur Utsav) नामक एक उत्सव का आयोजन करते हैं, जिसमें छउ समूहों के प्रदर्शन के लिए एक खुला मंच तैयार किया जाता है।</p>",
+                    options_en: ["<p>Jharkhand</p>", "<p>West Bengal</p>", 
+                                "<p>Madhya Pradesh</p>", "<p>Chhattisgarh</p>"],
+                    options_hi: ["<p>झारखंड</p>", "<p>पश्चिम बंगाल</p>",
+                                "<p>मध्यप्रदेश</p>", "<p>छत्तीसगढ़</p>"],
+                    solution_en: "<p>10.(b) <strong>West Bengal.</strong> Chhau is performed in three styles across eastern India: Purulia Chhau - West Bengal. Seraikela Chhau - Jharkhand. Mayurbhanj Chhau - Odisha. Folk dance of other states: Jharkhand - Karma, Santhali, Mundari, etc. Madhya Pradesh - Gaur Dance, Tertali, Grida Dance, etc. Chhattisgarh - Panthi, Raut Nacha, Karma, Saila, etc.</p>",
+                    solution_hi: "<p>10.(b) <strong>पश्चिम बंगाल।</strong> छऊ पूर्वी भारत में तीन शैलियों में प्रस्तुत किया जाता है: पुरुलिया छऊ - पश्चिम बंगाल। सरायकेला छऊ - झारखंड। मयूरभंज छऊ - ओडिशा। अन्य राज्यों के लोक नृत्य: झारखंड - करमा, संथाली, मुंडारी आदि। मध्य प्रदेश - गौर नृत्य, तरताली, ग्रिडा नृत्य आदि। छत्तीसगढ़ - पंथी, राऊत नाचा, करमा, सैला आदि।</p>",
+                    correct: "b",
+                    pos_marks: 2.0,
+                    neg_marks: 0.5
+                });
+                questions.push({
+                    id: "11",
+                    section: "18",
+                    question_en: "<p>11. Which of the following is NOT an alignment option for text in a cell ?</p>",
+                    question_hi: "<p>11. निम्नलिखित में से कौन-सा विकल्प सेल में टेक्स्ट के अलाइनमेंट (alignment) का एक ऑप्शन नहीं है?</p>",
+                    options_en: ["<p>Justified</p>", "<p>Center</p>", 
+                                "<p>Left</p>", "<p>Right</p>"],
+                    options_hi: ["<p>जस्टीफ़ाइड (Justified)</p>", "<p>सेंटर (Center)</p>",
+                                "<p>लेफ्ट (Left)</p>", "<p>राईट (Right)</p>"],
+                    solution_en: "<p>11.(a) <strong>Justified</strong> alignment is typically used in paragraph formatting to align text to both the left and right margins. Common shortcut keys related to line alignment in MS Word: Horizontal Alignment: Ctrl + L = Left align, Ctrl + E = Center align, Ctrl + R = Right align, Ctrl + J= Justify align (in some applications).</p>",
+                    solution_hi: "<p>11.(a) <strong>जस्टिफाइड</strong> अलाइनमेंट का प्रयोग आमतौर पर पैराग्राफ़ फ़ॉर्मेटिंग में टेक्स्ट को बाएँ और दाएँ मार्जिन दोनों पर अलाइन करने के लिए किया जाता है। MS Word में लाइन अलाइनमेंट से जुड़ी सामान्य शॉर्टकट कुंजियाँ: क्षैतिज अलाइनमेंट (Horizontal Alignment ):&nbsp;Ctrl + L = लेफ्ट अलाइनमेंट, Ctrl + E = सेंटर अलाइनमेंट, Ctrl + R = राइट अलाइनमेंट, Ctrl + J = जस्टिफाई अलाइन (कुछ एप्लीकेशन में)।</p>",
+                    correct: "a",
+                    pos_marks: 2.0,
+                    neg_marks: 0.5
+                });
+                questions.push({
+                    id: "12",
+                    section: "18",
+                    question_en: "<p>12. Which of the following pairs of state and folk dance is correctly paired ?</p>",
+                    question_hi: "<p>12. निम्नलिखित में से कौन सा राज्य और लोक नृत्य का युग्म सही सुमेलित है?</p>",
+                    options_en: ["<p>Punjab &ndash; Bhangra dance</p>", "<p>Gujarat &ndash; Bihu dance</p>", 
+                                "<p>Haryana &ndash; Garia or Goria dance</p>", "<p>Kerala &ndash; Ghoomar dance</p>"],
+                    options_hi: ["<p>पंजाब - भांगड़ा नृत्य</p>", "<p>गुजरात - बिहू नृत्य</p>",
+                                "<p>हरियाणा &ndash; गरिया या गोरिया नृत्य</p>", "<p>केरल &ndash; घूमर नृत्य</p>"],
+                    solution_en: "<p>12.(a) <strong>Punjab - Bhangra dance</strong>. Famous Folk dances of Indian States: Punjab - Giddha, Luddi, Sammi, Bhangra. Gujarat - Siddi Dhamal (hunting dance), Padhar Dance (rituals dance), Garba, Raas. Rajasthan - Ghoomar (weddings and Festivals dance), Kalbeliya Dance, Chari Dance, Pavri Nach (festival dance). Haryana - Phalgun dance, Loor dance, Daph dance, Khoria dance.</p>",
+                    solution_hi: "<p>12.(a) <strong>पंजाब - भांगड़ा नृत्य। </strong>भारतीय राज्यों के प्रसिद्ध लोक नृत्य: पंजाब - गिद्दा, लुड्डी, सम्मी, भांगड़ा। गुजरात - सिद्दी धमाल (शिकार नृत्य), पधार नृत्य (अनुष्ठान नृत्य), गरबा, रास। राजस्थान - घूमर (शादियों और त्योहारों पर नृत्य), कालबेलिया नृत्य, चरी नृत्य, पावरी नाच (त्योहार नृत्य)। हरियाणा - फाल्गुन नृत्य, लूर नृत्य, डफ नृत्य, खोरिया नृत्य।</p>",
+                    correct: "a",
+                    pos_marks: 2.0,
+                    neg_marks: 0.5
+                });
+                questions.push({
+                    id: "13",
+                    section: "18",
+                    question_en: "<p>13. __________ is one of the well-known schemes sponsored by the Union Government of India. It was launched in November 2015 with the aim of rescuing the country&rsquo;s ailing electricity distribution companies.</p>",
+                    question_hi: "<p>13. __________ भारत की केंद्र सरकार द्वारा प्रायोजित प्रसिद्ध योजनाओं में से एक है। इसे देश की बीमार&nbsp;बिजली वितरण कंपनियों को बचाने के उद्देश्य से नवंबर 2015 में शुरू किया गया था।</p>",
+                    options_en: ["<p>One Nation, One Grid</p>", "<p>Integrated Power Development Scheme (IPDS)</p>", 
+                                "<p>Ujwal DISCOM Assurance Yojana</p>", "<p>Deendayal Upadhyaya Gram Jyoti Yojana</p>"],
+                    options_hi: ["<p>वन नेशन, वन ग्रिड</p>", "<p>इंटेग्रेटेड पॉवर डेवलपमेंट स्कीम (IPDS)</p>",
+                                "<p>उज्ज्वल डिस्कॉम (DISCOM) एश्योरेंस योजना</p>", "<p>दीनदयाल उपाध्याय ग्राम ज्योति योजना</p>"],
+                    solution_en: "<p>13.(c) <strong>Ujwal DISCOM Assurance Yojana. </strong>Key Features of UDAY: Financial Turnaround: Allows state governments to take over 75% of DISCOM debt and pay back lenders by selling bonds. Energy Efficiency: Promotes the use of energy-efficient LED bulbs, agricultural pumps, fans, and air conditioners. Other Scheme: One Nation, One Grid refers to the unified national power grid. Integrated Power Development Scheme (IPDS) focuses on strengthening sub-transmission and distribution infrastructure. Deendayal Upadhyaya Gram Jyoti Yojana (DDUGJY) aims to provide 24/7 electricity to rural areas.</p>",
+                    solution_hi: "<p>13.(c) <strong>उज्ज्वल डिस्कॉम एश्योरेंस योजना।</strong> UDAY की मुख्य विशेषताएं : वित्तीय बदलाव - राज्य सरकारों को DISCOM ऋण का 75% हिस्सा लेने और बांड बेचकर ऋणदाताओं को भुगतान करने की अनुमति देता है। ऊर्जा दक्षता: यह ऊर्जा कुशल LED बल्ब, कृषि पंप, पंखे और एयर कंडीशनर के उपयोग को बढ़ावा देता है। अन्य योजना: वन नेशन, वन ग्रिड एकीकृत राष्ट्रीय पावर ग्रिड को संदर्भित करता है। इंटीग्रेटेड पावर डेवलपमेंट स्कीम (IPDS) उप-संचरण और वितरण बुनियादी ढांचे को मजबूत करने पर केंद्रित है। दीनदयाल उपाध्याय ग्राम ज्योति योजना (DDUGJY) का उद्देश्य ग्रामीण क्षेत्रों में 24/7 बिजली उपलब्ध कराना है।</p>",
+                    correct: "c",
+                    pos_marks: 2.0,
+                    neg_marks: 0.5
+                });
+                questions.push({
+                    id: "14",
+                    section: "18",
+                    question_en: "<p>14. Where did the indigenous sport &lsquo;Gatka&rsquo; originate from ?</p>",
+                    question_hi: "<p>14. स्वदेशी खेल गतका (Gatka) की उत्पत्ति कहां से हुई है ?</p>",
+                    options_en: ["<p>Punjab</p>", "<p>Manipur</p>", 
+                                "<p>Rajasthan</p>", "<p>Jammu and Kashmir</p>"],
+                    options_hi: ["<p>पंजाब</p>", "<p>मणिपुर</p>",
+                                "<p>राजस्थान</p>", "<p>जम्मू और कश्मीर</p>"],
+                    solution_en: "<p>14.(a) <strong>Punjab.</strong> Gatka is a traditional fighting style of the Nihang Sikh warriors, used both for self- defence as well as a sport. Famous Martial Arts in India: Kalaripayattu (Oldest Martial Art in India; Kerala), Silambam (Tamil Nadu), Thang-ta, and Sarit Sarak (Manipur), Thoda (Himachal Pradesh), Lathi (Punjab and Bengal), Inbuan Wrestling (Mizoram), Musti Yuddha (Varanasi), and Pari -Khanda (Bihar).</p>",
+                    solution_hi: "<p>14.(a) <strong>पंजाब।</strong> गतका निहंग सिख योद्धाओं की एक पारंपरिक युद्ध शैली है, जिसका प्रयोग आत्मरक्षा के साथ-साथ खेल के लिए भी किया जाता है। भारत में प्रसिद्ध मार्शल आर्ट: कलारीपयट्टू (भारत में सबसे पुरानी मार्शल आर्ट; केरल), सिलंबम (तमिलनाडु), थांग-टा और सरित सरक (मणिपुर), थोडा (हिमाचल प्रदेश), लाठी (पंजाब और बंगाल), इनबुआन कुश्ती (मिजोरम), मुस्ती युद्ध (वाराणसी), और पारी-खंडा (बिहार)।</p>",
+                    correct: "a",
+                    pos_marks: 2.0,
+                    neg_marks: 0.5
+                });
+                questions.push({
+                    id: "15",
+                    section: "misc",
+                    question_en: "<p>15. Which of the following songs did AR Rahman record with Michael Jackson?</p>",
+                    question_hi: "<p>15. ए. आर. रहमान ने माइकल जैक्सन के साथ निम्नलिखित में से कौन-सा संगीत एल्बम रिकॉर्ड किया था ?</p>",
+                    options_en: ["<p>You are my destiny</p>", "<p>The Oracle</p>", 
+                                "<p>Infinity Love</p>", "<p>Ekam Satyam</p>"],
+                    options_hi: ["<p>यू आर माय डेस्टिनी</p>", "<p>द ऑरेकल</p>",
+                                "<p>इन्फिनिटी लव</p>", "<p>एकम सत्यम</p>"],
+                    solution_en: "<p>15.(d) <strong>Ekam Satyam.</strong> A.R. Rahman collaborated with Michael Jackson on the song \"Ekam Satyam\" (also known as \"The One Truth\"), which was recorded in 1999. Michael Jackson (\"King of Pop\") was an American singer, songwriter, dancer, and record producer.</p>",
+                    solution_hi: "<p>15.(d) <strong>एकम सत्यम।</strong> ए.आर. रहमान ने माइकल जैक्सन के साथ मिलकर \"एकम सत्यम\" (जिसे \"द वन ट्रुथ\" के नाम से भी जाना जाता है) संगीत बनाया, जिसे 1999 में रिकॉर्ड किया गया था। माइकल जैक्सन (\"किंग ऑफ पॉप\") एक अमेरिकी गायक, गीतकार, डांसर और रिकॉर्ड प्रोड्यूसर थे।</p>",
+                    correct: "d",
+                    pos_marks: 2.0,
+                    neg_marks: 0.5
+                });
+            
+            // Generate question boxes
+            const boxesContainer = document.getElementById('question-boxes');
+            questions.forEach((q, index) => {
+                const box = document.createElement('div');
+                box.className = 'q-box';
+                box.textContent = index + 1;
+                box.onclick = () => showQuestion(index);
+                box.id = `box-${index}`;
+                boxesContainer.appendChild(box);
+            });
+            
+            // Show first question
+            showQuestion(0);
+            updateProgress();
+        }
+        
+        // Show a specific question
+        
+        function formatContent(text) {
+            if (!text) return '';
+            return text.replace(/<img/g, '<img style="max-width:100%;height:auto;"');
+        }
+        
+        function showQuestion(index) {
+            if (index < 0 || index >= questions.length) return;
+            
+            currentQuestion = index;
+            const question = questions[index];
+            
+            // Update question counter
+            document.getElementById('question-counter').textContent = `Question ${index + 1} of ${questions.length}`;
+            
+            // Update question boxes
+            document.querySelectorAll('.q-box').forEach(box => box.classList.remove('current'));
+            document.getElementById(`box-${index}`).classList.add('current');
+            
+            // Generate question HTML
+            let html = `
+                <div class="question-card">
+                    <div class="question-text">
+                        <div class="en">${formatContent(question.question_en)}</div>
+                        <div class="hi" style="display:none">${formatContent(question.question_hi)} </div>
+                    </div>
+                    <div class="options" id="options-container">`;
+            
+            // Add options
+            ['a', 'b', 'c', 'd'].forEach((opt, i) => {
+                let optionClass = '';
+                let isCorrectAnswer = opt === question.correct;
+                let isUserAnswer = answers[question.id] === opt;
+                
+                // When reviewing, add appropriate classes
+                if (submitted) {
+                    if (isCorrectAnswer) {
+                        optionClass += ' correct-answer';
+                    } else if (isUserAnswer && !isCorrectAnswer) {
+                        optionClass += ' incorrect';
+                    }
+                }
+                
+                html += `
+                    <div class="option-item">
+                        <input class="option-input" type="radio" name="q${index}" 
+                            id="opt-${index}-${opt}" value="${opt}" 
+                            ${isUserAnswer ? 'checked' : ''}
+                            onclick="selectAnswer('${question.id}', '${opt}')">
+                       <label class="option-label${optionClass}" for="opt-${index}-${opt}">
+                            <div class="en">${question.options_en[i]}</div>
+                            <div class="hi" style="display:none">${question.options_hi[i]}</div>
+                        </label>
+                    </div>`;
+            });
+            
+            // Add solution if submitted
+            if (submitted) {
+                const isCorrect = answers[question.id] === question.correct;
+                const resultText = answers[question.id] ? (isCorrect ? 'Correct!' : 'Incorrect!') : 'Not attempted';
+                
+                html += `
+                    <div class="solution-container">
+                        <div class="solution-title">${resultText}</div>
+                        <div class="solution-text">
+                            <div class="en">${question.solution_en}</div>
+                            <div class="hi" style="display:none">${question.solution_hi}</div>
+                        </div>
+                    </div>`;
+            }
+            
+            html += `</div></div>`;
+            
+            document.getElementById('questions-container').innerHTML = html;
+            
+            // Apply language settings
+            applyLanguage();
+            
+            // If in mobile view, close the menu
+            if (window.innerWidth < 992) {
+                toggleNav(false);
+            }
+            
+            // Add review mode class if submitted
+            if (submitted) {
+                document.getElementById('options-container').classList.add('review-mode');
+            }
+        }
+        
+        // Apply current language
+        function applyLanguage() {
+            document.querySelectorAll(`.${currentLang}`).forEach(el => el.style.display = 'block');
+            document.querySelectorAll(`.${currentLang === 'en' ? 'hi' : 'en'}`).forEach(el => el.style.display = 'none');
+            
+            // Update language button text
+            document.getElementById('lang-text').textContent = currentLang === 'en' ? 'Hi' : 'En';
+        }
+        
+        // Select an answer
+        function selectAnswer(qId, option) {
+            if (submitted) return;
+            
+            answers[qId] = option;
+            updateProgress();
+            
+            // Mark question as attempted in the navigation
+            const index = questions.findIndex(q => q.id === qId);
+            if (index >= 0) {
+                const box = document.getElementById(`box-${index}`);
+                box.classList.add('attempted');
+                box.classList.remove('unattempted');
+            }
+        }
+        
+        // Navigate to previous/next question
+        function prevQuestion() { 
+            if (currentQuestion > 0) showQuestion(currentQuestion - 1); 
+        }
+        
+        function nextQuestion() { 
+            if (currentQuestion < questions.length - 1) showQuestion(currentQuestion + 1); 
+        }
+        
+        // Switch section
+        function switchSection(sectionId) {
+            if (sectionId === 'all') {
+                showQuestion(0);
+                return;
+            }
+            
+            const section = sections[sectionId];
+            if (section) showQuestion(section.start);
+        }
+        
+        // Toggle language
+        function toggleLanguage() {
+            currentLang = currentLang === 'en' ? 'hi' : 'en';
+            applyLanguage();
+        }
+        
+        // Toggle navigation sidebar
+        function toggleNav(show) {
+            const nav = document.getElementById('question-nav');
+            const overlay = document.getElementById('nav-overlay');
+            
+            if (show === undefined) {
+                show = !nav.classList.contains('show');
+            }
+            
+            if (show) {
+                nav.classList.add('show');
+                overlay.classList.add('show');
+                document.body.style.overflow = 'hidden';
+            } else {
+                nav.classList.remove('show');
+                overlay.classList.remove('show');
+                document.body.style.overflow = '';
+            }
+        }
+        
+        // Update progress
+        function updateProgress() {
+            const attempted = Object.keys(answers).length;
+            document.getElementById('attempted-count').textContent = attempted;
+        }
+        
+        // Start timer
+        function startTimer() {
+            const timerDisplay = document.getElementById('timer-display');
+            let timeLeft = totalTime;
+            
+            const timerInterval = setInterval(() => {
+                if (timeLeft <= 0 || submitted) {
+                    clearInterval(timerInterval);
+                    if (!submitted) submitTest();
+                    return;
+                }
+                
+                const minutes = Math.floor(timeLeft / 60);
+                const seconds = timeLeft % 60;
+                timerDisplay.textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`;
+                timeLeft--;
+            }, 1000);
+        }
+        
+        // Confirm before submitting
+        function confirmSubmit() {
+            if (submitted) return;
+            
+            const attempted = Object.keys(answers).length;
+            const remaining = questions.length - attempted;
+            
+            // Create a more modern confirmation dialog
+            const confirmHtml = `
+                <div style="text-align: center; padding: 20px;">
+                    <h4 style="margin-bottom: 16px; color: var(--dark);">Confirm Submission</h4>
+                    <p style="margin-bottom: 24px; color: var(--gray);">
+                        You have attempted ${attempted} of ${questions.length} questions.<br>
+                        ${remaining} questions are unattempted.
+                    </p>
+                    <div style="display: flex; justify-content: center; gap: 12px;">
+                        <button onclick="this.closest('.modal').querySelector('.cancel-btn').click()" 
+                            style="padding: 8px 20px; border: 1px solid var(--light-gray); background: white; border-radius: 8px; cursor: pointer;">
+                            Cancel
+                        </button>
+                        <button onclick="submitTest(); this.closest('.modal').querySelector('.cancel-btn').click()" 
+                            style="padding: 8px 20px; background: var(--primary); color: white; border: none; border-radius: 8px; cursor: pointer;">
+                            Submit Test
+                        </button>
+                    </div>
+                </div>`;
+            
+            // Create modal element
+            const modal = document.createElement('div');
+            modal.className = 'results-modal show';
+            modal.innerHTML = `
+                <div class="results-card" style="max-width: 400px;">
+                    <button class="cancel-btn" style="position: absolute; top: 12px; right: 12px; background: none; border: none; font-size: 1.2rem; cursor: pointer; color: var(--gray);" onclick="this.closest('.results-modal').remove()">
+                        ×
+                    </button>
+                    ${confirmHtml}
+                </div>`;
+            
+            document.body.appendChild(modal);
+        }
+        
+        // Submit test
+        function submitTest() {
+            if (submitted) return;
+            
+            submitted = true;
+            
+            let score = 0;
+            let correctCount = 0;
+            let incorrectCount = 0;
+            let unattemptedCount = 0;
+            
+            questions.forEach((q, index) => {
+                const userAns = answers[q.id];
+                const box = document.getElementById(`box-${index}`);
+                
+                box.classList.remove('attempted');
+                
+                if (!userAns) {
+                    unattemptedCount++;
+                    box.classList.add('unattempted');
+                } else if (userAns === q.correct) {
+                    correctCount++;
+                    score += q.pos_marks;
+                    box.classList.add('correct');
+                } else {
+                    incorrectCount++;
+                    score -= q.neg_marks;
+                    box.classList.add('incorrect');
+                }
+            });
+            
+            // Update result values
+            document.getElementById('score-value').textContent = score.toFixed(2);
+            document.getElementById('correct-value').textContent = correctCount;
+            document.getElementById('incorrect-value').textContent = incorrectCount;
+            document.getElementById('unattempted-value').textContent = unattemptedCount;
+            
+            // Show the results modal
+            document.getElementById('results-modal').classList.add('show');
+            
+            // Disable submit button
+            const submitBtn = document.getElementById('submit-btn');
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<i class="fas fa-check"></i>';
+            submitBtn.style.backgroundColor = 'var(--success)';
+            
+            // Refresh current question view to show solution
+            showQuestion(currentQuestion);
+        }
+        
+        // Review test
+        function reviewTest() {
+            document.getElementById('results-modal').classList.remove('show');
+            showQuestion(0);
+        }
+        
+        // Close modal when clicking outside
+        window.addEventListener('click', function(event) {
+            if (event.target === document.getElementById('results-modal')) {
+                document.getElementById('results-modal').classList.remove('show');
+            }
+        });
+        
+        // Keyboard navigation
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowLeft') prevQuestion();
+            if (e.key === 'ArrowRight') nextQuestion();
+        });
+    </script>
+</body>
+</html>

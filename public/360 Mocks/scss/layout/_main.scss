@@ -1,0 +1,253 @@
+@import '../abstracts/variables';
+
+// CBT Welcome Screen Layout
+.welcome-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: $color-bg-dark !important;
+    z-index: 1000;
+    overflow-y: auto;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 20px;
+
+    &.hidden {
+        display: none;
+    }
+}
+
+body.light-theme .welcome-screen {
+    background: $color-bg-light !important;
+}
+
+.welcome-container {
+    background: $color-card-dark !important;
+    border: 1px solid $color-border-dark !important;
+    border-radius: $radius-lg !important;
+    box-shadow: $shadow-lg !important;
+    max-width: 800px;
+    width: 100%;
+    padding: 30px;
+    margin: 20px auto;
+    color: $color-text-dark !important;
+}
+
+body.light-theme .welcome-container {
+    background: $color-card-light !important;
+    border-color: $color-border-light !important;
+    color: $color-text-light !important;
+}
+
+.welcome-header {
+    text-align: center;
+    border-bottom: 2px solid $color-primary;
+    padding-bottom: 20px;
+    margin-bottom: 25px;
+
+    h1 {
+        color: $color-primary;
+        font-size: 24px;
+        margin-bottom: 10px;
+    }
+}
+
+.test-details {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.welcome-instructions {
+    background: rgba($color-warning, 0.08);
+    border-left: 4px solid $color-warning;
+    padding: 20px;
+    border-radius: $radius-sm;
+    margin-bottom: 25px;
+
+    h3 {
+        color: $color-warning;
+        margin-bottom: 12px;
+    }
+
+    ul {
+        padding-left: 20px;
+    }
+
+    li {
+        margin-bottom: 8px;
+    }
+}
+
+body.light-theme .welcome-instructions {
+    background: #fef3c7;
+    h3 {
+        color: #b45309;
+    }
+}
+
+.welcome-actions {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+// CBT Main Container
+.exam-container {
+    display: none;
+    height: 100vh;
+    flex-direction: column;
+    background: $color-bg-dark !important;
+
+    &.active {
+        display: flex;
+    }
+}
+
+body.light-theme .exam-container {
+    background: $color-bg-light !important;
+}
+
+.exam-main {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+    min-height: 0;
+}
+
+.question-area {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background: $color-bg-dark !important;
+    min-width: 0;
+}
+
+body.light-theme .question-area {
+    background: $color-bg-light !important;
+}
+
+.question-scroll {
+    flex: 1;
+    overflow-y: auto;
+    padding: 20px;
+    padding-bottom: 80px; // Padding for fixed bottom nav bar
+}
+
+// Language helpers
+.en {
+    display: inline;
+}
+
+.hi {
+    display: none;
+}
+
+// Invert filter for theme toggle icon if needed
+.themeToggle, #themeToggle {
+    filter: invert(1) !important;
+}
+
+body.light-theme {
+    .themeToggle, #themeToggle {
+        filter: none !important;
+    }
+}
+
+// Custom explanation and analysis panel background override for dark mode
+.explanation {
+    background: rgba(99, 102, 241, 0.05) !important;
+    border-left: 4px solid $color-primary !important;
+    border-top: 1px solid $color-border-dark !important;
+    border-right: 1px solid $color-border-dark !important;
+    border-bottom: 1px solid $color-border-dark !important;
+    border-radius: $radius-lg !important;
+    padding: 15px !important;
+    margin-top: 15px !important;
+    line-height: 2.0 !important;
+    color: #e5e7eb !important;
+
+    * {
+        color: #e5e7eb !important;
+    }
+}
+
+body.light-theme .explanation {
+    background: rgba(99, 102, 241, 0.05) !important;
+    border-top-color: $color-border-light !important;
+    border-right-color: $color-border-light !important;
+    border-bottom-color: $color-border-light !important;
+    color: $color-text-light !important;
+    
+    * {
+        color: $color-text-light !important;
+    }
+}
+
+.analysis-panel {
+    background: rgba(255, 255, 255, 0.02) !important;
+    border: 1px solid $color-border-dark !important;
+    border-radius: $radius-lg !important;
+    padding: 15px !important;
+    margin-top: 20px !important;
+    color: #e5e7eb !important;
+
+    * {
+        color: #e5e7eb !important;
+    }
+}
+
+body.light-theme .analysis-panel {
+    background: rgba(0, 0, 0, 0.02) !important;
+    border-color: $color-border-light !important;
+    color: $color-text-light !important;
+
+    * {
+        color: $color-text-light !important;
+    }
+}
+
+// Light theme text overrides
+.light-theme {
+    color: #2d3436 !important;
+    --text: #2d3436 !important;
+    filter: none !important;
+
+    .option, .option-label, .opt {
+        color: $color-text-light !important;
+    }
+}
+
+// Dark mode overrides to enforce high contrast on inline styled elements
+body:not(.light-theme) {
+    [style*="color: #000"], [style*="color:#000"], 
+    [style*="color: #111"], [style*="color:#111"],
+    [style*="color: #222"], [style*="color:#222"],
+    [style*="color: black"], [style*="color:black"],
+    [style*="color: #000000"], [style*="color:#000000"] {
+        color: #e5e7eb !important;
+    }
+}
+
+// Option status helper classes
+.answered {
+    background: $color-success !important;
+    color: #ffffff !important;
+}
+
+.review {
+    background: $color-warning !important;
+    color: #ffffff !important;
+}
+
+// Adversarial contrast overrides
+.adversarial {
+    color: red !important;
+    fill: blue !important;
+}

@@ -1,0 +1,1409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aether Mocks</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
+
+        :root {
+            --primary: #6366f1;
+            --primary-light: #818cf8;
+            --primary-dark: #4f46e5;
+            --secondary: #8b5cf6;
+            --accent: #ec4899;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --light: #1e293b;
+            --dark: #0f172a;
+            --gray: #64748b;
+            --light-gray: rgba(255, 255, 255, 0.08);
+            --card-bg: rgba(255, 255, 255, 0.03);
+            --body-bg: #030712;
+            --header-bg: rgba(15, 23, 42, 0.6);
+            --footer-bg: rgba(15, 23, 42, 0.8);
+            --box-shadow: 0 8px 32px 0 rgba(0,0,0,0.3);
+            --box-shadow-sm: 0 4px 16px rgba(0,0,0,0.2);
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Outfit', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        body {
+            background-color: var(--body-bg);
+            color: #f8fafc;
+            line-height: 1.6;
+            padding-bottom: 80px; /* Space for fixed navigation */
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(99, 102, 241, 0.15) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(139, 92, 246, 0.15) 0px, transparent 50%);
+            background-attachment: fixed;
+        }
+        
+        /* Header Styles */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 60px;
+            background: var(--header-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            color: #f8fafc;
+            display: flex;
+            align-items: center;
+            padding: 0 16px;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+            box-shadow: var(--box-shadow-sm);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+        }
+        
+        .header-brand {
+            display: flex;
+            align-items: center;
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: #f8fafc;
+            text-decoration: none;
+            gap: 8px;
+        }
+        
+        .header-brand i {
+            font-size: 1.2rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .header-controls {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .control-btn {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.08);
+            color: #f8fafc;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .control-btn:hover {
+            background: rgba(255,255,255,0.12);
+            border-color: rgba(255,255,255,0.2);
+            transform: translateY(-1px);
+        }
+        
+        .control-btn.active {
+            background: var(--primary);
+            border-color: var(--primary-light);
+        }
+        
+        .timer-display {
+            background: rgba(0,0,0,0.3);
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 18px;
+            padding: 4px 12px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            white-space: nowrap;
+            color: #f8fafc;
+        }
+        
+        .timer-display i {
+            margin-right: 6px;
+            color: var(--accent);
+        }
+        
+        /* Main Content */
+        .main-content {
+            margin-top: 60px;
+            padding: 16px;
+            min-height: calc(100vh - 140px);
+        }
+        
+        .question-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(8px);
+            border: 1px solid var(--light-gray);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 16px;
+            box-shadow: var(--box-shadow-sm);
+            transition: var(--transition);
+        }
+        
+        .question-counter {
+            font-size: 0.9rem;
+            color: var(--gray);
+            text-align: center;
+            margin-bottom: 16px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+        
+        .question-text {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 24px;
+            color: #f8fafc;
+            overflow-wrap: break-word;
+            word-wrap: break-word;
+            hyphens: auto;
+            max-width: 100%;
+        }
+        
+        .option-item {
+            margin-bottom: 12px;
+            position: relative;
+        }
+        
+        .option-input {
+            position: absolute;
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        
+        .question-text img,
+        .option-label img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 8px 0;
+            border-radius: 8px;
+        }
+        
+        .option-label {
+            display: block;
+            padding: 14px 16px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            color: #f8fafc;
+        }
+        
+        .option-label:hover {
+            border-color: rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.05);
+            transform: translateY(-2px);
+            box-shadow: var(--box-shadow-sm);
+        }
+        
+        .option-input:checked + .option-label {
+            border-color: var(--primary);
+            background: rgba(99, 102, 241, 0.08);
+            box-shadow: 0 0 12px var(--primary-glow);
+        }
+        
+        .option-input:checked + .option-label::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 3px;
+            height: 100%;
+            background: var(--primary);
+        }
+        
+        /* When reviewing answers */
+        .review-mode .option-input:checked + .option-label.correct {
+            border-color: var(--success);
+            background: rgba(16, 185, 129, 0.08);
+            box-shadow: 0 0 12px var(--success-glow);
+        }
+        
+        .review-mode .option-input:checked + .option-label.correct::after {
+            background: var(--success);
+        }
+        
+        .review-mode .option-input:checked + .option-label.incorrect {
+            border-color: var(--danger);
+            background: rgba(239, 68, 68, 0.08);
+            box-shadow: 0 0 12px var(--danger-glow);
+        }
+        
+        .review-mode .option-input:checked + .option-label.incorrect::after {
+            background: var(--danger);
+        }
+        
+        .review-mode .option-label.correct-answer {
+            border-color: var(--success);
+            background: rgba(16, 185, 129, 0.08);
+            box-shadow: 0 0 12px var(--success-glow);
+        }
+        
+        .review-mode .option-label.correct-answer::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 3px;
+            height: 100%;
+            background: var(--success);
+        }
+        
+        .solution-container {
+            margin-top: 24px;
+            padding: 18px;
+            background: rgba(99, 102, 241, 0.05);
+            border-radius: 12px;
+            border-left: 3px solid var(--primary);
+            border-top: 1px solid rgba(255,255,255,0.03);
+            border-right: 1px solid rgba(255,255,255,0.03);
+            border-bottom: 1px solid rgba(255,255,255,0.03);
+        }
+        
+        .solution-title {
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--primary-light);
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        /* Question Navigation */
+        .question-nav {
+            position: fixed;
+            top: 60px;
+            right: 0;
+            bottom: 80px;
+            width: 100%;
+            max-width: 320px;
+            background: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-left: 1px solid rgba(255,255,255,0.06);
+            box-shadow: var(--box-shadow);
+            transform: translateX(100%);
+            transition: var(--transition);
+            z-index: 900;
+            overflow-y: auto;
+            padding: 16px;
+        }
+        
+        .question-nav.show {
+            transform: translateX(0);
+        }
+        
+        .nav-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+        
+        .nav-title {
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin: 0;
+            color: #f8fafc;
+        }
+        
+        .question-stats {
+            display: flex;
+            gap: 8px;
+        }
+        
+        .stat-badge {
+            font-size: 0.75rem;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-weight: 500;
+            color: white;
+        }
+        
+        .section-selector {
+            width: 100%;
+            margin-bottom: 16px;
+            border-radius: 12px;
+            padding: 10px 16px;
+            border: 1px solid rgba(255,255,255,0.08);
+            background: rgba(0, 0, 0, 0.3);
+            color: #f8fafc;
+            font-size: 0.9rem;
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 10px center;
+            background-size: 16px;
+        }
+        
+        .question-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(40px, 1fr));
+            gap: 8px;
+        }
+        
+        .q-box {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 500;
+            border: 1px solid rgba(255,255,255,0.08);
+            background: rgba(255,255,255,0.02);
+            color: #94a3b8;
+            transition: var(--transition);
+            position: relative;
+        }
+        
+        .q-box:hover {
+            transform: translateY(-2px);
+            border-color: rgba(255,255,255,0.2);
+            color: #f8fafc;
+        }
+        
+        .q-box.attempted {
+            background-color: var(--primary);
+            color: white;
+            border-color: var(--primary);
+            box-shadow: 0 0 8px var(--primary-glow);
+        }
+        
+        .q-box.correct {
+            background-color: var(--success);
+            color: white;
+            border-color: var(--success);
+            box-shadow: 0 0 8px var(--success-glow);
+        }
+        
+        .q-box.incorrect {
+            background-color: var(--danger);
+            color: white;
+            border-color: var(--danger);
+            box-shadow: 0 0 8px var(--danger-glow);
+        }
+        
+        .q-box.current {
+            border: 2px solid var(--accent) !important;
+            transform: translateY(-3px);
+            box-shadow: 0 4px 12px rgba(236, 72, 153, 0.3);
+            color: #f8fafc;
+        }
+        
+        .q-box.unattempted {
+            background-color: var(--gray);
+            color: white;
+            border-color: var(--gray);
+        }
+        
+        /* Bottom Navigation */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 80px;
+            background: var(--footer-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-top: 1px solid rgba(255,255,255,0.06);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 16px;
+            z-index: 800;
+        }
+        
+        .nav-btn {
+            height: 48px;
+            border-radius: 12px;
+            border: none;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 20px;
+            transition: var(--transition);
+            gap: 8px;
+            cursor: pointer;
+        }
+        
+        .nav-btn i {
+            font-size: 1rem;
+        }
+        
+        .nav-btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .nav-btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px var(--primary-glow);
+        }
+        
+        .nav-btn-outline {
+            background: rgba(255,255,255,0.02);
+            color: #f8fafc;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .nav-btn-outline:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+        
+        .nav-btn:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+            transform: none !important;
+            box-shadow: none !important;
+        }
+        
+        /* Overlay when nav is open */
+        .nav-overlay {
+            position: fixed;
+            top: 60px;
+            left: 0;
+            right: 0;
+            bottom: 80px;
+            background: rgba(0,0,0,0.6);
+            backdrop-filter: blur(4px);
+            z-index: 800;
+            opacity: 0;
+            pointer-events: none;
+            transition: var(--transition);
+        }
+        
+        .nav-overlay.show {
+            opacity: 1;
+            pointer-events: all;
+        }
+        
+        /* Results Modal */
+        .results-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(3, 7, 18, 0.8);
+            backdrop-filter: blur(8px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1100;
+            opacity: 0;
+            pointer-events: none;
+            transition: var(--transition);
+            padding: 16px;
+        }
+        
+        .results-modal.show {
+            opacity: 1;
+            pointer-events: all;
+        }
+        
+        .results-card {
+            background: #0f172a;
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 24px;
+            width: 100%;
+            max-width: 500px;
+            overflow: hidden;
+            transform: translateY(20px);
+            transition: var(--transition);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+        }
+        
+        .results-modal.show .results-card {
+            transform: translateY(0);
+        }
+        
+        .results-header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 24px 20px;
+            text-align: center;
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+        }
+        
+        .results-title {
+            margin: 0;
+            font-weight: 600;
+            font-size: 1.4rem;
+        }
+        
+        .results-body {
+            padding: 24px;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+        
+        .stat-card {
+            padding: 16px;
+            border-radius: 16px;
+            text-align: center;
+            color: white;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+        
+        .stat-value {
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+        
+        .stat-label {
+            font-size: 0.8rem;
+            opacity: 0.8;
+            font-weight: 500;
+        }
+        
+        .results-footer {
+            padding: 18px 24px;
+            display: flex;
+            justify-content: center;
+            border-top: 1px solid rgba(255,255,255,0.06);
+            background: rgba(0,0,0,0.1);
+        }
+        
+        /* MathJax Styling Override */
+        .MathJax, .mjx-chtml {
+            overflow-x: auto;
+            max-width: 100%;
+            display: inline-block;
+        }
+        
+        /* Responsive Adjustments */
+        @media (min-width: 992px) {
+            .question-nav {
+                transform: translateX(0);
+            }
+            
+            .main-content {
+                margin-right: 320px;
+            }
+            
+            .nav-overlay {
+                display: none;
+            }
+            
+            .bottom-nav {
+                display: none;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .question-grid {
+                grid-template-columns: repeat(auto-fill, minmax(36px, 1fr));
+                gap: 6px;
+            }
+            
+            .q-box {
+                width: 36px;
+                height: 36px;
+                font-size: 0.9rem;
+            }
+            
+            .option-label {
+                padding: 12px 14px;
+            }
+            
+            .question-text {
+                font-size: 1rem;
+            }
+            
+            .header-brand {
+                font-size: 1rem;
+            }
+            
+            .control-btn {
+                width: 32px;
+                height: 32px;
+            }
+            
+            .timer-display {
+                font-size: 0.8rem;
+                padding: 4px 10px;
+            }
+            
+            .nav-btn {
+                height: 44px;
+                padding: 0 16px;
+                font-size: 0.9rem;
+            }
+        }
+</style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <a href="#" class="header-brand">
+                <i class="fas fa-graduation-cap"></i>
+                <span>Aether Mocks</span>
+            </a>
+            
+            <div class="header-controls">
+                <!-- Timer -->
+                <div class="timer-display">
+                    <i class="far fa-clock"></i>
+                    <span id="timer-display">8:00</span>
+                </div>
+                
+                                <!-- Full Screen Button -->
+                <button class="control-btn" id="fullscreen-btn" onclick="toggleFullscreen()" title="Toggle Fullscreen">
+                    <i class="fas fa-expand"></i>
+                </button>
+                
+                <!-- Language toggle -->
+                <button class="control-btn" id="lang-btn" onclick="toggleLanguage()">
+                    <span id="lang-text">En</span>
+                </button>
+                
+                <!-- Submit button -->
+                <button class="control-btn" id="submit-btn" onclick="confirmSubmit()">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+                
+                <!-- Questions toggle for mobile -->
+                <button class="control-btn nav-toggle-btn" id="nav-toggle" onclick="toggleNav()">
+                    <i class="fas fa-th"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Main content -->
+    <main class="main-content" id="main-content">
+        <div class="question-counter" id="question-counter">Question 1 of 15</div>
+        
+        <!-- Questions will be displayed here -->
+        <div id="questions-container"></div>
+    </main>
+    
+    <!-- Overlay for mobile nav -->
+    <div class="nav-overlay" id="nav-overlay" onclick="toggleNav(false)"></div>
+    
+    <!-- Question navigation sidebar -->
+    <aside class="question-nav" id="question-nav">
+        <div class="nav-header">
+            <h3 class="nav-title">Questions</h3>
+            <div class="question-stats">
+                <span class="stat-badge bg-primary" id="attempted-count">0</span>
+                <span class="stat-badge bg-gray" id="total-count">15</span>
+                <button class="control-btn d-lg-none" onclick="toggleNav(false)">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Section selector -->
+        <select class="section-selector" id="section-selector" onchange="switchSection(this.value)">
+            <option value="all">All Sections</option>
+        </select>
+        
+        <!-- Question grid -->
+        <div class="question-grid" id="question-boxes"></div>
+    </aside>
+    
+    <!-- Bottom navigation for mobile -->
+    <nav class="bottom-nav d-lg-none">
+        <button class="nav-btn nav-btn-outline" onclick="prevQuestion()">
+            <i class="fas fa-chevron-left"></i>
+            <span>Previous</span>
+        </button>
+        <button class="nav-btn nav-btn-outline" onclick="nextQuestion()">
+            <span>Next</span>
+            <i class="fas fa-chevron-right"></i>
+        </button>
+    </nav>
+    
+    <!-- Results modal -->
+    <div class="results-modal" id="results-modal">
+        <div class="results-card">
+            <div class="results-header">
+                <h3 class="results-title">Test Results</h3>
+            </div>
+            <div class="results-body">
+                <div class="stats-grid">
+                    <div class="stat-card" style="background: linear-gradient(135deg, var(--primary), var(--primary-dark))">
+                        <div class="stat-value" id="score-value">0</div>
+                        <div class="stat-label">Score</div>
+                    </div>
+                    <div class="stat-card" style="background: linear-gradient(135deg, var(--success), #1b9aaa)">
+                        <div class="stat-value" id="correct-value">0</div>
+                        <div class="stat-label">Correct</div>
+                    </div>
+                    <div class="stat-card" style="background: linear-gradient(135deg, var(--danger), var(--accent))">
+                        <div class="stat-value" id="incorrect-value">0</div>
+                        <div class="stat-label">Incorrect</div>
+                    </div>
+                    <div class="stat-card" style="background: linear-gradient(135deg, var(--gray), var(--dark))">
+                        <div class="stat-value" id="unattempted-value">0</div>
+                        <div class="stat-label">Unattempted</div>
+                    </div>
+                </div>
+            </div>
+            <div class="results-footer">
+                <button class="nav-btn nav-btn-primary" onclick="reviewTest()">
+                    <i class="fas fa-search me-1"></i>
+                    <span>Review Test</span>
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Questions data
+        const questions = [];
+        const sections = {};
+        let currentLang = "en";
+        let currentQuestion = 0;
+        let answers = {};
+        let submitted = false;
+        let totalTime = 8 * 60;
+        
+                function toggleFullscreen() {
+            const btn = document.getElementById('fullscreen-btn');
+            if (!btn) return;
+            const icon = btn.querySelector('i');
+            if (!document.fullscreenElement) {
+                document.documentElement.requestFullscreen().then(() => {
+                    icon.className = 'fas fa-compress';
+                }).catch(err => {
+                    console.error("Fullscreen error: ", err);
+                });
+            } else {
+                document.exitFullscreen().then(() => {
+                    icon.className = 'fas fa-expand';
+                });
+            }
+        }
+        
+        document.addEventListener('fullscreenchange', () => {
+            const btn = document.getElementById('fullscreen-btn');
+            if (btn) {
+                const icon = btn.querySelector('i');
+                if (document.fullscreenElement) {
+                    icon.className = 'fas fa-compress';
+                } else {
+                    icon.className = 'fas fa-expand';
+                }
+            }
+        });
+
+        // Initialize the test
+        window.onload = function() {
+            initializeTest();
+            startTimer();
+            
+            // If on desktop, show the question navigation by default
+            if (window.innerWidth >= 992) {
+                document.getElementById('question-nav').classList.add('show');
+                document.getElementById('main-content').classList.add('with-nav');
+            }
+        };
+        
+        // Initialize test data
+        function initializeTest() {
+            // Add sections and questions
+            
+            sections["18"] = {
+                name: "General Awareness",
+                start: 0,
+                end: 13
+            };
+            
+            document.getElementById('section-selector').innerHTML += 
+                `<option value="18">General Awareness</option>`;
+            
+            sections["misc"] = {
+                name: "Miscellaneous",
+                start: 14,
+                end: 14
+            };
+            
+            document.getElementById('section-selector').innerHTML += 
+                `<option value="misc">Miscellaneous</option>`;
+            
+            
+                questions.push({
+                    id: "1",
+                    section: "18",
+                    question_en: "<p>1. Which of the following are needed for Skype to function on a computer?<br>1) A web cam<br>2) A microphone<br>3) A speaker</p>",
+                    question_hi: "<p>1. स्काइप (Skype) के कंप्यूटर पर कार्य करने के लिए निम्नलिखित में से किसकी आवश्यकता होती है?<br>1) एक वेब कैमरे<br>2) एक माइक्रोफोन<br>3) एक स्पीकर</p>",
+                    options_en: ["<p>Only 1 and 2</p>", "<p>Only 2 and 3</p>", 
+                                "<p>1, 2 and 3</p>", "<p>Only 1 and 3</p>"],
+                    options_hi: ["<p>केवल 1 और 2</p>", "<p>केवल 2 और 3</p>",
+                                "<p>1, 2 और 3</p>", "<p>केवल 1 और 3</p>"],
+                    solution_en: "<p>1.(c) <strong>1, 2 and 3.</strong> Skype is a communication platform that allows users to make voice and video calls, send instant messages, and share files over the internet. A web camera (for video calls and seeing the other person). A microphone (for speaking and transmitting your voice). A speaker (for hearing the other person).</p>",
+                    solution_hi: "<p>1.(c) <strong>1, 2 और 3.</strong> स्काइप (Skype) एक संचार प्लेटफ़ॉर्म है जो उपयोगकर्ताओं को वॉयस (voice) और वीडियो कॉल करने, तात्कालिक संदेश भेजने, और इंटरनेट के माध्यम से फ़ाइलें साझा करने की सुविधा देता है। वेब कैमरा (वीडियो कॉल्स और दूसरे व्यक्ति को देखने के लिए), माइक्रोफोन (बोलने और अपनी आवाज़ ट्रांसमिट करने के लिए), स्पीकर (दूसरे व्यक्ति को सुनने के लिए)।</p>",
+                    correct: "c",
+                    pos_marks: 2.0,
+                    neg_marks: 0.5
+                });
+                questions.push({
+                    id: "2",
+                    section: "18",
+                    question_en: "<p>2. The default width of a column in MS-Excel is:</p>",
+                    question_hi: "<p>2. एमएस एक्सेल (MS-Excel) में कॉलम की डिफ़ॉल्ट चौड़ाई _________ होती है।</p>",
+                    options_en: ["<p>6 characters</p>", "<p>7 characters</p>", 
+                                "<p>9 characters</p>", "<p>8 characters</p>"],
+                    options_hi: ["<p>6 केरेक्टर्स</p>", "<p>7 केरेक्टर्स</p>",
+                                "<p>9 केरेक्टर्स</p>", "<p>8 केरेक्टर्स</p>"],
+                    solution_en: "<p>2.(d) <strong>8 characters.</strong> In Microsoft Excel, the default width of a column is set to accommodate 8.43 characters, which is approximately 64 pixels. Here are some of the default settings in Microsoft Excel: Row Height: 15 points (or about 20 pixels). Font: Calibri, Font Size: 11. Cell Alignment: Horizontal Alignment- General , Vertical Alignment- Bottom. Cell Fill Color: No fill (white background). Page Margins: 1 inch (2.54 cm) on all sides. Zoom Level: 100%.</p>",
+                    solution_hi: "<p>2.(d) <strong>8 केरेक्टर्स ।</strong> माइक्रोसॉफ्ट एक्सेल में, कॉलम की डिफ़ॉल्ट चौड़ाई 8.43 अक्षरों के लिए सेट की गई है, जो लगभग 64 पिक्सल के बराबर होती है। माइक्रोसॉफ्ट एक्सेल में कुछ डिफ़ॉल्ट सेटिंग्स यहां दी गई हैं: पंक्ति (row) की ऊँचाई: 15 प्वाइंट (या लगभग 20 पिक्सल) । फॉन्ट: कैलिब्री, फॉन्ट साइज: 11, सेल एलाइनमेंट : हॉरिजेंटल एलाइनमेंट: जनरल, वर्टिकल अलाइनमेंट: बॉटम , सेल भरने का रंग: कोई भराव नहीं (व्हाइट बैकग्राउंड), पेज मार्जिन: सभी ओर 1 इंच (2.54 सेमी), जूम लेवल (Zoom level): 100% ।</p>",
+                    correct: "d",
+                    pos_marks: 2.0,
+                    neg_marks: 0.5
+                });
+                questions.push({
+                    id: "3",
+                    section: "18",
+                    question_en: "<p>3. The song &lsquo;Teri mitti&rsquo; is from which of the following movies?</p>",
+                    question_hi: "<p>3. \'तेरी मिट्टी \' गीत निम्नलिखित में से किस फिल्म का है?</p>",
+                    options_en: ["<p>Jai Ho</p>", "<p>Kesari</p>", 
+                                "<p>Satya Mev Jayte</p>", "<p>Rajniti</p>"],
+                    options_hi: ["<p>जय हो</p>", "<p>केसरी</p>",
+                                "<p>सत्यमेव जयते</p>", "<p>राजनीति</p>"],
+                    solution_en: "<p>3.(b) <strong>Kesari. </strong>It is based on the true story of the Battle of Saragarhi in 1897. The film was directed by Anurag Singh. &lsquo;Teri mitti&rsquo; song : Writer - Manoj Muntashir. Composer - Arko Pravo Mukherjee. Singer - B Praak.</p>",
+                    solution_hi: "<p>3.(b) <strong>केसरी</strong>। यह 1897 में सारागढ़ी की लड़ाई की सच्ची कहानी पर आधारित है। इस फिल्म का निर्देशन अनुराग सिंह ने किया था। &lsquo;तेरी मिट्टी&rsquo; गीत : लेखक - मनोज मुंतशिर। संगीतकार - अर्को प्रावो मुखर्जी। गायक - बी प्राक।</p>",
+                    correct: "b",
+                    pos_marks: 2.0,
+                    neg_marks: 0.5
+                });
+                questions.push({
+                    id: "4",
+                    section: "18",
+                    question_en: "<p>4. Nehru Institute of Mountaineering is located at ________.</p>",
+                    question_hi: "<p>4. नेहरू पर्वतारोहण संस्थान (Nehru Institute of Mountaineering) ________ में स्थित है।</p>",
+                    options_en: ["<p>Jammu and Kashmir</p>", "<p>Himachal Pradesh</p>", 
+                                "<p>Uttarakhand</p>", "<p>Leh</p>"],
+                    options_hi: ["<p>जम्मू और कश्मीर</p>", "<p>हिमाचल प्रदेश</p>",
+                                "<p>उत्तराखंड</p>", "<p>लेह</p>"],
+                    solution_en: "<p>4.(c) <strong>Uttarakhand</strong>. The Nehru Institute of Mountaineering (NIM) was founded in 1965. The Himalayan Mountaineering Institute, located in Darjeeling, West Bengal. It was founded on November 4, 1954, by Pandit Jawaharlal Nehru to commemorate the first successful ascent of Mount Everest by Tenzing Norgay Sherpa and Sir Edmund Hillary.</p>",
+                    solution_hi: "<p>4.(c) <strong>उत्तराखंड</strong>। नेहरू पर्वतारोहण संस्थान (NIM) की स्थापना 1965 में हुई थी। हिमालयन पर्वतारोहण संस्थान, पश्चिम बंगाल के दार्जिलिंग में स्थित है। इसकी स्थापना 4 नवंबर, 1954 को पंडित जवाहरलाल नेहरू ने तेनजिंग नोर्गे शेरपा और सर एडमंड हिलेरी द्वारा माउंट एवरेस्ट पर प्रथम सफलतापूर्ण चढ़ाई की स्मृति में की गई थी।</p>",
+                    correct: "c",
+                    pos_marks: 2.0,
+                    neg_marks: 0.5
+                });
+                questions.push({
+                    id: "5",
+                    section: "18",
+                    question_en: "<p>5. Which folk music is based on the Mahabharata with Bhima portrayed as hero?</p>",
+                    question_hi: "<p>5. कौन-सा लोक संगीत महाभारत पर आधारित है जिसमें भीम को नायक के रूप में चित्रित किया गया है?</p>",
+                    options_en: ["<p>Dandiya</p>", "<p>Pandavani</p>", 
+                                "<p>Alha</p>", "<p>Mando</p>"],
+                    options_hi: ["<p>डांडिया</p>", "<p>पंडवानी</p>",
+                                "<p>आल्हा</p>", "<p>मांडो</p>"],
+                    solution_en: "<p>5.(b) <strong>Pandavani.</strong> It is a folk music tradition from Chhattisgarh. It narrates the story of the five Pandava brothers (protagonists of the epic Mahabharata). This age-old musical form was kept alive by performers like Teejan Bai, Jhaduram Devangan, Ritu Verma, Usha Barle and Shantibai Chelak. Folk songs of Chhattisgarh : Fag, Karma songs, Danda songs, Sawnahi, Kau-Mau, Sua songs, Chau-Mau Dewar songs, Cher-Chera songs, Sohar song, Khuduwa, Dhankul songs, Bhojali songs, Dandi Pouha, Loriya, Goura songs, Fugdi etc.</p>",
+                    solution_hi: "<p>5.(b) <strong>पंडवानी।</strong> यह छत्तीसगढ़ की एक लोक संगीत परंपरा है। यह पांच पांडव भाइयों (महाकाव्य महाभारत के नायक) की कहानी बताता है। इस सदियों पुराने संगीत शैली को तीजन बाई, झाडूराम देवांगन, रितु वर्मा, उषा बारले और शांतिबाई चेलक जैसे कलाकारों ने जीवित रखा है। छत्तीसगढ़ के लोकगीत: फाग, कर्मा गीत, डंडा गीत, सवनाही, कऊ-मऊ, सुआ गीत, चौ-मऊ, देवार गीत, छेर-छेरा गीत, सोहर गीत, खुडुवा, धनकुल गीत, भोजली गीत, डंडी पौहा, लोरिया, गौरा गीत, फुगड़ी आदि।</p>",
+                    correct: "b",
+                    pos_marks: 2.0,
+                    neg_marks: 0.5
+                });
+                questions.push({
+                    id: "6",
+                    section: "18",
+                    question_en: "<p>6. The Indian festival of Holi comes every year in the season of:</p>",
+                    question_hi: "<p>6. भारतीय त्योहार होली हर साल किस मौसम में आता है?</p>",
+                    options_en: ["<p>spring</p>", "<p>autumn</p>", 
+                                "<p>summer</p>", "<p>winter</p>"],
+                    options_hi: ["<p>वसंत</p>", "<p>पतझड़</p>",
+                                "<p>गर्मी</p>", "<p>सर्दी</p>"],
+                    solution_en: "<p>6.(a) <strong>Spring</strong>. Holi, also known as the Festival of Colors, is celebrated on the full moon day of the Phalguna month in the Hindu calendar. Other notable festivals and their seasons include: Diwali, celebrated in autumn (usually October or November); Makar Sankranti, observed in winter (January); Pongal, also in winter (January); and Ganesh Chaturthi, celebrated during the monsoon season (August or September).</p>",
+                    solution_hi: "<p>6.(a) <strong>वसंत</strong>। होली, जिसे रंगों का त्यौहार भी कहा जाता है, हिंदू कैलेंडर के अनुसार फाल्गुन महीने की पूर्णिमा के दिन मनाया जाता है। अन्य प्रसिद्ध त्योहार और उनके मौसम : दिवाली, जो शरद ऋतु (आमतौर पर अक्टूबर या नवंबर) में मनाई जाती है; मकर संक्रांति, जो सर्दियों (जनवरी) में मनाई जाती है; पोंगल, जो सर्दियों (जनवरी) में ही मनाया जाता है; और गणेश चतुर्थी, जो मानसून के मौसम (अगस्त या सितंबर) में मनाई जाती है।</p>",
+                    correct: "a",
+                    pos_marks: 2.0,
+                    neg_marks: 0.5
+                });
+                questions.push({
+                    id: "7",
+                    section: "18",
+                    question_en: "<p>7. Who is the author of Natyashastra?</p>",
+                    question_hi: "<p>7. नाट्यशास्त्र के लेखक कौन हैं?</p>",
+                    options_en: ["<p>Prabhupada</p>", "<p>Patanjali</p>", 
+                                "<p>Bharatmuni</p>", "<p>Panini</p>"],
+                    options_hi: ["<p>प्रभुपाद</p>", "<p>पतंजलि</p>",
+                                "<p>भरतमुनि</p>", "<p>पाणिनि</p>"],
+                    solution_en: "<p>7.(c) <strong>Bharatmuni,</strong> an ancient Indian sage, is known for writing the Natya Shastra, a major text on Indian dance, drama, poetry, and music. Prabhupada founded the International Society for Krishna Consciousness (ISKCON), while Patanjali authored the Yoga Sutras, a key text on yoga. Panini, another ancient scholar, is renowned for his work on Sanskrit grammar, particularly the Ashtadhyayi.</p>",
+                    solution_hi: "<p>7.(c) <strong>भरतमुनि,</strong> एक प्राचीन भारतीय ऋषि, नाट्य शास्त्र लिखने के लिए जाने जाते हैं, जो भारतीय नृत्य, नाटक, कविता और संगीत का एक प्रमुख ग्रंथ है। प्रभुपाद ने इंटरनेशनल सोसाइटी फॉर कृष्णा कॉन्शियसनेस (ISKCON) की स्थापना की, जबकि पतंजलि ने योग सूत्र की रचना की थी, जो योग का एक प्रमुख ग्रंथ है। एक अन्य प्राचीन विद्वान पाणिनि संस्कृत व्याकरण, विशेष रूप से अष्टाध्यायी पर अपने काम के लिए प्रसिद्ध हैं।</p>",
+                    correct: "c",
+                    pos_marks: 2.0,
+                    neg_marks: 0.5
+                });
+                questions.push({
+                    id: "8",
+                    section: "18",
+                    question_en: "<p>8. How might ICT enhance the openness of e-land records?</p>",
+                    question_hi: "<p>8. ICT ई-भूमि अभिलेखों (e-land records) के खुलेपन को कैसे बढ़ा सकता है?</p>",
+                    options_en: ["<p>Enabling quick search and retrieval of land records</p>", "<p>Facilitating manual record updates and amendments</p>", 
+                                "<p>Enforcing strict regulations on land transactions</p>", "<p>Reducing the need for land surveys and assessments</p>"],
+                    options_hi: ["<p>भूमि अभिलेखों की त्वरित खोज और पुनर्प्राप्ति को सक्षम बनाना</p>", "<p>मैन्युअल अभिलेखों अद्यतन और संशोधन की सुविधा प्रदान करना</p>",
+                                "<p>भूमि लेनदेन पर सख्त नियम लागू करके</p>", "<p>भूमि सर्वेक्षण और कर-निर्धारण की आवश्यकता को कम करना</p>"],
+                    solution_en: "<p>8.(a) Information and Communication Technology (ICT) facilitates the digitization and online availability of land records, making it easier for stakeholders to access information efficiently. ICT systems can provide real-time updates and tracking of land records, reducing delays and increasing the reliability of information. Digital India Land Records Modernization Programme was launched in 2008 by the Ministry of Rural Development to digitize and modernize land records and develop a centralized land record management system.</p>",
+                    solution_hi: "<p>8.(a) सूचना और संचार प्रौद्योगिकी (ICT) भूमि अभिलेखों के डिजिटलीकरण और ऑनलाइन उपलब्धता की सुविधा प्रदान करती है, जिससे हितधारकों के लिए सूचना तक कुशलतापूर्वक पहुँचना आसान हो जाता है। ICT सिस्टम भूमि अभिलेखों के वास्तविक समय के अपडेट और ट्रैकिंग प्रदान कर सकते हैं, जिससे देरी कम हो सकती है और सूचना की विश्वसनीयता बढ़ सकती है। ग्रामीण विकास मंत्रालय द्वारा भूमि अभिलेखों को डिजिटल बनाने और आधुनिकीकरण करने तथा एक केंद्रीकृत भूमि अभिलेख प्रबंधन प्रणाली विकसित करने के लिए 2008 में डिजिटल इंडिया भूमि अभिलेख आधुनिकीकरण कार्यक्रम शुरू किया गया था।</p>",
+                    correct: "a",
+                    pos_marks: 2.0,
+                    neg_marks: 0.5
+                });
+                questions.push({
+                    id: "9",
+                    section: "18",
+                    question_en: "<p>9. In field hockey, ________ occurs when a player pushes the ball and raises it off the&nbsp;ground.</p>",
+                    question_hi: "<p>9. फ़ील्ड हॉकी में, ________ तब होता है जब कोई खिलाड़ी गेंद को धकेलता है और उसे ज़मीन से ऊपर उठाता है।</p>",
+                    options_en: ["<p>bully</p>", "<p>slap</p>", 
+                                "<p>flick</p>", "<p>centre pass</p>"],
+                    options_hi: ["<p>बुली (bully)</p>", "<p>स्लैप (slap)</p>",
+                                "<p>फ्लिक ( flick)</p>", "<p>सेंटर पास (centre pass)</p>"],
+                    solution_en: "<p>9.(c) <strong>flick.</strong> During a penalty corner, the attacker must use a push, scoop, or flick shot to avoid fouls. Internationally, the \"drag flick\" is the most popular lifted shot in penalty corners. Terms Used in Field Hockey: Free hits - Awarded for general offenses by either team during play. Dribbling : Keeping the ball under close control. Flagposts : Placed at each corner of the field. Foot foul : In field hockey, players cannot use their feet or body to control the ball.</p>",
+                    solution_hi: "<p>9.(c) <strong>फ़्लिक।</strong> पेनल्टी कॉर्नर के दौरान, आक्रमणकर्ता (attacker) को फ़ाउल से बचने के लिए पुश, स्कूप या फ़्लिक शॉट का उपयोग करना चाहिए। अंतरराष्ट्रीय स्तर पर, \"ड्रैग फ़्लिक\" पेनल्टी कॉर्नर में सबसे लोकप्रिय लिफ़्टेड शॉट है। फ़ील्ड हॉकी में प्रयुक्त शब्दावली :- फ़्री हिट्स - खेल के दौरान किसी भी टीम द्वारा सामान्य ओफ़ेन्स के लिए दिया जाता है। ड्रिब्लिंग: गेंद को नज़दीकी नियंत्रण में रखना। फ़्लैगपोस्ट: मैदान के प्रत्येक कोने पर रखा जाता है। फ़ुट फ़ाउल: फ़ील्ड हॉकी में, खिलाड़ी गेंद को नियंत्रित करने के लिए अपने पैरों या शरीर का उपयोग नहीं कर सकते हैं।</p>",
+                    correct: "c",
+                    pos_marks: 2.0,
+                    neg_marks: 0.5
+                });
+                questions.push({
+                    id: "10",
+                    section: "18",
+                    question_en: "<p>10. Which of the following states launched the first Migration Monitoring System in the&nbsp;year 2022?</p>",
+                    question_hi: "<p>10. वर्ष 2022 में निम्नलिखित में से किस राज्य ने पहली प्रवासन निगरानी प्रणाली (Migration Monitoring&nbsp;System) शुरू की है?</p>",
+                    options_en: ["<p>Maharashtra</p>", "<p>Karnataka</p>", 
+                                "<p>Kerala</p>", "<p>Goa</p>"],
+                    options_hi: ["<p>महाराष्ट्र</p>", "<p>कर्नाटक</p>",
+                                "<p>केरल</p>", "<p>गोवा</p>"],
+                    solution_en: "<p>10.(a) <strong>Maharashtra.</strong> Migration Monitoring System provides updated information on migrant pregnant women, lactating mothers, and children. It is developed by the Department of Women and Child Development. Some schemes of the Maharashtra government : State Agriculture Mechanization Scheme, Mahatma Jyotirao Phule Jan Arogya Yojana (MJPJAY), Government Vidyaniketan Scholarship.</p>",
+                    solution_hi: "<p>10.(a) <strong>महाराष्ट्र।</strong> प्रवासन निगरानी प्रणाली प्रवासी गर्भवती महिलाओं, स्तनपान कराने वाली माताओं और बच्चों के बारे में अद्यतन जानकारी प्रदान करती है। इसे महिला एवं बाल विकास विभाग द्वारा विकसित किया गया है। महाराष्ट्र सरकार की कुछ प्रमुख योजनाएँ: राज्य कृषि मशीनीकरण योजना, महात्मा ज्योतिराव फुले जन आरोग्य योजना (MJPJAY), सरकारी विद्यानिकेतन छात्रवृत्ति आदि।</p>",
+                    correct: "a",
+                    pos_marks: 2.0,
+                    neg_marks: 0.5
+                });
+                questions.push({
+                    id: "11",
+                    section: "18",
+                    question_en: "<p>11. Who is known as the &lsquo;Father of Carnatic Music&rsquo;?</p>",
+                    question_hi: "<p>11. &lsquo;कर्नाटक संगीत का जनक&rsquo; किसे कहा जाता है?</p>",
+                    options_en: ["<p>Vidyaranya</p>", "<p>Purandara Dasa</p>", 
+                                "<p>Thirunal Rama Varma</p>", "<p>Vishwanath Iyer</p>"],
+                    options_hi: ["<p>विद्यारण्य</p>", "<p>पुरंदर दास</p>",
+                                "<p>तिरुनल राम वर्मा</p>", "<p>विश्वनाथ अय्यर</p>"],
+                    solution_en: "<p>11.(b) <strong>Purandara Dasa.</strong> Tamil Nadu is famous for Carnatic music, based on ragas (melodies) and talas (rhythms). Purandara Dasa has contributed significantly to its codification and giving it a clear format for its teaching and performance. The devotional songs composed by Shyama Shastri, Tyagaraja and Muthuswami Dikshitar are very popular. These songs are accompanied by instruments like the mridangam, veena, nadaswaram, and flute. In recognition of its musical heritage, Chennai was included in the UNESCO Creative Cities Network in 2017.</p>",
+                    solution_hi: "<p>11.(b) <strong>पुरंदर दास।</strong> तमिलनाडु रागों (धुनों) और तालों (लय) पर आधारित कर्नाटक संगीत के लिए प्रसिद्ध है। पुरंदर दास ने इसके संहिताकरण और इसके शिक्षण और प्रदर्शन के लिए एक स्पष्ट प्रारूप देने में महत्वपूर्ण योगदान दिया है। श्यामा शास्त्री, त्यागराज और मुथुस्वामी दीक्षितार द्वारा रचित भक्ति गीत बहुत लोकप्रिय हैं। इन गीतों के साथ मृदंगम, वीणा, नादस्वरम और बांसुरी जैसे वाद्य यंत्रों का प्रयोग किया जाता है। चेन्नई को अपनी समृद्ध संगीत परंपरा के लिए 2017 में यूनेस्को क्रिएटिव सिटीज़ नेटवर्क में शामिल किया गया था।</p>",
+                    correct: "b",
+                    pos_marks: 2.0,
+                    neg_marks: 0.5
+                });
+                questions.push({
+                    id: "12",
+                    section: "18",
+                    question_en: "<p>12. Which country do the &lsquo;Veddas&rsquo; traditional forest dwellers who foraged, hunted and&nbsp;lived in close-knit groups in caves in the dense jungles?</p>",
+                    question_hi: "<p>12. \'वेदा (Veddas)\' पारंपरिक वनवासी किस देश के निवासी थे, जो चारा खोजते थे, शिकार करते थे और&nbsp;घने जंगलों में गुफओं में एकजुट समूहों में रहते थे ?</p>",
+                    options_en: ["<p>Sri Lanka</p>", "<p>Nepal</p>", 
+                                "<p>Myanmar</p>", "<p>Bhutan</p>"],
+                    options_hi: ["<p>श्रीलंका</p>", "<p>नेपाल</p>",
+                                "<p>म्यांमार</p>", "<p>भूटान</p>"],
+                    solution_en: "<p>12.(a) <strong>Sri Lanka.</strong> Some tribes from different countries : Nepal - Tamang, Newar, Tharu, Rai, Limbu, and Bhutia. Myanmar - Burmese, Rakhine, Kachin, Danu, Lisu. Bhutan - Monpa, Brokpa, Bumthangpa, Tibetans. Pakistan - Pashtuns, Sindhis, Muhajirs.</p>",
+                    solution_hi: "<p>12.(a) <strong>श्रीलंका।</strong> विभिन्न देशों की कुछ प्रमुख जनजातियाँ: नेपाल - तमांग, नेवार, थारू, राई , लिम्बु और भूटिया। म्यांमार - बर्मी, राखीन, काचिन, दानू, लिसु। भूटान - मोनपा, ब्रोकपा, बुमथांगपा, तिब्बती। पाकिस्तान - पश्तून, सिंधी, मुहाजिर।</p>",
+                    correct: "a",
+                    pos_marks: 2.0,
+                    neg_marks: 0.5
+                });
+                questions.push({
+                    id: "13",
+                    section: "18",
+                    question_en: "<p>13. How is the structure of health infrastructure and health care system in India?</p>",
+                    question_hi: "<p>13. भारत में स्वास्थ्य अवसंरचना और स्वास्थ्य देखभाल प्रणाली की संरचना कैसी है?</p>",
+                    options_en: ["<p>Three-tier system</p>", "<p>Five-tier system</p>", 
+                                "<p>Two-tier system</p>", "<p>Four-tier system</p>"],
+                    options_hi: ["<p>त्रिस्तरीय प्रणाली</p>", "<p>पाँच-स्तरीय प्रणाली</p>",
+                                "<p>दो-स्तरीय प्रणाली</p>", "<p>चार-स्तरीय प्रणाली</p>"],
+                    solution_en: "<p>13.(a) <strong>Three-tier system.</strong> The healthcare system in India is a three-tier structure, with Sub Health Centres, Primary Health Centres, and Community Health Centres, both in urban and rural areas, serving as the pillars of the primary health care system. As per established norms, Sub Health Centre: Serves 5,000 people in plains and 3,000 in hilly/tribal areas. Primary Health Centre (PHC): Serves 30,000 people in plains and 20,000 in hilly/tribal areas. Community Health Centre (CHC): Serves 1,20,000 people in plains and 80,000 in hilly/tribal areas.</p>",
+                    solution_hi: "<p>13.(a) <strong>त्रिस्तरीय प्रणाली।</strong> भारत में स्वास्थ्य सेवा प्रणाली तीन-स्तरीय संरचना वाली है, जिसमें शहरी और ग्रामीण दोनों क्षेत्रों में उप-स्वास्थ्य केंद्र, प्राथमिक स्वास्थ्य केंद्र और सामुदायिक स्वास्थ्य केंद्र हैं, जो प्राथमिक स्वास्थ्य देखभाल प्रणाली के स्तंभ के रूप में कार्य करते हैं। स्थापित मानदंडों के अनुसार, उप-स्वास्थ्य केंद्र: मैदानी इलाकों में 5,000 और पहाड़ी/आदिवासी क्षेत्रों में 3,000 लोगों को सेवाएं प्रदान कर है। प्राथमिक स्वास्थ्य केंद्र (PHC): मैदानी इलाकों में 30,000 और पहाड़ी/आदिवासी क्षेत्रों में 20,000 लोगों को सेवाएं प्रदान करता है। सामुदायिक स्वास्थ्य केंद्र (CHC): मैदानी इलाकों में 1,20,000 और पहाड़ी/आदिवासी क्षेत्रों में 80,000 लोगों को सेवा प्रदान करता है।</p>",
+                    correct: "a",
+                    pos_marks: 2.0,
+                    neg_marks: 0.5
+                });
+                questions.push({
+                    id: "14",
+                    section: "18",
+                    question_en: "<p>14. Which language is known as &lsquo;Italian of the East&rsquo;?</p>",
+                    question_hi: "<p>14. किस भाषा को \'पूर्व का इतालवी\' कहा जाता है?</p>",
+                    options_en: ["<p>Telugu</p>", "<p>Malayalam</p>", 
+                                "<p>Marathi</p>", "<p>Kannada</p>"],
+                    options_hi: ["<p>तेलुगु</p>", "<p>मलयालम</p>",
+                                "<p>मराठी</p>", "<p>कन्नड़</p>"],
+                    solution_en: "<p>14.(a) <strong>Telugu.</strong> Telugu Language Day is celebrated every year on August 29. In 2008, Telugu was granted the status of a classical language. Nicolo di Conti, who visited the Vijayanagara Empire, found that the words in the Telugu language end with vowels, just like those in Italian, and hence referred to it as \"The Italian of the East&rdquo;.</p>",
+                    solution_hi: "<p>14.(a) <strong>तेलुगु।</strong> तेलुगु भाषा दिवस प्रत्येक वर्ष 29 अगस्त को मनाया जाता है। 2008 में तेलुगु को शास्त्रीय भाषा का दर्जा प्रदान किया गया था। विजयनगर साम्राज्य का दौरा करने वाले निकोलो डी कोंटी ने पाया कि तेलुगु भाषा में शब्द इटालियन की तरह ही स्वरों (vowels) के साथ समाप्त होते हैं, इसलिए इसे \"पूर्व का इटालियन\" कहा जाता है।</p>",
+                    correct: "a",
+                    pos_marks: 2.0,
+                    neg_marks: 0.5
+                });
+                questions.push({
+                    id: "15",
+                    section: "misc",
+                    question_en: "<p>15. In which year did Indian archers participate in the Olympics for the first time?</p>",
+                    question_hi: "<p>15. भारतीय तीरंदाज़ों (archers) ने पहली बार ओलंपिक में किस वर्ष भाग लिया था?</p>",
+                    options_en: ["<p>1980</p>", "<p>1973</p>", 
+                                "<p>1988</p>", "<p>1975</p>"],
+                    options_hi: ["<p>1980</p>", "<p>1973</p>",
+                                "<p>1988</p>", "<p>1975</p>"],
+                    solution_en: "<p>15.(c) <strong>1988.</strong> India competed in 7 events at the 1988 Summer Olympic Games held in Seoul, South Korea with a contingent of about 20 athletes participating in sports disciplines including Archery for the first time, Athletics, Boxing, Hockey, Swimming, Table Tennis and Tennis.</p>",
+                    solution_hi: "<p>15.(c) <strong>1988. </strong>भारत ने दक्षिण कोरिया के सियोल में आयोजित 1988 ग्रीष्मकालीन ओलंपिक खेलों में 7 स्पर्धाओं में भाग लिया था, जिसमें लगभग 20 एथलीटों के दल ने पहली बार तीरंदाजी, एथलेटिक्स, मुक्केबाजी, हॉकी, तैराकी, टेबल टेनिस और टेनिस सहित खेलों में भाग लिया।</p>",
+                    correct: "c",
+                    pos_marks: 2.0,
+                    neg_marks: 0.5
+                });
+            
+            // Generate question boxes
+            const boxesContainer = document.getElementById('question-boxes');
+            questions.forEach((q, index) => {
+                const box = document.createElement('div');
+                box.className = 'q-box';
+                box.textContent = index + 1;
+                box.onclick = () => showQuestion(index);
+                box.id = `box-${index}`;
+                boxesContainer.appendChild(box);
+            });
+            
+            // Show first question
+            showQuestion(0);
+            updateProgress();
+        }
+        
+        // Show a specific question
+        
+        function formatContent(text) {
+            if (!text) return '';
+            return text.replace(/<img/g, '<img style="max-width:100%;height:auto;"');
+        }
+        
+        function showQuestion(index) {
+            if (index < 0 || index >= questions.length) return;
+            
+            currentQuestion = index;
+            const question = questions[index];
+            
+            // Update question counter
+            document.getElementById('question-counter').textContent = `Question ${index + 1} of ${questions.length}`;
+            
+            // Update question boxes
+            document.querySelectorAll('.q-box').forEach(box => box.classList.remove('current'));
+            document.getElementById(`box-${index}`).classList.add('current');
+            
+            // Generate question HTML
+            let html = `
+                <div class="question-card">
+                    <div class="question-text">
+                        <div class="en">${formatContent(question.question_en)}</div>
+                        <div class="hi" style="display:none">${formatContent(question.question_hi)} </div>
+                    </div>
+                    <div class="options" id="options-container">`;
+            
+            // Add options
+            ['a', 'b', 'c', 'd'].forEach((opt, i) => {
+                let optionClass = '';
+                let isCorrectAnswer = opt === question.correct;
+                let isUserAnswer = answers[question.id] === opt;
+                
+                // When reviewing, add appropriate classes
+                if (submitted) {
+                    if (isCorrectAnswer) {
+                        optionClass += ' correct-answer';
+                    } else if (isUserAnswer && !isCorrectAnswer) {
+                        optionClass += ' incorrect';
+                    }
+                }
+                
+                html += `
+                    <div class="option-item">
+                        <input class="option-input" type="radio" name="q${index}" 
+                            id="opt-${index}-${opt}" value="${opt}" 
+                            ${isUserAnswer ? 'checked' : ''}
+                            onclick="selectAnswer('${question.id}', '${opt}')">
+                       <label class="option-label${optionClass}" for="opt-${index}-${opt}">
+                            <div class="en">${question.options_en[i]}</div>
+                            <div class="hi" style="display:none">${question.options_hi[i]}</div>
+                        </label>
+                    </div>`;
+            });
+            
+            // Add solution if submitted
+            if (submitted) {
+                const isCorrect = answers[question.id] === question.correct;
+                const resultText = answers[question.id] ? (isCorrect ? 'Correct!' : 'Incorrect!') : 'Not attempted';
+                
+                html += `
+                    <div class="solution-container">
+                        <div class="solution-title">${resultText}</div>
+                        <div class="solution-text">
+                            <div class="en">${question.solution_en}</div>
+                            <div class="hi" style="display:none">${question.solution_hi}</div>
+                        </div>
+                    </div>`;
+            }
+            
+            html += `</div></div>`;
+            
+            document.getElementById('questions-container').innerHTML = html;
+            
+            // Apply language settings
+            applyLanguage();
+            
+            // If in mobile view, close the menu
+            if (window.innerWidth < 992) {
+                toggleNav(false);
+            }
+            
+            // Add review mode class if submitted
+            if (submitted) {
+                document.getElementById('options-container').classList.add('review-mode');
+            }
+        }
+        
+        // Apply current language
+        function applyLanguage() {
+            document.querySelectorAll(`.${currentLang}`).forEach(el => el.style.display = 'block');
+            document.querySelectorAll(`.${currentLang === 'en' ? 'hi' : 'en'}`).forEach(el => el.style.display = 'none');
+            
+            // Update language button text
+            document.getElementById('lang-text').textContent = currentLang === 'en' ? 'Hi' : 'En';
+        }
+        
+        // Select an answer
+        function selectAnswer(qId, option) {
+            if (submitted) return;
+            
+            answers[qId] = option;
+            updateProgress();
+            
+            // Mark question as attempted in the navigation
+            const index = questions.findIndex(q => q.id === qId);
+            if (index >= 0) {
+                const box = document.getElementById(`box-${index}`);
+                box.classList.add('attempted');
+                box.classList.remove('unattempted');
+            }
+        }
+        
+        // Navigate to previous/next question
+        function prevQuestion() { 
+            if (currentQuestion > 0) showQuestion(currentQuestion - 1); 
+        }
+        
+        function nextQuestion() { 
+            if (currentQuestion < questions.length - 1) showQuestion(currentQuestion + 1); 
+        }
+        
+        // Switch section
+        function switchSection(sectionId) {
+            if (sectionId === 'all') {
+                showQuestion(0);
+                return;
+            }
+            
+            const section = sections[sectionId];
+            if (section) showQuestion(section.start);
+        }
+        
+        // Toggle language
+        function toggleLanguage() {
+            currentLang = currentLang === 'en' ? 'hi' : 'en';
+            applyLanguage();
+        }
+        
+        // Toggle navigation sidebar
+        function toggleNav(show) {
+            const nav = document.getElementById('question-nav');
+            const overlay = document.getElementById('nav-overlay');
+            
+            if (show === undefined) {
+                show = !nav.classList.contains('show');
+            }
+            
+            if (show) {
+                nav.classList.add('show');
+                overlay.classList.add('show');
+                document.body.style.overflow = 'hidden';
+            } else {
+                nav.classList.remove('show');
+                overlay.classList.remove('show');
+                document.body.style.overflow = '';
+            }
+        }
+        
+        // Update progress
+        function updateProgress() {
+            const attempted = Object.keys(answers).length;
+            document.getElementById('attempted-count').textContent = attempted;
+        }
+        
+        // Start timer
+        function startTimer() {
+            const timerDisplay = document.getElementById('timer-display');
+            let timeLeft = totalTime;
+            
+            const timerInterval = setInterval(() => {
+                if (timeLeft <= 0 || submitted) {
+                    clearInterval(timerInterval);
+                    if (!submitted) submitTest();
+                    return;
+                }
+                
+                const minutes = Math.floor(timeLeft / 60);
+                const seconds = timeLeft % 60;
+                timerDisplay.textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`;
+                timeLeft--;
+            }, 1000);
+        }
+        
+        // Confirm before submitting
+        function confirmSubmit() {
+            if (submitted) return;
+            
+            const attempted = Object.keys(answers).length;
+            const remaining = questions.length - attempted;
+            
+            // Create a more modern confirmation dialog
+            const confirmHtml = `
+                <div style="text-align: center; padding: 20px;">
+                    <h4 style="margin-bottom: 16px; color: var(--dark);">Confirm Submission</h4>
+                    <p style="margin-bottom: 24px; color: var(--gray);">
+                        You have attempted ${attempted} of ${questions.length} questions.<br>
+                        ${remaining} questions are unattempted.
+                    </p>
+                    <div style="display: flex; justify-content: center; gap: 12px;">
+                        <button onclick="this.closest('.modal').querySelector('.cancel-btn').click()" 
+                            style="padding: 8px 20px; border: 1px solid var(--light-gray); background: white; border-radius: 8px; cursor: pointer;">
+                            Cancel
+                        </button>
+                        <button onclick="submitTest(); this.closest('.modal').querySelector('.cancel-btn').click()" 
+                            style="padding: 8px 20px; background: var(--primary); color: white; border: none; border-radius: 8px; cursor: pointer;">
+                            Submit Test
+                        </button>
+                    </div>
+                </div>`;
+            
+            // Create modal element
+            const modal = document.createElement('div');
+            modal.className = 'results-modal show';
+            modal.innerHTML = `
+                <div class="results-card" style="max-width: 400px;">
+                    <button class="cancel-btn" style="position: absolute; top: 12px; right: 12px; background: none; border: none; font-size: 1.2rem; cursor: pointer; color: var(--gray);" onclick="this.closest('.results-modal').remove()">
+                        ×
+                    </button>
+                    ${confirmHtml}
+                </div>`;
+            
+            document.body.appendChild(modal);
+        }
+        
+        // Submit test
+        function submitTest() {
+            if (submitted) return;
+            
+            submitted = true;
+            
+            let score = 0;
+            let correctCount = 0;
+            let incorrectCount = 0;
+            let unattemptedCount = 0;
+            
+            questions.forEach((q, index) => {
+                const userAns = answers[q.id];
+                const box = document.getElementById(`box-${index}`);
+                
+                box.classList.remove('attempted');
+                
+                if (!userAns) {
+                    unattemptedCount++;
+                    box.classList.add('unattempted');
+                } else if (userAns === q.correct) {
+                    correctCount++;
+                    score += q.pos_marks;
+                    box.classList.add('correct');
+                } else {
+                    incorrectCount++;
+                    score -= q.neg_marks;
+                    box.classList.add('incorrect');
+                }
+            });
+            
+            // Update result values
+            document.getElementById('score-value').textContent = score.toFixed(2);
+            document.getElementById('correct-value').textContent = correctCount;
+            document.getElementById('incorrect-value').textContent = incorrectCount;
+            document.getElementById('unattempted-value').textContent = unattemptedCount;
+            
+            // Show the results modal
+            document.getElementById('results-modal').classList.add('show');
+            
+            // Disable submit button
+            const submitBtn = document.getElementById('submit-btn');
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<i class="fas fa-check"></i>';
+            submitBtn.style.backgroundColor = 'var(--success)';
+            
+            // Refresh current question view to show solution
+            showQuestion(currentQuestion);
+        }
+        
+        // Review test
+        function reviewTest() {
+            document.getElementById('results-modal').classList.remove('show');
+            showQuestion(0);
+        }
+        
+        // Close modal when clicking outside
+        window.addEventListener('click', function(event) {
+            if (event.target === document.getElementById('results-modal')) {
+                document.getElementById('results-modal').classList.remove('show');
+            }
+        });
+        
+        // Keyboard navigation
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowLeft') prevQuestion();
+            if (e.key === 'ArrowRight') nextQuestion();
+        });
+    </script>
+</body>
+</html>

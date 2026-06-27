@@ -1,0 +1,1409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aether Mocks</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
+
+        :root {
+            --primary: #6366f1;
+            --primary-light: #818cf8;
+            --primary-dark: #4f46e5;
+            --secondary: #8b5cf6;
+            --accent: #ec4899;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --light: #1e293b;
+            --dark: #0f172a;
+            --gray: #64748b;
+            --light-gray: rgba(255, 255, 255, 0.08);
+            --card-bg: rgba(255, 255, 255, 0.03);
+            --body-bg: #030712;
+            --header-bg: rgba(15, 23, 42, 0.6);
+            --footer-bg: rgba(15, 23, 42, 0.8);
+            --box-shadow: 0 8px 32px 0 rgba(0,0,0,0.3);
+            --box-shadow-sm: 0 4px 16px rgba(0,0,0,0.2);
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Outfit', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        body {
+            background-color: var(--body-bg);
+            color: #f8fafc;
+            line-height: 1.6;
+            padding-bottom: 80px; /* Space for fixed navigation */
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(99, 102, 241, 0.15) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(139, 92, 246, 0.15) 0px, transparent 50%);
+            background-attachment: fixed;
+        }
+        
+        /* Header Styles */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 60px;
+            background: var(--header-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            color: #f8fafc;
+            display: flex;
+            align-items: center;
+            padding: 0 16px;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+            box-shadow: var(--box-shadow-sm);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+        }
+        
+        .header-brand {
+            display: flex;
+            align-items: center;
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: #f8fafc;
+            text-decoration: none;
+            gap: 8px;
+        }
+        
+        .header-brand i {
+            font-size: 1.2rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .header-controls {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .control-btn {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.08);
+            color: #f8fafc;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .control-btn:hover {
+            background: rgba(255,255,255,0.12);
+            border-color: rgba(255,255,255,0.2);
+            transform: translateY(-1px);
+        }
+        
+        .control-btn.active {
+            background: var(--primary);
+            border-color: var(--primary-light);
+        }
+        
+        .timer-display {
+            background: rgba(0,0,0,0.3);
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 18px;
+            padding: 4px 12px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            white-space: nowrap;
+            color: #f8fafc;
+        }
+        
+        .timer-display i {
+            margin-right: 6px;
+            color: var(--accent);
+        }
+        
+        /* Main Content */
+        .main-content {
+            margin-top: 60px;
+            padding: 16px;
+            min-height: calc(100vh - 140px);
+        }
+        
+        .question-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(8px);
+            border: 1px solid var(--light-gray);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 16px;
+            box-shadow: var(--box-shadow-sm);
+            transition: var(--transition);
+        }
+        
+        .question-counter {
+            font-size: 0.9rem;
+            color: var(--gray);
+            text-align: center;
+            margin-bottom: 16px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+        
+        .question-text {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 24px;
+            color: #f8fafc;
+            overflow-wrap: break-word;
+            word-wrap: break-word;
+            hyphens: auto;
+            max-width: 100%;
+        }
+        
+        .option-item {
+            margin-bottom: 12px;
+            position: relative;
+        }
+        
+        .option-input {
+            position: absolute;
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        
+        .question-text img,
+        .option-label img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 8px 0;
+            border-radius: 8px;
+        }
+        
+        .option-label {
+            display: block;
+            padding: 14px 16px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            color: #f8fafc;
+        }
+        
+        .option-label:hover {
+            border-color: rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.05);
+            transform: translateY(-2px);
+            box-shadow: var(--box-shadow-sm);
+        }
+        
+        .option-input:checked + .option-label {
+            border-color: var(--primary);
+            background: rgba(99, 102, 241, 0.08);
+            box-shadow: 0 0 12px var(--primary-glow);
+        }
+        
+        .option-input:checked + .option-label::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 3px;
+            height: 100%;
+            background: var(--primary);
+        }
+        
+        /* When reviewing answers */
+        .review-mode .option-input:checked + .option-label.correct {
+            border-color: var(--success);
+            background: rgba(16, 185, 129, 0.08);
+            box-shadow: 0 0 12px var(--success-glow);
+        }
+        
+        .review-mode .option-input:checked + .option-label.correct::after {
+            background: var(--success);
+        }
+        
+        .review-mode .option-input:checked + .option-label.incorrect {
+            border-color: var(--danger);
+            background: rgba(239, 68, 68, 0.08);
+            box-shadow: 0 0 12px var(--danger-glow);
+        }
+        
+        .review-mode .option-input:checked + .option-label.incorrect::after {
+            background: var(--danger);
+        }
+        
+        .review-mode .option-label.correct-answer {
+            border-color: var(--success);
+            background: rgba(16, 185, 129, 0.08);
+            box-shadow: 0 0 12px var(--success-glow);
+        }
+        
+        .review-mode .option-label.correct-answer::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 3px;
+            height: 100%;
+            background: var(--success);
+        }
+        
+        .solution-container {
+            margin-top: 24px;
+            padding: 18px;
+            background: rgba(99, 102, 241, 0.05);
+            border-radius: 12px;
+            border-left: 3px solid var(--primary);
+            border-top: 1px solid rgba(255,255,255,0.03);
+            border-right: 1px solid rgba(255,255,255,0.03);
+            border-bottom: 1px solid rgba(255,255,255,0.03);
+        }
+        
+        .solution-title {
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--primary-light);
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        /* Question Navigation */
+        .question-nav {
+            position: fixed;
+            top: 60px;
+            right: 0;
+            bottom: 80px;
+            width: 100%;
+            max-width: 320px;
+            background: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-left: 1px solid rgba(255,255,255,0.06);
+            box-shadow: var(--box-shadow);
+            transform: translateX(100%);
+            transition: var(--transition);
+            z-index: 900;
+            overflow-y: auto;
+            padding: 16px;
+        }
+        
+        .question-nav.show {
+            transform: translateX(0);
+        }
+        
+        .nav-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+        
+        .nav-title {
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin: 0;
+            color: #f8fafc;
+        }
+        
+        .question-stats {
+            display: flex;
+            gap: 8px;
+        }
+        
+        .stat-badge {
+            font-size: 0.75rem;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-weight: 500;
+            color: white;
+        }
+        
+        .section-selector {
+            width: 100%;
+            margin-bottom: 16px;
+            border-radius: 12px;
+            padding: 10px 16px;
+            border: 1px solid rgba(255,255,255,0.08);
+            background: rgba(0, 0, 0, 0.3);
+            color: #f8fafc;
+            font-size: 0.9rem;
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 10px center;
+            background-size: 16px;
+        }
+        
+        .question-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(40px, 1fr));
+            gap: 8px;
+        }
+        
+        .q-box {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 500;
+            border: 1px solid rgba(255,255,255,0.08);
+            background: rgba(255,255,255,0.02);
+            color: #94a3b8;
+            transition: var(--transition);
+            position: relative;
+        }
+        
+        .q-box:hover {
+            transform: translateY(-2px);
+            border-color: rgba(255,255,255,0.2);
+            color: #f8fafc;
+        }
+        
+        .q-box.attempted {
+            background-color: var(--primary);
+            color: white;
+            border-color: var(--primary);
+            box-shadow: 0 0 8px var(--primary-glow);
+        }
+        
+        .q-box.correct {
+            background-color: var(--success);
+            color: white;
+            border-color: var(--success);
+            box-shadow: 0 0 8px var(--success-glow);
+        }
+        
+        .q-box.incorrect {
+            background-color: var(--danger);
+            color: white;
+            border-color: var(--danger);
+            box-shadow: 0 0 8px var(--danger-glow);
+        }
+        
+        .q-box.current {
+            border: 2px solid var(--accent) !important;
+            transform: translateY(-3px);
+            box-shadow: 0 4px 12px rgba(236, 72, 153, 0.3);
+            color: #f8fafc;
+        }
+        
+        .q-box.unattempted {
+            background-color: var(--gray);
+            color: white;
+            border-color: var(--gray);
+        }
+        
+        /* Bottom Navigation */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 80px;
+            background: var(--footer-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-top: 1px solid rgba(255,255,255,0.06);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 16px;
+            z-index: 800;
+        }
+        
+        .nav-btn {
+            height: 48px;
+            border-radius: 12px;
+            border: none;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 20px;
+            transition: var(--transition);
+            gap: 8px;
+            cursor: pointer;
+        }
+        
+        .nav-btn i {
+            font-size: 1rem;
+        }
+        
+        .nav-btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .nav-btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px var(--primary-glow);
+        }
+        
+        .nav-btn-outline {
+            background: rgba(255,255,255,0.02);
+            color: #f8fafc;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .nav-btn-outline:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+        
+        .nav-btn:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+            transform: none !important;
+            box-shadow: none !important;
+        }
+        
+        /* Overlay when nav is open */
+        .nav-overlay {
+            position: fixed;
+            top: 60px;
+            left: 0;
+            right: 0;
+            bottom: 80px;
+            background: rgba(0,0,0,0.6);
+            backdrop-filter: blur(4px);
+            z-index: 800;
+            opacity: 0;
+            pointer-events: none;
+            transition: var(--transition);
+        }
+        
+        .nav-overlay.show {
+            opacity: 1;
+            pointer-events: all;
+        }
+        
+        /* Results Modal */
+        .results-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(3, 7, 18, 0.8);
+            backdrop-filter: blur(8px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1100;
+            opacity: 0;
+            pointer-events: none;
+            transition: var(--transition);
+            padding: 16px;
+        }
+        
+        .results-modal.show {
+            opacity: 1;
+            pointer-events: all;
+        }
+        
+        .results-card {
+            background: #0f172a;
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 24px;
+            width: 100%;
+            max-width: 500px;
+            overflow: hidden;
+            transform: translateY(20px);
+            transition: var(--transition);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+        }
+        
+        .results-modal.show .results-card {
+            transform: translateY(0);
+        }
+        
+        .results-header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 24px 20px;
+            text-align: center;
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+        }
+        
+        .results-title {
+            margin: 0;
+            font-weight: 600;
+            font-size: 1.4rem;
+        }
+        
+        .results-body {
+            padding: 24px;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+        
+        .stat-card {
+            padding: 16px;
+            border-radius: 16px;
+            text-align: center;
+            color: white;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+        
+        .stat-value {
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+        
+        .stat-label {
+            font-size: 0.8rem;
+            opacity: 0.8;
+            font-weight: 500;
+        }
+        
+        .results-footer {
+            padding: 18px 24px;
+            display: flex;
+            justify-content: center;
+            border-top: 1px solid rgba(255,255,255,0.06);
+            background: rgba(0,0,0,0.1);
+        }
+        
+        /* MathJax Styling Override */
+        .MathJax, .mjx-chtml {
+            overflow-x: auto;
+            max-width: 100%;
+            display: inline-block;
+        }
+        
+        /* Responsive Adjustments */
+        @media (min-width: 992px) {
+            .question-nav {
+                transform: translateX(0);
+            }
+            
+            .main-content {
+                margin-right: 320px;
+            }
+            
+            .nav-overlay {
+                display: none;
+            }
+            
+            .bottom-nav {
+                display: none;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .question-grid {
+                grid-template-columns: repeat(auto-fill, minmax(36px, 1fr));
+                gap: 6px;
+            }
+            
+            .q-box {
+                width: 36px;
+                height: 36px;
+                font-size: 0.9rem;
+            }
+            
+            .option-label {
+                padding: 12px 14px;
+            }
+            
+            .question-text {
+                font-size: 1rem;
+            }
+            
+            .header-brand {
+                font-size: 1rem;
+            }
+            
+            .control-btn {
+                width: 32px;
+                height: 32px;
+            }
+            
+            .timer-display {
+                font-size: 0.8rem;
+                padding: 4px 10px;
+            }
+            
+            .nav-btn {
+                height: 44px;
+                padding: 0 16px;
+                font-size: 0.9rem;
+            }
+        }
+</style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <a href="#" class="header-brand">
+                <i class="fas fa-graduation-cap"></i>
+                <span>Aether Mocks</span>
+            </a>
+            
+            <div class="header-controls">
+                <!-- Timer -->
+                <div class="timer-display">
+                    <i class="far fa-clock"></i>
+                    <span id="timer-display">5:00</span>
+                </div>
+                
+                                <!-- Full Screen Button -->
+                <button class="control-btn" id="fullscreen-btn" onclick="toggleFullscreen()" title="Toggle Fullscreen">
+                    <i class="fas fa-expand"></i>
+                </button>
+                
+                <!-- Language toggle -->
+                <button class="control-btn" id="lang-btn" onclick="toggleLanguage()">
+                    <span id="lang-text">En</span>
+                </button>
+                
+                <!-- Submit button -->
+                <button class="control-btn" id="submit-btn" onclick="confirmSubmit()">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+                
+                <!-- Questions toggle for mobile -->
+                <button class="control-btn nav-toggle-btn" id="nav-toggle" onclick="toggleNav()">
+                    <i class="fas fa-th"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Main content -->
+    <main class="main-content" id="main-content">
+        <div class="question-counter" id="question-counter">Question 1 of 15</div>
+        
+        <!-- Questions will be displayed here -->
+        <div id="questions-container"></div>
+    </main>
+    
+    <!-- Overlay for mobile nav -->
+    <div class="nav-overlay" id="nav-overlay" onclick="toggleNav(false)"></div>
+    
+    <!-- Question navigation sidebar -->
+    <aside class="question-nav" id="question-nav">
+        <div class="nav-header">
+            <h3 class="nav-title">Questions</h3>
+            <div class="question-stats">
+                <span class="stat-badge bg-primary" id="attempted-count">0</span>
+                <span class="stat-badge bg-gray" id="total-count">15</span>
+                <button class="control-btn d-lg-none" onclick="toggleNav(false)">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Section selector -->
+        <select class="section-selector" id="section-selector" onchange="switchSection(this.value)">
+            <option value="all">All Sections</option>
+        </select>
+        
+        <!-- Question grid -->
+        <div class="question-grid" id="question-boxes"></div>
+    </aside>
+    
+    <!-- Bottom navigation for mobile -->
+    <nav class="bottom-nav d-lg-none">
+        <button class="nav-btn nav-btn-outline" onclick="prevQuestion()">
+            <i class="fas fa-chevron-left"></i>
+            <span>Previous</span>
+        </button>
+        <button class="nav-btn nav-btn-outline" onclick="nextQuestion()">
+            <span>Next</span>
+            <i class="fas fa-chevron-right"></i>
+        </button>
+    </nav>
+    
+    <!-- Results modal -->
+    <div class="results-modal" id="results-modal">
+        <div class="results-card">
+            <div class="results-header">
+                <h3 class="results-title">Test Results</h3>
+            </div>
+            <div class="results-body">
+                <div class="stats-grid">
+                    <div class="stat-card" style="background: linear-gradient(135deg, var(--primary), var(--primary-dark))">
+                        <div class="stat-value" id="score-value">0</div>
+                        <div class="stat-label">Score</div>
+                    </div>
+                    <div class="stat-card" style="background: linear-gradient(135deg, var(--success), #1b9aaa)">
+                        <div class="stat-value" id="correct-value">0</div>
+                        <div class="stat-label">Correct</div>
+                    </div>
+                    <div class="stat-card" style="background: linear-gradient(135deg, var(--danger), var(--accent))">
+                        <div class="stat-value" id="incorrect-value">0</div>
+                        <div class="stat-label">Incorrect</div>
+                    </div>
+                    <div class="stat-card" style="background: linear-gradient(135deg, var(--gray), var(--dark))">
+                        <div class="stat-value" id="unattempted-value">0</div>
+                        <div class="stat-label">Unattempted</div>
+                    </div>
+                </div>
+            </div>
+            <div class="results-footer">
+                <button class="nav-btn nav-btn-primary" onclick="reviewTest()">
+                    <i class="fas fa-search me-1"></i>
+                    <span>Review Test</span>
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Questions data
+        const questions = [];
+        const sections = {};
+        let currentLang = "en";
+        let currentQuestion = 0;
+        let answers = {};
+        let submitted = false;
+        let totalTime = 5 * 60;
+        
+                function toggleFullscreen() {
+            const btn = document.getElementById('fullscreen-btn');
+            if (!btn) return;
+            const icon = btn.querySelector('i');
+            if (!document.fullscreenElement) {
+                document.documentElement.requestFullscreen().then(() => {
+                    icon.className = 'fas fa-compress';
+                }).catch(err => {
+                    console.error("Fullscreen error: ", err);
+                });
+            } else {
+                document.exitFullscreen().then(() => {
+                    icon.className = 'fas fa-expand';
+                });
+            }
+        }
+        
+        document.addEventListener('fullscreenchange', () => {
+            const btn = document.getElementById('fullscreen-btn');
+            if (btn) {
+                const icon = btn.querySelector('i');
+                if (document.fullscreenElement) {
+                    icon.className = 'fas fa-compress';
+                } else {
+                    icon.className = 'fas fa-expand';
+                }
+            }
+        });
+
+        // Initialize the test
+        window.onload = function() {
+            initializeTest();
+            startTimer();
+            
+            // If on desktop, show the question navigation by default
+            if (window.innerWidth >= 992) {
+                document.getElementById('question-nav').classList.add('show');
+                document.getElementById('main-content').classList.add('with-nav');
+            }
+        };
+        
+        // Initialize test data
+        function initializeTest() {
+            // Add sections and questions
+            
+            sections["18"] = {
+                name: "General Awareness",
+                start: 0,
+                end: 13
+            };
+            
+            document.getElementById('section-selector').innerHTML += 
+                `<option value="18">General Awareness</option>`;
+            
+            sections["misc"] = {
+                name: "Miscellaneous",
+                start: 14,
+                end: 14
+            };
+            
+            document.getElementById('section-selector').innerHTML += 
+                `<option value="misc">Miscellaneous</option>`;
+            
+            
+                questions.push({
+                    id: "1",
+                    section: "18",
+                    question_en: "<p><span style=\"font-family: Cambria Math;\">1. Who has become the first woman director general of the Council of Scientific and Industrial Research?</span></p>",
+                    question_hi: "<p><span style=\"font-family: Cambria Math;\">1. </span><span style=\"font-family: Cambria Math;\">वैज्ञानिक</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">और</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">औद्योगिक</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">अनुसंधान</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">परिषद</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">की</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">पहली</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">महिला</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">महानिदेशक</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">कौन</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">बनी</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">हैं</span><span style=\"font-family: Cambria Math;\">?</span></p>",
+                    options_en: ["<p>Sanjay Verma</p>", "<p>Vinod Aggarwal</p>", 
+                                "<p>Nallathamby Kalaiselvi</p>", "<p>Prakash Chand</p>"],
+                    options_hi: ["<p><span style=\"font-family: Cambria Math;\">संजय</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">वर्मा</span></p>", "<p><span style=\"font-family: Cambria Math;\">विनोद</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">अग्रवाल</span></p>",
+                                "<p><span style=\"font-family: Cambria Math;\">नल्लाथम्बी</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">कलाइसेल्वी</span></p>", "<p><span style=\"font-family: Cambria Math;\">प्रकाश</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">चंद</span></p>"],
+                    solution_en: "<p><span style=\"font-family: Cambria Math;\">1.(</span><span style=\"font-family: Cambria Math;\">c)</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\"><strong>Nallathamby Kalaiselvi</strong> </span><span style=\"font-family: Cambria Math;\">became the first women director general of the Council of S</span><span style=\"font-family: Cambria Math;\">cientific and Industrial Research (CSIR).</span><span style=\"font-family: Cambria Math;\"> <strong>CSIR</strong>: </span><span style=\"font-family: Cambria Math;\">Founded:</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">26 </span><span style=\"font-family: Cambria Math;\">september</span><span style=\"font-family: Cambria Math;\"> 1942, Headquarters: New Delhi. </span><span style=\"font-family: Cambria Math;\"><strong>Prakash Chand </strong>{</span><span style=\"font-family: Cambria Math;\">Ambassador: Eritrea}. </span><strong><span style=\"font-family: Cambria Math;\">Vinod Aggarwal</span></strong><span style=\"font-family: Cambria Math;\"><strong>:</strong> {President of </span><strong><span style=\"font-family: Cambria Math;\">SIAM</span></strong><span style=\"font-family: Cambria Math;\"><strong> </strong>(</span><span style=\"font-family: Cambria Math;\">Society of Indian Automobile Manufacturers)</span><span style=\"font-family: Cambria Math;\">}.</span></p>",
+                    solution_hi: "<p><span style=\"font-family: Cambria Math;\">1.(</span><span style=\"font-family: Cambria Math;\">c)</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">वैज्ञानिक</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">और</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">औद्योगिक</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">अ</span><span style=\"font-family: Cambria Math;\">नुसंधान</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">परिषद</span><span style=\"font-family: Cambria Math;\"> (CSIR) </span><span style=\"font-family: Cambria Math;\">की</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">पहली</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">महिला</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">महानिदेशक</span><span style=\"font-family: Cambria Math;\"> <strong>नल्लाथम्बी</strong></span><strong><span style=\"font-family: Cambria Math;\">&nbsp;</span><span style=\"font-family: Cambria Math;\">कलैसेल्वी</span></strong><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">बनीं</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">है।</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\"><strong>CSIR</strong>: </span><span style=\"font-family: Cambria Math;\">स्थापना</span><span style=\"font-family: Cambria Math;\">: 26 </span><span style=\"font-family: Cambria Math;\">सितंबर</span><span style=\"font-family: Cambria Math;\"> 1942, </span><span style=\"font-family: Cambria Math;\">मुख्यालय</span><span style=\"font-family: Cambria Math;\">: </span><span style=\"font-family: Cambria Math;\">नई</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">दिल्ली।</span><span style=\"font-family: Cambria Math;\"> </span><strong><span style=\"font-family: Cambria Math;\">प्रकाश</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">चंद</span></strong><span style=\"font-family: Cambria Math;\"> {</span><span style=\"font-family: Cambria Math;\">राजदूत</span><span style=\"font-family: Cambria Math;\">: </span><span style=\"font-family: Cambria Math;\">इरीट्रिया</span><span style=\"font-family: Cambria Math;\">}</span><span style=\"font-family: Cambria Math;\">।</span><span style=\"font-family: Cambria Math;\"> </span><strong><span style=\"font-family: Cambria Math;\">विनोद</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">अग्रवाल</span></strong><span style=\"font-family: Cambria Math;\">: </span><span style=\"font-family: Cambria Math;\">{SIAM (</span><span style=\"font-family: Cambria Math;\">Society of Indian Automobile Manufacturers</span><span style=\"font-family: Cambria Math;\">) </span><span style=\"font-family: Cambria Math;\">के</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">अध्यक्ष</span><span style=\"font-family: Cambria Math;\">}</span><span style=\"font-family: Cambria Math;\">।</span></p>",
+                    correct: "c",
+                    pos_marks: 2.0,
+                    neg_marks: 0.5
+                });
+                questions.push({
+                    id: "2",
+                    section: "18",
+                    question_en: "<p><span style=\"font-family: Cambria Math;\">2. By</span><span style=\"font-family: Cambria Math;\"> which name is the birthday of Lord Krishna famous?</span></p>",
+                    question_hi: "<p><span style=\"font-family: Cambria Math;\">2. </span><span style=\"font-family: Cambria Math;\">भगवान</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">कृष्ण</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">का</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">जन्मोत्सव</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">किस</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">नाम</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">से</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">प्रसिद्ध</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">है</span><span style=\"font-family: Cambria Math;\">?</span></p>",
+                    options_en: ["<p>Mahashtami</p>", "<p><span style=\"font-weight: 400;\">Maha Navami</span></p>", 
+                                "<p>Janmashtami</p>", "<p>Akshaya Tritiya</p>"],
+                    options_hi: ["<p><span style=\"font-family: Cambria Math;\">महाष्टमी</span></p>", "<p><span style=\"font-family: Cambria Math;\">महानवमी</span></p>",
+                                "<p><span style=\"font-family: Cambria Math;\">जन्माष्टमी</span></p>", "<p><span style=\"font-family: Cambria Math;\">अक्षय</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">तृतीया</span></p>"],
+                    solution_en: "<p><span style=\"font-family: Cambria Math;\">2.(</span><span style=\"font-family: Cambria Math;\">c) <strong>Janmashtami </strong></span><span style=\"font-family: Cambria Math;\">(August-September), also known as Gokulashtami, is an annual Hindu festival celebrated to celebrate the birth of Lord Krishna, the eighth of Vishnu\'s Dashavatara and the twenty-second of the twenty-four incarnations. It is celebrated</span><span style=\"font-family: Cambria Math;\"> in Bhadrapada on the eighth day (Ashtami) of Krishna Paksha (dark fortnight), according to the Hindu lunisolar calendar.</span></p>",
+                    solution_hi: "<p><span style=\"font-family: Cambria Math;\">2.(</span><span style=\"font-family: Cambria Math;\">c) </span><span style=\"font-family: Cambria Math;\">जन्माष्टमी</span><span style=\"font-family: Cambria Math;\"> (</span><strong><span style=\"font-family: Cambria Math;\">अगस्त</span><span style=\"font-family: Cambria Math;\">-</span><span style=\"font-family: Cambria Math;\">सितंबर</span></strong><span style=\"font-family: Cambria Math;\">)</span><span style=\"font-family: Cambria Math;\">, </span><span style=\"font-family: Cambria Math;\">जिसे</span><span style=\"font-family: Cambria Math;\"> </span><strong><span style=\"font-family: Cambria Math;\">गोकुलाष्टमी</span></strong><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">के</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">रूप</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">में</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">भी</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">जाना</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">जाता</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">है</span><span style=\"font-family: Cambria Math;\">, </span><span style=\"font-family: Cambria Math;\">एक</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">वार्षिक</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">हिंदू</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">त्योहार</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">है</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">जो</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">भगवान</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">कृष्ण</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">के</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">जन्</span><span style=\"font-family: Cambria Math;\">म</span><span style=\"font-family: Cambria Math;\">, </span><span style=\"font-family: Cambria Math;\">विष्णु</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">के</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">दशावतार</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">के</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">आठवें</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">और</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">चौबीस</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">अवतारों</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">में</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">से</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">बाईसवें</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">दिन</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">मनाया</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">जाता</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">है।</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">यह</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">भाद्रपद</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">में</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">कृष्ण</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">पक्ष</span><span style=\"font-family: Cambria Math;\"> (</span><span style=\"font-family: Cambria Math;\">अंधेरे</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">पखवाड़े</span><span style=\"font-family: Cambria Math;\">) </span><span style=\"font-family: Cambria Math;\">के</span><span style=\"font-family: Cambria Math;\"> </span><strong><span style=\"font-family: Cambria Math;\">आठवें</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">दिन</span></strong><span style=\"font-family: Cambria Math;\"> (</span><span style=\"font-family: Cambria Math;\">अष्टमी</span><span style=\"font-family: Cambria Math;\">) </span><span style=\"font-family: Cambria Math;\">को</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">हिंदू</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">लूनिसोलर</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">कैलेंडर</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">के</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">अनुसार</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">मनाया</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">जाता</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">है।</span></p>",
+                    correct: "c",
+                    pos_marks: 2.0,
+                    neg_marks: 0.5
+                });
+                questions.push({
+                    id: "3",
+                    section: "18",
+                    question_en: "<p><span style=\"font-family: Cambria Math;\">3. Vempati Chinna Satyam was awarded the Padma Bhushan </span><span style=\"font-family: Cambria Math;\">in 1998. He was a ________ dancer.</span></p>",
+                    question_hi: "<p><span style=\"font-family: Cambria Math;\">3. </span><span style=\"font-family: Cambria Math;\">वेम्पति</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">चिन्ना</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">सत्यम</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">को</span><span style=\"font-family: Cambria Math;\"> 1998 </span><span style=\"font-family: Cambria Math;\">में</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">पद्म</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">भूषण</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">से</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">सम्मानित</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">किया</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">गया</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">था।</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">वह</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">एक</span><span style=\"font-family: Cambria Math;\">_____</span><span style=\"font-family: Cambria Math;\">नर्तक</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">थे।</span></p>",
+                    options_en: ["<p>Kuchipudi</p>", "<p>Kathak</p>", 
+                                "<p>Manipuri</p>", "<p>Kathakali</p>"],
+                    options_hi: ["<p><span style=\"font-family: Cambria Math;\">कुचिपुड़ी</span></p>", "<p><span style=\"font-family: Cambria Math;\">कथक</span></p>",
+                                "<p><span style=\"font-family: Cambria Math;\">मणिपुरी</span></p>", "<p><span style=\"font-family: Cambria Math;\">कथकली</span></p>"],
+                    solution_en: "<p><span style=\"font-family: Cambria Math;\">3.(</span><span style=\"font-family: Cambria Math;\">a) <strong>Vempati Chinna Satyam</strong></span><span style=\"font-family: Cambria Math;\"><strong> </strong>(Andhra Pradesh) is a great dancer and master of Kuchipudi dance. He started the </span><span style=\"font-family: Cambria Math;\"><strong>Kuchipudi Kala Academy</strong> </span><span style=\"font-family: Cambria Math;\">in 1963 in Madras. </span><span style=\"font-family: Cambria Math;\"><strong>Awards and honors</strong>: </span><span style=\"font-family: Cambria Math;\">Kalidas Award by the Government of Madhya Pradesh and Kalaimamani by the Governme</span><span style=\"font-family: Cambria Math;\">nt of Tamil Nadu. He was awarded the doctorate degree by Andhra University. </span><span style=\"font-family: Cambria Math;\"><strong>Other famous proponents of Kuchipudi Dance include-</strong> </span><span style=\"font-family: Cambria Math;\">Raja and Radha Reddy, their daughter Yamini Reddy; Kaushalya Reddy; Bhavana Reddy, etc.</span><span style=\"font-family: Cambria Math;\"> <strong>Indrani Bajpai</strong></span><span style=\"font-family: Cambria Math;\"><strong> </strong>(Indrani Rahman) is a fam</span><span style=\"font-family: Cambria Math;\">ous exponent of Kuchipudi Dance. </span></p>",
+                    solution_hi: "<p>3.(a) <strong><span style=\"font-family: Cambria Math;\">वेम्पति</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">चिन्ना</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">सत्यम</span></strong><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">(</span><span style=\"font-family: Cambria Math;\">आंध्र</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">प्रदेश</span><span style=\"font-family: Cambria Math;\">) </span><span style=\"font-family: Cambria Math;\">एक</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">महान</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">नर्तक</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">और</span><span style=\"font-family: Cambria Math;\"> </span><strong><span style=\"font-family: Cambria Math;\">कुचिपुड़ी</span><span style=\"font-family: Cambria Math;\"> </span></strong><span style=\"font-family: Cambria Math;\">नृत्य</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">के</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">गुरु</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">हैं।</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">उन्होंने</span><span style=\"font-family: Cambria Math;\"> </span><strong><span style=\"font-family: Cambria Math;\">1963 </span></strong><span style=\"font-family: Cambria Math;\">में</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">मद्रास</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">में</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">कुचिपुड़ी</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">कला</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">अकादमी</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">की</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">शुरुआत</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">की।</span><span style=\"font-family: Cambria Math;\"> </span><strong><span style=\"font-family: Cambria Math;\">पुरस्कार</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">और</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">सम्मान</span></strong><span style=\"font-family: Cambria Math;\">: </span><span style=\"font-family: Cambria Math;\">मध्य</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">प्रदेश</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">सरकार</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">द्वारा</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">कालिदास</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">पुरस्कार</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">और</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">तमिलनाडु</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">सरकार</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">द्वारा</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">कलाईमणि</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">पुरस्कार।</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">उन्हें</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">आंध्र</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">विश्वविद्यालय</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">द्वारा</span><span style=\"font-family: Cambria Math;\"> </span><strong><span style=\"font-family: Cambria Math;\">डॉक्टरेट</span><span style=\"font-family: Cambria Math;\"> </span></strong><span style=\"font-family: Cambria Math;\">की</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">उपाधि</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">से</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">सम्मानित</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">किया</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">गया</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">था।</span><span style=\"font-family: Cambria Math;\"> </span><strong><span style=\"font-family: Cambria Math;\">कुचिपुड़ी</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">नृत्य</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">के</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">समर्थकों</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">में</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">शामिल</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">हैं</span></strong><span style=\"font-family: Cambria Math;\">-</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">राजा</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">और</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">राधा</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">रेड्डी</span><span style=\"font-family: Cambria Math;\">, </span><span style=\"font-family: Cambria Math;\">उनकी</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">बेटी</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">यामिनी</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">रेड्डी</span><span style=\"font-family: Cambria Math;\">; </span><span style=\"font-family: Cambria Math;\">कौशल्या</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">रेड्डी</span><span style=\"font-family: Cambria Math;\">; </span><span style=\"font-family: Cambria Math;\">भावना</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">रेड्डी</span><span style=\"font-family: Cambria Math;\">, </span><span style=\"font-family: Cambria Math;\">आदि</span><span style=\"font-family: Cambria Math;\"> | </span><strong><span style=\"font-family: Cambria Math;\">इंद्राणी</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">ब</span><span style=\"font-family: Cambria Math;\">ाजपेयी</span></strong><span style=\"font-family: Cambria Math;\"><strong> </strong>(</span><span style=\"font-family: Cambria Math;\">इंद्राणी</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">रहमान</span><span style=\"font-family: Cambria Math;\">) </span><span style=\"font-family: Cambria Math;\">कुचिपुड़ी</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">नृत्य</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">की</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">प्रसिद्ध</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">प्रतिपादक</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">हैं</span><span style=\"font-family: Cambria Math;\"> |</span></p>",
+                    correct: "a",
+                    pos_marks: 2.0,
+                    neg_marks: 0.5
+                });
+                questions.push({
+                    id: "4",
+                    section: "18",
+                    question_en: "<p><span style=\"font-family: Cambria Math;\">4. Which of the following folk dance forms is NOT associated with the state of Gujarat?</span></p>",
+                    question_hi: "<p><span style=\"font-family: Cambria Math;\">4. </span><span style=\"font-family: Cambria Math;\">निम्नलिखित</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">में</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">से</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">कौन</span><span style=\"font-family: Cambria Math;\">-</span><span style=\"font-family: Cambria Math;\">सी</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">लोक</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">नृत्य</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">शैली</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">गुजरात</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">राज्य</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">से</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">संबंधित</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">नहीं</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">है</span><span style=\"font-family: Cambria Math;\">?</span></p>",
+                    options_en: ["<p>Hojagiri</p>", "<p>Dandiya</p>", 
+                                "<p>Bhavai</p>", "<p>Garba</p>"],
+                    options_hi: ["<p><span style=\"font-family: Cambria Math;\">होजागिरी</span></p>", "<p><span style=\"font-family: Nirmala UI;\">डांडिया</span></p>",
+                                "<p><span style=\"font-family: Nirmala UI;\">भवाई</span></p>", "<p><span style=\"font-family: Nirmala UI;\">गरबा</span></p>"],
+                    solution_en: "<p><span style=\"font-family: Cambria Math;\">4.(</span><span style=\"font-family: Cambria Math;\">a) <strong>Dance Forms of Gujarat:</strong> </span><span style=\"font-family: Cambria Math;\">Dandiya, Garba, Bhavai, Tippani, Padhar, Hoodo. </span><span style=\"font-family: Cambria Math;\"><strong>Tripura</strong>: </span><span style=\"font-family: Cambria Math;\">Hojagiri ,</span><span style=\"font-family: Cambria Math;\"> Goria, Lebang Boomani</span><span style=\"font-family: Cambria Math;\">, Hai-hak, jhum, Sangrai. </span></p>",
+                    solution_hi: "<p><span style=\"font-family: Cambria Math;\">4.(</span><span style=\"font-family: Cambria Math;\">a) </span><strong><span style=\"font-family: Nirmala UI;\">गुजरात</span></strong><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">के</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">नृत्य</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">शैली</span><span style=\"font-family: Cambria Math;\"> : </span><span style=\"font-family: Nirmala UI;\">डांडिया</span><span style=\"font-family: Cambria Math;\">, </span><span style=\"font-family: Nirmala UI;\">गरबा</span><span style=\"font-family: Cambria Math;\">, </span><span style=\"font-family: Nirmala UI;\">भवई</span><span style=\"font-family: Cambria Math;\">, </span><span style=\"font-family: Nirmala UI;\">तिप्पानी</span><span style=\"font-family: Cambria Math;\">, </span><span style=\"font-family: Nirmala UI;\">पाधार</span><span style=\"font-family: Cambria Math;\">, </span><span style=\"font-family: Nirmala UI;\">हूडो।</span><span style=\"font-family: Cambria Math;\"> </span><strong><span style=\"font-family: Nirmala UI;\">त्रिपुरा</span></strong><span style=\"font-family: Cambria Math;\">: </span><span style=\"font-family: Nirmala UI;\">होजागिरी</span><span style=\"font-family: Cambria Math;\">, </span><span style=\"font-family: Nirmala UI;\">गोरिया</span><span style=\"font-family: Cambria Math;\">, </span><span style=\"font-family: Nirmala UI;\">लेबांग</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">बूमनी</span><span style=\"font-family: Cambria Math;\">, </span><span style=\"font-family: Nirmala UI;\">है</span><span style=\"font-family: Cambria Math;\">-</span><span style=\"font-family: Nirmala UI;\">हक</span><span style=\"font-family: Cambria Math;\">, </span><span style=\"font-family: Nirmala UI;\">झूम</span><span style=\"font-family: Cambria Math;\">, </span><span style=\"font-family: Nirmala UI;\">संगराई।</span></p>",
+                    correct: "a",
+                    pos_marks: 2.0,
+                    neg_marks: 0.5
+                });
+                questions.push({
+                    id: "5",
+                    section: "18",
+                    question_en: "<p><span style=\"font-family: Cambria Math;\">5. Which</span><span style=\"font-family: Cambria Math;\"> of the following countries hosted the first edition of the Summer Youth Olym</span><span style=\"font-family: Cambria Math;\">pic Games in 2010?</span></p>",
+                    question_hi: "<p><span style=\"font-family: Cambria Math;\">5. </span><span style=\"font-family: Nirmala UI;\">निम्नलिखित</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">में</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">से</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">किस</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">देश</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">ने</span><span style=\"font-family: Cambria Math;\"> 2010 </span><span style=\"font-family: Nirmala UI;\">में</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">ग्रीष्मकालीन</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">युवा</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">ओलंपिक</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">खेलों</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">के</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">पहले</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">संस्करण</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">की</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">मेजबानी</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">की</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">थी</span><span style=\"font-family: Cambria Math;\">?</span></p>",
+                    options_en: ["<p>China</p>", "<p>Singapore</p>", 
+                                "<p>Argentina</p>", "<p>Senegal</p>\n<p><span style=\"font-family: Cambria Math;\"> </span></p>"],
+                    options_hi: ["<p><span style=\"font-family: Nirmala UI;\">चीन</span></p>", "<p><span style=\"font-family: Nirmala UI;\">सिंगापुर</span></p>",
+                                "<p><span style=\"font-family: Nirmala UI;\">अर्जेंटीना</span></p>", "<p><span style=\"font-family: Nirmala UI;\">सेनेगल</span></p>"],
+                    solution_en: "<p><span style=\"font-family: Cambria Math;\">5.(</span><span style=\"font-family: Cambria Math;\">b) </span><span style=\"font-family: Cambria Math;\">The first summer edition was held in </span><strong><span style=\"font-family: Cambria Math;\">Singapore</span></strong><span style=\"font-family: Cambria Math;\"><strong> </strong>from </span><span style=\"font-family: Cambria Math;\"><strong>14 to 26 August 2010.</strong> <strong>Winner</strong>: <strong>China</strong>. </span><span style=\"font-family: Cambria Math;\">2nd edition 2014 {Nanjing (China), Winner: China}, 3rd edition 2018 {Buenos Aires (Argentina), Winner: Russia}.</span></p>",
+                    solution_hi: "<p><span style=\"font-family: Cambria Math;\">5.(</span><span style=\"font-family: Cambria Math;\">b) </span><span style=\"font-family: Nirmala UI;\">पहला</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">ग्रीष्मकालीन</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">संस्करण</span><span style=\"font-family: Cambria Math;\"> </span><strong><span style=\"font-family: Cambria Math;\">14 </span><span style=\"font-family: Nirmala UI;\">से</span><span style=\"font-family: Cambria Math;\"> 26 </span><span style=\"font-family: Nirmala UI;\">अगस्त</span><span style=\"font-family: Cambria Math;\"> 2</span></strong><span style=\"font-family: Cambria Math;\"><strong>010</strong> </span><span style=\"font-family: Nirmala UI;\">तक</span><span style=\"font-family: Cambria Math;\"> </span><strong><span style=\"font-family: Nirmala UI;\">सिंगापुर</span><span style=\"font-family: Cambria Math;\"> </span></strong><span style=\"font-family: Nirmala UI;\">में</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">आयोजित</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">किया</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">गया</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">था।</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">विजेता</span><span style=\"font-family: Cambria Math;\">: </span><span style=\"font-family: Nirmala UI;\">चीन।</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">दूसरा</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">संस्करण</span><span style=\"font-family: Cambria Math;\"> 2014 {</span><span style=\"font-family: Nirmala UI;\">नानजिंग</span><span style=\"font-family: Cambria Math;\"> (</span><span style=\"font-family: Nirmala UI;\">चीन</span><span style=\"font-family: Cambria Math;\">), </span><span style=\"font-family: Nirmala UI;\">विजेता</span><span style=\"font-family: Cambria Math;\">: </span><span style=\"font-family: Nirmala UI;\">चीन</span><span style=\"font-family: Cambria Math;\">},</span><span style=\"font-family: Cambria Math;\"> </span><strong><span style=\"font-family: Nirmala UI;\">तीसरा</span><span style=\"font-family: Cambria Math;\"> </span></strong><span style=\"font-family: Nirmala UI;\">संस्करण</span><span style=\"font-family: Cambria Math;\"> 2018 {</span><span style=\"font-family: Nirmala UI;\">ब्यूनस</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">आयर्स</span><span style=\"font-family: Cambria Math;\"> (</span><span style=\"font-family: Nirmala UI;\">अर्जेंटीना</span><span style=\"font-family: Cambria Math;\">), </span><span style=\"font-family: Nirmala UI;\">विजेता</span><span style=\"font-family: Cambria Math;\">: </span><span style=\"font-family: Nirmala UI;\">रूस</span><span style=\"font-family: Cambria Math;\">}</span><span style=\"font-family: Nirmala UI;\">।</span></p>",
+                    correct: "b",
+                    pos_marks: 2.0,
+                    neg_marks: 0.5
+                });
+                questions.push({
+                    id: "6",
+                    section: "18",
+                    question_en: "<p><span style=\"font-family: Cambria Math;\">6.</span><span style=\"font-family: Cambria Math;\"> The height of stumps in cricket is______</span></p>",
+                    question_hi: "<p><span style=\"font-family: Cambria Math;\">6.</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">क्रिकेट</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">में</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">स्टंप</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">की</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">ऊंचाई</span><span style=\"font-family: Cambria Math;\">_______</span><span style=\"font-family: Nirmala UI;\">होती</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">है।</span></p>",
+                    options_en: ["<p>28<span style=\"font-family: Cambria Math;\"> inches</span></p>", "<p>20<span style=\"font-family: Cambria Math;\"> inches</span></p>", 
+                                "<p>25<span style=\"font-family: Cambria Math;\"> inches</span></p>", "<p>22 inches</p>"],
+                    options_hi: ["<p>28 <span style=\"font-family: Nirmala UI;\">इंच</span></p>", "<p>20 <span style=\"font-family: Nirmala UI;\">इंच</span></p>",
+                                "<p>25 <span style=\"font-family: Nirmala UI;\">इंच</span></p>", "<p>22 <span style=\"font-family: Nirmala UI;\">इंच</span></p>"],
+                    solution_en: "<p><span style=\"font-family: Cambria Math;\">6.(</span><span style=\"font-family: Cambria Math;\">a)</span><span style=\"font-family: Cambria Math;\"> Height of stumps in cricket</span><span style=\"font-family: Cambria Math;\"> <strong>28 inches.</strong></span><strong><span style=\"font-family: Cambria Math;\"> </span></strong><span style=\"font-family: Cambria Math;\">Cricket pitch </span><span style=\"font-family: Cambria Math;\">breadth :</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\"><strong>10 feet.</strong> </span><span style=\"font-family: Cambria Math;\">Important</span><span style=\"font-family: Cambria Math;\"> <strong>terminologies </strong></span><span style=\"font-family: Cambria Math;\">used in </span><span style=\"font-family: Cambria Math;\">Cricket: Striker, Off-side/leg-side, Run, Four, Bowled, Caught, LBW, Stumped, Innings, etc.</span></p>",
+                    solution_hi: "<p><span style=\"font-family: Cambria Math;\">6.(</span><span style=\"font-family: Cambria Math;\">a)</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">क्रिकेट</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">में</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">स्टंप</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">की</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">ऊंचाई</span><span style=\"font-family: Cambria Math;\"> </span><strong><span style=\"font-family: Cambria Math;\">28 </span><span style=\"font-family: Nirmala UI;\">इंच</span></strong><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">होती</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">है।</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">क्रिकेट</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">पिच</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">की</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">चौड़ाई</span><span style=\"font-family: Cambria Math;\">: </span><strong><span style=\"font-family: Cambria Math;\">10 </span><span style=\"font-family: Nirmala UI;\">फीट</span></strong><span style=\"font-family: Nirmala UI;\">।</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">क्रिकेट</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">में</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">उपयोग</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">की</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">जाने</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">वाली</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">महत्वपूर्ण</span><span style=\"font-family: Cambria Math;\"> </span><strong><span style=\"font-family: Nirmala UI;\">शब्दावली</span></strong><span style=\"font-family: Cambria Math;\">: </span><span style=\"font-family: Nirmala UI;\">स्ट्राइकर</span><span style=\"font-family: Cambria Math;\">, </span><span style=\"font-family: Nirmala UI;\">ऑफ</span><span style=\"font-family: Cambria Math;\">-</span><span style=\"font-family: Nirmala UI;\">साइड</span><span style=\"font-family: Cambria Math;\">/</span><span style=\"font-family: Nirmala UI;\">लेग</span><span style=\"font-family: Cambria Math;\">-</span><span style=\"font-family: Nirmala UI;\">सा</span><span style=\"font-family: Nirmala UI;\">इड</span><span style=\"font-family: Cambria Math;\">, </span><span style=\"font-family: Nirmala UI;\">रन</span><span style=\"font-family: Cambria Math;\">, </span><span style=\"font-family: Nirmala UI;\">फोर</span><span style=\"font-family: Cambria Math;\">, </span><span style=\"font-family: Nirmala UI;\">बोल्ड</span><span style=\"font-family: Cambria Math;\">, </span><span style=\"font-family: Nirmala UI;\">कॉट</span><span style=\"font-family: Cambria Math;\">, LBW, </span><span style=\"font-family: Nirmala UI;\">स्टंप्ड</span><span style=\"font-family: Cambria Math;\">, </span><span style=\"font-family: Nirmala UI;\">इनिंग्स</span><span style=\"font-family: Cambria Math;\">, </span><span style=\"font-family: Nirmala UI;\">आदि।</span></p>",
+                    correct: "a",
+                    pos_marks: 2.0,
+                    neg_marks: 0.5
+                });
+                questions.push({
+                    id: "7",
+                    section: "18",
+                    question_en: "<p><span style=\"font-family: Cambria Math;\">7. Rukmani</span><span style=\"font-family: Cambria Math;\"> Devi Arundale was a famous dancer of which Indian classical dance form?</span></p>",
+                    question_hi: "<p><span style=\"font-family: Cambria Math;\">7. </span><span style=\"font-family: Nirmala UI;\">रुक्मणी</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">देवी</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">अरुंडेल</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">किस</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">भारतीय</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">शास्त्रीय</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">नृत्य</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">की</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">प्रसिद्ध</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">नृत्यांगना</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">थीं</span><span style=\"font-family: Cambria Math;\">?</span></p>",
+                    options_en: ["<p>Bharatanatyam</p>", "<p>Kathak</p>", 
+                                "<p>Mohiniyattam</p>", "<p>Kathakali</p>"],
+                    options_hi: ["<p><span style=\"font-family: Nirmala UI;\">भरतनाट्यम</span></p>", "<p><span style=\"font-family: Nirmala UI;\">कथक</span></p>",
+                                "<p><span style=\"font-family: Nirmala UI;\">मोहिनीअट्टम</span></p>", "<p><span style=\"font-family: Nirmala UI;\">कथकली</span></p>"],
+                    solution_en: "<p><span style=\"font-family: Cambria Math;\">7.(</span><span style=\"font-family: Cambria Math;\">a) <strong>Rukmani Devi Arundale (Tamil Nadu)</strong> </span><span style=\"font-family: Cambria Math;\">is a famous dancer of Bharatanatyam classical dance form. </span><strong><span style=\"font-family: Cambria Math;\">Awards and hono</span><span style=\"font-family: Cambria Math;\">rs:</span></strong><span style=\"font-family: Cambria Math;\"> Padma Bhushan (1956), Sangeet Natak Award (1957), Sangeet Natak Akademi Fellowship (1967). </span><strong><span style=\"font-family: Cambria Math;\">Bharatanatyam Dancers</span></strong><span style=\"font-family: Cambria Math;\"><strong>:</strong>Mallika</span><span style=\"font-family: Cambria Math;\"> Sarabhai, Yamini Krishnamurthy, Alarmel Valli, Padma Subrahmanyam etc.</span></p>",
+                    solution_hi: "<p><span style=\"font-family: Cambria Math;\">7.(</span><span style=\"font-family: Cambria Math;\">a) </span><strong><span style=\"font-family: Nirmala UI;\">रुक्मणी</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">देवी</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">अरुंडेल</span><span style=\"font-family: Cambria Math;\"> </span></strong><span style=\"font-family: Cambria Math;\">(</span><span style=\"font-family: Nirmala UI;\">तमिलनाडु</span><span style=\"font-family: Cambria Math;\">) </span><span style=\"font-family: Nirmala UI;\">भरतनाट्यम</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">शास्त</span><span style=\"font-family: Nirmala UI;\">्रीय</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">नृत्य</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">शैली</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">की</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">प्रसिद्ध</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">नर्तकी</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">हैं।</span><strong><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">पुरस्कार</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">और</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">सम्मान</span><span style=\"font-family: Cambria Math;\">:</span><span style=\"font-family: Cambria Math;\"> </span></strong><span style=\"font-family: Nirmala UI;\">पद्म</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">भूषण</span><span style=\"font-family: Cambria Math;\"> (1956), </span><span style=\"font-family: Nirmala UI;\">संगीत</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">नाटक</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">पुरस्कार</span><span style=\"font-family: Cambria Math;\"> (1957), </span><span style=\"font-family: Nirmala UI;\">संगीत</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">नाटक</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">अकादमी</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">फेलोशिप</span><span style=\"font-family: Cambria Math;\"> (1967)</span><span style=\"font-family: Nirmala UI;\">।</span><span style=\"font-family: Cambria Math;\"> </span><strong><span style=\"font-family: Nirmala UI;\">भरतनाट्यम</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">नर्तक</span></strong><span style=\"font-family: Cambria Math;\"><strong>:</strong> </span><span style=\"font-family: Nirmala UI;\">मल्लिका</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">साराभाई</span><span style=\"font-family: Cambria Math;\">, </span><span style=\"font-family: Nirmala UI;\">यामिनी</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">कृष्णमूर्ति</span><span style=\"font-family: Cambria Math;\">, </span><span style=\"font-family: Nirmala UI;\">अलरमेल</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">वल्ली</span><span style=\"font-family: Cambria Math;\">, </span><span style=\"font-family: Nirmala UI;\">पद्म</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">सुब्रह्मण्यम</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">आदि।</span></p>",
+                    correct: "a",
+                    pos_marks: 2.0,
+                    neg_marks: 0.5
+                });
+                questions.push({
+                    id: "8",
+                    section: "18",
+                    question_en: "<p><span style=\"font-family: Cambria Math;\">8. Who</span><span style=\"font-family: Cambria Math;\"> among the following is a famous performer of the Kathakali classical dance?</span></p>",
+                    question_hi: "<p><span style=\"font-family: Cambria Math;\">8.</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">निम्नलिखित</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">में</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">से</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">कौन</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">कथकली</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">शास्त्रीय</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">नृत्य</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">का</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">प्रसिद्ध</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">कलाकार</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">है</span><span style=\"font-family: Cambria Math;\">?</span></p>",
+                    options_en: ["<p>Pankaj Charan Das</p>", "<p>Sunanda Nayar</p>", 
+                                "<p>Gopinath</p>", "<p>Raja Reddy</p>"],
+                    options_hi: ["<p><span style=\"font-family: Nirmala UI;\">पंकज</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">चरण</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">दास</span></p>", "<p><span style=\"font-family: Nirmala UI;\">सुनंदा</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">नायर</span></p>",
+                                "<p><span style=\"font-family: Nirmala UI;\">गोपीनाथ</span></p>", "<p><span style=\"font-family: Nirmala UI;\">राजा</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">रेड्डी</span></p>"],
+                    solution_en: "<p><span style=\"font-family: Cambria Math;\">8.(</span><span style=\"font-family: Cambria Math;\">c) <strong>Guru Gopinath</strong> </span><span style=\"font-family: Cambria Math;\">was a well known Kathakali dancer.</span><span style=\"font-family: Cambria Math;\"> <strong>Awards and Honors</strong>:</span><span style=\"font-family: Cambria Math;\"> Sangeet Natak Akademi\'s award (1965), \'Kala Tilakam\' by the Guruvayur Devaswom (1968), \'Kala RatIn&rsquo; title by the Travancore Devaswom Board (1973), etc. </span><span style=\"font-family: Cambria Math;\">Pankaj Charan Das (Odissi dancer), Sunanda Nair (Mohiniattam dancer), Raja Reddy (Kuchipudi dancer).</span><span style=\"font-family: Cambria Math;\"> </span></p>",
+                    solution_hi: "<p><span style=\"font-family: Cambria Math;\">8.(</span><span style=\"font-family: Cambria Math;\">c) </span><strong><span style=\"font-family: Nirmala UI;\">गुरु</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">गोपीनाथ</span></strong><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">एक</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">प्रसिद्ध</span><span style=\"font-family: Cambria Math;\"> </span><strong><span style=\"font-family: Nirmala UI;\">कथकली</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">नर्तक</span></strong><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">थे।</span><span style=\"font-family: Cambria Math;\"> </span><strong><span style=\"font-family: Nirmala UI;\">पुरस्कार</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">और</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">सम्मान</span></strong><span style=\"font-family: Cambria Math;\"><strong>:</strong> </span><span style=\"font-family: Nirmala UI;\">संगीत</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">नाटक</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">अकादमी</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">का</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">पुरस्कार</span><span style=\"font-family: Cambria Math;\"> (1965), </span><span style=\"font-family: Nirmala UI;\">गुरुवायूर</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">देवस्वोम</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">द्वारा</span><span style=\"font-family: Cambria Math;\"> \'</span><span style=\"font-family: Nirmala UI;\">कला</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">तिलकम</span><span style=\"font-family: Cambria Math;\">\' (1968), </span><span style=\"font-family: Nirmala UI;\">त्रावणकोर</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">देवस्वोम</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">बोर्ड</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">द्वारा</span><span style=\"font-family: Cambria Math;\"> \'</span><span style=\"font-family: Nirmala UI;\">कला</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">रत्न</span><span style=\"font-family: Cambria Math;\">\' </span><span style=\"font-family: Nirmala UI;\">शीर्षक</span><span style=\"font-family: Cambria Math;\"> (1973), </span><span style=\"font-family: Nirmala UI;\">आदि।</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">पंकज</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">चरण</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">दास</span><span style=\"font-family: Cambria Math;\"> (</span><strong><span style=\"font-family: Nirmala UI;\">ओडिसी</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">नर्तक</span></strong><span style=\"font-family: Cambria Math;\">), </span><span style=\"font-family: Nirmala UI;\">सुनं</span><span style=\"font-family: Nirmala UI;\">दा</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">नायर</span><span style=\"font-family: Cambria Math;\"> (</span><strong><span style=\"font-family: Nirmala UI;\">मोहिनीअट्टम</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">नर्तक</span></strong><span style=\"font-family: Cambria Math;\">), </span><span style=\"font-family: Nirmala UI;\">राजा</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">रेड्डी</span><span style=\"font-family: Cambria Math;\"> (</span><strong><span style=\"font-family: Nirmala UI;\">कुचिपुड़ी</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">नर्तक</span></strong><span style=\"font-family: Cambria Math;\">)</span><span style=\"font-family: Nirmala UI;\">।</span></p>",
+                    correct: "c",
+                    pos_marks: 2.0,
+                    neg_marks: 0.5
+                });
+                questions.push({
+                    id: "9",
+                    section: "18",
+                    question_en: "<p><span style=\"font-family: Cambria Math;\">9. Shovana Narayan was awarded which of the following awards in 2013?</span></p>",
+                    question_hi: "<p><span style=\"font-family: Cambria Math;\">9. </span><span style=\"font-family: Nirmala UI;\">शोवना</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">नारायण</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">को</span><span style=\"font-family: Cambria Math;\"> 2013 </span><span style=\"font-family: Nirmala UI;\">में</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">निम्नलिखित</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">में</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">से</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">किस</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">पुरस्कार</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">से</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">सम्मानित</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">किया</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">गया</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">था</span><span style=\"font-family: Cambria Math;\">?</span></p>",
+                    options_en: ["<p>Guru Deba Prasad</p>", "<p>Sangam Kala</p>", 
+                                "<p>Kalidas Samman</p>", "<p>Bharat Muni Samman</p>"],
+                    options_hi: ["<p><span style=\"font-family: Nirmala UI;\">गुरु</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">देब</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">प्रसाद</span></p>", "<p><span style=\"font-family: Nirmala UI;\">संगम</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">कला</span></p>",
+                                "<p><span style=\"font-family: Nirmala UI;\">कालिदास</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">सम्मान</span></p>", "<p><span style=\"font-family: Nirmala UI;\">भरत</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">मुनि</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">सम्मान</span></p>"],
+                    solution_en: "<p><span style=\"font-family: Cambria Math;\">9.(</span><span style=\"font-family: Cambria Math;\">a) <strong>Shovana Narayan</strong> </span><span style=\"font-family: Cambria Math;\">was awarded Guru Deba Prasad in 2013.</span><span style=\"font-family: Cambria Math;\"> <strong>Awards and Honors:</strong> </span><span style=\"font-family: Cambria Math;\">Padma</span><span style=\"font-family: Cambria Math;\"> Shri (1992), Sangeet Natak Akademi Award (1999&ndash;2000), Oisca Award (Japan) (1990&ndash;91), Dadabhai Naoroji Award (1993), </span><span style=\"font-family: Cambria Math;\">Bihar Gaurav Puraskar (1985), Guru ML Koser Award (2013), Art Karat Award (2014), Bharat Nirman&rsquo;s Social Responsibility Award 2014 etc. </span></p>",
+                    solution_hi: "<p><span style=\"font-family: Cambria Math;\">9.(</span><span style=\"font-family: Cambria Math;\">a) </span><strong><span style=\"font-family: Nirmala UI;\">शोवना</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">नारायण</span><span style=\"font-family: Cambria Math;\"> </span></strong><span style=\"font-family: Nirmala UI;\">को</span><span style=\"font-family: Cambria Math;\"> 2013 </span><span style=\"font-family: Nirmala UI;\">में</span><span style=\"font-family: Cambria Math;\"> </span><strong><span style=\"font-family: Nirmala UI;\">गुरु</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">देव</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">प्रसाद</span></strong><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">पुरस्कार</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">से</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">सम्मानित</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">किया</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">गया</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">था।</span><span style=\"font-family: Cambria Math;\"> </span><strong><span style=\"font-family: Nirmala UI;\">पुरस्कार</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">और</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">सम्मान</span><span style=\"font-family: Cambria Math;\">: </span></strong><span style=\"font-family: Nirmala UI;\">पद्म</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">श्री</span><span style=\"font-family: Cambria Math;\"> (1992), </span><span style=\"font-family: Nirmala UI;\">संगीत</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">नाटक</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">अकादमी</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">पुरस्कार</span><span style=\"font-family: Cambria Math;\"> (1999-2000), </span><span style=\"font-family: Nirmala UI;\">ओइस्का</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">पुरस्कार</span><span style=\"font-family: Cambria Math;\"> (</span><span style=\"font-family: Nirmala UI;\">जापान</span><span style=\"font-family: Cambria Math;\">) (1990-91), </span><span style=\"font-family: Nirmala UI;\">दादाभाई</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">नौरोजी</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">पुरस्कार</span><span style=\"font-family: Cambria Math;\"> (1993), </span><span style=\"font-family: Nirmala UI;\">बिहार</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">गौरव</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">पुरस्कार</span><span style=\"font-family: Cambria Math;\"> (1985</span><span style=\"font-family: Cambria Math;\">), </span><span style=\"font-family: Nirmala UI;\">गुरु</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">एमएल</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">कोसर</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">पुरस्कार</span><span style=\"font-family: Cambria Math;\"> (2013), </span><span style=\"font-family: Nirmala UI;\">कला</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">करात</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">पुरस्कार</span><span style=\"font-family: Cambria Math;\"> (2014), </span><span style=\"font-family: Nirmala UI;\">भारत</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">निर्माण</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">सामाजिक</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">उत्तरदायित्व</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">पुरस्कार</span><span style=\"font-family: Cambria Math;\"> 2014 </span><span style=\"font-family: Nirmala UI;\">आदि</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">।</span></p>",
+                    correct: "a",
+                    pos_marks: 2.0,
+                    neg_marks: 0.5
+                });
+                questions.push({
+                    id: "10",
+                    section: "18",
+                    question_en: "<p><span style=\"font-family: Cambria Math;\">10</span><span style=\"font-family: Cambria Math;\">. The abbreviation &ldquo;CPCL&rdquo; is associated with the petroleum industry in India. Expand </span><span style=\"font-family: Cambria Math;\">&ldquo;CPCL&rdquo;:</span></p>",
+                    question_hi: "<p><span style=\"font-family: Cambria Math;\">10</span><span style=\"font-family: Cambria Math;\">. </span><span style=\"font-family: Nirmala UI;\">संक्षिप्ताक्षर</span><span style=\"font-family: Cambria Math;\"> \"</span><span style=\"font-family: Cambria Math;\">CPCL&rdquo; </span><span style=\"font-family: Nirmala UI;\">भारत</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">के</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">पेट्रोलियम</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">उद्योग</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">से</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">संबंधित</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">है।</span><span style=\"font-family: Cambria Math;\"> &ldquo;CPCL&rdquo; </span><span style=\"font-family: Nirmala UI;\">का</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">विस्तारित</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">रूप</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">लिखें।</span></p>",
+                    options_en: ["<p>Central Petroleum Corporation Limited</p>", "<p>Coimbatore Petroleum Corporation Limited</p>", 
+                                "<p>Chennai Petroleum Corporation Limited</p>", "<p>Corporation of Petroleum and Chemicals Limited</p>"],
+                    options_hi: ["<p><span style=\"font-weight: 400;\">Central Petroleum Corporation Limited (सेंट्रल पेट्रोलियम कॉर्पोरेशन लिमिटेड)</span></p>", "<p><span style=\"font-weight: 400;\">Coimbatore Petroleum Corporation Limited (कोयंबटूर पेट्रोलियम कॉर्पोरेशन लिमिटेड)</span></p>",
+                                "<p><span style=\"font-weight: 400;\">Chennai Petroleum Corporation Limited (चेन्नई पेट्रोलियम कॉर्पोरेशन लिमिटेड)</span></p>", "<p><span style=\"font-weight: 400;\">Corporation of Petroleum and Chemicals Limited (कॉर्पोरेशन ऑफ पेट्रोलियम एंड केमिकल्स लिमिटेड)</span></p>"],
+                    solution_en: "<p>10<span style=\"font-family: Cambria Math;\">.(c) <strong>Chennai Petroleum Corporation Limited (CPCL)</strong> </span><span style=\"font-family: Cambria Math;\">is a subsidiary </span><span style=\"font-family: Cambria Math;\">of Indian Oil Corporation which is under the ownership of the Ministry of Petroleum and Natural Gas of the Government of India. </span><span style=\"font-family: Cambria Math;\">Headquarters</span><span style=\"font-family: Cambria Math;\">: Chennai, </span><strong><span style=\"font-family: Cambria Math;\">Founded</span></strong><span style=\"font-family: Cambria Math;\">: 18 November 1965, </span><strong><span style=\"font-family: Cambria Math;\">Chairman</span></strong><span style=\"font-family: Cambria Math;\">: Shrikant Madhav Vaidya, </span><strong><span style=\"font-family: Cambria Math;\">Managing Director</span></strong><span style=\"font-family: Cambria Math;\"><strong>:</strong> Arvind Kumar (As of Decem</span><span style=\"font-family: Cambria Math;\">ber 2022).</span></p>",
+                    solution_hi: "<p>10<span style=\"font-family: Cambria Math;\">.(c) </span><strong><span style=\"font-family: Nirmala UI;\">चेन्नई</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">पेट्रोलियम</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">कॉर्पोरेशन</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">लिमिटेड</span><span style=\"font-family: Cambria Math;\"> (CPCL)</span></strong><span style=\"font-family: Cambria Math;\"> , </span><span style=\"font-family: Nirmala UI;\">इंडियन</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">ऑयल</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">कॉर्पोरेशन</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">की</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">सहायक</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">कंपनी</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">है</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">जो</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">भारत</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">सरकार</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">के</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">पेट्रोलियम</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">और</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">प्राकृतिक</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">गैस</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">मंत्रालय</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">के</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">स्वामित्व</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">में</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">है।</span><span style=\"font-family: Cambria Math;\"> </span><strong><span style=\"font-family: Nirmala UI;\">मुख्यालय</span></strong><span style=\"font-family: Cambria Math;\">: </span><span style=\"font-family: Nirmala UI;\">चेन्नई।</span><span style=\"font-family: Cambria Math;\"> </span><strong><span style=\"font-family: Nirmala UI;\">स्थापना</span></strong><span style=\"font-family: Cambria Math;\">: 18 </span><span style=\"font-family: Nirmala UI;\">नवंबर</span><span style=\"font-family: Cambria Math;\"> 1965 , </span><strong><span style=\"font-family: Nirmala UI;\">अध्यक्ष</span></strong><span style=\"font-family: Cambria Math;\">: </span><span style=\"font-family: Nirmala UI;\">श्रीकांत</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">माधव</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">वैद्य।</span><span style=\"font-family: Cambria Math;\"> </span><strong><span style=\"font-family: Nirmala UI;\">प्रबंध</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">निदेशक</span></strong><span style=\"font-family: Cambria Math;\">: </span><span style=\"font-family: Nirmala UI;\">अरविंद</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">कुमार</span><span style=\"font-family: Cambria Math;\"> (</span><span style=\"font-family: Nirmala UI;\">दिसंबर</span><span style=\"font-family: Cambria Math;\"> 2022 </span><span style=\"font-family: Nirmala UI;\">तक</span><span style=\"font-family: Cambria Math;\">)</span><span style=\"font-family: Nirmala UI;\">।</span></p>",
+                    correct: "c",
+                    pos_marks: 2.0,
+                    neg_marks: 0.5
+                });
+                questions.push({
+                    id: "11",
+                    section: "18",
+                    question_en: "<p><span style=\"font-family: Cambria Math;\">11</span><span style=\"font-family: Cambria Math;\">.</span><span style=\"font-family: Cambria Math;\"> In which of the following Olympic </span><span style=\"font-family: Cambria Math;\">games</span><span style=\"font-family: Cambria Math;\"> did India NOT win Gold?</span></p>",
+                    question_hi: "<p><span style=\"font-family: Cambria Math;\">11</span><span style=\"font-family: Cambria Math;\">.</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">निम्नलिखित</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">में</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">से</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">किस</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">ओलंपिक</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">खेल</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">में</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">भारत</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">ने</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">स्वर्ण</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">पदक</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">नहीं</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">जी</span><span style=\"font-family: Nirmala UI;\">ता</span><span style=\"font-family: Cambria Math;\">?</span></p>",
+                    options_en: ["<p>1948</p>", "<p>1928</p>", 
+                                "<p>1932</p>", "<p>1960</p>"],
+                    options_hi: ["<p>1948</p>", "<p>1928</p>",
+                                "<p>1932</p>", "<p>1960</p>"],
+                    solution_en: "<p>11<span style=\"font-family: Cambria Math;\">.(d) </span><span style=\"font-family: Cambria Math;\">India has won</span><span style=\"font-family: Cambria Math;\"> <strong>35 medals</strong></span><span style=\"font-family: Cambria Math;\"> at the Olympics since the 1900 edition.</span><span style=\"font-family: Cambria Math;\"> <strong>Gold medal winners</strong></span><span style=\"font-family: Cambria Math;\"> from India: Jaipal Singh (</span><strong><span style=\"font-family: Cambria Math;\">1928</span></strong><span style=\"font-family: Cambria Math;\"><strong> </strong>- Amsterdam), Lal Bokhari (</span><strong><span style=\"font-family: Cambria Math;\">1932 </span></strong><span style=\"font-family: Cambria Math;\">- Los Angeles), Dhyan Chand (</span><strong><span style=\"font-family: Cambria Math;\">1936</span></strong><span style=\"font-family: Cambria Math;\"><strong> </strong>- Berlin)</span><span style=\"font-family: Cambria Math;\">, Kishan</span><span style=\"font-family: Cambria Math;\"> Lal (</span><span style=\"font-family: Cambria Math;\"><strong>1948</strong> </span><span style=\"font-family: Cambria Math;\">- London), K.D. Singh </span><span style=\"font-family: Cambria Math;\">(<strong>1952</strong> -</span><span style=\"font-family: Cambria Math;\"> Helsinki), Balbir Singh Sr (</span><strong><span style=\"font-family: Cambria Math;\">1956 </span></strong><span style=\"font-family: Cambria Math;\">- Melbourne), Charanjit Singh (</span><span style=\"font-family: Cambria Math;\">1964</span><span style=\"font-family: Cambria Math;\"> - Tokyo), Vasudevan Bhaskaran (</span><strong><span style=\"font-family: Cambria Math;\">1980 </span></strong><span style=\"font-family: Cambria Math;\">- Moscow), Abhinav Bindra </span><span style=\"font-family: Cambria Math;\">(2008-</span><span style=\"font-family: Cambria Math;\">Beijing), and Neeraj Chopra (</span><strong><span style=\"font-family: Cambria Math;\">2021</span></strong><span style=\"font-family: Cambria Math;\">-Tokyo ). </span></p>",
+                    solution_hi: "<p>11<span style=\"font-family: Cambria Math;\">.(d) </span><span style=\"font-family: Nirmala UI;\">भ</span><span style=\"font-family: Nirmala UI;\">ारत</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">ने</span><span style=\"font-family: Cambria Math;\"> 1900 </span><span style=\"font-family: Nirmala UI;\">संस्करण</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">के</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">बाद</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">से</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">ओलंपिक</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">में</span><span style=\"font-family: Cambria Math;\"> 35 </span><span style=\"font-family: Nirmala UI;\">पदक</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">जीते</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">हैं।</span><span style=\"font-family: Cambria Math;\"> </span><strong><span style=\"font-family: Nirmala UI;\">भारत</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">के</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">स्वर्ण</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">पदक</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">विजेता</span></strong><span style=\"font-family: Cambria Math;\">: </span><span style=\"font-family: Nirmala UI;\">जयपाल</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">सिंह</span><span style=\"font-family: Cambria Math;\"> (</span><strong><span style=\"font-family: Cambria Math;\">1928</span></strong><span style=\"font-family: Cambria Math;\"><strong> </strong>- </span><span style=\"font-family: Nirmala UI;\">एम्स्टर्डम</span><span style=\"font-family: Cambria Math;\">), </span><span style=\"font-family: Nirmala UI;\">लाल</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">बुखारी</span><span style=\"font-family: Cambria Math;\"> (</span><strong><span style=\"font-family: Cambria Math;\">1932</span></strong><span style=\"font-family: Cambria Math;\"><strong> </strong>- </span><span style=\"font-family: Nirmala UI;\">लॉस</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">एंजिल्स</span><span style=\"font-family: Cambria Math;\">), </span><span style=\"font-family: Nirmala UI;\">ध्यानचंद</span><span style=\"font-family: Cambria Math;\"> (</span><strong><span style=\"font-family: Cambria Math;\">1936</span></strong><span style=\"font-family: Cambria Math;\"><strong> </strong>- </span><span style=\"font-family: Nirmala UI;\">बर्लिन</span><span style=\"font-family: Cambria Math;\">), </span><span style=\"font-family: Nirmala UI;\">किशन</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">लाल</span><span style=\"font-family: Cambria Math;\"> (</span><strong><span style=\"font-family: Cambria Math;\">1948</span></strong><span style=\"font-family: Cambria Math;\"> - </span><span style=\"font-family: Nirmala UI;\">लंदन</span><span style=\"font-family: Cambria Math;\">), </span><span style=\"font-family: Nirmala UI;\">के</span><span style=\"font-family: Cambria Math;\">.</span><span style=\"font-family: Nirmala UI;\">डी</span><span style=\"font-family: Cambria Math;\">. </span><span style=\"font-family: Nirmala UI;\">सिंह</span><span style=\"font-family: Cambria Math;\"> (</span><strong><span style=\"font-family: Cambria Math;\">1952</span></strong><span style=\"font-family: Cambria Math;\"> - </span><span style=\"font-family: Nirmala UI;\">हेलसिंकी</span><span style=\"font-family: Cambria Math;\">), </span><span style=\"font-family: Nirmala UI;\">बलबीर</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">सिंह</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">सीनियर</span><span style=\"font-family: Cambria Math;\"> (</span><strong><span style=\"font-family: Cambria Math;\">1956</span></strong><span style=\"font-family: Cambria Math;\"><strong> </strong>-</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">मेलबर्न</span><span style=\"font-family: Cambria Math;\">), </span><span style=\"font-family: Nirmala UI;\">चरणजीत</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">सिंह</span><span style=\"font-family: Cambria Math;\"> (</span><strong><span style=\"font-family: Cambria Math;\">1964</span></strong><span style=\"font-family: Cambria Math;\"><strong> </strong>- </span><span style=\"font-family: Nirmala UI;\">टोक्यो</span><span style=\"font-family: Cambria Math;\">), </span><span style=\"font-family: Nirmala UI;\">वासुदेवन</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">भास्करन</span><span style=\"font-family: Cambria Math;\"> (</span><strong><span style=\"font-family: Cambria Math;\">1980</span></strong><span style=\"font-family: Cambria Math;\"><strong> </strong>- </span><span style=\"font-family: Nirmala UI;\">मॉस्को</span><span style=\"font-family: Cambria Math;\">), </span><span style=\"font-family: Nirmala UI;\">अभिनव</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">बिंद्रा</span><span style=\"font-family: Cambria Math;\"> (</span><strong><span style=\"font-family: Cambria Math;\">2008</span></strong><span style=\"font-family: Cambria Math;\"><strong> </strong>- </span><span style=\"font-family: Nirmala UI;\">बीजिंग</span><span style=\"font-family: Cambria Math;\">), </span><span style=\"font-family: Nirmala UI;\">और</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">नीरज</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">चोपड़ा</span><span style=\"font-family: Cambria Math;\"> (</span><strong><span style=\"font-family: Cambria Math;\">2021</span></strong><span style=\"font-family: Cambria Math;\"><strong> </strong>- </span><span style=\"font-family: Nirmala UI;\">टोक्यो</span><span style=\"font-family: Cambria Math;\">)</span><span style=\"font-family: Nirmala UI;\">।</span></p>",
+                    correct: "d",
+                    pos_marks: 2.0,
+                    neg_marks: 0.5
+                });
+                questions.push({
+                    id: "12",
+                    section: "18",
+                    question_en: "<p><span style=\"font-family: Cambria Math;\">12</span><span style=\"font-family: Cambria Math;\">. Which Indian tabla virtuoso and musician won the \'Best Contemporary World </span><span style=\"font-family: Cambria Math;\">Musi </span><span style=\"font-family: Cambria Math;\">Album\' Grammy award for \'Global</span><span style=\"font-family: Cambria Math;\"> Drum Project\'?</span></p>",
+                    question_hi: "<p><span style=\"font-family: Cambria Math;\">12</span><span style=\"font-family: Cambria Math;\">.</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">किस</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">भारतीय</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">तबला</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">वादक</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">और</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">संगीतकार</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">ने</span><span style=\"font-family: Cambria Math;\"> \'</span><span style=\"font-family: Nirmala UI;\">ग्लोबल</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">ड्रम</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">प्रोजेक्ट</span><span style=\"font-family: Cambria Math;\">\' </span><span style=\"font-family: Nirmala UI;\">के</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">लिए</span><span style=\"font-family: Cambria Math;\"> \'</span><span style=\"font-family: Nirmala UI;\">बेस्ट</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">कंटेंपोरेरी</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">वर्ल्ड</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">म्युजिक</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">एल्बम</span><span style=\"font-family: Cambria Math;\">\' </span><span style=\"font-family: Nirmala UI;\">ग्रैमी</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">पुरस्कार</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">जीता</span><span style=\"font-family: Cambria Math;\">?</span></p>",
+                    options_en: ["<p>Pandit Sandeep Das</p>", "<p>Ustad Alla Rakha</p>", 
+                                "<p>Ustad Zakir Hussain</p>", "<p>Pandit Anindo Chatterjee</p>"],
+                    options_hi: ["<p><span style=\"font-family: Nirmala UI;\">पंडित</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">संदीप</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">दास</span></p>", "<p><span style=\"font-family: Nirmala UI;\">उस्ताद</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">अल्ला</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">रखा</span></p>",
+                                "<p><span style=\"font-family: Nirmala UI;\">उस्ताद</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">जाकिर</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">हुसेन</span></p>", "<p><span style=\"font-family: Nirmala UI;\">पंडित</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">अनिंदो</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">चटर्जी</span></p>"],
+                    solution_en: "<p>12<span style=\"font-family: Cambria Math;\">.(c) <strong>Ustad Zakir </strong></span><strong><span style=\"font-family: Cambria Math;\">Hussain</span></strong><span style=\"font-family: Cambria Math;\"> (tabla player) won <strong>51st Grammy award </strong>on 8 February 2009. <strong>Awards </strong>and Honors: Padma Shri (1988), Padma Bhushan (2002), Sangeet Natak Akademi Award (1990), Kalidas Samman (2006), Lifetime Achievement Award (2017, San Francisco Jazz Center), Academy Fe</span><span style=\"font-family: Cambria Math;\">llow award (2019), Kyoto Prize (2022, Japan\'s highest private award for global achievement). </span></p>",
+                    solution_hi: "<p>12<span style=\"font-family: Cambria Math;\">.(c) </span><strong><span style=\"font-family: Nirmala UI;\">उस्ताद</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">जाकिर</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">हुसैन</span><span style=\"font-family: Cambria Math;\"> (</span><span style=\"font-family: Nirmala UI;\">तबला</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">वादक</span></strong><span style=\"font-family: Cambria Math;\"><strong>)</strong> </span><span style=\"font-family: Nirmala UI;\">ने</span><span style=\"font-family: Cambria Math;\"> 8 </span><span style=\"font-family: Nirmala UI;\">फरवरी</span><span style=\"font-family: Cambria Math;\"> 2009 </span><span style=\"font-family: Nirmala UI;\">को</span><span style=\"font-family: Cambria Math;\"> <strong>51</strong></span><strong><span style=\"font-family: Nirmala UI;\">वां</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">ग्रैमी</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">पुरस्कार</span></strong><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">जीता।</span><span style=\"font-family: Cambria Math;\"> </span><strong><span style=\"font-family: Nirmala UI;\">पुरस्कार</span><span style=\"font-family: Cambria Math;\"> </span></strong><span style=\"font-family: Nirmala UI;\">और</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">सम्मान</span><span style=\"font-family: Cambria Math;\">:</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">पद्म</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">श्री</span><span style=\"font-family: Cambria Math;\"> (1988), </span><span style=\"font-family: Nirmala UI;\">पद्म</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">भूषण</span><span style=\"font-family: Cambria Math;\"> (2002), </span><span style=\"font-family: Nirmala UI;\">संगीत</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">नाटक</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">अका</span><span style=\"font-family: Nirmala UI;\">दमी</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">पुरस्कार</span><span style=\"font-family: Cambria Math;\"> (1990), </span><span style=\"font-family: Nirmala UI;\">कालिदास</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">सम्मान</span><span style=\"font-family: Cambria Math;\"> (2006), </span><span style=\"font-family: Nirmala UI;\">लाइफटाइम</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">अचीवमेंट</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">अवार्ड</span><span style=\"font-family: Cambria Math;\"> (2017, </span><span style=\"font-family: Nirmala UI;\">सैन</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">फ्रांसिस्को</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">जैज</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">सेंटर</span><span style=\"font-family: Cambria Math;\">), </span><span style=\"font-family: Nirmala UI;\">अकादमी</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">फेलो</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">अवार्ड</span><span style=\"font-family: Cambria Math;\"> (2019), </span><span style=\"font-family: Nirmala UI;\">क्योटो</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">पुरस्कार</span><span style=\"font-family: Cambria Math;\"> (2022): </span><span style=\"font-family: Nirmala UI;\">वैश्विक</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">उपलब्धि</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">के</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">लिए</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">जापान</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">का</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">सर्वोच्च</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">निजी</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">पुरस्कार</span><span style=\"font-family: Cambria Math;\">)</span><span style=\"font-family: Nirmala UI;\">।</span></p>",
+                    correct: "c",
+                    pos_marks: 2.0,
+                    neg_marks: 0.5
+                });
+                questions.push({
+                    id: "13",
+                    section: "18",
+                    question_en: "<p><span style=\"font-family: Cambria Math;\">13</span><span style=\"font-family: Cambria Math;\">.</span><span style=\"font-family: Cambria Math;\"> Who was recognised as &lsquo;Asthana Nart</span><span style=\"font-family: Cambria Math;\">aki&rsquo; (resident dancer) of the Tirumala </span><span style=\"font-family: Cambria Math;\">Tirupati </span><span style=\"font-family: Cambria Math;\">Devasthanam for her contribution in the development and promotion of the Indian </span><span style=\"font-family: Cambria Math;\">classical</span><span style=\"font-family: Cambria Math;\"> dance forms?</span></p>",
+                    question_hi: "<p><span style=\"font-family: Cambria Math;\">13. </span><span style=\"font-family: Nirmala UI;\">न</span><span style=\"font-family: Nirmala UI;\">िम्नलिखित</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">में</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">से</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">किसे</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">भारतीय</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">शास्त्रीय</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">नृत्य</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">रूपों</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">के</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">विकास</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">और</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">प्रचार</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">में</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">उनके</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">योगदान</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">के</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">लिए</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">तिरुमाला</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">तिरुपति</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">देवस्थानम</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">की</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">आस्थाना</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">नर्तकी</span><span style=\"font-family: Cambria Math;\">\' (&ldquo;Resident Dancer\") </span><span style=\"font-family: Nirmala UI;\">के</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">रूप</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">में</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">मान्यता</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">दी</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">गई</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">थी</span><span style=\"font-family: Cambria Math;\">?</span></p>",
+                    options_en: ["<p>Rukmini Devi</p>", "<p>Ragini Devi</p>", 
+                                "<p>Yamini Krishnamurthy</p>", "<p>Uma Sharma</p>"],
+                    options_hi: ["<p><span style=\"font-family: Nirmala UI;\">रुक्मिणी</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">देवी</span></p>", "<p><span style=\"font-family: Nirmala UI;\">रागिनी</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">देवी</span></p>",
+                                "<p><span style=\"font-family: Nirmala UI;\">यामिनी</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">कृष्णमूर्ति</span></p>", "<p><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">उमा</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">शर्मा</span></p>"],
+                    solution_en: "<p>13<span style=\"font-family: Cambria Math;\">.(c) <strong>Mungara Yamini Krishnamurthy </strong></span><span style=\"font-family: Cambria Math;\">(Bharatanatyam and Kuchipudi dancer). </span><span style=\"font-family: Cambria Math;\">She was</span><span style=\"font-family: Cambria Math;\"> also known as the \"torch bearer\" of Kuchipudi form of dance. Her autobiography: &lsquo;A passion for dance&rsquo;. </span><strong><span style=\"font-family: Cambria Math;\">Awards and Honors:</span></strong><span style=\"font-family: Cambria Math;\"> Padma </span><span style=\"font-family: Cambria Math;\">Shri (1968), Padma </span><span style=\"font-family: Cambria Math;\">Bhushan (2001), Padma Vibhushan (2016), \"Natya Shastra\" (2014, by Shambhavi School of Dance), etc. Rukmini Devi Arundale (Bharatnatyam dancer), Ragini Devi (Bharata Natyam, Kuchipudi, Kathakali and Odissi dancer), Uma Sharma (Kathak dancer). </span></p>",
+                    solution_hi: "<p>13.(c)<span style=\"font-family: Cambria Math;\"> </span><strong><span style=\"font-family: Nirmala UI;\">मुंगरा</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">यामिनी</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">कृष्णमूर्ति</span></strong><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">(</span><span style=\"font-family: Nirmala UI;\">भरतनाट्यम</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">और</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">कुचिपुड़ी</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">नृत्यांगना</span><span style=\"font-family: Cambria Math;\">)</span><span style=\"font-family: Nirmala UI;\">।</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">उन्हें</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">कुचिपुड़ी</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">नृत्य</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">के</span><span style=\"font-family: Cambria Math;\"> <strong>\"</strong></span><strong><span style=\"font-family: Nirmala UI;\">मशाल</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">वाहक</span></strong><span style=\"font-family: Cambria Math;\"><strong>\"</strong> </span><span style=\"font-family: Nirmala UI;\">के</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">रूप</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">में</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">भी</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">जाना</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">जाता</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">था।</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">उनकी</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">आत्मकथा</span><span style=\"font-family: Cambria Math;\">: </span><strong><span style=\"font-family: Cambria Math;\">\'</span><span style=\"font-family: Nirmala UI;\">ए</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">पैशन</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">फॉर</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">डांस</span></strong><span style=\"font-family: Cambria Math;\"><strong>\'</strong> </span><span style=\"font-family: Nirmala UI;\">।</span><span style=\"font-family: Cambria Math;\"> </span><strong><span style=\"font-family: Nirmala UI;\">पुरस्कार</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">और</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">सम्मान</span></strong><span style=\"font-family: Cambria Math;\"><strong>:</strong> </span><span style=\"font-family: Nirmala UI;\">पद्म</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">श्री</span><span style=\"font-family: Cambria Math;\"> (1968), </span><span style=\"font-family: Nirmala UI;\">पद्म</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">भूषण</span><span style=\"font-family: Cambria Math;\"> (2001), </span><span style=\"font-family: Nirmala UI;\">पद्म</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">विभूषण</span><span style=\"font-family: Cambria Math;\"> (2016), \"</span><span style=\"font-family: Nirmala UI;\">नाट्य</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">शास्त्र</span><span style=\"font-family: Cambria Math;\">\"</span><span style=\"font-family: Cambria Math;\">(2014, </span><span style=\"font-family: Nirmala UI;\">शाम्भवी</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">डांस</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">स्कूल</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">द्वारा</span><span style=\"font-family: Cambria Math;\">) </span><span style=\"font-family: Nirmala UI;\">आदि।</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">रुक्मिणी</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">देवी</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">अरुंडेल</span><span style=\"font-family: Cambria Math;\"> (</span><span style=\"font-family: Nirmala UI;\">भरतनाट्यम</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">नर्तकी</span><span style=\"font-family: Cambria Math;\">), </span><span style=\"font-family: Nirmala UI;\">रागिनी</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">देवी</span><span style=\"font-family: Cambria Math;\"> (</span><span style=\"font-family: Nirmala UI;\">भरत</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">नाट्यम</span><span style=\"font-family: Cambria Math;\">, </span><span style=\"font-family: Nirmala UI;\">कुचिपुड़ी</span><span style=\"font-family: Cambria Math;\">, </span><span style=\"font-family: Nirmala UI;\">कथकली</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">और</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">ओडिसी</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">नृत्यांगना</span><span style=\"font-family: Cambria Math;\">), </span><span style=\"font-family: Nirmala UI;\">उमा</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">शर्मा</span><span style=\"font-family: Cambria Math;\"> (</span><span style=\"font-family: Nirmala UI;\">कथक</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">नर्तकी</span><span style=\"font-family: Cambria Math;\">)</span><span style=\"font-family: Nirmala UI;\">।</span></p>",
+                    correct: "c",
+                    pos_marks: 2.0,
+                    neg_marks: 0.5
+                });
+                questions.push({
+                    id: "14",
+                    section: "18",
+                    question_en: "<p><span style=\"font-family: Cambria Math;\">14</span><span style=\"font-family: Cambria Math;\">. Manimekalai describes the story of which of the following?</span></p>",
+                    question_hi: "<p><span style=\"font-family: Cambria Math;\">14</span><span style=\"font-family: Cambria Math;\">. </span><span style=\"font-family: Nirmala UI;\">मणिमेखलई</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">महाकाव्य</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">निम्नलिखित</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">में</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">से</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">किसकी</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">कहानी</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">का</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">वर्णन</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">करता</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">है</span><span style=\"font-family: Cambria Math;\">?</span></p>",
+                    options_en: ["<p>Kovalan and Madhavi&rsquo;s Daughter</p>", "<p>Kovalan&rsquo;s wife Madhavi</p>", 
+                                "<p>Kovalan&rsquo;s first wife Kannagi</p>", "<p>Kovalan and Madhavi&rsquo;s Son</p>"],
+                    options_hi: ["<p><span style=\"font-family: Nirmala UI;\">कोवलन</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">और</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">माधवी</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">की</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">बेटी</span></p>", "<p><span style=\"font-family: Nirmala UI;\">कोवलन</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">की</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">पत्नी</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">म</span><span style=\"font-family: Nirmala UI;\">ाधवी</span></p>",
+                                "<p><span style=\"font-family: Nirmala UI;\">कोवलन</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">की</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">पूर्व</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">पत्नी</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">कन्नगी</span></p>", "<p><span style=\"font-family: Nirmala UI;\">कोवलन</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">और</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">माधवी</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">के</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">बेटे</span></p>"],
+                    solution_en: "<p>14<span style=\"font-family: Cambria Math;\">.(a) <strong>Manimekalai </strong></span><span style=\"font-family: Cambria Math;\">describes the story of the daughter of </span><strong><span style=\"font-family: Cambria Math;\">Kovalan and Madhavi.</span></strong><span style=\"font-family: Cambria Math;\"> It</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">is a Tamil-Buddhist epic written by Kulavanikan Seethalai Sataar in the 6th century. Other</span><span style=\"font-family: Cambria Math;\"> <strong>Great Epics</strong></span><span style=\"font-family: Cambria Math;\"> of Tamil Literature are Cilappatikaram (written by Ilango Adigal, story of Kannaki and </span><span style=\"font-family: Cambria Math;\">Kovalan )</span><span style=\"font-family: Cambria Math;\">, Civaka Cintamani (written by Tirutakkatevar, story of King Caccantan), Kundalakesi (composed by Nagasena, story of Kundalakesi and Kalan), and Va</span><span style=\"font-family: Cambria Math;\">layapathi (story of a father who has two wives). </span></p>",
+                    solution_hi: "<p>14<span style=\"font-family: Cambria Math;\">.(a) </span><span style=\"font-family: Nirmala UI;\">मणिमेकलई</span><span style=\"font-family: Cambria Math;\"> , </span><strong><span style=\"font-family: Nirmala UI;\">कोवलन</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">और</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">माधवी</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">की</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">बेटी</span><span style=\"font-family: Cambria Math;\"> </span></strong><span style=\"font-family: Nirmala UI;\">की</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">कहानी</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">का</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">वर्णन</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">करता</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">है।</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">यह</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">एक</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">तमिल</span><span style=\"font-family: Cambria Math;\">-</span><span style=\"font-family: Nirmala UI;\">बौद्ध</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">महाकाव्य</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">है</span><span style=\"font-family: Cambria Math;\">, </span><span style=\"font-family: Nirmala UI;\">जिसे</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">छठी</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">शताब्दी</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">में</span><span style=\"font-family: Cambria Math;\"> </span><strong><span style=\"font-family: Nirmala UI;\">कुलवनिकन</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">सीतलाई</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">सतार</span></strong><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">ने</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">लिखा</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">था।</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">तमिल</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">साहित्य</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">के</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">अन्य</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">महान</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">महाकाव्य</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">हैं</span><span style=\"font-family: Cambria Math;\"> </span><strong><span style=\"font-family: Nirmala UI;\">सिलप्पाट</span><span style=\"font-family: Nirmala UI;\">िकरम</span><span style=\"font-family: Cambria Math;\"> </span></strong><span style=\"font-family: Cambria Math;\">(</span><span style=\"font-family: Nirmala UI;\">इलंगो</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">अडिगल</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">द्वारा</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">लिखित</span><span style=\"font-family: Cambria Math;\">, </span><span style=\"font-family: Nirmala UI;\">कन्नकी</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">और</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">कोवलन</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">की</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">कहानी</span><span style=\"font-family: Cambria Math;\">), </span><strong><span style=\"font-family: Nirmala UI;\">सिवाका</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">चिंतामणि</span></strong><span style=\"font-family: Cambria Math;\"> (</span><span style=\"font-family: Nirmala UI;\">तिरुतक्कतेवर</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">द्वारा</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">लिखित</span><span style=\"font-family: Cambria Math;\">, </span><span style=\"font-family: Nirmala UI;\">राजा</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">कैकांतन</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">की</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">कहानी</span><span style=\"font-family: Cambria Math;\">), </span><strong><span style=\"font-family: Nirmala UI;\">कुंडलकेशी</span><span style=\"font-family: Cambria Math;\"> </span></strong><span style=\"font-family: Cambria Math;\">(</span><span style=\"font-family: Nirmala UI;\">नागसेना</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">द्वारा</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">रचित</span><span style=\"font-family: Cambria Math;\">, </span><span style=\"font-family: Nirmala UI;\">कुंडलकेशी</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">और</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">कलां</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">की</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">कहानी</span><span style=\"font-family: Cambria Math;\">), </span><span style=\"font-family: Nirmala UI;\">और</span><span style=\"font-family: Cambria Math;\"> </span><strong><span style=\"font-family: Nirmala UI;\">वलयपथी</span><span style=\"font-family: Cambria Math;\"> </span></strong><span style=\"font-family: Cambria Math;\">( </span><span style=\"font-family: Nirmala UI;\">एक</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">पिता</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">की</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">कहानी</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">जिसकी</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">दो</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">पत्नियाँ</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">हैं</span><span style=\"font-family: Cambria Math;\">)</span><span style=\"font-family: Nirmala UI;\">।</span></p>",
+                    correct: "a",
+                    pos_marks: 2.0,
+                    neg_marks: 0.5
+                });
+                questions.push({
+                    id: "15",
+                    section: "misc",
+                    question_en: "<p><span style=\"font-family: Cambria Math;\">15</span><span style=\"font-family: Cambria Math;\">.</span><span style=\"font-family: Cambria Math;\"> With which of the following Indian states is the folk dance Lezim associated?</span></p>",
+                    question_hi: "<p>15.<span style=\"font-family: Nirmala UI;\">ल</span><span style=\"font-family: Nirmala UI;\">ोक</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">नृत्य</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">लेज़िम</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">निम्नलिखित</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">में</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">से</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">किस</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">भारतीय</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">राज्य</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">से</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">संबंधित</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">है</span><span style=\"font-family: Cambria Math;\">?</span></p>",
+                    options_en: ["<p>Maharashtra</p>", "<p>Kerala</p>", 
+                                "<p>Arunachal Pradesh</p>", "<p>Jharkhand</p>"],
+                    options_hi: ["<p><span style=\"font-family: Nirmala UI;\">महाराष्ट्र</span></p>", "<p><span style=\"font-family: Nirmala UI;\">केरल</span></p>",
+                                "<p><span style=\"font-family: Nirmala UI;\">अरुणा</span><span style=\"font-family: Nirmala UI;\">चल</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">प्रदेश</span></p>", "<p><span style=\"font-family: Nirmala UI;\">झारखंड</span></p>"],
+                    solution_en: "<p>15<span style=\"font-family: Cambria Math;\">.(a) </span><span style=\"font-family: Cambria Math;\">Folk dances of </span><strong><span style=\"font-family: Cambria Math;\">Maharashtra</span><span style=\"font-family: Cambria Math;\">: </span></strong><span style=\"font-family: Cambria Math;\"><strong>Lezim,</strong> </span><span style=\"font-family: Cambria Math;\">Lavani, Nakata, Koli, Gafa, Dahikala Dasavtar or Bohada, Tamasha, Mauni, Powara, Gouricha, etc. </span><strong><span style=\"font-family: Cambria Math;\">Kerala</span></strong><span style=\"font-family: Cambria Math;\">: Ottam Thulal, Kaikottikali, Tappatikali, Kali Auttam, etc. </span><strong><span style=\"font-family: Cambria Math;\">Arunachal Prade</span><span style=\"font-family: Cambria Math;\">sh: </span></strong><span style=\"font-family: Cambria Math;\">Chham, Mask dance (Mukhauta Nritya), War dance, Buiya, Chalo, Wancho, Pasi Kongki, Ponung, Popir, Bardo , etc. </span><span style=\"font-family: Cambria Math;\"><strong>Jharkhand</strong>: </span><span style=\"font-family: Cambria Math;\">Karma, Agni, Jhumar, Janani Jhumar, Mardana Jhumar, Paika, Phagua, Chhanu, Sarahul, Jat-Jatin, Karma, Danga, Bidesia, Sohrai, Hunt</span><span style=\"font-family: Cambria Math;\">a Dance, Mundari Dance, Sarhul, Barao, Jhitka, Danga, Domkach, Ghora Naach, etc. </span></p>",
+                    solution_hi: "<p>15.(a) <strong><span style=\"font-family: Nirmala UI;\">महाराष्ट्र</span><span style=\"font-family: Cambria Math;\"> </span></strong><span style=\"font-family: Nirmala UI;\">के</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">लोक</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">नृत्य</span><span style=\"font-family: Cambria Math;\">: </span><strong><span style=\"font-family: Nirmala UI;\">लेज़िम</span></strong><span style=\"font-family: Cambria Math;\">, </span><span style=\"font-family: Nirmala UI;\">लावणी</span><span style=\"font-family: Cambria Math;\">, </span><span style=\"font-family: Nirmala UI;\">नकटा</span><span style=\"font-family: Cambria Math;\">, </span><span style=\"font-family: Nirmala UI;\">कोली</span><span style=\"font-family: Cambria Math;\">, </span><span style=\"font-family: Nirmala UI;\">गाफा</span><span style=\"font-family: Cambria Math;\">, </span><span style=\"font-family: Nirmala UI;\">दहिकला</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">दशावतार</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">या</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">बोहड़ा</span><span style=\"font-family: Cambria Math;\">, </span><span style=\"font-family: Nirmala UI;\">तमाशा</span><span style=\"font-family: Cambria Math;\">, </span><span style=\"font-family: Nirmala UI;\">मौनी</span><span style=\"font-family: Cambria Math;\">, </span><span style=\"font-family: Nirmala UI;\">पोवारा</span><span style=\"font-family: Cambria Math;\">, </span><span style=\"font-family: Nirmala UI;\">गौरिचा</span><span style=\"font-family: Cambria Math;\">, </span><span style=\"font-family: Nirmala UI;\">आदि।</span><span style=\"font-family: Cambria Math;\"> </span><strong><span style=\"font-family: Nirmala UI;\">केरल</span></strong><span style=\"font-family: Cambria Math;\">:</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">ओट्टम</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">थुलाल</span><span style=\"font-family: Cambria Math;\">, </span><span style=\"font-family: Nirmala UI;\">कैकोट्टिकली</span><span style=\"font-family: Cambria Math;\">, </span><span style=\"font-family: Nirmala UI;\">तप्पटिकली</span><span style=\"font-family: Cambria Math;\">,</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">काली</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">ऑटम</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">आदि।</span><span style=\"font-family: Cambria Math;\"> </span><strong><span style=\"font-family: Nirmala UI;\">अरुणाचल</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">प्रदेश</span><span style=\"font-family: Cambria Math;\">: </span></strong><span style=\"font-family: Nirmala UI;\">छम</span><span style=\"font-family: Cambria Math;\">, </span><span style=\"font-family: Nirmala UI;\">मुखौटा</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">नृत्य</span><span style=\"font-family: Cambria Math;\"> (</span><span style=\"font-family: Nirmala UI;\">मुखौटा</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">नृत्य</span><span style=\"font-family: Cambria Math;\">), </span><span style=\"font-family: Nirmala UI;\">युद्ध</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">नृत्य</span><span style=\"font-family: Cambria Math;\">, </span><span style=\"font-family: Nirmala UI;\">बुइया</span><span style=\"font-family: Cambria Math;\">, </span><span style=\"font-family: Nirmala UI;\">चलो</span><span style=\"font-family: Cambria Math;\">, </span><span style=\"font-family: Nirmala UI;\">वांचो</span><span style=\"font-family: Cambria Math;\">, </span><span style=\"font-family: Nirmala UI;\">पासी</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">कोंगकी</span><span style=\"font-family: Cambria Math;\">, </span><span style=\"font-family: Nirmala UI;\">पोनुंग</span><span style=\"font-family: Cambria Math;\">, </span><span style=\"font-family: Nirmala UI;\">पोपिर</span><span style=\"font-family: Cambria Math;\">, </span><span style=\"font-family: Nirmala UI;\">बारदो</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">आदि।</span><span style=\"font-family: Cambria Math;\"> </span><strong><span style=\"font-family: Nirmala UI;\">झारखंड</span></strong><span style=\"font-family: Cambria Math;\">: </span><span style=\"font-family: Nirmala UI;\">कर्मा</span><span style=\"font-family: Cambria Math;\">, </span><span style=\"font-family: Nirmala UI;\">अग्नि</span><span style=\"font-family: Cambria Math;\">, </span><span style=\"font-family: Nirmala UI;\">झूमर</span><span style=\"font-family: Cambria Math;\">, </span><span style=\"font-family: Nirmala UI;\">जननी</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">झूमर</span><span style=\"font-family: Cambria Math;\">, </span><span style=\"font-family: Nirmala UI;\">मरदाना</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">झूमर</span><span style=\"font-family: Cambria Math;\">, </span><span style=\"font-family: Nirmala UI;\">पाइका</span><span style=\"font-family: Cambria Math;\">, </span><span style=\"font-family: Nirmala UI;\">फगुआ</span><span style=\"font-family: Cambria Math;\">, </span><span style=\"font-family: Nirmala UI;\">छानू</span><span style=\"font-family: Cambria Math;\">, </span><span style=\"font-family: Nirmala UI;\">सरहुल</span><span style=\"font-family: Cambria Math;\">, </span><span style=\"font-family: Nirmala UI;\">जाट</span><span style=\"font-family: Cambria Math;\">-</span><span style=\"font-family: Nirmala UI;\">जतिन</span><span style=\"font-family: Cambria Math;\">, </span><span style=\"font-family: Nirmala UI;\">कर्मा</span><span style=\"font-family: Cambria Math;\">, </span><span style=\"font-family: Nirmala UI;\">डंगा</span><span style=\"font-family: Cambria Math;\">, </span><span style=\"font-family: Nirmala UI;\">बिदेसिया</span><span style=\"font-family: Cambria Math;\">, </span><span style=\"font-family: Nirmala UI;\">सोहराई</span><span style=\"font-family: Cambria Math;\">, </span><span style=\"font-family: Nirmala UI;\">हु</span><span style=\"font-family: Nirmala UI;\">ंता</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">नृत्य</span><span style=\"font-family: Cambria Math;\">, </span><span style=\"font-family: Nirmala UI;\">मुंडारी</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">नृत्य</span><span style=\"font-family: Cambria Math;\">, </span><span style=\"font-family: Nirmala UI;\">सरहुल</span><span style=\"font-family: Cambria Math;\">, </span><span style=\"font-family: Nirmala UI;\">बाराव</span><span style=\"font-family: Cambria Math;\">, </span><span style=\"font-family: Nirmala UI;\">झिटका</span><span style=\"font-family: Cambria Math;\">, </span><span style=\"font-family: Nirmala UI;\">डंगा</span><span style=\"font-family: Cambria Math;\">, </span><span style=\"font-family: Nirmala UI;\">डोमकच</span><span style=\"font-family: Cambria Math;\">, </span><span style=\"font-family: Nirmala UI;\">घोरा</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Nirmala UI;\">नाच</span><span style=\"font-family: Cambria Math;\">, </span><span style=\"font-family: Nirmala UI;\">आदि।</span></p>",
+                    correct: "a",
+                    pos_marks: 2.0,
+                    neg_marks: 0.5
+                });
+            
+            // Generate question boxes
+            const boxesContainer = document.getElementById('question-boxes');
+            questions.forEach((q, index) => {
+                const box = document.createElement('div');
+                box.className = 'q-box';
+                box.textContent = index + 1;
+                box.onclick = () => showQuestion(index);
+                box.id = `box-${index}`;
+                boxesContainer.appendChild(box);
+            });
+            
+            // Show first question
+            showQuestion(0);
+            updateProgress();
+        }
+        
+        // Show a specific question
+        
+        function formatContent(text) {
+            if (!text) return '';
+            return text.replace(/<img/g, '<img style="max-width:100%;height:auto;"');
+        }
+        
+        function showQuestion(index) {
+            if (index < 0 || index >= questions.length) return;
+            
+            currentQuestion = index;
+            const question = questions[index];
+            
+            // Update question counter
+            document.getElementById('question-counter').textContent = `Question ${index + 1} of ${questions.length}`;
+            
+            // Update question boxes
+            document.querySelectorAll('.q-box').forEach(box => box.classList.remove('current'));
+            document.getElementById(`box-${index}`).classList.add('current');
+            
+            // Generate question HTML
+            let html = `
+                <div class="question-card">
+                    <div class="question-text">
+                        <div class="en">${formatContent(question.question_en)}</div>
+                        <div class="hi" style="display:none">${formatContent(question.question_hi)} </div>
+                    </div>
+                    <div class="options" id="options-container">`;
+            
+            // Add options
+            ['a', 'b', 'c', 'd'].forEach((opt, i) => {
+                let optionClass = '';
+                let isCorrectAnswer = opt === question.correct;
+                let isUserAnswer = answers[question.id] === opt;
+                
+                // When reviewing, add appropriate classes
+                if (submitted) {
+                    if (isCorrectAnswer) {
+                        optionClass += ' correct-answer';
+                    } else if (isUserAnswer && !isCorrectAnswer) {
+                        optionClass += ' incorrect';
+                    }
+                }
+                
+                html += `
+                    <div class="option-item">
+                        <input class="option-input" type="radio" name="q${index}" 
+                            id="opt-${index}-${opt}" value="${opt}" 
+                            ${isUserAnswer ? 'checked' : ''}
+                            onclick="selectAnswer('${question.id}', '${opt}')">
+                       <label class="option-label${optionClass}" for="opt-${index}-${opt}">
+                            <div class="en">${question.options_en[i]}</div>
+                            <div class="hi" style="display:none">${question.options_hi[i]}</div>
+                        </label>
+                    </div>`;
+            });
+            
+            // Add solution if submitted
+            if (submitted) {
+                const isCorrect = answers[question.id] === question.correct;
+                const resultText = answers[question.id] ? (isCorrect ? 'Correct!' : 'Incorrect!') : 'Not attempted';
+                
+                html += `
+                    <div class="solution-container">
+                        <div class="solution-title">${resultText}</div>
+                        <div class="solution-text">
+                            <div class="en">${question.solution_en}</div>
+                            <div class="hi" style="display:none">${question.solution_hi}</div>
+                        </div>
+                    </div>`;
+            }
+            
+            html += `</div></div>`;
+            
+            document.getElementById('questions-container').innerHTML = html;
+            
+            // Apply language settings
+            applyLanguage();
+            
+            // If in mobile view, close the menu
+            if (window.innerWidth < 992) {
+                toggleNav(false);
+            }
+            
+            // Add review mode class if submitted
+            if (submitted) {
+                document.getElementById('options-container').classList.add('review-mode');
+            }
+        }
+        
+        // Apply current language
+        function applyLanguage() {
+            document.querySelectorAll(`.${currentLang}`).forEach(el => el.style.display = 'block');
+            document.querySelectorAll(`.${currentLang === 'en' ? 'hi' : 'en'}`).forEach(el => el.style.display = 'none');
+            
+            // Update language button text
+            document.getElementById('lang-text').textContent = currentLang === 'en' ? 'Hi' : 'En';
+        }
+        
+        // Select an answer
+        function selectAnswer(qId, option) {
+            if (submitted) return;
+            
+            answers[qId] = option;
+            updateProgress();
+            
+            // Mark question as attempted in the navigation
+            const index = questions.findIndex(q => q.id === qId);
+            if (index >= 0) {
+                const box = document.getElementById(`box-${index}`);
+                box.classList.add('attempted');
+                box.classList.remove('unattempted');
+            }
+        }
+        
+        // Navigate to previous/next question
+        function prevQuestion() { 
+            if (currentQuestion > 0) showQuestion(currentQuestion - 1); 
+        }
+        
+        function nextQuestion() { 
+            if (currentQuestion < questions.length - 1) showQuestion(currentQuestion + 1); 
+        }
+        
+        // Switch section
+        function switchSection(sectionId) {
+            if (sectionId === 'all') {
+                showQuestion(0);
+                return;
+            }
+            
+            const section = sections[sectionId];
+            if (section) showQuestion(section.start);
+        }
+        
+        // Toggle language
+        function toggleLanguage() {
+            currentLang = currentLang === 'en' ? 'hi' : 'en';
+            applyLanguage();
+        }
+        
+        // Toggle navigation sidebar
+        function toggleNav(show) {
+            const nav = document.getElementById('question-nav');
+            const overlay = document.getElementById('nav-overlay');
+            
+            if (show === undefined) {
+                show = !nav.classList.contains('show');
+            }
+            
+            if (show) {
+                nav.classList.add('show');
+                overlay.classList.add('show');
+                document.body.style.overflow = 'hidden';
+            } else {
+                nav.classList.remove('show');
+                overlay.classList.remove('show');
+                document.body.style.overflow = '';
+            }
+        }
+        
+        // Update progress
+        function updateProgress() {
+            const attempted = Object.keys(answers).length;
+            document.getElementById('attempted-count').textContent = attempted;
+        }
+        
+        // Start timer
+        function startTimer() {
+            const timerDisplay = document.getElementById('timer-display');
+            let timeLeft = totalTime;
+            
+            const timerInterval = setInterval(() => {
+                if (timeLeft <= 0 || submitted) {
+                    clearInterval(timerInterval);
+                    if (!submitted) submitTest();
+                    return;
+                }
+                
+                const minutes = Math.floor(timeLeft / 60);
+                const seconds = timeLeft % 60;
+                timerDisplay.textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`;
+                timeLeft--;
+            }, 1000);
+        }
+        
+        // Confirm before submitting
+        function confirmSubmit() {
+            if (submitted) return;
+            
+            const attempted = Object.keys(answers).length;
+            const remaining = questions.length - attempted;
+            
+            // Create a more modern confirmation dialog
+            const confirmHtml = `
+                <div style="text-align: center; padding: 20px;">
+                    <h4 style="margin-bottom: 16px; color: var(--dark);">Confirm Submission</h4>
+                    <p style="margin-bottom: 24px; color: var(--gray);">
+                        You have attempted ${attempted} of ${questions.length} questions.<br>
+                        ${remaining} questions are unattempted.
+                    </p>
+                    <div style="display: flex; justify-content: center; gap: 12px;">
+                        <button onclick="this.closest('.modal').querySelector('.cancel-btn').click()" 
+                            style="padding: 8px 20px; border: 1px solid var(--light-gray); background: white; border-radius: 8px; cursor: pointer;">
+                            Cancel
+                        </button>
+                        <button onclick="submitTest(); this.closest('.modal').querySelector('.cancel-btn').click()" 
+                            style="padding: 8px 20px; background: var(--primary); color: white; border: none; border-radius: 8px; cursor: pointer;">
+                            Submit Test
+                        </button>
+                    </div>
+                </div>`;
+            
+            // Create modal element
+            const modal = document.createElement('div');
+            modal.className = 'results-modal show';
+            modal.innerHTML = `
+                <div class="results-card" style="max-width: 400px;">
+                    <button class="cancel-btn" style="position: absolute; top: 12px; right: 12px; background: none; border: none; font-size: 1.2rem; cursor: pointer; color: var(--gray);" onclick="this.closest('.results-modal').remove()">
+                        ×
+                    </button>
+                    ${confirmHtml}
+                </div>`;
+            
+            document.body.appendChild(modal);
+        }
+        
+        // Submit test
+        function submitTest() {
+            if (submitted) return;
+            
+            submitted = true;
+            
+            let score = 0;
+            let correctCount = 0;
+            let incorrectCount = 0;
+            let unattemptedCount = 0;
+            
+            questions.forEach((q, index) => {
+                const userAns = answers[q.id];
+                const box = document.getElementById(`box-${index}`);
+                
+                box.classList.remove('attempted');
+                
+                if (!userAns) {
+                    unattemptedCount++;
+                    box.classList.add('unattempted');
+                } else if (userAns === q.correct) {
+                    correctCount++;
+                    score += q.pos_marks;
+                    box.classList.add('correct');
+                } else {
+                    incorrectCount++;
+                    score -= q.neg_marks;
+                    box.classList.add('incorrect');
+                }
+            });
+            
+            // Update result values
+            document.getElementById('score-value').textContent = score.toFixed(2);
+            document.getElementById('correct-value').textContent = correctCount;
+            document.getElementById('incorrect-value').textContent = incorrectCount;
+            document.getElementById('unattempted-value').textContent = unattemptedCount;
+            
+            // Show the results modal
+            document.getElementById('results-modal').classList.add('show');
+            
+            // Disable submit button
+            const submitBtn = document.getElementById('submit-btn');
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<i class="fas fa-check"></i>';
+            submitBtn.style.backgroundColor = 'var(--success)';
+            
+            // Refresh current question view to show solution
+            showQuestion(currentQuestion);
+        }
+        
+        // Review test
+        function reviewTest() {
+            document.getElementById('results-modal').classList.remove('show');
+            showQuestion(0);
+        }
+        
+        // Close modal when clicking outside
+        window.addEventListener('click', function(event) {
+            if (event.target === document.getElementById('results-modal')) {
+                document.getElementById('results-modal').classList.remove('show');
+            }
+        });
+        
+        // Keyboard navigation
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowLeft') prevQuestion();
+            if (e.key === 'ArrowRight') nextQuestion();
+        });
+    </script>
+</body>
+</html>

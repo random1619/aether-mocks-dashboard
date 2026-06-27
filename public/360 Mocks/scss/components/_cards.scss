@@ -1,0 +1,387 @@
+@import '../abstracts/variables';
+
+// CBT Component Cards
+.question-card {
+    background: $color-card-dark;
+    border: 1px solid $color-border-dark;
+    border-radius: $radius-lg;
+    padding: 25px;
+    box-shadow: $shadow-md;
+    color: $color-text-dark;
+    transition: box-shadow 0.3s;
+
+    &:hover {
+        box-shadow: $shadow-lg;
+    }
+}
+
+body.light-theme .question-card {
+    background: $color-card-light;
+    border-color: $color-border-light;
+    color: $color-text-light;
+}
+
+.question-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.05);
+}
+
+body.light-theme .question-header {
+    border-bottom-color: rgba(0, 0, 0, 0.05);
+}
+
+.question-number {
+    font-size: $font-size-lg;
+    font-weight: 600;
+    color: $color-primary;
+}
+
+.question-marks {
+    font-size: $font-size-sm;
+    color: $color-text-muted-dark;
+}
+
+body.light-theme .question-marks {
+    color: $color-text-muted-light;
+}
+
+.question-text {
+    font-size: $font-size-md;
+    line-height: 2.0 !important;
+    margin-bottom: 20px;
+    color: #e5e7eb !important;
+
+    p {
+        line-height: 2.0 !important;
+    }
+}
+
+body.light-theme .question-text {
+    color: $color-text-light !important;
+}
+
+.options-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+// Option Styling
+.option {
+    display: flex;
+    align-items: flex-start;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.01) !important;
+    border: 1.5px solid $color-border-dark !important;
+    border-radius: $radius-md !important;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    color: #f3f4f6 !important;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+
+    &:hover:not(.submitted):not(.correct):not(.wrong):not(.selected) {
+        border-color: $color-primary !important;
+        background: rgba(255, 255, 255, 0.03) !important;
+    }
+
+    &.selected {
+        border-color: $color-primary !important;
+        background: rgba(255, 255, 255, 0.06) !important;
+        color: white !important;
+
+        .option-indicator {
+            border-color: $color-primary !important;
+            background: $color-primary !important;
+            color: white !important;
+        }
+    }
+
+    &.correct {
+        border-color: $color-success !important;
+        background: rgba($color-success, 0.1) !important;
+        color: $color-success !important;
+
+        .option-indicator {
+            border-color: $color-success !important;
+            background: $color-success !important;
+            color: white !important;
+        }
+    }
+
+    &.wrong {
+        border-color: $color-danger !important;
+        background: rgba($color-danger, 0.1) !important;
+        color: $color-danger !important;
+
+        .option-indicator {
+            border-color: $color-danger !important;
+            background: $color-danger !important;
+            color: white !important;
+        }
+    }
+}
+
+body.light-theme .option {
+    background: white !important;
+    border-color: $color-border-light !important;
+    color: $color-text-light !important;
+
+    &:hover:not(.submitted):not(.correct):not(.wrong):not(.selected) {
+        background: #f9fafb !important;
+        border-color: $color-primary !important;
+    }
+
+    &.selected {
+        background: rgba($color-primary, 0.08) !important;
+        border-color: $color-primary !important;
+        color: $color-text-light !important;
+    }
+
+    &.correct {
+        background: rgba($color-success, 0.1) !important;
+        border-color: $color-success !important;
+        color: #047857 !important;
+    }
+
+    &.wrong {
+        background: rgba($color-danger, 0.1) !important;
+        border-color: $color-danger !important;
+        color: #b91c1c !important;
+    }
+}
+
+.option-indicator {
+    width: 24px;
+    height: 24px;
+    border: 2px solid $color-border-dark;
+    border-radius: 50%;
+    margin-right: 12px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2px;
+    font-size: $font-size-sm;
+    transition: all 0.2s;
+}
+
+body.light-theme .option-indicator {
+    border-color: $color-border-light;
+}
+
+.option-text {
+    flex: 1;
+    font-size: $font-size-base;
+    line-height: 2.0 !important;
+    color: inherit;
+}
+
+// Comprehension block
+.comprehension {
+    background: rgba(255, 255, 255, 0.02) !important;
+    border-left: 4px solid $color-primary !important;
+    border-top: 1px solid $color-border-dark !important;
+    border-right: 1px solid $color-border-dark !important;
+    border-bottom: 1px solid $color-border-dark !important;
+    border-radius: $radius-lg !important;
+    padding: 15px;
+    margin-bottom: 20px;
+    line-height: 2.0 !important;
+    color: #e5e7eb !important;
+
+    h4 {
+        color: $color-primary !important;
+        margin-bottom: 10px;
+        font-size: $font-size-base;
+        font-weight: 600 !important;
+    }
+    
+    p {
+        line-height: 2.0 !important;
+    }
+}
+
+body.light-theme .comprehension {
+    background: #eff6ff !important;
+    border-left-color: $color-primary !important;
+    border-top-color: $color-border-light !important;
+    border-right-color: $color-border-light !important;
+    border-bottom-color: $color-border-light !important;
+    color: $color-text-light !important;
+}
+
+// Solution block
+.solution-box {
+    background: rgba($color-success, 0.08) !important;
+    border-left: 4px solid $color-success !important;
+    border-top: 1px solid $color-border-dark !important;
+    border-right: 1px solid $color-border-dark !important;
+    border-bottom: 1px solid $color-border-dark !important;
+    border-radius: $radius-lg !important;
+    padding: 15px;
+    margin-top: 20px;
+    display: none;
+    line-height: 2.0 !important;
+    color: #e5e7eb !important;
+    pointer-events: none !important;
+
+    &.show {
+        display: block;
+    }
+    
+    p {
+        line-height: 2.0 !important;
+    }
+}
+
+body.light-theme .solution-box {
+    background: #d1fae5 !important;
+    border-left-color: $color-success !important;
+    border-top-color: $color-border-light !important;
+    border-right-color: $color-border-light !important;
+    border-bottom-color: $color-border-light !important;
+    color: $color-text-light !important;
+}
+
+.solution-header {
+    color: $color-success !important;
+    font-weight: 600;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.solution-stats {
+    display: flex;
+    gap: 15px;
+    font-size: $font-size-xs;
+    color: $color-text-muted-dark;
+    margin-bottom: 10px;
+    flex-wrap: wrap !important;
+}
+
+body.light-theme .solution-stats {
+    color: $color-text-muted-light;
+}
+
+// Welcome Screen Cards / Details
+.detail-item {
+    background: rgba(255, 255, 255, 0.03) !important;
+    border-left: 3px solid $color-primary !important;
+    border-top: 1px solid $color-border-dark !important;
+    border-right: 1px solid $color-border-dark !important;
+    border-bottom: 1px solid $color-border-dark !important;
+    border-radius: $radius-md !important;
+    padding: 15px;
+}
+
+body.light-theme .detail-item {
+    background: #f9fafb !important;
+    border-top-color: $color-border-light !important;
+    border-right-color: $color-border-light !important;
+    border-bottom-color: $color-border-light !important;
+}
+
+.detail-label {
+    font-size: $font-size-sm;
+    color: $color-text-muted-dark !important;
+    margin-bottom: 5px;
+}
+
+body.light-theme .detail-label {
+    color: $color-text-muted-light !important;
+}
+
+.detail-value {
+    font-size: $font-size-xl;
+    font-weight: 700 !important;
+    color: $color-primary !important;
+}
+
+// Section details table on welcome screen
+.section-info {
+    margin-bottom: 25px;
+    overflow-x: auto;
+}
+
+.section-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: $color-card-dark !important;
+    border: 1px solid $color-border-dark !important;
+    min-width: 400px;
+
+    th, td {
+        padding: 12px;
+        text-align: left;
+        border: 1px solid $color-border-dark !important;
+        color: #e5e7eb !important;
+    }
+
+    th {
+        background: rgba(255, 255, 255, 0.05) !important;
+        font-weight: 600;
+        color: white !important;
+    }
+    
+    td {
+        background: transparent !important;
+    }
+}
+
+body.light-theme .section-table {
+    background: $color-card-light !important;
+    border-color: $color-border-light !important;
+
+    th, td {
+        border-color: $color-border-light !important;
+        color: $color-text-light !important;
+    }
+
+    th {
+        background: #f9fafb !important;
+        color: $color-text-light !important;
+    }
+}
+
+// Math Equations
+.math-eq {
+    vertical-align: middle !important;
+    margin: 4px 8px !important;
+    display: inline-block !important;
+    max-height: 2.4em !important;
+    width: auto !important;
+}
+
+body:not(.light-theme) .math-eq {
+    filter: brightness(0.88) invert(0.88) !important;
+    background: transparent !important;
+}
+
+// MathJax and Katex scaling
+mjx-container, math, .mathjax, [class*="mathjax"], [id*="MathJax"], .katex, .katex * {
+    color: #f3f4f6 !important;
+    fill: #f3f4f6 !important;
+}
+
+body.light-theme {
+    mjx-container, math, .mathjax, [class*="mathjax"], [id*="MathJax"], .katex, .katex * {
+        color: inherit !important;
+        fill: inherit !important;
+    }
+}
+
+mjx-container svg *, math svg *, .katex svg * {
+    fill: currentColor !important;
+    stroke: currentColor !important;
+}
+
+.math-exp, .math-num, .math-line {
+    color: inherit !important;
+}

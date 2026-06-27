@@ -1,0 +1,144 @@
+@import '../abstracts/variables';
+
+// CBT Component Question Palette
+.navigator-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+    padding: 15px;
+    overflow-y: auto;
+    flex: 1;
+}
+
+.nav-question, .q-box, .q-num {
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid $color-border-dark !important;
+    border-radius: $radius-sm;
+    font-size: $font-size-sm;
+    font-weight: 600;
+    cursor: pointer;
+    background: rgba(255, 255, 255, 0.02) !important;
+    color: $color-text-dark !important;
+    transition: all 0.2s;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+
+    &:hover {
+        border-color: $color-primary !important;
+        background: rgba($color-primary, 0.1) !important;
+    }
+
+    &.current, &.active {
+        border-color: $color-primary !important;
+        background: rgba($color-primary, 0.2) !important;
+        color: white !important;
+        box-shadow: 0 0 8px rgba($color-primary, 0.3);
+    }
+
+    &.answered, &.cor {
+        background: $color-success !important;
+        border-color: $color-success !important;
+        color: white !important;
+    }
+
+    &.review, &.marked {
+        background: $color-warning !important;
+        border-color: $color-warning !important;
+        color: white !important;
+    }
+}
+
+body.light-theme {
+    .nav-question, .q-box, .q-num {
+        border-color: $color-border-light !important;
+        background: #f9fafb !important;
+        color: $color-text-light !important;
+
+        &:hover {
+            background: #f3f4f6 !important;
+        }
+
+        &.current, &.active {
+            border-color: $color-primary !important;
+            background: rgba($color-primary, 0.1) !important;
+            color: $color-primary !important;
+        }
+
+        &.answered, &.cor {
+            background: $color-success !important;
+            border-color: $color-success !important;
+            color: white !important;
+        }
+
+        &.review, &.marked {
+            background: $color-warning !important;
+            border-color: $color-warning !important;
+            color: white !important;
+        }
+    }
+}
+
+// Legend
+.navigator-legend {
+    padding: 15px;
+    border-top: 1px solid $color-border-dark;
+    background: rgba(255, 255, 255, 0.01);
+    font-size: $font-size-sm !important;
+    display: flex;
+    flex-direction: column;
+    gap: 10px !important;
+}
+
+body.light-theme .navigator-legend {
+    border-top-color: $color-border-light;
+    background: #f9fafb;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 10px !important;
+    padding: 2px 0;
+}
+
+.legend-box {
+    width: 20px !important;
+    height: 20px !important;
+    border-radius: $radius-sm !important;
+    flex-shrink: 0;
+    border: 1px solid $color-border-dark;
+
+    &.not-visited {
+        background: rgba(255, 255, 255, 0.02);
+    }
+
+    &.not-answered {
+        background: rgba(255, 255, 255, 0.02);
+        border-color: $color-border-dark;
+    }
+
+    &.answered {
+        background: $color-success !important;
+        border-color: $color-success !important;
+    }
+
+    &.marked-review {
+        background: $color-warning !important;
+        border-color: $color-warning !important;
+    }
+}
+
+body.light-theme .legend-box {
+    border-color: $color-border-light;
+
+    &.not-visited {
+        background: #f9fafb;
+    }
+
+    &.not-answered {
+        background: #f9fafb;
+    }
+}

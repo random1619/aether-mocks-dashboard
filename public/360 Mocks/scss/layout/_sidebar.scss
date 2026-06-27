@@ -1,0 +1,69 @@
+@import '../abstracts/variables';
+
+// CBT Sidebar & Mobile Navigation Drawer
+.navigator-sidebar {
+    width: 300px;
+    background: $color-card-dark !important;
+    border-left: 1px solid $color-border-dark !important;
+    display: none; // Managed by JS classes (.active / .show / etc.)
+    flex-direction: column;
+    overflow: hidden;
+    position: sticky !important;
+    z-index: 9999 !important;
+    box-shadow: $shadow-md;
+    border: 1px solid $color-border-dark !important;
+    border-radius: $radius-lg !important;
+}
+
+body.light-theme .navigator-sidebar {
+    background: $color-card-light !important;
+    border-left-color: $color-border-light !important;
+    border-color: $color-border-light !important;
+}
+
+.navigator-header {
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.02) !important;
+    border-bottom: 1px solid $color-border-dark !important;
+    font-weight: 600;
+    color: $color-text-dark !important;
+    flex-shrink: 0;
+}
+
+body.light-theme .navigator-header {
+    background: #f9fafb !important;
+    border-bottom-color: $color-border-light !important;
+    color: $color-text-light !important;
+}
+
+// Mobile navigation drawer
+.mobile-navigator {
+    position: fixed;
+    top: 0;
+    right: -300px;
+    width: 300px;
+    height: 100%;
+    background: $color-card-dark !important;
+    z-index: 9999 !important;
+    box-shadow: $shadow-lg;
+    transition: right 0.3s ease;
+    display: flex;
+    flex-direction: column;
+
+    &.open {
+        right: 0;
+    }
+    
+    // Set text colors inside
+    *:not(.nav-question):not(.nav-question *) {
+        color: $color-text-dark !important;
+    }
+}
+
+body.light-theme .mobile-navigator {
+    background: $color-card-light !important;
+
+    *:not(.nav-question):not(.nav-question *) {
+        color: $color-text-light !important;
+    }
+}

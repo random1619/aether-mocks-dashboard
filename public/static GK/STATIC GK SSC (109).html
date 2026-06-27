@@ -1,0 +1,1409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aether Mocks</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
+
+        :root {
+            --primary: #6366f1;
+            --primary-light: #818cf8;
+            --primary-dark: #4f46e5;
+            --secondary: #8b5cf6;
+            --accent: #ec4899;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --light: #1e293b;
+            --dark: #0f172a;
+            --gray: #64748b;
+            --light-gray: rgba(255, 255, 255, 0.08);
+            --card-bg: rgba(255, 255, 255, 0.03);
+            --body-bg: #030712;
+            --header-bg: rgba(15, 23, 42, 0.6);
+            --footer-bg: rgba(15, 23, 42, 0.8);
+            --box-shadow: 0 8px 32px 0 rgba(0,0,0,0.3);
+            --box-shadow-sm: 0 4px 16px rgba(0,0,0,0.2);
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Outfit', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        body {
+            background-color: var(--body-bg);
+            color: #f8fafc;
+            line-height: 1.6;
+            padding-bottom: 80px; /* Space for fixed navigation */
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(99, 102, 241, 0.15) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(139, 92, 246, 0.15) 0px, transparent 50%);
+            background-attachment: fixed;
+        }
+        
+        /* Header Styles */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 60px;
+            background: var(--header-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            color: #f8fafc;
+            display: flex;
+            align-items: center;
+            padding: 0 16px;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+            box-shadow: var(--box-shadow-sm);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+        }
+        
+        .header-brand {
+            display: flex;
+            align-items: center;
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: #f8fafc;
+            text-decoration: none;
+            gap: 8px;
+        }
+        
+        .header-brand i {
+            font-size: 1.2rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .header-controls {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .control-btn {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.08);
+            color: #f8fafc;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .control-btn:hover {
+            background: rgba(255,255,255,0.12);
+            border-color: rgba(255,255,255,0.2);
+            transform: translateY(-1px);
+        }
+        
+        .control-btn.active {
+            background: var(--primary);
+            border-color: var(--primary-light);
+        }
+        
+        .timer-display {
+            background: rgba(0,0,0,0.3);
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 18px;
+            padding: 4px 12px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            white-space: nowrap;
+            color: #f8fafc;
+        }
+        
+        .timer-display i {
+            margin-right: 6px;
+            color: var(--accent);
+        }
+        
+        /* Main Content */
+        .main-content {
+            margin-top: 60px;
+            padding: 16px;
+            min-height: calc(100vh - 140px);
+        }
+        
+        .question-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(8px);
+            border: 1px solid var(--light-gray);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 16px;
+            box-shadow: var(--box-shadow-sm);
+            transition: var(--transition);
+        }
+        
+        .question-counter {
+            font-size: 0.9rem;
+            color: var(--gray);
+            text-align: center;
+            margin-bottom: 16px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+        
+        .question-text {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 24px;
+            color: #f8fafc;
+            overflow-wrap: break-word;
+            word-wrap: break-word;
+            hyphens: auto;
+            max-width: 100%;
+        }
+        
+        .option-item {
+            margin-bottom: 12px;
+            position: relative;
+        }
+        
+        .option-input {
+            position: absolute;
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        
+        .question-text img,
+        .option-label img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 8px 0;
+            border-radius: 8px;
+        }
+        
+        .option-label {
+            display: block;
+            padding: 14px 16px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            color: #f8fafc;
+        }
+        
+        .option-label:hover {
+            border-color: rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.05);
+            transform: translateY(-2px);
+            box-shadow: var(--box-shadow-sm);
+        }
+        
+        .option-input:checked + .option-label {
+            border-color: var(--primary);
+            background: rgba(99, 102, 241, 0.08);
+            box-shadow: 0 0 12px var(--primary-glow);
+        }
+        
+        .option-input:checked + .option-label::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 3px;
+            height: 100%;
+            background: var(--primary);
+        }
+        
+        /* When reviewing answers */
+        .review-mode .option-input:checked + .option-label.correct {
+            border-color: var(--success);
+            background: rgba(16, 185, 129, 0.08);
+            box-shadow: 0 0 12px var(--success-glow);
+        }
+        
+        .review-mode .option-input:checked + .option-label.correct::after {
+            background: var(--success);
+        }
+        
+        .review-mode .option-input:checked + .option-label.incorrect {
+            border-color: var(--danger);
+            background: rgba(239, 68, 68, 0.08);
+            box-shadow: 0 0 12px var(--danger-glow);
+        }
+        
+        .review-mode .option-input:checked + .option-label.incorrect::after {
+            background: var(--danger);
+        }
+        
+        .review-mode .option-label.correct-answer {
+            border-color: var(--success);
+            background: rgba(16, 185, 129, 0.08);
+            box-shadow: 0 0 12px var(--success-glow);
+        }
+        
+        .review-mode .option-label.correct-answer::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 3px;
+            height: 100%;
+            background: var(--success);
+        }
+        
+        .solution-container {
+            margin-top: 24px;
+            padding: 18px;
+            background: rgba(99, 102, 241, 0.05);
+            border-radius: 12px;
+            border-left: 3px solid var(--primary);
+            border-top: 1px solid rgba(255,255,255,0.03);
+            border-right: 1px solid rgba(255,255,255,0.03);
+            border-bottom: 1px solid rgba(255,255,255,0.03);
+        }
+        
+        .solution-title {
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--primary-light);
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        /* Question Navigation */
+        .question-nav {
+            position: fixed;
+            top: 60px;
+            right: 0;
+            bottom: 80px;
+            width: 100%;
+            max-width: 320px;
+            background: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-left: 1px solid rgba(255,255,255,0.06);
+            box-shadow: var(--box-shadow);
+            transform: translateX(100%);
+            transition: var(--transition);
+            z-index: 900;
+            overflow-y: auto;
+            padding: 16px;
+        }
+        
+        .question-nav.show {
+            transform: translateX(0);
+        }
+        
+        .nav-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+        
+        .nav-title {
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin: 0;
+            color: #f8fafc;
+        }
+        
+        .question-stats {
+            display: flex;
+            gap: 8px;
+        }
+        
+        .stat-badge {
+            font-size: 0.75rem;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-weight: 500;
+            color: white;
+        }
+        
+        .section-selector {
+            width: 100%;
+            margin-bottom: 16px;
+            border-radius: 12px;
+            padding: 10px 16px;
+            border: 1px solid rgba(255,255,255,0.08);
+            background: rgba(0, 0, 0, 0.3);
+            color: #f8fafc;
+            font-size: 0.9rem;
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 10px center;
+            background-size: 16px;
+        }
+        
+        .question-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(40px, 1fr));
+            gap: 8px;
+        }
+        
+        .q-box {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 500;
+            border: 1px solid rgba(255,255,255,0.08);
+            background: rgba(255,255,255,0.02);
+            color: #94a3b8;
+            transition: var(--transition);
+            position: relative;
+        }
+        
+        .q-box:hover {
+            transform: translateY(-2px);
+            border-color: rgba(255,255,255,0.2);
+            color: #f8fafc;
+        }
+        
+        .q-box.attempted {
+            background-color: var(--primary);
+            color: white;
+            border-color: var(--primary);
+            box-shadow: 0 0 8px var(--primary-glow);
+        }
+        
+        .q-box.correct {
+            background-color: var(--success);
+            color: white;
+            border-color: var(--success);
+            box-shadow: 0 0 8px var(--success-glow);
+        }
+        
+        .q-box.incorrect {
+            background-color: var(--danger);
+            color: white;
+            border-color: var(--danger);
+            box-shadow: 0 0 8px var(--danger-glow);
+        }
+        
+        .q-box.current {
+            border: 2px solid var(--accent) !important;
+            transform: translateY(-3px);
+            box-shadow: 0 4px 12px rgba(236, 72, 153, 0.3);
+            color: #f8fafc;
+        }
+        
+        .q-box.unattempted {
+            background-color: var(--gray);
+            color: white;
+            border-color: var(--gray);
+        }
+        
+        /* Bottom Navigation */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 80px;
+            background: var(--footer-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-top: 1px solid rgba(255,255,255,0.06);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 16px;
+            z-index: 800;
+        }
+        
+        .nav-btn {
+            height: 48px;
+            border-radius: 12px;
+            border: none;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 20px;
+            transition: var(--transition);
+            gap: 8px;
+            cursor: pointer;
+        }
+        
+        .nav-btn i {
+            font-size: 1rem;
+        }
+        
+        .nav-btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .nav-btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px var(--primary-glow);
+        }
+        
+        .nav-btn-outline {
+            background: rgba(255,255,255,0.02);
+            color: #f8fafc;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .nav-btn-outline:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+        
+        .nav-btn:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+            transform: none !important;
+            box-shadow: none !important;
+        }
+        
+        /* Overlay when nav is open */
+        .nav-overlay {
+            position: fixed;
+            top: 60px;
+            left: 0;
+            right: 0;
+            bottom: 80px;
+            background: rgba(0,0,0,0.6);
+            backdrop-filter: blur(4px);
+            z-index: 800;
+            opacity: 0;
+            pointer-events: none;
+            transition: var(--transition);
+        }
+        
+        .nav-overlay.show {
+            opacity: 1;
+            pointer-events: all;
+        }
+        
+        /* Results Modal */
+        .results-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(3, 7, 18, 0.8);
+            backdrop-filter: blur(8px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1100;
+            opacity: 0;
+            pointer-events: none;
+            transition: var(--transition);
+            padding: 16px;
+        }
+        
+        .results-modal.show {
+            opacity: 1;
+            pointer-events: all;
+        }
+        
+        .results-card {
+            background: #0f172a;
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 24px;
+            width: 100%;
+            max-width: 500px;
+            overflow: hidden;
+            transform: translateY(20px);
+            transition: var(--transition);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+        }
+        
+        .results-modal.show .results-card {
+            transform: translateY(0);
+        }
+        
+        .results-header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 24px 20px;
+            text-align: center;
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+        }
+        
+        .results-title {
+            margin: 0;
+            font-weight: 600;
+            font-size: 1.4rem;
+        }
+        
+        .results-body {
+            padding: 24px;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+        
+        .stat-card {
+            padding: 16px;
+            border-radius: 16px;
+            text-align: center;
+            color: white;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+        
+        .stat-value {
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+        
+        .stat-label {
+            font-size: 0.8rem;
+            opacity: 0.8;
+            font-weight: 500;
+        }
+        
+        .results-footer {
+            padding: 18px 24px;
+            display: flex;
+            justify-content: center;
+            border-top: 1px solid rgba(255,255,255,0.06);
+            background: rgba(0,0,0,0.1);
+        }
+        
+        /* MathJax Styling Override */
+        .MathJax, .mjx-chtml {
+            overflow-x: auto;
+            max-width: 100%;
+            display: inline-block;
+        }
+        
+        /* Responsive Adjustments */
+        @media (min-width: 992px) {
+            .question-nav {
+                transform: translateX(0);
+            }
+            
+            .main-content {
+                margin-right: 320px;
+            }
+            
+            .nav-overlay {
+                display: none;
+            }
+            
+            .bottom-nav {
+                display: none;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .question-grid {
+                grid-template-columns: repeat(auto-fill, minmax(36px, 1fr));
+                gap: 6px;
+            }
+            
+            .q-box {
+                width: 36px;
+                height: 36px;
+                font-size: 0.9rem;
+            }
+            
+            .option-label {
+                padding: 12px 14px;
+            }
+            
+            .question-text {
+                font-size: 1rem;
+            }
+            
+            .header-brand {
+                font-size: 1rem;
+            }
+            
+            .control-btn {
+                width: 32px;
+                height: 32px;
+            }
+            
+            .timer-display {
+                font-size: 0.8rem;
+                padding: 4px 10px;
+            }
+            
+            .nav-btn {
+                height: 44px;
+                padding: 0 16px;
+                font-size: 0.9rem;
+            }
+        }
+</style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <a href="#" class="header-brand">
+                <i class="fas fa-graduation-cap"></i>
+                <span>Aether Mocks</span>
+            </a>
+            
+            <div class="header-controls">
+                <!-- Timer -->
+                <div class="timer-display">
+                    <i class="far fa-clock"></i>
+                    <span id="timer-display">5:00</span>
+                </div>
+                
+                                <!-- Full Screen Button -->
+                <button class="control-btn" id="fullscreen-btn" onclick="toggleFullscreen()" title="Toggle Fullscreen">
+                    <i class="fas fa-expand"></i>
+                </button>
+                
+                <!-- Language toggle -->
+                <button class="control-btn" id="lang-btn" onclick="toggleLanguage()">
+                    <span id="lang-text">En</span>
+                </button>
+                
+                <!-- Submit button -->
+                <button class="control-btn" id="submit-btn" onclick="confirmSubmit()">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+                
+                <!-- Questions toggle for mobile -->
+                <button class="control-btn nav-toggle-btn" id="nav-toggle" onclick="toggleNav()">
+                    <i class="fas fa-th"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Main content -->
+    <main class="main-content" id="main-content">
+        <div class="question-counter" id="question-counter">Question 1 of 15</div>
+        
+        <!-- Questions will be displayed here -->
+        <div id="questions-container"></div>
+    </main>
+    
+    <!-- Overlay for mobile nav -->
+    <div class="nav-overlay" id="nav-overlay" onclick="toggleNav(false)"></div>
+    
+    <!-- Question navigation sidebar -->
+    <aside class="question-nav" id="question-nav">
+        <div class="nav-header">
+            <h3 class="nav-title">Questions</h3>
+            <div class="question-stats">
+                <span class="stat-badge bg-primary" id="attempted-count">0</span>
+                <span class="stat-badge bg-gray" id="total-count">15</span>
+                <button class="control-btn d-lg-none" onclick="toggleNav(false)">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Section selector -->
+        <select class="section-selector" id="section-selector" onchange="switchSection(this.value)">
+            <option value="all">All Sections</option>
+        </select>
+        
+        <!-- Question grid -->
+        <div class="question-grid" id="question-boxes"></div>
+    </aside>
+    
+    <!-- Bottom navigation for mobile -->
+    <nav class="bottom-nav d-lg-none">
+        <button class="nav-btn nav-btn-outline" onclick="prevQuestion()">
+            <i class="fas fa-chevron-left"></i>
+            <span>Previous</span>
+        </button>
+        <button class="nav-btn nav-btn-outline" onclick="nextQuestion()">
+            <span>Next</span>
+            <i class="fas fa-chevron-right"></i>
+        </button>
+    </nav>
+    
+    <!-- Results modal -->
+    <div class="results-modal" id="results-modal">
+        <div class="results-card">
+            <div class="results-header">
+                <h3 class="results-title">Test Results</h3>
+            </div>
+            <div class="results-body">
+                <div class="stats-grid">
+                    <div class="stat-card" style="background: linear-gradient(135deg, var(--primary), var(--primary-dark))">
+                        <div class="stat-value" id="score-value">0</div>
+                        <div class="stat-label">Score</div>
+                    </div>
+                    <div class="stat-card" style="background: linear-gradient(135deg, var(--success), #1b9aaa)">
+                        <div class="stat-value" id="correct-value">0</div>
+                        <div class="stat-label">Correct</div>
+                    </div>
+                    <div class="stat-card" style="background: linear-gradient(135deg, var(--danger), var(--accent))">
+                        <div class="stat-value" id="incorrect-value">0</div>
+                        <div class="stat-label">Incorrect</div>
+                    </div>
+                    <div class="stat-card" style="background: linear-gradient(135deg, var(--gray), var(--dark))">
+                        <div class="stat-value" id="unattempted-value">0</div>
+                        <div class="stat-label">Unattempted</div>
+                    </div>
+                </div>
+            </div>
+            <div class="results-footer">
+                <button class="nav-btn nav-btn-primary" onclick="reviewTest()">
+                    <i class="fas fa-search me-1"></i>
+                    <span>Review Test</span>
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Questions data
+        const questions = [];
+        const sections = {};
+        let currentLang = "en";
+        let currentQuestion = 0;
+        let answers = {};
+        let submitted = false;
+        let totalTime = 5 * 60;
+        
+                function toggleFullscreen() {
+            const btn = document.getElementById('fullscreen-btn');
+            if (!btn) return;
+            const icon = btn.querySelector('i');
+            if (!document.fullscreenElement) {
+                document.documentElement.requestFullscreen().then(() => {
+                    icon.className = 'fas fa-compress';
+                }).catch(err => {
+                    console.error("Fullscreen error: ", err);
+                });
+            } else {
+                document.exitFullscreen().then(() => {
+                    icon.className = 'fas fa-expand';
+                });
+            }
+        }
+        
+        document.addEventListener('fullscreenchange', () => {
+            const btn = document.getElementById('fullscreen-btn');
+            if (btn) {
+                const icon = btn.querySelector('i');
+                if (document.fullscreenElement) {
+                    icon.className = 'fas fa-compress';
+                } else {
+                    icon.className = 'fas fa-expand';
+                }
+            }
+        });
+
+        // Initialize the test
+        window.onload = function() {
+            initializeTest();
+            startTimer();
+            
+            // If on desktop, show the question navigation by default
+            if (window.innerWidth >= 992) {
+                document.getElementById('question-nav').classList.add('show');
+                document.getElementById('main-content').classList.add('with-nav');
+            }
+        };
+        
+        // Initialize test data
+        function initializeTest() {
+            // Add sections and questions
+            
+            sections["18"] = {
+                name: "General Awareness",
+                start: 0,
+                end: 13
+            };
+            
+            document.getElementById('section-selector').innerHTML += 
+                `<option value="18">General Awareness</option>`;
+            
+            sections["misc"] = {
+                name: "Miscellaneous",
+                start: 14,
+                end: 14
+            };
+            
+            document.getElementById('section-selector').innerHTML += 
+                `<option value="misc">Miscellaneous</option>`;
+            
+            
+                questions.push({
+                    id: "1",
+                    section: "18",
+                    question_en: "<p><span style=\"font-family: Cambria Math;\">1. </span><span style=\"font-family: Cambria Math;\">A football match lasts two equal periods of_________.</span></p>\n",
+                    question_hi: "<p><span style=\"font-family: Cambria Math;\">1. </span><span style=\"font-family: Cambria Math;\">&#2319;&#2325;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2347;&#2369;&#2335;&#2348;&#2377;&#2354;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2350;&#2376;&#2330;</span><span style=\"font-family: Cambria Math;\"> _______ </span><span style=\"font-family: Cambria Math;\">&#2325;&#2368;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2342;&#2379;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2348;&#2352;&#2366;&#2348;&#2352;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2309;&#2357;&#2343;&#2367;&#2351;&#2379;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2340;&#2325;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2330;&#2354;&#2340;&#2366;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2361;&#2376;&#2404;</span></p>\n",
+                    options_en: ["<p>40 minutes</p>\n", "<p>50 minutes</p>\n", 
+                                "<p>20 minutes</p>\n", "<p>45 minutes</p>\n"],
+                    options_hi: ["<p>40 <span style=\"font-family: Cambria Math;\">&#2350;&#2367;&#2344;&#2335;</span><span style=\"font-family: Cambria Math;\"> </span></p>\n", "<p>50 <span style=\"font-family: Cambria Math;\">&#2350;&#2367;&#2344;&#2335;</span><span style=\"font-family: Cambria Math;\"> </span></p>\n",
+                                "<p>20 <span style=\"font-family: Cambria Math;\">&#2350;&#2367;&#2344;&#2335;</span></p>\n", "<p>45 <span style=\"font-family: Cambria Math;\">&#2350;&#2367;&#2344;&#2335;</span></p>\n"],
+                    solution_en: "<p><span style=\"font-family: Cambria Math;\">1</span><span style=\"font-family: Cambria Math;\">.(</span><span style=\"font-family: Cambria Math;\">d)&nbsp;</span><strong>&nbsp;45 minutes. </strong><span style=\"font-weight: 400;\">A football team consists of 11 players on the field, including 1 goalkeeper and 10 position players. Football Terminology:&nbsp; Back heel, cross, far post, futsal, Header, Inswinger.</span><strong> Games and their duration</strong><span style=\"font-weight: 400;\">: Hockey (two periods of 35 minutes), Basketball (48 minutes or 12 minutes each quarter), Kabaddi (two halves of 20 minutes).&nbsp;</span></p>\n",
+                    solution_hi: "<p><span style=\"font-family: Cambria Math;\">1</span><span style=\"font-family: Cambria Math;\">.(</span><span style=\"font-family: Cambria Math;\">d) </span><strong>45 &#2350;&#2367;&#2344;&#2335;</strong><span style=\"font-weight: 400;\">&#2404; &#2319;&#2325; &#2347;&#2369;&#2335;&#2348;&#2377;&#2354; &#2335;&#2368;&#2350; &#2350;&#2375;&#2306; &#2350;&#2376;&#2342;&#2366;&#2344; &#2346;&#2352; 11 &#2326;&#2367;&#2354;&#2366;&#2337;&#2364;&#2368; &#2361;&#2379;&#2340;&#2375; &#2361;&#2376;&#2306;, &#2332;&#2367;&#2344;&#2350;&#2375;&#2306; 1 &#2327;&#2379;&#2354;&#2325;&#2368;&#2346;&#2352; &#2324;&#2352; 10 &#2346;&#2379;&#2332;&#2368;&#2358;&#2344; &#2357;&#2366;&#2354;&#2375; &#2326;&#2367;&#2354;&#2366;&#2337;&#2364;&#2368; &#2358;&#2366;&#2350;&#2367;&#2354; &#2361;&#2379;&#2340;&#2375; &#2361;&#2376;&#2306;&#2404; &#2347;&#2369;&#2335;&#2348;&#2377;&#2354; &#2358;&#2348;&#2381;&#2342;&#2366;&#2357;&#2354;&#2368;: &#2348;&#2376;&#2325; &#2361;&#2368;&#2354;, &#2325;&#2381;&#2352;&#2377;&#2360;, &#2347;&#2366;&#2352; &#2346;&#2379;&#2360;&#2381;&#2335;, &#2347;&#2369;&#2335;&#2360;&#2354;, &#2361;&#2375;&#2337;&#2352;, &#2311;&#2344;&#2360;&#2381;&#2357;&#2367;&#2306;&#2327;&#2352;&#2404; </span><strong>&#2326;&#2375;&#2354; &#2324;&#2352; &#2326;&#2375;&#2354;&#2375; &#2332;&#2366;&#2344;&#2375; &#2325;&#2368; &#2309;&#2357;&#2343;&#2367; </strong><span style=\"font-weight: 400;\">: &#2361;&#2377;&#2325;&#2368; (35 &#2350;&#2367;&#2344;&#2335; &#2325;&#2375; &#2342;&#2379; &#2349;&#2366;&#2327;), &#2348;&#2366;&#2360;&#2381;&#2325;&#2375;&#2335;&#2348;&#2377;&#2354; (&#2346;&#2381;&#2352;&#2340;&#2381;&#2351;&#2375;&#2325; &#2330;&#2340;&#2369;&#2352;&#2381;&#2341; &#2349;&#2366;&#2327; &#2350;&#2375;&#2306; 48 &#2350;&#2367;&#2344;&#2335; &#2351;&#2366; 12 &#2350;&#2367;&#2344;&#2335;), &#2325;&#2348;&#2337;&#2381;&#2337;&#2368; (20 &#2350;&#2367;&#2344;&#2335; &#2325;&#2375; &#2342;&#2379; &#2349;&#2366;&#2327;)&#2404;&nbsp;</span></p>\n",
+                    correct: "d",
+                    pos_marks: 2.0,
+                    neg_marks: 0.5
+                });
+                questions.push({
+                    id: "2",
+                    section: "18",
+                    question_en: "<p><span style=\"font-family: Cambria Math;\">2. </span><span style=\"font-family: Cambria Math;\">Ricky Kej won his third Grammy under which of the following categories?</span></p>\n",
+                    question_hi: "<p><span style=\"font-family: Cambria Math;\">2. </span><span style=\"font-family: Cambria Math;\">&#2352;&#2367;&#2325;&#2368;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2325;&#2375;&#2332;</span><span style=\"font-family: Cambria Math;\"> (Ricky Kej) </span><span style=\"font-family: Cambria Math;\">&#2344;&#2375;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2344;&#2367;&#2350;&#2381;&#2344;&#2354;&#2367;&#2326;&#2367;&#2340;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2350;&#2375;&#2306;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2360;&#2375;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2325;&#2367;&#2360;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2358;&#2381;&#2352;&#2375;&#2339;&#2368;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2325;&#2375;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2340;&#2361;&#2340;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2309;&#2346;&#2344;&#2366;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2340;&#2368;&#2360;&#2352;&#2366;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2327;&#2381;&#2352;&#2376;&#2350;&#2368;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2332;&#2368;&#2340;&#2366;</span><span style=\"font-family: Cambria Math;\">?</span></p>\n",
+                    options_en: ["<p>Song of the Year</p>\n", "<p>Best Contemporary Instrumental Album</p>\n", 
+                                "<p>Best Immersive Audio Album</p>\n", "<p>Album of the Year</p>\n"],
+                    options_hi: ["<p><span style=\"font-family: Cambria Math;\">&#2360;&#2366;&#2305;&#2327;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2321;&#2347;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2342;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2312;&#2351;&#2352;</span></p>\n", "<p><span style=\"font-family: Cambria Math;\">&#2348;&#2375;&#2360;&#2381;&#2335;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2325;&#2306;&#2335;&#2375;&#2306;&#2346;&#2352;&#2375;&#2352;&#2368;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2311;</span><span style=\"font-family: Cambria Math;\">&#2306;&#2360;&#2381;&#2335;&#2381;&#2352;&#2370;&#2350;&#2375;&#2306;&#2335;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2319;&#2354;&#2381;&#2348;&#2350;</span></p>\n",
+                                "<p><span style=\"font-family: Cambria Math;\">&#2348;&#2375;&#2360;&#2381;&#2335;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2311;&#2350;&#2352;&#2381;&#2360;&#2367;&#2357;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2321;&#2337;&#2367;&#2351;&#2379;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2319;&#2354;&#2381;&#2348;&#2350;</span><span style=\"font-family: Cambria Math;\"> </span></p>\n", "<p><span style=\"font-family: Cambria Math;\">&#2319;&#2354;&#2381;&#2348;&#2350;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2321;&#2347;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2342;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2312;&#2351;&#2352;</span></p>\n"],
+                    solution_en: "<p><span style=\"font-family: Cambria Math;\">2</span><span style=\"font-family: Cambria Math;\">.(</span><span style=\"font-family: Cambria Math;\">c)<strong> Best Immersive Audio Album </strong></span><span style=\"font-family: Cambria Math;\">(Divine Tides). The 65</span><span style=\"font-family: Cambria Math;\">th </span><span style=\"font-family: Cambria Math;\">Grammy Awards (music industry) 2023 were held at the Crypto.com arena in Los Angeles (South California). Category and winner: Album of the Year - (Harry Styles-Harry&rsquo;s House), Song of the Year - (Lizzo-About Damn time), Best Traditional Pop Vocal Album - (</span><span style=\"font-family: Cambria Math;\">Michael Buble-Higher), Best Country Song - &lsquo;Til You Can&rsquo;t&rsquo; (Cody Johnson). </span></p>\n",
+                    solution_hi: "<p><span style=\"font-family: Cambria Math;\">2</span><span style=\"font-family: Cambria Math;\">.(</span><span style=\"font-family: Cambria Math;\">c)<strong> </strong></span><strong><span style=\"font-family: Cambria Math;\">&#2348;&#2375;&#2360;&#2381;&#2335;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2311;&#2350;&#2352;&#2381;&#2360;&#2367;&#2357;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2321;&#2337;&#2367;&#2351;&#2379;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2319;&#2354;&#2381;&#2348;&#2350;</span></strong><span style=\"font-family: Cambria Math;\"> (</span><span style=\"font-family: Cambria Math;\">&#2337;&#2367;&#2357;&#2366;&#2311;&#2344;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2335;&#2366;&#2311;&#2337;&#2381;&#2360;</span><span style=\"font-family: Cambria Math;\">)</span><span style=\"font-family: Cambria Math;\">&#2404;</span><span style=\"font-family: Cambria Math;\"> 65</span><span style=\"font-family: Cambria Math;\">&#2357;&#2375;&#2306;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2327;&#2381;&#2352;&#2376;&#2350;&#2368;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2309;&#2357;&#2366;&#2352;&#2381;&#2337;&#2381;&#2360;</span><span style=\"font-family: Cambria Math;\"> (</span><span style=\"font-family: Cambria Math;\">&#2360;&#2306;&#2327;&#2368;&#2340;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2313;&#2342;&#2381;&#2351;&#2379;&#2327;</span><span style=\"font-family: Cambria Math;\">) 2023 </span><span style=\"font-family: Cambria Math;\">&#2354;&#2377;&#2360;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2319;&#2306;&#2332;&#2367;&#2354;&#2381;&#2360;</span><span style=\"font-family: Cambria Math;\"> (</span><span style=\"font-family: Cambria Math;\">&#2342;&#2325;&#2381;&#2359;&#2367;&#2339;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2325;&#2376;&#2354;&#2367;&#2347;&#2379;&#2352;&#2381;&#2344;&#2367;&#2351;&#2366;</span><span style=\"font-family: Cambria Math;\">) </span><span style=\"font-family: Cambria Math;\">&#2350;&#2375;&#2306;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2325;&#2381;&#2352;&#2367;&#2346;&#2381;&#2335;&#2379;</span><span style=\"font-family: Cambria Math;\">.</span><span style=\"font-family: Cambria Math;\">&#2325;&#2377;&#2350;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2325;&#2381;&#2359;&#2375;&#2340;&#2381;&#2352;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2350;&#2375;&#2306;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2310;&#2351;&#2379;&#2332;&#2367;&#2340;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2325;&#2367;&#2319;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2327;&#2319;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2341;&#2375;&#2404;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2358;&#2381;&#2352;&#2375;&#2339;&#2368;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2324;&#2352;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2357;&#2367;&#2332;&#2375;&#2340;&#2366;</span><span style=\"font-family: Cambria Math;\">: </span><span style=\"font-family: Cambria Math;\">&#2319;&#2354;&#2381;&#2348;&#2350;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2321;&#2347;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2342;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2312;&#2351;&#2352;</span><span style=\"font-family: Cambria Math;\"> - (</span><span style=\"font-family: Cambria Math;\">&#2361;&#2376;&#2352;&#2368;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2360;&#2381;&#2335;&#2366;&#2311;&#2354;&#2381;&#2360;</span><span style=\"font-family: Cambria Math;\">-</span><span style=\"font-family: Cambria Math;\">&#2361;&#2376;&#2352;&#2368;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2361;&#2366;&#2313;&#2360;</span><span style=\"font-family: Cambria Math;\">), </span><span style=\"font-family: Cambria Math;\">&#2360;&#2366;&#2305;&#2327;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2321;&#2347;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2342;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2312;&#2351;&#2352;</span><span style=\"font-family: Cambria Math;\"> - (</span><span style=\"font-family: Cambria Math;\">&#2354;&#2367;&#2332;&#2364;&#2379;</span><span style=\"font-family: Cambria Math;\">-</span><span style=\"font-family: Cambria Math;\">&#2309;&#2348;&#2366;&#2313;&#2335;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2337;&#2375;&#2350;&#2344;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2335;&#2366;&#2311;&#2350;</span><span style=\"font-family: Cambria Math;\">), </span><span style=\"font-family: Cambria Math;\">&#2348;&#2375;&#2360;&#2381;&#2335;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2335;&#2381;&#2352;&#2375;&#2337;&#2367;&#2358;&#2344;&#2354;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2346;&#2377;&#2346;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2357;&#2379;&#2325;&#2354;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2319;&#2354;&#2381;&#2348;&#2350;</span><span style=\"font-family: Cambria Math;\"> - (</span><span style=\"font-family: Cambria Math;\">&#2350;&#2366;&#2311;&#2325;&#2354;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2348;&#2348;&#2354;</span><span style=\"font-family: Cambria Math;\">-</span><span style=\"font-family: Cambria Math;\">&#2361;&#2366;&#2351;&#2352;</span><span style=\"font-family: Cambria Math;\">), </span><span style=\"font-family: Cambria Math;\">&#2348;&#2375;&#2360;&#2381;&#2335;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2325;&#2306;&#2335;&#2381;&#2352;&#2368;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2360;&#2379;&#2306;&#2327;</span><span style=\"font-family: Cambria Math;\"> - \'</span><span style=\"font-family: Cambria Math;\">&#2335;&#2367;&#2354;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2351;&#2370;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2325;&#2366;&#2344;</span><span style=\"font-family: Cambria Math;\">&rsquo;</span><span style=\"font-family: Cambria Math;\">&#2335;</span><span style=\"font-family: Cambria Math;\">\' (</span><span style=\"font-family: Cambria Math;\">&#2325;&#2379;&#2337;&#2368;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2332;&#2377;&#2344;&#2360;&#2344;</span><span style=\"font-family: Cambria Math;\">)</span><span style=\"font-family: Cambria Math;\">&#2404;</span></p>\n",
+                    correct: "c",
+                    pos_marks: 2.0,
+                    neg_marks: 0.5
+                });
+                questions.push({
+                    id: "3",
+                    section: "18",
+                    question_en: "<p><span style=\"font-family: Cambria Math;\">3.</span><span style=\"font-family: Cambria Math;\"> Which of the following states </span><span style=\"font-family: Cambria Math;\">are a part</span><span style=\"font-family: Cambria Math;\"> of Ga</span><span style=\"font-family: Cambria Math;\">rib Kalyan Rojgar Abhiyaan?</span></p>\n",
+                    question_hi: "<p><span style=\"font-family: Cambria Math;\">3.</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2344;&#2367;&#2350;&#2381;&#2344;&#2354;&#2367;&#2326;&#2367;&#2340;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2350;&#2375;&#2306;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2360;&#2375;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2325;&#2380;&#2344;</span><span style=\"font-family: Cambria Math;\">-</span><span style=\"font-family: Cambria Math;\">&#2360;&#2375;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2352;&#2366;&#2332;&#2381;&#2351;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2327;&#2352;&#2368;&#2348;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2325;&#2354;&#2381;&#2351;&#2366;&#2339;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2352;&#2379;&#2332;&#2364;&#2327;&#2366;&#2352;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2309;&#2349;&#2367;&#2351;&#2366;&#2344;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2325;&#2366;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2361;&#2367;&#2360;&#2381;&#2360;&#2366;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2361;&#2376;&#2306;</span><span style=\"font-family: Cambria Math;\">?</span></p>\n",
+                    options_en: ["<p>Madhya Pradesh and Gujarat</p>\n", "<p>Bihar and Madhya Pradesh</p>\n", 
+                                "<p>Haryana and Bihar</p>\n", "<p>Assam and West Bengal</p>\n"],
+                    options_hi: ["<p><span style=\"font-family: Cambria Math;\">&#2350;&#2343;&#2381;&#2351;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2346;&#2381;&#2352;&#2342;&#2375;&#2358;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2324;&#2352;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2327;&#2369;&#2332;&#2352;&#2366;&#2340;</span></p>\n", "<p><span style=\"font-family: Cambria Math;\">&#2348;&#2367;&#2361;&#2366;&#2352;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2324;&#2352;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2350;&#2343;&#2381;&#2351;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2346;&#2381;&#2352;&#2342;&#2375;&#2358;</span></p>\n",
+                                "<p><span style=\"font-family: Cambria Math;\">&#2361;&#2352;&#2367;&#2351;&#2366;&#2339;&#2366;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2324;&#2352;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2348;&#2367;&#2361;&#2366;&#2352;</span></p>\n", "<p><span style=\"font-family: Cambria Math;\">&#2309;&#2360;&#2350;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2324;&#2352;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2346;&#2358;&#2381;&#2330;&#2367;&#2350;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2348;&#2306;&#2327;&#2366;&#2354;</span></p>\n"],
+                    solution_en: "<p><span style=\"font-family: Cambria Math;\">3</span><span style=\"font-family: Cambria Math;\">.(</span><span style=\"font-family: Cambria Math;\">b)</span><strong>&nbsp;Bihar and Madhya Pradesh. </strong><span style=\"font-weight: 400;\">Garib Kalyan Rojgar Abhiyaan: Launched - 20 June 2020 (by Prime Minister Narender Modi). Started - Khagaria district of Bihar. </span><strong>Aim </strong><span style=\"font-weight: 400;\">- It will help in creating modern facilities in the rural areas. It will run for 125 days in 116 districts across six states - Bihar, Uttar Pradesh, Madhya Pradesh, Jharkhand, Odisha and Rajasthan. 50000 crore rupees will be spent on this mega campaign. Under the scheme, the government will provide these migrant labourers with 25 work options.</span></p>\n",
+                    solution_hi: "<p><span style=\"font-family: Cambria Math;\">3</span><span style=\"font-family: Cambria Math;\">.(</span><span style=\"font-family: Cambria Math;\">b)</span><strong>&nbsp;&#2348;&#2367;&#2361;&#2366;&#2352; &#2324;&#2352; &#2350;&#2343;&#2381;&#2351; &#2346;&#2381;&#2352;&#2342;&#2375;&#2358;</strong><span style=\"font-weight: 400;\">&#2404; &#2327;&#2352;&#2368;&#2348; &#2325;&#2354;&#2381;&#2351;&#2366;&#2339; &#2352;&#2379;&#2332;&#2364;&#2327;&#2366;&#2352; &#2309;&#2349;&#2367;&#2351;&#2366;&#2344;: &#2354;&#2377;&#2344;&#2381;&#2330; - 20 &#2332;&#2370;&#2344; 2020 (&#2346;&#2381;&#2352;&#2343;&#2366;&#2344;&#2350;&#2306;&#2340;&#2381;&#2352;&#2368; &#2344;&#2352;&#2375;&#2306;&#2342;&#2381;&#2352; &#2350;&#2379;&#2342;&#2368; &#2342;&#2381;&#2357;&#2366;&#2352;&#2366;)&#2404; &#2358;&#2369;&#2352;&#2369;&#2310;&#2340; - &#2348;&#2367;&#2361;&#2366;&#2352; &#2325;&#2375; &#2326;&#2327;&#2337;&#2364;&#2367;&#2351;&#2366; &#2332;&#2367;&#2354;&#2375; &#2360;&#2375;&#2404; </span><strong>&#2313;&#2342;&#2381;&#2342;&#2375;&#2358;&#2381;&#2351;</strong><span style=\"font-weight: 400;\">- &#2327;&#2381;&#2352;&#2366;&#2350;&#2368;&#2339; &#2311;&#2354;&#2366;&#2325;&#2379;&#2306; &#2350;&#2375;&#2306; &#2310;&#2343;&#2369;&#2344;&#2367;&#2325; &#2360;&#2369;&#2357;&#2367;&#2343;&#2366;&#2319;&#2306; &#2340;&#2376;&#2351;&#2366;&#2352; &#2325;&#2352;&#2344;&#2375; &#2350;&#2375;&#2306; &#2350;&#2342;&#2342; &#2350;&#2367;&#2354;&#2375;&#2327;&#2368;&#2404; &#2351;&#2361; &#2331;&#2361; &#2352;&#2366;&#2332;&#2381;&#2351;&#2379;&#2306; - &#2348;&#2367;&#2361;&#2366;&#2352;, &#2313;&#2340;&#2381;&#2340;&#2352; &#2346;&#2381;&#2352;&#2342;&#2375;&#2358;, &#2350;&#2343;&#2381;&#2351; &#2346;&#2381;&#2352;&#2342;&#2375;&#2358;, &#2333;&#2366;&#2352;&#2326;&#2306;&#2337;, &#2323;&#2337;&#2367;&#2358;&#2366; &#2324;&#2352; &#2352;&#2366;&#2332;&#2360;&#2381;&#2341;&#2366;&#2344; &#2325;&#2375; 116 &#2332;&#2367;&#2354;&#2379;&#2306; &#2350;&#2375;&#2306; 125 &#2342;&#2367;&#2344;&#2379;&#2306; &#2340;&#2325; &#2330;&#2354;&#2375;&#2327;&#2366;&#2404; &#2311;&#2360; &#2350;&#2361;&#2366;&#2309;&#2349;&#2367;&#2351;&#2366;&#2344; &#2346;&#2352; 50 &#2361;&#2332;&#2366;&#2352; &#2325;&#2352;&#2379;&#2337;&#2364; &#2352;&#2369;&#2346;&#2351;&#2375; &#2326;&#2352;&#2381;&#2330; &#2325;&#2367;&#2351;&#2375; &#2332;&#2366;&#2351;&#2375;&#2306;&#2327;&#2375;&#2404; &#2351;&#2379;&#2332;&#2344;&#2366; &#2325;&#2375; &#2340;&#2361;&#2340; &#2360;&#2352;&#2325;&#2366;&#2352; &#2311;&#2344; &#2346;&#2381;&#2352;&#2357;&#2366;&#2360;&#2368; &#2350;&#2332;&#2342;&#2370;&#2352;&#2379;&#2306; &#2325;&#2379; 25 &#2325;&#2366;&#2350; &#2325;&#2375; &#2357;&#2367;&#2325;&#2354;&#2381;&#2346; &#2313;&#2346;&#2354;&#2348;&#2381;&#2343; &#2325;&#2352;&#2366;&#2319;&#2327;&#2368;&#2404;</span></p>\n",
+                    correct: "b",
+                    pos_marks: 2.0,
+                    neg_marks: 0.5
+                });
+                questions.push({
+                    id: "4",
+                    section: "18",
+                    question_en: "<p><span style=\"font-family: Cambria Math;\">4. </span><span style=\"font-family: Cambria Math;\">Who was given the title of \'Hanjaba\' by the Maharaj of Manipur for reviving Manipuri dance?</span></p>\n",
+                    question_hi: "<p><span style=\"font-family: Cambria Math;\">4. </span><span style=\"font-family: Cambria Math;\">&#2350;&#2339;&#2367;&#2346;&#2369;&#2352;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2325;&#2375;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2350;&#2361;&#2366;&#2352;&#2366;&#2332;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2344;&#2375;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2350;&#2339;&#2367;&#2346;&#2369;&#2352;&#2368;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2344;&#2371;&#2340;&#2381;&#2351;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2325;&#2379;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2346;&#2369;&#2344;&#2352;&#2381;&#2332;&#2368;&#2357;&#2367;&#2340;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2325;&#2352;&#2344;&#2375;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2325;&#2375;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2354;&#2367;&#2319;</span><span style=\"font-family: Cambria Math;\"> \'</span><span style=\"font-family: Cambria Math;\">&#2361;&#2306;&#2332;&#2366;&#2348;&#2366;</span><span style=\"font-family: Cambria Math;\">\' </span><span style=\"font-family: Cambria Math;\">&#2325;&#2368;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2313;&#2346;&#2366;&#2343;&#2367;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2325;&#2367;&#2360;&#2375;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2342;&#2368;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2341;&#2368;</span><span style=\"font-family: Cambria Math;\">?</span></p>\n",
+                    options_en: ["<p>Charu Malhar</p>\n", "<p>Darshana Jhaveri</p>\n", 
+                                "<p>Bipin Singh</p>\n", "<p>Kalavati Devi</p>\r\n<p><span style=\"font-family: Cambria Math;\"> </span></p>\n"],
+                    options_hi: ["<p><span style=\"font-family: Cambria Math;\">&#2330;&#2366;&#2352;&#2369;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2350;&#2354;&#2381;&#2361;&#2366;&#2352;</span></p>\n", "<p><span style=\"font-family: Cambria Math;\">&#2342;&#2352;&#2381;&#2358;&#2344;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2333;&#2366;&#2357;&#2375;&#2352;&#2368;</span></p>\n",
+                                "<p><span style=\"font-family: Cambria Math;\">&#2348;&#2367;&#2346;&#2367;&#2344;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2360;&#2367;&#2306;&#2361;</span></p>\n", "<p><span style=\"font-family: Cambria Math;\">&#2325;&#2354;&#2366;&#2357;&#2340;&#2368;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2342;&#2375;&#2357;&#2368;</span></p>\n"],
+                    solution_en: "<p><span style=\"font-family: Cambria Math;\">4</span><span style=\"font-family: Cambria Math;\">.(</span><span style=\"font-family: Cambria Math;\">c) </span><strong>Bipin Singh. </strong><span style=\"font-weight: 400;\">He is regarded as the father of modern Manipuri dance and style belonging to the Bishnupriya Manipuri community. Awards: Sangeet Natak Akademy (1966), Kalidas Samman (1989-90). </span><strong>Famous Manipuri Dancers</strong><span style=\"font-weight: 400;\">: Darshana Jhaveri, Yumlembam Gambhini Devi, Nirmala Mehta, Charu Mathur, Nayana, Devyani Chalia, Darshana Jhaveri, Kalavati Devi.</span></p>\n",
+                    solution_hi: "<p><span style=\"font-family: Cambria Math;\">4</span><span style=\"font-family: Cambria Math;\">.(</span><span style=\"font-family: Cambria Math;\">c)&nbsp;</span><strong>&nbsp;&#2348;&#2367;&#2346;&#2367;&#2344; &#2360;&#2367;&#2306;&#2361; &#2404; </strong><span style=\"font-weight: 400;\">&#2357;&#2375; &#2348;&#2367;&#2359;&#2381;&#2339;&#2369;&#2346;&#2381;&#2352;&#2367;&#2351;&#2366; &#2350;&#2339;&#2367;&#2346;&#2369;&#2352;&#2368; &#2360;&#2350;&#2369;&#2342;&#2366;&#2351; &#2360;&#2375; &#2360;&#2306;&#2348;&#2306;&#2343;&#2367;&#2340; &#2361;&#2376; &#2324;&#2352; &#2313;&#2344;&#2381;&#2361;&#2375; &#2310;&#2343;&#2369;&#2344;&#2367;&#2325; &#2350;&#2339;&#2367;&#2346;&#2369;&#2352;&#2368; &#2344;&#2371;&#2340;&#2381;&#2351; &#2324;&#2352; &#2358;&#2376;&#2354;&#2368; &#2325;&#2366; &#2332;&#2344;&#2325; &#2350;&#2366;&#2344;&#2366; &#2332;&#2366;&#2340;&#2366; &#2361;&#2376;&#2404;&nbsp; &#2346;&#2369;&#2352;&#2360;&#2381;&#2325;&#2366;&#2352;: &#2360;&#2306;&#2327;&#2368;&#2340; &#2344;&#2366;&#2335;&#2325; &#2309;&#2325;&#2366;&#2342;&#2350;&#2368; (1966), &#2325;&#2366;&#2354;&#2367;&#2342;&#2366;&#2360; &#2360;&#2350;&#2381;&#2350;&#2366;&#2344; (1989-90)&#2404; </span><strong>&#2346;&#2381;&#2352;&#2360;&#2367;&#2342;&#2381;&#2343; &#2350;&#2339;&#2367;&#2346;&#2369;&#2352;&#2368; &#2344;&#2352;&#2381;&#2340;&#2325;:</strong><span style=\"font-weight: 400;\"> &#2342;&#2352;&#2381;&#2358;&#2344;&#2366; &#2333;&#2366;&#2357;&#2375;&#2352;&#2368;, &#2351;&#2369;&#2350;&#2354;&#2375;&#2350;&#2381;&#2348;&#2350; &#2327;&#2306;&#2349;&#2367;&#2344;&#2368; &#2342;&#2375;&#2357;&#2368;, &#2344;&#2367;&#2352;&#2381;&#2350;&#2354;&#2366; &#2350;&#2375;&#2361;&#2340;&#2366;, &#2330;&#2366;&#2352;&#2369; &#2350;&#2366;&#2341;&#2369;&#2352;, &#2344;&#2351;&#2344;&#2366;, &#2342;&#2375;&#2357;&#2351;&#2366;&#2344;&#2368; &#2330;&#2366;&#2354;&#2367;&#2351;&#2366;, &#2342;&#2352;&#2381;&#2358;&#2344;&#2366; &#2333;&#2366;&#2357;&#2375;&#2352;&#2368;, &#2325;&#2354;&#2366;&#2357;&#2340;&#2368; &#2342;&#2375;&#2357;&#2368;&#2404;</span></p>\n",
+                    correct: "c",
+                    pos_marks: 2.0,
+                    neg_marks: 0.5
+                });
+                questions.push({
+                    id: "5",
+                    section: "18",
+                    question_en: "<p><span style=\"font-family: Cambria Math;\">5.</span><span style=\"font-family: Cambria Math;\"> Which player among the following is the twenty-third Woman Grandmaster of India?</span></p>\n",
+                    question_hi: "<p><span style=\"font-family: Cambria Math;\">5. </span><span style=\"font-family: Cambria Math;\">&#2344;&#2367;&#2350;&#2381;&#2344;&#2354;&#2367;&#2326;&#2367;&#2340;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2350;&#2375;&#2306;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2360;&#2375;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2325;&#2380;&#2344;</span><span style=\"font-family: Cambria Math;\">-</span><span style=\"font-family: Cambria Math;\">&#2360;&#2368;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2326;&#2367;&#2354;&#2366;&#2337;&#2364;&#2368;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2349;&#2366;&#2352;&#2340;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2325;&#2368;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2340;&#2375;&#2312;&#2360;&#2357;&#2368;&#2306;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2350;&#2361;&#2367;&#2354;&#2366;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2327;&#2381;&#2352;&#2376;&#2306;&#2337;&#2350;&#2366;&#2360;&#2381;&#2335;&#2352;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2361;&#2376;&#2306;</span><span style=\"font-family: Cambria Math;\">?</span></p>\n",
+                    options_en: ["<p>Priyanka Nutakki</p>\n", "<p>Eesha Karavade</p>\n", 
+                                "<p>Bhakti Kulkarni</p>\n", "<p>Subbaraman <span style=\"font-family: Cambria Math;\">Vijayalakshmi </span></p>\n"],
+                    options_hi: ["<p><span style=\"font-weight: 400;\">&#2346;&#2381;&#2352;&#2367;&#2351;&#2306;&#2325;&#2366; &#2344;&#2369;&#2335;&#2325;&#2381;&#2325;&#2368; (Priyanka Nutakki)</span></p>\n", "<p><span style=\"font-weight: 400;\">&#2312;&#2358;&#2366; &#2325;&#2352;&#2357;&#2337;&#2375; (Eesha Karavade)</span></p>\n",
+                                "<p><span style=\"font-weight: 400;\">&#2349;&#2325;&#2381;&#2340;&#2367; &#2325;&#2369;&#2354;&#2325;&#2352;&#2381;&#2339;&#2368; (Bhakti Kulkarni)</span></p>\n", "<p><span style=\"font-weight: 400;\">&#2360;&#2369;&#2348;&#2381;&#2348;&#2366;&#2352;&#2366;&#2350;&#2344; &#2357;&#2367;&#2332;&#2351;&#2354;&#2325;&#2381;&#2359;&#2381;&#2350;&#2368; (Subbaraman Vijayalakshmi)</span></p>\n"],
+                    solution_en: "<p><span style=\"font-family: Cambria Math;\">5</span><span style=\"font-family: Cambria Math;\">.(</span><span style=\"font-family: Cambria Math;\">a)&nbsp;</span><strong>Priyanka Nutakki. Bhakti kulkarni</strong><span style=\"font-weight: 400;\"> - She became Goa&rsquo;s first woman grandmaster after her name was cleared by the world chess federation. </span><strong>Subbaraman Vijayalakshmi</strong><span style=\"font-weight: 400;\"> - She is the first female Indian Grandmaster in chess (2001) and FIDE title of International Master. She was awarded the Arjuna Award (2001). </span><strong>Eesha Karavade </strong><span style=\"font-weight: 400;\">(Chess Player from Pune) - Titles of International Master and Woman Grandmaster (2005).</span></p>\n",
+                    solution_hi: "<p><span style=\"font-family: Cambria Math;\">5</span><span style=\"font-family: Cambria Math;\">.(</span><span style=\"font-family: Cambria Math;\">a) </span><strong>&#2346;&#2381;&#2352;&#2367;&#2351;&#2306;&#2325;&#2366; &#2344;&#2369;&#2335;&#2325;&#2381;&#2325;&#2368;</strong><strong>&#2404; &#2349;&#2325;&#2381;&#2340;&#2367; &#2325;&#2369;&#2354;&#2325;&#2352;&#2381;&#2339;&#2368;</strong><span style=\"font-weight: 400;\"> - &#2357;&#2367;&#2358;&#2381;&#2357; &#2358;&#2340;&#2352;&#2306;&#2332; &#2350;&#2361;&#2366;&#2360;&#2306;&#2328; &#2342;&#2381;&#2357;&#2366;&#2352;&#2366; &#2313;&#2344;&#2325;&#2375; &#2344;&#2366;&#2350; &#2325;&#2379; &#2350;&#2306;&#2332;&#2370;&#2352;&#2368; &#2350;&#2367;&#2354;&#2344;&#2375; &#2325;&#2375; &#2348;&#2366;&#2342; &#2357;&#2361; &#2327;&#2379;&#2357;&#2366; &#2325;&#2368; &#2346;&#2361;&#2354;&#2368; &#2350;&#2361;&#2367;&#2354;&#2366; &#2327;&#2381;&#2352;&#2376;&#2306;&#2337;&#2350;&#2366;&#2360;&#2381;&#2335;&#2352; &#2348;&#2344;&#2368;&#2306;&#2404; </span><strong>&#2360;&#2369;&#2348;&#2381;&#2348;&#2366;&#2352;&#2350;&#2344; &#2357;&#2367;&#2332;&#2351;&#2366;&#2354;&#2325;&#2381;&#2359;&#2381;&#2350;&#2368;</strong><span style=\"font-weight: 400;\"> - &#2357;&#2361; &#2358;&#2340;&#2352;&#2306;&#2332; (2001) &#2350;&#2375;&#2306; &#2346;&#2361;&#2354;&#2368; &#2350;&#2361;&#2367;&#2354;&#2366; &#2349;&#2366;&#2352;&#2340;&#2368;&#2351; &#2327;&#2381;&#2352;&#2376;&#2306;&#2337;&#2350;&#2366;&#2360;&#2381;&#2335;&#2352; &#2324;&#2352; &#2309;&#2306;&#2340;&#2352;&#2381;&#2352;&#2366;&#2359;&#2381;&#2335;&#2381;&#2352;&#2368;&#2351; &#2350;&#2366;&#2360;&#2381;&#2335;&#2352; &#2325;&#2366; FIDE &#2326;&#2367;&#2340;&#2366;&#2348; &#2332;&#2368;&#2340;&#2366; &#2404; &#2313;&#2344;&#2381;&#2361;&#2375;&#2306; &#2309;&#2352;&#2381;&#2332;&#2369;&#2344; &#2346;&#2369;&#2352;&#2360;&#2381;&#2325;&#2366;&#2352; (2001) &#2360;&#2375; &#2349;&#2368; &#2360;&#2350;&#2381;&#2350;&#2366;&#2344;&#2367;&#2340; &#2325;&#2367;&#2351;&#2366; &#2327;&#2351;&#2366; &#2341;&#2366;&#2404;</span><strong> &#2312;&#2358;&#2366; &#2325;&#2352;&#2357;&#2337;&#2375; </strong><span style=\"font-weight: 400;\">(&#2346;&#2369;&#2339;&#2375; &#2360;&#2375; &#2358;&#2340;&#2352;&#2306;&#2332; &#2326;&#2367;&#2354;&#2366;&#2337;&#2364;&#2368;) - &#2309;&#2306;&#2340;&#2352;&#2381;&#2352;&#2366;&#2359;&#2381;&#2335;&#2381;&#2352;&#2368;&#2351; &#2350;&#2366;&#2360;&#2381;&#2335;&#2352; &#2324;&#2352;&nbsp; &#2350;&#2361;&#2367;&#2354;&#2366; &#2327;&#2381;&#2352;&#2376;&#2306;&#2337;&#2350;&#2366;&#2360;&#2381;&#2335;&#2352; &#2325;&#2366; &#2326;&#2367;&#2340;&#2366;&#2348; (2005)&#2404;</span></p>\n",
+                    correct: "a",
+                    pos_marks: 2.0,
+                    neg_marks: 0.5
+                });
+                questions.push({
+                    id: "6",
+                    section: "18",
+                    question_en: "<p>6. <span style=\"font-family: Cambria Math;\">Who among the following Indian musicians is known as \'Pancham Da\'?</span></p>\n",
+                    question_hi: "<p>6. <span style=\"font-family: Cambria Math;\">&#2344;&#2367;&#2350;&#2381;&#2344;&#2354;&#2367;&#2326;&#2367;&#2340;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2349;&#2366;&#2352;&#2340;&#2368;&#2351;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2360;&#2306;&#2327;&#2368;&#2340;&#2325;&#2366;&#2352;&#2379;&#2306;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2350;&#2375;&#2306;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2360;&#2375;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2325;&#2380;&#2344;</span><span style=\"font-family: Cambria Math;\"> \'</span><span style=\"font-family: Cambria Math;\">&#2346;&#2306;&#2330;&#2350;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2342;&#2366;</span><span style=\"font-family: Cambria Math;\">&rsquo; </span><span style=\"font-family: Cambria Math;\">&#2325;&#2375;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2344;&#2366;&#2350;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2360;&#2375;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2332;&#2366;&#2344;&#2375;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2332;&#2366;&#2340;&#2375;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2361;&#2376;&#2306;</span><span style=\"font-family: Cambria Math;\">?</span></p>\n",
+                    options_en: ["<p><span style=\"font-family: Cambria Math;\">Sachin Dev Barman</span><span style=\"font-family: Cambria Math;\"> </span></p>\n", "<p><span style=\"font-family: Cambria Math;\">Kishore Kumar</span><span style=\"font-family: Cambria Math;\"> </span></p>\n", 
+                                "<p><span style=\"font-family: Cambria Math;\">Nitin Mukesh</span><span style=\"font-family: Cambria Math;\"> </span></p>\n", "<p><span style=\"font-family: Cambria Math;\">Rahul Dev Barman</span></p>\n"],
+                    options_hi: ["<p><span style=\"font-family: Cambria Math;\">&#2360;&#2330;&#2367;&#2344;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2342;&#2375;&#2357;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2348;&#2352;&#2381;&#2350;&#2344;</span></p>\n", "<p><span style=\"font-family: Cambria Math;\">&#2325;&#2367;&#2358;&#2379;&#2352;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2325;&#2369;&#2350;&#2366;&#2352;</span><span style=\"font-family: Cambria Math;\"> </span></p>\n",
+                                "<p><span style=\"font-family: Cambria Math;\">&#2344;&#2367;&#2340;&#2367;&#2344;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2350;&#2369;&#2325;&#2375;&#2358;</span><span style=\"font-family: Cambria Math;\"> </span></p>\n", "<p><span style=\"font-family: Cambria Math;\">&#2352;&#2366;&#2361;&#2369;&#2354;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2342;&#2375;&#2357;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2348;&#2352;&#2381;&#2350;&#2344;</span></p>\n"],
+                    solution_en: "<p><span style=\"font-family: Cambria Math;\">6</span><span style=\"font-family: Cambria Math;\">.(</span><span style=\"font-family: Cambria Math;\">d) <strong>Rahul Dev Barman</strong></span><span style=\"font-family: Cambria Math;\">. He composed musical scores for 331 films. </span><span style=\"font-family: Cambria Math;\">Awards :</span><span style=\"font-family: Cambria Math;\"> Filmfare for Best Music Director for Sanam Teri Kasam (1983). Other musicians and their </span><span style=\"font-family: Cambria Math;\">nicknames :</span><span style=\"font-family: Cambria Math;\"> Lata Mangeshkar - &ldquo;Queen of melody&rdquo;. Kishore Kumar - Kishore Da, AR Rahman - The </span><span style=\"font-family: Cambria Math;\">Mozart of Madras. Usha Uthup - The Queen of Indipop. </span></p>\n",
+                    solution_hi: "<p><span style=\"font-family: Cambria Math;\">6</span><span style=\"font-family: Cambria Math;\">.(</span><span style=\"font-family: Cambria Math;\">d) </span><strong><span style=\"font-family: Cambria Math;\">&#2352;&#2366;&#2361;&#2369;&#2354;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2342;&#2375;&#2357;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2348;&#2352;&#2381;&#2350;&#2344;&#2404;</span></strong><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2313;&#2344;&#2381;&#2361;&#2379;&#2306;&#2344;&#2375;</span><span style=\"font-family: Cambria Math;\"> 331 </span><span style=\"font-family: Cambria Math;\">&#2347;&#2367;&#2354;&#2381;&#2350;&#2379;&#2306;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2325;&#2375;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2354;&#2367;&#2319;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2360;&#2306;&#2327;&#2368;&#2340;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2352;&#2330;&#2344;&#2366;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2325;&#2368;&#2404;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2346;&#2369;&#2352;&#2360;&#2381;&#2325;&#2366;&#2352;</span><span style=\"font-family: Cambria Math;\"> : </span><span style=\"font-family: Cambria Math;\">&#2360;&#2344;&#2350;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2340;&#2375;&#2352;&#2368;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2325;&#2360;&#2350;</span><span style=\"font-family: Cambria Math;\"> (1983) </span><span style=\"font-family: Cambria Math;\">&#2325;&#2375;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2354;&#2367;&#2319;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2360;&#2352;&#2381;&#2357;&#2358;&#2381;&#2352;&#2375;&#2359;&#2381;&#2336;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2360;&#2306;&#2327;&#2368;&#2340;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2344;&#2367;&#2352;&#2381;&#2342;&#2375;&#2358;&#2325;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2325;&#2366;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2347;&#2367;&#2354;&#2381;&#2350;&#2347;&#2375;&#2351;&#2352;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2346;&#2369;&#2352;&#2360;&#2381;&#2325;&#2366;&#2352;&#2404;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2309;&#2344;&#2381;&#2351;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2360;&#2306;&#2327;&#2368;&#2340;&#2325;&#2366;&#2352;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2324;&#2352;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2313;&#2344;&#2325;&#2375;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2313;&#2346;&#2344;&#2366;&#2350;</span><span style=\"font-family: Cambria Math;\"> : </span><span style=\"font-family: Cambria Math;\">&#2354;&#2340;&#2366;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2350;&#2306;&#2327;&#2375;&#2358;&#2325;&#2352;</span><span style=\"font-family: Cambria Math;\"> - \"</span><span style=\"font-family: Cambria Math;\">&#2360;&#2381;&#2357;&#2352;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2325;&#2379;&#2325;&#2367;&#2354;&#2366;</span><span style=\"font-family: Cambria Math;\"> \" (Queen of </span><span style=\"font-family: Cambria Math;\">melody)</span><span style=\"font-family: Cambria Math;\">&#2404;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2325;&#2367;&#2358;&#2379;&#2352;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2325;&#2369;&#2350;&#2366;&#2352;</span><span style=\"font-family: Cambria Math;\"> - </span><span style=\"font-family: Cambria Math;\">&#2325;&#2367;&#2358;&#2379;&#2352;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2342;&#2366;</span><span style=\"font-family: Cambria Math;\">, </span><span style=\"font-family: Cambria Math;\">&#2319;</span><span style=\"font-family: Cambria Math;\">.</span><span style=\"font-family: Cambria Math;\">&#2310;&#2352;</span><span style=\"font-family: Cambria Math;\">. </span><span style=\"font-family: Cambria Math;\">&#2352;&#2361;&#2350;&#2366;&#2344;</span><span style=\"font-family: Cambria Math;\"> - </span><span style=\"font-family: Cambria Math;\">&#2342;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2350;&#2379;&#2332;&#2366;&#2352;&#2381;&#2335;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2321;&#2347;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2350;&#2342;&#2381;&#2352;&#2366;&#2360;</span><span style=\"font-family: Cambria Math;\"> (The Mozart of Madras)</span><span style=\"font-family: Cambria Math;\">&#2404;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2313;&#2359;&#2366;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2313;&#2341;&#2369;&#2346;</span><span style=\"font-family: Cambria Math;\"> - </span><span style=\"font-family: Cambria Math;\">&#2342;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2325;&#2381;&#2357;&#2368;&#2344;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2321;&#2398;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2311;&#2306;&#2337;&#2368;&#2346;&#2377;&#2346;</span><span style=\"font-family: Cambria Math;\"> (The Queen of Indipop)</span><span style=\"font-family: Cambria Math;\">&#2404;</span></p>\n",
+                    correct: "d",
+                    pos_marks: 2.0,
+                    neg_marks: 0.5
+                });
+                questions.push({
+                    id: "7",
+                    section: "18",
+                    question_en: "<p><span style=\"font-family: Cambria Math;\">7. </span><span style=\"font-family: Cambria Math;\">Where were the 35th National Games held in the year </span><span style=\"font-family: Cambria Math;\">2015 ?</span></p>\n",
+                    question_hi: "<p><span style=\"font-family: Cambria Math;\">7. </span><span style=\"font-family: Cambria Math;\">&#2357;&#2352;&#2381;&#2359;</span><span style=\"font-family: Cambria Math;\"> 2015 </span><span style=\"font-family: Cambria Math;\">&#2350;&#2375;&#2306;</span><span style=\"font-family: Cambria Math;\"> 35</span><span style=\"font-family: Cambria Math;\">&#2357;&#2375;&#2306;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2352;&#2366;&#2359;&#2381;&#2335;&#2381;&#2352;&#2368;&#2351;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2326;&#2375;&#2354;&#2379;&#2306;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2325;&#2366;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2310;&#2351;&#2379;&#2332;&#2344;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2325;&#2361;&#2366;&#2305;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2361;&#2369;&#2310;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2341;&#2366;</span><span style=\"font-family: Cambria Math;\">?</span></p>\n",
+                    options_en: ["<p>Delhi</p>\n", "<p><span style=\"font-family: Cambria Math;\">Mumbai </span></p>\n", 
+                                "<p>Punjab</p>\n", "<p>Kerala</p>\n"],
+                    options_hi: ["<p><span style=\"font-family: Cambria Math;\">&#2342;&#2367;&#2354;&#2381;&#2354;&#2368;</span><span style=\"font-family: Cambria Math;\"> </span></p>\n", "<p><span style=\"font-family: Cambria Math;\">&#2350;&#2369;&#2306;&#2348;&#2312;</span><span style=\"font-family: Cambria Math;\"> </span></p>\n",
+                                "<p><span style=\"font-family: Cambria Math;\">&#2346;&#2306;&#2332;&#2366;&#2348;</span><span style=\"font-family: Cambria Math;\"> </span></p>\n", "<p><span style=\"font-family: Cambria Math;\">&#2325;&#2375;&#2352;&#2354;</span></p>\n"],
+                    solution_en: "<p><span style=\"font-family: Cambria Math;\">7</span><span style=\"font-family: Cambria Math;\">.</span><span style=\"font-family: Cambria Math;\">(</span><span style=\"font-family: Cambria Math;\">d)&nbsp;</span><strong>Kerala.</strong><span style=\"font-weight: 400;\"> National Games:- Kerala hosted this second time&nbsp; (first time hosted 27th National Games in1987). 35th National Games: Opening ceremony held&nbsp; at Greenfield Stadium inaugurated by Shri Venkaiah Naidu. First National Games organised in Lahore (1924). First Modern National Games -&nbsp; New Delhi (1985). They were hosted in various Places, including Bombay and Pune (1994), Bangalore and Mysore (1997), Imphal (1999), Punjab (2001), Andhra Pradesh (2002), Guwahati (2007), Jharkhand (2011), and Gujarat (2022). </span><strong>37th National Games</strong><span style=\"font-weight: 400;\">&nbsp; - Goa ( October 2023).&nbsp;</span></p>\n",
+                    solution_hi: "<p><span style=\"font-family: Cambria Math;\">7</span><span style=\"font-family: Cambria Math;\">.</span><span style=\"font-family: Cambria Math;\">(d)&nbsp; </span><strong>&#2325;&#2375;&#2352;&#2354;</strong><span style=\"font-weight: 400;\">&#2404; &#2352;&#2366;&#2359;&#2381;&#2335;&#2381;&#2352;&#2368;&#2351; &#2326;&#2375;&#2354; :- &#2325;&#2375;&#2352;&#2354; &#2344;&#2375; &#2342;&#2370;&#2360;&#2352;&#2368; &#2348;&#2366;&#2352; &#2311;&#2360;&#2325;&#2368; &#2350;&#2375;&#2332;&#2348;&#2366;&#2344;&#2368; &#2325;&#2368; (&#2346;&#2361;&#2354;&#2368; &#2348;&#2366;&#2352; 1987 &#2350;&#2375;&#2306; 27&#2357;&#2375;&#2306; &#2352;&#2366;&#2359;&#2381;&#2335;&#2381;&#2352;&#2368;&#2351; &#2326;&#2375;&#2354;&#2379;&#2306; &#2325;&#2368; &#2350;&#2375;&#2332;&#2348;&#2366;&#2344;&#2368; &#2325;&#2368;)&#2404; 35&#2357;&#2375;&#2306; &#2352;&#2366;&#2359;&#2381;&#2335;&#2381;&#2352;&#2368;&#2351; &#2326;&#2375;&#2354; : &#2327;&#2381;&#2352;&#2368;&#2344;&#2347;&#2368;&#2354;&#2381;&#2337; &#2360;&#2381;&#2335;&#2375;&#2337;&#2367;&#2351;&#2350; &#2350;&#2375;&#2306; &#2310;&#2351;&#2379;&#2332;&#2367;&#2340; &#2313;&#2342;&#2381;&#2328;&#2366;&#2335;&#2344; &#2360;&#2350;&#2366;&#2352;&#2379;&#2361; &#2325;&#2366; &#2313;&#2342;&#2381;&#2328;&#2366;&#2335;&#2344; &#2358;&#2381;&#2352;&#2368; &#2357;&#2375;&#2306;&#2325;&#2376;&#2351;&#2366; &#2344;&#2366;&#2351;&#2337;&#2370; &#2344;&#2375; &#2325;&#2367;&#2351;&#2366;&#2404; &#2346;&#2381;&#2352;&#2341;&#2350; &#2352;&#2366;&#2359;&#2381;&#2335;&#2381;&#2352;&#2368;&#2351; &#2326;&#2375;&#2354; &#2354;&#2366;&#2361;&#2380;&#2352; &#2350;&#2375;&#2306; &#2310;&#2351;&#2379;&#2332;&#2367;&#2340; (1924) &#2325;&#2367;&#2319; &#2327;&#2351;&#2375; &#2404; &#2346;&#2381;&#2352;&#2341;&#2350; &#2310;&#2343;&#2369;&#2344;&#2367;&#2325; &#2352;&#2366;&#2359;&#2381;&#2335;&#2381;&#2352;&#2368;&#2351; &#2326;&#2375;&#2354; - &#2344;&#2312; &#2342;&#2367;&#2354;&#2381;&#2354;&#2368; (1985)&#2404; &#2352;&#2366;&#2359;&#2381;&#2335;&#2381;&#2352;&#2368;&#2351; &#2326;&#2375;&#2354;&#2379;&#2306; &#2325;&#2368; &#2350;&#2375;&#2332;&#2348;&#2366;&#2344;&#2368; &#2357;&#2367;&#2349;&#2367;&#2344;&#2381;&#2344; &#2360;&#2381;&#2341;&#2366;&#2344;&#2379;&#2306; &#2346;&#2352; &#2325;&#2368; &#2327;&#2312;, &#2332;&#2367;&#2344;&#2350;&#2375;&#2306; &#2348;&#2377;&#2350;&#2381;&#2348;&#2375; &#2324;&#2352; &#2346;&#2369;&#2339;&#2375; (1994), &#2348;&#2376;&#2306;&#2327;&#2354;&#2379;&#2352; &#2324;&#2352; &#2350;&#2376;&#2360;&#2370;&#2352; (1997), &#2311;&#2350;&#2381;&#2347;&#2366;&#2354; (1999), &#2346;&#2306;&#2332;&#2366;&#2348; (2001), &#2310;&#2306;&#2343;&#2381;&#2352; &#2346;&#2381;&#2352;&#2342;&#2375;&#2358; (2002), &#2327;&#2369;&#2357;&#2366;&#2361;&#2366;&#2335;&#2368; (2007), &#2333;&#2366;&#2352;&#2326;&#2306;&#2337; (2011) &#2324;&#2352; &#2327;&#2369;&#2332;&#2352;&#2366;&#2340; ( 2022)&#2404; </span><strong>37&#2357;&#2375;&#2306; &#2352;&#2366;&#2359;&#2381;&#2335;&#2381;&#2352;&#2368;&#2351; &#2326;&#2375;&#2354;</strong><span style=\"font-weight: 400;\"> - &#2327;&#2379;&#2357;&#2366; (&#2309;&#2325;&#2381;&#2335;&#2370;&#2348;&#2352; 2023)&#2404;</span></p>\n",
+                    correct: "d",
+                    pos_marks: 2.0,
+                    neg_marks: 0.5
+                });
+                questions.push({
+                    id: "8",
+                    section: "18",
+                    question_en: "<p><span style=\"font-family: Cambria Math;\">8. </span><span style=\"font-family: Cambria Math;\">\'Kalasam\' is a dance sequence in which of the following classical dances of India?</span></p>\n",
+                    question_hi: "<p><span style=\"font-family: Cambria Math;\">8. </span><span style=\"font-family: Cambria Math;\">\'</span><span style=\"font-family: Cambria Math;\">&#2325;&#2354;&#2366;&#2360;&#2350;</span><span style=\"font-family: Cambria Math;\">\' </span><span style=\"font-family: Cambria Math;\">&#2349;&#2366;&#2352;&#2340;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2325;&#2375;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2344;&#2367;&#2350;&#2381;&#2344;&#2354;&#2367;&#2326;&#2367;&#2340;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2350;&#2375;&#2306;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2360;&#2375;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2325;&#2367;&#2360;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2358;&#2366;&#2360;&#2381;&#2340;&#2381;&#2352;&#2368;&#2351;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2344;&#2371;&#2340;&#2381;&#2351;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2325;&#2368;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2319;&#2325;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2344;&#2371;&#2340;&#2381;&#2351;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2309;&#2344;&#2369;&#2325;&#2381;&#2352;&#2350;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2361;&#2376;</span><span style=\"font-family: Cambria Math;\">?</span></p>\n",
+                    options_en: ["<p>Kathak</p>\n", "<p>Kathakali</p>\n", 
+                                "<p>Bharatanatyam</p>\n", "<p><span style=\"font-family: Cambria Math;\">Manipuri</span></p>\n"],
+                    options_hi: ["<p><span style=\"font-family: Cambria Math;\">&#2325;&#2341;&#2325;</span><span style=\"font-family: Cambria Math;\"> </span></p>\n", "<p><span style=\"font-family: Cambria Math;\">&#2325;&#2341;&#2325;&#2354;&#2368;</span><span style=\"font-family: Cambria Math;\"> </span></p>\n",
+                                "<p><span style=\"font-family: Cambria Math;\">&#2349;&#2352;&#2340;&#2344;&#2366;&#2335;&#2381;&#2351;&#2350;</span><span style=\"font-family: Cambria Math;\"> </span></p>\n", "<p><span style=\"font-family: Cambria Math;\">&#2350;&#2339;&#2367;&#2346;&#2369;&#2352;&#2368;</span></p>\n"],
+                    solution_en: "<p><span style=\"font-family: Cambria Math;\">8</span><span style=\"font-family: Cambria Math;\">.(</span><span style=\"font-family: Cambria Math;\">b) <strong>Kathakali</strong>.</span><span style=\"font-family: Cambria Math;\"> It is a classical Indian dance form of Kerala. </span><span style=\"font-family: Cambria Math;\">The text of Kathakali songs known as Attakkatha.</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">Major instruments</span><span style=\"font-family: Cambria Math;\"> used in Kathakali music - Chenda, Maddalam, Chengila and Elathalam. Other Indian classical </span><span style=\"font-family: Cambria Math;\">dances - Kathak (Uttar Pradesh) , Bharatanatyam </span><span style=\"font-family: Cambria Math;\">(Tamil Nadu), Manipuri (Manipur), Odissi (Odisha), Kuchipudi (Andhra Pradesh), Sattriya (Assam), Mohiniyattam (Kerala).</span></p>\n",
+                    solution_hi: "<p><span style=\"font-family: Cambria Math;\">8</span><span style=\"font-family: Cambria Math;\">.(</span><span style=\"font-family: Cambria Math;\">b) </span><strong><span style=\"font-family: Cambria Math;\">&#2325;&#2341;&#2325;&#2354;&#2368;</span></strong><span style=\"font-family: Cambria Math;\">&#2404;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2351;&#2361;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2325;&#2375;&#2352;&#2354;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2325;&#2366;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2319;&#2325;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2358;&#2366;&#2360;&#2381;&#2340;&#2381;&#2352;&#2368;&#2351;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2349;&#2366;&#2352;&#2340;&#2368;&#2351;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2344;&#2371;&#2340;&#2381;&#2351;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2361;&#2376;&#2404;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2325;&#2341;&#2325;&#2354;&#2368;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2327;&#2368;&#2340;&#2379;&#2306;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2325;&#2375;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2346;&#2366;&#2336;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2325;&#2379;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2309;&#2335;&#2381;&#2335;&#2325;&#2381;&#2325;&#2325;&#2341;&#2366;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2325;&#2375;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2344;&#2366;&#2350;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2360;&#2375;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2332;&#2366;&#2344;&#2366;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2332;&#2366;&#2340;&#2366;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2361;&#2376;&#2404;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2325;&#2341;&#2325;&#2354;&#2368;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2360;&#2306;&#2327;&#2368;&#2340;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2350;&#2375;&#2306;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2346;&#2381;</span><span style=\"font-family: Cambria Math;\">&#2352;&#2351;&#2369;&#2325;&#2381;&#2340;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2346;&#2381;&#2352;&#2350;&#2369;&#2326;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2357;&#2366;&#2342;&#2381;&#2351;&#2351;&#2306;&#2340;&#2381;&#2352;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2344;&#2367;&#2350;&#2381;&#2344;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2361;&#2376;</span><span style=\"font-family: Cambria Math;\"> - </span><span style=\"font-family: Cambria Math;\">&#2330;&#2375;&#2306;&#2337;&#2366;</span><span style=\"font-family: Cambria Math;\">, </span><span style=\"font-family: Cambria Math;\">&#2350;&#2342;&#2381;&#2342;&#2354;&#2350;</span><span style=\"font-family: Cambria Math;\">, </span><span style=\"font-family: Cambria Math;\">&#2330;&#2375;&#2306;&#2327;&#2367;&#2354;&#2366;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2324;&#2352;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2311;&#2354;&#2366;&#2341;&#2354;&#2350;&#2404;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2309;&#2344;&#2381;&#2351;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2349;&#2366;&#2352;&#2340;&#2368;&#2351;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2358;&#2366;&#2360;&#2381;&#2340;&#2381;&#2352;&#2368;&#2351;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2344;&#2371;&#2340;&#2381;&#2351;</span><span style=\"font-family: Cambria Math;\"> - </span><span style=\"font-family: Cambria Math;\">&#2325;&#2341;&#2325;</span><span style=\"font-family: Cambria Math;\"> (</span><span style=\"font-family: Cambria Math;\">&#2313;&#2340;&#2381;&#2340;&#2352;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2346;&#2381;&#2352;&#2342;&#2375;&#2358;</span><span style=\"font-family: Cambria Math;\">), </span><span style=\"font-family: Cambria Math;\">&#2349;&#2352;&#2340;&#2344;&#2366;&#2335;&#2381;&#2351;&#2350;</span><span style=\"font-family: Cambria Math;\"> (</span><span style=\"font-family: Cambria Math;\">&#2340;&#2350;&#2367;&#2354;&#2344;&#2366;&#2337;&#2369;</span><span style=\"font-family: Cambria Math;\">), </span><span style=\"font-family: Cambria Math;\">&#2350;&#2339;&#2367;&#2346;&#2369;&#2352;&#2368;</span><span style=\"font-family: Cambria Math;\"> (</span><span style=\"font-family: Cambria Math;\">&#2350;&#2339;&#2367;&#2346;&#2369;&#2352;</span><span style=\"font-family: Cambria Math;\">), </span><span style=\"font-family: Cambria Math;\">&#2323;&#2337;&#2367;&#2360;&#2368;</span><span style=\"font-family: Cambria Math;\"> (</span><span style=\"font-family: Cambria Math;\">&#2323;&#2337;&#2367;&#2358;&#2366;</span><span style=\"font-family: Cambria Math;\">), </span><span style=\"font-family: Cambria Math;\">&#2325;&#2369;&#2330;&#2367;&#2346;&#2369;&#2337;&#2364;&#2368;</span><span style=\"font-family: Cambria Math;\"> (</span><span style=\"font-family: Cambria Math;\">&#2310;&#2306;&#2343;&#2381;&#2352;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2346;&#2381;&#2352;&#2342;&#2375;&#2358;</span><span style=\"font-family: Cambria Math;\">), </span><span style=\"font-family: Cambria Math;\">&#2360;&#2340;&#2381;&#2340;&#2381;&#2352;&#2367;&#2351;&#2366;</span><span style=\"font-family: Cambria Math;\"> (</span><span style=\"font-family: Cambria Math;\">&#2309;&#2360;&#2350;</span><span style=\"font-family: Cambria Math;\">), </span><span style=\"font-family: Cambria Math;\">&#2350;&#2379;&#2361;&#2367;&#2344;&#2368;&#2309;&#2335;&#2381;&#2335;&#2350;</span><span style=\"font-family: Cambria Math;\"> (</span><span style=\"font-family: Cambria Math;\">&#2325;&#2375;&#2352;&#2354;</span><span style=\"font-family: Cambria Math;\">)</span><span style=\"font-family: Cambria Math;\">&#2404;</span></p>\n",
+                    correct: "b",
+                    pos_marks: 2.0,
+                    neg_marks: 0.5
+                });
+                questions.push({
+                    id: "9",
+                    section: "18",
+                    question_en: "<p>9.<span style=\"font-family: Cambria Math;\"> Padma Shri </span><span style=\"font-family: Cambria Math;\">and Padma Bhushan awardee, Yamini Krishnamurthy is renowned for Bharatanatyam and which of the following dances?</span></p>\n",
+                    question_hi: "<p>9. <span style=\"font-family: Cambria Math;\">&#2346;&#2342;&#2381;&#2350;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2358;&#2381;&#2352;&#2368;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2324;&#2352;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2346;&#2342;&#2381;&#2350;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2349;&#2370;&#2359;&#2339;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2346;&#2369;&#2352;&#2360;&#2381;&#2325;&#2366;&#2352;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2360;&#2375;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2360;&#2350;&#2381;&#2350;&#2366;&#2344;&#2367;&#2340;</span><span style=\"font-family: Cambria Math;\">, </span><span style=\"font-family: Cambria Math;\">&#2351;&#2366;&#2350;&#2367;&#2344;&#2368;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2325;&#2371;&#2359;&#2381;&#2339;&#2350;&#2370;&#2352;&#2381;&#2340;&#2367;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2349;&#2352;&#2340;&#2344;&#2366;&#2335;&#2381;&#2351;&#2350;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2324;&#2352;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2344;</span><span style=\"font-family: Cambria Math;\">&#2367;&#2350;&#2381;&#2344;&#2354;&#2367;&#2326;&#2367;&#2340;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2350;&#2375;&#2306;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2360;&#2375;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2325;&#2367;&#2360;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2344;&#2371;&#2340;&#2381;&#2351;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2325;&#2375;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2354;&#2367;&#2319;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2346;&#2381;&#2352;&#2360;&#2367;&#2342;&#2381;&#2343;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2361;&#2376;&#2306;</span><span style=\"font-family: Cambria Math;\">?</span></p>\n",
+                    options_en: ["<p>Kathak</p>\n", "<p>Manipuri</p>\n", 
+                                "<p>Kuchipudi</p>\n", "<p>Kathakali</p>\n"],
+                    options_hi: ["<p><span style=\"font-family: Cambria Math;\">&#2325;&#2341;&#2325;</span><span style=\"font-family: Cambria Math;\"> </span></p>\n", "<p><span style=\"font-family: Cambria Math;\">&#2350;&#2339;&#2367;&#2346;&#2369;&#2352;&#2368;</span><span style=\"font-family: Cambria Math;\"> </span></p>\n",
+                                "<p><span style=\"font-family: Cambria Math;\">&#2325;&#2369;&#2330;&#2367;&#2346;&#2369;&#2337;&#2364;&#2368;</span><span style=\"font-family: Cambria Math;\"> </span></p>\n", "<p><span style=\"font-family: Cambria Math;\">&#2325;&#2341;&#2325;&#2354;&#2368;</span></p>\n"],
+                    solution_en: "<p><span style=\"font-family: Cambria Math;\">9.(</span><span style=\"font-family: Cambria Math;\">c)&nbsp;</span><strong>Kuchipudi </strong><span style=\"font-weight: 400;\">(Andhra Pradesh)</span><strong>. Awards of Yamini Krishnamurthy -</strong><span style=\"font-weight: 400;\"> Padma Shri (1968), Padma Bhushan (2001), Padma Vibhushan (2016), Natya Shastra Award (2014). </span><strong>Other Dancers of Kuchipudi </strong><span style=\"font-weight: 400;\">- Radha Reddy And Raja Reddy, Yamini Reddy, Kaushalya Reddy, Bhavana Reddy, Lakshmi Narayn Shastri, Indrani Rehman. </span><strong>Manipuri Dancers -</strong><span style=\"font-weight: 400;\"> Yumlembam Gambhini Devi, Nirmala Mehta, Guru Bipin Singh, Jhaveri Sisters.</span></p>\n",
+                    solution_hi: "<p><span style=\"font-family: Cambria Math;\">9</span><span style=\"font-family: Cambria Math;\">.(</span><span style=\"font-family: Cambria Math;\">c)&nbsp;</span><strong>&nbsp;&#2325;&#2369;&#2330;&#2367;&#2346;&#2369;&#2337;&#2364;&#2368; </strong><span style=\"font-weight: 400;\">(&#2310;&#2306;&#2343;&#2381;&#2352; &#2346;&#2381;&#2352;&#2342;&#2375;&#2358;) I </span><strong>&#2351;&#2366;&#2350;&#2367;&#2344;&#2368; &#2325;&#2371;&#2359;&#2381;&#2339;&#2350;&#2370;&#2352;&#2381;&#2340;&#2367; &#2325;&#2375; &#2346;&#2369;&#2352;&#2360;&#2381;&#2325;&#2366;&#2352; -</strong><span style=\"font-weight: 400;\"> </span><span style=\"font-weight: 400;\">&#2346;&#2342;&#2381;&#2350; &#2358;&#2381;&#2352;&#2368; (1968), &#2346;&#2342;&#2381;&#2350; &#2349;&#2370;&#2359;&#2339; (2001), &#2346;&#2342;&#2381;&#2350; &#2357;&#2367;&#2349;&#2370;&#2359;&#2339; (2016), &#2344;&#2366;&#2335;&#2381;&#2351; &#2358;&#2366;&#2360;&#2381;&#2340;&#2381;&#2352; &#2346;&#2369;&#2352;&#2360;&#2381;&#2325;&#2366;&#2352; (2014)&#2404; </span><strong>&#2325;&#2369;&#2330;&#2367;&#2346;&#2369;&#2337;&#2364;&#2368; &#2325;&#2375; &#2309;&#2344;&#2381;&#2351; &#2344;&#2352;&#2381;&#2340;&#2325; </strong><span style=\"font-weight: 400;\">- &#2352;&#2366;&#2343;&#2366; &#2352;&#2375;&#2337;&#2381;&#2337;&#2368; &#2324;&#2352; &#2352;&#2366;&#2332;&#2366; &#2352;&#2375;&#2337;&#2381;&#2337;&#2368;, &#2351;&#2366;&#2350;&#2367;&#2344;&#2368; &#2352;&#2375;&#2337;&#2381;&#2337;&#2368;, &#2325;&#2380;&#2358;&#2354;&#2381;&#2351;&#2366; &#2352;&#2375;&#2337;&#2381;&#2337;&#2368;, &#2349;&#2366;&#2357;&#2344;&#2366; &#2352;&#2375;&#2337;&#2381;&#2337;&#2368;, &#2354;&#2325;&#2381;&#2359;&#2381;&#2350;&#2368; &#2344;&#2366;&#2352;&#2366;&#2351;&#2339; &#2358;&#2366;&#2360;&#2381;&#2340;&#2381;&#2352;&#2368;, &#2311;&#2306;&#2342;&#2381;&#2352;&#2366;&#2339;&#2368; &#2352;&#2361;&#2350;&#2366;&#2344;&#2404; </span><strong>&#2350;&#2339;&#2367;&#2346;&#2369;&#2352;&#2368; &#2344;&#2352;&#2381;&#2340;&#2325; </strong><span style=\"font-weight: 400;\">- &#2351;&#2369;&#2350;&#2354;&#2375;&#2350;&#2381;&#2348;&#2350; &#2327;&#2306;&#2349;&#2367;&#2344;&#2368; &#2342;&#2375;&#2357;&#2368;, &#2344;&#2367;&#2352;&#2381;&#2350;&#2354;&#2366; &#2350;&#2375;&#2361;&#2340;&#2366;, &#2327;&#2369;&#2352;&#2369; &#2348;&#2367;&#2346;&#2367;&#2344; &#2360;&#2367;&#2306;&#2361;, &#2333;&#2366;&#2357;&#2375;&#2352;&#2368; &#2348;&#2361;&#2344;&#2375;&#2306;&#2404;</span></p>\n",
+                    correct: "c",
+                    pos_marks: 2.0,
+                    neg_marks: 0.5
+                });
+                questions.push({
+                    id: "10",
+                    section: "18",
+                    question_en: "<p><span style=\"font-family: Cambria Math;\">10</span><span style=\"font-family: Cambria Math;\">.</span><span style=\"font-family: Cambria Math;\"> Which of the following personalities is a famous Bharatanatyam dancer?</span></p>\n",
+                    question_hi: "<p><span style=\"font-family: Cambria Math;\">10</span><span style=\"font-family: Cambria Math;\">. </span><span style=\"font-family: Cambria Math;\">&#2344;&#2367;&#2350;&#2381;&#2344;&#2354;&#2367;&#2326;&#2367;&#2340;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2350;&#2375;&#2306;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2360;&#2375;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2325;&#2380;&#2344;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2360;&#2366;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2357;&#2381;&#2351;&#2325;&#2381;&#2340;&#2367;&#2340;&#2381;&#2357;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2319;&#2325;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2346;&#2381;&#2352;&#2360;&#2367;&#2342;&#2381;&#2343;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2349;&#2352;&#2340;&#2344;&#2366;&#2335;&#2381;&#2351;&#2350;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2344;&#2352;&#2381;&#2340;&#2325;</span><span style=\"font-family: Cambria Math;\"> / </span><span style=\"font-family: Cambria Math;\">&#2344;&#2371;&#2340;&#2381;&#2351;&#2366;&#2306;&#2327;&#2344;&#2366;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2361;&#2376;</span><span style=\"font-family: Cambria Math;\">?</span></p>\n",
+                    options_en: ["<p>Birju Maharaj</p>\n", "<p>Padma Subrahmanyam</p>\n", 
+                                "<p>Naik Siddiqui</p>\n", "<p>Saswati Sen</p>\n"],
+                    options_hi: ["<p><span style=\"font-family: Cambria Math;\">&#2348;&#2367;&#2352;&#2332;&#2370;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2350;&#2361;&#2366;&#2352;&#2366;&#2332;</span><span style=\"font-family: Cambria Math;\"> </span></p>\n", "<p><span style=\"font-family: Cambria Math;\">&#2346;&#2342;&#2381;&#2350;&#2366;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2360;&#2369;&#2348;&#2381;&#2352;&#2361;&#2381;&#2350;&#2339;&#2381;&#2351;&#2350;</span></p>\n",
+                                "<p><span style=\"font-family: Cambria Math;\">&#2344;&#2366;&#2311;&#2325;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2360;&#2367;&#2342;&#2381;&#2342;&#2368;&#2325;&#2368;</span></p>\n", "<p><span style=\"font-family: Cambria Math;\">&#2358;&#2366;&#2358;&#2381;&#2357;&#2340;&#2368;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2360;&#2375;&#2344;</span><span style=\"font-family: Cambria Math;\"> </span></p>\n"],
+                    solution_en: "<p><span style=\"font-family: Cambria Math;\">10</span><span style=\"font-family: Cambria Math;\">.(b)</span><strong>&nbsp;Padma Subrahmanyam. Awards - </strong><span style=\"font-weight: 400;\">Sangeet Natak Akademi Award (1983), Padma Shri (1981), Padma Bhushan (2003). </span><strong>Other Bharatanatyam dancers - </strong><span style=\"font-weight: 400;\">Rukmini Devi Arundale, Alarmel Valli, Yamini Krishnamurthy, Mallika Sarabhai, T. Bala Saraswati, Shobhana Pillai, Sonal Mansingh, Shudha Chandran, Vyjayantimala, Mrinalini Sarabhai. </span><strong>Kathak dancers -</strong><span style=\"font-weight: 400;\"> Birju Maharaj, Shovana Narayan, Nahid Siddiqui, Saswati Sen, Lachhu Maharaj, Shambhu Maharaj, Uday Shankar, Sitara devi.&nbsp;</span></p>\n",
+                    solution_hi: "<p><span style=\"font-family: Cambria Math;\">10</span><span style=\"font-family: Cambria Math;\">.(b) </span><strong>&#2346;&#2342;&#2381;&#2350;&#2366; &#2360;&#2369;&#2348;&#2381;&#2352;&#2361;&#2381;&#2350;&#2339;&#2381;&#2351;&#2350; I &#2346;&#2369;&#2352;&#2360;&#2381;&#2325;&#2366;&#2352; - </strong><span style=\"font-weight: 400;\">&#2360;&#2306;&#2327;&#2368;&#2340; &#2344;&#2366;&#2335;&#2325; &#2309;&#2325;&#2366;&#2342;&#2350;&#2368; &#2346;&#2369;&#2352;&#2360;&#2381;&#2325;&#2366;&#2352; (1983), &#2346;&#2342;&#2381;&#2350; &#2358;&#2381;&#2352;&#2368; (1981), &#2346;&#2342;&#2381;&#2350; &#2349;&#2370;&#2359;&#2339; (2003)&#2404; </span><strong>&#2309;&#2344;&#2381;&#2351; &#2349;&#2352;&#2340;&#2344;&#2366;&#2335;&#2381;&#2351;&#2350; &#2344;&#2352;&#2381;&#2340;&#2325; - </strong><span style=\"font-weight: 400;\">&#2352;&#2369;&#2325;&#2381;&#2350;&#2367;&#2339;&#2368; &#2342;&#2375;&#2357;&#2368; &#2309;&#2352;&#2369;&#2306;&#2337;&#2375;&#2354;, &#2309;&#2354;&#2366;&#2352;&#2381;&#2350;&#2375;&#2354; &#2357;&#2354;&#2381;&#2354;&#2368;, &#2351;&#2366;&#2350;&#2367;&#2344;&#2368; &#2325;&#2371;&#2359;&#2381;&#2339;&#2350;&#2370;&#2352;&#2381;&#2340;&#2367;, &#2350;&#2354;&#2381;&#2354;&#2367;&#2325;&#2366; &#2360;&#2366;&#2352;&#2366;&#2349;&#2366;&#2312;, &#2335;&#2368; &#2348;&#2366;&#2354;&#2366; &#2360;&#2352;&#2360;&#2381;&#2357;&#2340;&#2368;, &#2358;&#2379;&#2349;&#2344;&#2366; &#2346;&#2367;&#2354;&#2381;&#2354;&#2312;, &#2360;&#2379;&#2344;&#2354; &#2350;&#2366;&#2344;&#2360;&#2367;&#2306;&#2361;, &#2358;&#2369;&#2343;&#2366; &#2330;&#2306;&#2342;&#2381;&#2352;&#2344;, &#2357;&#2376;&#2332;&#2351;&#2306;&#2340;&#2368;&#2350;&#2366;&#2354;&#2366;, &#2350;&#2371;&#2339;&#2366;&#2354;&#2367;&#2344;&#2368; &#2360;&#2366;&#2352;&#2366;&#2349;&#2366;&#2312;&#2404; </span><strong>&#2325;&#2341;&#2325; &#2344;&#2352;&#2381;&#2340;&#2325;</strong><span style=\"font-weight: 400;\"> - &#2348;&#2367;&#2352;&#2332;&#2370; &#2350;&#2361;&#2366;&#2352;&#2366;&#2332;, &#2358;&#2379;&#2357;&#2344;&#2366; &#2344;&#2366;&#2352;&#2366;&#2351;&#2339;, &#2344;&#2366;&#2361;&#2367;&#2342; &#2360;&#2367;&#2342;&#2381;&#2342;&#2368;&#2325;&#2368;, &#2360;&#2360;&#2381;&#2357;&#2340;&#2368; &#2360;&#2375;&#2344;, &#2354;&#2330;&#2381;&#2331;&#2370; &#2350;&#2361;&#2366;&#2352;&#2366;&#2332;, &#2358;&#2306;&#2349;&#2370; &#2350;&#2361;&#2366;&#2352;&#2366;&#2332;, &#2313;&#2342;&#2351; &#2358;&#2306;&#2325;&#2352;, &#2360;&#2367;&#2340;&#2366;&#2352;&#2366; &#2342;&#2375;&#2357;&#2368;&#2404;&nbsp;</span></p>\n",
+                    correct: "b",
+                    pos_marks: 2.0,
+                    neg_marks: 0.5
+                });
+                questions.push({
+                    id: "11",
+                    section: "18",
+                    question_en: "<p><span style=\"font-family: Cambria Math;\">11</span><span style=\"font-family: Cambria Math;\">. </span><span style=\"font-family: Cambria Math;\">Where did Vivek</span><span style=\"font-family: Cambria Math;\">ananda participate at the World\'s Parliament of Religions?</span></p>\n",
+                    question_hi: "<p><span style=\"font-family: Cambria Math;\">11</span><span style=\"font-family: Cambria Math;\">. </span><span style=\"font-family: Cambria Math;\">&#2357;&#2367;&#2357;&#2375;&#2325;&#2366;&#2344;&#2306;&#2342;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2344;&#2375;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2357;&#2367;&#2358;&#2381;&#2357;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2343;&#2352;&#2381;&#2350;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2360;&#2306;&#2360;&#2342;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2350;&#2375;&#2306;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2325;&#2361;&#2366;&#2305;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2349;&#2366;&#2327;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2354;&#2367;&#2351;&#2366;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2341;&#2366;</span><span style=\"font-family: Cambria Math;\">?</span></p>\n",
+                    options_en: ["<p>San Francisco</p>\n", "<p>New York</p>\n", 
+                                "<p>Washington</p>\n", "<p>Chicago</p>\n"],
+                    options_hi: ["<p><span style=\"font-family: Cambria Math;\">&#2360;&#2376;&#2344;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2347;&#2381;&#2352;&#2366;&#2306;&#2360;&#2367;&#2360;&#2381;&#2325;&#2379;</span><span style=\"font-family: Cambria Math;\"> </span></p>\n", "<p><span style=\"font-family: Cambria Math;\">&#2344;&#2381;&#2351;&#2370;&#2351;&#2366;&#2352;&#2381;&#2325;</span><span style=\"font-family: Cambria Math;\"> </span></p>\n",
+                                "<p><span style=\"font-family: Cambria Math;\">&#2357;&#2366;&#2358;&#2367;&#2306;&#2327;&#2335;&#2344;</span><span style=\"font-family: Cambria Math;\"> </span></p>\n", "<p><span style=\"font-family: Cambria Math;\">&#2358;&#2367;&#2325;&#2366;&#2327;&#2379;</span></p>\n"],
+                    solution_en: "<p>11<span style=\"font-family: Cambria Math;\">.(d) </span><strong>Chicago (1893). Narendranath Datta</strong><span style=\"font-weight: 400;\"> (Maharaja Ajit Singh of the Khetri gave him the name &lsquo;Vivekananda\') - He Introduced the world to the Indian philosophies of Vedanta and Yoga. Netaji Subhas Chandra Bose had called Vivekananda &ldquo;Maker of modern India&rdquo;. He established the Ramakrishna Mission and Belur Math in West Bengal. </span><strong>Books -</strong><span style=\"font-weight: 400;\"> Raja-yoga, Karma-yoga, Jnana-yoga and Bhakti-yoga.</span></p>\n",
+                    solution_hi: "<p>11<span style=\"font-family: Cambria Math;\">.(d)&nbsp;</span><strong>&#2358;&#2367;&#2325;&#2366;&#2327;&#2379; (1893)&#2404; &#2344;&#2352;&#2375;&#2306;&#2342;&#2381;&#2352;&#2344;&#2366;&#2341; &#2342;&#2340;&#2381;&#2340; </strong><span style=\"font-weight: 400;\">(&#2326;&#2375;&#2340;&#2337;&#2364;&#2368; &#2325;&#2375; &#2350;&#2361;&#2366;&#2352;&#2366;&#2332;&#2366; &#2309;&#2332;&#2368;&#2340; &#2360;&#2367;&#2306;&#2361; &#2344;&#2375; &#2313;&#2344;&#2381;&#2361;&#2375;&#2306; \'&#2357;&#2367;&#2357;&#2375;&#2325;&#2366;&#2344;&#2306;&#2342;\' &#2344;&#2366;&#2350; &#2342;&#2367;&#2351;&#2366;) - &#2313;&#2344;&#2381;&#2361;&#2379;&#2306;&#2344;&#2375; &#2342;&#2369;&#2344;&#2367;&#2351;&#2366; &#2325;&#2379; &#2357;&#2375;&#2342;&#2366;&#2306;&#2340; &#2324;&#2352; &#2351;&#2379;&#2327; &#2325;&#2375; &#2349;&#2366;&#2352;&#2340;&#2368;&#2351; &#2342;&#2352;&#2381;&#2358;&#2344; &#2360;&#2375; &#2346;&#2352;&#2367;&#2330;&#2367;&#2340; &#2325;&#2352;&#2366;&#2351;&#2366;&#2404; &#2344;&#2375;&#2340;&#2366;&#2332;&#2368; &#2360;&#2369;&#2349;&#2366;&#2359; &#2330;&#2306;&#2342;&#2381;&#2352; &#2348;&#2379;&#2360; &#2344;&#2375; &#2357;&#2367;&#2357;&#2375;&#2325;&#2366;&#2344;&#2344;&#2381;&#2342; &#2325;&#2379; \"&#2310;&#2343;&#2369;&#2344;&#2367;&#2325; &#2349;&#2366;&#2352;&#2340; &#2325;&#2366; &#2344;&#2367;&#2352;&#2381;&#2350;&#2366;&#2340;&#2366;\" &#2325;&#2361;&#2366; &#2341;&#2366;&#2404; &#2313;&#2344;&#2381;&#2361;&#2379;&#2306;&#2344;&#2375; &#2346;&#2358;&#2381;&#2330;&#2367;&#2350; &#2348;&#2306;&#2327;&#2366;&#2354; &#2350;&#2375;&#2306; &#2352;&#2366;&#2350;&#2325;&#2371;&#2359;&#2381;&#2339; &#2350;&#2367;&#2358;&#2344; &#2324;&#2352; &#2348;&#2375;&#2354;&#2370;&#2352; &#2350;&#2336; &#2325;&#2368; &#2360;&#2381;&#2341;&#2366;&#2346;&#2344;&#2366; &#2325;&#2368;&#2404; </span><strong>&#2346;&#2369;&#2360;&#2381;&#2340;&#2325;&#2375;&#2306; </strong><span style=\"font-weight: 400;\">- &#2352;&#2366;&#2332;-&#2351;&#2379;&#2327;, &#2325;&#2352;&#2381;&#2350;-&#2351;&#2379;&#2327;, &#2332;&#2381;&#2334;&#2366;&#2344;-&#2351;&#2379;&#2327; &#2324;&#2352; &#2349;&#2325;&#2381;&#2340;&#2367;-&#2351;&#2379;&#2327;&#2404;</span></p>\n",
+                    correct: "d",
+                    pos_marks: 2.0,
+                    neg_marks: 0.5
+                });
+                questions.push({
+                    id: "12",
+                    section: "18",
+                    question_en: "<p><span style=\"font-family: Cambria Math;\">12</span><span style=\"font-family: Cambria Math;\">. </span><span style=\"font-family: Cambria Math;\">In which district of Gujarat is the Modhera dance festival organized by the Government of Gujarat?</span></p>\n",
+                    question_hi: "<p><span style=\"font-family: Cambria Math;\">12</span><span style=\"font-family: Cambria Math;\">. </span><span style=\"font-family: Cambria Math;\">&#2327;&#2369;&#2332;&#2352;&#2366;&#2340;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2325;&#2375;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2325;&#2367;&#2360;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2332;&#2367;&#2354;&#2375;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2350;&#2375;&#2306;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2327;&#2369;&#2332;&#2352;&#2366;&#2340;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2360;&#2352;&#2325;&#2366;&#2352;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2342;&#2381;&#2357;&#2366;&#2352;&#2366;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2350;&#2379;&#2338;&#2375;&#2352;&#2366;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2344;&#2371;&#2340;&#2381;&#2351;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2350;&#2361;&#2379;&#2340;&#2381;&#2360;&#2357;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2325;&#2366;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2310;&#2351;&#2379;&#2332;&#2344;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2325;&#2367;&#2351;&#2366;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2332;&#2366;&#2340;&#2366;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2361;&#2376;</span><span style=\"font-family: Cambria Math;\">?</span></p>\n",
+                    options_en: ["<p>Amreli</p>\n", "<p>Bharuch</p>\n", 
+                                "<p>Dang</p>\n", "<p>Mehsana</p>\r\n<p><span style=\"font-family: Cambria Math;\"> </span></p>\n"],
+                    options_hi: ["<p><span style=\"font-family: Cambria Math;\">&#2309;&#2350;&#2352;&#2375;&#2354;&#2368;</span><span style=\"font-family: Cambria Math;\"> </span></p>\n", "<p><span style=\"font-family: Cambria Math;\">&#2349;&#2352;&#2370;&#2330;</span><span style=\"font-family: Cambria Math;\"> </span></p>\n",
+                                "<p><span style=\"font-family: Cambria Math;\">&#2337;&#2366;&#2306;&#2327;</span><span style=\"font-family: Cambria Math;\"> </span></p>\n", "<p><span style=\"font-family: Cambria Math;\">&#2350;&#2375;&#2361;&#2360;&#2366;&#2339;&#2366;</span></p>\n"],
+                    solution_en: "<p><span style=\"font-family: Cambria Math;\">12</span><span style=\"font-family: Cambria Math;\">.(d)&nbsp;</span><strong>Mehsana. </strong><span style=\"font-weight: 400;\">The Sun Temple of Modhera is a masterpiece of the Solanki Empire, which hosts the annual Modhera Dance Festival. </span><strong>States and their festivals : Gujarat - </strong><span style=\"font-weight: 400;\">Navratri, Janmashtami, Rann Utsav, Uttarayana, Shamlaji Mela, Vautha Mela, Bhadra Purnima; </span><strong>Maharashtra - </strong><span style=\"font-weight: 400;\">Ganesh Chathurthi, Gudi Padva, Bhau Beej, Ellora Festival, Ashadhi Ekadashi, Mangala Gauri, Pola, Kojagiri Purnima,&nbsp; Banganga.&nbsp;&nbsp;</span></p>\n",
+                    solution_hi: "<p><span style=\"font-family: Cambria Math;\">12</span><span style=\"font-family: Cambria Math;\">.(d) </span><strong>&#2350;&#2375;&#2361;&#2360;&#2366;&#2339;&#2366; I</strong><strong> </strong><span style=\"font-weight: 400;\">&#2350;&#2379;&#2338;&#2375;&#2352;&#2366; &#2325;&#2366; &#2360;&#2370;&#2352;&#2381;&#2351; &#2350;&#2306;&#2342;&#2367;&#2352; &#2360;&#2379;&#2354;&#2306;&#2325;&#2368; &#2360;&#2366;&#2350;&#2381;&#2352;&#2366;&#2332;&#2381;&#2351; &#2325;&#2368; &#2313;&#2340;&#2381;&#2325;&#2371;&#2359;&#2381;&#2335; &#2325;&#2371;&#2340;&#2367; &#2361;&#2376;, &#2332;&#2379; &#2357;&#2366;&#2352;&#2381;&#2359;&#2367;&#2325; &#2350;&#2379;&#2338;&#2375;&#2352;&#2366; &#2344;&#2371;&#2340;&#2381;&#2351; &#2350;&#2361;&#2379;&#2340;&#2381;&#2360;&#2357; &#2325;&#2368; &#2350;&#2375;&#2332;&#2348;&#2366;&#2344;&#2368; &#2325;&#2352;&#2340;&#2366; &#2361;&#2376;&#2404; </span><strong>&#2352;&#2366;&#2332;&#2381;&#2351; &#2324;&#2352; &#2313;&#2344;&#2325;&#2375; &#2340;&#2381;&#2351;&#2380;&#2361;&#2366;&#2352;: &#2327;&#2369;&#2332;&#2352;&#2366;&#2340; </strong><span style=\"font-weight: 400;\">- &#2344;&#2357;&#2352;&#2366;&#2340;&#2381;&#2352;&#2367;, &#2332;&#2344;&#2381;&#2350;&#2366;&#2359;&#2381;&#2335;&#2350;&#2368;, &#2352;&#2339; &#2313;&#2340;&#2381;&#2360;&#2357;, &#2313;&#2340;&#2381;&#2340;&#2352;&#2366;&#2351;&#2339;, &#2358;&#2366;&#2350;&#2354;&#2366;&#2332;&#2368; &#2350;&#2375;&#2354;&#2366;, &#2357;&#2380;&#2341;&#2366; &#2350;&#2375;&#2354;&#2366;, &#2349;&#2366;&#2342;&#2381;&#2352; &#2346;&#2370;&#2352;&#2381;&#2339;&#2367;&#2350;&#2366;; </span><strong>&#2350;&#2361;&#2366;&#2352;&#2366;&#2359;&#2381;&#2335;&#2381;&#2352; </strong><span style=\"font-weight: 400;\">- &#2327;&#2339;&#2375;&#2358; &#2330;&#2340;&#2369;&#2352;&#2381;&#2341;&#2368;, &#2327;&#2369;&#2337;&#2364;&#2368; &#2346;&#2337;&#2364;&#2357;&#2366;, &#2349;&#2366;&#2314; &#2348;&#2368;&#2332;, &#2319;&#2354;&#2379;&#2352;&#2366; &#2350;&#2361;&#2379;&#2340;&#2381;&#2360;&#2357;, &#2310;&#2359;&#2366;&#2338;&#2364;&#2368; &#2319;&#2325;&#2366;&#2342;&#2358;&#2368;, &#2350;&#2306;&#2327;&#2354;&#2366; &#2327;&#2380;&#2352;&#2368;, &#2346;&#2379;&#2354;&#2366;, &#2325;&#2379;&#2332;&#2366;&#2327;&#2367;&#2352;&#2368; &#2346;&#2370;&#2352;&#2381;&#2339;&#2367;&#2350;&#2366;, &#2348;&#2366;&#2339;&#2327;&#2306;&#2327;&#2366;&#2404;</span></p>\n",
+                    correct: "d",
+                    pos_marks: 2.0,
+                    neg_marks: 0.5
+                });
+                questions.push({
+                    id: "13",
+                    section: "18",
+                    question_en: "<p><span style=\"font-family: Cambria Math;\">13</span><span style=\"font-family: Cambria Math;\">. </span><span style=\"font-family: Cambria Math;\">Identify the musician who is associate</span><span style=\"font-family: Cambria Math;\">d with the musical instrument Sarod.</span></p>\n",
+                    question_hi: "<p><span style=\"font-family: Cambria Math;\">13</span><span style=\"font-family: Cambria Math;\">. </span><span style=\"font-family: Cambria Math;\">&#2357;&#2367;&#2325;&#2354;&#2381;&#2346;&#2379;&#2306;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2350;&#2375;&#2306;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2360;&#2375;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2313;&#2360;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2360;&#2306;&#2327;&#2368;&#2340;&#2325;&#2366;&#2352;</span><span style=\"font-family: Cambria Math;\"> <span style=\"font-weight: 400;\">&#2325;&#2368;</span></span><span style=\"font-family: Cambria Math;\">&nbsp;</span><span style=\"font-family: Cambria Math;\">&#2346;&#2361;&#2330;&#2366;&#2344;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2325;&#2368;&#2332;&#2367;&#2319;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2332;&#2379;</span><span style=\"font-family: Cambria Math;\"> &#2360;&#2352;&#2379;&#2342; </span><span style=\"font-family: Cambria Math;\">&#2357;&#2366;&#2342;&#2381;&#2351;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2351;&#2306;&#2340;&#2381;&#2352;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2360;&#2375;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2332;&#2369;&#2337;&#2364;&#2366;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2361;&#2376;&#2404;</span></p>\n",
+                    options_en: ["<p>Vilayat Khan</p>\n", "<p>Hariprasad Chaurasia</p>\n", 
+                                "<p>Annapurna Devi</p>\n", "<p>Allaudin Khan</p>\n"],
+                    options_hi: ["<p><span style=\"font-family: Cambria Math;\">&#2357;&#2367;&#2354;&#2366;&#2351;&#2340;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2326;&#2366;&#2344;</span><span style=\"font-family: Cambria Math;\"> </span></p>\n", "<p><span style=\"font-family: Cambria Math;\">&#2361;&#2352;&#2367;&#2346;&#2381;&#2352;&#2360;&#2366;&#2342;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2330;&#2380;&#2352;&#2360;&#2367;&#2351;&#2366;</span><span style=\"font-family: Cambria Math;\"> </span></p>\n",
+                                "<p><span style=\"font-family: Cambria Math;\">&#2309;&#2344;&#2381;&#2344;&#2346;&#2370;&#2352;&#2381;&#2339;&#2366;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2342;&#2375;&#2357;&#2368;</span><span style=\"font-family: Cambria Math;\"> </span></p>\n", "<p><span style=\"font-family: Cambria Math;\">&#2309;&#2354;&#2366;&#2313;&#2342;&#2381;&#2342;&#2368;&#2344;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2326;&#2366;&#2344;</span></p>\n"],
+                    solution_en: "<p>13<span style=\"font-family: Cambria Math;\">.(d) </span><strong>Allaudin Khan. Awards - </strong><span style=\"font-weight: 400;\">Sangeet Natak Akademi Award (1952), Padma Bhushan (1958), Padma Vibhushan (1971).&nbsp; </span><strong>Proponents of</strong><span style=\"font-weight: 400;\"> </span><strong>Sarod -</strong><span style=\"font-weight: 400;\"> Ali Akbar Khan, Amjad Ali Khan, Buddhadev Das Gupta, Tejendra Majumdar. </span><strong>Flute -</strong><span style=\"font-weight: 400;\"> Hari Prasad Chaurasia, Pannalal Ghosh, Palladam Sanjiva Rao. </span><strong>Sitar - </strong><span style=\"font-weight: 400;\">Pandit Ravi Shankar, Shahid Parvez Khan, Budhaditya Mukherjee, Anushka Shankar, Annapurna Devi, Vilayat Khan.</span></p>\n",
+                    solution_hi: "<p>13<span style=\"font-family: Cambria Math;\">.(d)&nbsp;</span><strong>&#2309;&#2354;&#2366;&#2313;&#2342;&#2381;&#2342;&#2368;&#2344; &#2326;&#2366;&#2344; </strong><strong>I &#2346;&#2369;&#2352;&#2360;&#2381;&#2325;&#2366;&#2352; - </strong><span style=\"font-weight: 400;\">&#2360;&#2306;&#2327;&#2368;&#2340; &#2344;&#2366;&#2335;&#2325; &#2309;&#2325;&#2366;&#2342;&#2350;&#2368; &#2346;&#2369;&#2352;&#2360;&#2381;&#2325;&#2366;&#2352; (1952), &#2346;&#2342;&#2381;&#2350; &#2349;&#2370;&#2359;&#2339; (1958), &#2346;&#2342;&#2381;&#2350; &#2357;&#2367;&#2349;&#2370;&#2359;&#2339; (1971)&#2404;</span><strong> &#2360;&#2352;&#2379;&#2342; &#2325;&#2375; &#2357;&#2366;&#2342;&#2325; -</strong><span style=\"font-weight: 400;\"> &#2309;&#2354;&#2368; &#2309;&#2325;&#2348;&#2352; &#2326;&#2366;&#2344;, &#2309;&#2350;&#2332;&#2342; &#2309;&#2354;&#2368; &#2326;&#2366;&#2344;, &#2348;&#2369;&#2342;&#2381;&#2343;&#2342;&#2375;&#2357; &#2342;&#2366;&#2360; &#2327;&#2369;&#2346;&#2381;&#2340;&#2366;, &#2340;&#2375;&#2332;&#2375;&#2306;&#2342;&#2381;&#2352; &#2350;&#2332;&#2370;&#2350;&#2342;&#2366;&#2352;&#2404; </span><strong>&#2348;&#2366;&#2306;&#2360;&#2369;&#2352;&#2368; </strong><span style=\"font-weight: 400;\">- &#2361;&#2352;&#2367; &#2346;&#2381;&#2352;&#2360;&#2366;&#2342; &#2330;&#2380;&#2352;&#2360;&#2367;&#2351;&#2366;, &#2346;&#2344;&#2381;&#2344;&#2366;&#2354;&#2366;&#2354; &#2328;&#2379;&#2359;, &#2346;&#2354;&#2381;&#2354;&#2342;&#2350; &#2360;&#2306;&#2332;&#2368;&#2357; &#2352;&#2366;&#2357;&#2404; </span><strong>&#2360;&#2367;&#2340;&#2366;&#2352; </strong><span style=\"font-weight: 400;\">- &#2346;&#2306;&#2337;&#2367;&#2340; &#2352;&#2357;&#2367;&#2358;&#2306;&#2325;&#2352;, &#2358;&#2366;&#2361;&#2367;&#2342; &#2346;&#2352;&#2357;&#2375;&#2332;&#2364; &#2326;&#2366;&#2344;, &#2348;&#2369;&#2343;&#2366;&#2342;&#2367;&#2340;&#2381;&#2351; &#2350;&#2369;&#2326;&#2352;&#2381;&#2332;&#2368;, &#2309;&#2344;&#2369;&#2359;&#2381;&#2325;&#2366; &#2358;&#2306;&#2325;&#2352;, &#2309;&#2344;&#2381;&#2344;&#2346;&#2370;&#2352;&#2381;&#2339;&#2366; &#2342;&#2375;&#2357;&#2368;, &#2357;&#2367;&#2354;&#2366;&#2351;&#2340; &#2326;&#2366;&#2344;&#2404;</span></p>\n",
+                    correct: "d",
+                    pos_marks: 2.0,
+                    neg_marks: 0.5
+                });
+                questions.push({
+                    id: "14",
+                    section: "18",
+                    question_en: "<p><span style=\"font-family: Cambria Math;\">14</span><span style=\"font-family: Cambria Math;\">. </span><span style=\"font-family: Cambria Math;\">Krishnadeva Raya composed a work on ______ in Telugu known as the Amuktamalyada.</span></p>\n",
+                    question_hi: "<p><span style=\"font-family: Cambria Math;\">14</span><span style=\"font-family: Cambria Math;\">. </span><span style=\"font-family: Cambria Math;\">&#2325;&#2371;&#2359;&#2381;&#2339;&#2342;&#2375;&#2357;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2352;&#2366;&#2351;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2344;&#2375;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2340;&#2375;&#2354;&#2369;&#2327;&#2369;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2350;&#2375;&#2306;</span><span style=\"font-family: Cambria Math;\">________</span><span style=\"font-family: Cambria Math;\">&#2346;&#2352;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2319;&#2325;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2325;&#2371;</span><span style=\"font-family: Cambria Math;\">&#2340;&#2367;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2325;&#2368;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2352;&#2330;&#2344;&#2366;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2325;&#2368;</span><span style=\"font-family: Cambria Math;\">, </span><span style=\"font-family: Cambria Math;\">&#2332;&#2367;&#2360;&#2375;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2309;&#2350;&#2369;&#2325;&#2381;&#2340;&#2350;&#2366;&#2354;&#2381;&#2351;&#2342;&#2366;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2325;&#2375;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2344;&#2366;&#2350;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2360;&#2375;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2332;&#2366;&#2344;&#2366;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2332;&#2366;&#2340;&#2366;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2361;&#2376;&#2404;</span></p>\n",
+                    options_en: ["<p>statecraft</p>\n", "<p>dance</p>\n", 
+                                "<p>medicine</p>\n", "<p>music</p>\n"],
+                    options_hi: ["<p><span style=\"font-family: Cambria Math;\">&#2358;&#2366;&#2360;&#2344;</span><span style=\"font-family: Cambria Math;\">- </span><span style=\"font-family: Cambria Math;\">&#2325;&#2354;&#2366;</span><span style=\"font-family: Cambria Math;\"> </span></p>\n", "<p><span style=\"font-family: Cambria Math;\">&#2344;&#2371;&#2340;&#2381;&#2351;</span><span style=\"font-family: Cambria Math;\"> </span></p>\n",
+                                "<p><span style=\"font-family: Cambria Math;\">&#2324;&#2359;&#2343;&#2367;</span><span style=\"font-family: Cambria Math;\"> </span></p>\n", "<p><span style=\"font-family: Cambria Math;\">&#2360;&#2306;&#2327;&#2368;&#2340;</span></p>\r\n<p><span style=\"font-family: Cambria Math;\"> </span></p>\n"],
+                    solution_en: "<p><span style=\"font-family: Cambria Math;\">14</span><span style=\"font-family: Cambria Math;\">.(a)&nbsp;</span><strong>Statecraft. Krishnadevaraya</strong><span style=\"font-weight: 400;\"> : Ruler of the Tuluva dynasty of Vijayanagar empire (1509-29 AD). He also founded a suburban township near Vijayanagar called Nagalapuram. </span><strong>Vijayanagara Empire (</strong><span style=\"font-weight: 400;\">City of victory</span><strong>) :</strong><span style=\"font-weight: 400;\"> Founded in 1336 AD by Harihara and Bukka of the Sangama dynasty. Capital - Hampi (along the river Tungabhadra). Vijayanagar Empire was ruled by Sangama, Saluva, Tuluva, Aravidu Dynasties.&nbsp;</span></p>\n",
+                    solution_hi: "<p><span style=\"font-family: Cambria Math;\">14</span><span style=\"font-family: Cambria Math;\">.(a)&nbsp;</span><strong>&#2358;&#2366;&#2360;&#2344;- &#2325;&#2354;&#2366;</strong><strong> I &#2325;&#2371;&#2359;&#2381;&#2339;&#2342;&#2375;&#2357;&#2352;&#2366;&#2351; </strong><span style=\"font-weight: 400;\">: &#2357;&#2367;&#2332;&#2351;&#2344;&#2327;&#2352; &#2360;&#2366;&#2350;&#2381;&#2352;&#2366;&#2332;&#2381;&#2351; &#2325;&#2375; &#2340;&#2369;&#2354;&#2369;&#2357; &#2357;&#2306;&#2358; &#2325;&#2375; &#2358;&#2366;&#2360;&#2325; (1509-29 &#2312;&#2360;&#2381;&#2357;&#2368;) &#2341;&#2375;&#2404; &#2313;&#2344;&#2381;&#2361;&#2379;&#2306;&#2344;&#2375; &#2357;&#2367;&#2332;&#2351;&#2344;&#2327;&#2352; &#2325;&#2375; &#2344;&#2367;&#2325;&#2335; &#2344;&#2366;&#2327;&#2354;&#2366;&#2346;&#2369;&#2352;&#2350; &#2344;&#2366;&#2350;&#2325; &#2319;&#2325; &#2313;&#2346;&#2344;&#2327;&#2352;&#2368;&#2351; &#2344;&#2327;&#2352; &#2325;&#2368; &#2349;&#2368; &#2360;&#2381;&#2341;&#2366;&#2346;&#2344;&#2366; &#2325;&#2368;&#2404; </span><strong>&#2357;&#2367;&#2332;&#2351;&#2344;&#2327;&#2352; &#2360;&#2366;&#2350;&#2381;&#2352;&#2366;&#2332;&#2381;&#2351; </strong><span style=\"font-weight: 400;\">(&#2357;&#2367;&#2332;&#2351; &#2325;&#2366; &#2358;&#2361;&#2352;): 1336 &#2312;. &#2350;&#2375;&#2306; &#2360;&#2306;&#2327;&#2350; &#2357;&#2306;&#2358; &#2325;&#2375; &#2361;&#2352;&#2367;&#2361;&#2352; &#2324;&#2352; &#2348;&#2369;&#2325;&#2381;&#2325;&#2366; &#2342;&#2381;&#2357;&#2366;&#2352;&#2366; &#2360;&#2381;&#2341;&#2366;&#2346;&#2367;&#2340; &#2325;&#2367;&#2351;&#2366; &#2327;&#2351;&#2366;&#2404; &#2352;&#2366;&#2332;&#2343;&#2366;&#2344;&#2368; - &#2361;&#2350;&#2381;&#2346;&#2368; (&#2340;&#2369;&#2306;&#2327;&#2349;&#2342;&#2381;&#2352;&#2366; &#2344;&#2342;&#2368; &#2325;&#2375; &#2325;&#2367;&#2344;&#2366;&#2352;&#2375;)&#2404; &#2357;&#2367;&#2332;&#2351;&#2344;&#2327;&#2352; &#2360;&#2366;&#2350;&#2381;&#2352;&#2366;&#2332;&#2381;&#2351; &#2346;&#2352; &#2360;&#2306;&#2327;&#2350;, &#2360;&#2369;&#2354;&#2369;&#2357;, &#2340;&#2369;&#2354;&#2369;&#2357;, &#2309;&#2352;&#2366;&#2357;&#2367;&#2342;&#2369; &#2352;&#2366;&#2332;&#2357;&#2306;&#2358;&#2379;&#2306; &#2325;&#2366; &#2358;&#2366;&#2360;&#2344; &#2341;&#2366;&#2404;</span></p>\n",
+                    correct: "a",
+                    pos_marks: 2.0,
+                    neg_marks: 0.5
+                });
+                questions.push({
+                    id: "15",
+                    section: "misc",
+                    question_en: "<p><span style=\"font-family: Cambria Math;\">15</span><span style=\"font-family: Cambria Math;\">.</span><span style=\"font-family: Cambria Math;\"> The colours of the squares used in a chessboard are_____.</span></p>\n",
+                    question_hi: "<p><span style=\"font-family: Cambria Math;\">15</span><span style=\"font-family: Cambria Math;\">. </span><span style=\"font-family: Cambria Math;\">&#8203;&#8203;</span><span style=\"font-family: Cambria Math;\">&#2358;&#2340;&#2352;&#2306;&#2332;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2348;&#2379;&#2352;&#2381;&#2337;</span><span style=\"font-family: Cambria Math;\"> (chessboard) </span><span style=\"font-family: Cambria Math;\">&#2350;&#2375;&#2306;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2346;&#2381;&#2352;&#2351;&#2369;&#2325;&#2381;&#2340;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2357;&#2352;&#2381;&#2327;&#2379;&#2306;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2325;&#2375;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2352;&#2306;&#2327;</span><span style=\"font-family: Cambria Math;\"> ______ </span><span style=\"font-family: Cambria Math;\">&#2361;&#2379;&#2340;&#2375;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2361;&#2376;&#2306;&#2404;</span></p>\n",
+                    options_en: ["<p>white and black</p>\n", "<p>red and black</p>\n", 
+                                "<p>white and green</p>\n", "<p>white and red</p>\n"],
+                    options_hi: ["<p><span style=\"font-family: Cambria Math;\">&#2360;&#2347;&#2375;&#2342;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2323;&#2352;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2325;&#2366;&#2354;&#2375;</span><span style=\"font-family: Cambria Math;\"> </span></p>\n", "<p><span style=\"font-family: Cambria Math;\">&#2354;&#2366;&#2354;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2324;&#2352;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2325;&#2366;&#2354;&#2375;</span><span style=\"font-family: Cambria Math;\"> </span></p>\n",
+                                "<p><span style=\"font-family: Cambria Math;\">&#2360;&#2347;&#2375;&#2342;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2324;&#2352;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2361;&#2352;&#2375;</span><span style=\"font-family: Cambria Math;\"> </span></p>\n", "<p><span style=\"font-family: Cambria Math;\">&#2360;&#2347;&#2375;&#2342;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2324;&#2352;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&#2354;&#2366;&#2354;</span></p>\n"],
+                    solution_en: "<p><span style=\"font-family: Cambria Math;\">15</span><span style=\"font-family: Cambria Math;\">.(a)&nbsp;</span><strong>White and Black. FIDE</strong><span style=\"font-weight: 400;\"> (International Chess Federation), the governing body of the sport of chess, and it regulates all international chess competitions. Headquarter - Lausanne (Switzerland). Establishment&nbsp; - 1924. Minimum FIDE rating required to earn the &ldquo;Grandmaster&rdquo; (GM) title - 2500. </span><strong>First Indian Chess GrandMaster</strong><span style=\"font-weight: 400;\"> - Viswanathan Anand. </span><strong>Famous Players -</strong><span style=\"font-weight: 400;\"> Gukesh D,&nbsp; Magnus Carlsen, Mitrabha Guha, Vuppala Praneeth, Aditya Mittal, Koneru Humpy.</span><strong>&nbsp;&nbsp;&nbsp;</strong></p>\n",
+                    solution_hi: "<p><span style=\"font-family: Cambria Math;\">15</span><span style=\"font-family: Cambria Math;\">.(a) </span><strong>&nbsp;&#2360;&#2347;&#2364;&#2375;&#2342; &#2323;&#2352; &#2325;&#2366;&#2354;&#2375;&#2404; FIDE (</strong><span style=\"font-weight: 400;\">&#2311;&#2306;&#2335;&#2352;&#2344;&#2375;&#2358;&#2344;&#2354; &#2358;&#2340;&#2352;&#2306;&#2332; &#2347;&#2375;&#2337;&#2352;&#2375;&#2358;&#2344;), &#2358;&#2340;&#2352;&#2306;&#2332; &#2325;&#2375; &#2326;&#2375;&#2354; &#2325;&#2366; &#2358;&#2366;&#2360;&#2368; &#2344;&#2367;&#2325;&#2366;&#2351; &#2361;&#2376;, &#2324;&#2352; &#2351;&#2361; &#2360;&#2349;&#2368; &#2309;&#2306;&#2340;&#2352;&#2352;&#2366;&#2359;&#2381;&#2335;&#2381;&#2352;&#2368;&#2351; &#2358;&#2340;&#2352;&#2306;&#2332; &#2346;&#2381;&#2352;&#2340;&#2367;&#2351;&#2379;&#2327;&#2367;&#2340;&#2366;&#2323;&#2306; &#2325;&#2379; &#2344;&#2367;&#2351;&#2306;&#2340;&#2381;&#2352;&#2367;&#2340; &#2325;&#2352;&#2340;&#2366; &#2361;&#2376;&#2404; &#2350;&#2369;&#2326;&#2381;&#2351;&#2366;&#2354;&#2351; - &#2354;&#2369;&#2360;&#2366;&#2344;&#2375; (&#2360;&#2381;&#2357;&#2367;&#2335;&#2381;&#2332;&#2352;&#2354;&#2376;&#2306;&#2337;) &#2404; &#2360;&#2381;&#2341;&#2366;&#2346;&#2344;&#2366; - 1924&#2404; \"&#2327;&#2381;&#2352;&#2376;&#2306;&#2337;&#2350;&#2366;&#2360;&#2381;&#2335;&#2352;\" (GM) &#2313;&#2346;&#2366;&#2343;&#2367; &#2309;&#2352;&#2381;&#2332;&#2367;&#2340; &#2325;&#2352;&#2344;&#2375; &#2325;&#2375; &#2354;&#2367;&#2319; &#2310;&#2357;&#2358;&#2381;&#2351;&#2325; &#2344;&#2381;&#2351;&#2370;&#2344;&#2340;&#2350; FIDE &#2352;&#2375;&#2335;&#2367;&#2306;&#2327; - 2500&#2404; </span><strong>&#2346;&#2381;&#2352;&#2341;&#2350; &#2349;&#2366;&#2352;&#2340;&#2368;&#2351; &#2358;&#2340;&#2352;&#2306;&#2332; &#2327;&#2381;&#2352;&#2376;&#2306;&#2337;&#2350;&#2366;&#2360;&#2381;&#2335;&#2352; </strong><span style=\"font-weight: 400;\">- &#2357;&#2367;&#2358;&#2381;&#2357;&#2344;&#2366;&#2341;&#2344; &#2310;&#2344;&#2306;&#2342;&#2404; </span><strong>&#2346;&#2381;&#2352;&#2360;&#2367;&#2342;&#2381;&#2343; &#2326;&#2367;&#2354;&#2366;&#2337;&#2364;&#2368;</strong><span style=\"font-weight: 400;\"> - &#2327;&#2369;&#2325;&#2375;&#2358; &#2337;&#2368;, &#2350;&#2376;&#2327;&#2381;&#2344;&#2360; &#2325;&#2366;&#2352;&#2381;&#2354;&#2360;&#2375;&#2344;, &#2350;&#2367;&#2340;&#2381;&#2352;&#2349;&#2366; &#2327;&#2369;&#2361;&#2366;, &#2357;&#2370;&#2346;&#2381;&#2346;&#2366;&#2354;&#2366; &#2346;&#2381;&#2352;&#2339;&#2368;&#2340;, &#2310;&#2342;&#2367;&#2340;&#2381;&#2351; &#2350;&#2367;&#2340;&#2381;&#2340;&#2354;, &#2325;&#2379;&#2344;&#2375;&#2352;&#2370; &#2361;&#2350;&#2381;&#2346;&#2368; &#2404;</span></p>\n",
+                    correct: "a",
+                    pos_marks: 2.0,
+                    neg_marks: 0.5
+                });
+            
+            // Generate question boxes
+            const boxesContainer = document.getElementById('question-boxes');
+            questions.forEach((q, index) => {
+                const box = document.createElement('div');
+                box.className = 'q-box';
+                box.textContent = index + 1;
+                box.onclick = () => showQuestion(index);
+                box.id = `box-${index}`;
+                boxesContainer.appendChild(box);
+            });
+            
+            // Show first question
+            showQuestion(0);
+            updateProgress();
+        }
+        
+        // Show a specific question
+        
+        function formatContent(text) {
+            if (!text) return '';
+            return text.replace(/<img/g, '<img style="max-width:100%;height:auto;"');
+        }
+        
+        function showQuestion(index) {
+            if (index < 0 || index >= questions.length) return;
+            
+            currentQuestion = index;
+            const question = questions[index];
+            
+            // Update question counter
+            document.getElementById('question-counter').textContent = `Question ${index + 1} of ${questions.length}`;
+            
+            // Update question boxes
+            document.querySelectorAll('.q-box').forEach(box => box.classList.remove('current'));
+            document.getElementById(`box-${index}`).classList.add('current');
+            
+            // Generate question HTML
+            let html = `
+                <div class="question-card">
+                    <div class="question-text">
+                        <div class="en">${formatContent(question.question_en)}</div>
+                        <div class="hi" style="display:none">${formatContent(question.question_hi)} </div>
+                    </div>
+                    <div class="options" id="options-container">`;
+            
+            // Add options
+            ['a', 'b', 'c', 'd'].forEach((opt, i) => {
+                let optionClass = '';
+                let isCorrectAnswer = opt === question.correct;
+                let isUserAnswer = answers[question.id] === opt;
+                
+                // When reviewing, add appropriate classes
+                if (submitted) {
+                    if (isCorrectAnswer) {
+                        optionClass += ' correct-answer';
+                    } else if (isUserAnswer && !isCorrectAnswer) {
+                        optionClass += ' incorrect';
+                    }
+                }
+                
+                html += `
+                    <div class="option-item">
+                        <input class="option-input" type="radio" name="q${index}" 
+                            id="opt-${index}-${opt}" value="${opt}" 
+                            ${isUserAnswer ? 'checked' : ''}
+                            onclick="selectAnswer('${question.id}', '${opt}')">
+                       <label class="option-label${optionClass}" for="opt-${index}-${opt}">
+                            <div class="en">${question.options_en[i]}</div>
+                            <div class="hi" style="display:none">${question.options_hi[i]}</div>
+                        </label>
+                    </div>`;
+            });
+            
+            // Add solution if submitted
+            if (submitted) {
+                const isCorrect = answers[question.id] === question.correct;
+                const resultText = answers[question.id] ? (isCorrect ? 'Correct!' : 'Incorrect!') : 'Not attempted';
+                
+                html += `
+                    <div class="solution-container">
+                        <div class="solution-title">${resultText}</div>
+                        <div class="solution-text">
+                            <div class="en">${question.solution_en}</div>
+                            <div class="hi" style="display:none">${question.solution_hi}</div>
+                        </div>
+                    </div>`;
+            }
+            
+            html += `</div></div>`;
+            
+            document.getElementById('questions-container').innerHTML = html;
+            
+            // Apply language settings
+            applyLanguage();
+            
+            // If in mobile view, close the menu
+            if (window.innerWidth < 992) {
+                toggleNav(false);
+            }
+            
+            // Add review mode class if submitted
+            if (submitted) {
+                document.getElementById('options-container').classList.add('review-mode');
+            }
+        }
+        
+        // Apply current language
+        function applyLanguage() {
+            document.querySelectorAll(`.${currentLang}`).forEach(el => el.style.display = 'block');
+            document.querySelectorAll(`.${currentLang === 'en' ? 'hi' : 'en'}`).forEach(el => el.style.display = 'none');
+            
+            // Update language button text
+            document.getElementById('lang-text').textContent = currentLang === 'en' ? 'Hi' : 'En';
+        }
+        
+        // Select an answer
+        function selectAnswer(qId, option) {
+            if (submitted) return;
+            
+            answers[qId] = option;
+            updateProgress();
+            
+            // Mark question as attempted in the navigation
+            const index = questions.findIndex(q => q.id === qId);
+            if (index >= 0) {
+                const box = document.getElementById(`box-${index}`);
+                box.classList.add('attempted');
+                box.classList.remove('unattempted');
+            }
+        }
+        
+        // Navigate to previous/next question
+        function prevQuestion() { 
+            if (currentQuestion > 0) showQuestion(currentQuestion - 1); 
+        }
+        
+        function nextQuestion() { 
+            if (currentQuestion < questions.length - 1) showQuestion(currentQuestion + 1); 
+        }
+        
+        // Switch section
+        function switchSection(sectionId) {
+            if (sectionId === 'all') {
+                showQuestion(0);
+                return;
+            }
+            
+            const section = sections[sectionId];
+            if (section) showQuestion(section.start);
+        }
+        
+        // Toggle language
+        function toggleLanguage() {
+            currentLang = currentLang === 'en' ? 'hi' : 'en';
+            applyLanguage();
+        }
+        
+        // Toggle navigation sidebar
+        function toggleNav(show) {
+            const nav = document.getElementById('question-nav');
+            const overlay = document.getElementById('nav-overlay');
+            
+            if (show === undefined) {
+                show = !nav.classList.contains('show');
+            }
+            
+            if (show) {
+                nav.classList.add('show');
+                overlay.classList.add('show');
+                document.body.style.overflow = 'hidden';
+            } else {
+                nav.classList.remove('show');
+                overlay.classList.remove('show');
+                document.body.style.overflow = '';
+            }
+        }
+        
+        // Update progress
+        function updateProgress() {
+            const attempted = Object.keys(answers).length;
+            document.getElementById('attempted-count').textContent = attempted;
+        }
+        
+        // Start timer
+        function startTimer() {
+            const timerDisplay = document.getElementById('timer-display');
+            let timeLeft = totalTime;
+            
+            const timerInterval = setInterval(() => {
+                if (timeLeft <= 0 || submitted) {
+                    clearInterval(timerInterval);
+                    if (!submitted) submitTest();
+                    return;
+                }
+                
+                const minutes = Math.floor(timeLeft / 60);
+                const seconds = timeLeft % 60;
+                timerDisplay.textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`;
+                timeLeft--;
+            }, 1000);
+        }
+        
+        // Confirm before submitting
+        function confirmSubmit() {
+            if (submitted) return;
+            
+            const attempted = Object.keys(answers).length;
+            const remaining = questions.length - attempted;
+            
+            // Create a more modern confirmation dialog
+            const confirmHtml = `
+                <div style="text-align: center; padding: 20px;">
+                    <h4 style="margin-bottom: 16px; color: var(--dark);">Confirm Submission</h4>
+                    <p style="margin-bottom: 24px; color: var(--gray);">
+                        You have attempted ${attempted} of ${questions.length} questions.<br>
+                        ${remaining} questions are unattempted.
+                    </p>
+                    <div style="display: flex; justify-content: center; gap: 12px;">
+                        <button onclick="this.closest('.modal').querySelector('.cancel-btn').click()" 
+                            style="padding: 8px 20px; border: 1px solid var(--light-gray); background: white; border-radius: 8px; cursor: pointer;">
+                            Cancel
+                        </button>
+                        <button onclick="submitTest(); this.closest('.modal').querySelector('.cancel-btn').click()" 
+                            style="padding: 8px 20px; background: var(--primary); color: white; border: none; border-radius: 8px; cursor: pointer;">
+                            Submit Test
+                        </button>
+                    </div>
+                </div>`;
+            
+            // Create modal element
+            const modal = document.createElement('div');
+            modal.className = 'results-modal show';
+            modal.innerHTML = `
+                <div class="results-card" style="max-width: 400px;">
+                    <button class="cancel-btn" style="position: absolute; top: 12px; right: 12px; background: none; border: none; font-size: 1.2rem; cursor: pointer; color: var(--gray);" onclick="this.closest('.results-modal').remove()">
+                        ×
+                    </button>
+                    ${confirmHtml}
+                </div>`;
+            
+            document.body.appendChild(modal);
+        }
+        
+        // Submit test
+        function submitTest() {
+            if (submitted) return;
+            
+            submitted = true;
+            
+            let score = 0;
+            let correctCount = 0;
+            let incorrectCount = 0;
+            let unattemptedCount = 0;
+            
+            questions.forEach((q, index) => {
+                const userAns = answers[q.id];
+                const box = document.getElementById(`box-${index}`);
+                
+                box.classList.remove('attempted');
+                
+                if (!userAns) {
+                    unattemptedCount++;
+                    box.classList.add('unattempted');
+                } else if (userAns === q.correct) {
+                    correctCount++;
+                    score += q.pos_marks;
+                    box.classList.add('correct');
+                } else {
+                    incorrectCount++;
+                    score -= q.neg_marks;
+                    box.classList.add('incorrect');
+                }
+            });
+            
+            // Update result values
+            document.getElementById('score-value').textContent = score.toFixed(2);
+            document.getElementById('correct-value').textContent = correctCount;
+            document.getElementById('incorrect-value').textContent = incorrectCount;
+            document.getElementById('unattempted-value').textContent = unattemptedCount;
+            
+            // Show the results modal
+            document.getElementById('results-modal').classList.add('show');
+            
+            // Disable submit button
+            const submitBtn = document.getElementById('submit-btn');
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<i class="fas fa-check"></i>';
+            submitBtn.style.backgroundColor = 'var(--success)';
+            
+            // Refresh current question view to show solution
+            showQuestion(currentQuestion);
+        }
+        
+        // Review test
+        function reviewTest() {
+            document.getElementById('results-modal').classList.remove('show');
+            showQuestion(0);
+        }
+        
+        // Close modal when clicking outside
+        window.addEventListener('click', function(event) {
+            if (event.target === document.getElementById('results-modal')) {
+                document.getElementById('results-modal').classList.remove('show');
+            }
+        });
+        
+        // Keyboard navigation
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowLeft') prevQuestion();
+            if (e.key === 'ArrowRight') nextQuestion();
+        });
+    </script>
+</body>
+</html>

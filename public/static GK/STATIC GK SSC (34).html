@@ -1,0 +1,1484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aether Mocks</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
+
+        :root {
+            --primary: #6366f1;
+            --primary-light: #818cf8;
+            --primary-dark: #4f46e5;
+            --secondary: #8b5cf6;
+            --accent: #ec4899;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --light: #1e293b;
+            --dark: #0f172a;
+            --gray: #64748b;
+            --light-gray: rgba(255, 255, 255, 0.08);
+            --card-bg: rgba(255, 255, 255, 0.03);
+            --body-bg: #030712;
+            --header-bg: rgba(15, 23, 42, 0.6);
+            --footer-bg: rgba(15, 23, 42, 0.8);
+            --box-shadow: 0 8px 32px 0 rgba(0,0,0,0.3);
+            --box-shadow-sm: 0 4px 16px rgba(0,0,0,0.2);
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Outfit', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        body {
+            background-color: var(--body-bg);
+            color: #f8fafc;
+            line-height: 1.6;
+            padding-bottom: 80px; /* Space for fixed navigation */
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(99, 102, 241, 0.15) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(139, 92, 246, 0.15) 0px, transparent 50%);
+            background-attachment: fixed;
+        }
+        
+        /* Header Styles */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 60px;
+            background: var(--header-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            color: #f8fafc;
+            display: flex;
+            align-items: center;
+            padding: 0 16px;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+            box-shadow: var(--box-shadow-sm);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+        }
+        
+        .header-brand {
+            display: flex;
+            align-items: center;
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: #f8fafc;
+            text-decoration: none;
+            gap: 8px;
+        }
+        
+        .header-brand i {
+            font-size: 1.2rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .header-controls {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .control-btn {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.08);
+            color: #f8fafc;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .control-btn:hover {
+            background: rgba(255,255,255,0.12);
+            border-color: rgba(255,255,255,0.2);
+            transform: translateY(-1px);
+        }
+        
+        .control-btn.active {
+            background: var(--primary);
+            border-color: var(--primary-light);
+        }
+        
+        .timer-display {
+            background: rgba(0,0,0,0.3);
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 18px;
+            padding: 4px 12px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            white-space: nowrap;
+            color: #f8fafc;
+        }
+        
+        .timer-display i {
+            margin-right: 6px;
+            color: var(--accent);
+        }
+        
+        /* Main Content */
+        .main-content {
+            margin-top: 60px;
+            padding: 16px;
+            min-height: calc(100vh - 140px);
+        }
+        
+        .question-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(8px);
+            border: 1px solid var(--light-gray);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 16px;
+            box-shadow: var(--box-shadow-sm);
+            transition: var(--transition);
+        }
+        
+        .question-counter {
+            font-size: 0.9rem;
+            color: var(--gray);
+            text-align: center;
+            margin-bottom: 16px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+        
+        .question-text {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 24px;
+            color: #f8fafc;
+            overflow-wrap: break-word;
+            word-wrap: break-word;
+            hyphens: auto;
+            max-width: 100%;
+        }
+        
+        .option-item {
+            margin-bottom: 12px;
+            position: relative;
+        }
+        
+        .option-input {
+            position: absolute;
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        
+        .question-text img,
+        .option-label img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 8px 0;
+            border-radius: 8px;
+        }
+        
+        .option-label {
+            display: block;
+            padding: 14px 16px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            color: #f8fafc;
+        }
+        
+        .option-label:hover {
+            border-color: rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.05);
+            transform: translateY(-2px);
+            box-shadow: var(--box-shadow-sm);
+        }
+        
+        .option-input:checked + .option-label {
+            border-color: var(--primary);
+            background: rgba(99, 102, 241, 0.08);
+            box-shadow: 0 0 12px var(--primary-glow);
+        }
+        
+        .option-input:checked + .option-label::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 3px;
+            height: 100%;
+            background: var(--primary);
+        }
+        
+        /* When reviewing answers */
+        .review-mode .option-input:checked + .option-label.correct {
+            border-color: var(--success);
+            background: rgba(16, 185, 129, 0.08);
+            box-shadow: 0 0 12px var(--success-glow);
+        }
+        
+        .review-mode .option-input:checked + .option-label.correct::after {
+            background: var(--success);
+        }
+        
+        .review-mode .option-input:checked + .option-label.incorrect {
+            border-color: var(--danger);
+            background: rgba(239, 68, 68, 0.08);
+            box-shadow: 0 0 12px var(--danger-glow);
+        }
+        
+        .review-mode .option-input:checked + .option-label.incorrect::after {
+            background: var(--danger);
+        }
+        
+        .review-mode .option-label.correct-answer {
+            border-color: var(--success);
+            background: rgba(16, 185, 129, 0.08);
+            box-shadow: 0 0 12px var(--success-glow);
+        }
+        
+        .review-mode .option-label.correct-answer::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 3px;
+            height: 100%;
+            background: var(--success);
+        }
+        
+        .solution-container {
+            margin-top: 24px;
+            padding: 18px;
+            background: rgba(99, 102, 241, 0.05);
+            border-radius: 12px;
+            border-left: 3px solid var(--primary);
+            border-top: 1px solid rgba(255,255,255,0.03);
+            border-right: 1px solid rgba(255,255,255,0.03);
+            border-bottom: 1px solid rgba(255,255,255,0.03);
+        }
+        
+        .solution-title {
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--primary-light);
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        /* Question Navigation */
+        .question-nav {
+            position: fixed;
+            top: 60px;
+            right: 0;
+            bottom: 80px;
+            width: 100%;
+            max-width: 320px;
+            background: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-left: 1px solid rgba(255,255,255,0.06);
+            box-shadow: var(--box-shadow);
+            transform: translateX(100%);
+            transition: var(--transition);
+            z-index: 900;
+            overflow-y: auto;
+            padding: 16px;
+        }
+        
+        .question-nav.show {
+            transform: translateX(0);
+        }
+        
+        .nav-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+        
+        .nav-title {
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin: 0;
+            color: #f8fafc;
+        }
+        
+        .question-stats {
+            display: flex;
+            gap: 8px;
+        }
+        
+        .stat-badge {
+            font-size: 0.75rem;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-weight: 500;
+            color: white;
+        }
+        
+        .section-selector {
+            width: 100%;
+            margin-bottom: 16px;
+            border-radius: 12px;
+            padding: 10px 16px;
+            border: 1px solid rgba(255,255,255,0.08);
+            background: rgba(0, 0, 0, 0.3);
+            color: #f8fafc;
+            font-size: 0.9rem;
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 10px center;
+            background-size: 16px;
+        }
+        
+        .question-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(40px, 1fr));
+            gap: 8px;
+        }
+        
+        .q-box {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 500;
+            border: 1px solid rgba(255,255,255,0.08);
+            background: rgba(255,255,255,0.02);
+            color: #94a3b8;
+            transition: var(--transition);
+            position: relative;
+        }
+        
+        .q-box:hover {
+            transform: translateY(-2px);
+            border-color: rgba(255,255,255,0.2);
+            color: #f8fafc;
+        }
+        
+        .q-box.attempted {
+            background-color: var(--primary);
+            color: white;
+            border-color: var(--primary);
+            box-shadow: 0 0 8px var(--primary-glow);
+        }
+        
+        .q-box.correct {
+            background-color: var(--success);
+            color: white;
+            border-color: var(--success);
+            box-shadow: 0 0 8px var(--success-glow);
+        }
+        
+        .q-box.incorrect {
+            background-color: var(--danger);
+            color: white;
+            border-color: var(--danger);
+            box-shadow: 0 0 8px var(--danger-glow);
+        }
+        
+        .q-box.current {
+            border: 2px solid var(--accent) !important;
+            transform: translateY(-3px);
+            box-shadow: 0 4px 12px rgba(236, 72, 153, 0.3);
+            color: #f8fafc;
+        }
+        
+        .q-box.unattempted {
+            background-color: var(--gray);
+            color: white;
+            border-color: var(--gray);
+        }
+        
+        /* Bottom Navigation */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 80px;
+            background: var(--footer-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-top: 1px solid rgba(255,255,255,0.06);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 16px;
+            z-index: 800;
+        }
+        
+        .nav-btn {
+            height: 48px;
+            border-radius: 12px;
+            border: none;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 20px;
+            transition: var(--transition);
+            gap: 8px;
+            cursor: pointer;
+        }
+        
+        .nav-btn i {
+            font-size: 1rem;
+        }
+        
+        .nav-btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .nav-btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px var(--primary-glow);
+        }
+        
+        .nav-btn-outline {
+            background: rgba(255,255,255,0.02);
+            color: #f8fafc;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .nav-btn-outline:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+        
+        .nav-btn:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+            transform: none !important;
+            box-shadow: none !important;
+        }
+        
+        /* Overlay when nav is open */
+        .nav-overlay {
+            position: fixed;
+            top: 60px;
+            left: 0;
+            right: 0;
+            bottom: 80px;
+            background: rgba(0,0,0,0.6);
+            backdrop-filter: blur(4px);
+            z-index: 800;
+            opacity: 0;
+            pointer-events: none;
+            transition: var(--transition);
+        }
+        
+        .nav-overlay.show {
+            opacity: 1;
+            pointer-events: all;
+        }
+        
+        /* Results Modal */
+        .results-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(3, 7, 18, 0.8);
+            backdrop-filter: blur(8px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1100;
+            opacity: 0;
+            pointer-events: none;
+            transition: var(--transition);
+            padding: 16px;
+        }
+        
+        .results-modal.show {
+            opacity: 1;
+            pointer-events: all;
+        }
+        
+        .results-card {
+            background: #0f172a;
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 24px;
+            width: 100%;
+            max-width: 500px;
+            overflow: hidden;
+            transform: translateY(20px);
+            transition: var(--transition);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+        }
+        
+        .results-modal.show .results-card {
+            transform: translateY(0);
+        }
+        
+        .results-header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 24px 20px;
+            text-align: center;
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+        }
+        
+        .results-title {
+            margin: 0;
+            font-weight: 600;
+            font-size: 1.4rem;
+        }
+        
+        .results-body {
+            padding: 24px;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+        
+        .stat-card {
+            padding: 16px;
+            border-radius: 16px;
+            text-align: center;
+            color: white;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+        
+        .stat-value {
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+        
+        .stat-label {
+            font-size: 0.8rem;
+            opacity: 0.8;
+            font-weight: 500;
+        }
+        
+        .results-footer {
+            padding: 18px 24px;
+            display: flex;
+            justify-content: center;
+            border-top: 1px solid rgba(255,255,255,0.06);
+            background: rgba(0,0,0,0.1);
+        }
+        
+        /* MathJax Styling Override */
+        .MathJax, .mjx-chtml {
+            overflow-x: auto;
+            max-width: 100%;
+            display: inline-block;
+        }
+        
+        /* Responsive Adjustments */
+        @media (min-width: 992px) {
+            .question-nav {
+                transform: translateX(0);
+            }
+            
+            .main-content {
+                margin-right: 320px;
+            }
+            
+            .nav-overlay {
+                display: none;
+            }
+            
+            .bottom-nav {
+                display: none;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .question-grid {
+                grid-template-columns: repeat(auto-fill, minmax(36px, 1fr));
+                gap: 6px;
+            }
+            
+            .q-box {
+                width: 36px;
+                height: 36px;
+                font-size: 0.9rem;
+            }
+            
+            .option-label {
+                padding: 12px 14px;
+            }
+            
+            .question-text {
+                font-size: 1rem;
+            }
+            
+            .header-brand {
+                font-size: 1rem;
+            }
+            
+            .control-btn {
+                width: 32px;
+                height: 32px;
+            }
+            
+            .timer-display {
+                font-size: 0.8rem;
+                padding: 4px 10px;
+            }
+            
+            .nav-btn {
+                height: 44px;
+                padding: 0 16px;
+                font-size: 0.9rem;
+            }
+        }
+</style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <a href="#" class="header-brand">
+                <i class="fas fa-graduation-cap"></i>
+                <span>Aether Mocks</span>
+            </a>
+            
+            <div class="header-controls">
+                <!-- Timer -->
+                <div class="timer-display">
+                    <i class="far fa-clock"></i>
+                    <span id="timer-display">6:00</span>
+                </div>
+                
+                                <!-- Full Screen Button -->
+                <button class="control-btn" id="fullscreen-btn" onclick="toggleFullscreen()" title="Toggle Fullscreen">
+                    <i class="fas fa-expand"></i>
+                </button>
+                
+                <!-- Language toggle -->
+                <button class="control-btn" id="lang-btn" onclick="toggleLanguage()">
+                    <span id="lang-text">En</span>
+                </button>
+                
+                <!-- Submit button -->
+                <button class="control-btn" id="submit-btn" onclick="confirmSubmit()">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+                
+                <!-- Questions toggle for mobile -->
+                <button class="control-btn nav-toggle-btn" id="nav-toggle" onclick="toggleNav()">
+                    <i class="fas fa-th"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Main content -->
+    <main class="main-content" id="main-content">
+        <div class="question-counter" id="question-counter">Question 1 of 20</div>
+        
+        <!-- Questions will be displayed here -->
+        <div id="questions-container"></div>
+    </main>
+    
+    <!-- Overlay for mobile nav -->
+    <div class="nav-overlay" id="nav-overlay" onclick="toggleNav(false)"></div>
+    
+    <!-- Question navigation sidebar -->
+    <aside class="question-nav" id="question-nav">
+        <div class="nav-header">
+            <h3 class="nav-title">Questions</h3>
+            <div class="question-stats">
+                <span class="stat-badge bg-primary" id="attempted-count">0</span>
+                <span class="stat-badge bg-gray" id="total-count">20</span>
+                <button class="control-btn d-lg-none" onclick="toggleNav(false)">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Section selector -->
+        <select class="section-selector" id="section-selector" onchange="switchSection(this.value)">
+            <option value="all">All Sections</option>
+        </select>
+        
+        <!-- Question grid -->
+        <div class="question-grid" id="question-boxes"></div>
+    </aside>
+    
+    <!-- Bottom navigation for mobile -->
+    <nav class="bottom-nav d-lg-none">
+        <button class="nav-btn nav-btn-outline" onclick="prevQuestion()">
+            <i class="fas fa-chevron-left"></i>
+            <span>Previous</span>
+        </button>
+        <button class="nav-btn nav-btn-outline" onclick="nextQuestion()">
+            <span>Next</span>
+            <i class="fas fa-chevron-right"></i>
+        </button>
+    </nav>
+    
+    <!-- Results modal -->
+    <div class="results-modal" id="results-modal">
+        <div class="results-card">
+            <div class="results-header">
+                <h3 class="results-title">Test Results</h3>
+            </div>
+            <div class="results-body">
+                <div class="stats-grid">
+                    <div class="stat-card" style="background: linear-gradient(135deg, var(--primary), var(--primary-dark))">
+                        <div class="stat-value" id="score-value">0</div>
+                        <div class="stat-label">Score</div>
+                    </div>
+                    <div class="stat-card" style="background: linear-gradient(135deg, var(--success), #1b9aaa)">
+                        <div class="stat-value" id="correct-value">0</div>
+                        <div class="stat-label">Correct</div>
+                    </div>
+                    <div class="stat-card" style="background: linear-gradient(135deg, var(--danger), var(--accent))">
+                        <div class="stat-value" id="incorrect-value">0</div>
+                        <div class="stat-label">Incorrect</div>
+                    </div>
+                    <div class="stat-card" style="background: linear-gradient(135deg, var(--gray), var(--dark))">
+                        <div class="stat-value" id="unattempted-value">0</div>
+                        <div class="stat-label">Unattempted</div>
+                    </div>
+                </div>
+            </div>
+            <div class="results-footer">
+                <button class="nav-btn nav-btn-primary" onclick="reviewTest()">
+                    <i class="fas fa-search me-1"></i>
+                    <span>Review Test</span>
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Questions data
+        const questions = [];
+        const sections = {};
+        let currentLang = "en";
+        let currentQuestion = 0;
+        let answers = {};
+        let submitted = false;
+        let totalTime = 6 * 60;
+        
+                function toggleFullscreen() {
+            const btn = document.getElementById('fullscreen-btn');
+            if (!btn) return;
+            const icon = btn.querySelector('i');
+            if (!document.fullscreenElement) {
+                document.documentElement.requestFullscreen().then(() => {
+                    icon.className = 'fas fa-compress';
+                }).catch(err => {
+                    console.error("Fullscreen error: ", err);
+                });
+            } else {
+                document.exitFullscreen().then(() => {
+                    icon.className = 'fas fa-expand';
+                });
+            }
+        }
+        
+        document.addEventListener('fullscreenchange', () => {
+            const btn = document.getElementById('fullscreen-btn');
+            if (btn) {
+                const icon = btn.querySelector('i');
+                if (document.fullscreenElement) {
+                    icon.className = 'fas fa-compress';
+                } else {
+                    icon.className = 'fas fa-expand';
+                }
+            }
+        });
+
+        // Initialize the test
+        window.onload = function() {
+            initializeTest();
+            startTimer();
+            
+            // If on desktop, show the question navigation by default
+            if (window.innerWidth >= 992) {
+                document.getElementById('question-nav').classList.add('show');
+                document.getElementById('main-content').classList.add('with-nav');
+            }
+        };
+        
+        // Initialize test data
+        function initializeTest() {
+            // Add sections and questions
+            
+            sections["8"] = {
+                name: "GK",
+                start: 0,
+                end: 18
+            };
+            
+            document.getElementById('section-selector').innerHTML += 
+                `<option value="8">GK</option>`;
+            
+            sections["misc"] = {
+                name: "Miscellaneous",
+                start: 19,
+                end: 19
+            };
+            
+            document.getElementById('section-selector').innerHTML += 
+                `<option value="misc">Miscellaneous</option>`;
+            
+            
+                questions.push({
+                    id: "1",
+                    section: "8",
+                    question_en: "<p><span style=\"font-family: Cambria Math;\">1</span><span style=\"font-family: Cambria Math;\">. </span><span style=\"font-family: Cambria Math;\"> With which of the following sports do you associate the term \'</span><span style=\"font-family: Cambria Math;\">16</span><span style=\"font-family: Cambria Math;\">-yard hit\'?&nbsp;</span></p>",
+                    question_hi: "<p><span style=\"font-family: Cambria Math;\">1</span><span style=\"font-family: Cambria Math;\">. </span><span style=\"font-family: Cambria Math;\">\'</span><span style=\"font-family: Cambria Math;\">16</span><span style=\"font-family: Cambria Math;\">-</span><span style=\"font-family: Aparajita;\">यार्ड</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">हिट</span><span style=\"font-family: Cambria Math;\">\' </span><span style=\"font-family: Aparajita;\">शब्द</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">को</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">निम्नलिखित</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">में</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">से</span><span style=\"font-family: Cambria Math;\"> &nbsp;</span><span style=\"font-family: Aparajita;\">किस</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">खेल</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">से</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">जुड़ा</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">हैं</span><span style=\"font-family: Cambria Math;\">?&nbsp;</span></p>",
+                    options_en: ["<p>Lawn tennis</p>", "<p>Golf</p>", 
+                                "<p>Field hockey</p>", "<p>Cricket</p>"],
+                    options_hi: ["<p><span style=\"font-family: Aparajita;\">लॉन</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">टेनिस</span></p>", "<p><span style=\"font-family: Aparajita;\">गोल्फ</span></p>",
+                                "<p><span style=\"font-family: Aparajita;\">फील्ड</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">हॉकी</span></p>", "<p><span style=\"font-family: Aparajita;\">क्रिकेट</span></p>"],
+                    solution_en: "<p><span style=\"font-family: Cambria Math;\">1</span><span style=\"font-family: Cambria Math;\">.(c)</span><span style=\"font-family: Cambria Math;\"> Field hockey is associated with the term</span><span style=\"font-family: Cambria Math;\"> \'</span><span style=\"font-family: Cambria Math;\">16</span><span style=\"font-family: Cambria Math;\">-yard hit\'.</span><span style=\"font-family: Cambria Math;\"> A </span><span style=\"font-family: Cambria Math;\">16</span><span style=\"font-family: Cambria Math;\">-yard hit is awarded to the defense when a foul is committed inside their striking circle by the opposition or when the ball is hit over the backline by the opposing team.</span></p>",
+                    solution_hi: "<p><span style=\"font-family: Cambria Math;\">1</span><span style=\"font-family: Cambria Math;\">.(c) </span><span style=\"font-family: Aparajita;\">फील्ड</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">हॉकी</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">\'</span><span style=\"font-family: Cambria Math;\">16</span><span style=\"font-family: Cambria Math;\">-</span><span style=\"font-family: Palanquin;\">यार्ड</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Palanquin;\">हिट</span><span style=\"font-family: Cambria Math;\">\'</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">शब्द</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">से</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">संबंधित</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">है।</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">एक</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">16</span><span style=\"font-family: Cambria Math;\">-</span><span style=\"font-family: Aparajita;\">यार्ड</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">हिट</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">रक्षा</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">को</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">प्रदान</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">की</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">जाती</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">है</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">जब</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">विपक्ष</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">द्वारा</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">उनके</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">स्ट्राइकिंग</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">सर्कल</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">के</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">अंदर</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">एक</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">बेईमानी</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">की</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">जाती</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">है</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">या</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">जब</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">विरोधी</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">टीम</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">द्वारा</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">गेंद</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">को</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">बैकलाइन</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">पर</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">मारा</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">जाता</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">है।</span></p>",
+                    correct: "c",
+                    pos_marks: 2.0,
+                    neg_marks: 0.5
+                });
+                questions.push({
+                    id: "2",
+                    section: "8",
+                    question_en: "<p><span style=\"font-family: Cambria Math;\">2</span><span style=\"font-family: Cambria Math;\">.</span><span style=\"font-family: Cambria Math;\"> Who among the following was the founder and the first Chairman and Commissioner of the Indian Premier League (IPL)?&nbsp;</span></p>",
+                    question_hi: "<p><span style=\"font-family: Cambria Math;\">2</span><span style=\"font-family: Cambria Math;\">.</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">निम्नलिखित</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">में</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">से</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">कौन</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">इंडियन</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">प्रीमियर</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">लीग</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">(IPL) </span><span style=\"font-family: Aparajita;\">के</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">संस्थापक</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">और</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">पहले</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">अध्यक्ष</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">और</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">आयुक्त</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">थे</span><span style=\"font-family: Cambria Math;\">?&nbsp;</span></p>",
+                    options_en: ["<p>Jagmohan Dalmiya</p>", "<p>Raj Singh Dungarpur</p>", 
+                                "<p>Sandeep Patil</p>", "<p>Lalit Modi</p>"],
+                    options_hi: ["<p><span style=\"font-family: Aparajita;\">जगमोहन</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">डालमिया</span><span style=\"font-family: Cambria Math;\"> </span></p>", "<p><span style=\"font-family: Aparajita;\">राज</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">सिंह</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">डूंगरपुर</span></p>",
+                                "<p><span style=\"font-family: Aparajita;\">संदीप</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">पाटिल</span><span style=\"font-family: Cambria Math;\"> </span></p>", "<p><span style=\"font-family: Aparajita;\">ललित</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">मोदी</span></p>"],
+                    solution_en: "<p><span style=\"font-family: Cambria Math;\">2</span><span style=\"font-family: Cambria Math;\">.(d) </span><span style=\"font-family: Cambria Math;\">Lalit Modi was the founder and the first Chairman and Commissioner of IPL. </span></p>",
+                    solution_hi: "<p><span style=\"font-family: Cambria Math;\">2</span><span style=\"font-family: Cambria Math;\">.(d)</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">ललित</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">मोदी</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">आईपीएल</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">के</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">संस्थापक</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">और</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">पहले</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">अध्यक्ष</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">और</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">आयुक्त</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">थे।</span><span style=\"font-family: Cambria Math;\"> </span></p>",
+                    correct: "d",
+                    pos_marks: 2.0,
+                    neg_marks: 0.5
+                });
+                questions.push({
+                    id: "3",
+                    section: "8",
+                    question_en: "<p><span style=\"font-family: Cambria Math;\">3</span><span style=\"font-family: Cambria Math;\">.</span><span style=\"font-family: Cambria Math;\"> In which of the following sports is the shakehand grip used?&nbsp;</span></p>",
+                    question_hi: "<p><span style=\"font-family: Cambria Math;\">3</span><span style=\"font-family: Cambria Math;\">. </span><span style=\"font-family: Aparajita;\">निम्नलिखित</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">में</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">से</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">किस</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">खेल</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">में</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">शेकहैंड</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">ग्रिप</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">का</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">प्रयोग</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">किया</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">जाता</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">है</span><span style=\"font-family: Cambria Math;\">?</span></p>",
+                    options_en: ["<p>Badminton</p>", "<p>Squash</p>", 
+                                "<p>Cricket</p>", "<p>Table tennis</p>"],
+                    options_hi: ["<p><span style=\"font-family: Aparajita;\">बैडमिंटन</span></p>", "<p><span style=\"font-family: Aparajita;\">स्क्वैश</span></p>",
+                                "<p><span style=\"font-family: Aparajita;\">क्रिकेट</span></p>", "<p><span style=\"font-family: Aparajita;\">टेबल</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">टेनिस</span></p>"],
+                    solution_en: "<p><span style=\"font-family: Cambria Math;\">3</span><span style=\"font-family: Cambria Math;\">.(d)</span><span style=\"font-family: Cambria Math;\"> The </span><span style=\"font-family: Cambria Math;\">&lsquo;</span><span style=\"font-family: Cambria Math;\">shakehand</span><span style=\"font-family: Cambria Math;\">&rsquo; </span><span style=\"font-family: Cambria Math;\">grip is used in Table tennis. It is the typical European type grip where the head of the racket faces up, and your hand looks like it\'s ready to shake a person\'s hand. </span><span style=\"font-family: Cambria Math;\">&lsquo;</span><span style=\"font-family: Cambria Math;\">Penhold grip</span><span style=\"font-family: Cambria Math;\">&rsquo;</span><span style=\"font-family: Cambria Math;\">, </span><span style=\"font-family: Cambria Math;\">&lsquo;</span><span style=\"font-family: Cambria Math;\">Common grip</span><span style=\"font-family: Cambria Math;\">&rsquo; </span><span style=\"font-family: Cambria Math;\">and </span><span style=\"font-family: Cambria Math;\">&lsquo;</span><span style=\"font-family: Cambria Math;\">Forehand</span><span style=\"font-family: Cambria Math;\">&rsquo; </span><span style=\"font-family: Cambria Math;\">grip are some of the other grips used in Table tennis.</span></p>\n<p><span style=\"font-family: Cambria Math;\"> </span></p>",
+                    solution_hi: "<p><span style=\"font-family: Cambria Math;\">3</span><span style=\"font-family: Cambria Math;\">.(d) </span><span style=\"font-family: Aparajita;\">टेबल</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">टेनिस</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">में</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">\'</span><span style=\"font-family: Aparajita;\">शेकहैंड</span><span style=\"font-family: Cambria Math;\">\' </span><span style=\"font-family: Aparajita;\">ग्रिप</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">का</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">प्रयोग</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">किया</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">जाता</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">है।</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">यह</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">विशिष्ट</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">यूरोपीय</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">प्रकार</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">की</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">पकड़</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">है</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">जहां</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">रैकेट</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">का</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">सिर</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">ऊपर</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">की</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">ओर</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">होता</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">है</span><span style=\"font-family: Cambria Math;\">, </span><span style=\"font-family: Aparajita;\">और</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">आपका</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">हाथ</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">ऐसा</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">लगता</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">है</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">कि</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">यह</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">किसी</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">व्यक्ति</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">का</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">हाथ</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">मिलाने</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">के</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">लिए</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">तैयार</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">है।</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">\'</span><span style=\"font-family: Aparajita;\">पेनहोल्ड</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">ग्रिप</span><span style=\"font-family: Cambria Math;\">\', \'</span><span style=\"font-family: Aparajita;\">कॉमन</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">ग्रिप</span><span style=\"font-family: Cambria Math;\">\' </span><span style=\"font-family: Aparajita;\">और</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">\'</span><span style=\"font-family: Aparajita;\">फोरहैंड</span><span style=\"font-family: Cambria Math;\">\' </span><span style=\"font-family: Aparajita;\">ग्रिप</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">टेबल</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">टेनिस</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">में</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">इस्तेमाल</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">की</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">जाने</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">वाली</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">कुछ</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">अन्य </span><span style=\"font-family: Aparajita;\">ग्रिप</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">हैं।</span></p>",
+                    correct: "d",
+                    pos_marks: 2.0,
+                    neg_marks: 0.5
+                });
+                questions.push({
+                    id: "4",
+                    section: "8",
+                    question_en: "<p><span style=\"font-family: Cambria Math;\">4</span><span style=\"font-family: Cambria Math;\">. </span><span style=\"font-family: Cambria Math;\">Hima Das is an Indian ______.&nbsp;</span></p>",
+                    question_hi: "<p><span style=\"font-family: Cambria Math;\">4</span><span style=\"font-family: Cambria Math;\">.</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">हिमा</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">दास</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">एक</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">भारतीय</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">______ </span><span style=\"font-family: Aparajita;\">हैं।</span><span style=\"font-family: Cambria Math;\">&nbsp;</span></p>",
+                    options_en: ["<p>boxer</p>", "<p>swimmer</p>", 
+                                "<p>sprinter</p>", "<p>cricketer</p>"],
+                    options_hi: ["<p><span style=\"font-family: Aparajita;\">बॉक्सर</span><span style=\"font-family: Cambria Math;\"> </span></p>", "<p><span style=\"font-family: Aparajita;\">तैराक</span><span style=\"font-family: Cambria Math;\"> </span></p>",
+                                "<p><span style=\"font-family: Aparajita;\">धावक</span><span style=\"font-family: Cambria Math;\"> </span></p>", "<p><span style=\"font-family: Aparajita;\">क्रिकेटर</span></p>"],
+                    solution_en: "<p><span style=\"font-family: Cambria Math;\">4</span><span style=\"font-family: Cambria Math;\">.(c) </span><span style=\"font-family: Cambria Math;\">Hima Das is an Indian sprinter. She is the first and only Indian athlete who won a gold medal in the IAAF World U</span><span style=\"font-family: Cambria Math;\">20 </span><span style=\"font-family: Cambria Math;\">Championships. She is </span><span style=\"font-family: Cambria Math;\">21 </span><span style=\"font-family: Cambria Math;\">years old and belongs to Assam and also holds the current Indian national record in </span><span style=\"font-family: Cambria Math;\">400 </span><span style=\"font-family: Cambria Math;\">meters with a timing of </span><span style=\"font-family: Cambria Math;\">50.79 </span><span style=\"font-family: Cambria Math;\">seconds. </span></p>",
+                    solution_hi: "<p><span style=\"font-family: Cambria Math;\">4</span><span style=\"font-family: Cambria Math;\">.(c)</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">हिमा</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">दास</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">एक</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">भारतीय</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">धावक</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">हैं।</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">वह</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">पहली</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">और</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">एकमात्र</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">भारतीय</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">एथलीट</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">हैं</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">जिन्होंने</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">IAAF </span><span style=\"font-family: Aparajita;\">वर्ल्ड</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">U</span><span style=\"font-family: Cambria Math;\">20 </span><span style=\"font-family: Aparajita;\">चैंपियनशिप</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">में</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">स्वर्ण</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">पदक</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">जीता</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">है।</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">वह</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">21 </span><span style=\"font-family: Aparajita;\">साल</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">की</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">है</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">और</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">असम</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">से</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">ताल्लुक</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">रखती</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">है</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">और</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">50.79 </span><span style=\"font-family: Aparajita;\">सेकंड</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">के</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">समय</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">के</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">साथ</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">400 </span><span style=\"font-family: Aparajita;\">मीटर</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">में</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">वर्तमान</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">भारतीय</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">राष्ट्रीय</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">रिकॉर्ड</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">भी</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">रखती</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">है।</span></p>",
+                    correct: "c",
+                    pos_marks: 2.0,
+                    neg_marks: 0.5
+                });
+                questions.push({
+                    id: "5",
+                    section: "8",
+                    question_en: "<p><span style=\"font-family: Cambria Math;\">5</span><span style=\"font-family: Cambria Math;\">. </span><span style=\"font-family: Cambria Math;\">Who among the following cricketers is a left-arm pace bowler?&nbsp;</span></p>",
+                    question_hi: "<p><span style=\"font-family: Cambria Math;\">5</span><span style=\"font-family: Cambria Math;\">.</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">निम्नलिखित</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">क्रिकेटरों</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">में</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">से</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">कौन</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">बाएं</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">हाथ</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">का</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">तेज</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">गेंदबाज</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">है</span><span style=\"font-family: Cambria Math;\">?&nbsp;</span></p>",
+                    options_en: ["<p>Ashish Nehra</p>", "<p>Ishant Sharma</p>", 
+                                "<p>Bhuvneshwar Kumar</p>", "<p>Umesh Yadav</p>"],
+                    options_hi: ["<p><span style=\"font-family: Aparajita;\">आशीष</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">नेहरा</span></p>", "<p><span style=\"font-family: Aparajita;\">इशांत</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">शर्मा</span></p>",
+                                "<p><span style=\"font-family: Aparajita;\">भुवनेश्वर</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">कुमार</span></p>", "<p><span style=\"font-family: Aparajita;\">उमेश</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">यादव</span></p>"],
+                    solution_en: "<p><span style=\"font-family: Cambria Math;\">5</span><span style=\"font-family: Cambria Math;\">.(a) </span><span style=\"font-family: Cambria Math;\">Ashish Nehra is a left-arm pace bowler among the above-given options.</span></p>",
+                    solution_hi: "<p><span style=\"font-family: Cambria Math;\">5</span><span style=\"font-family: Cambria Math;\">.(a) </span><span style=\"font-family: Aparajita;\">आशीष</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">नेहरा</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">ऊपर</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">दिए</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">गए</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">विकल्पों</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">में</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">से</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">बाएं</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">हाथ</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">के</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">तेज</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">गेंदबाज</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">हैं।</span></p>",
+                    correct: "a",
+                    pos_marks: 2.0,
+                    neg_marks: 0.5
+                });
+                questions.push({
+                    id: "6",
+                    section: "8",
+                    question_en: "<p><span style=\"font-family: Cambria Math;\">6</span><span style=\"font-family: Cambria Math;\">.</span><span style=\"font-family: Cambria Math;\"> Who among the following had written Kitab-ul-Hind that gave an incisive description of early </span><span style=\"font-family: Cambria Math;\">11</span><span style=\"font-family: Cambria Math;\">th Century India?&nbsp;</span></p>",
+                    question_hi: "<p><span style=\"font-family: Cambria Math;\">6</span><span style=\"font-family: Cambria Math;\">. </span><span style=\"font-family: Aparajita;\">निम्नलिखित</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">में</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">से</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">किसने</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">किताब</span><span style=\"font-family: Cambria Math;\">-</span><span style=\"font-family: Aparajita;\">उल</span><span style=\"font-family: Cambria Math;\">-</span><span style=\"font-family: Aparajita;\">हिंद</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">लिखा</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">था</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">जिसने</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">11</span><span style=\"font-family: Aparajita;\">वीं</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">सदी</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">के</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">भारत</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">की</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">शुरुआत</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">का</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">तीक्ष्ण</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">वर्णन</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">दिया</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">था</span><span style=\"font-family: Cambria Math;\">?&nbsp;</span></p>",
+                    options_en: ["<p>Al-Kindi</p>", "<p>Al-Bukhari</p>", 
+                                "<p>Al-Biruni</p>", "<p>Al-Khwarizmi</p>"],
+                    options_hi: ["<p><span style=\"font-family: Aparajita;\">अल</span><span style=\"font-family: Cambria Math;\">-</span><span style=\"font-family: Aparajita;\">किंडी</span><span style=\"font-family: Cambria Math;\"> </span></p>", "<p><span style=\"font-family: Aparajita;\">अल</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">बुखारी</span><span style=\"font-family: Cambria Math;\"> </span></p>",
+                                "<p><span style=\"font-family: Aparajita;\">अल</span><span style=\"font-family: Cambria Math;\">-</span><span style=\"font-family: Aparajita;\">बिरूनी</span><span style=\"font-family: Cambria Math;\"> </span></p>", "<p><span style=\"font-family: Aparajita;\">अल</span><span style=\"font-family: Cambria Math;\">-</span><span style=\"font-family: Aparajita;\">खवारीज़मी</span><span style=\"font-family: Cambria Math;\"> </span></p>"],
+                    solution_en: "<p><span style=\"font-family: Cambria Math;\">6</span><span style=\"font-family: Cambria Math;\">.(c) </span><span style=\"font-family: Cambria Math;\">Al-Biruni had written Kitab-ul-Hind which is a book written about the Indian subcontinent. </span></p>",
+                    solution_hi: "<p><span style=\"font-family: Cambria Math;\">6</span><span style=\"font-family: Cambria Math;\">.(c)</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">अल</span><span style=\"font-family: Cambria Math;\">-</span><span style=\"font-family: Aparajita;\">बिरूनी</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">ने</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">किताब</span><span style=\"font-family: Cambria Math;\">-</span><span style=\"font-family: Aparajita;\">उल</span><span style=\"font-family: Cambria Math;\">-</span><span style=\"font-family: Aparajita;\">हिंद</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">लिखी</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">थी</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">जो</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">भारतीय</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">उपमहाद्वीप</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">के</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">बारे</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">में</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">लिखी</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">गई</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">एक</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">किताब</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">है।</span><span style=\"font-family: Cambria Math;\"> </span></p>",
+                    correct: "c",
+                    pos_marks: 2.0,
+                    neg_marks: 0.5
+                });
+                questions.push({
+                    id: "7",
+                    section: "8",
+                    question_en: "<p><span style=\"font-family: Cambria Math;\">7</span><span style=\"font-family: Cambria Math;\">.</span><span style=\"font-family: Cambria Math;\"> Who among the following wrote the novel </span><span style=\"font-family: Cambria Math;\">&lsquo;</span><span style=\"font-family: Cambria Math;\">Rangbhumi: The Arena of Life</span><span style=\"font-family: Cambria Math;\">&rsquo;</span><span style=\"font-family: Cambria Math;\">?&nbsp;</span></p>",
+                    question_hi: "<p><span style=\"font-family: Cambria Math;\">7</span><span style=\"font-family: Cambria Math;\">.</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">निम्नलिखित</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">में</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">से</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">किसने</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">उपन्यास</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">\'</span><span style=\"font-family: Aparajita;\">रंगभूमि</span><span style=\"font-family: Cambria Math;\">: </span><span style=\"font-family: Aparajita;\">द</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">एरिना</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">ऑफ</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">लाइफ</span><span style=\"font-family: Cambria Math;\">\' </span><span style=\"font-family: Aparajita;\">लिखा</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">है</span><span style=\"font-family: Cambria Math;\">?&nbsp;</span></p>",
+                    options_en: ["<p>Mahatma Gandhi</p>", "<p>Munshi Pemchand</p>", 
+                                "<p>Abanindranath Tagore</p>", "<p>Rabindranath Tagore</p>"],
+                    options_hi: ["<p><span style=\"font-family: Aparajita;\">महात्मा</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">गांधी</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\"> </span></p>", "<p><span style=\"font-family: Aparajita;\">मुंशी</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">प्रेमचंद</span></p>",
+                                "<p><span style=\"font-family: Aparajita;\">अवनिंद्रनाथ</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">टैगोर</span></p>", "<p><span style=\"font-family: Aparajita;\">रवींद्रनाथ</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">टैगोर</span><span style=\"font-family: Cambria Math;\"> </span></p>"],
+                    solution_en: "<p><span style=\"font-family: Cambria Math;\">7</span><span style=\"font-family: Cambria Math;\">.(b)</span><span style=\"font-family: Cambria Math;\"> Dhanpat Rai Srivastava popularly known by his pen name, Munshi Pemchand, wrote the novel </span><span style=\"font-family: Cambria Math;\">&lsquo;</span><span style=\"font-family: Cambria Math;\">Rangbhoomi: The Arena of Life</span><span style=\"font-family: Cambria Math;\">&rsquo;</span><span style=\"font-family: Cambria Math;\">. It is a </span><span style=\"font-family: Cambria Math;\">Hindi language novel inspired by Gandhian values. Other important works by Munshi Premchand include Godan, Gaban, Mansarovar, Idgah and many more.</span></p>",
+                    solution_hi: "<p><span style=\"font-family: Cambria Math;\">7</span><span style=\"font-family: Cambria Math;\">.(b) </span><span style=\"font-family: Aparajita;\">धनपत</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">राय</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">श्रीवास्तव</span><span style=\"font-family: Cambria Math;\">, </span><span style=\"font-family: Aparajita;\">जिन्हें</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">उनके</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">कलम</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">नाम</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">मुंशी</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">प्रेमचंद</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">के</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">नाम</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">से</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">जाना</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">जाता</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">है</span><span style=\"font-family: Cambria Math;\">, </span><span style=\"font-family: Aparajita;\">ने</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">\'</span><span style=\"font-family: Aparajita;\">रंगभूमि</span><span style=\"font-family: Cambria Math;\">: </span><span style=\"font-family: Aparajita;\">द</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">एरिना</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">ऑफ</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">लाइफ</span><span style=\"font-family: Cambria Math;\">\' </span><span style=\"font-family: Aparajita;\">उपन्यास</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">लिखा</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">था।</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">यह</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">गांधीवादी</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">मूल्यों</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">से</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">प्रेरित</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">हिंदी</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">भाषा</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">का</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">उपन्यास</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">है।</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">मुंशी</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">प्रेमचंद</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">के</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">अन्य</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">महत्वपूर्ण</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">कार्यों</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">में</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">गोदान</span><span style=\"font-family: Cambria Math;\">, </span><span style=\"font-family: Aparajita;\">गबन</span><span style=\"font-family: Cambria Math;\">, </span><span style=\"font-family: Aparajita;\">मानसरोवर</span><span style=\"font-family: Cambria Math;\">, </span><span style=\"font-family: Aparajita;\">ईदगाह</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">और</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">कई</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">अन्य</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">शामिल</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">हैं।</span></p>",
+                    correct: "b",
+                    pos_marks: 2.0,
+                    neg_marks: 0.5
+                });
+                questions.push({
+                    id: "8",
+                    section: "8",
+                    question_en: "<p><span style=\"font-family: Cambria Math;\">8</span><span style=\"font-family: Cambria Math;\">.</span><span style=\"font-family: Cambria Math;\"> Who among the following is the author of the book \'Democrats and Dissenters\'?&nbsp;</span></p>",
+                    question_hi: "<p><span style=\"font-family: Cambria Math;\">8</span><span style=\"font-family: Cambria Math;\">.</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">निम्नलिखित</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">में</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">से</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">कौन</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">\'</span><span style=\"font-family: Aparajita;\">डेमोक्रेट्स</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">एंड</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">डिसेंटर्स</span><span style=\"font-family: Cambria Math;\">\' </span><span style=\"font-family: Aparajita;\">पुस्तक</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">के</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">लेखक</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">हैं</span><span style=\"font-family: Cambria Math;\">?&nbsp;</span></p>",
+                    options_en: ["<p>Arun Shourie</p>", "<p>Ramchandra Guha</p>", 
+                                "<p>Nalini Singh</p>", "<p>Gurucharan Das</p>"],
+                    options_hi: ["<p><span style=\"font-family: Aparajita;\">अरुण</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">शौरी</span></p>", "<p><span style=\"font-family: Aparajita;\">रामचंद्र</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">गुहा</span></p>",
+                                "<p><span style=\"font-family: Aparajita;\">नलिनी</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">सिंह</span></p>", "<p><span style=\"font-family: Aparajita;\">गुरुचरण</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">दास</span></p>"],
+                    solution_en: "<p><span style=\"font-family: Cambria Math;\">8</span><span style=\"font-family: Cambria Math;\">.(b)</span><span style=\"font-family: Cambria Math;\"> Ramchandra Guha has written the book \'Democrats and Dissenters</span><span style=\"font-family: Cambria Math;\">&rsquo;</span><span style=\"font-family: Cambria Math;\">. </span><span style=\"font-family: Cambria Math;\">His other major works include </span><span style=\"font-family: Cambria Math;\">&lsquo;</span><span style=\"font-family: Cambria Math;\">India after Gandhi</span><span style=\"font-family: Cambria Math;\">&rsquo;</span><span style=\"font-family: Cambria Math;\">, </span><span style=\"font-family: Cambria Math;\">&lsquo;</span><span style=\"font-family: Cambria Math;\">The Unquiet Woods</span><span style=\"font-family: Cambria Math;\">&rsquo;</span><span style=\"font-family: Cambria Math;\">, </span><span style=\"font-family: Cambria Math;\">&lsquo;</span><span style=\"font-family: Cambria Math;\">Savaging the Civilized</span><span style=\"font-family: Cambria Math;\">&rsquo;</span><span style=\"font-family: Cambria Math;\">.</span></p>",
+                    solution_hi: "<p><span style=\"font-family: Cambria Math;\">8</span><span style=\"font-family: Cambria Math;\">.(b) </span><span style=\"font-family: Aparajita;\">रामचंद्र</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">गुहा</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">ने</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">\'</span><span style=\"font-family: Aparajita;\">डेमोक्रेट्स</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">एंड</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">डिसेंटर्स</span><span style=\"font-family: Cambria Math;\">\' </span><span style=\"font-family: Aparajita;\">पुस्तक</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">लिखी</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">है।</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">उनकी</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">अन्य</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">प्रमुख</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">कृतियों</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">में</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">\'</span><span style=\"font-family: Aparajita;\">इंडिया</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">आफ्टर</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">गाँधी</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">, \'</span><span style=\"font-family: Aparajita;\">द</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">अनक्विट</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">वुड्स</span><span style=\"font-family: Cambria Math;\">\', \'</span><span style=\"font-family: Aparajita;\">सेवेजिंग</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">द</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">सिविलाइज्ड</span><span style=\"font-family: Cambria Math;\">\' </span><span style=\"font-family: Aparajita;\">शामिल</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">हैं।</span></p>",
+                    correct: "b",
+                    pos_marks: 2.0,
+                    neg_marks: 0.5
+                });
+                questions.push({
+                    id: "9",
+                    section: "8",
+                    question_en: "<p><span style=\"font-family: Cambria Math;\">9</span><span style=\"font-family: Cambria Math;\">. </span><span style=\"font-family: Cambria Math;\">Who among the following is the author of the book </span><span style=\"font-family: Cambria Math;\">&lsquo;</span><span style=\"font-family: Cambria Math;\">Interpreter of Maladies</span><span style=\"font-family: Cambria Math;\">&rsquo;</span><span style=\"font-family: Cambria Math;\">?&nbsp;</span></p>",
+                    question_hi: "<p><span style=\"font-family: Cambria Math;\">9</span><span style=\"font-family: Cambria Math;\">. </span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">निम्नलिखित</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">में</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">से</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">कौन</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">\'</span><span style=\"font-family: Aparajita;\">इंटरप्रेटर</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">ऑफ</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">मालडीज</span><span style=\"font-family: Cambria Math;\">\' </span><span style=\"font-family: Aparajita;\">पुस्तक</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">के</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">लेखक</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">हैं</span><span style=\"font-family: Cambria Math;\">?&nbsp;</span></p>",
+                    options_en: ["<p>Arundhati Roy</p>", "<p>Anita Nair</p>", 
+                                "<p>Sudha Murty</p>", "<p>Jhumpa Lahiri</p>"],
+                    options_hi: ["<p><span style=\"font-family: Aparajita;\">अरुंधति</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">रॉय</span></p>", "<p><span style=\"font-family: Aparajita;\">अनीता</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">नायर</span></p>",
+                                "<p><span style=\"font-family: Aparajita;\">सुधा</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">मूर्ति</span></p>", "<p><span style=\"font-family: Aparajita;\">झुम्पा</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">लाहिड़ी</span></p>"],
+                    solution_en: "<p><span style=\"font-family: Cambria Math;\">9</span><span style=\"font-family: Cambria Math;\">.(d) </span><span style=\"font-family: Cambria Math;\">Jhumpa Lahiri is the author of the book </span><span style=\"font-family: Cambria Math;\">&lsquo;</span><span style=\"font-family: Cambria Math;\">Interpreter of Maladies</span><span style=\"font-family: Cambria Math;\">&rsquo;</span><span style=\"font-family: Cambria Math;\">. She also wrote </span><span style=\"font-family: Cambria Math;\">&lsquo;</span><span style=\"font-family: Cambria Math;\">The Namesake</span><span style=\"font-family: Cambria Math;\">&rsquo; </span><span style=\"font-family: Cambria Math;\">(</span><span style=\"font-family: Cambria Math;\">2003</span><span style=\"font-family: Cambria Math;\">) </span><span style=\"font-family: Cambria Math;\">&lsquo;</span><span style=\"font-family: Cambria Math;\">Unaccustomed Earth</span><span style=\"font-family: Cambria Math;\">&rsquo; </span><span style=\"font-family: Cambria Math;\">(</span><span style=\"font-family: Cambria Math;\">2008</span><span style=\"font-family: Cambria Math;\">) and </span><span style=\"font-family: Cambria Math;\">&lsquo;</span><span style=\"font-family: Cambria Math;\">The Lowland</span><span style=\"font-family: Cambria Math;\">&rsquo; </span><span style=\"font-family: Cambria Math;\">(</span><span style=\"font-family: Cambria Math;\">2013</span><span style=\"font-family: Cambria Math;\">). She </span><span style=\"font-family: Cambria Math;\">won the Pulitzer Prize for Fiction.</span></p>",
+                    solution_hi: "<p><span style=\"font-family: Cambria Math;\">9</span><span style=\"font-family: Cambria Math;\">.(d)</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">झुम्पा</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">लाहिरी</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">\'</span><span style=\"font-family: Aparajita;\">इंटरप्रेटर</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">ऑफ</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">मैलाडीज</span><span style=\"font-family: Cambria Math;\">\' </span><span style=\"font-family: Aparajita;\">पुस्तक</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">की</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">लेखिका</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">हैं।</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">उन्होंने</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">\'</span><span style=\"font-family: Aparajita;\">द</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">नेमसेक</span><span style=\"font-family: Cambria Math;\">\' (</span><span style=\"font-family: Cambria Math;\">2003</span><span style=\"font-family: Cambria Math;\">) \'</span><span style=\"font-family: Aparajita;\">अनकस्टम्ड</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">अर्थ</span><span style=\"font-family: Cambria Math;\">\' (</span><span style=\"font-family: Cambria Math;\">2008</span><span style=\"font-family: Cambria Math;\">) </span><span style=\"font-family: Aparajita;\">और</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">\'</span><span style=\"font-family: Aparajita;\">द</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">लोलैंड</span><span style=\"font-family: Cambria Math;\">\' (</span><span style=\"font-family: Cambria Math;\">2013</span><span style=\"font-family: Cambria Math;\">) </span><span style=\"font-family: Aparajita;\">भी</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">लिखा।</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">उन्होंने</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">फिक्शन</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">के</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">लिए</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">पुलित्जर</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">पुरस्कार</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">जीता।</span></p>",
+                    correct: "d",
+                    pos_marks: 2.0,
+                    neg_marks: 0.5
+                });
+                questions.push({
+                    id: "10",
+                    section: "8",
+                    question_en: "<p><span style=\"font-family: Cambria Math;\">10</span><span style=\"font-family: Cambria Math;\">.</span><span style=\"font-family: Cambria Math;\"> Who wrote the book \'The Quest for Equity in Development\'?&nbsp;</span></p>",
+                    question_hi: "<p><span style=\"font-family: Cambria Math;\">10</span><span style=\"font-family: Cambria Math;\">.</span><span style=\"font-family: Cambria Math;\"> \'</span><span style=\"font-family: Aparajita;\">द</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">क्वेस्ट</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">फॉर</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">इक्विटी</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">इन</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">डेवलपमेंट</span><span style=\"font-family: Cambria Math;\">\' </span><span style=\"font-family: Aparajita;\">पुस्तक</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">किसने</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">लिखी</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">है</span><span style=\"font-family: Cambria Math;\">?&nbsp;</span></p>",
+                    options_en: ["<p>Amartya Sen</p>", "<p>Montek Singh Ahluwalia</p>", 
+                                "<p>Raghuram Rajan</p>", "<p>Manmohan Singh</p>"],
+                    options_hi: ["<p><span style=\"font-family: Aparajita;\">अमर्त्य</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">सेन</span><span style=\"font-family: Cambria Math;\"> </span></p>", "<p><span style=\"font-family: Aparajita;\">मोंटेक</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">सिंह</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">अहलूवालिया</span></p>",
+                                "<p><span style=\"font-family: Aparajita;\">रघुराम</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">राजन</span></p>", "<p><span style=\"font-family: Aparajita;\">मनमोहन</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">सिंह</span></p>"],
+                    solution_en: "<p><span style=\"font-family: Cambria Math;\">10</span><span style=\"font-family: Cambria Math;\">.(d)</span><span style=\"font-family: Cambria Math;\"> The Quest for Equity in Development was written by Manmohan Singh. He is the former Prime Minister of India. </span></p>",
+                    solution_hi: "<p><span style=\"font-family: Cambria Math;\">10</span><span style=\"font-family: Cambria Math;\">.(d)</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">द</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">क्वेस्ट</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">फॉर</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">इक्विटी</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">इन</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">डेवलपमेंट</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">मनमोहन</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">सिंह</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">द्वारा</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">लिखी</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">गई</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">थी।</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">वह</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">भारत</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">के</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">पूर्व</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">प्रधानमंत्री</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">हैं।</span></p>",
+                    correct: "d",
+                    pos_marks: 2.0,
+                    neg_marks: 0.5
+                });
+                questions.push({
+                    id: "11",
+                    section: "8",
+                    question_en: "<p><span style=\"font-family: Cambria Math;\">11</span><span style=\"font-family: Cambria Math;\">. </span><span style=\"font-family: Cambria Math;\">Who among the following wrote </span><span style=\"font-family: Cambria Math;\">&lsquo;</span><span style=\"font-family: Cambria Math;\">The Light of Asia: The Poem that Defined the Buddha</span><span style=\"font-family: Cambria Math;\">&rsquo; </span><span style=\"font-family: Cambria Math;\">that will narrate the phenomenal poem </span><span style=\"font-family: Cambria Math;\">&lsquo;</span><span style=\"font-family: Cambria Math;\">The Light of Asia</span><span style=\"font-family: Cambria Math;\">&rsquo;</span><span style=\"font-family: Cambria Math;\">?</span></p>",
+                    question_hi: "<p><span style=\"font-family: Cambria Math;\">11</span><span style=\"font-family: Cambria Math;\">. </span><span style=\"font-family: Aparajita;\">निम्नलिखित</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">में</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">से</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">किसने</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">\'</span><span style=\"font-family: Aparajita;\">द</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">लाइट</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">ऑफ</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">एशिया</span><span style=\"font-family: Cambria Math;\">: </span><span style=\"font-family: Aparajita;\">द</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">पोएम</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">दैट</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">डिफाइंड</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">द</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">बुद्धा</span><span style=\"font-family: Cambria Math;\">\' </span><span style=\"font-family: Aparajita;\">लिखी</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">जो</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">अभूतपूर्व</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">कविता</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">\'</span><span style=\"font-family: Aparajita;\">द</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">लाइट</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">ऑफ</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">एशिया</span><span style=\"font-family: Cambria Math;\">\' </span><span style=\"font-family: Aparajita;\">का</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">वर्णन</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">करेती</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">है</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">?&nbsp;</span></p>",
+                    options_en: ["<p>Shashi Tharoor</p>", "<p>Salman Rushdie</p>", 
+                                "<p>Chetan Bhagat</p>", "<p>Jairam Ramesh</p>"],
+                    options_hi: ["<p><span style=\"font-family: Aparajita;\">शशि</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">थरूर</span></p>", "<p><span style=\"font-family: Aparajita;\">सलमान</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">रुश्दी</span></p>",
+                                "<p><span style=\"font-family: Aparajita;\">चेतन</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">भगत</span></p>", "<p><span style=\"font-family: Aparajita;\">जयराम</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">रमेश</span></p>"],
+                    solution_en: "<p><span style=\"font-family: Cambria Math;\">11</span><span style=\"font-family: Cambria Math;\">.(d)</span><span style=\"font-family: Cambria Math;\"> Jairam Ramesh wrote </span><span style=\"font-family: Cambria Math;\">&lsquo;</span><span style=\"font-family: Cambria Math;\">The Light of Asia: The Poem that Defined the Buddha</span><span style=\"font-family: Cambria Math;\">&rsquo;</span><span style=\"font-family: Cambria Math;\">. It is a biblio-biography of Edwin Arnold</span><span style=\"font-family: Cambria Math;\">&rsquo;</span><span style=\"font-family: Cambria Math;\">s palpably fresh grasp of a complex philosophy and a worthy contribution to modern Buddhist studies.</span></p>",
+                    solution_hi: "<p><span style=\"font-family: Cambria Math;\">11</span><span style=\"font-family: Cambria Math;\">.(d) </span><span style=\"font-family: Aparajita;\">जयराम</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">रमेश</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">ने</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">\'</span><span style=\"font-family: Aparajita;\">द</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">लाइट</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">ऑफ</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">एशिया</span><span style=\"font-family: Cambria Math;\">: </span><span style=\"font-family: Aparajita;\">द</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">पोएम</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">द</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">डिफाइन्ड</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">द</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">बुद्धा</span><span style=\"font-family: Cambria Math;\">\' </span><span style=\"font-family: Aparajita;\">लिखा।</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">यह</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">एडविन</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">अर्नोल्ड</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">की</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">एक</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">जटिल</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">दर्शन</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">की</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">स्पष्ट</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">रूप</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">से</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">ताजा</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">समझ</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">और</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">आधुनिक</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">बौद्ध</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">अध्ययन</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">में</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">एक</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">योग्य</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">योगदान</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">की</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">ग्रंथ</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">सूची</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">है।</span></p>",
+                    correct: "d",
+                    pos_marks: 2.0,
+                    neg_marks: 0.5
+                });
+                questions.push({
+                    id: "12",
+                    section: "8",
+                    question_en: "<p><span style=\"font-family: Cambria Math;\">12</span><span style=\"font-family: Cambria Math;\">. </span><span style=\"font-family: Cambria Math;\">Who is the author of the book, \'Men in White - A Book of Cricket\'?&nbsp;</span></p>",
+                    question_hi: "<p><span style=\"font-family: Cambria Math;\">12</span><span style=\"font-family: Cambria Math;\">. </span><span style=\"font-family: Aparajita;\">मेन</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">इन</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">व्हाइट</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">- </span><span style=\"font-family: Aparajita;\">ए</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">बुक</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">ऑफ</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">क्रिकेट</span><span style=\"font-family: Cambria Math;\">\' </span><span style=\"font-family: Aparajita;\">पुस्तक</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">के</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">लेखक</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">कौन</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">हैं</span><span style=\"font-family: Cambria Math;\">?&nbsp;</span></p>",
+                    options_en: ["<p>Boria Mazumdar</p>", "<p>Mukul Kesavan</p>", 
+                                "<p>Harsha Bhogle</p>", "<p>Sanjay Manjrekar</p>"],
+                    options_hi: ["<p><span style=\"font-family: Aparajita;\">बोरिया</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">मजूमदार</span></p>", "<p><span style=\"font-family: Aparajita;\">मुकुल</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">केशवन</span></p>",
+                                "<p><span style=\"font-family: Aparajita;\">हर्षा</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">भोगले</span></p>", "<p><span style=\"font-family: Aparajita;\">संजय</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">मांजरेकर</span></p>"],
+                    solution_en: "<p><span style=\"font-family: Cambria Math;\">12</span><span style=\"font-family: Cambria Math;\">.(b) </span><span style=\"font-family: Cambria Math;\">Mukul Kesavan is the author of the book, \'Men in White - A Book of Cricket\'. </span></p>",
+                    solution_hi: "<p><span style=\"font-family: Cambria Math;\">12</span><span style=\"font-family: Cambria Math;\">.(b) </span><span style=\"font-family: Aparajita;\">मुकुल</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">केसवन</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">\'</span><span style=\"font-family: Aparajita;\">मेन</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">इन</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">व्हाइट</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">- </span><span style=\"font-family: Aparajita;\">ए</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">बुक</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">ऑफ</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">क्रिकेट</span><span style=\"font-family: Cambria Math;\">\' </span><span style=\"font-family: Aparajita;\">पुस्तक</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">के</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">लेखक</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">हैं।</span><span style=\"font-family: Cambria Math;\"> </span></p>",
+                    correct: "b",
+                    pos_marks: 2.0,
+                    neg_marks: 0.5
+                });
+                questions.push({
+                    id: "13",
+                    section: "8",
+                    question_en: "<p><span style=\"font-family: Cambria Math;\">13</span><span style=\"font-family: Cambria Math;\">. </span><span style=\"font-family: Cambria Math;\">Who among the following is the author of the book \'Inglorious Empire: What the British Did to India\'?&nbsp;</span></p>",
+                    question_hi: "<p><span style=\"font-family: Cambria Math;\">13</span><span style=\"font-family: Cambria Math;\">.</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">निम्नलिखित</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">में</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">से</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">कौन</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">\'</span><span style=\"font-family: Aparajita;\">इनग्लोरियस</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">एम्पायर</span><span style=\"font-family: Cambria Math;\">: </span><span style=\"font-family: Aparajita;\">व्हाट</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">द</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">ब्रिटिश</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">डिड</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">टू</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">इंडिया</span><span style=\"font-family: Cambria Math;\">\' </span><span style=\"font-family: Aparajita;\">पुस्तक</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">के</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">लेखक</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">हैं</span><span style=\"font-family: Cambria Math;\">?&nbsp;</span></p>",
+                    options_en: ["<p>Ramchandra Guha</p>", "<p>Shashi Tharoor</p>", 
+                                "<p>Ashwin Sanghi</p>", "<p>VS Naipaul</p>"],
+                    options_hi: ["<p><span style=\"font-family: Aparajita;\">रामचंद्र</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">गुहा</span></p>", "<p><span style=\"font-family: Aparajita;\">शशि</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">थरूर</span></p>",
+                                "<p><span style=\"font-family: Aparajita;\">अश्विन</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">सांघी</span></p>", "<p><span style=\"font-family: Aparajita;\">वी</span><span style=\"font-family: Cambria Math;\">.</span><span style=\"font-family: Aparajita;\">एस</span><span style=\"font-family: Cambria Math;\">. </span><span style=\"font-family: Aparajita;\">नायपॉल</span></p>"],
+                    solution_en: "<p><span style=\"font-family: Cambria Math;\">13</span><span style=\"font-family: Cambria Math;\">.(b)</span><span style=\"font-family: Cambria Math;\"> Shashi Tharoor is the author of the book \'Inglorious Empire: What the British Did to India</span><span style=\"font-family: Cambria Math;\">&rsquo;</span><span style=\"font-family: Cambria Math;\">. He is a senior Congress leader who has authored famous books like </span><span style=\"font-family: Cambria Math;\">&lsquo;</span><span style=\"font-family: Cambria Math;\">The great Indian novel</span><span style=\"font-family: Cambria Math;\">&rsquo;</span><span style=\"font-family: Cambria Math;\">, </span><span style=\"font-family: Cambria Math;\">&lsquo;</span><span style=\"font-family: Cambria Math;\">India : From midnight to Millennium</span><span style=\"font-family: Cambria Math;\">&rsquo;</span><span style=\"font-family: Cambria Math;\">, </span><span style=\"font-family: Cambria Math;\">&lsquo;</span><span style=\"font-family: Cambria Math;\">An Era of Darkness: The British Empire in India\' and many more. </span></p>",
+                    solution_hi: "<p><span style=\"font-family: Cambria Math;\">13</span><span style=\"font-family: Cambria Math;\">.(b)</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">शशि</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">थरूर</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">\'</span><span style=\"font-family: Aparajita;\">इनग्लोरियस</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">एम्पायर</span><span style=\"font-family: Cambria Math;\">: </span><span style=\"font-family: Aparajita;\">व्हाट</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">द</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">ब्रिटिश</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">डिड</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">टू</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">इंडिया</span><span style=\"font-family: Cambria Math;\">\' </span><span style=\"font-family: Aparajita;\">पुस्तक</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">के</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">लेखक</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">हैं।</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">वह</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">कांग्रेस</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">के</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">एक</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">वरिष्ठ</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">नेता</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">हैं</span><span style=\"font-family: Cambria Math;\">, </span><span style=\"font-family: Aparajita;\">जिन्होंने</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">\'</span><span style=\"font-family: Aparajita;\">द</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">ग्रेट</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">इंडियन</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">नॉवेल</span><span style=\"font-family: Cambria Math;\">\', \'</span><span style=\"font-family: Aparajita;\">इंडिया</span><span style=\"font-family: Cambria Math;\">: </span><span style=\"font-family: Aparajita;\">फ्रॉम</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">मिडनाइट</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">टू</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">मिलेनियम</span><span style=\"font-family: Cambria Math;\">\', \'</span><span style=\"font-family: Aparajita;\">एन</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">एरा</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">ऑफ</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">डार्कनेस</span><span style=\"font-family: Cambria Math;\">: </span><span style=\"font-family: Aparajita;\">द</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">ब्रिटिश</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">एम्पायर</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">इन</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">इंडिया</span><span style=\"font-family: Cambria Math;\">\' </span><span style=\"font-family: Aparajita;\">जैसी</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">प्रसिद्ध</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">किताबें</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">लिखी</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">हैं।</span></p>",
+                    correct: "b",
+                    pos_marks: 2.0,
+                    neg_marks: 0.5
+                });
+                questions.push({
+                    id: "14",
+                    section: "8",
+                    question_en: "<p><span style=\"font-family: Cambria Math;\">14</span><span style=\"font-family: Cambria Math;\">.</span><span style=\"font-family: Cambria Math;\"> Who among the following is the author of the book </span><span style=\"font-family: Cambria Math;\">&lsquo;</span><span style=\"font-family: Cambria Math;\">Abode of Love</span><span style=\"font-family: Cambria Math;\">&rsquo;</span><span style=\"font-family: Cambria Math;\">?&nbsp;</span></p>",
+                    question_hi: "<p><span style=\"font-family: Cambria Math;\">14</span><span style=\"font-family: Cambria Math;\">.</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">निम्नलिखित</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">में</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">से</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">कौन</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">\'</span><span style=\"font-family: Aparajita;\">एबोड</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">ऑफ</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">लव</span><span style=\"font-family: Cambria Math;\">\' </span><span style=\"font-family: Aparajita;\">पुस्तक</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">के</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">लेखक</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">हैं</span><span style=\"font-family: Cambria Math;\">?&nbsp;</span></p>",
+                    options_en: ["<p>Shankar Dayal Sharma</p>", "<p>Narendra Modi</p>", 
+                                "<p>APJ Abdul Kalam</p>", "<p>Manmohan Singh</p>"],
+                    options_hi: ["<p><span style=\"font-family: Aparajita;\">शंकर</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">दयाल</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">शर्मा</span><span style=\"font-family: Cambria Math;\"> </span></p>", "<p><span style=\"font-family: Aparajita;\">नरेंद्र</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">मोदी</span></p>",
+                                "<p><span style=\"font-family: Aparajita;\">एपीजे</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">अब्दुल</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">कलाम</span><span style=\"font-family: Cambria Math;\"> </span></p>", "<p><span style=\"font-family: Aparajita;\">मनमोहन</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">सिंह</span></p>"],
+                    solution_en: "<p><span style=\"font-family: Cambria Math;\">14</span><span style=\"font-family: Cambria Math;\">.(b)</span><span style=\"font-family: Cambria Math;\"> Narendra Modi is the author of the book Abode of Love. </span><span style=\"font-family: Cambria Math;\">Other major works of the authors are</span><span style=\"font-family: Cambria Math;\">&ndash; </span><span style=\"font-family: Cambria Math;\">Shankar Dayal Sharma (the </span><span style=\"font-family: Cambria Math;\">ninth president of India (</span><span style=\"font-family: Cambria Math;\">1992-1997</span><span style=\"font-family: Cambria Math;\">)-- </span><span style=\"font-family: Cambria Math;\">Chetna Ke Srot, Hamare Chintan ki Muladhara, Manavata ki Hamari virasat. </span><span style=\"font-family: Cambria Math;\">APJ Abdul Kalam</span><span style=\"font-family: Cambria Math;\">&ndash; </span><span style=\"font-family: Cambria Math;\">Transcendence: My Spiritual Experiences with Pramukh Swamiji (last book), Thirukkural by Thiruvalluvar (Kalam</span><span style=\"font-family: Cambria Math;\">&rsquo;</span><span style=\"font-family: Cambria Math;\">s favorite book).</span></p>",
+                    solution_hi: "<p><span style=\"font-family: Cambria Math;\">14</span><span style=\"font-family: Cambria Math;\">.(b)</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">एबोड</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">ऑफ</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">लव</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">पुस्तक</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">के</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">लेखक</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">नरेंद्र</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">मोदी</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">हैं। </span><span style=\"font-family: Aparajita;\">लेखक</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">की</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">अन्य</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">प्रमुख</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">रचना</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">हैं</span><span style=\"font-family: Cambria Math;\">- </span><span style=\"font-family: Aparajita;\">शंकर</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">दयाल</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">शर्मा</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">(</span><span style=\"font-family: Aparajita;\">भारत</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">के</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">नौवें</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">राष्ट्रपति</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">(</span><span style=\"font-family: Cambria Math;\">1992-1997</span><span style=\"font-family: Cambria Math;\">) - </span><span style=\"font-family: Aparajita;\">चेतना</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">के</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">स्रोत</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">, </span><span style=\"font-family: Aparajita;\">हमरे</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">चिंतन</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">की</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">मुलधारा</span><span style=\"font-family: Cambria Math;\">, </span><span style=\"font-family: Aparajita;\">मानवता</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">की</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">हमारी</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">विरासत। </span><span style=\"font-family: Aparajita;\">एपीजे</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">अब्दुल</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">कलाम</span><span style=\"font-family: Cambria Math;\">- </span><span style=\"font-family: Aparajita;\">आरोहण</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">: </span><span style=\"font-family: Aparajita;\">प्रमुख</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">स्वामीजी</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">के</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">साथ</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">मेरा</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">आध्यात्मिक</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">सफर</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">(</span><span style=\"font-family: Aparajita;\">अंतिम</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">पुस्तक</span><span style=\"font-family: Cambria Math;\">), </span><span style=\"font-family: Aparajita;\">तिरुवल्लुवर</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">(</span><span style=\"font-family: Aparajita;\">कलाम</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">की</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">पसंदीदा</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">पुस्तक</span><span style=\"font-family: Cambria Math;\">) </span><span style=\"font-family: Aparajita;\">द्वारा</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">थिरुकुरल</span><span style=\"font-family: Cambria Math;\"> </span></p>",
+                    correct: "b",
+                    pos_marks: 2.0,
+                    neg_marks: 0.5
+                });
+                questions.push({
+                    id: "15",
+                    section: "8",
+                    question_en: "<p><span style=\"font-family: Cambria Math;\">15</span><span style=\"font-family: Cambria Math;\">. </span><span style=\"font-family: Cambria Math;\">Who is the author of the book, \'Walking with the Comrades\'?&nbsp;</span></p>",
+                    question_hi: "<p><span style=\"font-family: Cambria Math;\">15</span><span style=\"font-family: Cambria Math;\">. </span><span style=\"font-family: Cambria Math;\">\'</span><span style=\"font-family: Aparajita;\">वॉकिंग</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">विद</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">द</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">कॉमरेड्स</span><span style=\"font-family: Cambria Math;\">\' </span><span style=\"font-family: Aparajita;\">पुस्तक</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">के</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">लेखक</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">कौन</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">हैं</span><span style=\"font-family: Cambria Math;\">?&nbsp;</span></p>",
+                    options_en: ["<p>Pupul Jayakar</p>", "<p>Prakash Karat</p>", 
+                                "<p>Sitaram Yechury</p>", "<p>Arundhati Roy</p>"],
+                    options_hi: ["<p><span style=\"font-family: Aparajita;\">पुपुल</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">जयकर</span></p>", "<p><span style=\"font-family: Aparajita;\">प्रकाश</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">करात</span></p>",
+                                "<p><span style=\"font-family: Aparajita;\">सीताराम</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">येचुरी</span></p>", "<p><span style=\"font-family: Aparajita;\">अरुंधति</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">रॉय</span></p>"],
+                    solution_en: "<p><span style=\"font-family: Cambria Math;\">15</span><span style=\"font-family: Cambria Math;\">.(d)</span><span style=\"font-family: Cambria Math;\"> \'Walking with the Comrades\' is an eyewitness account of the Naxal-Maoist insurgency by Indian author Arundhati Roy. The book covers her time in </span><span style=\"font-family: Cambria Math;\">2010 </span><span style=\"font-family: Cambria Math;\">spent living with Naxalite communist guerillas deep within the forests of rural Chhattisgarh.</span></p>",
+                    solution_hi: "<p><span style=\"font-family: Cambria Math;\">1</span><span style=\"font-family: Cambria Math;\">5</span><span style=\"font-family: Cambria Math;\">.(d)</span><span style=\"font-family: Cambria Math;\"> \'</span><span style=\"font-family: Aparajita;\">वॉकिंग</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">विद</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">द</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">कॉमरेड्स</span><span style=\"font-family: Cambria Math;\">\' </span><span style=\"font-family: Aparajita;\">भारतीय</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">लेखक</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">अरुंधति</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">रॉय</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">द्वारा</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">नक्सल</span><span style=\"font-family: Cambria Math;\">-</span><span style=\"font-family: Aparajita;\">माओवादी</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">विद्रोह</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">का</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">एक</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">चश्मदीद</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">गवाह</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">है।</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">इस</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">पुस्तक</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">में</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">उनके</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">द्वारा</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">2010 </span><span style=\"font-family: Aparajita;\">में</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">ग्रामीण</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">छत्तीसगढ़</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">के</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">जंगलों</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">के</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">भीतर</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">नक्सली</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">कम्युनिस्ट</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">छापामारों</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">के</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">साथ</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">रहने</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">में</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">बिताए</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">गए</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">समय</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">को</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">शामिल</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">किया</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">गया</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">है।</span></p>",
+                    correct: "d",
+                    pos_marks: 2.0,
+                    neg_marks: 0.5
+                });
+                questions.push({
+                    id: "16",
+                    section: "8",
+                    question_en: "<p><span style=\"font-family: Cambria Math;\">16</span><span style=\"font-family: Cambria Math;\">. I</span><span style=\"font-family: Cambria Math;\">dentify the author of the book \'The English Teacher\'.&nbsp;</span></p>",
+                    question_hi: "<p><span style=\"font-family: Cambria Math;\">16</span><span style=\"font-family: Cambria Math;\">.</span><span style=\"font-family: Cambria Math;\"> \'</span><span style=\"font-family: Aparajita;\">द</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">इंग्लिश</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">टीचर</span><span style=\"font-family: Cambria Math;\">\' </span><span style=\"font-family: Aparajita;\">पुस्तक</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">के</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">लेखक</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">कौन</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">है</span><span style=\"font-family: Cambria Math;\">?&nbsp;</span></p>",
+                    options_en: ["<p>Salman Rushdie</p>", "<p>Vikram Seth</p>", 
+                                "<p>RK Narayan</p>", "<p>Khushwant Singh</p>"],
+                    options_hi: ["<p><span style=\"font-family: Aparajita;\">सलमान</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">रुश्दी</span></p>", "<p><span style=\"font-family: Aparajita;\">विक्रम</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">सेठ</span></p>",
+                                "<p><span style=\"font-family: Aparajita;\">आरके</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">नारायण</span></p>", "<p><span style=\"font-family: Aparajita;\">खुशवंत</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">सिंह</span></p>"],
+                    solution_en: "<p><span style=\"font-family: Cambria Math;\">16</span><span style=\"font-family: Cambria Math;\">.(c) </span><span style=\"font-family: Cambria Math;\">The author of the book \'The English Teacher</span><span style=\"font-family: Cambria Math;\">&rsquo; </span><span style=\"font-family: Cambria Math;\">is RK Narayan. Salman Rushdie (The Satanic Verses, Quichotte), Vikram Seth (Mappings, Beastly Tales), Khushwant Singh (Train to Pakistan, A History of the Sikh). </span></p>",
+                    solution_hi: "<p><span style=\"font-family: Cambria Math;\">16</span><span style=\"font-family: Cambria Math;\">.(c)</span><span style=\"font-family: Cambria Math;\"> \'</span><span style=\"font-family: Aparajita;\">द</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">इंग्लिश</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">टीचर</span><span style=\"font-family: Cambria Math;\">\' </span><span style=\"font-family: Aparajita;\">पुस्तक</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">के</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">लेखक</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">आर</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">के</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">नारायण</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">हैं।</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">सलमान</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">रुश्दी</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">(</span><span style=\"font-family: Aparajita;\">द</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">सैटेनिक</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">वर्सेज</span><span style=\"font-family: Cambria Math;\">, </span><span style=\"font-family: Aparajita;\">क्विचोटे</span><span style=\"font-family: Cambria Math;\">), </span><span style=\"font-family: Aparajita;\">विक्रम</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">सेठ</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">(</span><span style=\"font-family: Aparajita;\">मैपिंग</span><span style=\"font-family: Cambria Math;\">, </span><span style=\"font-family: Aparajita;\">बीस्टली</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">टेल्स</span><span style=\"font-family: Cambria Math;\">), </span><span style=\"font-family: Aparajita;\">खुशवंत</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">सिंह</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">(</span><span style=\"font-family: Aparajita;\">ट्रेन</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">टू</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">पाकिस्तान</span><span style=\"font-family: Cambria Math;\">, </span><span style=\"font-family: Aparajita;\">ए</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">हिस्ट्री</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">ऑफ</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">द</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">सिख</span><span style=\"font-family: Cambria Math;\">)</span></p>",
+                    correct: "c",
+                    pos_marks: 2.0,
+                    neg_marks: 0.5
+                });
+                questions.push({
+                    id: "17",
+                    section: "8",
+                    question_en: "<p><span style=\"font-family: Cambria Math;\">17</span><span style=\"font-family: Cambria Math;\">.</span><span style=\"font-family: Cambria Math;\"> Who among the following wrote the novel </span><span style=\"font-family: Cambria Math;\">&lsquo;</span><span style=\"font-family: Cambria Math;\">Gora</span><span style=\"font-family: Cambria Math;\">&rsquo;</span><span style=\"font-family: Cambria Math;\">?&nbsp;</span></p>",
+                    question_hi: "<p><span style=\"font-family: Cambria Math;\">17</span><span style=\"font-family: Cambria Math;\">.</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">निम्नलिखित</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">में</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">से</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">किसने</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">\'</span><span style=\"font-family: Aparajita;\">गोरा</span><span style=\"font-family: Cambria Math;\">\' </span><span style=\"font-family: Aparajita;\">उपन्यास</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">लिखा</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">था</span><span style=\"font-family: Cambria Math;\">?&nbsp;</span></p>",
+                    options_en: ["<p>Rabindranath Tagore</p>", "<p>Premchand</p>", 
+                                "<p>Mahatma Gandhi</p>", "<p>Abanindranath Tagore</p>"],
+                    options_hi: ["<p><span style=\"font-family: Aparajita;\">रवींद्रनाथ</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">टैगोर</span></p>", "<p><span style=\"font-family: Aparajita;\">प्रेमचंद</span></p>",
+                                "<p><span style=\"font-family: Aparajita;\">महात्मा</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">गांधी</span></p>", "<p><span style=\"font-family: Aparajita;\">अबनिंद्रनाथ</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">टैगोर</span></p>"],
+                    solution_en: "<p><span style=\"font-family: Cambria Math;\">17</span><span style=\"font-family: Cambria Math;\">.(a)</span><span style=\"font-family: Cambria Math;\"> Rabindranath Tagore wrote the novel, Gora. </span><span style=\"font-family: Cambria Math;\">He was an Indian playwright, poet, philosopher, social reformer, and painter. He was the first non-european to win the nobel prize in literature for his book Gitanjali in </span><span style=\"font-family: Cambria Math;\">1913</span><span style=\"font-family: Cambria Math;\">. Some of his other works are Ghare-Baire, Jana Gana Mana, Rabindra Sangeet, and Amar Shonar Bangla.</span></p>",
+                    solution_hi: "<p><span style=\"font-family: Cambria Math;\">17</span><span style=\"font-family: Cambria Math;\">.(a) </span><span style=\"font-family: Aparajita;\">रवींद्रनाथ</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">टैगोर</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">ने</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">उपन्यास</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">गोरा</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">लिखा</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">था।</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">वह</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">एक</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">भारतीय</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">नाटककार</span><span style=\"font-family: Cambria Math;\">, </span><span style=\"font-family: Aparajita;\">कवि</span><span style=\"font-family: Cambria Math;\">, </span><span style=\"font-family: Aparajita;\">दार्शनिक</span><span style=\"font-family: Cambria Math;\">, </span><span style=\"font-family: Aparajita;\">समाज</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">सुधारक</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">और</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">चित्रकार</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">थे।</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">वह</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">1913 </span><span style=\"font-family: Aparajita;\">में</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">अपनी</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">पुस्तक</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">गीतांजलि</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">के</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">लिए</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">साहित्य</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">में</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">महान</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">पुरस्कार</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">जीतने</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">वाले</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">पहले</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">गैर</span><span style=\"font-family: Cambria Math;\">-</span><span style=\"font-family: Aparajita;\">यूरोपीय</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">थे।</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">उनकी</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">कुछ</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">अन्य</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">रचनाएँ</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">घरे</span><span style=\"font-family: Cambria Math;\">-</span><span style=\"font-family: Aparajita;\">बाइरे</span><span style=\"font-family: Cambria Math;\">, </span><span style=\"font-family: Aparajita;\">जन</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">गण</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">मन</span><span style=\"font-family: Cambria Math;\">, </span><span style=\"font-family: Aparajita;\">रवींद्र</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">संगीत</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">और</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">अमर</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">शोनार</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">बांग्ला</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">हैं।</span></p>",
+                    correct: "a",
+                    pos_marks: 2.0,
+                    neg_marks: 0.5
+                });
+                questions.push({
+                    id: "18",
+                    section: "8",
+                    question_en: "<p><span style=\"font-family: Cambria Math;\">18</span><span style=\"font-family: Cambria Math;\">. </span><span style=\"font-family: Cambria Math;\">Who is the author of the book \'Ethical Religion\'?&nbsp;</span></p>",
+                    question_hi: "<p><span style=\"font-family: Cambria Math;\">18</span><span style=\"font-family: Cambria Math;\">.</span><span style=\"font-family: Cambria Math;\"> \'</span><span style=\"font-family: Aparajita;\">एथिकल</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">रिलिजन</span><span style=\"font-family: Cambria Math;\">\' </span><span style=\"font-family: Aparajita;\">पुस्तक</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">के</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">लेखक</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">कौन</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">हैं</span><span style=\"font-family: Cambria Math;\">?&nbsp;</span></p>",
+                    options_en: ["<p>Bipan Chandra</p>", "<p>Vinoba Bhave</p>", 
+                                "<p>Swami Vivekananda</p>", "<p>Mahatma Gandhi</p>"],
+                    options_hi: ["<p><span style=\"font-family: Aparajita;\">बिपन</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">चंद्र</span></p>", "<p><span style=\"font-family: Aparajita;\">विनोबा</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">भावे</span></p>",
+                                "<p><span style=\"font-family: Aparajita;\">स्वामी</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">विवेकानंद</span></p>", "<p><span style=\"font-family: Aparajita;\">महात्मा</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">गांधी</span></p>"],
+                    solution_en: "<p><span style=\"font-family: Cambria Math;\">18</span><span style=\"font-family: Cambria Math;\">.(d)</span><span style=\"font-family: Cambria Math;\"> Mahatma Gandhi (</span><span style=\"font-family: Cambria Math;\">Mohandas Karamchand Gandhi</span><span style=\"font-family: Cambria Math;\">) is the author of the book \'Ethical Religion\'. </span></p>",
+                    solution_hi: "<p><span style=\"font-family: Cambria Math;\">18</span><span style=\"font-family: Cambria Math;\">.(d)</span><span style=\"font-family: Cambria Math;\"> \'</span><span style=\"font-family: Aparajita;\">एथिकल</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">रिलिजन</span><span style=\"font-family: Cambria Math;\">\' </span><span style=\"font-family: Aparajita;\">पुस्तक</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">के</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">लेखक</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">महात्मा</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">गांधी</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">(</span><span style=\"font-family: Aparajita;\">मोहनदास</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">करमचंद</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">गांधी</span><span style=\"font-family: Cambria Math;\">) </span><span style=\"font-family: Aparajita;\">हैं।</span></p>",
+                    correct: "d",
+                    pos_marks: 2.0,
+                    neg_marks: 0.5
+                });
+                questions.push({
+                    id: "19",
+                    section: "8",
+                    question_en: "<p><span style=\"font-family: Cambria Math;\">19</span><span style=\"font-family: Cambria Math;\">.</span><span style=\"font-family: Cambria Math;\"> Who among the following is one of the authors of </span><span style=\"font-family: Cambria Math;\">&lsquo;</span><span style=\"font-family: Cambria Math;\">The Hitman: The Rohit Sharma Story</span><span style=\"font-family: Cambria Math;\">&rsquo;</span><span style=\"font-family: Cambria Math;\">?&nbsp;</span></p>",
+                    question_hi: "<p><span style=\"font-family: Cambria Math;\">19</span><span style=\"font-family: Cambria Math;\">.</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">निम्नलिखित</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">में</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">से</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">कौन</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">\'</span><span style=\"font-family: Aparajita;\">द</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">हिटमैन</span><span style=\"font-family: Cambria Math;\">: </span><span style=\"font-family: Aparajita;\">द</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">रोहित</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">शर्मा</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">स्टोरी</span><span style=\"font-family: Cambria Math;\">\' </span><span style=\"font-family: Aparajita;\">के</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">लेखकों</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">में</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">से</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">एक</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">है</span><span style=\"font-family: Cambria Math;\">?&nbsp;</span></p>",
+                    options_en: ["<p>G Krishnan <span style=\"font-family: Cambria Math;\">&nbsp;</span></p>", "<p><span style=\"font-family: Cambria Math;\">S Hareesh</span></p>", 
+                                "<p>Sanjana Desai&nbsp;</p>", "<p>Anupam Kher</p>"],
+                    options_hi: ["<p><span style=\"font-family: Aparajita;\">जी</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">कृष्णन</span></p>", "<p><span style=\"font-family: Aparajita;\">एस</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">हरीश</span></p>",
+                                "<p><span style=\"font-family: Aparajita;\">संजना</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">देसाई</span></p>", "<p><span style=\"font-family: Aparajita;\">अनुपम</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">खेर</span></p>"],
+                    solution_en: "<p><span style=\"font-family: Cambria Math;\">19</span><span style=\"font-family: Cambria Math;\">.(a) </span><span style=\"font-family: Cambria Math;\">G Krishnan is one of the authors of </span><span style=\"font-family: Cambria Math;\">&lsquo;</span><span style=\"font-family: Cambria Math;\">The Hitman: The Rohit Sharma Story</span><span style=\"font-family: Cambria Math;\">&rsquo;</span><span style=\"font-family: Cambria Math;\">. He authored the book along with Vijay Lokapally and they are well known sports journalists. </span></p>",
+                    solution_hi: "<p><span style=\"font-family: Cambria Math;\">19</span><span style=\"font-family: Cambria Math;\">.(a) </span><span style=\"font-family: Aparajita;\">जी</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">कृष्णन</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">\'</span><span style=\"font-family: Aparajita;\">द</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">हिटमैन</span><span style=\"font-family: Cambria Math;\">: </span><span style=\"font-family: Aparajita;\">द</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">रोहित</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">शर्मा</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">स्टोरी</span><span style=\"font-family: Cambria Math;\">\' </span><span style=\"font-family: Aparajita;\">के</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">लेखकों</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">में</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">से</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">एक</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">हैं।</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">उन्होंने</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">विजय</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">लोकपल्ली</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">के</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">साथ</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">पुस्तक</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">लिखी</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">और</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">वे</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">प्रसिद्ध</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">खेल</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">पत्रकार</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">हैं।</span></p>",
+                    correct: "a",
+                    pos_marks: 2.0,
+                    neg_marks: 0.5
+                });
+                questions.push({
+                    id: "20",
+                    section: "misc",
+                    question_en: "<p><span style=\"font-family: Cambria Math;\">20</span><span style=\"font-family: Cambria Math;\">. </span><span style=\"font-family: Cambria Math;\">Who authored the book </span><span style=\"font-family: Cambria Math;\">&lsquo;</span><span style=\"font-family: Cambria Math;\">Reporting India: My Seventy-Year Journey as a Journalist</span><span style=\"font-family: Cambria Math;\">&rsquo;</span><span style=\"font-family: Cambria Math;\">?&nbsp;</span></p>",
+                    question_hi: "<p><span style=\"font-family: Cambria Math;\">20</span><span style=\"font-family: Cambria Math;\">.</span><span style=\"font-family: Cambria Math;\"> \'</span><span style=\"font-family: Aparajita;\">रिपोर्टिंग</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">इंडिया</span><span style=\"font-family: Cambria Math;\">: </span><span style=\"font-family: Aparajita;\">माई</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">सेवेंटी</span><span style=\"font-family: Cambria Math;\">-</span><span style=\"font-family: Aparajita;\">ईयर</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">जर्नी</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">एज़</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">ए</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">जर्नलिस्ट</span><span style=\"font-family: Cambria Math;\">\' </span><span style=\"font-family: Aparajita;\">पुस्तक</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">किसने</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">लिखी</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">है</span><span style=\"font-family: Cambria Math;\">?&nbsp;</span></p>",
+                    options_en: ["<p>Khushwant Singh</p>", "<p>Anjan Sundaram</p>", 
+                                "<p>Chetan Bhagat</p>", "<p>Prem Prakash</p>"],
+                    options_hi: ["<p><span style=\"font-family: Aparajita;\">खुशवंत</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">सिंह</span></p>", "<p><span style=\"font-family: Aparajita;\">अंजन</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">सुंदरम</span></p>",
+                                "<p><span style=\"font-family: Aparajita;\">चेतन</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">भगत</span></p>", "<p><span style=\"font-family: Aparajita;\">प्रेम</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">प्रकाश</span></p>"],
+                    solution_en: "<p><span style=\"font-family: Cambria Math;\">20</span><span style=\"font-family: Cambria Math;\">.(d)</span>&nbsp;Prem Prakash authored the book &lsquo;Reporting India: My Seventy-Year Journey as a Journalist&rsquo;.</p>\n<p>&nbsp;</p>",
+                    solution_hi: "<p><span style=\"font-family: Cambria Math;\">20</span><span style=\"font-family: Cambria Math;\">.(d)</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">प्रेम</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">प्रकाश</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">ने</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">\'</span><span style=\"font-family: Aparajita;\">रिपोर्टिंग</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">इंडिया</span><span style=\"font-family: Cambria Math;\">: </span><span style=\"font-family: Aparajita;\">माई</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">सेवेंटी</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">- </span><span style=\"font-family: Aparajita;\">ईयर</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">जर्नी</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">ऐज़</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">ए</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">जर्नलिस्ट</span><span style=\"font-family: Cambria Math;\">\' </span><span style=\"font-family: Aparajita;\">पुस्तक</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">लिखी</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Aparajita;\">है।</span><span style=\"font-family: Aparajita;\"><span style=\"font-family: Cambria Math;\">x</span></span></p>",
+                    correct: "d",
+                    pos_marks: 2.0,
+                    neg_marks: 0.5
+                });
+            
+            // Generate question boxes
+            const boxesContainer = document.getElementById('question-boxes');
+            questions.forEach((q, index) => {
+                const box = document.createElement('div');
+                box.className = 'q-box';
+                box.textContent = index + 1;
+                box.onclick = () => showQuestion(index);
+                box.id = `box-${index}`;
+                boxesContainer.appendChild(box);
+            });
+            
+            // Show first question
+            showQuestion(0);
+            updateProgress();
+        }
+        
+        // Show a specific question
+        
+        function formatContent(text) {
+            if (!text) return '';
+            return text.replace(/<img/g, '<img style="max-width:100%;height:auto;"');
+        }
+        
+        function showQuestion(index) {
+            if (index < 0 || index >= questions.length) return;
+            
+            currentQuestion = index;
+            const question = questions[index];
+            
+            // Update question counter
+            document.getElementById('question-counter').textContent = `Question ${index + 1} of ${questions.length}`;
+            
+            // Update question boxes
+            document.querySelectorAll('.q-box').forEach(box => box.classList.remove('current'));
+            document.getElementById(`box-${index}`).classList.add('current');
+            
+            // Generate question HTML
+            let html = `
+                <div class="question-card">
+                    <div class="question-text">
+                        <div class="en">${formatContent(question.question_en)}</div>
+                        <div class="hi" style="display:none">${formatContent(question.question_hi)} </div>
+                    </div>
+                    <div class="options" id="options-container">`;
+            
+            // Add options
+            ['a', 'b', 'c', 'd'].forEach((opt, i) => {
+                let optionClass = '';
+                let isCorrectAnswer = opt === question.correct;
+                let isUserAnswer = answers[question.id] === opt;
+                
+                // When reviewing, add appropriate classes
+                if (submitted) {
+                    if (isCorrectAnswer) {
+                        optionClass += ' correct-answer';
+                    } else if (isUserAnswer && !isCorrectAnswer) {
+                        optionClass += ' incorrect';
+                    }
+                }
+                
+                html += `
+                    <div class="option-item">
+                        <input class="option-input" type="radio" name="q${index}" 
+                            id="opt-${index}-${opt}" value="${opt}" 
+                            ${isUserAnswer ? 'checked' : ''}
+                            onclick="selectAnswer('${question.id}', '${opt}')">
+                       <label class="option-label${optionClass}" for="opt-${index}-${opt}">
+                            <div class="en">${question.options_en[i]}</div>
+                            <div class="hi" style="display:none">${question.options_hi[i]}</div>
+                        </label>
+                    </div>`;
+            });
+            
+            // Add solution if submitted
+            if (submitted) {
+                const isCorrect = answers[question.id] === question.correct;
+                const resultText = answers[question.id] ? (isCorrect ? 'Correct!' : 'Incorrect!') : 'Not attempted';
+                
+                html += `
+                    <div class="solution-container">
+                        <div class="solution-title">${resultText}</div>
+                        <div class="solution-text">
+                            <div class="en">${question.solution_en}</div>
+                            <div class="hi" style="display:none">${question.solution_hi}</div>
+                        </div>
+                    </div>`;
+            }
+            
+            html += `</div></div>`;
+            
+            document.getElementById('questions-container').innerHTML = html;
+            
+            // Apply language settings
+            applyLanguage();
+            
+            // If in mobile view, close the menu
+            if (window.innerWidth < 992) {
+                toggleNav(false);
+            }
+            
+            // Add review mode class if submitted
+            if (submitted) {
+                document.getElementById('options-container').classList.add('review-mode');
+            }
+        }
+        
+        // Apply current language
+        function applyLanguage() {
+            document.querySelectorAll(`.${currentLang}`).forEach(el => el.style.display = 'block');
+            document.querySelectorAll(`.${currentLang === 'en' ? 'hi' : 'en'}`).forEach(el => el.style.display = 'none');
+            
+            // Update language button text
+            document.getElementById('lang-text').textContent = currentLang === 'en' ? 'Hi' : 'En';
+        }
+        
+        // Select an answer
+        function selectAnswer(qId, option) {
+            if (submitted) return;
+            
+            answers[qId] = option;
+            updateProgress();
+            
+            // Mark question as attempted in the navigation
+            const index = questions.findIndex(q => q.id === qId);
+            if (index >= 0) {
+                const box = document.getElementById(`box-${index}`);
+                box.classList.add('attempted');
+                box.classList.remove('unattempted');
+            }
+        }
+        
+        // Navigate to previous/next question
+        function prevQuestion() { 
+            if (currentQuestion > 0) showQuestion(currentQuestion - 1); 
+        }
+        
+        function nextQuestion() { 
+            if (currentQuestion < questions.length - 1) showQuestion(currentQuestion + 1); 
+        }
+        
+        // Switch section
+        function switchSection(sectionId) {
+            if (sectionId === 'all') {
+                showQuestion(0);
+                return;
+            }
+            
+            const section = sections[sectionId];
+            if (section) showQuestion(section.start);
+        }
+        
+        // Toggle language
+        function toggleLanguage() {
+            currentLang = currentLang === 'en' ? 'hi' : 'en';
+            applyLanguage();
+        }
+        
+        // Toggle navigation sidebar
+        function toggleNav(show) {
+            const nav = document.getElementById('question-nav');
+            const overlay = document.getElementById('nav-overlay');
+            
+            if (show === undefined) {
+                show = !nav.classList.contains('show');
+            }
+            
+            if (show) {
+                nav.classList.add('show');
+                overlay.classList.add('show');
+                document.body.style.overflow = 'hidden';
+            } else {
+                nav.classList.remove('show');
+                overlay.classList.remove('show');
+                document.body.style.overflow = '';
+            }
+        }
+        
+        // Update progress
+        function updateProgress() {
+            const attempted = Object.keys(answers).length;
+            document.getElementById('attempted-count').textContent = attempted;
+        }
+        
+        // Start timer
+        function startTimer() {
+            const timerDisplay = document.getElementById('timer-display');
+            let timeLeft = totalTime;
+            
+            const timerInterval = setInterval(() => {
+                if (timeLeft <= 0 || submitted) {
+                    clearInterval(timerInterval);
+                    if (!submitted) submitTest();
+                    return;
+                }
+                
+                const minutes = Math.floor(timeLeft / 60);
+                const seconds = timeLeft % 60;
+                timerDisplay.textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`;
+                timeLeft--;
+            }, 1000);
+        }
+        
+        // Confirm before submitting
+        function confirmSubmit() {
+            if (submitted) return;
+            
+            const attempted = Object.keys(answers).length;
+            const remaining = questions.length - attempted;
+            
+            // Create a more modern confirmation dialog
+            const confirmHtml = `
+                <div style="text-align: center; padding: 20px;">
+                    <h4 style="margin-bottom: 16px; color: var(--dark);">Confirm Submission</h4>
+                    <p style="margin-bottom: 24px; color: var(--gray);">
+                        You have attempted ${attempted} of ${questions.length} questions.<br>
+                        ${remaining} questions are unattempted.
+                    </p>
+                    <div style="display: flex; justify-content: center; gap: 12px;">
+                        <button onclick="this.closest('.modal').querySelector('.cancel-btn').click()" 
+                            style="padding: 8px 20px; border: 1px solid var(--light-gray); background: white; border-radius: 8px; cursor: pointer;">
+                            Cancel
+                        </button>
+                        <button onclick="submitTest(); this.closest('.modal').querySelector('.cancel-btn').click()" 
+                            style="padding: 8px 20px; background: var(--primary); color: white; border: none; border-radius: 8px; cursor: pointer;">
+                            Submit Test
+                        </button>
+                    </div>
+                </div>`;
+            
+            // Create modal element
+            const modal = document.createElement('div');
+            modal.className = 'results-modal show';
+            modal.innerHTML = `
+                <div class="results-card" style="max-width: 400px;">
+                    <button class="cancel-btn" style="position: absolute; top: 12px; right: 12px; background: none; border: none; font-size: 1.2rem; cursor: pointer; color: var(--gray);" onclick="this.closest('.results-modal').remove()">
+                        ×
+                    </button>
+                    ${confirmHtml}
+                </div>`;
+            
+            document.body.appendChild(modal);
+        }
+        
+        // Submit test
+        function submitTest() {
+            if (submitted) return;
+            
+            submitted = true;
+            
+            let score = 0;
+            let correctCount = 0;
+            let incorrectCount = 0;
+            let unattemptedCount = 0;
+            
+            questions.forEach((q, index) => {
+                const userAns = answers[q.id];
+                const box = document.getElementById(`box-${index}`);
+                
+                box.classList.remove('attempted');
+                
+                if (!userAns) {
+                    unattemptedCount++;
+                    box.classList.add('unattempted');
+                } else if (userAns === q.correct) {
+                    correctCount++;
+                    score += q.pos_marks;
+                    box.classList.add('correct');
+                } else {
+                    incorrectCount++;
+                    score -= q.neg_marks;
+                    box.classList.add('incorrect');
+                }
+            });
+            
+            // Update result values
+            document.getElementById('score-value').textContent = score.toFixed(2);
+            document.getElementById('correct-value').textContent = correctCount;
+            document.getElementById('incorrect-value').textContent = incorrectCount;
+            document.getElementById('unattempted-value').textContent = unattemptedCount;
+            
+            // Show the results modal
+            document.getElementById('results-modal').classList.add('show');
+            
+            // Disable submit button
+            const submitBtn = document.getElementById('submit-btn');
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<i class="fas fa-check"></i>';
+            submitBtn.style.backgroundColor = 'var(--success)';
+            
+            // Refresh current question view to show solution
+            showQuestion(currentQuestion);
+        }
+        
+        // Review test
+        function reviewTest() {
+            document.getElementById('results-modal').classList.remove('show');
+            showQuestion(0);
+        }
+        
+        // Close modal when clicking outside
+        window.addEventListener('click', function(event) {
+            if (event.target === document.getElementById('results-modal')) {
+                document.getElementById('results-modal').classList.remove('show');
+            }
+        });
+        
+        // Keyboard navigation
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowLeft') prevQuestion();
+            if (e.key === 'ArrowRight') nextQuestion();
+        });
+    </script>
+</body>
+</html>

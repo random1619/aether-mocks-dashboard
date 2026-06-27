@@ -1,0 +1,1469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aether Mocks</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
+
+        :root {
+            --primary: #6366f1;
+            --primary-light: #818cf8;
+            --primary-dark: #4f46e5;
+            --secondary: #8b5cf6;
+            --accent: #ec4899;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --light: #1e293b;
+            --dark: #0f172a;
+            --gray: #64748b;
+            --light-gray: rgba(255, 255, 255, 0.08);
+            --card-bg: rgba(255, 255, 255, 0.03);
+            --body-bg: #030712;
+            --header-bg: rgba(15, 23, 42, 0.6);
+            --footer-bg: rgba(15, 23, 42, 0.8);
+            --box-shadow: 0 8px 32px 0 rgba(0,0,0,0.3);
+            --box-shadow-sm: 0 4px 16px rgba(0,0,0,0.2);
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Outfit', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        body {
+            background-color: var(--body-bg);
+            color: #f8fafc;
+            line-height: 1.6;
+            padding-bottom: 80px; /* Space for fixed navigation */
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(99, 102, 241, 0.15) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(139, 92, 246, 0.15) 0px, transparent 50%);
+            background-attachment: fixed;
+        }
+        
+        /* Header Styles */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 60px;
+            background: var(--header-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            color: #f8fafc;
+            display: flex;
+            align-items: center;
+            padding: 0 16px;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+            box-shadow: var(--box-shadow-sm);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+        }
+        
+        .header-brand {
+            display: flex;
+            align-items: center;
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: #f8fafc;
+            text-decoration: none;
+            gap: 8px;
+        }
+        
+        .header-brand i {
+            font-size: 1.2rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .header-controls {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .control-btn {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.08);
+            color: #f8fafc;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .control-btn:hover {
+            background: rgba(255,255,255,0.12);
+            border-color: rgba(255,255,255,0.2);
+            transform: translateY(-1px);
+        }
+        
+        .control-btn.active {
+            background: var(--primary);
+            border-color: var(--primary-light);
+        }
+        
+        .timer-display {
+            background: rgba(0,0,0,0.3);
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 18px;
+            padding: 4px 12px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            white-space: nowrap;
+            color: #f8fafc;
+        }
+        
+        .timer-display i {
+            margin-right: 6px;
+            color: var(--accent);
+        }
+        
+        /* Main Content */
+        .main-content {
+            margin-top: 60px;
+            padding: 16px;
+            min-height: calc(100vh - 140px);
+        }
+        
+        .question-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(8px);
+            border: 1px solid var(--light-gray);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 16px;
+            box-shadow: var(--box-shadow-sm);
+            transition: var(--transition);
+        }
+        
+        .question-counter {
+            font-size: 0.9rem;
+            color: var(--gray);
+            text-align: center;
+            margin-bottom: 16px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+        
+        .question-text {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 24px;
+            color: #f8fafc;
+            overflow-wrap: break-word;
+            word-wrap: break-word;
+            hyphens: auto;
+            max-width: 100%;
+        }
+        
+        .option-item {
+            margin-bottom: 12px;
+            position: relative;
+        }
+        
+        .option-input {
+            position: absolute;
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        
+        .question-text img,
+        .option-label img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 8px 0;
+            border-radius: 8px;
+        }
+        
+        .option-label {
+            display: block;
+            padding: 14px 16px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            color: #f8fafc;
+        }
+        
+        .option-label:hover {
+            border-color: rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.05);
+            transform: translateY(-2px);
+            box-shadow: var(--box-shadow-sm);
+        }
+        
+        .option-input:checked + .option-label {
+            border-color: var(--primary);
+            background: rgba(99, 102, 241, 0.08);
+            box-shadow: 0 0 12px var(--primary-glow);
+        }
+        
+        .option-input:checked + .option-label::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 3px;
+            height: 100%;
+            background: var(--primary);
+        }
+        
+        /* When reviewing answers */
+        .review-mode .option-input:checked + .option-label.correct {
+            border-color: var(--success);
+            background: rgba(16, 185, 129, 0.08);
+            box-shadow: 0 0 12px var(--success-glow);
+        }
+        
+        .review-mode .option-input:checked + .option-label.correct::after {
+            background: var(--success);
+        }
+        
+        .review-mode .option-input:checked + .option-label.incorrect {
+            border-color: var(--danger);
+            background: rgba(239, 68, 68, 0.08);
+            box-shadow: 0 0 12px var(--danger-glow);
+        }
+        
+        .review-mode .option-input:checked + .option-label.incorrect::after {
+            background: var(--danger);
+        }
+        
+        .review-mode .option-label.correct-answer {
+            border-color: var(--success);
+            background: rgba(16, 185, 129, 0.08);
+            box-shadow: 0 0 12px var(--success-glow);
+        }
+        
+        .review-mode .option-label.correct-answer::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 3px;
+            height: 100%;
+            background: var(--success);
+        }
+        
+        .solution-container {
+            margin-top: 24px;
+            padding: 18px;
+            background: rgba(99, 102, 241, 0.05);
+            border-radius: 12px;
+            border-left: 3px solid var(--primary);
+            border-top: 1px solid rgba(255,255,255,0.03);
+            border-right: 1px solid rgba(255,255,255,0.03);
+            border-bottom: 1px solid rgba(255,255,255,0.03);
+        }
+        
+        .solution-title {
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--primary-light);
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        /* Question Navigation */
+        .question-nav {
+            position: fixed;
+            top: 60px;
+            right: 0;
+            bottom: 80px;
+            width: 100%;
+            max-width: 320px;
+            background: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-left: 1px solid rgba(255,255,255,0.06);
+            box-shadow: var(--box-shadow);
+            transform: translateX(100%);
+            transition: var(--transition);
+            z-index: 900;
+            overflow-y: auto;
+            padding: 16px;
+        }
+        
+        .question-nav.show {
+            transform: translateX(0);
+        }
+        
+        .nav-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+        
+        .nav-title {
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin: 0;
+            color: #f8fafc;
+        }
+        
+        .question-stats {
+            display: flex;
+            gap: 8px;
+        }
+        
+        .stat-badge {
+            font-size: 0.75rem;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-weight: 500;
+            color: white;
+        }
+        
+        .section-selector {
+            width: 100%;
+            margin-bottom: 16px;
+            border-radius: 12px;
+            padding: 10px 16px;
+            border: 1px solid rgba(255,255,255,0.08);
+            background: rgba(0, 0, 0, 0.3);
+            color: #f8fafc;
+            font-size: 0.9rem;
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 10px center;
+            background-size: 16px;
+        }
+        
+        .question-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(40px, 1fr));
+            gap: 8px;
+        }
+        
+        .q-box {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 500;
+            border: 1px solid rgba(255,255,255,0.08);
+            background: rgba(255,255,255,0.02);
+            color: #94a3b8;
+            transition: var(--transition);
+            position: relative;
+        }
+        
+        .q-box:hover {
+            transform: translateY(-2px);
+            border-color: rgba(255,255,255,0.2);
+            color: #f8fafc;
+        }
+        
+        .q-box.attempted {
+            background-color: var(--primary);
+            color: white;
+            border-color: var(--primary);
+            box-shadow: 0 0 8px var(--primary-glow);
+        }
+        
+        .q-box.correct {
+            background-color: var(--success);
+            color: white;
+            border-color: var(--success);
+            box-shadow: 0 0 8px var(--success-glow);
+        }
+        
+        .q-box.incorrect {
+            background-color: var(--danger);
+            color: white;
+            border-color: var(--danger);
+            box-shadow: 0 0 8px var(--danger-glow);
+        }
+        
+        .q-box.current {
+            border: 2px solid var(--accent) !important;
+            transform: translateY(-3px);
+            box-shadow: 0 4px 12px rgba(236, 72, 153, 0.3);
+            color: #f8fafc;
+        }
+        
+        .q-box.unattempted {
+            background-color: var(--gray);
+            color: white;
+            border-color: var(--gray);
+        }
+        
+        /* Bottom Navigation */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 80px;
+            background: var(--footer-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-top: 1px solid rgba(255,255,255,0.06);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 16px;
+            z-index: 800;
+        }
+        
+        .nav-btn {
+            height: 48px;
+            border-radius: 12px;
+            border: none;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 20px;
+            transition: var(--transition);
+            gap: 8px;
+            cursor: pointer;
+        }
+        
+        .nav-btn i {
+            font-size: 1rem;
+        }
+        
+        .nav-btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .nav-btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px var(--primary-glow);
+        }
+        
+        .nav-btn-outline {
+            background: rgba(255,255,255,0.02);
+            color: #f8fafc;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .nav-btn-outline:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+        
+        .nav-btn:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+            transform: none !important;
+            box-shadow: none !important;
+        }
+        
+        /* Overlay when nav is open */
+        .nav-overlay {
+            position: fixed;
+            top: 60px;
+            left: 0;
+            right: 0;
+            bottom: 80px;
+            background: rgba(0,0,0,0.6);
+            backdrop-filter: blur(4px);
+            z-index: 800;
+            opacity: 0;
+            pointer-events: none;
+            transition: var(--transition);
+        }
+        
+        .nav-overlay.show {
+            opacity: 1;
+            pointer-events: all;
+        }
+        
+        /* Results Modal */
+        .results-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(3, 7, 18, 0.8);
+            backdrop-filter: blur(8px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1100;
+            opacity: 0;
+            pointer-events: none;
+            transition: var(--transition);
+            padding: 16px;
+        }
+        
+        .results-modal.show {
+            opacity: 1;
+            pointer-events: all;
+        }
+        
+        .results-card {
+            background: #0f172a;
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 24px;
+            width: 100%;
+            max-width: 500px;
+            overflow: hidden;
+            transform: translateY(20px);
+            transition: var(--transition);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+        }
+        
+        .results-modal.show .results-card {
+            transform: translateY(0);
+        }
+        
+        .results-header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 24px 20px;
+            text-align: center;
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+        }
+        
+        .results-title {
+            margin: 0;
+            font-weight: 600;
+            font-size: 1.4rem;
+        }
+        
+        .results-body {
+            padding: 24px;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+        
+        .stat-card {
+            padding: 16px;
+            border-radius: 16px;
+            text-align: center;
+            color: white;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+        
+        .stat-value {
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+        
+        .stat-label {
+            font-size: 0.8rem;
+            opacity: 0.8;
+            font-weight: 500;
+        }
+        
+        .results-footer {
+            padding: 18px 24px;
+            display: flex;
+            justify-content: center;
+            border-top: 1px solid rgba(255,255,255,0.06);
+            background: rgba(0,0,0,0.1);
+        }
+        
+        /* MathJax Styling Override */
+        .MathJax, .mjx-chtml {
+            overflow-x: auto;
+            max-width: 100%;
+            display: inline-block;
+        }
+        
+        /* Responsive Adjustments */
+        @media (min-width: 992px) {
+            .question-nav {
+                transform: translateX(0);
+            }
+            
+            .main-content {
+                margin-right: 320px;
+            }
+            
+            .nav-overlay {
+                display: none;
+            }
+            
+            .bottom-nav {
+                display: none;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .question-grid {
+                grid-template-columns: repeat(auto-fill, minmax(36px, 1fr));
+                gap: 6px;
+            }
+            
+            .q-box {
+                width: 36px;
+                height: 36px;
+                font-size: 0.9rem;
+            }
+            
+            .option-label {
+                padding: 12px 14px;
+            }
+            
+            .question-text {
+                font-size: 1rem;
+            }
+            
+            .header-brand {
+                font-size: 1rem;
+            }
+            
+            .control-btn {
+                width: 32px;
+                height: 32px;
+            }
+            
+            .timer-display {
+                font-size: 0.8rem;
+                padding: 4px 10px;
+            }
+            
+            .nav-btn {
+                height: 44px;
+                padding: 0 16px;
+                font-size: 0.9rem;
+            }
+        }
+</style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <a href="#" class="header-brand">
+                <i class="fas fa-graduation-cap"></i>
+                <span>Aether Mocks</span>
+            </a>
+            
+            <div class="header-controls">
+                <!-- Timer -->
+                <div class="timer-display">
+                    <i class="far fa-clock"></i>
+                    <span id="timer-display">6:00</span>
+                </div>
+                
+                                <!-- Full Screen Button -->
+                <button class="control-btn" id="fullscreen-btn" onclick="toggleFullscreen()" title="Toggle Fullscreen">
+                    <i class="fas fa-expand"></i>
+                </button>
+                
+                <!-- Language toggle -->
+                <button class="control-btn" id="lang-btn" onclick="toggleLanguage()">
+                    <span id="lang-text">En</span>
+                </button>
+                
+                <!-- Submit button -->
+                <button class="control-btn" id="submit-btn" onclick="confirmSubmit()">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+                
+                <!-- Questions toggle for mobile -->
+                <button class="control-btn nav-toggle-btn" id="nav-toggle" onclick="toggleNav()">
+                    <i class="fas fa-th"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Main content -->
+    <main class="main-content" id="main-content">
+        <div class="question-counter" id="question-counter">Question 1 of 19</div>
+        
+        <!-- Questions will be displayed here -->
+        <div id="questions-container"></div>
+    </main>
+    
+    <!-- Overlay for mobile nav -->
+    <div class="nav-overlay" id="nav-overlay" onclick="toggleNav(false)"></div>
+    
+    <!-- Question navigation sidebar -->
+    <aside class="question-nav" id="question-nav">
+        <div class="nav-header">
+            <h3 class="nav-title">Questions</h3>
+            <div class="question-stats">
+                <span class="stat-badge bg-primary" id="attempted-count">0</span>
+                <span class="stat-badge bg-gray" id="total-count">19</span>
+                <button class="control-btn d-lg-none" onclick="toggleNav(false)">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Section selector -->
+        <select class="section-selector" id="section-selector" onchange="switchSection(this.value)">
+            <option value="all">All Sections</option>
+        </select>
+        
+        <!-- Question grid -->
+        <div class="question-grid" id="question-boxes"></div>
+    </aside>
+    
+    <!-- Bottom navigation for mobile -->
+    <nav class="bottom-nav d-lg-none">
+        <button class="nav-btn nav-btn-outline" onclick="prevQuestion()">
+            <i class="fas fa-chevron-left"></i>
+            <span>Previous</span>
+        </button>
+        <button class="nav-btn nav-btn-outline" onclick="nextQuestion()">
+            <span>Next</span>
+            <i class="fas fa-chevron-right"></i>
+        </button>
+    </nav>
+    
+    <!-- Results modal -->
+    <div class="results-modal" id="results-modal">
+        <div class="results-card">
+            <div class="results-header">
+                <h3 class="results-title">Test Results</h3>
+            </div>
+            <div class="results-body">
+                <div class="stats-grid">
+                    <div class="stat-card" style="background: linear-gradient(135deg, var(--primary), var(--primary-dark))">
+                        <div class="stat-value" id="score-value">0</div>
+                        <div class="stat-label">Score</div>
+                    </div>
+                    <div class="stat-card" style="background: linear-gradient(135deg, var(--success), #1b9aaa)">
+                        <div class="stat-value" id="correct-value">0</div>
+                        <div class="stat-label">Correct</div>
+                    </div>
+                    <div class="stat-card" style="background: linear-gradient(135deg, var(--danger), var(--accent))">
+                        <div class="stat-value" id="incorrect-value">0</div>
+                        <div class="stat-label">Incorrect</div>
+                    </div>
+                    <div class="stat-card" style="background: linear-gradient(135deg, var(--gray), var(--dark))">
+                        <div class="stat-value" id="unattempted-value">0</div>
+                        <div class="stat-label">Unattempted</div>
+                    </div>
+                </div>
+            </div>
+            <div class="results-footer">
+                <button class="nav-btn nav-btn-primary" onclick="reviewTest()">
+                    <i class="fas fa-search me-1"></i>
+                    <span>Review Test</span>
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Questions data
+        const questions = [];
+        const sections = {};
+        let currentLang = "en";
+        let currentQuestion = 0;
+        let answers = {};
+        let submitted = false;
+        let totalTime = 6 * 60;
+        
+                function toggleFullscreen() {
+            const btn = document.getElementById('fullscreen-btn');
+            if (!btn) return;
+            const icon = btn.querySelector('i');
+            if (!document.fullscreenElement) {
+                document.documentElement.requestFullscreen().then(() => {
+                    icon.className = 'fas fa-compress';
+                }).catch(err => {
+                    console.error("Fullscreen error: ", err);
+                });
+            } else {
+                document.exitFullscreen().then(() => {
+                    icon.className = 'fas fa-expand';
+                });
+            }
+        }
+        
+        document.addEventListener('fullscreenchange', () => {
+            const btn = document.getElementById('fullscreen-btn');
+            if (btn) {
+                const icon = btn.querySelector('i');
+                if (document.fullscreenElement) {
+                    icon.className = 'fas fa-compress';
+                } else {
+                    icon.className = 'fas fa-expand';
+                }
+            }
+        });
+
+        // Initialize the test
+        window.onload = function() {
+            initializeTest();
+            startTimer();
+            
+            // If on desktop, show the question navigation by default
+            if (window.innerWidth >= 992) {
+                document.getElementById('question-nav').classList.add('show');
+                document.getElementById('main-content').classList.add('with-nav');
+            }
+        };
+        
+        // Initialize test data
+        function initializeTest() {
+            // Add sections and questions
+            
+            sections["18"] = {
+                name: "General Awareness",
+                start: 0,
+                end: 17
+            };
+            
+            document.getElementById('section-selector').innerHTML += 
+                `<option value="18">General Awareness</option>`;
+            
+            sections["misc"] = {
+                name: "Miscellaneous",
+                start: 18,
+                end: 18
+            };
+            
+            document.getElementById('section-selector').innerHTML += 
+                `<option value="misc">Miscellaneous</option>`;
+            
+            
+                questions.push({
+                    id: "1",
+                    section: "18",
+                    question_en: "<p><span style=\"font-family: Times New Roman;\">1. </span><span style=\"font-family: Times New Roman;\">In which discipline is the Bidhan Chandra Roy Award given&nbsp;</span></p>",
+                    question_hi: "<p><span style=\"font-family: Times New Roman;\">1. </span><span style=\"font-family: Baloo;\">बिधान चंद्र रॉय पुरस्कार किस विषय में दिया जाता है।</span></p>",
+                    options_en: ["<p>Law</p>", "<p>Architecture</p>", 
+                                "<p>sports</p>", "<p>medicine</p>"],
+                    options_hi: ["<p>कानून</p>", "<p>वास्तुकला</p>",
+                                "<p>खेल</p>", "<p>दवा</p>"],
+                    solution_en: "<p>1.(d) <span style=\"font-family: Times New Roman;\">Bidhan Chandra Roy Award is given in the field of <strong>Medicine</strong>. </span><span style=\"font-family: Times New Roman;\">The Bidhan Chandra Roy Award was instituted in 1962 . Legal Era Awards given in the field of law. The Pritzker Prize award is given in the Architecture</span><span style=\"font-family: Times New Roman;\"> </span><span style=\"font-family: Times New Roman;\">field. Sports awards in India are Dhyan Chand Khel Ratna Award, Arjuna Award, Dronacharya Award etc</span></p>",
+                    solution_hi: "<p>1.(d) <span style=\"font-family: Baloo;\">बिधान चंद्र रॉय पुरस्कार <strong>चिकित्सा </strong>के क्षेत्र में दिया जाता है। बिधान चंद्र रॉय पुरस्कार 1962 में स्थापित किया गया था। कानूनी युग पुरस्कार कानून के क्षेत्र में दिए जाते हैं। प्रित्जकर पुरस्कार आर्किटेक्चर क्षेत्र में दिया जाता है। भारत में खेल पुरस्कार ध्यानचंद खेल रत्न पुरस्कार, अर्जुन पुरस्कार, द्रोणाचार्य पुरस्कार आदि हैं।</span><span style=\"font-family: Baloo;\"> </span></p>",
+                    correct: "d",
+                    pos_marks: 2.0,
+                    neg_marks: 0.5
+                });
+                questions.push({
+                    id: "2",
+                    section: "18",
+                    question_en: "<p><span style=\"font-family: Times New Roman;\">2. </span><span style=\"font-family: Times New Roman;\">Kelucharan Mahopatra was an exponent of which of the following categories of&nbsp;</span></p>",
+                    question_hi: "<p><span style=\"font-family: Times New Roman;\">2. </span><span style=\"font-family: Baloo;\">केलुचरण महोपात्रा निम्नलिखित में से किस श्रेणी के प्रतिपादक थे?</span></p>",
+                    options_en: ["<p>Manipur</p>", "<p>Bharatnatyam</p>", 
+                                "<p>Kuchipudi</p>", "<p>Odissi</p>"],
+                    options_hi: ["<p>मणिपुर</p>", "<p>भरतनाट्यम</p>",
+                                "<p>कुचिपुड़ी</p>", "<p>ओडिसी</p>"],
+                    solution_en: "<p>2.(d) <strong><span style=\"font-family: Times New Roman;\">Kelucharan Mahopatra</span></strong><span style=\"font-family: Times New Roman;\"> was an exponent of Odissi dance. Famous</span><span style=\"font-family: Times New Roman;\"> <strong>odissi dancers</strong></span><span style=\"font-family: Times New Roman;\"> are </span><span style=\"font-family: Times New Roman;\">Sanjukta Panigrahi , Sonal Mansingh, Jhelum Paranjape, Mayadhar Raut, Gangadhar Pradhan, Leana Citaristi etc. Five Most Famous </span><strong><span style=\"font-family: Times New Roman;\">Bharatanatyam Dancers</span></strong><span style=\"font-family: Times New Roman;\"> Rukmini Devi, Padma Subrahmanyam ,Alarmel Valli, Yamini Krishnamurthy, Mallika Sarabhai. Famous</span><span style=\"font-family: Times New Roman;\"> <strong>Manipuri Dancers</strong></span><span style=\"font-family: Times New Roman;\"> -Yumlembam Gambhini Devi,Guru Bipin Sinha,Darshana Jhaveri, Nirmala Mehta. Famous </span><strong><span style=\"font-family: Times New Roman;\">Kuchipudi Dancers</span></strong><span style=\"font-family: Times New Roman;\">- Mallika Sarabhai, V. Satyanarayana Sarma, Deepa Sashindran, Vedantam Ramalinga Sastry.</span></p>\n<p><span style=\"font-family: Times New Roman;\"> </span></p>",
+                    solution_hi: "<p>2.(d) <strong><span style=\"font-family: Baloo;\">केलुचरण महोपात्रा</span></strong><span style=\"font-family: Baloo;\"> ओडिसी नृत्य के प्रतिपादक थे। प्रसिद्ध </span><strong><span style=\"font-family: Baloo;\">ओडिसी नर्तकियों</span></strong><span style=\"font-family: Baloo;\"> में संजुक्ता पाणिग्रही, सोनल मानसिंह, झेलम परांजपे, मायाधर राउत, गंगाधर प्रधान, लीना सिटारिस्टी आदि हैं। पांच सबसे प्रसिद्ध </span><strong><span style=\"font-family: Baloo;\">भरतनाट्यम नर्तक</span></strong><span style=\"font-family: Times New Roman;\"> </span><span style=\"font-family: Baloo;\">रुक्मिणी देवी</span><span style=\"font-family: Baloo;\">, पद्म सुब्रह्मण्यम, अलार्मल वल्ली, यामिनी कृष्णमूर्ति, मल्लिका साराभाई हैं। प्रसिद्ध </span><strong><span style=\"font-family: Baloo;\">मणिपुरी नर्तक</span></strong><span style=\"font-family: Baloo;\"> - युमलेम्बम गंभीरी देवी, गुरु बिपिन सिन्हा, दर्शन झावेरी, निर्मला मेहता। प्रसिद्ध </span><strong><span style=\"font-family: Baloo;\">कुचिपुड़ी नर्तक</span></strong><span style=\"font-family: Baloo;\">- मल्लिका साराभाई, वी. सत्यनारायण शर्मा, दीपा शशिन्द्रन, वेदांतम रामलिंग शास्त्री।</span></p>\n<p><span style=\"font-family: Baloo;\"> </span></p>",
+                    correct: "d",
+                    pos_marks: 2.0,
+                    neg_marks: 0.5
+                });
+                questions.push({
+                    id: "3",
+                    section: "18",
+                    question_en: "<p><span style=\"font-family: Times New Roman;\">3. </span><span style=\"font-family: Times New Roman;\">who among the following is the author of the book &lsquo;Unaccustomed Earth&rsquo;</span></p>",
+                    question_hi: "<p><span style=\"font-family: Times New Roman;\">3. </span><span style=\"font-family: Baloo;\">निम्नलिखित में से कौन \'अनकस्टम्ड अर्थ\' पुस्तक के लेखक हैं।</span></p>",
+                    options_en: ["<p>Arundhati Roy</p>", "<p>Anita Nair</p>", 
+                                "<p>Jumpa Lahiri</p>", "<p>Shobha de</p>"],
+                    options_hi: ["<p>अरुंधति रॉय</p>", "<p>अनीता नायर</p>",
+                                "<p>जम्पा लाहिड़ी</p>", "<p>शोभा दे</p>"],
+                    solution_en: "<p>3.(c) <span style=\"font-family: Times New Roman;\">Books by </span><strong><span style=\"font-family: Times New Roman;\">Jhumpa Lahiri</span></strong><span style=\"font-family: Times New Roman;\"> are- Unaccustomed Earth, Interpreter of Maladies, The Namesake, The Lowland, In Other Words, Whereabouts, The Clothing of Books, Translating Myself and others.</span><span style=\"font-family: Times New Roman;\"> <strong>Arundhati Roy</strong></span><span style=\"font-family: Times New Roman;\">- The God of Small Things, Ministry of Utmost Happiness, The Doctor and the Saint, Azaadi, Walking with the Comrades </span><span style=\"font-family: Times New Roman;\">. <strong>Anita Nair</strong></span><span style=\"font-family: Times New Roman;\">- Ladies Coupe, Mistress, Lessons in Forgetting, The Lilac House .</span><span style=\"font-family: Times New Roman;\"> <strong>Shobha de</strong> </span><span style=\"font-family: Times New Roman;\">- Strange Obsession, Snapshots, Sisters, Sultry Days.</span></p>\n<p><span style=\"font-family: Times New Roman;\"> </span></p>",
+                    solution_hi: "<p>3.(c) <strong><span style=\"font-family: Baloo;\">झुम्पा लाहिड़ी</span></strong><span style=\"font-family: Baloo;\"> की पुस्तकें हैं- अनकस्टम्ड अर्थ, इंटरप्रेटर ऑफ मैलाडीज, द नेमसेक, द लोलैंड, दूसरे शब्दों में, ठिकाने, द क्लॉथिंग ऑफ बुक्स, ट्रांसलेटिंग माईसेल्फ और अन्य। </span><strong><span style=\"font-family: Baloo;\">अरुंधति रॉय</span></strong><span style=\"font-family: Baloo;\">- छोटी-छोटी बातों की भगवान, अत्यंत प्रसन्नता का मंत्रालय, डॉक्टर और संत, आज़ादी, साथियों के साथ घूमना। </span><strong><span style=\"font-family: Baloo;\">अनीता नायर</span></strong><span style=\"font-family: Baloo;\">- लेडीज कूप, मिस्ट्रेस, लेसन्स इन फॉरगेटिंग, द लिलाक हाउस। </span><strong><span style=\"font-family: Baloo;\">शोभा दे</span></strong><span style=\"font-family: Baloo;\"> - अजीब जुनून, स्नैपशॉट, बहनों, उमस भरे दिन।</span></p>\n<p><span style=\"font-family: Baloo;\"> </span></p>",
+                    correct: "c",
+                    pos_marks: 2.0,
+                    neg_marks: 0.5
+                });
+                questions.push({
+                    id: "4",
+                    section: "18",
+                    question_en: "<p>4. <span style=\"font-family: Baloo;\">______ is a mask dance popular in South Malabar.</span></p>",
+                    question_hi: "<p>4. <span style=\"font-family: Palanquin Dark;\">________ दक्षिण मालाबार में लोकप्रिय एक मुखौटा नृत्य है।</span></p>",
+                    options_en: ["<p>Dhangar</p>", "<p>Kummattikali</p>", 
+                                "<p>Parichakali</p>", "<p>Zemmado</p>"],
+                    options_hi: ["<p>धनगर</p>", "<p>कुम्मत्तिकली</p>",
+                                "<p>परिचारकली</p>", "<p>ज़ेमाडो</p>"],
+                    solution_en: "<p>4.(b) <strong><span style=\"font-family: Times New Roman;\">Kummattikali </span></strong><span style=\"font-family: Times New Roman;\">- a famous mask dance of </span><span style=\"font-family: Times New Roman;\"><strong>South Malabar</strong> </span><span style=\"font-family: Times New Roman;\">(Thrissur, Kerala)&nbsp;</span><strong><span style=\"font-family: Times New Roman;\">Dhangar </span></strong><span style=\"font-family: Times New Roman;\">- </span><span style=\"font-family: Times New Roman;\">The Dhangar dance is performed by the shepherd community of Goa during Navratri. </span><strong><span style=\"font-family: Times New Roman;\">Parichakali </span></strong><span style=\"font-family: Times New Roman;\">&ndash; Traditional Folk Dance Form of Lakshadweep. Other famous folk dance of south India are - Padayani or Paddeni (Kerala),</span><span style=\"font-family: Times New Roman;\">Kummi and Kolattam (Tamil Nadu), Kargam and Puli Vesham (Tamil Nadu),</span></p>\n<p><span style=\"font-family: Times New Roman;\"> </span></p>",
+                    solution_hi: "<p>4.(b) <span style=\"font-family: Baloo;\"><strong>कुम्मत्तिकली </strong>- दक्षिण मालाबार का एक प्रसिद्ध मुखौटा नृत्य (त्रिशूर, केरल)&nbsp;</span><span style=\"font-family: Baloo;\"><strong>धनगर </strong>- धनगर नृत्य नवरात्रि के दौरान गोवा के चरवाहा समुदाय द्वारा किया जाता है। </span><span style=\"font-family: Baloo;\"><strong>परिचकली </strong>- लक्षद्वीप का पारंपरिक लोक नृत्य रूप। </span><span style=\"font-family: Baloo;\">दक्षिण भारत के अन्य प्रसिद्ध लोक नृत्य हैं - पदयानी या पड्डेनी (केरल), कुम्मी और कोलट्टम (तमिलनाडु), करगम और पुली वेशम (तमिलनाडु),</span></p>\n<p><span style=\"font-family: Baloo;\"> </span></p>",
+                    correct: "b",
+                    pos_marks: 2.0,
+                    neg_marks: 0.5
+                });
+                questions.push({
+                    id: "5",
+                    section: "18",
+                    question_en: "<p>5.<span style=\"font-family: Baloo;\"> What is the maximum permissible limit of turbidity in potable water as per the Bureau of Indian Standards (BIS)(IS -10500 : 2012)?</span></p>",
+                    question_hi: "<p>5.<span style=\"font-family: Palanquin Dark;\"> भारतीय मानक ब्यूरो (BIS) (IS -10500: 2012) के अनुसार पीने योग्य पानी में मैलापन की अधिकतम अनुमेय सीमा क्या है?</span></p>",
+                    options_en: ["<p>3 NTU</p>", "<p>5 NTU</p>", 
+                                "<p>7 NTU</p>", "<p>1 NTU</p>"],
+                    options_hi: ["<p>3 NTU</p>", "<p>5 NTU</p>",
+                                "<p>7 NTU</p>", "<p>1 NTU</p>"],
+                    solution_en: "<p>5.(b) <span style=\"font-family: Times New Roman;\">The maximum permissible limit of turbidity in potable water as per the Bureau of Indian Standards (BIS)(IS -10500 : 2012) is </span><strong><span style=\"font-family: Times New Roman;\">5 NTU</span></strong><span style=\"font-family: Times New Roman;\"><strong> </strong>. </span><span style=\"font-family: Times New Roman;\">NTU stands for </span><strong><span style=\"font-family: Times New Roman;\">Nephelometric Turbidity unit</span></strong><span style=\"font-family: Times New Roman;\">, i.e. the unit used to measure the turbidity of a fluid or the presence of suspended particles in water.</span><span style=\"font-family: Times New Roman;\"> <strong>Turbidity</strong></span><span style=\"font-family: Times New Roman;\"><strong> </strong>is a measure of the cloudiness of water. It is used to indicate water quality and filtration effectiveness (such as whether disease-causing organisms are present) .On a standard silica scale, the permissible value of turbidity for drinking water is </span><strong><span style=\"font-family: Times New Roman;\">10 (ppm) .</span></strong><span style=\"font-family: Times New Roman;\"> </span></p>\n<p><span style=\"font-family: Times New Roman;\"> </span></p>",
+                    solution_hi: "<p>5.(b) <span style=\"font-family: Baloo;\">भारतीय मानक ब्यूरो (BIS) (IS -10500: 2012) के अनुसार पीने योग्य पानी में मैलापन की अधिकतम अनुमेय सीमा <strong>5 </strong></span><strong><span style=\"font-family: Times New Roman;\">NTU</span></strong><span style=\"font-family: Baloo;\"> है। NTU का पूर्ण रूप </span><strong><span style=\"font-family: Times New Roman;\">Nephelometric Turbidity unit</span></strong><span style=\"font-family: Baloo;\"> है, अर्थात वह इकाई जिसका उपयोग किसी तरल पदार्थ की मैलापन या पानी में निलंबित कणों की उपस्थिति को मापने के लिए किया जाता है। <strong>गंदलापन </strong>पानी के धुंधलेपन का एक मापन है। इसका उपयोग पानी की गुणवत्ता और निस्पंदन प्रभावशीलता (जैसे कि रोग पैदा करने वाले जीव मौजूद हैं) को इंगित करने के लिए किया जाता है। एक मानक सिलिका पैमाने पर, पीने के पानी के लिए मैलापन का अनुमेय मूल्य <strong>10 </strong>(</span><strong><span style=\"font-family: Times New Roman;\">ppm</span></strong><span style=\"font-family: Baloo;\">) है।</span></p>",
+                    correct: "b",
+                    pos_marks: 2.0,
+                    neg_marks: 0.5
+                });
+                questions.push({
+                    id: "6",
+                    section: "18",
+                    question_en: "<p>6. <span style=\"font-family: Baloo;\">Which of the following festivals is celebrated in Uttarakhand?</span></p>",
+                    question_hi: "<p>6. <span style=\"font-family: Palanquin Dark;\">निम्नलिखित में से कौन सा त्योहार उत्तराखंड में मनाया जाता है?</span></p>",
+                    options_en: [" <p> Vishu</span></p>", " <p> Phool Dei</span></p>", 
+                                " <p> Dol Jatra</span></p>", " <p> Nuakhai</span></p>"],
+                    options_hi: [" <p> विशु</span></p>", " <p> फूल देई</span></p>",
+                                " <p> डोल जात्रा</span></p>", " <p> नुआखाई</span></p>"],
+                    solution_en: "<p>6.(b) <strong><span style=\"font-family: Times New Roman;\">Phool Dei</span></strong><span style=\"font-family: Times New Roman;\"> is a festival of Uttarakhand It takes place on the first day of the Chaitra season (March-April) and is also known as the harvest festival. </span><strong><span style=\"font-family: Times New Roman;\">Vishu</span></strong><span style=\"font-family: Times New Roman;\"><strong> </strong>-Vishu is a Hindu festival celebrated by the people of Kerala .</span><span style=\"font-family: Times New Roman;\"> \'<strong>Dol Jatra</strong>\'</span><span style=\"font-family: Times New Roman;\"> - also known as \'Dol Utsav \'is the festival of colours celebrated in West Bengal . </span><strong><span style=\"font-family: Times New Roman;\">Nuakhai</span></strong><span style=\"font-family: Times New Roman;\"><strong> </strong>- Nuakhai is an agricultural festival mainly observed by people of Western Odisha in India.</span></p>\n<p><span style=\"font-family: Times New Roman;\"> </span></p>",
+                    solution_hi: "<p>6.(b) <span style=\"font-family: Baloo;\"><strong>फूल देई</strong> उत्तराखंड का एक त्योहार है यह चैत्र सीजन (मार्च-अप्रैल) के पहले दिन होता है और इसे फसल उत्सव के रूप में भी जाना जाता है। <strong>विशु</strong>-विशु केरल के लोगों द्वारा मनाया जाने वाला एक हिंदू त्योहार है। \'<strong>डोल जात्रा</strong>\' - जिसे \'डोल उत्सव\' के नाम से भी जाना जाता है, पश्चिम बंगाल में मनाया जाने वाला रंगों का त्योहार है। <strong>नुआखाई</strong> - नुआखाई मुख्य रूप से भारत में पश्चिमी ओडिशा के लोगों द्वारा मनाया जाने वाला एक कृषि त्योहार है।</span></p>\n<p><span style=\"font-family: Baloo;\"> </span></p>",
+                    correct: "b",
+                    pos_marks: 2.0,
+                    neg_marks: 0.5
+                });
+                questions.push({
+                    id: "7",
+                    section: "18",
+                    question_en: "<p>7. <span style=\"font-family: Times New Roman;\">What is located inside the premises of Akhal Takht Sahib?</span></p>",
+                    question_hi: "<p>7. <span style=\"font-family: Palanquin Dark;\">अकाल तख्त साहिब के परिसर के अंदर क्या स्थित है?</span></p>",
+                    options_en: ["<p>Golden Temple</p>", "<p>Paonta Sahib</p>", 
+                                "<p>Patna Sahib</p>", "<p>Gurudwara Bangla Sahib</p>"],
+                    options_hi: ["<p>स्वर्ण मंदिर</p>", "<p>पोंटा साहिब</p>",
+                                "<p>पटना साहिब</p>", "<p>गुरुद्वारा बंगला साहिब</p>"],
+                    solution_en: "<p>7.(a) <span style=\"font-family: Times New Roman;\"><strong>Golden Temple</strong> </span><span style=\"font-family: Times New Roman;\">is located inside the premises of Akhal Takht Sahib. </span><span style=\"font-family: Times New Roman;\">Shri Guru Hargobind Singh laid the foundation stone of the </span><span style=\"font-family: Times New Roman;\"><strong>Akal Takht</strong> </span><span style=\"font-family: Times New Roman;\">building in 1605.</span><span style=\"font-family: Times New Roman;\"> <strong>Paonta Sahib</strong></span><span style=\"font-family: Times New Roman;\"> was founded by the Tenth Sikh guru, Guru Gobind Singh.</span><span style=\"font-family: Times New Roman;\"> </span><strong><span style=\"font-family: Times New Roman;\">Patna Sahib</span></strong><span style=\"font-family: Times New Roman;\"> </span><span style=\"font-family: Times New Roman;\">was built by Maharaja Ranjit Singh.</span><span style=\"font-family: Times New Roman;\"> </span><strong><span style=\"font-family: Times New Roman;\">Gurudwara Bangla Sahib</span></strong><span style=\"font-family: Times New Roman;\"> is </span><span style=\"font-family: Times New Roman;\">known for its association with the eighth Sikh Guru, Guru Har Krishan. </span></p>\n<p><span style=\"font-family: Times New Roman;\"> </span></p>",
+                    solution_hi: "<p>7.(a)<span style=\"font-family: Baloo;\"> <strong>स्वर्ण मंदिर</strong> अकाल तख्त साहिब के परिसर के अंदर स्थित है। श्री गुरु हरगोबिंद सिंह ने 1605 में <strong>अकाल तख्त</strong> भवन की आधारशिला रखी थी। <strong>पांवटा साहिब</strong> की स्थापना सिखों के दसवें गुरु, गुरु गोबिंद सिंह ने की थी। <strong>पटना साहिब</strong> का निर्माण महाराजा रणजीत सिंह ने करवाया था। <strong>गुरुद्वारा बंगला साहिब</strong> को आठवें सिख गुरु, गुरु हर कृष्ण के साथ जुड़ाव के लिए जाना जाता है।</span><span style=\"font-family: Baloo;\"> </span></p>",
+                    correct: "a",
+                    pos_marks: 2.0,
+                    neg_marks: 0.5
+                });
+                questions.push({
+                    id: "8",
+                    section: "18",
+                    question_en: "<p>8. <span style=\"font-family: Baloo;\">In which of the following dances chairs on heads with lighted diyas are performed by women?</span></p>",
+                    question_hi: "<p>8. <span style=\"font-family: Palanquin Dark;\">निम्नलिखित में से किस नृत्य में महिलाओं द्वारा सिर पर जले हुए दीयों के साथ प्रदर्शन किया जाता है?</span></p>",
+                    options_en: [" <p> Dhangari Gaja Dance</span></p>", " <p> Koli Dance</span></p>", 
+                                " <p> Tamasha Dance</span></p>", " <p> Chari Dance</span></p>"],
+                    options_hi: [" <p> धंगारी गाजा नृत्य</span></p>", " <p> कोली नृत्य</span></p>",
+                                " <p> तमाशा नृत्य</span></p>", " <p> चारी नृत्य</span></p>"],
+                    solution_en: "<p>8.(b) <strong><span style=\"font-family: Times New Roman;\">Koli Dance</span></strong><span style=\"font-family: Times New Roman;\"> dances chairs on heads with lighted diyas are performed by women. It is a popular folk dance of Maharashtra. </span><strong><span style=\"font-family: Times New Roman;\">Dhangari Gaja dance</span></strong><span style=\"font-family: Times New Roman;\">(Maharashtra) is performed to please their God for His blessings. </span><strong><span style=\"font-family: Times New Roman;\">Tamasha (Maharashtra)</span></strong><span style=\"font-family: Times New Roman;\">, as a theater form, is a style that can be called a mix of a regular play, a musical and dance.</span><strong><span style=\"font-family: Times New Roman;\">Chari </span></strong><span style=\"font-family: Times New Roman;\">dance describes the art of collecting water in a </span><span style=\"font-family: Times New Roman;\">chari</span><span style=\"font-family: Times New Roman;\"> or pot by the Rajasthani Women.</span><span style=\"font-family: Times New Roman;\"> </span></p>",
+                    solution_hi: "<p>8.(b) <span style=\"font-family: Baloo;\"><strong>कोली नृत्य</strong> सिर पर दीयों के साथ कुर्सियों पर नृत्य करता है जो महिलाओं द्वारा किया जाता है। यह महाराष्ट्र का एक लोकप्रिय लोक नृत्य है। <strong>धनगरी गाजा नृत्य</strong> (महाराष्ट्र) उनके भगवान को उनके आशीर्वाद के लिए खुश करने के लिए किया जाता है। <strong>तमाशा (महाराष्ट्र)</strong>, एक रंगमंच के रूप में, एक शैली है जिसे नियमित नाटक, संगीत और नृत्य का मिश्रण कहा जा सकता है। <strong>चारी </strong>नृत्य राजस्थानी महिलाओं द्वारा एक चरी या बर्तन में पानी इकट्ठा करने की कला का वर्णन करता है।</span></p>\n<p><span style=\"font-family: Baloo;\"> </span></p>",
+                    correct: "b",
+                    pos_marks: 2.0,
+                    neg_marks: 0.5
+                });
+                questions.push({
+                    id: "9",
+                    section: "18",
+                    question_en: "<p>9. <span style=\"font-family: Baloo;\">Under the National Urban Sanitation Policy, a city that scores points between 34 and 66 and needs considerable improvement is </span><span style=\"font-family: Baloo;\">colour</span><span style=\"font-family: Baloo;\">-coded ______.&nbsp;</span></p>",
+                    question_hi: "<p>9. <span style=\"font-family: Palanquin Dark;\">राष्ट्रीय शहरी स्वच्छता नीति के तहत, एक शहर जो 34 और 66 के बीच अंक प्राप्त करता है और जिसमें काफी सुधार की आवश्यकता होती है, वह रंग-कोडित ______ है।</span></p>",
+                    options_en: ["<p>green</p>", "<p>black</p>", 
+                                "<p>blue</p>", "<p>red</p>"],
+                    options_hi: ["<p>हरा</p>", "<p>काला</p>",
+                                "<p>नीला</p>", "<p>लाल</p>"],
+                    solution_en: "<p>9.(b) <strong><span style=\"font-family: Times New Roman;\">Black</span></strong><span style=\"font-family: Times New Roman;\">- Needing considerable improvement- &lt;34</span><span style=\"font-family: Times New Roman;\">66, </span><strong><span style=\"font-family: Times New Roman;\">Red</span></strong><span style=\"font-family: Times New Roman;\">- Cities required immediate remedial action- &lt;33, </span><span style=\"font-family: Times New Roman;\"><strong>Blue</strong> </span><span style=\"font-family: Times New Roman;\">- Recovering but still diseased - &lt;67</span><span style=\"font-family: Times New Roman;\">90, </span><strong><span style=\"font-family: Times New Roman;\">Green </span></strong><span style=\"font-family: Times New Roman;\">- Healthy and clean city &ndash; &lt;91</span><span style=\"font-family: Times New Roman;\"> 100.</span></p>\n<p><span style=\"font-family: Times New Roman;\"> </span></p>",
+                    solution_hi: "<p>9.(b) <strong><span style=\"font-family: Baloo;\">काला</span></strong><span style=\"font-family: Baloo;\">- काफी सुधार की आवश्यकता है- &lt;34</span><span style=\"font-family: Times New Roman;\">66, </span><strong><span style=\"font-family: Baloo;\">लाल</span></strong><span style=\"font-family: Baloo;\">-शहरों को तत्काल उपचारात्मक कार्रवाई की आवश्यकता है- &lt;33, </span><strong><span style=\"font-family: Baloo;\">नीला </span></strong><span style=\"font-family: Baloo;\">- ठीक हो रहा है लेकिन अभी भी रोगग्रस्त है - &lt;67</span><span style=\"font-family: Baloo;\">90, <strong>हरा </strong>- स्वस्थ और स्वच्छ शहर - &ndash; &lt;91</span><span style=\"font-family: Times New Roman;\"> 100</span></p>\n<p><span style=\"font-family: Times New Roman;\"> </span></p>",
+                    correct: "b",
+                    pos_marks: 2.0,
+                    neg_marks: 0.5
+                });
+                questions.push({
+                    id: "10",
+                    section: "18",
+                    question_en: "<p>10. <span style=\"font-family: Times New Roman;\">As per WHO (World Health Organization), which of the following is NOT an example of disinfection by-products formed at traditional drinking water treatment plants?&nbsp;</span></p>",
+                    question_hi: "<p>10. <span style=\"font-family: Palanquin Dark;\">WHO (विश्व स्वास्थ्य संगठन) के अनुसार, निम्नलिखित में से कौन पारंपरिक पेयजल उपचार संयंत्रों में बनने वाले कीटाणुशोधन उप-उत्पादों का उदाहरण नहीं है?</span></p>",
+                    options_en: ["<p>Titania</p>", "<p>Bromate</p>", 
+                                "<p>Chlorate</p>", "<p>Chlorite</p>"],
+                    options_hi: ["<p>टाइटेनिया</p>", "<p>ब्रोमेट</p>",
+                                "<p>क्लोरेट</p>", "<p>क्लोराइट</p>"],
+                    solution_en: "<p>10.(a) <span style=\"font-family: Times New Roman;\"><strong>Titanium dioxide</strong>,</span><span style=\"font-family: Times New Roman;\"> also called titania, (TiO</span><sub><span style=\"font-family: Times New Roman;\">2</span></sub><span style=\"font-family: Times New Roman;\">), a white, opaque, naturally occurring mineral existing in a number of crystalline forms, the most important of which are rutile and anatase. It is used in paints, coatings, papers, inks, toothpaste, face powder, and food colouring. </span></p>\n<p><span style=\"font-family: Times New Roman;\"> </span></p>",
+                    solution_hi: "<p>10.(a) <strong><span style=\"font-family: Baloo;\">टाइटेनियम डाइऑक्साइड</span></strong><span style=\"font-family: Baloo;\">, जिसे टिटानिया भी कहा जाता है, (<span style=\"font-family: Times New Roman;\">TiO</span><sub><span style=\"font-family: Times New Roman;\">2</span></sub></span><span style=\"font-family: Baloo;\">), एक सफेद, अपारदर्शी, प्राकृतिक रूप से पाए जाने वाले खनिज जो कई क्रिस्टलीय रूपों में मौजूद हैं, जिनमें से सबसे महत्वपूर्ण रूटाइल और एनाटेस हैं। इसका उपयोग पेंट, कोटिंग्स, पेपर, स्याही, टूथपेस्ट, फेस पाउडर और फूड कलरिंग में किया जाता है</span></p>\n<p><span style=\"font-family: Baloo;\"> </span></p>",
+                    correct: "a",
+                    pos_marks: 2.0,
+                    neg_marks: 0.5
+                });
+                questions.push({
+                    id: "11",
+                    section: "18",
+                    question_en: "<p>11. <span style=\"font-family: Baloo;\">Who among the following was the first Indian Governor </span><span style=\"font-family: Baloo;\">of Reserve</span><span style=\"font-family: Baloo;\"> Bank of India?&nbsp;</span></p>",
+                    question_hi: "<p>11. <span style=\"font-family: Palanquin Dark;\">निम्नलिखित में से कौन भारतीय रिजर्व बैंक के पहले भारतीय गवर्नर थे?</span></p>",
+                    options_en: ["<p>CD Deshmukh</p>", "<p>HVR <span style=\"font-family: Baloo;\">Lengar</span><span style=\"font-family: Baloo;\"> </span></p>", 
+                                "<p>PC Bhattacharya</p>", "<p>LK Jha</p>"],
+                    options_hi: ["<p>सी.डी. देशमुख</p>", "<p>एच.वी.आर. लेंगर</p>",
+                                "<p>पी.सी भट्टाचार्य</p>", "<p>एल.के. झा</p>"],
+                    solution_en: "<p>11.(a) <span style=\"font-family: Times New Roman;\"><strong>CD Deshmukh</strong> </span><span style=\"font-family: Times New Roman;\">was the first Indian Governor of the Reserve Bank of India. As of may 2022 </span><strong><span style=\"font-family: Times New Roman;\">Shaktikanta Das</span></strong><span style=\"font-family: Times New Roman;\"> is the current (twenty-fifth) governor of the Reserve Bank of India . RBI was established on 1 April 1935. The headquarter of RBI is in Mumbai. </span><span style=\"font-family: Times New Roman;\">The Reserve Bank of India was set up on the basis of the recommendations of the &lsquo;</span><span style=\"font-family: Times New Roman;\"><strong>Hilton Young Commission</strong>&rsquo;. </span></p>\n<p><span style=\"font-family: Times New Roman;\"> </span></p>",
+                    solution_hi: "<p>11.(a)<span style=\"font-family: Times New Roman;\"> </span><span style=\"font-family: Baloo;\"><strong>सी.डी. देशमुख</strong> </span><span style=\"font-family: Baloo;\">भारतीय रिजर्व बैंक के पहले भारतीय गवर्नर थे। मई 2022 तक </span><span style=\"font-family: Baloo;\"><strong>शक्तिकांत दास</strong> </span><span style=\"font-family: Baloo;\">भारतीय रिजर्व बैंक के वर्तमान (पच्चीसवें) गवर्नर हैं। </span><span style=\"font-family: Times New Roman;\">RBI</span><span style=\"font-family: Baloo;\"> की स्थापना 1 अप्रैल 1935 को हुई थी। </span><span style=\"font-family: Times New Roman;\">RBI</span><span style=\"font-family: Baloo;\"> का मुख्यालय मुंबई में है। भारतीय रिजर्व बैंक की स्थापना \'<strong>हिल्टन यंग कमीशन</strong>\' की सिफारिशों के आधार पर की गई थी।</span></p>\n<p><span style=\"font-family: Baloo;\"> </span></p>",
+                    correct: "a",
+                    pos_marks: 2.0,
+                    neg_marks: 0.5
+                });
+                questions.push({
+                    id: "12",
+                    section: "18",
+                    question_en: "<p><span style=\"font-family: Times New Roman;\">12. </span><span style=\"font-family: Times New Roman;\">Which of the following decades was proclaimed by the General Assembly of the United Nations as the International Decade for action on &lsquo;Water for life&rsquo;?</span></p>",
+                    question_hi: "<p><span style=\"font-family: Times New Roman;\">12. </span><span style=\"font-family: Baloo;\">निम्नलिखित में से किस दशक को संयुक्त राष्ट्र महासभा द्वारा \'जीवन के लिए जल\' पर कार्रवाई के लिए अंतर्राष्ट्रीय दशक के रूप में घोषित किया गया था?</span></p>",
+                    options_en: ["<p>1994 - 2004</p>", "<p>1972 - 1982</p>", 
+                                "<p>1983 - 1993</p>", "<p>2005 - 2015</p>"],
+                    options_hi: ["<p>1994 - 2004</p>", "<p>1972 - 1982</p>",
+                                "<p>1983 - 1993</p>", "<p>2005 - 2015</p>"],
+                    solution_en: "<p>12.(d) <strong><span style=\"font-family: Times New Roman;\">2005 - 2015</span></strong><span style=\"font-family: Times New Roman;\"><strong> </strong>:- International Decade for Action ,water for Life. The decade of</span><span style=\"font-family: Times New Roman;\"> <strong>1994-2004</strong> </span><span style=\"font-family: Times New Roman;\">:- Decade of the world&rsquo;s Indigenous People. The decade of </span><span style=\"font-family: Times New Roman;\"><strong>1983-1993</strong> </span><span style=\"font-family: Times New Roman;\">Second Decade to Combat Racism and Racial Discrimination. </span><strong><span style=\"font-family: Times New Roman;\">2021-2030</span></strong><span style=\"font-family: Times New Roman;\">:- United Nation Decade on Ecosystem Restoration</span><span style=\"font-family: Times New Roman;\">. <strong>2014 - 2024</strong></span><span style=\"font-family: Times New Roman;\"> :- United Nations Decade of sustainable Energy for all.</span></p>\n<p><span style=\"font-family: Times New Roman;\"> </span></p>",
+                    solution_hi: "<p>12.(d) <strong><span style=\"font-family: Times New Roman;\">2005 - 2015</span></strong><span style=\"font-family: Baloo;\">: - इंटरनेशनल डिकेड फॉर एक्शन, वाटर फॉर लाइफ। </span><strong><span style=\"font-family: Times New Roman;\">1994-2004</span></strong><span style=\"font-family: Baloo;\"> का दशक :- विश्व के स्वदेशी लोगों का दशक। जातिवाद और नस्लीय भेदभाव का मुकाबला करने के लिए </span><span style=\"font-family: Times New Roman;\">1983-1993</span><span style=\"font-family: Baloo;\"> का दूसरा दशक। </span><strong><span style=\"font-family: Times New Roman;\">2021-2030</span></strong><span style=\"font-family: Baloo;\">:- पारिस्थितिकी तंत्र की बहाली पर संयुक्त राष्ट्र दशक। </span><strong><span style=\"font-family: Times New Roman;\">2014 - 2024</span></strong><span style=\"font-family: Baloo;\">: - सभी के लिए सतत ऊर्जा का संयुक्त राष्ट्र दशक।</span></p>\n<p><span style=\"font-family: Baloo;\"> </span></p>",
+                    correct: "d",
+                    pos_marks: 2.0,
+                    neg_marks: 0.5
+                });
+                questions.push({
+                    id: "13",
+                    section: "18",
+                    question_en: "<p><span style=\"font-family: Times New Roman;\">13. </span><span style=\"font-family: Times New Roman;\">The Ghoom Monastery is located in:</span></p>",
+                    question_hi: "<p><span style=\"font-family: Times New Roman;\">13. </span><span style=\"font-family: Baloo;\">घूम मठ कहाँ स्थित है?</span></p>",
+                    options_en: ["<p>Gangtok</p>", "<p>Namch</p>", 
+                                "<p>Kalimpong</p>", "<p>Darjeeling</p>"],
+                    options_hi: ["<p>गंगटोक</p>", "<p>नामचू</p>",
+                                "<p>कलिम्पोंग</p>", "<p>दार्जिलिंग</p>"],
+                    solution_en: "<p>13.(d) <span style=\"font-family: Baloo;\">Ghoom Monastery: First Tibetan Monastery in Darjeeling (West Bengal). </span><span style=\"font-family: Baloo;\"> <strong>Famous Monasteries in India are</strong> </span><span style=\"font-family: Baloo;\">Hemis Monasteries ( Ladakh), Tabo Monasteries (Himachal Pradesh), Tsulglagkhang Monastery (Dharamshala), Thiksey Monastery (Ladakh), Tawang Monastery ( Arunachal Pradesh), Bylakuppe Monastery (Karnataka), Rumtek Monastery (Gangtok, Sikkkim) etc.</span><span style=\"font-family: Baloo;\"> </span></p>",
+                    solution_hi: "<p>13.(d) <span style=\"font-family: Baloo;\">घूम मठ: दार्जिलिंग (पश्चिम बंगाल) में पहला तिब्बती मठ </span><span style=\"font-family: Baloo;\">है</span><span style=\"font-family: Baloo;\">। <strong>भारत में प्रसिद्ध मठ</strong>- हेमिस मठ (लद्दाख), ताबो मठ (हिमाचल प्रदेश), सुलग्लगखंग मठ (धर्मशाला), ठिकसे मठ (लद्दाख), तवांग मठ (अरुणाचल प्रदेश), बाइलाकुप्पे मठ (कर्नाटक), रुमटेक मठ (गंगटोक, सिक्किम) आदि हैं। </span></p>\n<p><span style=\"font-family: Baloo;\"> </span></p>",
+                    correct: "d",
+                    pos_marks: 2.0,
+                    neg_marks: 0.5
+                });
+                questions.push({
+                    id: "14",
+                    section: "18",
+                    question_en: "<p><span style=\"font-family: Times New Roman;\">14. </span><span style=\"font-family: Times New Roman;\">A distinct &lsquo;Dhrupad style&rsquo; is associated with the ______ gharana.</span></p>",
+                    question_hi: "<p><span style=\"font-family: Times New Roman;\">14. </span><span style=\"font-family: Baloo;\">एक विशिष्ट \'ध्रुपद शैली\' ______ घराने से जुड़ी है।</span></p>",
+                    options_en: ["<p>Ajrada</p>", "<p>Nathdwara</p>", 
+                                "<p>Jafferkhani</p>", "<p>Bishnupur</p>"],
+                    options_hi: ["<p>अजरदा</p>", "<p>नाथद्वारा</p>",
+                                "<p>जाफरखानी</p>", "<p>बिष्णुपुर</p>"],
+                    solution_en: "<p>14.(d)<span style=\"font-family: Times New Roman;\"> </span><span style=\"font-family: Times New Roman;\">A distinct &lsquo;Dhrupad style&rsquo; is associated with the <strong>Bishnupur gharana</strong>. Tansen was a famous Dhrupad instrument player. It is the oldest known style of major vocal styles associated with Hindustani classical music, Haveli Sangeet of Pushtimarg Sampraday and also related to the South Indian Carnatic tradition.</span></p>\n<p><span style=\"font-family: Times New Roman;\"> </span></p>",
+                    solution_hi: "<p>14.(d) <span style=\"font-family: Baloo;\"><strong>बिष्णुपुर घराने</strong> से एक विशिष्ट \'ध्रुपद शैली\' जुड़ी हुई है। तानसेन एक प्रसिद्ध ध्रुपद वाद्य वादक थे। यह हिंदुस्तानी शास्त्रीय संगीत, पुष्टिमार्ग संप्रदाय के हवेली संगीत और दक्षिण भारतीय कर्नाटक परंपरा से संबंधित प्रमुख मुखर (vocal) शैलियों की सबसे पुरानी ज्ञात शैली है।</span></p>\n<p><span style=\"font-family: Baloo;\"> </span></p>",
+                    correct: "d",
+                    pos_marks: 2.0,
+                    neg_marks: 0.5
+                });
+                questions.push({
+                    id: "15",
+                    section: "18",
+                    question_en: "<p>15.<span style=\"font-family: Baloo;\"> What do you call the maximum sustainable size of a resident population in a given ecosystem?&nbsp;</span></p>",
+                    question_hi: "<p>15. <span style=\"font-family: Palanquin Dark;\">किसी दिए गए पारितंत्र में निवासी जनसंख्या के अधिकतम धारणीय आकार को आप क्या कहते हैं?</span></p>",
+                    options_en: ["<p>Census</p>", "<p>Crude Oil</p>", 
+                                "<p>Carrying capacity</p>", "<p>Case rate</p>"],
+                    options_hi: ["<p>जनगणना</p>", "<p>कच्चा तेल</p>",
+                                "<p>वहन क्षमता</p>", "<p>केस दर</p>"],
+                    solution_en: "<p>15.(c) <strong><span style=\"font-family: Palanquin Dark;\">Carrying capacity</span></strong><span style=\"font-family: Palanquin Dark;\"> can be defined as a species\' average population size in a particular habitat. Carrying capacity is the maximum number of a species an environment can support indefinitely. </span></p>\n<p><span style=\"font-family: Palanquin Dark;\"> </span></p>",
+                    solution_hi: "<p>15.(c) <strong>वहन क्षमता</strong><span style=\"font-family: Palanquin Dark;\"><strong> </strong>को एक विशेष आवास में एक प्रजाति की औसत जनसंख्या आकार के रूप में परिभाषित किया जा सकता है। वहन क्षमता एक प्रजाति की अधिकतम संख्या है जिसे एक पर्यावरण अनिश्चित काल तक समर्थन दे सकता है।</span><span style=\"font-family: Palanquin Dark;\"> </span></p>",
+                    correct: "c",
+                    pos_marks: 2.0,
+                    neg_marks: 0.5
+                });
+                questions.push({
+                    id: "16",
+                    section: "18",
+                    question_en: "<p>16. <span style=\"font-family: Palanquin Dark;\">Which of the following is the largest dome of India as of April 2021?&nbsp;</span></p>",
+                    question_hi: "<p>16.<span style=\"font-family: Palanquin Dark;\"> निम्नलिखित में से कौन अप्रैल 2021 तक भारत का सबसे बड़ा गुंबद है?</span></p>",
+                    options_en: [" <p> Alai Darwaza</span></p>", " <p> Adhai Din ka Jhonpra</span></p>", 
+                                " <p> Gol Gumbaz</span></p>", " <p> Data Darbar</span></p>"],
+                    options_hi: ["<p>अलाई दरवाजा</p>", " <p> अढाई दिन का झोंपरा</span></p>",
+                                " <p> गोल गुंबज़</span></p>", "<p>डेटा दरबार</p>"],
+                    solution_en: "<p>16.(c) <strong>Gol Gumbaz</strong><span style=\"font-family: Palanquin Dark;\"> is located at Bijapur, Karnataka is the largest dome of India. </span><span style=\"font-family: Palanquin Dark;\"> This mausoleum of Muhammed Adil Shah was constructed in 1656 by architect Yaqut of Dabul. The </span><span style=\"font-family: Palanquin Dark;\"><strong>Alai Darwaza</strong> </span><span style=\"font-family: Palanquin Dark;\">was built by Ala-ud-Din Khalji in 1311 located at Qutab Minar Complex, Delhi India. </span><span style=\"font-family: Palanquin Dark;\"><strong>Adhai Din ka Jhonpra</strong> </span><span style=\"font-family: Palanquin Dark;\">was built by </span><span style=\"font-family: Palanquin Dark;\">Qutb al-Din Aibak in 1199 CE located at Ajmer. </span><strong><span style=\"font-family: Palanquin Dark;\">Data Darbar</span></strong><span style=\"font-family: Palanquin Dark;\">, located in the city of Lahore, Punjab, Pakistan, is the largest Sufi shrine in South Asia. It was built to house the remains of Ali Hujwiri.</span></p>\n<p><span style=\"font-family: Palanquin Dark;\"> </span></p>",
+                    solution_hi: "<p>16.(c) <strong>गोल गुंबज</strong>&nbsp;<span style=\"font-family: Palanquin Dark;\">कर्नाटक के बीजापुर में स्थित है जो भारत का सबसे बड़ा गुंबद है। मुहम्मद आदिल शाह के इस मकबरे का निर्माण 1656 में दाबुल के वास्तुकार याकूत ने करवाया था। </span><strong><span style=\"font-family: Palanquin Dark;\">अलाई दरवाजा</span></strong><span style=\"font-family: Palanquin Dark;\"> का निर्माण अला-उद-दीन खिलजी ने 1311 में कुतुब मीनार परिसर, दिल्ली भारत में किया था। </span><span style=\"font-family: Palanquin Dark;\"><strong>अढ़ाई दिन का झोपड़ा</strong> </span><span style=\"font-family: Palanquin Dark;\">कुतुब अल-दीन ऐबक द्वारा अजमेर में स्थित 1199 CE में बनाया गया था। पाकिस्तान के लाहौर शहर में स्थित </span><strong><span style=\"font-family: Palanquin Dark;\">दाता दरबार</span></strong><span style=\"font-family: Palanquin Dark;\"> दक्षिण एशिया का सबसे बड़ा सूफी दरगाह है। इसे अली हुजविरी के अवशेषों को रखने के लिए बनाया गया था।</span></p>\n<p><span style=\"font-family: Palanquin Dark;\"> </span></p>",
+                    correct: "c",
+                    pos_marks: 2.0,
+                    neg_marks: 0.5
+                });
+                questions.push({
+                    id: "17",
+                    section: "18",
+                    question_en: "<p>17. <span style=\"font-family: Palanquin Dark;\">&lsquo;Povadas&rsquo; is a popular folk dance from the state of ______.</span></p>",
+                    question_hi: "<p>17. <span style=\"font-family: Palanquin Dark;\">\'पोवदास\' ______ राज्य का एक लोकप्रिय लोक नृत्य है।</span></p>",
+                    options_en: ["<p>Maharashtra</p>", "<p>Gujrat</p>", 
+                                "<p>Rajasthan</p>", "<p>Kerala</p>"],
+                    options_hi: ["<p>महाराष्ट्र</p>", "<p>गुजराती</p>",
+                                "<p>राजस्थान</p>", "<p>केरल</p>"],
+                    solution_en: "<p>17.(a) <span style=\"font-family: Palanquin Dark;\">&lsquo;Povadas&rsquo; is a popular folk dance from the state of <strong>Maharashtra</strong>. </span><span style=\"font-family: Palanquin Dark;\">The main folk dances of Maharashtra are Lavani, Dhangarigaja, Lezim, Koli, Gondhal and Tamasha.</span></p>\n<p><span style=\"font-family: Palanquin Dark;\"> </span></p>",
+                    solution_hi: "<p>17.(a) &lsquo;<span style=\"font-family: Palanquin Dark;\">पोवाड़ा&rsquo; <strong>महाराष्ट्र </strong>राज्य का एक लोकप्रिय लोक नृत्य है। महाराष्ट्र के प्रमुख लोक नृत्य लावणी, धांगरिगाजा, </span><span style=\"font-family: Palanquin Dark;\">लेज़ियम</span><span style=\"font-family: Palanquin Dark;\">, कोली, गोंधल और तमाशा हैं।</span></p>\n<p><span style=\"font-family: Palanquin Dark;\"> </span></p>",
+                    correct: "a",
+                    pos_marks: 2.0,
+                    neg_marks: 0.5
+                });
+                questions.push({
+                    id: "18",
+                    section: "18",
+                    question_en: "<p>18. <span style=\"font-family: Palanquin Dark;\">Which of the following books was written by Jawaharlal Nehru?&nbsp;</span></p>",
+                    question_hi: "<p>18. <span style=\"font-family: Palanquin Dark;\">निम्नलिखित में से कौन सी पुस्तक जवाहरलाल नेहरू द्वारा लिखी गई थी?</span></p>",
+                    options_en: ["<p>A bunch of Old letters.</p>", "<p>Riddles in Hinduism</p>", 
+                                "<p>Ranade, Gandhi and Jinnah</p>", "<p>Waiting For A Visa : Autobiographical Notes</p>"],
+                    options_hi: ["<p>ए बंच ऑफ़ ओल्ड लेटर्स</p>", "<p>रिडल इन हिन्दूइज्म</p>",
+                                "<p>रानाडे, गांधी और जिन्ना</p>", "<p>वेटिंग फॉर ए वीज़ा: ऑटोबायोग्राफिकल नोट्स</p>"],
+                    solution_en: "<p>18.(a) <span style=\"font-family: Palanquin Dark;\"><strong>A bunch of Old letters</strong> was written by JawaharLal Nehru.( &lsquo;Riddles in Hinduism&rsquo;, &lsquo;Ranade, Gandhi and Jinnah&rsquo;, &lsquo;Waiting For A Visa : Autobiographical Notes&rsquo; ) written by</span><span style=\"font-family: Palanquin Dark;\"> <strong>B.R Ambedkar</strong></span><span style=\"font-family: Palanquin Dark;\">. More books written by </span><span style=\"font-family: Palanquin Dark;\"><strong>Jawaharlal Nehru</strong> </span><span style=\"font-family: Palanquin Dark;\">The Discovery of India, Letters from a Father to his Daughter, Glimpses of World History, The Unity of India Collected Writings 1937-1940, An Autobiography.</span></p>\n<p><span style=\"font-family: Palanquin Dark;\"> </span></p>",
+                    solution_hi: "<p>18.(a) <span style=\"font-family: Palanquin Dark;\">&lsquo;</span><span style=\"font-family: Palanquin Dark;\"><strong>अ बंच ऑफ ओल्ड लेटर्स</strong>&rsquo;</span><span style=\"font-family: Palanquin Dark;\"> जवाहरलाल नेहरू द्वारा लिखा गया था। (\'रिडल्स इन हिंदूइज्म\', \'रानाडे, गांधी और जिन्ना\', \'वेटिंग फॉर ए वीजा: ऑटोबायोग्राफिकल नोट्स\') <strong>बी.आर. अम्बेडकर</strong> द्वारा लिखित है। इसके अलावा <strong>जवाहरलाल नेहरू</strong> द्वारा लिखित पुस्तकें हैं- द डिस्कवरी ऑफ इंडिया, लेटर्स फ्रॉम ए फादर टू हिज डॉटर, ग्लिम्पसेज ऑफ वर्ल्ड हिस्ट्री, द यूनिटी ऑफ इंडिया कलेक्टेड राइटिंग्स 1937-1940, एन ऑटोबायोग्राफी।</span></p>\n<p><span style=\"font-family: Palanquin Dark;\"> </span></p>",
+                    correct: "a",
+                    pos_marks: 2.0,
+                    neg_marks: 0.5
+                });
+                questions.push({
+                    id: "19",
+                    section: "misc",
+                    question_en: "<p>19.<span style=\"font-family: Palanquin Dark;\"> Realizing the importance of maintaining the cleanliness of the water bodies, the Government of India passed the Water (Prevention and Control of Pollution) Act, ________, to safeguard our water resources.&nbsp;</span></p>",
+                    question_hi: "<p>19.<span style=\"font-family: Palanquin Dark;\"> जल निकायों की स्वच्छता बनाए रखने के महत्व को समझते हुए, भारत सरकार ने हमारे जल संसाधनों की सुरक्षा के लिए जल (प्रदूषण की रोकथाम और नियंत्रण) अधिनियम, ________ पारित किया।</span></p>",
+                    options_en: ["<p>1974</p>", "<p>1973</p>", 
+                                "<p>1971</p>", "<p>1969</p>"],
+                    options_hi: ["<p>1974</p>", "<p>1973</p>",
+                                "<p>1971</p>", "<p>1969</p>"],
+                    solution_en: "<p>19.(a) <span style=\"font-family: Palanquin Dark;\">The six laws related to environmental protection and wildlife are: The Environment (Protection) Act, 1986, The Forest (Conservation) Act, 1980, The Wildlife Protection Act, 1972, </span><span style=\"font-family: Palanquin Dark;\"><strong>Water (Prevention and Control of Pollution) Act, 1974</strong>,</span><span style=\"font-family: Palanquin Dark;\"> Air (Prevention and Control of Pollution) Act, 1981 and The Indian Forest Act, 1927. Some more important Acts- The Ozone Depleting Substances (Regulation and Control) in 2000, The Noise Pollution (Regulation and Control) (Amendment) in 2002, The Biological Diversity Act in 2002. </span><span style=\"font-family: Palanquin Dark;\"> </span></p>",
+                    solution_hi: "<p>19.(a) <span style=\"font-family: Palanquin Dark;\">पर्यावरण संरक्षण और वन्यजीव से संबंधित छह कानून हैं: पर्यावरण (संरक्षण) अधिनियम, 1986, वन (संरक्षण) अधिनियम, 1980, वन्यजीव संरक्षण अधिनियम, 1972, <strong>जल (प्रदूषण की रोकथाम और नियंत्रण) अधिनियम, 1974</strong>, वायु ( प्रदूषण की रोकथाम और नियंत्रण) अधिनियम, 1981 और भारतीय वन अधिनियम, 1927। कुछ और महत्वपूर्ण अधिनियम हैं - 2000 में ओजोन क्षयकारी पदार्थ (विनियमन और नियंत्रण), 2002 में ध्वनि प्रदूषण (विनियमन और नियंत्रण) (संशोधन), 2002 में जैविक विविधता अधिनियम।</span></p>\n<p><span style=\"font-family: Palanquin Dark;\"> </span></p>",
+                    correct: "a",
+                    pos_marks: 2.0,
+                    neg_marks: 0.5
+                });
+            
+            // Generate question boxes
+            const boxesContainer = document.getElementById('question-boxes');
+            questions.forEach((q, index) => {
+                const box = document.createElement('div');
+                box.className = 'q-box';
+                box.textContent = index + 1;
+                box.onclick = () => showQuestion(index);
+                box.id = `box-${index}`;
+                boxesContainer.appendChild(box);
+            });
+            
+            // Show first question
+            showQuestion(0);
+            updateProgress();
+        }
+        
+        // Show a specific question
+        
+        function formatContent(text) {
+            if (!text) return '';
+            return text.replace(/<img/g, '<img style="max-width:100%;height:auto;"');
+        }
+        
+        function showQuestion(index) {
+            if (index < 0 || index >= questions.length) return;
+            
+            currentQuestion = index;
+            const question = questions[index];
+            
+            // Update question counter
+            document.getElementById('question-counter').textContent = `Question ${index + 1} of ${questions.length}`;
+            
+            // Update question boxes
+            document.querySelectorAll('.q-box').forEach(box => box.classList.remove('current'));
+            document.getElementById(`box-${index}`).classList.add('current');
+            
+            // Generate question HTML
+            let html = `
+                <div class="question-card">
+                    <div class="question-text">
+                        <div class="en">${formatContent(question.question_en)}</div>
+                        <div class="hi" style="display:none">${formatContent(question.question_hi)} </div>
+                    </div>
+                    <div class="options" id="options-container">`;
+            
+            // Add options
+            ['a', 'b', 'c', 'd'].forEach((opt, i) => {
+                let optionClass = '';
+                let isCorrectAnswer = opt === question.correct;
+                let isUserAnswer = answers[question.id] === opt;
+                
+                // When reviewing, add appropriate classes
+                if (submitted) {
+                    if (isCorrectAnswer) {
+                        optionClass += ' correct-answer';
+                    } else if (isUserAnswer && !isCorrectAnswer) {
+                        optionClass += ' incorrect';
+                    }
+                }
+                
+                html += `
+                    <div class="option-item">
+                        <input class="option-input" type="radio" name="q${index}" 
+                            id="opt-${index}-${opt}" value="${opt}" 
+                            ${isUserAnswer ? 'checked' : ''}
+                            onclick="selectAnswer('${question.id}', '${opt}')">
+                       <label class="option-label${optionClass}" for="opt-${index}-${opt}">
+                            <div class="en">${question.options_en[i]}</div>
+                            <div class="hi" style="display:none">${question.options_hi[i]}</div>
+                        </label>
+                    </div>`;
+            });
+            
+            // Add solution if submitted
+            if (submitted) {
+                const isCorrect = answers[question.id] === question.correct;
+                const resultText = answers[question.id] ? (isCorrect ? 'Correct!' : 'Incorrect!') : 'Not attempted';
+                
+                html += `
+                    <div class="solution-container">
+                        <div class="solution-title">${resultText}</div>
+                        <div class="solution-text">
+                            <div class="en">${question.solution_en}</div>
+                            <div class="hi" style="display:none">${question.solution_hi}</div>
+                        </div>
+                    </div>`;
+            }
+            
+            html += `</div></div>`;
+            
+            document.getElementById('questions-container').innerHTML = html;
+            
+            // Apply language settings
+            applyLanguage();
+            
+            // If in mobile view, close the menu
+            if (window.innerWidth < 992) {
+                toggleNav(false);
+            }
+            
+            // Add review mode class if submitted
+            if (submitted) {
+                document.getElementById('options-container').classList.add('review-mode');
+            }
+        }
+        
+        // Apply current language
+        function applyLanguage() {
+            document.querySelectorAll(`.${currentLang}`).forEach(el => el.style.display = 'block');
+            document.querySelectorAll(`.${currentLang === 'en' ? 'hi' : 'en'}`).forEach(el => el.style.display = 'none');
+            
+            // Update language button text
+            document.getElementById('lang-text').textContent = currentLang === 'en' ? 'Hi' : 'En';
+        }
+        
+        // Select an answer
+        function selectAnswer(qId, option) {
+            if (submitted) return;
+            
+            answers[qId] = option;
+            updateProgress();
+            
+            // Mark question as attempted in the navigation
+            const index = questions.findIndex(q => q.id === qId);
+            if (index >= 0) {
+                const box = document.getElementById(`box-${index}`);
+                box.classList.add('attempted');
+                box.classList.remove('unattempted');
+            }
+        }
+        
+        // Navigate to previous/next question
+        function prevQuestion() { 
+            if (currentQuestion > 0) showQuestion(currentQuestion - 1); 
+        }
+        
+        function nextQuestion() { 
+            if (currentQuestion < questions.length - 1) showQuestion(currentQuestion + 1); 
+        }
+        
+        // Switch section
+        function switchSection(sectionId) {
+            if (sectionId === 'all') {
+                showQuestion(0);
+                return;
+            }
+            
+            const section = sections[sectionId];
+            if (section) showQuestion(section.start);
+        }
+        
+        // Toggle language
+        function toggleLanguage() {
+            currentLang = currentLang === 'en' ? 'hi' : 'en';
+            applyLanguage();
+        }
+        
+        // Toggle navigation sidebar
+        function toggleNav(show) {
+            const nav = document.getElementById('question-nav');
+            const overlay = document.getElementById('nav-overlay');
+            
+            if (show === undefined) {
+                show = !nav.classList.contains('show');
+            }
+            
+            if (show) {
+                nav.classList.add('show');
+                overlay.classList.add('show');
+                document.body.style.overflow = 'hidden';
+            } else {
+                nav.classList.remove('show');
+                overlay.classList.remove('show');
+                document.body.style.overflow = '';
+            }
+        }
+        
+        // Update progress
+        function updateProgress() {
+            const attempted = Object.keys(answers).length;
+            document.getElementById('attempted-count').textContent = attempted;
+        }
+        
+        // Start timer
+        function startTimer() {
+            const timerDisplay = document.getElementById('timer-display');
+            let timeLeft = totalTime;
+            
+            const timerInterval = setInterval(() => {
+                if (timeLeft <= 0 || submitted) {
+                    clearInterval(timerInterval);
+                    if (!submitted) submitTest();
+                    return;
+                }
+                
+                const minutes = Math.floor(timeLeft / 60);
+                const seconds = timeLeft % 60;
+                timerDisplay.textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`;
+                timeLeft--;
+            }, 1000);
+        }
+        
+        // Confirm before submitting
+        function confirmSubmit() {
+            if (submitted) return;
+            
+            const attempted = Object.keys(answers).length;
+            const remaining = questions.length - attempted;
+            
+            // Create a more modern confirmation dialog
+            const confirmHtml = `
+                <div style="text-align: center; padding: 20px;">
+                    <h4 style="margin-bottom: 16px; color: var(--dark);">Confirm Submission</h4>
+                    <p style="margin-bottom: 24px; color: var(--gray);">
+                        You have attempted ${attempted} of ${questions.length} questions.<br>
+                        ${remaining} questions are unattempted.
+                    </p>
+                    <div style="display: flex; justify-content: center; gap: 12px;">
+                        <button onclick="this.closest('.modal').querySelector('.cancel-btn').click()" 
+                            style="padding: 8px 20px; border: 1px solid var(--light-gray); background: white; border-radius: 8px; cursor: pointer;">
+                            Cancel
+                        </button>
+                        <button onclick="submitTest(); this.closest('.modal').querySelector('.cancel-btn').click()" 
+                            style="padding: 8px 20px; background: var(--primary); color: white; border: none; border-radius: 8px; cursor: pointer;">
+                            Submit Test
+                        </button>
+                    </div>
+                </div>`;
+            
+            // Create modal element
+            const modal = document.createElement('div');
+            modal.className = 'results-modal show';
+            modal.innerHTML = `
+                <div class="results-card" style="max-width: 400px;">
+                    <button class="cancel-btn" style="position: absolute; top: 12px; right: 12px; background: none; border: none; font-size: 1.2rem; cursor: pointer; color: var(--gray);" onclick="this.closest('.results-modal').remove()">
+                        ×
+                    </button>
+                    ${confirmHtml}
+                </div>`;
+            
+            document.body.appendChild(modal);
+        }
+        
+        // Submit test
+        function submitTest() {
+            if (submitted) return;
+            
+            submitted = true;
+            
+            let score = 0;
+            let correctCount = 0;
+            let incorrectCount = 0;
+            let unattemptedCount = 0;
+            
+            questions.forEach((q, index) => {
+                const userAns = answers[q.id];
+                const box = document.getElementById(`box-${index}`);
+                
+                box.classList.remove('attempted');
+                
+                if (!userAns) {
+                    unattemptedCount++;
+                    box.classList.add('unattempted');
+                } else if (userAns === q.correct) {
+                    correctCount++;
+                    score += q.pos_marks;
+                    box.classList.add('correct');
+                } else {
+                    incorrectCount++;
+                    score -= q.neg_marks;
+                    box.classList.add('incorrect');
+                }
+            });
+            
+            // Update result values
+            document.getElementById('score-value').textContent = score.toFixed(2);
+            document.getElementById('correct-value').textContent = correctCount;
+            document.getElementById('incorrect-value').textContent = incorrectCount;
+            document.getElementById('unattempted-value').textContent = unattemptedCount;
+            
+            // Show the results modal
+            document.getElementById('results-modal').classList.add('show');
+            
+            // Disable submit button
+            const submitBtn = document.getElementById('submit-btn');
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<i class="fas fa-check"></i>';
+            submitBtn.style.backgroundColor = 'var(--success)';
+            
+            // Refresh current question view to show solution
+            showQuestion(currentQuestion);
+        }
+        
+        // Review test
+        function reviewTest() {
+            document.getElementById('results-modal').classList.remove('show');
+            showQuestion(0);
+        }
+        
+        // Close modal when clicking outside
+        window.addEventListener('click', function(event) {
+            if (event.target === document.getElementById('results-modal')) {
+                document.getElementById('results-modal').classList.remove('show');
+            }
+        });
+        
+        // Keyboard navigation
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowLeft') prevQuestion();
+            if (e.key === 'ArrowRight') nextQuestion();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,1409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aether Mocks</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
+
+        :root {
+            --primary: #6366f1;
+            --primary-light: #818cf8;
+            --primary-dark: #4f46e5;
+            --secondary: #8b5cf6;
+            --accent: #ec4899;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --light: #1e293b;
+            --dark: #0f172a;
+            --gray: #64748b;
+            --light-gray: rgba(255, 255, 255, 0.08);
+            --card-bg: rgba(255, 255, 255, 0.03);
+            --body-bg: #030712;
+            --header-bg: rgba(15, 23, 42, 0.6);
+            --footer-bg: rgba(15, 23, 42, 0.8);
+            --box-shadow: 0 8px 32px 0 rgba(0,0,0,0.3);
+            --box-shadow-sm: 0 4px 16px rgba(0,0,0,0.2);
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Outfit', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        body {
+            background-color: var(--body-bg);
+            color: #f8fafc;
+            line-height: 1.6;
+            padding-bottom: 80px; /* Space for fixed navigation */
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(99, 102, 241, 0.15) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(139, 92, 246, 0.15) 0px, transparent 50%);
+            background-attachment: fixed;
+        }
+        
+        /* Header Styles */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 60px;
+            background: var(--header-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            color: #f8fafc;
+            display: flex;
+            align-items: center;
+            padding: 0 16px;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+            box-shadow: var(--box-shadow-sm);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+        }
+        
+        .header-brand {
+            display: flex;
+            align-items: center;
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: #f8fafc;
+            text-decoration: none;
+            gap: 8px;
+        }
+        
+        .header-brand i {
+            font-size: 1.2rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .header-controls {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .control-btn {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.08);
+            color: #f8fafc;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .control-btn:hover {
+            background: rgba(255,255,255,0.12);
+            border-color: rgba(255,255,255,0.2);
+            transform: translateY(-1px);
+        }
+        
+        .control-btn.active {
+            background: var(--primary);
+            border-color: var(--primary-light);
+        }
+        
+        .timer-display {
+            background: rgba(0,0,0,0.3);
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 18px;
+            padding: 4px 12px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            white-space: nowrap;
+            color: #f8fafc;
+        }
+        
+        .timer-display i {
+            margin-right: 6px;
+            color: var(--accent);
+        }
+        
+        /* Main Content */
+        .main-content {
+            margin-top: 60px;
+            padding: 16px;
+            min-height: calc(100vh - 140px);
+        }
+        
+        .question-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(8px);
+            border: 1px solid var(--light-gray);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 16px;
+            box-shadow: var(--box-shadow-sm);
+            transition: var(--transition);
+        }
+        
+        .question-counter {
+            font-size: 0.9rem;
+            color: var(--gray);
+            text-align: center;
+            margin-bottom: 16px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+        
+        .question-text {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 24px;
+            color: #f8fafc;
+            overflow-wrap: break-word;
+            word-wrap: break-word;
+            hyphens: auto;
+            max-width: 100%;
+        }
+        
+        .option-item {
+            margin-bottom: 12px;
+            position: relative;
+        }
+        
+        .option-input {
+            position: absolute;
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        
+        .question-text img,
+        .option-label img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 8px 0;
+            border-radius: 8px;
+        }
+        
+        .option-label {
+            display: block;
+            padding: 14px 16px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            color: #f8fafc;
+        }
+        
+        .option-label:hover {
+            border-color: rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.05);
+            transform: translateY(-2px);
+            box-shadow: var(--box-shadow-sm);
+        }
+        
+        .option-input:checked + .option-label {
+            border-color: var(--primary);
+            background: rgba(99, 102, 241, 0.08);
+            box-shadow: 0 0 12px var(--primary-glow);
+        }
+        
+        .option-input:checked + .option-label::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 3px;
+            height: 100%;
+            background: var(--primary);
+        }
+        
+        /* When reviewing answers */
+        .review-mode .option-input:checked + .option-label.correct {
+            border-color: var(--success);
+            background: rgba(16, 185, 129, 0.08);
+            box-shadow: 0 0 12px var(--success-glow);
+        }
+        
+        .review-mode .option-input:checked + .option-label.correct::after {
+            background: var(--success);
+        }
+        
+        .review-mode .option-input:checked + .option-label.incorrect {
+            border-color: var(--danger);
+            background: rgba(239, 68, 68, 0.08);
+            box-shadow: 0 0 12px var(--danger-glow);
+        }
+        
+        .review-mode .option-input:checked + .option-label.incorrect::after {
+            background: var(--danger);
+        }
+        
+        .review-mode .option-label.correct-answer {
+            border-color: var(--success);
+            background: rgba(16, 185, 129, 0.08);
+            box-shadow: 0 0 12px var(--success-glow);
+        }
+        
+        .review-mode .option-label.correct-answer::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 3px;
+            height: 100%;
+            background: var(--success);
+        }
+        
+        .solution-container {
+            margin-top: 24px;
+            padding: 18px;
+            background: rgba(99, 102, 241, 0.05);
+            border-radius: 12px;
+            border-left: 3px solid var(--primary);
+            border-top: 1px solid rgba(255,255,255,0.03);
+            border-right: 1px solid rgba(255,255,255,0.03);
+            border-bottom: 1px solid rgba(255,255,255,0.03);
+        }
+        
+        .solution-title {
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--primary-light);
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        /* Question Navigation */
+        .question-nav {
+            position: fixed;
+            top: 60px;
+            right: 0;
+            bottom: 80px;
+            width: 100%;
+            max-width: 320px;
+            background: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-left: 1px solid rgba(255,255,255,0.06);
+            box-shadow: var(--box-shadow);
+            transform: translateX(100%);
+            transition: var(--transition);
+            z-index: 900;
+            overflow-y: auto;
+            padding: 16px;
+        }
+        
+        .question-nav.show {
+            transform: translateX(0);
+        }
+        
+        .nav-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+        
+        .nav-title {
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin: 0;
+            color: #f8fafc;
+        }
+        
+        .question-stats {
+            display: flex;
+            gap: 8px;
+        }
+        
+        .stat-badge {
+            font-size: 0.75rem;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-weight: 500;
+            color: white;
+        }
+        
+        .section-selector {
+            width: 100%;
+            margin-bottom: 16px;
+            border-radius: 12px;
+            padding: 10px 16px;
+            border: 1px solid rgba(255,255,255,0.08);
+            background: rgba(0, 0, 0, 0.3);
+            color: #f8fafc;
+            font-size: 0.9rem;
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 10px center;
+            background-size: 16px;
+        }
+        
+        .question-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(40px, 1fr));
+            gap: 8px;
+        }
+        
+        .q-box {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 500;
+            border: 1px solid rgba(255,255,255,0.08);
+            background: rgba(255,255,255,0.02);
+            color: #94a3b8;
+            transition: var(--transition);
+            position: relative;
+        }
+        
+        .q-box:hover {
+            transform: translateY(-2px);
+            border-color: rgba(255,255,255,0.2);
+            color: #f8fafc;
+        }
+        
+        .q-box.attempted {
+            background-color: var(--primary);
+            color: white;
+            border-color: var(--primary);
+            box-shadow: 0 0 8px var(--primary-glow);
+        }
+        
+        .q-box.correct {
+            background-color: var(--success);
+            color: white;
+            border-color: var(--success);
+            box-shadow: 0 0 8px var(--success-glow);
+        }
+        
+        .q-box.incorrect {
+            background-color: var(--danger);
+            color: white;
+            border-color: var(--danger);
+            box-shadow: 0 0 8px var(--danger-glow);
+        }
+        
+        .q-box.current {
+            border: 2px solid var(--accent) !important;
+            transform: translateY(-3px);
+            box-shadow: 0 4px 12px rgba(236, 72, 153, 0.3);
+            color: #f8fafc;
+        }
+        
+        .q-box.unattempted {
+            background-color: var(--gray);
+            color: white;
+            border-color: var(--gray);
+        }
+        
+        /* Bottom Navigation */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 80px;
+            background: var(--footer-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-top: 1px solid rgba(255,255,255,0.06);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 16px;
+            z-index: 800;
+        }
+        
+        .nav-btn {
+            height: 48px;
+            border-radius: 12px;
+            border: none;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 20px;
+            transition: var(--transition);
+            gap: 8px;
+            cursor: pointer;
+        }
+        
+        .nav-btn i {
+            font-size: 1rem;
+        }
+        
+        .nav-btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .nav-btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px var(--primary-glow);
+        }
+        
+        .nav-btn-outline {
+            background: rgba(255,255,255,0.02);
+            color: #f8fafc;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .nav-btn-outline:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+        
+        .nav-btn:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+            transform: none !important;
+            box-shadow: none !important;
+        }
+        
+        /* Overlay when nav is open */
+        .nav-overlay {
+            position: fixed;
+            top: 60px;
+            left: 0;
+            right: 0;
+            bottom: 80px;
+            background: rgba(0,0,0,0.6);
+            backdrop-filter: blur(4px);
+            z-index: 800;
+            opacity: 0;
+            pointer-events: none;
+            transition: var(--transition);
+        }
+        
+        .nav-overlay.show {
+            opacity: 1;
+            pointer-events: all;
+        }
+        
+        /* Results Modal */
+        .results-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(3, 7, 18, 0.8);
+            backdrop-filter: blur(8px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1100;
+            opacity: 0;
+            pointer-events: none;
+            transition: var(--transition);
+            padding: 16px;
+        }
+        
+        .results-modal.show {
+            opacity: 1;
+            pointer-events: all;
+        }
+        
+        .results-card {
+            background: #0f172a;
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 24px;
+            width: 100%;
+            max-width: 500px;
+            overflow: hidden;
+            transform: translateY(20px);
+            transition: var(--transition);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+        }
+        
+        .results-modal.show .results-card {
+            transform: translateY(0);
+        }
+        
+        .results-header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 24px 20px;
+            text-align: center;
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+        }
+        
+        .results-title {
+            margin: 0;
+            font-weight: 600;
+            font-size: 1.4rem;
+        }
+        
+        .results-body {
+            padding: 24px;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+        
+        .stat-card {
+            padding: 16px;
+            border-radius: 16px;
+            text-align: center;
+            color: white;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+        
+        .stat-value {
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+        
+        .stat-label {
+            font-size: 0.8rem;
+            opacity: 0.8;
+            font-weight: 500;
+        }
+        
+        .results-footer {
+            padding: 18px 24px;
+            display: flex;
+            justify-content: center;
+            border-top: 1px solid rgba(255,255,255,0.06);
+            background: rgba(0,0,0,0.1);
+        }
+        
+        /* MathJax Styling Override */
+        .MathJax, .mjx-chtml {
+            overflow-x: auto;
+            max-width: 100%;
+            display: inline-block;
+        }
+        
+        /* Responsive Adjustments */
+        @media (min-width: 992px) {
+            .question-nav {
+                transform: translateX(0);
+            }
+            
+            .main-content {
+                margin-right: 320px;
+            }
+            
+            .nav-overlay {
+                display: none;
+            }
+            
+            .bottom-nav {
+                display: none;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .question-grid {
+                grid-template-columns: repeat(auto-fill, minmax(36px, 1fr));
+                gap: 6px;
+            }
+            
+            .q-box {
+                width: 36px;
+                height: 36px;
+                font-size: 0.9rem;
+            }
+            
+            .option-label {
+                padding: 12px 14px;
+            }
+            
+            .question-text {
+                font-size: 1rem;
+            }
+            
+            .header-brand {
+                font-size: 1rem;
+            }
+            
+            .control-btn {
+                width: 32px;
+                height: 32px;
+            }
+            
+            .timer-display {
+                font-size: 0.8rem;
+                padding: 4px 10px;
+            }
+            
+            .nav-btn {
+                height: 44px;
+                padding: 0 16px;
+                font-size: 0.9rem;
+            }
+        }
+</style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <a href="#" class="header-brand">
+                <i class="fas fa-graduation-cap"></i>
+                <span>Aether Mocks</span>
+            </a>
+            
+            <div class="header-controls">
+                <!-- Timer -->
+                <div class="timer-display">
+                    <i class="far fa-clock"></i>
+                    <span id="timer-display">5:00</span>
+                </div>
+                
+                                <!-- Full Screen Button -->
+                <button class="control-btn" id="fullscreen-btn" onclick="toggleFullscreen()" title="Toggle Fullscreen">
+                    <i class="fas fa-expand"></i>
+                </button>
+                
+                <!-- Language toggle -->
+                <button class="control-btn" id="lang-btn" onclick="toggleLanguage()">
+                    <span id="lang-text">En</span>
+                </button>
+                
+                <!-- Submit button -->
+                <button class="control-btn" id="submit-btn" onclick="confirmSubmit()">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+                
+                <!-- Questions toggle for mobile -->
+                <button class="control-btn nav-toggle-btn" id="nav-toggle" onclick="toggleNav()">
+                    <i class="fas fa-th"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Main content -->
+    <main class="main-content" id="main-content">
+        <div class="question-counter" id="question-counter">Question 1 of 15</div>
+        
+        <!-- Questions will be displayed here -->
+        <div id="questions-container"></div>
+    </main>
+    
+    <!-- Overlay for mobile nav -->
+    <div class="nav-overlay" id="nav-overlay" onclick="toggleNav(false)"></div>
+    
+    <!-- Question navigation sidebar -->
+    <aside class="question-nav" id="question-nav">
+        <div class="nav-header">
+            <h3 class="nav-title">Questions</h3>
+            <div class="question-stats">
+                <span class="stat-badge bg-primary" id="attempted-count">0</span>
+                <span class="stat-badge bg-gray" id="total-count">15</span>
+                <button class="control-btn d-lg-none" onclick="toggleNav(false)">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Section selector -->
+        <select class="section-selector" id="section-selector" onchange="switchSection(this.value)">
+            <option value="all">All Sections</option>
+        </select>
+        
+        <!-- Question grid -->
+        <div class="question-grid" id="question-boxes"></div>
+    </aside>
+    
+    <!-- Bottom navigation for mobile -->
+    <nav class="bottom-nav d-lg-none">
+        <button class="nav-btn nav-btn-outline" onclick="prevQuestion()">
+            <i class="fas fa-chevron-left"></i>
+            <span>Previous</span>
+        </button>
+        <button class="nav-btn nav-btn-outline" onclick="nextQuestion()">
+            <span>Next</span>
+            <i class="fas fa-chevron-right"></i>
+        </button>
+    </nav>
+    
+    <!-- Results modal -->
+    <div class="results-modal" id="results-modal">
+        <div class="results-card">
+            <div class="results-header">
+                <h3 class="results-title">Test Results</h3>
+            </div>
+            <div class="results-body">
+                <div class="stats-grid">
+                    <div class="stat-card" style="background: linear-gradient(135deg, var(--primary), var(--primary-dark))">
+                        <div class="stat-value" id="score-value">0</div>
+                        <div class="stat-label">Score</div>
+                    </div>
+                    <div class="stat-card" style="background: linear-gradient(135deg, var(--success), #1b9aaa)">
+                        <div class="stat-value" id="correct-value">0</div>
+                        <div class="stat-label">Correct</div>
+                    </div>
+                    <div class="stat-card" style="background: linear-gradient(135deg, var(--danger), var(--accent))">
+                        <div class="stat-value" id="incorrect-value">0</div>
+                        <div class="stat-label">Incorrect</div>
+                    </div>
+                    <div class="stat-card" style="background: linear-gradient(135deg, var(--gray), var(--dark))">
+                        <div class="stat-value" id="unattempted-value">0</div>
+                        <div class="stat-label">Unattempted</div>
+                    </div>
+                </div>
+            </div>
+            <div class="results-footer">
+                <button class="nav-btn nav-btn-primary" onclick="reviewTest()">
+                    <i class="fas fa-search me-1"></i>
+                    <span>Review Test</span>
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Questions data
+        const questions = [];
+        const sections = {};
+        let currentLang = "en";
+        let currentQuestion = 0;
+        let answers = {};
+        let submitted = false;
+        let totalTime = 5 * 60;
+        
+                function toggleFullscreen() {
+            const btn = document.getElementById('fullscreen-btn');
+            if (!btn) return;
+            const icon = btn.querySelector('i');
+            if (!document.fullscreenElement) {
+                document.documentElement.requestFullscreen().then(() => {
+                    icon.className = 'fas fa-compress';
+                }).catch(err => {
+                    console.error("Fullscreen error: ", err);
+                });
+            } else {
+                document.exitFullscreen().then(() => {
+                    icon.className = 'fas fa-expand';
+                });
+            }
+        }
+        
+        document.addEventListener('fullscreenchange', () => {
+            const btn = document.getElementById('fullscreen-btn');
+            if (btn) {
+                const icon = btn.querySelector('i');
+                if (document.fullscreenElement) {
+                    icon.className = 'fas fa-compress';
+                } else {
+                    icon.className = 'fas fa-expand';
+                }
+            }
+        });
+
+        // Initialize the test
+        window.onload = function() {
+            initializeTest();
+            startTimer();
+            
+            // If on desktop, show the question navigation by default
+            if (window.innerWidth >= 992) {
+                document.getElementById('question-nav').classList.add('show');
+                document.getElementById('main-content').classList.add('with-nav');
+            }
+        };
+        
+        // Initialize test data
+        function initializeTest() {
+            // Add sections and questions
+            
+            sections["18"] = {
+                name: "General Awareness",
+                start: 0,
+                end: 13
+            };
+            
+            document.getElementById('section-selector').innerHTML += 
+                `<option value="18">General Awareness</option>`;
+            
+            sections["misc"] = {
+                name: "Miscellaneous",
+                start: 14,
+                end: 14
+            };
+            
+            document.getElementById('section-selector').innerHTML += 
+                `<option value="misc">Miscellaneous</option>`;
+            
+            
+                questions.push({
+                    id: "1",
+                    section: "18",
+                    question_en: "<p>1. Which of the following dances is performed by women on various occasions to the beating of a drum in Madhya Pradesh?</p>",
+                    question_hi: "<p>1. मध्यप्रदेश में ढोल की थाप पर विभिन्न अवसरों पर महिलाओं द्वारा निम्नलिखित में से कौन-सा नृत्य किया जाता है?</p>",
+                    options_en: ["<p>Matki dance</p>", "<p>Mundari</p>", 
+                                "<p>Rouf</p>", "<p>Bhagoria</p>"],
+                    options_hi: ["<p>मटकी नृत्य</p>", "<p>मुंडारी</p>",
+                                "<p>रउफ़</p>", "<p>भगोरिया</p>"],
+                    solution_en: "<p>1.(a) <strong>Matki dance</strong> - Women balance earthen pots on their heads while dancing. Other folk dance of Madhya pradesh: Tertali- Performed by two or three women sitting on the ground. Lehangi - A dance of the Banjara and Kanjar tribes, performed during the monsoon. Akiri Dance - A signature dance of the cattle herders in Gwalior. Bhagoriya - It is a dance of the Bhils tribe.</p>",
+                    solution_hi: "<p>1.(a) <strong>मटकी नृत्य - </strong>नृत्य करते समय महिलाएँ अपने सिर पर मिट्टी के घड़े को रखकर नृत्य करती हैं। मध्य प्रदेश के अन्य लोक नृत्य: तेर्तली (तेराताली) - ज़मीन पर बैठकर दो या तीन महिलाओं द्वारा किया जाने वाला नृत्य। लहंगी - मानसून के दौरान किया जाने वाला बंजारा और कंजर जनजातियों का नृत्य। अकीरी नृत्य - ग्वालियर में पशुपालकों का एक विशिष्ट नृत्य। भगोरिया - यह भील जनजाति का नृत्य है।</p>",
+                    correct: "a",
+                    pos_marks: 2.0,
+                    neg_marks: 0.25
+                });
+                questions.push({
+                    id: "2",
+                    section: "18",
+                    question_en: "<p>2. In which year was the first edition of the Indian Premier League (IPL) cricket tournament held?</p>",
+                    question_hi: "<p>2. इंडियन प्रीमियर लीग (IPL) क्रिकेट टूर्नामेंट का पहला संस्करण निम्नलिखित में से किस वर्ष आयोजित किया गया था?</p>",
+                    options_en: ["<p>2015</p>", "<p>2003</p>", 
+                                "<p>2008</p>", "<p>2018</p>"],
+                    options_hi: ["<p>2015</p>", "<p>2003</p>",
+                                "<p>2008</p>", "<p>2018</p>"],
+                    solution_en: "<p>2.(c) <strong>2008</strong>. The inaugural IPL season was won by Rajasthan Royals. There have been seventeen seasons of the IPL tournament (As of August, 2024). Mumbai Indians and Chennai Super Kings have each won five titles.</p>",
+                    solution_hi: "<p>2.(c) <strong>2008</strong>. IPL का पहला सीजन राजस्थान रॉयल्स ने जीता था। IPL टूर्नामेंट (अगस्त, 2024 तक) के 17 सीज़न हो चुके हैं। मुंबई इंडियंस और चेन्नई सुपर किंग्स ने पांच-पांच खिताब जीते हैं।</p>",
+                    correct: "c",
+                    pos_marks: 2.0,
+                    neg_marks: 0.25
+                });
+                questions.push({
+                    id: "3",
+                    section: "18",
+                    question_en: "<p>3. In which of the following states is the Hornbill festival celebrated?</p>",
+                    question_hi: "<p>3. हॉर्नबिल पर्व (Hornbill festival) निम्नलिखित में से किस राज्य में मनाया जाता है?</p>",
+                    options_en: ["<p>Nagaland</p>", "<p>Manipur</p>", 
+                                "<p>Assam</p>", "<p>Mizoram</p>"],
+                    options_hi: ["<p>नागालैंड</p>", "<p>मणिपुर</p>",
+                                "<p>असम</p>", "<p>मिजोरम</p>"],
+                    solution_en: "<p>3.(a) <strong>Nagaland</strong>. Hornbill festival is celebrated annually in the first week of December. It is celebrated by the Naga tribe. It takes place at Kisama Heritage Village, around 12 km from Kohima (Capital city). It began in 2000. Other festivals in the state are Sekrenyi and Aoleang.</p>",
+                    solution_hi: "<p>3.(a) <strong>नागालैंड</strong>। हॉर्नबिल पर्व प्रतिवर्ष दिसंबर के पहले सप्ताह में मनाया जाता है। यह नागा जनजाति द्वारा मनाया जाता है। यह कोहिमा (राजधानी शहर) से लगभग 12 किमी. दूर किसामा हेरिटेज गांव में होता है। इसकी शुरुआत 2000 में हुई थी। राज्य के अन्य त्योहार सेक्रेनी और एओलियांग हैं।</p>",
+                    correct: "a",
+                    pos_marks: 2.0,
+                    neg_marks: 0.25
+                });
+                questions.push({
+                    id: "4",
+                    section: "18",
+                    question_en: "<p>4. Who of the following is famous for playing the musical instrument Kanjira?</p>",
+                    question_hi: "<p>4. निम्नलिखित में से कौन संगीत वाद्ययंत्र कंजिरा (Kanjira) के वादन के लिए प्रसिद्ध है?</p>",
+                    options_en: ["<p>Kishan Maharaj</p>", "<p>Pannalal Ghosh</p>", 
+                                "<p>Pudukkotai Dakshinamurthi Pillai</p>", "<p>S.V. Rajarao</p>"],
+                    options_hi: ["<p>किशन महाराज (Kishan Maharaj)</p>", "<p>पन्नालाल घोष (Pannalal Ghosh)</p>",
+                                "<p>पुदुक्कोट्टई दक्षिणामूर्ति पिल्लई (Pudukkotai Dakshinamurthi Pillai)</p>", "<p>एस.वी. राजाराव (S.V. Rajarao)</p>"],
+                    solution_en: "<p>4.(c)<strong> Pudukkottai Dakshinamurthi Pillai.</strong> His Awards: Kalaimamani award (1985), Sahitya Kala Parishad award (1992). Other Indian Kanjira players: Anandan Sivamani, Jamey Haddad, Natarajan Ganesh Kumar.</p>",
+                    solution_hi: "<p>4.(c) <strong>पुदुक्कोट्टई दक्षिणामूर्ति पिल्लई। </strong>उनके पुरस्कार: कलैमामणि पुरस्कार (1985), साहित्य कला परिषद पुरस्कार (1992)। अन्य भारतीय कंजीरा वादक: आनंदन शिवमणि, जेमी हद्दाद, नटराजन गणेश कुमार।</p>",
+                    correct: "c",
+                    pos_marks: 2.0,
+                    neg_marks: 0.25
+                });
+                questions.push({
+                    id: "5",
+                    section: "18",
+                    question_en: "<p>5. Kathak dance is known as a combination of ______ .</p>",
+                    question_hi: "<p>5. कथक नृत्य को ______ के संयोजन के रूप में जाना जाता है।</p>",
+                    options_en: [" Music and narrative only", " Music and drama only  ", 
+                                " Music and dance only ", " Music, dance and narrative"],
+                    options_hi: [" केवल संगीत और कथा ", " केवल संगीत और नाटक",
+                                " केवल संगीत और नृत्य", " संगीत, नृत्य और कथा"],
+                    solution_en: "<p>5.(d)<strong> Music, dance and narrative. </strong>Kathak is one of the classical dances of India. The word Kathak has been derived from the word Katha which means a story. It is mainly performed in Northern India and often portrays the legends of Radha and Krishna. Notable Kathak dancers are Pandit Birju Maharaj and Sitara Devi.</p>",
+                    solution_hi: "<p>5.(d) <strong>संगीत, नृत्य और कथा।</strong> कथक भारत के शास्त्रीय नृत्यों में से एक है। कथक शब्द की उत्पत्ति कथा शब्द से हुई है जिसका अर्थ है कहानी। यह मुख्य रूप से उत्तरी भारत में किया जाता है और प्रायः राधा और कृष्ण की कथाओं को चित्रित करता है। पंडित बिरजू महाराज और सितारा देवी प्रसिद्ध कथक नर्तक थे।</p>",
+                    correct: "d",
+                    pos_marks: 2.0,
+                    neg_marks: 0.25
+                });
+                questions.push({
+                    id: "6",
+                    section: "18",
+                    question_en: "<p>6. Which instrument is played by Pandit Ravi Shankar?</p>",
+                    question_hi: "<p>6. पंडित रविशंकर किस वाद्ययंत्र के वादक हैं ?</p>",
+                    options_en: ["<p>Sarod</p>", "<p>Guitar</p>", 
+                                "<p>Sitar</p>", "<p>Tabla</p>"],
+                    options_hi: ["<p>सरोद</p>", "<p>गिटार</p>",
+                                "<p>सितार</p>", "<p>तबला</p>"],
+                    solution_en: "<p>6.(c) <strong>Sitar</strong>. His awards: Bharat Ratna (1999), Padma Vibhushan (1981), and Padma Bhushan (1967). Exponents of Various Musical Instruments: Sitar - Nikhil Banerjee, Manilal Nag, and Mustaq Ali Khan; Sarod - Amjad Ali Khan, Allaudin Khan, and Ustad Ali Akbar Khan; Tabla - Allah Rakha, Pt. Kishan Maharaj.</p>",
+                    solution_hi: "<p>6.(c) <strong>सितार</strong>। उनके पुरस्कार: भारत रत्न (1999), पद्म विभूषण (1981), और पद्म भूषण (1967)। विभिन्न संगीत वाद्ययंत्रों के प्रतिपादक: सितार - निखिल बनर्जी, मणिलाल नाग, और मुस्ताक अली खान; सरोद - अमजद अली खान, अलाउद्दीन खान, और उस्ताद अली अकबर खान; तबला - अल्लाह रक्खा, पं. किशन महाराज।</p>",
+                    correct: "c",
+                    pos_marks: 2.0,
+                    neg_marks: 0.25
+                });
+                questions.push({
+                    id: "7",
+                    section: "18",
+                    question_en: "<p>7. Radha Sridhar is associated with which of the following classical dance?</p>",
+                    question_hi: "<p>7. राधा श्रीधर का संबंध निम्नलिखित में से किस शास्त्रीय नृत्य से है ?</p>",
+                    options_en: ["<p>Sattriya</p>", "<p>Bharatnatyam</p>", 
+                                "<p>Kathak</p>", "<p>Manipuri</p>"],
+                    options_hi: ["<p>सत्रीया</p>", "<p>भरतनाट्यम</p>",
+                                "<p>कथक</p>", "<p>मणिपुरी</p>"],
+                    solution_en: "<p>7.(b) <strong>Bharatnatyam</strong>. Her Award - Sangeet Natak Akademi Award (2018). Other Exponents of Bharatnatyam - Mrinalini Sarabhai, Mallika Sarabhai, Padma Subramanyam, Yamini Krishnamurthy and Anita Ratnam. Exponents of Indian Classical Dances: Kathak - Pandit Birju Maharaj, Roshan Kumari, Shovana Narayan, and Kumudini Lakhia; Manipuri - Guru Bipin Singh, Darshana Jhaveri, and Charu Mathur; Sattriya - Guru Jatin Goswami, Guru Ghanakanta Bora, and Bhabananda Barbayan.</p>",
+                    solution_hi: "<p>7.(b) <strong>भरतनाट्यम</strong>। उनके पुरस्कार - संगीत नाटक अकादमी पुरस्कार (2018)। भरतनाट्यम के अन्य प्रतिपादक - मृणालिनी साराभाई, मल्लिका साराभाई, पद्मा सुब्रमण्यम, यामिनी कृष्णमूर्ति और अनीता रत्नम। भारतीय शास्त्रीय नृत्यों के प्रतिपादक: कथक - पंडित बिरजू महाराज, रोशन कुमारी, शोवना नारायण और कुमुदिनी लाखिया; मणिपुरी - गुरु बिपिन सिंह, दर्शन झावेरी, और चारु माथुर; सत्रीया - गुरु जतिन गोस्वामी, गुरु घनकांत बोरा और भबानंद बारबायन।</p>",
+                    correct: "b",
+                    pos_marks: 2.0,
+                    neg_marks: 0.25
+                });
+                questions.push({
+                    id: "8",
+                    section: "18",
+                    question_en: "<p>8. Gurpurab is celebrated by which of the following community ?</p>",
+                    question_hi: "<p>8. गुरुपर्व निम्नलिखित में से किस समुदाय द्वारा मनाया जाता है ?</p>",
+                    options_en: ["<p>Hindu</p>", "<p>Christian</p>", 
+                                "<p>Sikh</p>", "<p>Parsi</p>"],
+                    options_hi: ["<p>हिंदू</p>", "<p>ईसाई</p>",
+                                "<p>सिख</p>", "<p>पारसी</p>"],
+                    solution_en: "<p>8.(c) <strong>Sikh</strong>. Gurpurab is celebrated in honour of the Sikh Gurus. Other Fairs and Festivals of Punjab - Lohri, Basant Panchami, Hola Mohalla, Maghi, Bandi Chhor Divas, and Baisakhi.</p>",
+                    solution_hi: "<p>8.(c) <strong>सिख</strong>। गुरुपर्व सिख गुरुओं के सम्मान में मनाया जाता है। पंजाब के अन्य मेले और त्यौहार - लोहड़ी, बसंत पंचमी, होला मोहल्ला, माघी, बंदी छोड़ दिवस, और बैसाखी।</p>",
+                    correct: "c",
+                    pos_marks: 2.0,
+                    neg_marks: 0.25
+                });
+                questions.push({
+                    id: "9",
+                    section: "18",
+                    question_en: "<p>9. Which sport is played by the Indian sportsperson Anjum Chopra ?</p>",
+                    question_hi: "<p>9. भारतीय खिलाड़ी अंजुम चोपड़ा निम्नलिखित में से कौन-सा खेल खेलती हैं?</p>",
+                    options_en: ["<p>Lawn Tennis</p>", "<p>Cricket</p>", 
+                                "<p>Badminton</p>", "<p>Football</p>"],
+                    options_hi: ["<p>लॉन टेनिस</p>", "<p>क्रिकेट</p>",
+                                "<p>बैडमिंटन</p>", "<p>फुटबॉल</p>"],
+                    solution_en: "<p>9.(b) <strong>Cricket</strong>. Sports and their personalities: Cricket - Harmanpreet Kaur, Shafali Verma, Smriti Mandhana. Tennis - Sania Mirza, Rohan Bopanna, Mahesh Bhupathi. Badminton - Saina Nehwal, PV Sindhu, Prakash Padukone. Football - Sunil Chhetri, Gurmeet Singh, Bhaichung Bhutia.</p>",
+                    solution_hi: "<p>9.(b) <strong>क्रिकेट</strong>। खेल एवं उनके प्रतिपादक : क्रिकेट - हरमनप्रीत कौर, शैफाली वर्मा, स्मृति मंधाना। टेनिस - सानिया मिर्ज़ा, रोहन बोपन्ना, महेश भूपति। बैडमिंटन - साइना नेहवाल, पीवी सिंधु, प्रकाश पदुकोण। फुटबॉल - सुनील छेत्री, गुरुमीत सिंह, बाईचुंग भूटिया।</p>",
+                    correct: "b",
+                    pos_marks: 2.0,
+                    neg_marks: 0.25
+                });
+                questions.push({
+                    id: "10",
+                    section: "18",
+                    question_en: "<p>10. Rukmini Devi is regarded as one of the most distinguished artists of _____.</p>",
+                    question_hi: "<p>10. रुक्मिणी देवी को ______ के सबसे प्रतिष्ठित कलाकारों में से एक माना जाता है।</p>",
+                    options_en: ["<p>Bharatanatyam</p>", "<p>Kathakali</p>", 
+                                "<p>Mohiniattam</p>", "<p>Bhortal Dance</p>"],
+                    options_hi: ["<p>भरतनाट्यम</p>", "<p>कथकली</p>",
+                                "<p>मोहिनीअट्टम</p>", "<p>भोरताल नृत्य</p>"],
+                    solution_en: "<p>10.(a) <strong>Bharatanatyam</strong>. Rukmini Devi Arundale - The first woman in Indian history to be nominated as a member&nbsp;of the Rajya Sabha. She established the Kalakshetra Foundation at Adyar, Chennai. Her award: Padma Bhushan (1956). Other Exponents of Bharatanatyam: Meenakshi Sundaram Pillai, T. Balasaraswati, Alarmel Valli, and Yamini Krishnamurthy.</p>",
+                    solution_hi: "<p>10.(a) <strong>भरतनाट्यम</strong>। रुक्मिणी देवी अरुंडेल - भारतीय इतिहास में पहली महिला जिन्हें राज्य सभा का सदस्य मनोनीत किया गया। उन्होंने चेन्नई के अड्यार में कलाक्षेत्र फाउंडेशन की स्थापना की। उन्हें पद्म भूषण (1956) से सम्मानित किया गया। भरतनाट्यम के अन्य प्रतिपादक: मीनाक्षी सुंदरम पिल्लई, टी. बालासरस्वती, अलारमेल वल्ली और यामिनी कृष्णमूर्ति।</p>",
+                    correct: "a",
+                    pos_marks: 2.0,
+                    neg_marks: 0.25
+                });
+                questions.push({
+                    id: "11",
+                    section: "18",
+                    question_en: "<p>11. A football match is played by two teams, each with a maximum of _____.</p>",
+                    question_hi: "<p>11. एक फुटबॉल मैच दो टीमों के बीच खेला जाता है, जिनमें से प्रत्येक टीम में अधिकतम ______ होते हैं।</p>",
+                    options_en: ["<p>eleven players</p>", "<p>ten players</p>", 
+                                "<p>five players</p>", "<p>seven players</p>"],
+                    options_hi: ["<p>ग्यारह खिलाड़ी</p>", "<p>दस खिलाड़ी</p>",
+                                "<p>पांच खिलाड़ी</p>", "<p>सात खिलाड़ी</p>"],
+                    solution_en: "<p>11.(a) <strong>eleven players.</strong> Sports and Number of Players: Cricket (11), Basketball (5), Volleyball (6), Hockey (11), Baseball (9), Handball (7), Water Polo (7), Kabaddi (7), and Kho Kho (9).</p>",
+                    solution_hi: "<p>11.(a) <strong>ग्यारह खिलाड़ी।</strong> खेल और खिलाड़ियों की संख्या: क्रिकेट (11), बास्केटबॉल (5), वॉलीबॉल (6), हॉकी (11), बेसबॉल (9), हैंडबॉल (7), वाटर पोलो (7), कबड्डी (7), और खो-खो (9)।</p>",
+                    correct: "a",
+                    pos_marks: 2.0,
+                    neg_marks: 0.25
+                });
+                questions.push({
+                    id: "12",
+                    section: "18",
+                    question_en: "<p>12. _____ in Indian Dance is given in recognition of excellence and achievement in performance or research studies in Indian Dance.</p>",
+                    question_hi: "<p>12. भारतीय नृत्य में,_____भारतीय नृत्य में प्रदर्शन या अनुसंधान अध्ययन में उत्कृष्टता और उपलब्धि की मान्यता में दिया जाता है।</p>",
+                    options_en: ["<p>The Manorama Thakkar Award</p>", "<p>The Uday Shankar Award</p>", 
+                                "<p>The Rukmini Devi Award</p>", "<p>The Nritya Choodamani Award</p>"],
+                    options_hi: ["<p>मनोरमा ठक्कर पुरस्कार</p>", "<p>उदय शंकर पुरस्कार</p>",
+                                "<p>रुक्मिणी देवी पुरस्कार</p>", "<p>नृत्य चूड़ामणि पुरस्कार</p>"],
+                    solution_en: "<p>12.(a) <strong>The Manorama Thakkar Award. </strong>Rukmini Devi Arundale was a trailblazer in the world of Bharatanatyam. Uday Shankar was an Indian dancer and choreographer, best known for creating a fusion style of dance. The Nritya Choodamani Award is given to artists who have made outstanding contributions to their art form and society through their dedication and performances.</p>",
+                    solution_hi: "<p>12.(a) <strong>मनोरमा ठक्कर पुरस्कार। </strong>रुक्मिणी देवी अरुंडेल भरतनाट्यम की दुनिया में एक पथप्रदर्शक थीं। उदय शंकर एक भारतीय नर्तक और कोरियोग्राफर थे, जो नृत्य की एक मिश्रित शैली बनाने के लिए जाने जाते थे। नृत्य चूड़ामणि पुरस्कार उन कलाकारों को दिया जाता है जिन्होंने अपने समर्पण और प्रदर्शन के माध्यम से अपने कला रूप और समाज में उत्कृष्ट योगदान दिया है।</p>",
+                    correct: "a",
+                    pos_marks: 2.0,
+                    neg_marks: 0.25
+                });
+                questions.push({
+                    id: "13",
+                    section: "18",
+                    question_en: "<p>13. In which of the following states of India is the Nongkrem festival celebrated ?</p>",
+                    question_hi: "<p>13. भारत के निम्नलिखित में से किस राज्य में नोंगक्रेम (Nongkrem) त्योहार मनाया जाता है?</p>",
+                    options_en: ["<p>Rajasthan</p>", "<p>Madhya Pradesh</p>", 
+                                "<p>Tamil Nadu</p>", "<p>Meghalaya</p>"],
+                    options_hi: ["<p>राजस्थान</p>", "<p>मध्यप्रदेश</p>",
+                                "<p>तमिलनाडु</p>", "<p>मेघालय</p>"],
+                    solution_en: "<p>13.(d) <strong>Meghalaya</strong>. The Nongkrem dance festival is celebrated during Autumn at Smit, the cultural centre of the Khasi Hills. It is a five day long religious festival of the Khasis. Other festivals of Meghalaya : Shad Suk Mynsiem, Behdienkhlam Festival, Shad Sukra, Wangala Festival, Strawberry Festival.</p>",
+                    solution_hi: "<p>13.(d) <strong>मेघालय</strong>। नोंगक्रेम नृत्य उत्सव खासी हिल्स के सांस्कृतिक केंद्र स्मित में शीत ऋतु के दौरान मनाया जाता है। यह खासी लोगों का पांच दिवसीय धार्मिक उत्सव है। मेघालय के अन्य त्यौहार: शाद सुक मिंसिएम, बेहदीनखलम महोत्सव, शाद शुक्र, वांगला महोत्सव, स्ट्रॉबेरी महोत्सव।</p>",
+                    correct: "d",
+                    pos_marks: 2.0,
+                    neg_marks: 0.25
+                });
+                questions.push({
+                    id: "14",
+                    section: "18",
+                    question_en: "<p>14. Which dance form originated in Andhra Pradesh ?</p>",
+                    question_hi: "<p>14. निम्नलिखित में से किस नृत्य शैली की उत्पत्ति आंध्र प्रदेश में हुई?</p>",
+                    options_en: ["<p>Kuchipudi</p>", "<p>Kathak</p>", 
+                                "<p>Bharatnatyam</p>", "<p>Sattriya</p>"],
+                    options_hi: ["<p>कुचिपुड़ी</p>", "<p>कथक</p>",
+                                "<p>भरतनाट्यम</p>", "<p>सत्रीया</p>"],
+                    solution_en: "<p>14.(a) <strong>Kuchipudi </strong>is one of the eight major Indian classical dances. It originates from a village named Kuchipudi in Andhra Pradesh. List of Classical dances: Bharatanatyam (Tamil Nadu), Kathak (Uttar Pradesh), Kuchipudi (Andhra Pradesh), Odissi (Odisha), Kathakali (Kerala), Sattriya (Assam), Manipuri (Manipur), Mohiniyattam (Kerala).</p>",
+                    solution_hi: "<p>14.(a) <strong>कुचिपुड़ी</strong>, आठ प्रमुख भारतीय शास्त्रीय नृत्यों में से एक है। इसकी उत्पत्ति आंध्र प्रदेश के कुचिपुड़ी नामक गाँव से हुई है। शास्त्रीय नृत्यों की सूची: भरतनाट्यम (तमिलनाडु), कथक (उत्तर प्रदेश), कुचिपुड़ी (आंध्र प्रदेश), ओडिसी (ओडिशा), कथकली (केरल), सत्त्रिया (असम), मणिपुरी (मणिपुर), मोहिनीअट्टम (केरल)।</p>",
+                    correct: "a",
+                    pos_marks: 2.0,
+                    neg_marks: 0.25
+                });
+                questions.push({
+                    id: "15",
+                    section: "misc",
+                    question_en: "<p>15. In any tennis game, any game starts at 0-0 and the zero point in tennis is called ______.</p>",
+                    question_hi: "<p>15. किसी भी टेनिस खेल में कोई भी खेल 0-0 से शुरू होता है और टेनिस में जीरो प्वॉइंट (zero point) को ______कहा जाता है।</p>",
+                    options_en: ["<p>origin</p>", "<p>start</p>", 
+                                "<p>love</p>", "<p>base</p>"],
+                    options_hi: ["<p>ऑरिजिन (origin)</p>", "<p>स्टार्ट (start)</p>",
+                                "<p>लव (love )</p>", "<p>बेस (base)</p>"],
+                    solution_en: "<p>15.(c) <strong>love</strong>. The word Love (for zero score) comes from the French word l\'oeuf &ndash; which means egg which is in the shape of zero. Common tennis terms: ACE, Backhand, Advantage, Deuce, Double fault, Forehand, Alley, Baseline, Break Point, Fault, Serve, Drop Shot.</p>",
+                    solution_hi: "<p>15.(c) <strong>लव (love)।</strong> लव शब्द (शून्य स्कोर के लिए) फ्रेंच शब्द l\'oeuf से लिया गया है जिसका अर्थ है अंडा जो शून्य के आकार का होता है। सामान्यतः टेनिस शब्द : ACE, बैकहैंड, एडवांटेज, ड्यूस, डबल फॉल्ट, फोरहैंड, एली, बेसलाइन, ब्रेक पॉइंट, फॉल्ट, सर्व, ड्रॉप शॉट।</p>",
+                    correct: "c",
+                    pos_marks: 2.0,
+                    neg_marks: 0.25
+                });
+            
+            // Generate question boxes
+            const boxesContainer = document.getElementById('question-boxes');
+            questions.forEach((q, index) => {
+                const box = document.createElement('div');
+                box.className = 'q-box';
+                box.textContent = index + 1;
+                box.onclick = () => showQuestion(index);
+                box.id = `box-${index}`;
+                boxesContainer.appendChild(box);
+            });
+            
+            // Show first question
+            showQuestion(0);
+            updateProgress();
+        }
+        
+        // Show a specific question
+        
+        function formatContent(text) {
+            if (!text) return '';
+            return text.replace(/<img/g, '<img style="max-width:100%;height:auto;"');
+        }
+        
+        function showQuestion(index) {
+            if (index < 0 || index >= questions.length) return;
+            
+            currentQuestion = index;
+            const question = questions[index];
+            
+            // Update question counter
+            document.getElementById('question-counter').textContent = `Question ${index + 1} of ${questions.length}`;
+            
+            // Update question boxes
+            document.querySelectorAll('.q-box').forEach(box => box.classList.remove('current'));
+            document.getElementById(`box-${index}`).classList.add('current');
+            
+            // Generate question HTML
+            let html = `
+                <div class="question-card">
+                    <div class="question-text">
+                        <div class="en">${formatContent(question.question_en)}</div>
+                        <div class="hi" style="display:none">${formatContent(question.question_hi)} </div>
+                    </div>
+                    <div class="options" id="options-container">`;
+            
+            // Add options
+            ['a', 'b', 'c', 'd'].forEach((opt, i) => {
+                let optionClass = '';
+                let isCorrectAnswer = opt === question.correct;
+                let isUserAnswer = answers[question.id] === opt;
+                
+                // When reviewing, add appropriate classes
+                if (submitted) {
+                    if (isCorrectAnswer) {
+                        optionClass += ' correct-answer';
+                    } else if (isUserAnswer && !isCorrectAnswer) {
+                        optionClass += ' incorrect';
+                    }
+                }
+                
+                html += `
+                    <div class="option-item">
+                        <input class="option-input" type="radio" name="q${index}" 
+                            id="opt-${index}-${opt}" value="${opt}" 
+                            ${isUserAnswer ? 'checked' : ''}
+                            onclick="selectAnswer('${question.id}', '${opt}')">
+                       <label class="option-label${optionClass}" for="opt-${index}-${opt}">
+                            <div class="en">${question.options_en[i]}</div>
+                            <div class="hi" style="display:none">${question.options_hi[i]}</div>
+                        </label>
+                    </div>`;
+            });
+            
+            // Add solution if submitted
+            if (submitted) {
+                const isCorrect = answers[question.id] === question.correct;
+                const resultText = answers[question.id] ? (isCorrect ? 'Correct!' : 'Incorrect!') : 'Not attempted';
+                
+                html += `
+                    <div class="solution-container">
+                        <div class="solution-title">${resultText}</div>
+                        <div class="solution-text">
+                            <div class="en">${question.solution_en}</div>
+                            <div class="hi" style="display:none">${question.solution_hi}</div>
+                        </div>
+                    </div>`;
+            }
+            
+            html += `</div></div>`;
+            
+            document.getElementById('questions-container').innerHTML = html;
+            
+            // Apply language settings
+            applyLanguage();
+            
+            // If in mobile view, close the menu
+            if (window.innerWidth < 992) {
+                toggleNav(false);
+            }
+            
+            // Add review mode class if submitted
+            if (submitted) {
+                document.getElementById('options-container').classList.add('review-mode');
+            }
+        }
+        
+        // Apply current language
+        function applyLanguage() {
+            document.querySelectorAll(`.${currentLang}`).forEach(el => el.style.display = 'block');
+            document.querySelectorAll(`.${currentLang === 'en' ? 'hi' : 'en'}`).forEach(el => el.style.display = 'none');
+            
+            // Update language button text
+            document.getElementById('lang-text').textContent = currentLang === 'en' ? 'Hi' : 'En';
+        }
+        
+        // Select an answer
+        function selectAnswer(qId, option) {
+            if (submitted) return;
+            
+            answers[qId] = option;
+            updateProgress();
+            
+            // Mark question as attempted in the navigation
+            const index = questions.findIndex(q => q.id === qId);
+            if (index >= 0) {
+                const box = document.getElementById(`box-${index}`);
+                box.classList.add('attempted');
+                box.classList.remove('unattempted');
+            }
+        }
+        
+        // Navigate to previous/next question
+        function prevQuestion() { 
+            if (currentQuestion > 0) showQuestion(currentQuestion - 1); 
+        }
+        
+        function nextQuestion() { 
+            if (currentQuestion < questions.length - 1) showQuestion(currentQuestion + 1); 
+        }
+        
+        // Switch section
+        function switchSection(sectionId) {
+            if (sectionId === 'all') {
+                showQuestion(0);
+                return;
+            }
+            
+            const section = sections[sectionId];
+            if (section) showQuestion(section.start);
+        }
+        
+        // Toggle language
+        function toggleLanguage() {
+            currentLang = currentLang === 'en' ? 'hi' : 'en';
+            applyLanguage();
+        }
+        
+        // Toggle navigation sidebar
+        function toggleNav(show) {
+            const nav = document.getElementById('question-nav');
+            const overlay = document.getElementById('nav-overlay');
+            
+            if (show === undefined) {
+                show = !nav.classList.contains('show');
+            }
+            
+            if (show) {
+                nav.classList.add('show');
+                overlay.classList.add('show');
+                document.body.style.overflow = 'hidden';
+            } else {
+                nav.classList.remove('show');
+                overlay.classList.remove('show');
+                document.body.style.overflow = '';
+            }
+        }
+        
+        // Update progress
+        function updateProgress() {
+            const attempted = Object.keys(answers).length;
+            document.getElementById('attempted-count').textContent = attempted;
+        }
+        
+        // Start timer
+        function startTimer() {
+            const timerDisplay = document.getElementById('timer-display');
+            let timeLeft = totalTime;
+            
+            const timerInterval = setInterval(() => {
+                if (timeLeft <= 0 || submitted) {
+                    clearInterval(timerInterval);
+                    if (!submitted) submitTest();
+                    return;
+                }
+                
+                const minutes = Math.floor(timeLeft / 60);
+                const seconds = timeLeft % 60;
+                timerDisplay.textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`;
+                timeLeft--;
+            }, 1000);
+        }
+        
+        // Confirm before submitting
+        function confirmSubmit() {
+            if (submitted) return;
+            
+            const attempted = Object.keys(answers).length;
+            const remaining = questions.length - attempted;
+            
+            // Create a more modern confirmation dialog
+            const confirmHtml = `
+                <div style="text-align: center; padding: 20px;">
+                    <h4 style="margin-bottom: 16px; color: var(--dark);">Confirm Submission</h4>
+                    <p style="margin-bottom: 24px; color: var(--gray);">
+                        You have attempted ${attempted} of ${questions.length} questions.<br>
+                        ${remaining} questions are unattempted.
+                    </p>
+                    <div style="display: flex; justify-content: center; gap: 12px;">
+                        <button onclick="this.closest('.modal').querySelector('.cancel-btn').click()" 
+                            style="padding: 8px 20px; border: 1px solid var(--light-gray); background: white; border-radius: 8px; cursor: pointer;">
+                            Cancel
+                        </button>
+                        <button onclick="submitTest(); this.closest('.modal').querySelector('.cancel-btn').click()" 
+                            style="padding: 8px 20px; background: var(--primary); color: white; border: none; border-radius: 8px; cursor: pointer;">
+                            Submit Test
+                        </button>
+                    </div>
+                </div>`;
+            
+            // Create modal element
+            const modal = document.createElement('div');
+            modal.className = 'results-modal show';
+            modal.innerHTML = `
+                <div class="results-card" style="max-width: 400px;">
+                    <button class="cancel-btn" style="position: absolute; top: 12px; right: 12px; background: none; border: none; font-size: 1.2rem; cursor: pointer; color: var(--gray);" onclick="this.closest('.results-modal').remove()">
+                        ×
+                    </button>
+                    ${confirmHtml}
+                </div>`;
+            
+            document.body.appendChild(modal);
+        }
+        
+        // Submit test
+        function submitTest() {
+            if (submitted) return;
+            
+            submitted = true;
+            
+            let score = 0;
+            let correctCount = 0;
+            let incorrectCount = 0;
+            let unattemptedCount = 0;
+            
+            questions.forEach((q, index) => {
+                const userAns = answers[q.id];
+                const box = document.getElementById(`box-${index}`);
+                
+                box.classList.remove('attempted');
+                
+                if (!userAns) {
+                    unattemptedCount++;
+                    box.classList.add('unattempted');
+                } else if (userAns === q.correct) {
+                    correctCount++;
+                    score += q.pos_marks;
+                    box.classList.add('correct');
+                } else {
+                    incorrectCount++;
+                    score -= q.neg_marks;
+                    box.classList.add('incorrect');
+                }
+            });
+            
+            // Update result values
+            document.getElementById('score-value').textContent = score.toFixed(2);
+            document.getElementById('correct-value').textContent = correctCount;
+            document.getElementById('incorrect-value').textContent = incorrectCount;
+            document.getElementById('unattempted-value').textContent = unattemptedCount;
+            
+            // Show the results modal
+            document.getElementById('results-modal').classList.add('show');
+            
+            // Disable submit button
+            const submitBtn = document.getElementById('submit-btn');
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<i class="fas fa-check"></i>';
+            submitBtn.style.backgroundColor = 'var(--success)';
+            
+            // Refresh current question view to show solution
+            showQuestion(currentQuestion);
+        }
+        
+        // Review test
+        function reviewTest() {
+            document.getElementById('results-modal').classList.remove('show');
+            showQuestion(0);
+        }
+        
+        // Close modal when clicking outside
+        window.addEventListener('click', function(event) {
+            if (event.target === document.getElementById('results-modal')) {
+                document.getElementById('results-modal').classList.remove('show');
+            }
+        });
+        
+        // Keyboard navigation
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowLeft') prevQuestion();
+            if (e.key === 'ArrowRight') nextQuestion();
+        });
+    </script>
+</body>
+</html>

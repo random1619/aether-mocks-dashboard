@@ -1,0 +1,1409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aether Mocks</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
+
+        :root {
+            --primary: #6366f1;
+            --primary-light: #818cf8;
+            --primary-dark: #4f46e5;
+            --secondary: #8b5cf6;
+            --accent: #ec4899;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --light: #1e293b;
+            --dark: #0f172a;
+            --gray: #64748b;
+            --light-gray: rgba(255, 255, 255, 0.08);
+            --card-bg: rgba(255, 255, 255, 0.03);
+            --body-bg: #030712;
+            --header-bg: rgba(15, 23, 42, 0.6);
+            --footer-bg: rgba(15, 23, 42, 0.8);
+            --box-shadow: 0 8px 32px 0 rgba(0,0,0,0.3);
+            --box-shadow-sm: 0 4px 16px rgba(0,0,0,0.2);
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Outfit', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        body {
+            background-color: var(--body-bg);
+            color: #f8fafc;
+            line-height: 1.6;
+            padding-bottom: 80px; /* Space for fixed navigation */
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(99, 102, 241, 0.15) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(139, 92, 246, 0.15) 0px, transparent 50%);
+            background-attachment: fixed;
+        }
+        
+        /* Header Styles */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 60px;
+            background: var(--header-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            color: #f8fafc;
+            display: flex;
+            align-items: center;
+            padding: 0 16px;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+            box-shadow: var(--box-shadow-sm);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+        }
+        
+        .header-brand {
+            display: flex;
+            align-items: center;
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: #f8fafc;
+            text-decoration: none;
+            gap: 8px;
+        }
+        
+        .header-brand i {
+            font-size: 1.2rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .header-controls {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .control-btn {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.08);
+            color: #f8fafc;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .control-btn:hover {
+            background: rgba(255,255,255,0.12);
+            border-color: rgba(255,255,255,0.2);
+            transform: translateY(-1px);
+        }
+        
+        .control-btn.active {
+            background: var(--primary);
+            border-color: var(--primary-light);
+        }
+        
+        .timer-display {
+            background: rgba(0,0,0,0.3);
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 18px;
+            padding: 4px 12px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            white-space: nowrap;
+            color: #f8fafc;
+        }
+        
+        .timer-display i {
+            margin-right: 6px;
+            color: var(--accent);
+        }
+        
+        /* Main Content */
+        .main-content {
+            margin-top: 60px;
+            padding: 16px;
+            min-height: calc(100vh - 140px);
+        }
+        
+        .question-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(8px);
+            border: 1px solid var(--light-gray);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 16px;
+            box-shadow: var(--box-shadow-sm);
+            transition: var(--transition);
+        }
+        
+        .question-counter {
+            font-size: 0.9rem;
+            color: var(--gray);
+            text-align: center;
+            margin-bottom: 16px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+        
+        .question-text {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 24px;
+            color: #f8fafc;
+            overflow-wrap: break-word;
+            word-wrap: break-word;
+            hyphens: auto;
+            max-width: 100%;
+        }
+        
+        .option-item {
+            margin-bottom: 12px;
+            position: relative;
+        }
+        
+        .option-input {
+            position: absolute;
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        
+        .question-text img,
+        .option-label img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 8px 0;
+            border-radius: 8px;
+        }
+        
+        .option-label {
+            display: block;
+            padding: 14px 16px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            color: #f8fafc;
+        }
+        
+        .option-label:hover {
+            border-color: rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.05);
+            transform: translateY(-2px);
+            box-shadow: var(--box-shadow-sm);
+        }
+        
+        .option-input:checked + .option-label {
+            border-color: var(--primary);
+            background: rgba(99, 102, 241, 0.08);
+            box-shadow: 0 0 12px var(--primary-glow);
+        }
+        
+        .option-input:checked + .option-label::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 3px;
+            height: 100%;
+            background: var(--primary);
+        }
+        
+        /* When reviewing answers */
+        .review-mode .option-input:checked + .option-label.correct {
+            border-color: var(--success);
+            background: rgba(16, 185, 129, 0.08);
+            box-shadow: 0 0 12px var(--success-glow);
+        }
+        
+        .review-mode .option-input:checked + .option-label.correct::after {
+            background: var(--success);
+        }
+        
+        .review-mode .option-input:checked + .option-label.incorrect {
+            border-color: var(--danger);
+            background: rgba(239, 68, 68, 0.08);
+            box-shadow: 0 0 12px var(--danger-glow);
+        }
+        
+        .review-mode .option-input:checked + .option-label.incorrect::after {
+            background: var(--danger);
+        }
+        
+        .review-mode .option-label.correct-answer {
+            border-color: var(--success);
+            background: rgba(16, 185, 129, 0.08);
+            box-shadow: 0 0 12px var(--success-glow);
+        }
+        
+        .review-mode .option-label.correct-answer::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 3px;
+            height: 100%;
+            background: var(--success);
+        }
+        
+        .solution-container {
+            margin-top: 24px;
+            padding: 18px;
+            background: rgba(99, 102, 241, 0.05);
+            border-radius: 12px;
+            border-left: 3px solid var(--primary);
+            border-top: 1px solid rgba(255,255,255,0.03);
+            border-right: 1px solid rgba(255,255,255,0.03);
+            border-bottom: 1px solid rgba(255,255,255,0.03);
+        }
+        
+        .solution-title {
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--primary-light);
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        /* Question Navigation */
+        .question-nav {
+            position: fixed;
+            top: 60px;
+            right: 0;
+            bottom: 80px;
+            width: 100%;
+            max-width: 320px;
+            background: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-left: 1px solid rgba(255,255,255,0.06);
+            box-shadow: var(--box-shadow);
+            transform: translateX(100%);
+            transition: var(--transition);
+            z-index: 900;
+            overflow-y: auto;
+            padding: 16px;
+        }
+        
+        .question-nav.show {
+            transform: translateX(0);
+        }
+        
+        .nav-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+        
+        .nav-title {
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin: 0;
+            color: #f8fafc;
+        }
+        
+        .question-stats {
+            display: flex;
+            gap: 8px;
+        }
+        
+        .stat-badge {
+            font-size: 0.75rem;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-weight: 500;
+            color: white;
+        }
+        
+        .section-selector {
+            width: 100%;
+            margin-bottom: 16px;
+            border-radius: 12px;
+            padding: 10px 16px;
+            border: 1px solid rgba(255,255,255,0.08);
+            background: rgba(0, 0, 0, 0.3);
+            color: #f8fafc;
+            font-size: 0.9rem;
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 10px center;
+            background-size: 16px;
+        }
+        
+        .question-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(40px, 1fr));
+            gap: 8px;
+        }
+        
+        .q-box {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 500;
+            border: 1px solid rgba(255,255,255,0.08);
+            background: rgba(255,255,255,0.02);
+            color: #94a3b8;
+            transition: var(--transition);
+            position: relative;
+        }
+        
+        .q-box:hover {
+            transform: translateY(-2px);
+            border-color: rgba(255,255,255,0.2);
+            color: #f8fafc;
+        }
+        
+        .q-box.attempted {
+            background-color: var(--primary);
+            color: white;
+            border-color: var(--primary);
+            box-shadow: 0 0 8px var(--primary-glow);
+        }
+        
+        .q-box.correct {
+            background-color: var(--success);
+            color: white;
+            border-color: var(--success);
+            box-shadow: 0 0 8px var(--success-glow);
+        }
+        
+        .q-box.incorrect {
+            background-color: var(--danger);
+            color: white;
+            border-color: var(--danger);
+            box-shadow: 0 0 8px var(--danger-glow);
+        }
+        
+        .q-box.current {
+            border: 2px solid var(--accent) !important;
+            transform: translateY(-3px);
+            box-shadow: 0 4px 12px rgba(236, 72, 153, 0.3);
+            color: #f8fafc;
+        }
+        
+        .q-box.unattempted {
+            background-color: var(--gray);
+            color: white;
+            border-color: var(--gray);
+        }
+        
+        /* Bottom Navigation */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 80px;
+            background: var(--footer-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-top: 1px solid rgba(255,255,255,0.06);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 16px;
+            z-index: 800;
+        }
+        
+        .nav-btn {
+            height: 48px;
+            border-radius: 12px;
+            border: none;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 20px;
+            transition: var(--transition);
+            gap: 8px;
+            cursor: pointer;
+        }
+        
+        .nav-btn i {
+            font-size: 1rem;
+        }
+        
+        .nav-btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .nav-btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px var(--primary-glow);
+        }
+        
+        .nav-btn-outline {
+            background: rgba(255,255,255,0.02);
+            color: #f8fafc;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .nav-btn-outline:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+        
+        .nav-btn:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+            transform: none !important;
+            box-shadow: none !important;
+        }
+        
+        /* Overlay when nav is open */
+        .nav-overlay {
+            position: fixed;
+            top: 60px;
+            left: 0;
+            right: 0;
+            bottom: 80px;
+            background: rgba(0,0,0,0.6);
+            backdrop-filter: blur(4px);
+            z-index: 800;
+            opacity: 0;
+            pointer-events: none;
+            transition: var(--transition);
+        }
+        
+        .nav-overlay.show {
+            opacity: 1;
+            pointer-events: all;
+        }
+        
+        /* Results Modal */
+        .results-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(3, 7, 18, 0.8);
+            backdrop-filter: blur(8px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1100;
+            opacity: 0;
+            pointer-events: none;
+            transition: var(--transition);
+            padding: 16px;
+        }
+        
+        .results-modal.show {
+            opacity: 1;
+            pointer-events: all;
+        }
+        
+        .results-card {
+            background: #0f172a;
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 24px;
+            width: 100%;
+            max-width: 500px;
+            overflow: hidden;
+            transform: translateY(20px);
+            transition: var(--transition);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+        }
+        
+        .results-modal.show .results-card {
+            transform: translateY(0);
+        }
+        
+        .results-header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 24px 20px;
+            text-align: center;
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+        }
+        
+        .results-title {
+            margin: 0;
+            font-weight: 600;
+            font-size: 1.4rem;
+        }
+        
+        .results-body {
+            padding: 24px;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+        
+        .stat-card {
+            padding: 16px;
+            border-radius: 16px;
+            text-align: center;
+            color: white;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+        
+        .stat-value {
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+        
+        .stat-label {
+            font-size: 0.8rem;
+            opacity: 0.8;
+            font-weight: 500;
+        }
+        
+        .results-footer {
+            padding: 18px 24px;
+            display: flex;
+            justify-content: center;
+            border-top: 1px solid rgba(255,255,255,0.06);
+            background: rgba(0,0,0,0.1);
+        }
+        
+        /* MathJax Styling Override */
+        .MathJax, .mjx-chtml {
+            overflow-x: auto;
+            max-width: 100%;
+            display: inline-block;
+        }
+        
+        /* Responsive Adjustments */
+        @media (min-width: 992px) {
+            .question-nav {
+                transform: translateX(0);
+            }
+            
+            .main-content {
+                margin-right: 320px;
+            }
+            
+            .nav-overlay {
+                display: none;
+            }
+            
+            .bottom-nav {
+                display: none;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .question-grid {
+                grid-template-columns: repeat(auto-fill, minmax(36px, 1fr));
+                gap: 6px;
+            }
+            
+            .q-box {
+                width: 36px;
+                height: 36px;
+                font-size: 0.9rem;
+            }
+            
+            .option-label {
+                padding: 12px 14px;
+            }
+            
+            .question-text {
+                font-size: 1rem;
+            }
+            
+            .header-brand {
+                font-size: 1rem;
+            }
+            
+            .control-btn {
+                width: 32px;
+                height: 32px;
+            }
+            
+            .timer-display {
+                font-size: 0.8rem;
+                padding: 4px 10px;
+            }
+            
+            .nav-btn {
+                height: 44px;
+                padding: 0 16px;
+                font-size: 0.9rem;
+            }
+        }
+</style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <a href="#" class="header-brand">
+                <i class="fas fa-graduation-cap"></i>
+                <span>Aether Mocks</span>
+            </a>
+            
+            <div class="header-controls">
+                <!-- Timer -->
+                <div class="timer-display">
+                    <i class="far fa-clock"></i>
+                    <span id="timer-display">5:00</span>
+                </div>
+                
+                                <!-- Full Screen Button -->
+                <button class="control-btn" id="fullscreen-btn" onclick="toggleFullscreen()" title="Toggle Fullscreen">
+                    <i class="fas fa-expand"></i>
+                </button>
+                
+                <!-- Language toggle -->
+                <button class="control-btn" id="lang-btn" onclick="toggleLanguage()">
+                    <span id="lang-text">En</span>
+                </button>
+                
+                <!-- Submit button -->
+                <button class="control-btn" id="submit-btn" onclick="confirmSubmit()">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+                
+                <!-- Questions toggle for mobile -->
+                <button class="control-btn nav-toggle-btn" id="nav-toggle" onclick="toggleNav()">
+                    <i class="fas fa-th"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Main content -->
+    <main class="main-content" id="main-content">
+        <div class="question-counter" id="question-counter">Question 1 of 15</div>
+        
+        <!-- Questions will be displayed here -->
+        <div id="questions-container"></div>
+    </main>
+    
+    <!-- Overlay for mobile nav -->
+    <div class="nav-overlay" id="nav-overlay" onclick="toggleNav(false)"></div>
+    
+    <!-- Question navigation sidebar -->
+    <aside class="question-nav" id="question-nav">
+        <div class="nav-header">
+            <h3 class="nav-title">Questions</h3>
+            <div class="question-stats">
+                <span class="stat-badge bg-primary" id="attempted-count">0</span>
+                <span class="stat-badge bg-gray" id="total-count">15</span>
+                <button class="control-btn d-lg-none" onclick="toggleNav(false)">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Section selector -->
+        <select class="section-selector" id="section-selector" onchange="switchSection(this.value)">
+            <option value="all">All Sections</option>
+        </select>
+        
+        <!-- Question grid -->
+        <div class="question-grid" id="question-boxes"></div>
+    </aside>
+    
+    <!-- Bottom navigation for mobile -->
+    <nav class="bottom-nav d-lg-none">
+        <button class="nav-btn nav-btn-outline" onclick="prevQuestion()">
+            <i class="fas fa-chevron-left"></i>
+            <span>Previous</span>
+        </button>
+        <button class="nav-btn nav-btn-outline" onclick="nextQuestion()">
+            <span>Next</span>
+            <i class="fas fa-chevron-right"></i>
+        </button>
+    </nav>
+    
+    <!-- Results modal -->
+    <div class="results-modal" id="results-modal">
+        <div class="results-card">
+            <div class="results-header">
+                <h3 class="results-title">Test Results</h3>
+            </div>
+            <div class="results-body">
+                <div class="stats-grid">
+                    <div class="stat-card" style="background: linear-gradient(135deg, var(--primary), var(--primary-dark))">
+                        <div class="stat-value" id="score-value">0</div>
+                        <div class="stat-label">Score</div>
+                    </div>
+                    <div class="stat-card" style="background: linear-gradient(135deg, var(--success), #1b9aaa)">
+                        <div class="stat-value" id="correct-value">0</div>
+                        <div class="stat-label">Correct</div>
+                    </div>
+                    <div class="stat-card" style="background: linear-gradient(135deg, var(--danger), var(--accent))">
+                        <div class="stat-value" id="incorrect-value">0</div>
+                        <div class="stat-label">Incorrect</div>
+                    </div>
+                    <div class="stat-card" style="background: linear-gradient(135deg, var(--gray), var(--dark))">
+                        <div class="stat-value" id="unattempted-value">0</div>
+                        <div class="stat-label">Unattempted</div>
+                    </div>
+                </div>
+            </div>
+            <div class="results-footer">
+                <button class="nav-btn nav-btn-primary" onclick="reviewTest()">
+                    <i class="fas fa-search me-1"></i>
+                    <span>Review Test</span>
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Questions data
+        const questions = [];
+        const sections = {};
+        let currentLang = "en";
+        let currentQuestion = 0;
+        let answers = {};
+        let submitted = false;
+        let totalTime = 5 * 60;
+        
+                function toggleFullscreen() {
+            const btn = document.getElementById('fullscreen-btn');
+            if (!btn) return;
+            const icon = btn.querySelector('i');
+            if (!document.fullscreenElement) {
+                document.documentElement.requestFullscreen().then(() => {
+                    icon.className = 'fas fa-compress';
+                }).catch(err => {
+                    console.error("Fullscreen error: ", err);
+                });
+            } else {
+                document.exitFullscreen().then(() => {
+                    icon.className = 'fas fa-expand';
+                });
+            }
+        }
+        
+        document.addEventListener('fullscreenchange', () => {
+            const btn = document.getElementById('fullscreen-btn');
+            if (btn) {
+                const icon = btn.querySelector('i');
+                if (document.fullscreenElement) {
+                    icon.className = 'fas fa-compress';
+                } else {
+                    icon.className = 'fas fa-expand';
+                }
+            }
+        });
+
+        // Initialize the test
+        window.onload = function() {
+            initializeTest();
+            startTimer();
+            
+            // If on desktop, show the question navigation by default
+            if (window.innerWidth >= 992) {
+                document.getElementById('question-nav').classList.add('show');
+                document.getElementById('main-content').classList.add('with-nav');
+            }
+        };
+        
+        // Initialize test data
+        function initializeTest() {
+            // Add sections and questions
+            
+            sections["18"] = {
+                name: "General Awareness",
+                start: 0,
+                end: 13
+            };
+            
+            document.getElementById('section-selector').innerHTML += 
+                `<option value="18">General Awareness</option>`;
+            
+            sections["misc"] = {
+                name: "Miscellaneous",
+                start: 14,
+                end: 14
+            };
+            
+            document.getElementById('section-selector').innerHTML += 
+                `<option value="misc">Miscellaneous</option>`;
+            
+            
+                questions.push({
+                    id: "1",
+                    section: "18",
+                    question_en: "<p>1. In 2002, Zakir Hussain became the youngest percussionist to be honoured with which award?</p>",
+                    question_hi: "<p>1. वर्ष 2002 में, ज़ाकिर हुसैन किस पुरस्कार से सम्मानित होने वाले सबसे कम उम्र के तालवादक बने?</p>",
+                    options_en: ["<p>Sangeet Natak Akademi Award</p>", "<p>Grammy Award</p>", 
+                                "<p>Padma Bhushan</p>", "<p>National Heritage Fellowship</p>"],
+                    options_hi: ["<p>संगीत नाटक अकादमी पुरस्कार</p>", "<p>ग्रैमी पुरस्कार</p>",
+                                "<p>पद्म भूषण</p>", "<p>नेशनल हेरिटेज फैलोशिप</p>"],
+                    solution_en: "<p>1.(c) <strong>Padma Bhushan. </strong>Ustad Zakir Hussain is the eldest son of tabla player Alla Rakha. His Awards: Sangeet Natak Akademi Award (1991), Padma Shri (1988), Padma Vibhushan (2023). He won three Grammys at the 66th Annual Grammy Awards in 2024. Indian tabla players: Pandit Shankar Ghosh, Pandit Udhai Mazumdar, Nandan Mehta, Pandit Swapan Chaudhuri, Pandit Vijay Ghate.</p>",
+                    solution_hi: "<p>1.(c) <strong>पद्म भूषण। </strong>उस्ताद ज़ाकिर हुसैन तबला वादक अल्ला रक्खा के सबसे बड़े पुत्र हैं। उनके पुरस्कार: संगीत नाटक अकादमी पुरस्कार (1991), पद्म श्री (1988), पद्म विभूषण (2023)। उन्होंने 2024 में 66वें वार्षिक ग्रैमी अवार्ड्स में तीन ग्रैमी पुरस्कार जीते थे। भारतीय तबला वादक: पंडित शंकर घोष, पंडित उदय मजूमदार, नंदन मेहता, पंडित स्वपन चौधरी, पंडित विजय घाटे।</p>",
+                    correct: "c",
+                    pos_marks: 2.0,
+                    neg_marks: 0.5
+                });
+                questions.push({
+                    id: "2",
+                    section: "18",
+                    question_en: "<p>2. In which year did India make its Olympic debut in hockey?</p>",
+                    question_hi: "<p>2. भारत ने हॉकी में ओलंपिक में अपनी शुरूआत किस वर्ष की थी?</p>",
+                    options_en: ["<p>1936</p>", "<p>1932</p>", 
+                                "<p>1924</p>", "<p>1928</p>"],
+                    options_hi: ["<p>1936</p>", "<p>1932</p>",
+                                "<p>1924</p>", "<p>1928</p>"],
+                    solution_en: "<p>2.(d) <strong>1928.</strong> India made its Olympic debut in hockey in 1928 at the Amsterdam Olympics. The Indian men\'s hockey team won their first Olympic gold medal in this tournament, beating the Netherlands. The team was led by captain Jaipal Singh and Dhyan Chand, who scored the most goals with 14. India\'s hockey team is the most successful in Olympic history, winning eight gold medals in 1928, 1932, 1936, 1948, 1952, 1956, 1964, and 1980.</p>",
+                    solution_hi: "<p>2.(d) <strong>1928. </strong>भारत ने हॉकी में अपना ओलंपिक पदार्पण 1928 में एम्स्टर्डम ओलंपिक में किया था। भारतीय पुरुष हॉकी टीम ने इस टूर्नामेंट में नीदरलैंड को हराकर अपना पहला ओलंपिक स्वर्ण पदक जीता था। टीम का नेतृत्व कप्तान जयपाल सिंह और ध्यानचंद ने किया था, जिन्होंने सबसे अधिक 14 गोल किए थे। भारत की हॉकी टीम ओलंपिक इतिहास में सबसे सफल है, जिसने 1928, 1932, 1936, 1948, 1952, 1956, 1964 और 1980 में आठ स्वर्ण पदक जीते हैं।</p>",
+                    correct: "d",
+                    pos_marks: 2.0,
+                    neg_marks: 0.5
+                });
+                questions.push({
+                    id: "3",
+                    section: "18",
+                    question_en: "<p>3. Which is the National Mission for Financial Inclusion to ensure access to financial services, namely, a basic savings and deposits accounts, remittance, credit, insurance, pension in an affordable manner?</p>",
+                    question_hi: "<p>3. वित्तीय सेवाओं, अर्थात् मूल बचत और जमा खातों, विप्रेषण, ऋण, बीमा, पेंशन तक किफायती तरीके से पहुंच सुनिश्&zwj;चित करने के लिए वित्तीय समावेशन के लिए राष्ट्रीय मिशन कौन सा है?</p>",
+                    options_en: ["<p>Deendayal Antyodaya Yojana</p>", "<p>Deen Dayal Upadhyaya Grameen Kaushalya Yojana</p>", 
+                                "<p>Swarnjayanti Gram Swarozgar Yojana</p>", "<p>Pradhan Mantri Jan Dhan Yojana</p>"],
+                    options_hi: ["<p>दीनदयाल अंत्योदय योजना</p>", "<p>दीन दयाल उपाध्याय ग्रामीण कौशल्&zwj;य योजना</p>",
+                                "<p>स्वर्णजयंती ग्राम स्वरोज़गार योजना</p>", "<p>प्रधानमंत्री जन धन योजना</p>"],
+                    solution_en: "<p>3.(d) <strong>Pradhan Mantri Jan Dhan Yojana</strong> (<strong>PMJDY</strong>) is a National Mission for Financial Inclusion launched on August 28, 2014. Deendayal Antyodaya Yojana - National Rural Livelihoods Mission (DAY-NRLM): Aim to promote poverty reduction through building strong institutions for the poor, particularly women, and enabling these institutions to access a range of financial services and livelihoods. Deen Dayal Upadhyaya Grameen Kaushalya Yojana (2014): Aims at skill development and placement for rural youth. Swarnjayanti Gram Swarozgar Yojana (1999): A self-employment program for rural poor.</p>",
+                    solution_hi: "<p>3.(d) <strong>प्रधानमंत्री जन धन योजना</strong> (<strong>PMJDY</strong>) 28 अगस्त, 2014 को शुरू किया गया वित्तीय समावेशन के लिए एक राष्ट्रीय मिशन है। दीनदयाल अंत्योदय योजना - राष्ट्रीय ग्रामीण आजीविका मिशन (DAY-NRLM): इसका उद्देश्य गरीबों, विशेषकर महिलाओं के लिए मजबूत संस्थाओं का निर्माण करके गरीबी में कमी लाना तथा इन संस्थाओं को वित्तीय सेवाओं और आजीविका तक पहुँच प्रदान करना है। दीनदयाल उपाध्याय ग्रामीण कौशल योजना (2014): इसका उद्देश्य ग्रामीण युवाओं के लिए कौशल विकास और रोजगार उपलब्ध कराना है। स्वर्ण जयंती ग्राम स्वरोजगार योजना (1999): ग्रामीण गरीबों के लिए एक स्वरोजगार कार्यक्रम।</p>",
+                    correct: "d",
+                    pos_marks: 2.0,
+                    neg_marks: 0.5
+                });
+                questions.push({
+                    id: "4",
+                    section: "18",
+                    question_en: "<p>4. In which of the following years was the Pro Kabaddi League established in India?</p>",
+                    question_hi: "<p>4. भारत में प्रो कबड्डी लीग की स्थापना निम्नलिखित में से किस वर्ष में की गई थी?</p>",
+                    options_en: ["<p>2015</p>", "<p>2016</p>", 
+                                "<p>2013</p>", "<p>2014</p>"],
+                    options_hi: ["<p>2015</p>", "<p>2016</p>",
+                                "<p>2013</p>", "<p>2014</p>"],
+                    solution_en: "<p>4.(d) <strong>2014.</strong> Pro Kabaddi is a ground-breaking initiative by Mashal Sports Pvt. Ltd and Disney Star. The inaugural Pro Kabaddi season in 2014 saw eight teams participating in the league. By Season 5, the number of teams competing grew to 12. Pro Kabaddi League (PKL) Winners : Season 1 - Jaipur Pink Panthers, Season 9 - Jaipur Pink Panthers, Season 10 - Puneri Paltan.</p>",
+                    solution_hi: "<p>4.(d) <strong>2014.</strong> प्रो कबड्डी मशाल स्पोर्ट्स प्राइवेट लिमिटेड और डिज्नी स्टार द्वारा शुरू की गई एक अनूठी पहल है। 2014 में पहले प्रो कबड्डी सीजन में आठ टीमों ने लीग में हिस्सा लिया था। सीजन 5 तक, प्रतिस्पर्धा करने वाली टीमों की संख्या बढ़कर 12 हो गई। प्रो कबड्डी लीग (PKL) विजेता: सीजन 1 - जयपुर पिंक पैंथर्स, सीजन 9 - जयपुर पिंक पैंथर्स, सीजन 10 - पुनेरी पल्टन।</p>",
+                    correct: "d",
+                    pos_marks: 2.0,
+                    neg_marks: 0.5
+                });
+                questions.push({
+                    id: "5",
+                    section: "18",
+                    question_en: "<p>5. In which year was the Digital India mission launched?</p>",
+                    question_hi: "<p>5. डिजिटल इंडिया मिशन (Digital India mission) किस वर्ष शुरू किया गया?</p>",
+                    options_en: ["<p>2014</p>", "<p>2016</p>", 
+                                "<p>2015</p>", "<p>2017</p>"],
+                    options_hi: ["<p>2014 में</p>", "<p>2016 में</p>",
+                                "<p>2015 में</p>", "<p>2017 में</p>"],
+                    solution_en: "<p>5.(c) <strong>2015. </strong>The Digital India programme was launched by Prime Minister Shri Narendra Modi. Aim : To transform India into a knowledge-based economy and a digitally empowered society by ensuring digital services, digital access, digital inclusion, digital empowerment and bridging the digital divide. Coordinated by : Ministry of Electronics and Information Technology.</p>",
+                    solution_hi: "<p>5.(c)<strong> 2015.</strong> डिजिटल इंडिया कार्यक्रम का शुभारंभ प्रधानमंत्री श्री नरेन्द्र मोदी ने किया था। उद्देश्य: डिजिटल सेवाएँ, डिजिटल पहुँच, डिजिटल समावेशन, डिजिटल सशक्तिकरण सुनिश्चित करके तथा डिजिटल विभाजन को समाप्त करके भारत को ज्ञान आधारित अर्थव्यवस्था तथा डिजिटल रूप से सशक्त समाज में बदलना । समन्वयन: इलेक्ट्रॉनिक्स एवं सूचना प्रौद्योगिकी मंत्रालय द्वारा ।</p>",
+                    correct: "c",
+                    pos_marks: 2.0,
+                    neg_marks: 0.5
+                });
+                questions.push({
+                    id: "6",
+                    section: "18",
+                    question_en: "<p>6. Who among the following players is related to table tennis?</p>",
+                    question_hi: "<p>6. निम्नलिखित में से कौन-सा/सी खिलाड़ी टेबल टेनिस से संबंधित है?</p>",
+                    options_en: ["<p>Manish Narwal</p>", "<p>Manika Batra</p>", 
+                                "<p>K Srikanth</p>", "<p>Pankaj Advani</p>"],
+                    options_hi: ["<p>मनीष नरवाल</p>", "<p>मनीका बत्रा</p>",
+                                "<p>के. श्रीकांत</p>", "<p>पंकज आडवानी</p>"],
+                    solution_en: "<p>6.(b) <strong>Manika Batra.</strong> She is a triple gold medalist at the South Asian Games, a double gold medalist at the Commonwealth Games, and a bronze medalist at the Asian Cup and Asian Games. Her Awards : Major Dhyan Chand Khel Ratna Award (2020), and Arjuna Award (2018). Other Prominent Table Tennis Players : Achanta Sharath Kamal, Sathiyan Gnanasekaran, Mouma Das, and Neha Aggarwal Sharma. Manish Narwal (Para Pistol Shooter), K Srikanth (badminton player), Pankaj Advani (billiards and snooker).</p>",
+                    solution_hi: "<p>6.(b) <strong>मनीका बत्रा </strong>दक्षिण एशियाई खेलों में तीन स्वर्ण पदक विजेता, राष्ट्रमंडल खेलों में दो स्वर्ण पदक विजेता और एशियाई कप तथा एशियाई खेलों में कांस्य पदक विजेता हैं। उनको प्राप्त पुरस्कार: मेजर ध्यानचंद खेल रत्न पुरस्कार (2020), और अर्जुन पुरस्कार (2018)। अन्य प्रमुख टेबल टेनिस खिलाड़ी: अचंता शरत कमल, साथियान ज्ञानसेकरन, मौमा दास और नेहा अग्रवाल शर्मा। मनीष नरवाल (पैरा पिस्टल शूटर), के. श्रीकांत (बैडमिंटन खिलाड़ी), पंकज आडवाणी (बिलियर्ड्स और स्नूकर)।</p>",
+                    correct: "b",
+                    pos_marks: 2.0,
+                    neg_marks: 0.5
+                });
+                questions.push({
+                    id: "7",
+                    section: "18",
+                    question_en: "<p>7. Buddhadev Dasgupta is famous for playing which of the following musical instruments?</p>",
+                    question_hi: "<p>7. बुद्धदेव दासगुप्ता निम्नलिखित में से किस संगीत वाद्ययंत्र को बजाने के लिए प्रसिद्ध हैं?</p>",
+                    options_en: ["<p>Sarod</p>", "<p>Sarangi</p>", 
+                                "<p>Bansuri</p>", "<p>Mridangam</p>"],
+                    options_hi: ["<p>सरोद</p>", "<p>सारंगी</p>",
+                                "<p>बांसुरी</p>", "<p>मृदंगम</p>"],
+                    solution_en: "<p>7.(a) <strong>Sarod.</strong> It is a stringed instrument, used in Hindustani music on the Indian subcontinent. Buddhadev Das Gupta was an Indian classical musician. His Awards: Padma Bhushan (2012) and Sangeet Natak Akademi Award (1993). Notable exponents of the Sarod : Ustad Amjad Ali Khan, Bahadur Khan, and Allaudin Khan.</p>",
+                    solution_hi: "<p>7.(a) <strong>सरोद </strong>एक तार वाला वाद्ययंत्र है, जिसका उपयोग भारतीय उपमहाद्वीप में हिंदुस्तानी संगीत में किया जाता है। बुद्धदेव दास गुप्ता एक भारतीय शास्त्रीय संगीतकार थे। उनके पुरस्कार: पद्म भूषण (2012) और संगीत नाटक अकादमी पुरस्कार (1993)। सरोद के उल्लेखनीय प्रतिपादक: उस्ताद अमजद अली खान, बहादुर खान और अलाउद्दीन खान आदि।</p>",
+                    correct: "a",
+                    pos_marks: 2.0,
+                    neg_marks: 0.5
+                });
+                questions.push({
+                    id: "8",
+                    section: "18",
+                    question_en: "<p>8. Gangaur Festival, Pushkar Fair, Nagaur Fair and Urs Fair are the popular fairs and festivals of which state?</p>",
+                    question_hi: "<p>8. गणगौर महोत्सव, पुष्कर मेला, नागौर मेला और उर्स मेला किस राज्य के लोकप्रिय मेले और महोत्सव हैं?</p>",
+                    options_en: ["<p>Rajasthan</p>", "<p>Tripura</p>", 
+                                "<p>Punjab</p>", "<p>Maharashtra</p>"],
+                    options_hi: ["<p>राजस्थान</p>", "<p>त्रिपुरा</p>",
+                                "<p>पंजाब</p>", "<p>महाराष्ट्र</p>"],
+                    solution_en: "<p>8.(a) <strong>Rajasthan.</strong> Other fairs and festivals in Rajasthan: Camel Festival, Mahaveerji Fair, Baneshwar Fair , Kolayat Fair, Marwar Festival, and Dhulandi Festival. Fairs and Festivals of India: Tripura - Poush Sankranti, Garia, and Kharchi. Punjab - Chhappar Mela, Lohri, Hola Mohalla, and Baisakhi. Maharashtra - Banganga Festival, and Pola Festival.</p>",
+                    solution_hi: "<p>8.(a)<strong> राजस्थान। </strong>राजस्थान के अन्य मेले और त्यौहार: ऊँट महोत्सव, महावीरजी मेला, बाणेश्वर मेला, कोलायत मेला, मारवाड़ महोत्सव और धुलंडी महोत्सव। भारत के मेले और त्यौहार: त्रिपुरा - पौष संक्रांति, गरिया और खारची। पंजाब - छप्पर मेला, लोहड़ी, होला मोहल्ला और बैसाखी। महाराष्ट्र - बाणगंगा महोत्सव, और पोला महोत्सव।</p>",
+                    correct: "a",
+                    pos_marks: 2.0,
+                    neg_marks: 0.5
+                });
+                questions.push({
+                    id: "9",
+                    section: "18",
+                    question_en: "<p>9. Which of the following institutes was founded by Mrinalini Sarabhai who was a Bharatanatyam and Kathakali dancer?</p>",
+                    question_hi: "<p>9. निम्नलिखित में से किस संस्थान की स्थापना मृणालिनी साराभाई ने की थी जो एक भरतनाट्यम और कथकली नृत्यांगना थीं?</p>",
+                    options_en: ["<p>Sri Thyagaraja College of Music and Dance</p>", "<p>Nrityanjali Institute of Performing Arts</p>", 
+                                "<p>Darpana Academy of Performing Arts</p>", "<p>Nalanda Nritya Kala Mahavidyalaya</p>"],
+                    options_hi: ["<p>श्री त्यागराज कॉलेज ऑफ म्यूजिक ऐंड डान्स</p>", "<p>नृत्यांजलि इंस्टीट्यूट ऑफ परफॉर्मिंग आर्ट्स</p>",
+                                "<p>दर्पण एकेडमी ऑफ परफॉर्मिंग आर्ट्स</p>", "<p>नालंदा नृत्य कला महाविद्यालय</p>"],
+                    solution_en: "<p>9.(c) <strong>Darpana Academy of Performing Arts.</strong> It is a school for performing arts in Ahmedabad, Gujarat, established by Mrinalini Sarabhai and Vikram Sarabhai in 1949. Mrinalini Sarabhai&rsquo;s Awards : Padma Bhushan (1992) and Padma Shri (1965).</p>",
+                    solution_hi: "<p>9.(c) <strong>दर्पण एकेडमी ऑफ परफॉर्मिंग आर्ट्स।</strong> यह अहमदाबाद, गुजरात में प्रदर्शन कला के लिए एक स्कूल है, जिसकी स्थापना 1949 में मृणालिनी साराभाई और विक्रम साराभाई ने की थी। मृणालिनी साराभाई के पुरस्कार: पद्म भूषण (1992) और पद्म श्री (1965)।</p>",
+                    correct: "c",
+                    pos_marks: 2.0,
+                    neg_marks: 0.5
+                });
+                questions.push({
+                    id: "10",
+                    section: "18",
+                    question_en: "<p>10. Khuallam is a famous dance of:</p>",
+                    question_hi: "<p>10. खुल्लम (Khuallam) किस राज्य का प्रसिद्ध नृत्य है?</p>",
+                    options_en: ["<p>Bihar</p>", "<p>Andhra Pradesh</p>", 
+                                "<p>Mizoram</p>", "<p>Uttar Pradesh</p>"],
+                    options_hi: ["<p>बिहार</p>", "<p>आंध्र प्रदेश</p>",
+                                "<p>मिजोरम</p>", "<p>उत्तर प्रदेश</p>"],
+                    solution_en: "<p>10.(c) <strong>Mizoram.</strong> Khuallam (Dance of the Guests) is a dance usually performed in the ceremony called \'Khuangchawi\'. Other Dances: Mizoram - Cheraw, Sarlamkai, Solakia, Chailam, Chawnglaizawn, Chheihlam, Tlanglam, Zangtalam. Bihar - Karma, Kajri, Jhumar, Jharni Dance, Jat Jatin. Andhra Pradesh - Dhimsa, Burrakatha. Uttar Pradesh - Charkula, Raslila, Kathak, Ramlila, Khyal, Nautanki.</p>",
+                    solution_hi: "<p>10.(c) <strong>मिजोरम। </strong>खुल्लम (मेहमानों का नृत्य) एक ऐसा नृत्य है जो आमतौर पर \'खुआंगचावी\' नामक समारोह में किया जाता है। अन्य नृत्य: मिज़ोरम - चेराव, सरलामकाई, सोलकिया, चैलम, चावंग्लाइज़ोन, छेइहलम, त्लांगलम, ज़ंगतालम। बिहार - करमा, कजरी, झूमर, झरनी नृत्य, जट जतिन। आंध्र प्रदेश - ढिम्सा, बुर्राकथा। उत्तर प्रदेश - चरकुला, रासलीला, कथक, रामलीला, ख्याल, नौटंकी।</p>",
+                    correct: "c",
+                    pos_marks: 2.0,
+                    neg_marks: 0.5
+                });
+                questions.push({
+                    id: "11",
+                    section: "18",
+                    question_en: "<p>11. Thrissur Pooram is one of the famous temple festivals celebrated in _______.</p>",
+                    question_hi: "<p>11. त्रिशूर पूरम ________ में मनाए जाने वाले प्रसिद्ध मंदिर उत्सवों में से एक है।</p>",
+                    options_en: ["<p>Andhra Pradesh</p>", "<p>Kerala</p>", 
+                                "<p>Karnataka</p>", "<p>Tamil Nadu</p>"],
+                    options_hi: ["<p>आंध्र प्रदेश</p>", "<p>केरल</p>",
+                                "<p>कर्नाटक</p>", "<p>तमिलनाडु</p>"],
+                    solution_en: "<p>11.(b) <strong>Kerala. </strong>Thrissur Pooram is celebrated in the Malayalam month of Medam (April-May). Other festivals: Kerala - Onam, Vishu, Attukal Pongala. Andhra Pradesh - Ugadi, Lumbini Festival . Karnataka - Kambala, Pattadakal, Dussehra (nada habba or &lsquo;state festival&rsquo;), Ugadi. Tamil Nadu - Pongal, Natyanjali.</p>",
+                    solution_hi: "<p>11.(b)<strong> केरल।</strong> त्रिशूर पूरम मलयालम महीने मेदम (अप्रैल-मई) में मनाया जाता है। अन्य त्योहार: केरल - ओणम, विशु, अट्टुकल पोंगल। आंध्र प्रदेश - उगादि, लुम्बिनी उत्सव । कर्नाटक - कंबाला, पट्टाडकल, दशहरा (नाडा हब्बा या \'राज्य त्योहार\'), उगादि। तमिलनाडु - पोंगल, नाट्यांजलि।</p>",
+                    correct: "b",
+                    pos_marks: 2.0,
+                    neg_marks: 0.5
+                });
+                questions.push({
+                    id: "12",
+                    section: "18",
+                    question_en: "<p>12. Ustad Zia Mohiuddin Dagar was a ___________ player of profound depth, favouring sparse and slow realisations of ragas.</p>",
+                    question_hi: "<p>12. उस्ताद ज़िया मोहिउद्दीन डागर गहन गूढ़ ___________ वादक थे, जो रागों की विरल और मंथर अनुभूति के पक्षधर थे।</p>",
+                    options_en: ["<p>Sitar</p>", "<p>Violin</p>", 
+                                "<p>Flute</p>", "<p>Rudra veena</p>"],
+                    options_hi: ["<p>सितार</p>", "<p>वायलिन</p>",
+                                "<p>बाँसुरी</p>", "<p>रुद्र वीणा</p>"],
+                    solution_en: "<p>12.(d) <strong>Rudra veena.</strong> Zia Mohiuddin Dagar received the Sangeet Natak Akademi Award in 1981. Other Maestro: Rudra veena - Ustad Ali Zaki Hader, Asad Ali Khan, Mohammed Khan Faridi. Sitar - Ustad Vilayat Khan, Pt Ravi Shankar, Nikhil Banerjee. Violin - V.V. Subrahmanyam, T. N. Krishnan, Tirukkodikaval Krishna Iyer. Flute - Hariprasad Chaurasia, Chetan Joshi, Ronu Mazumdar.</p>",
+                    solution_hi: "<p>12.(d) <strong>रूद्र वीणा।</strong> जिया मोहिउद्दीन डागर को 1981 में संगीत नाटक अकादमी पुरस्कार मिला। अन्य प्रतिपादक : रुद्र वीणा - उस्ताद अली जकी हैदर, असद अली खान, मोहम्मद खान फरीदी। सितार - उस्ताद विलायत खान, पं. रविशंकर, निखिल बनर्जी। वायलिन - वी.वी. सुब्रह्मण्यम, टी. एन. कृष्णन, तिरुक्कोडिकावल कृष्ण अय्यर। बांसुरी - हरिप्रसाद चौरसिया, चेतन जोशी, रोनू मजूमदार।</p>",
+                    correct: "d",
+                    pos_marks: 2.0,
+                    neg_marks: 0.5
+                });
+                questions.push({
+                    id: "13",
+                    section: "18",
+                    question_en: "<p>13. In which year was Smart Cities Mission launched?</p>",
+                    question_hi: "<p>13. स्मार्ट सिटीज मिशन किस वर्ष शुरू किया गया?</p>",
+                    options_en: ["<p>2015</p>", "<p>2013</p>", 
+                                "<p>2019</p>", "<p>2018</p>"],
+                    options_hi: ["<p>2015 में</p>", "<p>2013 में</p>",
+                                "<p>2019 में</p>", "<p>2018 में</p>"],
+                    solution_en: "<p>13.(a) <strong>2015. </strong>It is a Centrally Sponsored Scheme to enhance the quality of life in 100 selected cities by providing efficient services, robust infrastructure, and a sustainable environment. The Central Government has decided to extend the deadline for Smart Cities Mission till 31st March 2025.</p>",
+                    solution_hi: "<p>.13.(a)<strong> 2015 में।</strong> यह 100 चयनित शहरों में कुशल सेवाएँ, मजबूत बुनियादी ढाँचा और एक स्थायी वातावरण प्रदान करके जीवन की गुणवत्ता बढ़ाने के लिए एक केंद्र प्रायोजित योजना है। केंद्र सरकार ने स्मार्ट सिटी मिशन की समय सीमा 31 मार्च 2025 तक बढ़ाने का फैसला किया है।</p>",
+                    correct: "a",
+                    pos_marks: 2.0,
+                    neg_marks: 0.5
+                });
+                questions.push({
+                    id: "14",
+                    section: "18",
+                    question_en: "<p>14. Which of the following nations won the seven times women&rsquo;s Asia Cup cricket Championship?</p>",
+                    question_hi: "<p>14. निम्नलिखित में से किस देश ने सात बार महिला एशिया कप क्रिकेट चैम्पियनशिप जीती?</p>",
+                    options_en: ["<p>Pakistan</p>", "<p>Bangladesh</p>", 
+                                "<p>India</p>", "<p>Sri Lanka</p>"],
+                    options_hi: ["<p>पाकिस्तान</p>", "<p>बांग्लादेश</p>",
+                                "<p>भारत</p>", "<p>श्रीलंका</p>"],
+                    solution_en: "<p>14.(c)<strong> India. </strong>The Women\'s Asia Cup (Asian Women&rsquo;s Cricket Championships) is a women\'s One Day International and Twenty20 International cricket tournament. It was established in 2004 and is a biennial tournament. The first Women\'s Asia Cup was played in Sri Lanka in April 2004. Only two teams took part, India and Sri Lanka. India has won the tournament in the following years: 2004, 2005-06, 2006, 2008, 2012, 2016, and 2022.</p>",
+                    solution_hi: "<p>.14.(c) <strong>भारत।</strong> महिला एशिया कप (एशियाई महिला क्रिकेट चैंपियनशिप) महिलाओं का एक दिवसीय अंतर्राष्ट्रीय और T-20 अंतर्राष्ट्रीय क्रिकेट टूर्नामेंट है। इसकी स्थापना 2004 में हुई थी और यह एक द्विवार्षिक टूर्नामेंट है। पहला महिला एशिया कप अप्रैल 2004 में श्रीलंका में खेला गया था। इसमें केवल दो टीमों (भारत और श्रीलंका) ने भाग लिया था। भारत ने निम्नलिखित वर्षों में टूर्नामेंट जीता है: 2004, 2005-06, 2006, 2008, 2012, 2016 और 2022।</p>",
+                    correct: "c",
+                    pos_marks: 2.0,
+                    neg_marks: 0.5
+                });
+                questions.push({
+                    id: "15",
+                    section: "misc",
+                    question_en: "<p>15. When and where did India win its first World Championships medal in Athletics?</p>",
+                    question_hi: "<p>15. भारत ने एथलेटिक्स में अपना पहला विश्व चैंपियनशिप पदक कब और कहाँ जीता था?</p>",
+                    options_en: ["<p>2009, Germany</p>", "<p>2005, Finland</p>", 
+                                "<p>2007, Japan</p>", "<p>2003, France</p>"],
+                    options_hi: ["<p>2009, जर्मनी में</p>", "<p>2005, फ़िनलैंड में</p>",
+                                "<p>2007, जापान में</p>", "<p>2003, फ़्रांस में</p>"],
+                    solution_en: "<p>15.(d) <strong>2003, France.</strong> India won its first World Championships medal in Athletics when Anju Bobby George secured the bronze in the Women&rsquo;s long jump at the 2003 World Championships in Paris. This achievement marked her as the first Indian athlete to win a global athletics medal. World Athletics Championships 2023: India&rsquo;s Gold medal winner - Neeraj Chopra ( javelin throw , 88.17 m).</p>",
+                    solution_hi: "<p>15.(d) <strong>2003, फ्रांस में।</strong> भारत ने एथलेटिक्स में अपना पहला विश्व चैंपियनशिप पदक तब जीता जब अंजू बॉबी जॉर्ज ने पेरिस में 2003 विश्व चैंपियनशिप में महिलाओं की लंबी कूद में कांस्य पदक हासिल किया। इस उपलब्धि ने उन्हें वैश्विक एथलेटिक्स पदक जीतने वाली पहली भारतीय एथलीट के रूप में चिह्नित किया। विश्व एथलेटिक्स चैंपियनशिप 2023: भारत के स्वर्ण पदक विजेता - नीरज चोपड़ा (भाला फेंक, 88.17 मीटर)।</p>",
+                    correct: "d",
+                    pos_marks: 2.0,
+                    neg_marks: 0.5
+                });
+            
+            // Generate question boxes
+            const boxesContainer = document.getElementById('question-boxes');
+            questions.forEach((q, index) => {
+                const box = document.createElement('div');
+                box.className = 'q-box';
+                box.textContent = index + 1;
+                box.onclick = () => showQuestion(index);
+                box.id = `box-${index}`;
+                boxesContainer.appendChild(box);
+            });
+            
+            // Show first question
+            showQuestion(0);
+            updateProgress();
+        }
+        
+        // Show a specific question
+        
+        function formatContent(text) {
+            if (!text) return '';
+            return text.replace(/<img/g, '<img style="max-width:100%;height:auto;"');
+        }
+        
+        function showQuestion(index) {
+            if (index < 0 || index >= questions.length) return;
+            
+            currentQuestion = index;
+            const question = questions[index];
+            
+            // Update question counter
+            document.getElementById('question-counter').textContent = `Question ${index + 1} of ${questions.length}`;
+            
+            // Update question boxes
+            document.querySelectorAll('.q-box').forEach(box => box.classList.remove('current'));
+            document.getElementById(`box-${index}`).classList.add('current');
+            
+            // Generate question HTML
+            let html = `
+                <div class="question-card">
+                    <div class="question-text">
+                        <div class="en">${formatContent(question.question_en)}</div>
+                        <div class="hi" style="display:none">${formatContent(question.question_hi)} </div>
+                    </div>
+                    <div class="options" id="options-container">`;
+            
+            // Add options
+            ['a', 'b', 'c', 'd'].forEach((opt, i) => {
+                let optionClass = '';
+                let isCorrectAnswer = opt === question.correct;
+                let isUserAnswer = answers[question.id] === opt;
+                
+                // When reviewing, add appropriate classes
+                if (submitted) {
+                    if (isCorrectAnswer) {
+                        optionClass += ' correct-answer';
+                    } else if (isUserAnswer && !isCorrectAnswer) {
+                        optionClass += ' incorrect';
+                    }
+                }
+                
+                html += `
+                    <div class="option-item">
+                        <input class="option-input" type="radio" name="q${index}" 
+                            id="opt-${index}-${opt}" value="${opt}" 
+                            ${isUserAnswer ? 'checked' : ''}
+                            onclick="selectAnswer('${question.id}', '${opt}')">
+                       <label class="option-label${optionClass}" for="opt-${index}-${opt}">
+                            <div class="en">${question.options_en[i]}</div>
+                            <div class="hi" style="display:none">${question.options_hi[i]}</div>
+                        </label>
+                    </div>`;
+            });
+            
+            // Add solution if submitted
+            if (submitted) {
+                const isCorrect = answers[question.id] === question.correct;
+                const resultText = answers[question.id] ? (isCorrect ? 'Correct!' : 'Incorrect!') : 'Not attempted';
+                
+                html += `
+                    <div class="solution-container">
+                        <div class="solution-title">${resultText}</div>
+                        <div class="solution-text">
+                            <div class="en">${question.solution_en}</div>
+                            <div class="hi" style="display:none">${question.solution_hi}</div>
+                        </div>
+                    </div>`;
+            }
+            
+            html += `</div></div>`;
+            
+            document.getElementById('questions-container').innerHTML = html;
+            
+            // Apply language settings
+            applyLanguage();
+            
+            // If in mobile view, close the menu
+            if (window.innerWidth < 992) {
+                toggleNav(false);
+            }
+            
+            // Add review mode class if submitted
+            if (submitted) {
+                document.getElementById('options-container').classList.add('review-mode');
+            }
+        }
+        
+        // Apply current language
+        function applyLanguage() {
+            document.querySelectorAll(`.${currentLang}`).forEach(el => el.style.display = 'block');
+            document.querySelectorAll(`.${currentLang === 'en' ? 'hi' : 'en'}`).forEach(el => el.style.display = 'none');
+            
+            // Update language button text
+            document.getElementById('lang-text').textContent = currentLang === 'en' ? 'Hi' : 'En';
+        }
+        
+        // Select an answer
+        function selectAnswer(qId, option) {
+            if (submitted) return;
+            
+            answers[qId] = option;
+            updateProgress();
+            
+            // Mark question as attempted in the navigation
+            const index = questions.findIndex(q => q.id === qId);
+            if (index >= 0) {
+                const box = document.getElementById(`box-${index}`);
+                box.classList.add('attempted');
+                box.classList.remove('unattempted');
+            }
+        }
+        
+        // Navigate to previous/next question
+        function prevQuestion() { 
+            if (currentQuestion > 0) showQuestion(currentQuestion - 1); 
+        }
+        
+        function nextQuestion() { 
+            if (currentQuestion < questions.length - 1) showQuestion(currentQuestion + 1); 
+        }
+        
+        // Switch section
+        function switchSection(sectionId) {
+            if (sectionId === 'all') {
+                showQuestion(0);
+                return;
+            }
+            
+            const section = sections[sectionId];
+            if (section) showQuestion(section.start);
+        }
+        
+        // Toggle language
+        function toggleLanguage() {
+            currentLang = currentLang === 'en' ? 'hi' : 'en';
+            applyLanguage();
+        }
+        
+        // Toggle navigation sidebar
+        function toggleNav(show) {
+            const nav = document.getElementById('question-nav');
+            const overlay = document.getElementById('nav-overlay');
+            
+            if (show === undefined) {
+                show = !nav.classList.contains('show');
+            }
+            
+            if (show) {
+                nav.classList.add('show');
+                overlay.classList.add('show');
+                document.body.style.overflow = 'hidden';
+            } else {
+                nav.classList.remove('show');
+                overlay.classList.remove('show');
+                document.body.style.overflow = '';
+            }
+        }
+        
+        // Update progress
+        function updateProgress() {
+            const attempted = Object.keys(answers).length;
+            document.getElementById('attempted-count').textContent = attempted;
+        }
+        
+        // Start timer
+        function startTimer() {
+            const timerDisplay = document.getElementById('timer-display');
+            let timeLeft = totalTime;
+            
+            const timerInterval = setInterval(() => {
+                if (timeLeft <= 0 || submitted) {
+                    clearInterval(timerInterval);
+                    if (!submitted) submitTest();
+                    return;
+                }
+                
+                const minutes = Math.floor(timeLeft / 60);
+                const seconds = timeLeft % 60;
+                timerDisplay.textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`;
+                timeLeft--;
+            }, 1000);
+        }
+        
+        // Confirm before submitting
+        function confirmSubmit() {
+            if (submitted) return;
+            
+            const attempted = Object.keys(answers).length;
+            const remaining = questions.length - attempted;
+            
+            // Create a more modern confirmation dialog
+            const confirmHtml = `
+                <div style="text-align: center; padding: 20px;">
+                    <h4 style="margin-bottom: 16px; color: var(--dark);">Confirm Submission</h4>
+                    <p style="margin-bottom: 24px; color: var(--gray);">
+                        You have attempted ${attempted} of ${questions.length} questions.<br>
+                        ${remaining} questions are unattempted.
+                    </p>
+                    <div style="display: flex; justify-content: center; gap: 12px;">
+                        <button onclick="this.closest('.modal').querySelector('.cancel-btn').click()" 
+                            style="padding: 8px 20px; border: 1px solid var(--light-gray); background: white; border-radius: 8px; cursor: pointer;">
+                            Cancel
+                        </button>
+                        <button onclick="submitTest(); this.closest('.modal').querySelector('.cancel-btn').click()" 
+                            style="padding: 8px 20px; background: var(--primary); color: white; border: none; border-radius: 8px; cursor: pointer;">
+                            Submit Test
+                        </button>
+                    </div>
+                </div>`;
+            
+            // Create modal element
+            const modal = document.createElement('div');
+            modal.className = 'results-modal show';
+            modal.innerHTML = `
+                <div class="results-card" style="max-width: 400px;">
+                    <button class="cancel-btn" style="position: absolute; top: 12px; right: 12px; background: none; border: none; font-size: 1.2rem; cursor: pointer; color: var(--gray);" onclick="this.closest('.results-modal').remove()">
+                        ×
+                    </button>
+                    ${confirmHtml}
+                </div>`;
+            
+            document.body.appendChild(modal);
+        }
+        
+        // Submit test
+        function submitTest() {
+            if (submitted) return;
+            
+            submitted = true;
+            
+            let score = 0;
+            let correctCount = 0;
+            let incorrectCount = 0;
+            let unattemptedCount = 0;
+            
+            questions.forEach((q, index) => {
+                const userAns = answers[q.id];
+                const box = document.getElementById(`box-${index}`);
+                
+                box.classList.remove('attempted');
+                
+                if (!userAns) {
+                    unattemptedCount++;
+                    box.classList.add('unattempted');
+                } else if (userAns === q.correct) {
+                    correctCount++;
+                    score += q.pos_marks;
+                    box.classList.add('correct');
+                } else {
+                    incorrectCount++;
+                    score -= q.neg_marks;
+                    box.classList.add('incorrect');
+                }
+            });
+            
+            // Update result values
+            document.getElementById('score-value').textContent = score.toFixed(2);
+            document.getElementById('correct-value').textContent = correctCount;
+            document.getElementById('incorrect-value').textContent = incorrectCount;
+            document.getElementById('unattempted-value').textContent = unattemptedCount;
+            
+            // Show the results modal
+            document.getElementById('results-modal').classList.add('show');
+            
+            // Disable submit button
+            const submitBtn = document.getElementById('submit-btn');
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<i class="fas fa-check"></i>';
+            submitBtn.style.backgroundColor = 'var(--success)';
+            
+            // Refresh current question view to show solution
+            showQuestion(currentQuestion);
+        }
+        
+        // Review test
+        function reviewTest() {
+            document.getElementById('results-modal').classList.remove('show');
+            showQuestion(0);
+        }
+        
+        // Close modal when clicking outside
+        window.addEventListener('click', function(event) {
+            if (event.target === document.getElementById('results-modal')) {
+                document.getElementById('results-modal').classList.remove('show');
+            }
+        });
+        
+        // Keyboard navigation
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowLeft') prevQuestion();
+            if (e.key === 'ArrowRight') nextQuestion();
+        });
+    </script>
+</body>
+</html>
