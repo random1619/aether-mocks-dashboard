@@ -63,16 +63,33 @@ Plans:
 - [x] 03-01: Perform comprehensive dashboard and quiz functionality verification.
 - [x] 03-02: Deploy the final static package to Firebase and Render.
 
+### Phase 4: Fullscreen & Dark Theme Integration
+**Goal**: Integrate dark theme toggle and fullscreen triggers to all mock exams.
+**Mode**: mvp
+**Depends on**: Phase 3
+**Requirements**: LAYOUT-02, LAYOUT-03, LOGIC-01, LOGIC-04, INTEGRATE-01, INTEGRATE-02
+**Success Criteria** (what must be TRUE):
+  1. Dark theme class toggles correctly on the body element.
+  2. Fullscreen mode can be enabled or disabled via header toggles.
+  3. All 1,057 mock pages are updated to include header toggles.
+**Plans**: 2 plans
+
+Plans:
+- [ ] 04-01: Implement centralized dark theme variables and toggle actions in CSS/JS.
+- [ ] 04-02: Standardize welcome screen containers and inject toggle buttons into the HTML builder template.
+
 ## Progress
 
 **Execution Order:**
-Phases execute in numeric order: 1 → 2 → 3
+Phases execute in numeric order: 1 → 2 → 3 → 4
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Core Design & Scripting | 2/2 | Complete | 2026-06-29 |
 | 2. Page Unification & Cleaning | 2/2 | Complete | 2026-06-29 |
 | 3. Verification & Deployment | 2/2 | Complete | 2026-06-29 |
+| 4. Fullscreen & Dark Theme Integration | 0/2 | Not started | - |
+
 
 
 
