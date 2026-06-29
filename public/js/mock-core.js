@@ -24,18 +24,19 @@ class MockExamController {
         // Find all question cards
         this.questions = Array.from(document.querySelectorAll('.question-card'));
         
-        // Dynamically build question cards if DOM is empty but window.questions is defined
-        if (this.questions.length === 0 && window.questions && window.questions.length > 0) {
+        // Dynamically build question cards if DOM is empty but questions array is defined
+        const globalQuestions = typeof questions !== 'undefined' ? questions : null;
+        if (this.questions.length === 0 && globalQuestions && globalQuestions.length > 0) {
             const container = document.getElementById('questionContainer');
             if (container) {
-                window.questions.forEach((q, idx) => {
+                globalQuestions.forEach((q, idx) => {
                     const card = document.createElement('div');
                     card.className = 'question-card';
                     card.dataset.index = idx;
                     
                     const badge = document.createElement('div');
                     badge.className = 'question-number-badge';
-                    badge.textContent = `Question ${idx + 1} of ${window.questions.length}`;
+                    badge.textContent = `Question ${idx + 1} of ${globalQuestions.length}`;
                     card.appendChild(badge);
                     
                     const text = document.createElement('div');
