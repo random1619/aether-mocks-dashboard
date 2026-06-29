@@ -23,6 +23,60 @@ class MockExamController {
     init() {
         // Find all question cards
         this.questions = Array.from(document.querySelectorAll('.question-card'));
+        
+        // Dynamically build question cards if DOM is empty but window.questions is defined
+        if (this.questions.length === 0 && window.questions && window.questions.length > 0) {
+            const container = document.getElementById('questionContainer');
+            if (container) {
+                window.questions.forEach((q, idx) => {
+                    const card = document.createElement('div');
+                    card.className = 'question-card';
+                    card.dataset.index = idx;
+                    
+                    const badge = document.createElement('div');
+                    badge.className = 'question-number-badge';
+                    badge.textContent = `Question ${idx + 1} of ${window.questions.length}`;
+                    card.appendChild(badge);
+                    
+                    const text = document.createElement('div');
+                    text.className = 'question-text';
+                    text.innerHTML = q.question || q.text || '';
+                    card.appendChild(text);
+                    
+                    const list = document.createElement('div');
+                    list.className = 'options-list';
+                    
+                    const optionsArray = q.options || [];
+                    optionsArray.forEach((opt, optIdx) => {
+                        const optDiv = document.createElement('div');
+                        optDiv.className = 'quiz-option';
+                        optDiv.dataset.optIndex = optIdx;
+                        
+                        const indicator = document.createElement('div');
+                        indicator.className = 'option-indicator';
+                        indicator.textContent = String.fromCharCode(65 + optIdx); // A, B, C, D...
+                        optDiv.appendChild(indicator);
+                        
+                        const optText = document.createElement('div');
+                        optText.className = 'option-text';
+                        optText.innerHTML = opt;
+                        optDiv.appendChild(optText);
+                        
+                        optDiv.addEventListener('click', () => {
+                            this.selectOption(idx, optIdx);
+                        });
+                        
+                        list.appendChild(optDiv);
+                    });
+                    
+                    card.appendChild(list);
+                    container.appendChild(card);
+                });
+                
+                this.questions = Array.from(document.querySelectorAll('.question-card'));
+            }
+        }
+        
         this.totalQuestions = this.questions.length;
         if (this.totalQuestions === 0) {
             console.warn("No .question-card elements found in the DOM.");
@@ -33,13 +87,17 @@ class MockExamController {
         this.questions.forEach((card, idx) => {
             card.dataset.index = idx;
             
-            // Add options click handlers
+            // Add options click handlers if not already added
             const options = card.querySelectorAll('.quiz-option');
             options.forEach((opt, optIdx) => {
                 opt.dataset.optIndex = optIdx;
-                opt.addEventListener('click', () => {
-                    this.selectOption(idx, optIdx);
-                });
+                // Add click listener if not already handled dynamically
+                if (opt.onclick === null && opt.listenersCount === undefined) {
+                    opt.addEventListener('click', () => {
+                        this.selectOption(idx, optIdx);
+                    });
+                    opt.listenersCount = 1;
+                }
             });
         });
         
