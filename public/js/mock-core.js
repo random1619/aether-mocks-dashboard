@@ -18,9 +18,43 @@ class MockExamController {
         // Bind functions
         this.init = this.init.bind(this);
         this.updateUI = this.updateUI.bind(this);
+        this.toggleTheme = this.toggleTheme.bind(this);
+        this.toggleFullscreen = this.toggleFullscreen.bind(this);
     }
     
     init() {
+        // Immediately apply saved theme preference to avoid layout flashes
+        const savedTheme = localStorage.getItem('aether-theme');
+        if (savedTheme === 'dark') {
+            document.body.classList.add('dark-theme');
+            const themeBtn = document.getElementById('themeToggleBtn');
+            if (themeBtn) {
+                themeBtn.innerHTML = '<i class="fas fa-sun"></i>';
+                themeBtn.title = "Switch to Light Mode";
+            }
+        }
+
+        // Bind header controls
+        const themeBtn = document.getElementById('themeToggleBtn');
+        if (themeBtn) {
+            themeBtn.addEventListener('click', this.toggleTheme);
+        }
+        
+        const fsBtn = document.getElementById('fullscreenToggleBtn');
+        if (fsBtn) {
+            fsBtn.addEventListener('click', this.toggleFullscreen);
+            // Listen for fullscreen change to update icon
+            document.addEventListener('fullscreenchange', () => {
+                if (document.fullscreenElement) {
+                    fsBtn.innerHTML = '<i class="fas fa-compress"></i>';
+                    fsBtn.title = "Exit Fullscreen";
+                } else {
+                    fsBtn.innerHTML = '<i class="fas fa-expand"></i>';
+                    fsBtn.title = "Toggle Fullscreen";
+                }
+            });
+        }
+
         // Find all question cards
         this.questions = Array.from(document.querySelectorAll('.question-card'));
         
@@ -330,6 +364,26 @@ class MockExamController {
         
         // Go back to dashboard portal (relative path fallback)
         window.close();
+    }
+    
+    toggleTheme() {
+        const isDark = document.body.classList.toggle('dark-theme');
+        localStorage.setItem('aether-theme', isDark ? 'dark' : 'light');
+        const themeBtn = document.getElementById('themeToggleBtn');
+        if (themeBtn) {
+            themeBtn.innerHTML = isDark ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+            themeBtn.title = isDark ? "Switch to Light Mode" : "Switch to Dark Mode";
+        }
+    }
+    
+    toggleFullscreen() {
+        if (!document.fullscreenElement) {
+            document.documentElement.requestFullscreen().catch(err => {
+                console.error(`Error attempting to enable fullscreen: ${err.message}`);
+            });
+        } else {
+            document.exitFullscreen();
+        }
     }
 }
 
