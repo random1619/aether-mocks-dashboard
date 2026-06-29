@@ -44,8 +44,8 @@ Plans:
 **Plans**: 2 plans
 
 Plans:
-- [ ] 02-01: Standardize and inject layout classes into mock HTML files.
-- [ ] 02-02: Strip vendor scripts, keep LaTeX script loaders, and link centralized CSS/JS.
+- [x] 02-01: Standardize and inject layout classes into mock HTML files.
+- [x] 02-02: Strip vendor scripts, keep LaTeX script loaders, and link centralized CSS/JS.
 
 ### Phase 3: Verification & Deployment
 **Goal**: Final verification and deployment of the mock test portal.
@@ -71,6 +71,7 @@ Phases execute in numeric order: 1 → 2 → 3
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Core Design & Scripting | 2/2 | Complete | 2026-06-29 |
-| 2. Page Unification & Cleaning | 0/2 | Not started | - |
+| 2. Page Unification & Cleaning | 2/2 | Complete | 2026-06-29 |
 | 3. Verification & Deployment | 0/2 | Not started | - |
+
 
