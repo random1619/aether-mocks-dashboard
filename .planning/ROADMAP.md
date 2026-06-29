@@ -28,8 +28,8 @@ Modernizing static mock exam pages across multiple providers into a standardized
 **Plans**: 2 plans
 
 Plans:
-- [ ] 01-01: Create centralized CSS design system.
-- [ ] 01-02: Create unified exam-taking JS interactivity controller.
+- [x] 01-01: Create centralized CSS design system.
+- [x] 01-02: Create unified exam-taking JS interactivity controller.
 
 ### Phase 2: Page Unification & Cleaning
 **Goal**: Standardize HTML structure and connect mock pages to centralized assets.
@@ -70,6 +70,7 @@ Phases execute in numeric order: 1 → 2 → 3
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Core Design & Scripting | 0/2 | Not started | - |
+| 1. Core Design & Scripting | 2/2 | Complete | 2026-06-29 |
 | 2. Page Unification & Cleaning | 0/2 | Not started | - |
 | 3. Verification & Deployment | 0/2 | Not started | - |
+
