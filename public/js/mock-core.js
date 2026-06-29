@@ -10,6 +10,7 @@ class MockExamController {
         this.answers = {}; // questionIndex -> optionIndex
         this.flags = new Set();
         this.visited = new Set([0]); // start with first question visited
+        this.isSubmitted = false;
         
         this.timer = null;
         this.timeRemaining = 0;
@@ -155,7 +156,77 @@ class MockExamController {
         
         // Whitelist LaTeX processors
         this.triggerLaTeXRender();
+        
+        // Setup keyboard shortcuts
+        this.setupKeyboardShortcuts();
     }
+    
+    setupKeyboardShortcuts() {
+        document.addEventListener('keydown', (e) => {
+            // Skip keyboard shortcuts if user is typing in an input or textarea
+            if (document.activeElement && (document.activeElement.tagName === 'INPUT' || document.activeElement.tagName === 'TEXTAREA')) {
+                return;
+            }
+            
+            if (this.isSubmitted) {
+                // In review mode, only allow navigation
+                if (e.key === 'ArrowLeft') {
+                    e.preventDefault();
+                    this.prevQuestion();
+                } else if (e.key === 'ArrowRight') {
+                    e.preventDefault();
+                    this.nextQuestion();
+                }
+                return;
+            }
+            
+            switch(e.key) {
+                case 'ArrowLeft':
+                    e.preventDefault();
+                    this.prevQuestion();
+                    break;
+                case 'ArrowRight':
+                    e.preventDefault();
+                    this.nextQuestion();
+                    break;
+                case '1':
+                case 'a':
+                case 'A':
+                    this.selectOption(this.currentIdx, 0);
+                    break;
+                case '2':
+                case 'b':
+                case 'B':
+                    this.selectOption(this.currentIdx, 1);
+                    break;
+                case '3':
+                case 'c':
+                case 'C':
+                    this.selectOption(this.currentIdx, 2);
+                    break;
+                case '4':
+                case 'd':
+                case 'D':
+                    this.selectOption(this.currentIdx, 3);
+                    break;
+                case '5':
+                case 'e':
+                case 'E':
+                    this.selectOption(this.currentIdx, 4);
+                    break;
+                case 'f':
+                case 'F':
+                    this.toggleFlag(this.currentIdx);
+                    break;
+                case 'Escape':
+                case 'Delete':
+                case 'Backspace':
+                    this.clearSelection(this.currentIdx);
+                    break;
+            }
+        });
+    }
+
     
     buildQuestionGrid() {
         const gridContainer = document.querySelector('.questions-grid');
@@ -245,6 +316,7 @@ class MockExamController {
     }
     
     selectOption(questionIdx, optionIdx) {
+        if (this.isSubmitted) return;
         this.answers[questionIdx] = optionIdx;
         
         // Update styling of option blocks inside active card
@@ -262,6 +334,7 @@ class MockExamController {
     }
     
     clearSelection(questionIdx) {
+        if (this.isSubmitted) return;
         delete this.answers[questionIdx];
         
         const card = this.questions[questionIdx];
@@ -272,6 +345,7 @@ class MockExamController {
     }
     
     toggleFlag(questionIdx) {
+        if (this.isSubmitted) return;
         if (this.flags.has(questionIdx)) {
             this.flags.delete(questionIdx);
         } else {
@@ -281,12 +355,60 @@ class MockExamController {
     }
     
     updateUI() {
-        // Toggle question cards active visibility
+        const globalQuestions = typeof questions !== 'undefined' ? questions : null;
+        
+        // Toggle question cards active visibility & apply option correctness styling
         this.questions.forEach((card, idx) => {
             if (idx === this.currentIdx) {
                 card.classList.add('active');
             } else {
                 card.classList.remove('active');
+            }
+            
+            if (this.isSubmitted && globalQuestions) {
+                const qData = globalQuestions[idx];
+                const correctOpt = qData ? qData.correct_option_id : null;
+                const userOpt = this.answers[idx];
+                
+                // Style options
+                const options = card.querySelectorAll('.quiz-option');
+                options.forEach((opt, optIdx) => {
+                    opt.style.pointerEvents = 'none';
+                    opt.classList.remove('selected');
+                    
+                    if (optIdx === correctOpt) {
+                        opt.classList.add('correct');
+                    } else if (optIdx === userOpt) {
+                        opt.classList.add('incorrect');
+                    } else {
+                        opt.classList.remove('correct', 'incorrect');
+                    }
+                });
+                
+                // Render solution box
+                let solBox = card.querySelector('.solution-box');
+                if (!solBox) {
+                    solBox = document.createElement('div');
+                    solBox.className = 'solution-box';
+                    card.appendChild(solBox);
+                }
+                solBox.style.display = 'block';
+                solBox.innerHTML = `
+                    <div class="solution-header" style="font-weight: 700; color: #0f172a; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem;">
+                        <i class="fas fa-lightbulb" style="color: #eab308;"></i> Solution & Explanation
+                    </div>
+                    <div class="solution-content" style="margin-top: 0.5rem; line-height: 1.6; color: #334155;">
+                        ${qData.solution || 'No explanation available.'}
+                    </div>
+                `;
+                
+                // Support dark mode styling within explanation text
+                if (document.body.classList.contains('dark-theme')) {
+                    const solHeader = solBox.querySelector('.solution-header');
+                    if (solHeader) solHeader.style.color = '#f8fafc';
+                    const solContent = solBox.querySelector('.solution-content');
+                    if (solContent) solContent.style.color = '#94a3b8';
+                }
             }
         });
         
@@ -296,18 +418,32 @@ class MockExamController {
             const index = parseInt(item.dataset.index, 10);
             
             // Remove previous states
-            item.classList.remove('active', 'answered', 'flagged', 'unvisited');
+            item.classList.remove('active', 'answered', 'flagged', 'unvisited', 'correct', 'incorrect');
             
             if (index === this.currentIdx) {
                 item.classList.add('active');
             }
             
-            if (this.flags.has(index)) {
-                item.classList.add('flagged');
-            } else if (this.answers[index] !== undefined) {
-                item.classList.add('answered');
-            } else if (!this.visited.has(index)) {
-                item.classList.add('unvisited');
+            if (this.isSubmitted && globalQuestions) {
+                const qData = globalQuestions[index];
+                const correctOpt = qData ? qData.correct_option_id : null;
+                const userOpt = this.answers[index];
+                
+                if (userOpt === undefined) {
+                    item.classList.add('unvisited');
+                } else if (userOpt === correctOpt) {
+                    item.classList.add('correct');
+                } else {
+                    item.classList.add('incorrect');
+                }
+            } else {
+                if (this.flags.has(index)) {
+                    item.classList.add('flagged');
+                } else if (this.answers[index] !== undefined) {
+                    item.classList.add('answered');
+                } else if (!this.visited.has(index)) {
+                    item.classList.add('unvisited');
+                }
             }
         });
         
@@ -358,12 +494,109 @@ class MockExamController {
         }
         
         if (this.timer) clearInterval(this.timer);
+        this.isSubmitted = true;
         
-        // Display score results
-        alert(`Exam submitted successfully!\nTotal Answered: ${Object.keys(this.answers).length}/${this.totalQuestions}`);
+        // Hide standard controls that are no longer needed
+        const btnFlag = document.querySelector('.btn-flag');
+        const btnClear = document.querySelector('.btn-clear');
+        const btnSubmit = document.querySelector('.btn-submit');
+        if (btnFlag) btnFlag.style.display = 'none';
+        if (btnClear) btnClear.style.display = 'none';
+        if (btnSubmit) btnSubmit.style.display = 'none';
         
-        // Go back to dashboard portal (relative path fallback)
-        window.close();
+        // Calculate scores
+        let correctCount = 0;
+        let incorrectCount = 0;
+        let unattemptedCount = 0;
+        let totalScore = 0;
+        let maxScore = 0;
+        
+        const globalQuestions = typeof questions !== 'undefined' ? questions : null;
+        if (globalQuestions) {
+            globalQuestions.forEach((q, idx) => {
+                const userAns = this.answers[idx];
+                const correctAns = q.correct_option_id;
+                const qMarks = q.marks !== undefined ? parseFloat(q.marks) : 2.0;
+                maxScore += qMarks;
+                
+                if (userAns === undefined) {
+                    unattemptedCount++;
+                } else if (userAns === correctAns) {
+                    correctCount++;
+                    totalScore += qMarks;
+                } else {
+                    incorrectCount++;
+                    totalScore -= 0.25 * qMarks; // Standard 25% negative marking penalty
+                }
+            });
+        } else {
+            // Fallback if global questions variable is missing
+            correctCount = Object.keys(this.answers).length;
+            unattemptedCount = this.totalQuestions - correctCount;
+            totalScore = correctCount * 2.0;
+            maxScore = this.totalQuestions * 2.0;
+        }
+        totalScore = Math.max(0, totalScore); // Prevent negative score
+        
+        // Build and display results modal
+        let modal = document.getElementById('resultModal');
+        if (!modal) {
+            modal = document.createElement('div');
+            modal.id = 'resultModal';
+            modal.className = 'result-modal';
+            modal.innerHTML = `
+                <div class="result-container">
+                    <div class="result-header">
+                        <h2>Test Completed!</h2>
+                        <div class="result-score" id="resultScore">0.00 / 0.00</div>
+                    </div>
+                    <div class="result-grid">
+                        <div class="result-stat correct">
+                            <div class="result-stat-value" id="correctCount">0</div>
+                            <div class="result-stat-label">Correct</div>
+                        </div>
+                        <div class="result-stat incorrect">
+                            <div class="result-stat-value" id="incorrectCount">0</div>
+                            <div class="result-stat-label">Incorrect</div>
+                        </div>
+                        <div class="result-stat">
+                            <div class="result-stat-value" id="unattemptedCount">0</div>
+                            <div class="result-stat-label">Unattempted</div>
+                        </div>
+                    </div>
+                    <div class="result-actions">
+                        <button class="result-btn btn-close" id="closeResultBtn">Close Test</button>
+                        <button class="result-btn btn-review-ans" id="reviewAnswersBtn">Review Answers</button>
+                    </div>
+                </div>
+            `;
+            document.body.appendChild(modal);
+            
+            // Add event listeners
+            document.getElementById('closeResultBtn').addEventListener('click', () => {
+                window.close();
+            });
+            document.getElementById('reviewAnswersBtn').addEventListener('click', () => {
+                modal.classList.remove('show');
+                modal.style.display = 'none';
+            });
+        }
+        
+        // Populate modal stats
+        document.getElementById('resultScore').textContent = `${totalScore.toFixed(2)} / ${maxScore.toFixed(2)}`;
+        document.getElementById('correctCount').textContent = correctCount;
+        document.getElementById('incorrectCount').textContent = incorrectCount;
+        document.getElementById('unattemptedCount').textContent = unattemptedCount;
+        
+        // Show modal with animation
+        modal.style.display = 'flex';
+        // Force reflow
+        modal.offsetHeight;
+        modal.classList.add('show');
+        
+        // Trigger UI rendering to reflect correctness styling & reveal solution explanation boxes
+        this.updateUI();
+        this.triggerLaTeXRender();
     }
     
     toggleTheme() {

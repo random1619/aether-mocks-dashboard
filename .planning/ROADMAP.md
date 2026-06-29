@@ -13,6 +13,8 @@ Modernizing static mock exam pages across multiple providers into a standardized
 - [ ] **Phase 1: Core Design & Scripting** - Develop the unified styling variables (`mock-main.css`) and quiz taker interactive script (`mock-core.js`).
 - [ ] **Phase 2: Page Unification & Cleaning** - Strip inline styles/vendor logic and link centralized CSS/JS dynamically.
 - [ ] **Phase 3: Verification & Deployment** - Audit all mock test files locally and deploy to static hosting services.
+- [ ] **Phase 4: Fullscreen & Dark Theme Integration** - Integrate dark theme toggle and fullscreen triggers to all mock exams.
+- [ ] **Phase 5: Dashboard Redesign** - Redesign mock dashboard with professional structure and colors.
 
 ## Phase Details
 
@@ -78,10 +80,25 @@ Plans:
 - [x] 04-01: Implement centralized dark theme variables and toggle actions in CSS/JS.
 - [x] 04-02: Standardize welcome screen containers and inject toggle buttons into the HTML builder template.
 
+### Phase 5: Dashboard Redesign
+**Goal**: Redesign the main mock dashboard with a professional structure and a clean, legible light-mode theme using professional color palettes.
+**Mode**: mvp
+**Depends on**: Phase 4
+**Requirements**: LAYOUT-01, LAYOUT-02, LAYOUT-03, LOGIC-01
+**Success Criteria** (what must be TRUE):
+  1. Inline CSS styles and JavaScript block are extracted from `public/index.html` to separate files (`public/css/dashboard.css`, `public/js/dashboard.js`).
+  2. The main dashboard is redesigned in a professional, light-themed layout styled with Outfit typography, custom shadows, and micro-animations.
+  3. Dynamic mock badges are styled using professional pastel theme colors (e.g. green, blue, purple, amber, rose).
+  4. Search, filters, grid view, roadmap view, and completion tracking function correctly without console errors.
+**Plans**: 1 plan
+
+Plans:
+- [x] 05-01: Redesign index dashboard and modularize assets.
+
 ## Progress
 
 **Execution Order:**
-Phases execute in numeric order: 1 → 2 → 3 → 4
+Phases execute in numeric order: 1 → 2 → 3 → 4 → 5
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
@@ -89,7 +106,4 @@ Phases execute in numeric order: 1 → 2 → 3 → 4
 | 2. Page Unification & Cleaning | 2/2 | Complete | 2026-06-29 |
 | 3. Verification & Deployment | 2/2 | Complete | 2026-06-29 |
 | 4. Fullscreen & Dark Theme Integration | 2/2 | Complete | 2026-06-29 |
-
-
-
-
+| 5. Dashboard Redesign | 1/1 | Complete | 2026-06-29 |

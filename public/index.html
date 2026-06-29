@@ -3,1798 +3,201 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aether Mocks - Premium Dashboard</title>
+    <title>Aether Mocks — Premium Mock Test Dashboard</title>
+    <meta name="description" content="Browse, search and track your mock test preparation across all providers in one clean, unified dashboard.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <style>
-        :root {
-            --bg-color: #030712;
-            --text-main: #f8fafc;
-            --text-muted: #94a3b8;
-            
-            --glass-bg: rgba(255, 255, 255, 0.02);
-            --glass-border: rgba(255, 255, 255, 0.06);
-            --glass-hover: rgba(255, 255, 255, 0.05);
-            --glass-border-hover: rgba(255, 255, 255, 0.15);
-            
-            --primary: #6366f1;
-            --primary-glow: rgba(99, 102, 241, 0.3);
-            --secondary: #8b5cf6;
-            --accent: #ec4899;
-            --success: #10b981;
-            --success-glow: rgba(16, 185, 129, 0.3);
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Outfit', sans-serif;
-        }
-
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-main);
-            min-height: 100vh;
-            overflow-x: hidden;
-            position: relative;
-        }
-
-        /* Animated Background Orbs */
-        .bg-orbs {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            z-index: -1;
-            overflow: hidden;
-            pointer-events: none;
-        }
-        .orb {
-            position: absolute;
-            border-radius: 50%;
-            filter: blur(100px);
-            opacity: 0.4;
-            animation: float 20s infinite ease-in-out alternate;
-        }
-        .orb-1 { width: 50vw; height: 50vw; background: var(--primary); top: -20vw; left: -10vw; }
-        .orb-2 { width: 40vw; height: 40vw; background: var(--secondary); bottom: -10vw; right: -10vw; animation-delay: -5s; }
-        .orb-3 { width: 45vw; height: 45vw; background: var(--accent); top: 30vh; left: 20vw; opacity: 0.2; animation-delay: -10s; }
-
-        @keyframes float {
-            0% { transform: translate(0, 0) scale(1); }
-            100% { transform: translate(5vw, 5vh) scale(1.1); }
-        }
-
-        /* Scrollbar */
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: transparent; }
-        ::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.1); border-radius: 4px; }
-        ::-webkit-scrollbar-thumb:hover { background: rgba(255, 255, 255, 0.2); }
-
-        .dashboard {
-            max-width: 1800px;
-            margin: 0 auto;
-            padding: 2rem;
-            display: flex;
-            flex-direction: column;
-            gap: 2rem;
-        }
-
-        .glass-panel {
-            background: var(--glass-bg);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid var(--glass-border);
-            border-radius: 24px;
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
-        }
-
-        /* Header */
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 2rem 2.5rem;
-            flex-wrap: wrap;
-            gap: 2rem;
-            position: relative;
-            overflow: hidden;
-        }
-
-        header::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; right: 0; height: 2px;
-            background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent));
-        }
-
-        .brand {
-            display: flex;
-            align-items: center;
-            gap: 1.25rem;
-        }
-
-        .logo {
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            border-radius: 18px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2rem;
-            color: white;
-            box-shadow: 0 0 30px var(--primary-glow);
-        }
-
-        .brand-text h1 {
-            font-size: 2rem;
-            font-weight: 800;
-            background: linear-gradient(to right, #fff, #a5b4fc);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 0.2rem;
-        }
-        
-        .brand-text p {
-            color: var(--text-muted);
-            font-size: 0.95rem;
-        }
-
-        .stats-wrapper {
-            display: flex;
-            gap: 1.5rem;
-            flex-wrap: wrap;
-        }
-
-        .stat-card {
-            background: rgba(255, 255, 255, 0.01);
-            border: 1px solid var(--glass-border);
-            border-radius: 16px;
-            padding: 1.2rem 1.8rem;
-            min-width: 150px;
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
-            transition: all 0.3s;
-        }
-        
-        .stat-card:hover {
-            border-color: var(--glass-border-hover);
-            transform: translateY(-2px);
-            background: rgba(255, 255, 255, 0.03);
-        }
-
-        .stat-label {
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            font-weight: 600;
-        }
-
-        .stat-val {
-            font-size: 2rem;
-            font-weight: 700;
-            color: #fff;
-        }
-
-        .progress-bar-bg {
-            width: 100%;
-            height: 6px;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 3px;
-            overflow: hidden;
-            margin-top: 0.5rem;
-        }
-
-        .progress-bar-fill {
-            height: 100%;
-            width: 0%;
-            background: linear-gradient(90deg, var(--secondary), var(--success));
-            border-radius: 3px;
-            transition: width 1s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        /* Layout */
-        .main-layout {
-            display: grid;
-            grid-template-columns: 360px 1fr;
-            gap: 2.5rem;
-            align-items: start;
-        }
-
-        @media (max-width: 1200px) {
-            .main-layout { grid-template-columns: 1fr; }
-        }
-
-        /* Sidebar */
-        .sidebar {
-            padding: 2rem;
-            display: flex;
-            flex-direction: column;
-            gap: 2rem;
-            position: sticky;
-            top: 2rem;
-        }
-
-        .filter-section {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-
-        .filter-title {
-            font-size: 0.95rem;
-            font-weight: 600;
-            color: #fff;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .filter-title i { color: var(--secondary); }
-
-        /* Inputs & Selects */
-        .search-box {
-            position: relative;
-        }
-
-        .search-box i {
-            position: absolute;
-            left: 1.2rem;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--text-muted);
-        }
-
-        .search-input {
-            width: 100%;
-            background: rgba(0, 0, 0, 0.2);
-            border: 1px solid var(--glass-border);
-            border-radius: 14px;
-            padding: 1rem 1rem 1rem 3rem;
-            color: white;
-            font-size: 1rem;
-            transition: all 0.3s;
-            outline: none;
-        }
-
-        .search-input:focus {
-            border-color: var(--primary);
-            box-shadow: 0 0 20px var(--primary-glow);
-            background: rgba(0, 0, 0, 0.4);
-        }
-
-        .custom-select {
-            width: 100%;
-            background: rgba(0, 0, 0, 0.2);
-            border: 1px solid var(--glass-border);
-            border-radius: 14px;
-            padding: 1rem;
-            color: white;
-            font-size: 0.95rem;
-            cursor: pointer;
-            outline: none;
-            transition: all 0.3s;
-            appearance: none;
-        }
-        
-        .custom-select option { background: var(--bg-color); }
-        .custom-select:focus { border-color: var(--secondary); }
-
-        /* Filter Pills */
-        .pills-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.6rem;
-        }
-
-        .pill {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid var(--glass-border);
-            color: var(--text-muted);
-            padding: 0.6rem 1.2rem;
-            border-radius: 30px;
-            font-size: 0.85rem;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .pill:hover {
-            background: var(--glass-hover);
-            color: white;
-            border-color: var(--glass-border-hover);
-            transform: translateY(-1px);
-        }
-
-        .pill.active {
-            background: var(--primary-glow);
-            color: white;
-            border-color: var(--primary);
-            box-shadow: 0 0 15px var(--primary-glow);
-        }
-
-        .color-dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            box-shadow: 0 0 10px currentColor;
-        }
-
-        /* Switch Group */
-        .switch-group {
-            display: flex;
-            background: rgba(0, 0, 0, 0.2);
-            border: 1px solid var(--glass-border);
-            border-radius: 14px;
-            padding: 0.3rem;
-        }
-
-        .switch-btn {
-            flex: 1;
-            background: transparent;
-            border: none;
-            color: var(--text-muted);
-            padding: 0.8rem;
-            border-radius: 10px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .switch-btn.active {
-            background: rgba(255, 255, 255, 0.08);
-            color: white;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-        }
-
-        /* Content Area */
-        .content-area {
-            display: flex;
-            flex-direction: column;
-            gap: 2rem;
-        }
-
-        .content-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 0.5rem;
-        }
-
-        .results-count {
-            color: var(--text-muted);
-            font-size: 1.05rem;
-        }
-        .results-count strong { color: white; font-weight: 700; }
-
-        /* Grid */
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-            gap: 1.5rem;
-        }
-
-        /* Card */
-        .card {
-            background: var(--glass-bg);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid var(--glass-border);
-            border-radius: 20px;
-            padding: 1.8rem;
-            display: flex;
-            flex-direction: column;
-            gap: 1.25rem;
-            position: relative;
-            overflow: hidden;
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-            animation: fadeIn 0.5s ease-out forwards;
-            opacity: 0;
-            transform: translateY(20px);
-        }
-
-        @keyframes fadeIn {
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .card::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(135deg, rgba(255,255,255,0.05) 0%, transparent 100%);
-            opacity: 0;
-            transition: opacity 0.4s;
-            pointer-events: none;
-        }
-
-        .card:hover {
-            transform: translateY(-6px) scale(1.01);
-            border-color: rgba(255, 255, 255, 0.2);
-            box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.5), 0 0 20px var(--glass-border-hover);
-            background: rgba(255, 255, 255, 0.04);
-        }
-        .card:hover::before { opacity: 1; }
-
-        .card-accent {
-            position: absolute;
-            top: 0; left: 0; right: 0; height: 4px;
-            background: var(--primary);
-            opacity: 0.8;
-        }
-
-        .card-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            gap: 1rem;
-        }
-
-        .badge {
-            font-size: 0.75rem;
-            font-weight: 700;
-            padding: 0.4rem 0.8rem;
-            border-radius: 30px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            display: flex;
-            align-items: center;
-            gap: 0.4rem;
-        }
-
-        .badge-provider {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            color: white;
-        }
-
-        .badge-subject {
-            background: transparent;
-            border: 1px solid var(--glass-border);
-            color: var(--text-muted);
-        }
-
-        .card-title {
-            font-size: 1.2rem;
-            font-weight: 700;
-            line-height: 1.4;
-            color: white;
-            min-height: 3.36rem;
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-            margin-top: 0.5rem;
-        }
-
-        .card-meta {
-            color: var(--text-muted);
-            font-size: 0.9rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .card-footer {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: auto;
-            padding-top: 1.25rem;
-            border-top: 1px solid var(--glass-border);
-            position: relative;
-            z-index: 2;
-        }
-
-        .toggle-btn {
-            width: 42px;
-            height: 42px;
-            border-radius: 12px;
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid var(--glass-border);
-            color: var(--text-muted);
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.1rem;
-            transition: all 0.3s;
-        }
-
-        .toggle-btn:hover {
-            background: rgba(255, 255, 255, 0.1);
-            color: white;
-        }
-
-        .toggle-btn.completed {
-            background: var(--success-glow);
-            border-color: var(--success);
-            color: var(--success);
-            box-shadow: 0 0 15px var(--success-glow);
-        }
-
-        .launch-btn {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            border: none;
-            color: white;
-            padding: 0.8rem 1.5rem;
-            border-radius: 12px;
-            font-weight: 600;
-            font-size: 0.95rem;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 0.6rem;
-            transition: all 0.3s;
-            box-shadow: 0 4px 15px var(--primary-glow);
-        }
-
-        .launch-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(139, 92, 246, 0.4);
-            filter: brightness(1.1);
-        }
-
-        /* Load More */
-        .load-more-wrapper {
-            display: flex;
-            justify-content: center;
-            margin-top: 2rem;
-            padding-bottom: 2rem;
-        }
-
-        .load-more-btn {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid var(--glass-border);
-            color: white;
-            padding: 1rem 2.5rem;
-            border-radius: 14px;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            gap: 0.6rem;
-            backdrop-filter: blur(10px);
-        }
-
-        .load-more-btn:hover {
-            background: rgba(255, 255, 255, 0.08);
-            border-color: rgba(255, 255, 255, 0.2);
-            transform: translateY(-2px);
-        }
-
-        /* Empty State */
-        .empty-state {
-            grid-column: 1 / -1;
-            padding: 6rem 2rem;
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 1.5rem;
-        }
-
-        .empty-state i {
-            font-size: 4rem;
-            color: var(--text-muted);
-            opacity: 0.5;
-        }
-
-        .empty-state h3 {
-            font-size: 1.8rem;
-            color: white;
-        }
-
-        .empty-state p {
-            color: var(--text-muted);
-            max-width: 400px;
-            line-height: 1.6;
-        }
-
-        /* Subject Cards & Chapter selection portal */
-        .subject-select-portal {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 1.5rem;
-            padding: 1rem 0;
-            width: 100%;
-        }
-        .portal-instruction {
-            color: var(--text-muted);
-            font-size: 1.1rem;
-            font-weight: 500;
-        }
-        .subject-cards-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1.5rem;
-            width: 100%;
-            max-width: 900px;
-        }
-        .subject-card {
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid var(--glass-border);
-            border-radius: 16px;
-            padding: 1.5rem;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 1rem;
-        }
-        .subject-card:hover {
-            background: rgba(255, 255, 255, 0.05);
-            border-color: var(--primary);
-            transform: translateY(-4px);
-            box-shadow: 0 8px 24px rgba(99, 102, 241, 0.15);
-        }
-        .subject-card-icon {
-            width: 48px;
-            height: 48px;
-            border-radius: 12px;
-            background: rgba(99, 102, 241, 0.1);
-            color: var(--primary);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            transition: all 0.3s ease;
-        }
-        .subject-card:hover .subject-card-icon {
-            background: var(--primary);
-            color: white;
-            transform: scale(1.1);
-        }
-        .subject-card-title {
-            font-size: 1.2rem;
-            font-weight: 700;
-            color: var(--text-main);
-        }
-        .subject-card-count {
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            background: rgba(255, 255, 255, 0.04);
-            padding: 2px 10px;
-            border-radius: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-        }
-        .chapter-roadmap-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 2rem;
-            width: 100%;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-            padding-bottom: 1rem;
-        }
-        .back-btn {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid var(--glass-border);
-            color: var(--text-main);
-            padding: 8px 16px;
-            border-radius: 10px;
-            font-size: 0.9rem;
-            font-weight: 600;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            transition: all 0.3s;
-        }
-        .back-btn:hover {
-            background: rgba(255, 255, 255, 0.08);
-            border-color: rgba(255, 255, 255, 0.15);
-            transform: translateX(-4px);
-        }
-        .active-subject-badge {
-            font-size: 0.95rem;
-            color: var(--text-muted);
-        }
-        .active-subject-badge strong {
-            color: var(--primary);
-        }
-        .chapter-section {
-            margin-bottom: 2.5rem;
-            position: relative;
-        }
-        .chapter-section:last-child {
-            margin-bottom: 0;
-        }
-        .chapter-title {
-            font-size: 1.1rem;
-            font-weight: 700;
-            color: var(--text-main);
-            margin-bottom: 1.25rem;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            background: rgba(255, 255, 255, 0.02);
-            padding: 8px 16px;
-            border-radius: 10px;
-            border-left: 3px solid var(--primary);
-        }
-
-        /* View Toggle styling */
-        .view-toggle {
-            display: flex;
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 12px;
-            padding: 4px;
-            gap: 4px;
-        }
-        .view-btn {
-            background: transparent;
-            border: none;
-            color: var(--text-muted);
-            padding: 8px 16px;
-            border-radius: 8px;
-            font-size: 0.9rem;
-            font-weight: 600;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        .view-btn:hover {
-            color: var(--text-main);
-            background: rgba(255, 255, 255, 0.03);
-        }
-        .view-btn.active {
-            color: var(--text-main);
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            box-shadow: 0 4px 12px var(--primary-glow);
-        }
-
-        /* Roadmap Tracks styling */
-        .roadmap-container {
-            display: flex;
-            flex-direction: column;
-            gap: 2rem;
-            width: 100%;
-        }
-        .roadmap-track {
-            border: 1px solid var(--glass-border);
-            border-radius: 20px;
-            background: rgba(255, 255, 255, 0.01);
-            overflow: hidden;
-            transition: all 0.3s ease;
-        }
-        .roadmap-track:hover {
-            border-color: rgba(255, 255, 255, 0.12);
-        }
-        .roadmap-track-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1.5rem 2rem;
-            background: rgba(255, 255, 255, 0.02);
-            cursor: pointer;
-            user-select: none;
-        }
-        .roadmap-track-info {
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
-            flex-grow: 1;
-        }
-        .roadmap-track-title {
-            font-size: 1.25rem;
-            font-weight: 700;
-            color: var(--text-main);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        .roadmap-track-title i {
-            color: var(--primary);
-        }
-        .roadmap-track-meta {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            flex-wrap: wrap;
-        }
-        .roadmap-progress-container {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            width: 200px;
-        }
-        .roadmap-progress-bar {
-            flex-grow: 1;
-            height: 6px;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 3px;
-            overflow: hidden;
-        }
-        .roadmap-progress-fill {
-            height: 100%;
-            border-radius: 3px;
-            background: linear-gradient(90deg, var(--success), #34d399);
-            width: 0%;
-            transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        .roadmap-track-toggle {
-            font-size: 1.2rem;
-            color: var(--text-muted);
-            margin-left: 1.5rem;
-            transition: transform 0.3s ease;
-        }
-        .roadmap-track.collapsed .roadmap-track-toggle {
-            transform: rotate(-90deg);
-        }
-        .roadmap-track-content {
-            padding: 2rem;
-            display: flex;
-            flex-direction: column;
-            position: relative;
-            max-height: 100000px;
-            transition: max-height 0.5s ease-in-out, padding 0.5s ease;
-        }
-        .roadmap-track.collapsed .roadmap-track-content {
-            max-height: 0;
-            padding-top: 0;
-            padding-bottom: 0;
-            overflow: hidden;
-        }
-        
-        /* Timeline line and nodes */
-        .roadmap-timeline {
-            position: absolute;
-            left: calc(2rem + 15px);
-            top: 2rem;
-            bottom: 2rem;
-            width: 2px;
-            background: repeating-linear-gradient(
-                to bottom,
-                transparent,
-                transparent 4px,
-                rgba(255, 255, 255, 0.1) 4px,
-                rgba(255, 255, 255, 0.1) 8px
-            );
-            z-index: 1;
-        }
-        .roadmap-step {
-            display: flex;
-            gap: 2rem;
-            position: relative;
-            padding-bottom: 1.5rem;
-            z-index: 2;
-        }
-        .roadmap-step:last-child {
-            padding-bottom: 0;
-        }
-        .roadmap-node-container {
-            width: 32px;
-            height: 32px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-        }
-        .roadmap-node {
-            width: 24px;
-            height: 24px;
-            border-radius: 50%;
-            background: var(--bg-color);
-            border: 2px solid var(--text-muted);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.75rem;
-            font-weight: bold;
-            transition: all 0.3s ease;
-            box-shadow: 0 0 0 0px transparent;
-            z-index: 3;
-        }
-        .roadmap-step.completed .roadmap-node {
-            width: 28px;
-            height: 28px;
-            background: var(--success);
-            border-color: var(--success);
-            color: #ffffff;
-            box-shadow: 0 0 10px var(--success-glow);
-        }
-        .roadmap-step.active .roadmap-node {
-            width: 32px;
-            height: 32px;
-            background: var(--primary);
-            border-color: var(--primary);
-            color: #ffffff;
-            animation: pulse-node 2s infinite;
-        }
-        .roadmap-step.pending .roadmap-node {
-            background: rgba(255, 255, 255, 0.05);
-            border-color: rgba(255, 255, 255, 0.15);
-            color: var(--text-muted);
-        }
-        
-        @keyframes pulse-node {
-            0% { box-shadow: 0 0 0 0px var(--primary-glow); }
-            70% { box-shadow: 0 0 0 10px rgba(99, 102, 241, 0); }
-            100% { box-shadow: 0 0 0 0px rgba(99, 102, 241, 0); }
-        }
-
-        .roadmap-card {
-            flex-grow: 1;
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid var(--glass-border);
-            border-radius: 16px;
-            padding: 1.25rem 1.5rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 1.5rem;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        .roadmap-card:hover {
-            background: rgba(255, 255, 255, 0.04);
-            border-color: rgba(255, 255, 255, 0.15);
-            transform: translateX(6px);
-        }
-        .roadmap-step.active .roadmap-card {
-            background: rgba(99, 102, 241, 0.03);
-            border-color: rgba(99, 102, 241, 0.3);
-            box-shadow: 0 4px 20px rgba(99, 102, 241, 0.05);
-        }
-        .roadmap-step.completed .roadmap-card {
-            opacity: 0.85;
-        }
-        .roadmap-info {
-            display: flex;
-            flex-direction: column;
-            gap: 0.35rem;
-        }
-        .roadmap-name {
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: var(--text-main);
-        }
-        .roadmap-meta {
-            display: flex;
-            gap: 12px;
-            align-items: center;
-            font-size: 0.8rem;
-            color: var(--text-muted);
-            flex-wrap: wrap;
-        }
-        .roadmap-badge {
-            padding: 2px 8px;
-            border-radius: 6px;
-            font-size: 0.75rem;
-            font-weight: 600;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-        }
-    </style>
+    <link rel="stylesheet" href="css/dashboard.css">
 </head>
 <body>
-    <div class="bg-orbs">
-        <div class="orb orb-1"></div>
-        <div class="orb orb-2"></div>
-        <div class="orb orb-3"></div>
-    </div>
 
-    <div class="dashboard">
-        <!-- Header -->
-        <header class="glass-panel">
-            <div class="brand">
-                <div class="logo"><i class="fa-solid fa-layer-group"></i></div>
-                <div class="brand-text">
-                    <h1>Aether Mocks</h1>
-                    <p>Premium Mock Tests Explorer & Tracker</p>
-                </div>
+    <!-- Fixed Top Navigation -->
+    <nav class="topnav" id="topnav">
+        <div class="topnav-left">
+            <div class="nav-logo">
+                <i class="fa-solid fa-layer-group"></i>
             </div>
-            
-            <div class="stats-wrapper">
-                <div class="stat-card">
-                    <span class="stat-label">Total Tests</span>
-                    <span class="stat-val" id="stat-total">0</span>
-                </div>
-                <div class="stat-card">
-                    <span class="stat-label">Completed</span>
-                    <span class="stat-val" id="stat-completed" style="color: var(--success);">0</span>
-                </div>
-                <div class="stat-card" style="min-width: 200px;">
-                    <span class="stat-label">Progress</span>
-                    <span class="stat-val" id="stat-progress-txt">0%</span>
-                    <div class="progress-bar-bg">
-                        <div class="progress-bar-fill" id="stat-progress-bar"></div>
-                    </div>
-                </div>
+            <div class="nav-brand">
+                <span class="nav-brand-name">Aether Mocks</span>
+                <span class="nav-brand-tagline">Mock Test Explorer</span>
             </div>
-        </header>
+        </div>
 
-        <div class="main-layout">
-            <!-- Sidebar -->
-            <aside class="sidebar glass-panel">
-                <div class="filter-section">
-                    <label class="filter-title"><i class="fa-solid fa-magnifying-glass"></i> Search</label>
-                    <div class="search-box">
-                        <i class="fa-solid fa-magnifying-glass"></i>
-                        <input type="text" class="search-input" id="search-box" placeholder="Search mocks...">
+        <div class="topnav-center">
+            <div class="global-search-wrap">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" id="global-search" class="global-search" placeholder="Search across all 1,000+ mocks...">
+                <kbd class="search-kbd">⌘K</kbd>
+            </div>
+        </div>
+
+        <div class="topnav-right">
+            <div class="view-toggle">
+                <button class="view-btn active" id="view-grid-btn" title="Grid View">
+                    <i class="fa-solid fa-grip-vertical"></i>
+                    <span>Grid</span>
+                </button>
+                <button class="view-btn" id="view-roadmap-btn" title="Roadmap View">
+                    <i class="fa-solid fa-route"></i>
+                    <span>Roadmap</span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Stats Strip -->
+    <div class="stats-strip" id="stats-strip">
+        <div class="stat-item">
+            <div class="stat-icon stat-icon-blue">
+                <i class="fa-solid fa-file-lines"></i>
+            </div>
+            <div class="stat-body">
+                <div class="stat-number" id="stat-total">0</div>
+                <div class="stat-label">Total Tests</div>
+            </div>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+            <div class="stat-icon stat-icon-green">
+                <i class="fa-solid fa-circle-check"></i>
+            </div>
+            <div class="stat-body">
+                <div class="stat-number stat-number-green" id="stat-completed">0</div>
+                <div class="stat-label">Completed</div>
+            </div>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+            <div class="stat-icon stat-icon-amber">
+                <i class="fa-solid fa-hourglass-half"></i>
+            </div>
+            <div class="stat-body">
+                <div class="stat-number stat-number-amber" id="stat-remaining">0</div>
+                <div class="stat-label">Remaining</div>
+            </div>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item stat-item-progress">
+            <div class="stat-icon stat-icon-violet">
+                <i class="fa-solid fa-chart-line"></i>
+            </div>
+            <div class="stat-body">
+                <div class="stat-progress-row">
+                    <div class="stat-number" id="stat-progress-txt">0%</div>
+                    <div class="stat-progress-track">
+                        <div class="stat-progress-fill" id="stat-progress-bar"></div>
                     </div>
                 </div>
-
-                <div class="filter-section">
-                    <label class="filter-title"><i class="fa-solid fa-building-columns"></i> Provider</label>
-                    <div class="pills-container" id="provider-filters">
-                        <!-- Dynamic pills injected here -->
-                    </div>
-                </div>
-
-                <div class="filter-section">
-                    <label class="filter-title"><i class="fa-solid fa-graduation-cap"></i> Subject</label>
-                    <div class="pills-container" id="subject-filters">
-                        <!-- Dynamic pills injected here -->
-                    </div>
-                </div>
-
-                <div class="filter-section">
-                    <label class="filter-title"><i class="fa-solid fa-folder-open"></i> Category</label>
-                    <select class="custom-select" id="category-filter">
-                        <option value="all">All Categories</option>
-                    </select>
-                </div>
-
-                <div class="filter-section">
-                    <label class="filter-title"><i class="fa-solid fa-circle-check"></i> Status</label>
-                    <div class="switch-group" id="status-filters">
-                        <button class="switch-btn active" data-status="all">All</button>
-                        <button class="switch-btn" data-status="completed">Completed</button>
-                        <button class="switch-btn" data-status="pending">Pending</button>
-                    </div>
-                </div>
-
-                <div class="filter-section">
-                    <label class="filter-title"><i class="fa-solid fa-sort"></i> Sort By</label>
-                    <select class="custom-select" id="sort-select">
-                        <option value="name-asc">Alphabetical (A-Z)</option>
-                        <option value="name-desc">Alphabetical (Z-A)</option>
-                        <option value="provider-asc">Provider</option>
-                    </select>
-                </div>
-            </aside>
-
-            <!-- Content Area -->
-            <main class="content-area">
-                <div class="content-header">
-                    <div class="results-count" id="results-count">
-                        Found <strong>0</strong> mocks
-                    </div>
-                    <div class="view-toggle">
-                        <button class="view-btn active" id="view-grid-btn" title="Grid View">
-                            <i class="fa-solid fa-grip-vertical"></i> Grid
-                        </button>
-                        <button class="view-btn" id="view-roadmap-btn" title="Roadmap View">
-                            <i class="fa-solid fa-route"></i> Roadmap
-                        </button>
-                    </div>
-                </div>
-
-                <div class="grid" id="grid">
-                    <!-- Cards injected here -->
-                </div>
-
-                <div class="load-more-wrapper" id="load-more-wrapper" style="display: none;">
-                    <button class="load-more-btn" id="load-more-btn">
-                        <i class="fa-solid fa-arrow-down"></i> Load More
-                    </button>
-                </div>
-            </main>
+                <div class="stat-label">Overall Progress</div>
+            </div>
         </div>
     </div>
 
-    <script src="mocks-data.js"></script>
-    <script>
-        // Colors palette for dynamic pills/badges
-        const colorPalette = [
-            '#3b82f6', '#ec4899', '#f59e0b', '#10b981', 
-            '#8b5cf6', '#ef4444', '#14b8a6', '#f97316'
-        ];
-        
-        let providerColors = {};
-        let subjectColors = {};
+    <!-- App Shell -->
+    <div class="app-shell">
 
-        // Application State
-        let state = {
-            searchQuery: '',
-            provider: 'all',
-            subject: 'all',
-            category: 'all',
-            status: 'all',
-            sort: 'name-asc',
-            page: 1,
-            limit: 60,
-            viewMode: 'grid',
-            chapterSubject: null,
-            completed: JSON.parse(localStorage.getItem('completedMocks') || '{}')
-        };
+        <!-- Left Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-header-title">
+                    <i class="fa-solid fa-sliders"></i>
+                    Filters
+                </div>
+                <div class="results-badge" id="results-count">0 mocks</div>
+            </div>
 
-        const DOM = {
-            search: document.getElementById('search-box'),
-            providers: document.getElementById('provider-filters'),
-            subjects: document.getElementById('subject-filters'),
-            category: document.getElementById('category-filter'),
-            status: document.getElementById('status-filters'),
-            sort: document.getElementById('sort-select'),
-            grid: document.getElementById('grid'),
-            count: document.getElementById('results-count'),
-            loadMoreBtn: document.getElementById('load-more-btn'),
-            loadMoreWrap: document.getElementById('load-more-wrapper'),
-            statTotal: document.getElementById('stat-total'),
-            statCompleted: document.getElementById('stat-completed'),
-            statProgTxt: document.getElementById('stat-progress-txt'),
-            statProgBar: document.getElementById('stat-progress-bar'),
-            viewGrid: document.getElementById('view-grid-btn'),
-            viewRoadmap: document.getElementById('view-roadmap-btn')
-        };
-
-        function assignColors() {
-            const providers = [...new Set(MOCK_DATA.map(m => m.provider))].sort();
-            const subjects = [...new Set(MOCK_DATA.map(m => m.subject))].sort();
-            
-            providers.forEach((p, i) => {
-                providerColors[p] = colorPalette[i % colorPalette.length];
-            });
-            subjects.forEach((s, i) => {
-                subjectColors[s] = colorPalette[(i + 3) % colorPalette.length]; // offset colors
-            });
-        }
-
-        function initFilters() {
-            // Providers
-            const providers = [...new Set(MOCK_DATA.map(m => m.provider))].sort();
-            DOM.providers.innerHTML = `<button class="pill active" data-val="all">All Providers</button>`;
-            providers.forEach(p => {
-                const color = providerColors[p];
-                DOM.providers.innerHTML += `
-                    <button class="pill" data-val="${p}">
-                        <div class="color-dot" style="color: ${color}; background: ${color}"></div> ${p}
-                    </button>
-                `;
-            });
-
-            // Subjects
-            const subjects = [...new Set(MOCK_DATA.map(m => m.subject))].sort();
-            DOM.subjects.innerHTML = `<button class="pill active" data-val="all">All Subjects</button>`;
-            subjects.forEach(s => {
-                const color = subjectColors[s];
-                DOM.subjects.innerHTML += `
-                    <button class="pill" data-val="${s}">
-                        <div class="color-dot" style="color: ${color}; background: ${color}"></div> ${s}
-                    </button>
-                `;
-            });
-
-            // Categories
-            const categories = [...new Set(MOCK_DATA.map(m => m.category))].sort();
-            categories.forEach(c => {
-                const opt = document.createElement('option');
-                opt.value = c;
-                opt.textContent = c;
-                DOM.category.appendChild(opt);
-            });
-
-            bindEvents();
-        }
-
-        function bindEvents() {
-            DOM.search.addEventListener('input', (e) => {
-                state.searchQuery = e.target.value.toLowerCase();
-                resetAndRender();
-            });
-
-            DOM.providers.addEventListener('click', (e) => {
-                const btn = e.target.closest('.pill');
-                if (!btn) return;
-                Array.from(DOM.providers.children).forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-                state.provider = btn.dataset.val;
-                resetAndRender();
-            });
-
-            DOM.subjects.addEventListener('click', (e) => {
-                const btn = e.target.closest('.pill');
-                if (!btn) return;
-                Array.from(DOM.subjects.children).forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-                state.subject = btn.dataset.val;
-                resetAndRender();
-            });
-
-            DOM.category.addEventListener('change', (e) => {
-                state.category = e.target.value;
-                resetAndRender();
-            });
-
-            DOM.sort.addEventListener('change', (e) => {
-                state.sort = e.target.value;
-                resetAndRender();
-            });
-
-            DOM.status.addEventListener('click', (e) => {
-                const btn = e.target.closest('.switch-btn');
-                if (!btn) return;
-                Array.from(DOM.status.children).forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-                state.status = btn.dataset.status;
-                resetAndRender();
-            });
-
-            DOM.loadMoreBtn.addEventListener('click', () => {
-                state.page++;
-                render(true);
-            });
-
-            DOM.viewGrid.addEventListener('click', () => {
-                DOM.viewGrid.classList.add('active');
-                DOM.viewRoadmap.classList.remove('active');
-                state.viewMode = 'grid';
-                resetAndRender();
-            });
-
-            DOM.viewRoadmap.addEventListener('click', () => {
-                DOM.viewRoadmap.classList.add('active');
-                DOM.viewGrid.classList.remove('active');
-                state.viewMode = 'roadmap';
-                resetAndRender();
-            });
-        }
-
-        function toggleComplete(path) {
-            if (state.completed[path]) {
-                delete state.completed[path];
-            } else {
-                state.completed[path] = true;
-            }
-            localStorage.setItem('completedMocks', JSON.stringify(state.completed));
-            updateStats();
-
-            // Update UI
-            const btns = document.querySelectorAll(`[data-path="${CSS.escape(path)}"]`);
-            btns.forEach(btn => {
-                if (state.completed[path]) {
-                    btn.classList.add('completed');
-                    btn.innerHTML = '<i class="fa-solid fa-check"></i>';
-                } else {
-                    btn.classList.remove('completed');
-                    btn.innerHTML = '<i class="fa-regular fa-square"></i>';
-                }
-            });
-
-            if (state.status !== 'all' || state.viewMode === 'roadmap') {
-                resetAndRender();
-            }
-        }
-
-        // Export functions to global scope so inline onclick can access them
-        window.toggleComplete = toggleComplete;
-        
-        window.toggleTrack = function(trackId) {
-            const trackEl = document.getElementById(trackId);
-            if (trackEl) {
-                trackEl.classList.toggle('collapsed');
-            }
-        };
-
-        function getMockTrack(mock) {
-            const cat = mock.category.toLowerCase();
-            const name = mock.name.toLowerCase();
-            const subj = mock.subject.toLowerCase();
-            
-            // 1. Chapter-wise tests
-            if (cat.includes('chapter') || cat.includes('pyq') || name.includes('chapter') || name.includes('topic') || name.includes('wise')) {
-                return 'Chapter-wise Mocks';
-            }
-            
-            // 2. Full Syllabus Mocks
-            if (mock.subject === 'Full Mock' || cat.includes('full') || name.includes('full') || cat.includes('pre') || name.includes('pre') || cat.includes('tier') || name.includes('tier') || name.includes('cgl 2026 pre')) {
-                return 'Full Mocks';
-            }
-            
-            // 3. Subject Tracks
-            if (subj === 'quant' || cat.includes('quant') || name.includes('quant') || cat.includes('math') || name.includes('math') || name.includes('calc')) {
-                return 'Quant Mocks';
-            }
-            if (subj === 'english' || cat.includes('english') || name.includes('english') || name.includes('vocab') || name.includes('grammar')) {
-                return 'English Mocks';
-            }
-            if (subj === 'reasoning' || cat.includes('reasoning') || name.includes('reasoning') || name.includes('analog') || name.includes('speed')) {
-                return 'Reasoning Mocks';
-            }
-            if (subj === 'general studies' || subj === 'gs' || cat.includes('gs') || name.includes('gs') || cat.includes('gk') || name.includes('gk') || cat.includes('current affairs') || name.includes('current affairs') || cat.includes('history') || cat.includes('geography') || cat.includes('polity') || cat.includes('science')) {
-                return 'GS Mocks';
-            }
-            
-            // 4. Default fallback
-            return 'General Practice Mocks';
-        }
-
-        function extractChapterName(name) {
-            let clean = name.replace(/^Paid\s+/i, '');
-            let parts = clean.split(/PART|Part|part/i);
-            if (parts.length > 0) {
-                let chap = parts[0].trim();
-                chap = chap.replace(/[\s\-_]+$/, '').trim();
-                return chap;
-            }
-            return "General Topic";
-        }
-
-        window.setChapterSubject = function(subj) {
-            state.chapterSubject = subj;
-            render();
-        };
-
-        function renderRoadmap(filtered) {
-            const tracks = {};
-            filtered.forEach(mock => {
-                const trackName = getMockTrack(mock);
-                if (!tracks[trackName]) {
-                    tracks[trackName] = [];
-                }
-                tracks[trackName].push(mock);
-            });
-
-            DOM.grid.innerHTML = '<div class="roadmap-container"></div>';
-            const roadmapContainer = DOM.grid.querySelector('.roadmap-container');
-            
-            const trackOrder = [
-                'Full Mocks',
-                'Quant Mocks',
-                'English Mocks',
-                'Reasoning Mocks',
-                'GS Mocks',
-                'Chapter-wise Mocks',
-                'General Practice Mocks'
-            ];
-
-            const sortedTrackNames = Object.keys(tracks).sort((a, b) => {
-                let idxA = trackOrder.indexOf(a);
-                let idxB = trackOrder.indexOf(b);
-                if (idxA === -1) idxA = 99;
-                if (idxB === -1) idxB = 99;
-                return idxA - idxB;
-            });
-
-            if (sortedTrackNames.length === 0) {
-                DOM.grid.innerHTML = `
-                    <div class="empty-state glass-panel">
-                        <i class="fa-solid fa-ghost"></i>
-                        <h3>No tracks found</h3>
-                        <p>We couldn't find any mock tests matching your current filters. Try adjusting your search criteria.</p>
+            <div class="sidebar-body">
+                <!-- Provider Filter -->
+                <div class="filter-group">
+                    <div class="filter-group-label">
+                        <i class="fa-solid fa-building-columns"></i>
+                        Provider
                     </div>
-                `;
-                return;
-            }
+                    <div class="pills-container" id="provider-filters"></div>
+                </div>
 
-            sortedTrackNames.forEach((trackName, trackIdx) => {
-                const trackMocks = tracks[trackName];
-                const completedCount = trackMocks.filter(m => state.completed[m.path]).length;
-                const pct = trackMocks.length ? Math.round((completedCount / trackMocks.length) * 100) : 0;
-                const trackId = `track-${trackIdx}`;
-                
-                const firstUncompletedIndex = trackMocks.findIndex(m => !state.completed[m.path]);
-                
-                if (trackName === 'Chapter-wise Mocks') {
-                    const availableSubjects = [...new Set(trackMocks.map(m => m.subject))].sort();
-                    let trackContentHTML = '';
-                    
-                    if (!state.chapterSubject) {
-                        let cardsHTML = '';
-                        const subjectIcons = {
-                            'Quant': 'fa-calculator',
-                            'Reasoning': 'fa-brain',
-                            'English': 'fa-book',
-                            'General Studies': 'fa-globe',
-                            'General': 'fa-graduation-cap'
-                        };
-                        
-                        availableSubjects.forEach(subj => {
-                            const count = trackMocks.filter(m => m.subject === subj).length;
-                            const completed = trackMocks.filter(m => m.subject === subj && state.completed[m.path]).length;
-                            const icon = subjectIcons[subj] || 'fa-graduation-cap';
-                            const color = subjectColors[subj] || '#6366f1';
-                            
-                            cardsHTML += `
-                                <div class="subject-card" onclick="window.setChapterSubject('${subj}')">
-                                    <div class="subject-card-icon" style="background: ${color}15; color: ${color}">
-                                        <i class="fa-solid ${icon}"></i>
-                                    </div>
-                                    <div class="subject-card-title">${subj}</div>
-                                    <div class="subject-card-count">${completed}/${count} Completed</div>
-                                </div>
-                            `;
-                        });
-                        
-                        trackContentHTML = `
-                            <div class="subject-select-portal">
-                                <div class="portal-instruction">Choose a subject to explore chapter-wise roadmaps:</div>
-                                <div class="subject-cards-grid">
-                                    ${cardsHTML}
-                                </div>
-                            </div>
-                        `;
-                    } else {
-                        const subjectMocks = trackMocks.filter(m => m.subject === state.chapterSubject);
-                        const chapters = {};
-                        subjectMocks.forEach(mock => {
-                            const chap = extractChapterName(mock.name);
-                            if (!chapters[chap]) chapters[chap] = [];
-                            chapters[chap].push(mock);
-                        });
-                        
-                        let chaptersHTML = '';
-                        Object.keys(chapters).sort().forEach((chapName, chapIdx) => {
-                            const chapMocks = chapters[chapName];
-                            const firstUncompletedIndex = chapMocks.findIndex(m => !state.completed[m.path]);
-                            
-                            let stepsHTML = '';
-                            chapMocks.forEach((mock, idx) => {
-                                const isComp = !!state.completed[mock.path];
-                                const isActive = idx === firstUncompletedIndex;
-                                const isPending = !isComp && !isActive;
-                                
-                                let stepClass = 'pending';
-                                let nodeContent = idx + 1;
-                                if (isComp) {
-                                    stepClass = 'completed';
-                                    nodeContent = '<i class="fa-solid fa-check"></i>';
-                                } else if (isActive) {
-                                    stepClass = 'active';
-                                    nodeContent = '<i class="fa-solid fa-play"></i>';
-                                }
-                                
-                                const pColor = providerColors[mock.provider];
-                                const sColor = subjectColors[mock.subject];
-                                
-                                stepsHTML += `
-                                    <div class="roadmap-step ${stepClass}" data-card-path="${mock.path}">
-                                        <div class="roadmap-node-container">
-                                            <div class="roadmap-node" style="${isActive ? 'border-color: ' + pColor + '; background: ' + pColor : ''}">
-                                                ${nodeContent}
-                                            </div>
-                                        </div>
-                                        <div class="roadmap-card">
-                                            <div class="roadmap-info">
-                                                <div class="roadmap-name">${mock.name}</div>
-                                                <div class="roadmap-meta">
-                                                    <span class="roadmap-badge" style="border-color: ${pColor}40; color: ${pColor}">
-                                                        ${mock.provider}
-                                                    </span>
-                                                    <span class="roadmap-badge" style="border-color: ${sColor}40; color: ${sColor}">
-                                                        ${mock.subject}
-                                                    </span>
-                                                    <span class="category-meta"><i class="fa-regular fa-folder-open"></i> ${mock.category}</span>
-                                                </div>
-                                            </div>
-                                            <div style="display: flex; gap: 0.75rem; align-items: center;">
-                                                <button class="toggle-btn ${isComp ? 'completed' : ''}" 
-                                                        data-path="${mock.path}" 
-                                                        onclick="window.toggleComplete('${mock.path.replace(/'/g, "\\'")}')"
-                                                        title="Toggle Completion"
-                                                        style="padding: 10px; width: 40px; height: 40px; border-radius: 10px;">
-                                                    ${isComp ? '<i class="fa-solid fa-check"></i>' : '<i class="fa-regular fa-square"></i>'}
-                                                </button>
-                                                <a href="${mock.path}" target="_blank" class="launch-btn" style="background: linear-gradient(135deg, ${pColor}, ${sColor}); border-radius: 10px; padding: 10px 16px; font-size: 0.9rem; font-weight: 600; text-decoration: none; color: white; display: inline-flex; align-items: center; gap: 8px;">
-                                                    <i class="fa-solid fa-play"></i> Launch
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                `;
-                            });
-                            
-                            chaptersHTML += `
-                                <div class="chapter-section">
-                                    <div class="chapter-title">
-                                        <i class="fa-solid fa-book-open"></i> Topic: ${chapName} (${chapMocks.length} Mocks)
-                                    </div>
-                                    <div style="position: relative; display: flex; flex-direction: column;">
-                                        <div class="roadmap-timeline"></div>
-                                        ${stepsHTML}
-                                    </div>
-                                </div>
-                            `;
-                        });
-                        
-                        trackContentHTML = `
-                            <div class="chapter-roadmap-header">
-                                <button class="back-btn" onclick="window.setChapterSubject(null)">
-                                    <i class="fa-solid fa-arrow-left"></i> Back to Subjects
-                                </button>
-                                <div class="active-subject-badge">
-                                    Active Subject: <strong>${state.chapterSubject}</strong>
-                                </div>
-                            </div>
-                            <div class="chapters-roadmap-list" style="display: flex; flex-direction: column; gap: 2rem;">
-                                ${chaptersHTML}
-                            </div>
-                        `;
-                    }
-                    
-                    const trackHTML = `
-                        <div class="roadmap-track collapsed" id="${trackId}">
-                            <div class="roadmap-track-header" onclick="window.toggleTrack('${trackId}')">
-                                <div class="roadmap-track-info">
-                                    <div class="roadmap-track-title">
-                                        <i class="fa-solid fa-route"></i> ${trackName}
-                                    </div>
-                                    <div class="roadmap-track-meta">
-                                        <span><strong>${trackMocks.length}</strong> Mocks</span>
-                                        <span>•</span>
-                                        <span><strong>${completedCount}</strong> Completed</span>
-                                        <span>•</span>
-                                        <div class="roadmap-progress-container">
-                                            <div class="roadmap-progress-bar">
-                                                <div class="roadmap-progress-fill" style="width: ${pct}%"></div>
-                                            </div>
-                                            <span>${pct}%</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="roadmap-track-toggle">
-                                    <i class="fa-solid fa-chevron-down"></i>
-                                </div>
-                            </div>
-                            <div class="roadmap-track-content">
-                                ${trackContentHTML}
-                            </div>
-                        </div>
-                    `;
-                    roadmapContainer.insertAdjacentHTML('beforeend', trackHTML);
-                    return;
-                }
-                
-                let stepsHTML = '';
-                trackMocks.forEach((mock, idx) => {
-                    const isComp = !!state.completed[mock.path];
-                    const isActive = idx === firstUncompletedIndex;
-                    const isPending = !isComp && !isActive;
-                    
-                    let stepClass = 'pending';
-                    let nodeContent = idx + 1;
-                    if (isComp) {
-                        stepClass = 'completed';
-                        nodeContent = '<i class="fa-solid fa-check"></i>';
-                    } else if (isActive) {
-                        stepClass = 'active';
-                        nodeContent = '<i class="fa-solid fa-play"></i>';
-                    }
-                    
-                    const pColor = providerColors[mock.provider];
-                    const sColor = subjectColors[mock.subject];
-                    
-                    stepsHTML += `
-                        <div class="roadmap-step ${stepClass}" data-card-path="${mock.path}">
-                            <div class="roadmap-node-container">
-                                <div class="roadmap-node" style="${isActive ? 'border-color: ' + pColor + '; background: ' + pColor : ''}">
-                                    ${nodeContent}
-                                </div>
-                            </div>
-                            <div class="roadmap-card">
-                                <div class="roadmap-info">
-                                    <div class="roadmap-name">${mock.name}</div>
-                                    <div class="roadmap-meta">
-                                        <span class="roadmap-badge" style="border-color: ${pColor}40; color: ${pColor}">
-                                            ${mock.provider}
-                                        </span>
-                                        <span class="roadmap-badge" style="border-color: ${sColor}40; color: ${sColor}">
-                                            ${mock.subject}
-                                        </span>
-                                        <span class="category-meta"><i class="fa-regular fa-folder-open"></i> ${mock.category}</span>
-                                    </div>
-                                </div>
-                                <div style="display: flex; gap: 0.75rem; align-items: center;">
-                                    <button class="toggle-btn ${isComp ? 'completed' : ''}" 
-                                            data-path="${mock.path}" 
-                                            onclick="window.toggleComplete('${mock.path.replace(/'/g, "\\'")}')"
-                                            title="Toggle Completion"
-                                            style="padding: 10px; width: 40px; height: 40px; border-radius: 10px;">
-                                        ${isComp ? '<i class="fa-solid fa-check"></i>' : '<i class="fa-regular fa-square"></i>'}
-                                    </button>
-                                    <a href="${mock.path}" target="_blank" class="launch-btn" style="background: linear-gradient(135deg, ${pColor}, ${sColor}); border-radius: 10px; padding: 10px 16px; font-size: 0.9rem; font-weight: 600; text-decoration: none; color: white; display: inline-flex; align-items: center; gap: 8px;">
-                                        <i class="fa-solid fa-play"></i> Launch
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    `;
-                });
-                
-                const trackHTML = `
-                    <div class="roadmap-track collapsed" id="${trackId}">
-                        <div class="roadmap-track-header" onclick="window.toggleTrack('${trackId}')">
-                            <div class="roadmap-track-info">
-                                <div class="roadmap-track-title">
-                                    <i class="fa-solid fa-route"></i> ${trackName}
-                                </div>
-                                <div class="roadmap-track-meta">
-                                    <span><strong>${trackMocks.length}</strong> Mocks</span>
-                                    <span>•</span>
-                                    <span><strong>${completedCount}</strong> Completed</span>
-                                    <span>•</span>
-                                    <div class="roadmap-progress-container">
-                                        <div class="roadmap-progress-bar">
-                                            <div class="roadmap-progress-fill" style="width: ${pct}%"></div>
-                                        </div>
-                                        <span>${pct}%</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="roadmap-track-toggle">
-                                <i class="fa-solid fa-chevron-down"></i>
-                            </div>
-                        </div>
-                        <div class="roadmap-track-content">
-                            <div class="roadmap-timeline"></div>
-                            ${stepsHTML}
-                        </div>
+                <!-- Subject Filter -->
+                <div class="filter-group">
+                    <div class="filter-group-label">
+                        <i class="fa-solid fa-graduation-cap"></i>
+                        Subject
                     </div>
-                `;
-                roadmapContainer.insertAdjacentHTML('beforeend', trackHTML);
-            });
-        }
+                    <div class="pills-container" id="subject-filters"></div>
+                </div>
 
-        // Export toggleComplete to global scope so inline onclick can access it
-        window.toggleComplete = toggleComplete;
-
-        function updateStats() {
-            const total = MOCK_DATA.length;
-            const comp = Object.keys(state.completed).length;
-            const pct = total ? Math.round((comp / total) * 100) : 0;
-
-            DOM.statTotal.textContent = total.toLocaleString();
-            DOM.statCompleted.textContent = comp.toLocaleString();
-            DOM.statProgTxt.textContent = pct + '%';
-            DOM.statProgBar.style.width = pct + '%';
-        }
-
-        function resetAndRender() {
-            state.page = 1;
-            render(false);
-        }
-
-        function render(append = false) {
-            let filtered = MOCK_DATA.filter(m => {
-                if (state.provider !== 'all' && m.provider !== state.provider) return false;
-                if (state.subject !== 'all' && m.subject !== state.subject) return false;
-                if (state.category !== 'all' && m.category !== state.category) return false;
-                
-                const isComp = !!state.completed[m.path];
-                if (state.status === 'completed' && !isComp) return false;
-                if (state.status === 'pending' && isComp) return false;
-
-                if (state.searchQuery) {
-                    const q = state.searchQuery;
-                    if (!m.name.toLowerCase().includes(q) && 
-                        !m.category.toLowerCase().includes(q) && 
-                        !m.provider.toLowerCase().includes(q)) return false;
-                }
-
-                return true;
-            });
-
-            filtered.sort((a, b) => {
-                if (state.sort === 'name-asc') return a.name.localeCompare(b.name);
-                if (state.sort === 'name-desc') return b.name.localeCompare(a.name);
-                if (state.sort === 'provider-asc') {
-                    const diff = a.provider.localeCompare(b.provider);
-                    return diff !== 0 ? diff : a.name.localeCompare(b.name);
-                }
-                return 0;
-            });
-
-            DOM.count.innerHTML = `Found <strong>${filtered.length.toLocaleString()}</strong> mocks`;
-
-            if (state.viewMode === 'roadmap') {
-                DOM.loadMoreWrap.style.display = 'none';
-                renderRoadmap(filtered);
-                return;
-            }
-
-            const start = 0;
-            const end = state.page * state.limit;
-            const sliced = filtered.slice(start, end);
-
-            DOM.loadMoreWrap.style.display = end < filtered.length ? 'flex' : 'none';
-
-            if (!append) DOM.grid.innerHTML = '';
-
-            if (filtered.length === 0) {
-                DOM.grid.innerHTML = `
-                    <div class="empty-state glass-panel">
-                        <i class="fa-solid fa-ghost"></i>
-                        <h3>No mocks found</h3>
-                        <p>We couldn't find any mock tests matching your current filters. Try adjusting your search criteria.</p>
+                <!-- Category Filter -->
+                <div class="filter-group">
+                    <div class="filter-group-label">
+                        <i class="fa-solid fa-folder-open"></i>
+                        Category
                     </div>
-                `;
-                return;
-            }
-
-            const currentPaths = append ? new Set(Array.from(DOM.grid.children).map(c => c.dataset.cardPath)) : new Set();
-            const frag = document.createDocumentFragment();
-
-            sliced.forEach((mock, index) => {
-                if (currentPaths.has(mock.path)) return;
-
-                const isComp = !!state.completed[mock.path];
-                const pColor = providerColors[mock.provider];
-                const sColor = subjectColors[mock.subject];
-                
-                const delay = append ? (index % state.limit) * 0.02 : index * 0.02;
-
-                const div = document.createElement('div');
-                div.className = 'card';
-                div.dataset.cardPath = mock.path;
-                div.style.animationDelay = `${delay}s`;
-
-                div.innerHTML = `
-                    <div class="card-accent" style="background: ${pColor}"></div>
-                    <div class="card-header">
-                        <span class="badge badge-provider" style="border-color: ${pColor}40">
-                            <div class="color-dot" style="color: ${pColor}; background: ${pColor}"></div> ${mock.provider}
-                        </span>
-                        <span class="badge badge-subject">
-                            ${mock.subject}
-                        </span>
+                    <div class="select-wrapper">
+                        <select class="custom-select" id="category-filter">
+                            <option value="all">All Categories</option>
+                        </select>
+                        <i class="fa-solid fa-chevron-down select-arrow"></i>
                     </div>
-                    <h3 class="card-title" title="${mock.name}">${mock.name}</h3>
-                    <div class="card-meta">
-                        <i class="fa-regular fa-folder-open"></i> ${mock.category}
+                </div>
+
+                <!-- Status Filter -->
+                <div class="filter-group">
+                    <div class="filter-group-label">
+                        <i class="fa-solid fa-circle-half-stroke"></i>
+                        Status
                     </div>
-                    <div class="card-meta" style="margin-top: -0.5rem; font-size: 0.8rem; opacity: 0.8;">
-                        <i class="fa-solid fa-route"></i> Track: ${getMockTrack(mock)}
-                    </div>
-                    <div class="card-footer">
-                        <button class="toggle-btn ${isComp ? 'completed' : ''}" 
-                                data-path="${mock.path}" 
-                                onclick="window.toggleComplete('${mock.path.replace(/'/g, "\\'")}')"
-                                title="Toggle Completion">
-                            ${isComp ? '<i class="fa-solid fa-check"></i>' : '<i class="fa-regular fa-square"></i>'}
+                    <div class="status-tabs" id="status-filters">
+                        <button class="status-tab active" data-status="all">All</button>
+                        <button class="status-tab" data-status="completed">
+                            <i class="fa-solid fa-check"></i> Done
                         </button>
-                        <a href="${mock.path}" target="_blank" class="launch-btn" style="background: linear-gradient(135deg, ${pColor}, ${sColor})">
-                            <i class="fa-solid fa-play"></i> Start Test
-                        </a>
+                        <button class="status-tab" data-status="pending">
+                            <i class="fa-regular fa-clock"></i> Pending
+                        </button>
                     </div>
-                `;
-                frag.appendChild(div);
-            });
+                </div>
 
-            DOM.grid.appendChild(frag);
-        }
+                <!-- Sort -->
+                <div class="filter-group">
+                    <div class="filter-group-label">
+                        <i class="fa-solid fa-sort"></i>
+                        Sort By
+                    </div>
+                    <div class="select-wrapper">
+                        <select class="custom-select" id="sort-select">
+                            <option value="name-asc">Name A → Z</option>
+                            <option value="name-desc">Name Z → A</option>
+                            <option value="provider-asc">By Provider</option>
+                        </select>
+                        <i class="fa-solid fa-chevron-down select-arrow"></i>
+                    </div>
+                </div>
+            </div>
+        </aside>
 
-        // Initialize
-        document.addEventListener('DOMContentLoaded', () => {
-            if (typeof MOCK_DATA === 'undefined') {
-                console.error("MOCK_DATA is not defined. Ensure mocks-data.js is loaded.");
-                return;
-            }
-            assignColors();
-            initFilters();
-            updateStats();
-            render();
-        });
-    </script>
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="content-toolbar">
+                <div class="toolbar-left">
+                    <span class="results-text" id="results-text">Loading mocks...</span>
+                </div>
+                <div class="toolbar-right">
+                    <div class="load-more-wrapper" id="load-more-wrapper" style="display:none;">
+                        <button class="load-more-btn" id="load-more-btn">
+                            <i class="fa-solid fa-plus"></i> Load More
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid" id="grid">
+                <!-- Cards injected by JS -->
+            </div>
+        </main>
+    </div>
+
+    <script src="mocks-data.js"></script>
+    <script src="js/dashboard.js"></script>
 </body>
 </html>
