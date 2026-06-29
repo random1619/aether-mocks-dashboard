@@ -1,315 +1,110 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CBT Exam - ssct2np</title>
+    <!-- Fonts & Icons -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-        <link rel="stylesheet" href="styles/main.css">
-    <!-- Custom Enhancements & Libraries -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Central Stylesheet -->
+    <link rel="stylesheet" href="../../css/mock-main.css">
+    
+    <!-- Math Formula Rendering (KaTeX/MathJax) -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="../Quant Super Prac/assets/js/custom.js" defer></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    
+    <!-- Timer Config -->
+    <meta name="exam-duration" content="135">
 </head>
 <body>
-    <!-- Global Controls: Theme Toggle + Fullscreen -->
-    <div class="global-controls" id="globalControls">
-        <button class="ctrl-btn" id="themeToggleBtn" title="Toggle Dark Mode" aria-label="Toggle dark mode">
-            <i class="fas fa-sun icon-sun"></i>
-            <i class="fas fa-moon icon-moon"></i>
-        </button>
-        <button class="ctrl-btn" id="fullscreenBtn" title="Enter Fullscreen" aria-label="Toggle fullscreen">
-            <i class="fas fa-expand" id="fullscreenIcon"></i>
-        </button>
-    </div>
-
     <!-- Welcome Screen -->
     <div class="welcome-screen" id="welcomeScreen">
-        <div class="welcome-container">
-            <div class="welcome-header">
-                <h1><i class="fas fa-graduation-cap"></i> ssct2np</h1>
-                <p>Computer Based Test</p>
+        <div class="welcome-container" style="max-width: 600px; margin: 100px auto; padding: 40px; background: white; border-radius: 16px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); text-align: center;">
+            <div class="welcome-header" style="margin-bottom: 24px;">
+                <h1 style="font-size: 2rem; font-weight: 700; color: #0f172a; margin-bottom: 8px;"><i class="fas fa-graduation-cap" style="color: #3b82f6;"></i> CBT Exam - ssct2np</h1>
+                <p style="color: #64748b;">Computer Based Test Portal</p>
             </div>
             
-            <div class="test-details">
-                <div class="detail-item">
-                    <div class="detail-label">Test ID</div>
-                    <div class="detail-value">63</div>
+            <div class="test-details" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-bottom: 32px; text-align: left;">
+                <div class="detail-item" style="padding: 12px; background: #f8fafc; border-radius: 8px; border: 1px solid #e2e8f0;">
+                    <div class="detail-label" style="font-size: 0.8rem; color: #64748b;">Total Questions</div>
+                    <div class="detail-value" style="font-size: 1.1rem; font-weight: 600; color: #0f172a;">150</div>
                 </div>
-                <div class="detail-item">
-                    <div class="detail-label">Total Questions</div>
-                    <div class="detail-value">150</div>
-                </div>
-                <div class="detail-item">
-                    <div class="detail-label">Total Marks</div>
-                    <div class="detail-value">300.0</div>
-                </div>
-                <div class="detail-item">
-                    <div class="detail-label">Duration</div>
-                    <div class="detail-value">135 mins</div>
-                </div>
-                <div class="detail-item">
-                    <div class="detail-label">Marking Scheme</div>
-                    <div class="detail-value">+2.0 / -0.5</div>
+                <div class="detail-item" style="padding: 12px; background: #f8fafc; border-radius: 8px; border: 1px solid #e2e8f0;">
+                    <div class="detail-label" style="font-size: 0.8rem; color: #64748b;">Duration</div>
+                    <div class="detail-value" style="font-size: 1.1rem; font-weight: 600; color: #0f172a;">135 mins</div>
                 </div>
             </div>
-            
-            
-        <div class="section-info">
-            <h3><i class="fas fa-layer-group"></i> Section Details</h3>
-            <table class="section-table">
-                <thead>
-                    <tr>
-                        <th>Section Name</th>
-                        <th>Questions</th>
-                        <th>Time</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    
-            <tr>
-                <td>
-                    <strong>Module 1</strong>
-                    <div class="subsec-container"><div class="subsec-row">Maths: Q1-Q30 (2 marks each)</div><div class="subsec-row">Reso: Q31-Q60 (2 marks each)</div></div>
-                </td>
-                <td>Q1 - Q60</td>
-                <td>60 mins</td>
-            </tr>
-            
-            <tr>
-                <td>
-                    <strong>Module II</strong>
-                    <div class="subsec-container"><div class="subsec-row">English: Q61-Q105 (2 marks each)</div><div class="subsec-row">GS: Q106-Q130 (2 marks each)</div></div>
-                </td>
-                <td>Q61 - Q130</td>
-                <td>60 mins</td>
-            </tr>
-            
-            <tr>
-                <td>
-                    <strong>Computer</strong>
-                    
-                </td>
-                <td>Q131 - Q150</td>
-                <td>15 mins</td>
-            </tr>
-            
-                </tbody>
-            </table>
-        </div>
-        
             
             <div class="welcome-actions">
-                <button class="start-btn" id="startBtn">
-                    <i class="fas fa-play"></i> Start Test
+                <button class="btn btn-primary" id="startBtn" onclick="document.getElementById('welcomeScreen').style.display='none'; document.getElementById('examContainer').style.display='flex';" style="font-size: 1.1rem; padding: 12px 32px; width: 100%;">
+                    <i class="fas fa-play" style="margin-right: 8px;"></i> Start Test
                 </button>
-                <a href="https://t.me/mocks_wallah_free" target="_blank" class="channel-link">
-                    <i class="fab fa-telegram"></i> Join Channel
-                </a>
             </div>
         </div>
     </div>
     
     <!-- Main Exam Interface -->
-    <div class="exam-container" id="examContainer">
+    <div class="exam-container" id="examContainer" style="display: none; height: 100vh; flex-direction: column;">
         <!-- Top Header -->
         <div class="exam-header">
-            <div class="exam-title">ssct2np</div>
-            <div class="exam-timer">
-                <div class="timer-box" id="mainTimer">135:00</div>
-                <button class="nav-btn btn-submit mobile-only" id="submitBtn">Submit</button>
-            </div>
-        </div>
-        
-        <!-- Candidate Info Bar -->
-        <div class="candidate-bar">
-            <div class="candidate-info">
-                <div class="candidate-photo">
-                    <i class="fas fa-user"></i>
-                </div>
-                <div class="candidate-details">
-                    <div class="candidate-name">Candidate</div>
-                    <div class="candidate-id">Test ID: 63</div>
-                </div>
-            </div>
-            <div class="section-badge" id="sectionBadge">
-                <span id="sectionName"></span>
-                <span id="sectionTimer"></span>
+            <div class="exam-title">CBT Exam - ssct2np</div>
+            <div class="timer-box" id="mainTimer">
+                <i class="far fa-clock"></i>
+                <span class="timer-val">00:00</span>
             </div>
         </div>
         
         <!-- Main Content -->
-        <div class="exam-main">
+        <div class="mock-container">
             <!-- Question Area -->
-            <div class="question-area">
-                <div class="question-scroll">
-                    <div class="question-card">
-                        <div class="question-header">
-                            <div>
-                                <div class="question-number" id="questionNum">Question 1 of 150</div>
-                                <div class="question-marks" id="questionMarks">Marks: 2.0</div>
-                            </div>
-                            <div class="lang-toggle">
-                                <button class="lang-btn active" id="engBtn">English</button>
-                                <button class="lang-btn" id="hinBtn">हिंदी</button>
-                            </div>
-                        </div>
-                        
-                        <div class="comprehension" id="comprehension" style="display:none;">
-                            <h4><i class="fas fa-book-open"></i> Comprehension</h4>
-                            <div id="comprehensionText"></div>
-                        </div>
-                        
-                        <div class="question-text" id="questionText"></div>
-                        
-                        <div class="options-list" id="optionsList"></div>
-                        
-                        <div class="solution-box" id="solutionBox">
-                            <div class="solution-header">
-                                <i class="fas fa-lightbulb"></i> Solution
-                            </div>
-                            <div class="solution-stats" id="solutionStats"></div>
-                            <div id="solutionText"></div>
-                        </div>
-                    </div>
-                </div>
+            <div class="question-view">
+                <!-- Dynamically populated question container -->
+                <div id="questionContainer" style="flex: 1; display: flex; flex-direction: column; gap: 24px;"></div>
                 
-                <!-- Navigation Bar inside Question Area -->
-                <div class="navigation-bar">
-                    <button class="nav-btn btn-prev" id="prevBtn">
-                        <i class="fas fa-chevron-left"></i> Previous
-                    </button>
-                    
-                    <div class="progress-info">
-                        <div id="progressText">Question 1 of 150</div>
-                        <div style="font-size:11px;margin-top:4px">
-                            Answered: <span id="answeredCount">0</span> | 
-                            <a href="https://t.me/mocks_wallah_free" style="color:var(--primary)">Mocks Wallah</a>
-                        </div>
-                    </div>
-                    
-                    <button class="nav-btn btn-review" id="reviewBtn">
-                        <i class="fas fa-flag"></i> Mark for Review
-                    </button>
-                    
-                    <button class="nav-btn mobile-only" id="navigatorBtn">
-                        <i class="fas fa-th"></i> All Questions
-                    </button>
-                    
-                    <button class="nav-btn btn-submit desktop-only" id="submitBtnDesktop">Submit</button>
-                    
-                    <button class="nav-btn btn-next" id="nextBtn">
-                        Next <i class="fas fa-chevron-right"></i>
-                    </button>
+                <!-- Controls -->
+                <div class="nav-controls">
+                    <button class="btn btn-secondary btn-prev"><i class="fas fa-chevron-left" style="margin-right: 8px;"></i> Previous</button>
+                    <button class="btn btn-warning btn-flag"><i class="far fa-flag" style="margin-right: 8px;"></i> Flag Question</button>
+                    <button class="btn btn-secondary btn-clear"><i class="fas fa-eraser" style="margin-right: 8px;"></i> Clear Selection</button>
+                    <button class="btn btn-primary btn-submit">Submit Exam <i class="fas fa-paper-plane" style="margin-left: 8px;"></i></button>
+                    <button class="btn btn-primary btn-next">Next <i class="fas fa-chevron-right" style="margin-left: 8px;"></i></button>
                 </div>
             </div>
             
             <!-- Desktop Navigator Sidebar -->
-            <div class="navigator-sidebar desktop-only">
-                <div class="navigator-header">Question Navigator</div>
-                <div class="navigator-grid" id="desktopNav"></div>
-                <div class="navigator-legend">
-                    <div class="legend-item">
-                        <div class="legend-box" style="background:var(--success)"></div>
-                        <span>Answered</span>
+            <div class="sidebar">
+                <div class="sidebar-section-title">Summary Status</div>
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <div class="stat-count" id="stat-answered" style="color: #10b981;">0</div>
+                        <div class="stat-name">Answered</div>
                     </div>
-                    <div class="legend-item">
-                        <div class="legend-box" style="background:var(--warning)"></div>
-                        <span>Marked for Review</span>
+                    <div class="stat-item">
+                        <div class="stat-count" id="stat-flagged" style="color: #f59e0b;">0</div>
+                        <div class="stat-name">Flagged</div>
                     </div>
-                    <div class="legend-item">
-                        <div class="legend-box" style="background:var(--danger)"></div>
-                        <span>Incorrect</span>
+                    <div class="stat-item">
+                        <div class="stat-count" id="stat-not-answered" style="color: #64748b;">0</div>
+                        <div class="stat-name">Unanswered</div>
                     </div>
-                    <div class="legend-item">
-                        <div class="legend-box" style="background:white;border:2px solid var(--border)"></div>
-                        <span>Not Visited</span>
+                    <div class="stat-item">
+                        <div class="stat-count" id="stat-not-visited" style="color: #94a3b8;">0</div>
+                        <div class="stat-name">Not Visited</div>
                     </div>
                 </div>
+                
+                <div class="sidebar-section-title" style="margin-top: 16px;">Question Navigator</div>
+                <div class="questions-grid"></div>
             </div>
         </div>
     </div>
     
-    <!-- Mobile Navigator Panel -->
-    <div class="mobile-navigator" id="mobileNav">
-        <div class="mobile-nav-header">
-            <h3>Question Navigator</h3>
-            <button class="close-nav" id="closeNav">&times;</button>
-        </div>
-        <div class="navigator-grid" id="mobileNavGrid"></div>
-        <div class="navigator-legend">
-            <div class="legend-item">
-                <div class="legend-box" style="background:var(--success)"></div>
-                <span>Answered</span>
-            </div>
-            <div class="legend-item">
-                <div class="legend-box" style="background:var(--warning)"></div>
-                <span>Marked for Review</span>
-            </div>
-            <div class="legend-item">
-                <div class="legend-box" style="background:var(--danger)"></div>
-                <span>Incorrect</span>
-            </div>
-            <div class="legend-item">
-                <div class="legend-box" style="background:white;border:2px solid var(--border)"></div>
-                <span>Not Visited</span>
-            </div>
-        </div>
-    </div>
-    
-    <!-- Result Modal -->
-    <div class="result-modal" id="resultModal">
-        <div class="result-container">
-            <div class="result-header">
-                <h2>Test Completed!</h2>
-                <div class="result-score" id="resultScore">0/300.0</div>
-            </div>
-            
-            <div class="result-grid">
-                <div class="result-stat correct">
-                    <div class="result-stat-value" id="correctCount">0</div>
-                    <div class="result-stat-label">Correct</div>
-                </div>
-                <div class="result-stat incorrect">
-                    <div class="result-stat-value" id="incorrectCount">0</div>
-                    <div class="result-stat-label">Incorrect</div>
-                </div>
-                <div class="result-stat">
-                    <div class="result-stat-value" id="unattemptedCount">0</div>
-                    <div class="result-stat-label">Unattempted</div>
-                </div>
-                <div class="result-stat">
-                    <div class="result-stat-value" id="timeTaken">0</div>
-                    <div class="result-stat-label">Minutes</div>
-                </div>
-            </div>
-            
-            <div class="section-results" id="sectionResults" style="display:none;">
-                <h3>Section-wise Performance</h3>
-                <table class="section-results-table" id="sectionResultsTable">
-                    <thead>
-                        <tr>
-                            <th>Section</th>
-                            <th>Attempted</th>
-                            <th>Correct</th>
-                            <th>Wrong</th>
-                            <th>Score</th>
-                        </tr>
-                    </thead>
-                    <tbody id="sectionResultsBody"></tbody>
-                </table>
-            </div>
-            
-            <div class="result-actions">
-                <button class="result-btn btn-close" id="closeResult">Close</button>
-                <button class="result-btn btn-review-ans" id="reviewAnswers">Review Answers</button>
-            </div>
-        </div>
-    </div>
-    
+    <!-- Inject Question Data -->
     <script>
         const questions = [
   {
@@ -2129,728 +1924,9 @@
     "question_index": 149
   }
 ];
-        const sectionsData = [{"name": "Module 1", "timer": 3600, "start": 0, "end": 59, "submitted": false, "time_left": 3600, "subsections": [{"name": "Maths", "start": 0, "end": 29, "marks_per_q": 2}, {"name": "Reso", "start": 30, "end": 59, "marks_per_q": 2}]}, {"name": "Module II", "timer": 3600, "start": 60, "end": 129, "submitted": false, "time_left": 3600, "subsections": [{"name": "English", "start": 60, "end": 104, "marks_per_q": 2}, {"name": "GS", "start": 105, "end": 129, "marks_per_q": 2}]}, {"name": "Computer", "timer": 900, "start": 130, "end": 149, "submitted": false, "time_left": 900, "subsections": null}];
-        const marksPerQ = 2.0;
-        const negMarks = 0.5;
-        const totalDuration = 135;
-        
-        class CBTExam {
-            constructor() {
-                this.questions = questions;
-                this.sections = sectionsData;
-                this.currentQuestion = 0;
-                this.answers = new Array(this.questions.length).fill(null);
-                this.markedForReview = new Array(this.questions.length).fill(false);
-                this.timeSpent = new Array(this.questions.length).fill(0);
-                this.isEnglish = true;
-                this.isSubmitted = false;
-                this.startTime = null;
-                this.lastQuestionTime = null;
-                this.mainTimer = null;
-                this.sectionTimer = null;
-                this.currentSection = this.sections ? 0 : null;
-                this.totalTimeLeft = totalDuration * 60;
-                
-                this.initElements();
-                this.setupWelcomeScreen();
-                this.setupBeforeUnload();
-            }
-            
-            initElements() {
-                this.els = {
-                    welcomeScreen: document.getElementById('welcomeScreen'),
-                    examContainer: document.getElementById('examContainer'),
-                    mainTimer: document.getElementById('mainTimer'),
-                    sectionBadge: document.getElementById('sectionBadge'),
-                    sectionName: document.getElementById('sectionName'),
-                    sectionTimer: document.getElementById('sectionTimer'),
-                    questionNum: document.getElementById('questionNum'),
-                    questionMarks: document.getElementById('questionMarks'),
-                    questionText: document.getElementById('questionText'),
-                    comprehension: document.getElementById('comprehension'),
-                    comprehensionText: document.getElementById('comprehensionText'),
-                    optionsList: document.getElementById('optionsList'),
-                    solutionBox: document.getElementById('solutionBox'),
-                    solutionStats: document.getElementById('solutionStats'),
-                    solutionText: document.getElementById('solutionText'),
-                    progressText: document.getElementById('progressText'),
-                    answeredCount: document.getElementById('answeredCount'),
-                    desktopNav: document.getElementById('desktopNav'),
-                    mobileNav: document.getElementById('mobileNav'),
-                    mobileNavGrid: document.getElementById('mobileNavGrid'),
-                    resultModal: document.getElementById('resultModal'),
-                    resultScore: document.getElementById('resultScore'),
-                    correctCount: document.getElementById('correctCount'),
-                    incorrectCount: document.getElementById('incorrectCount'),
-                    unattemptedCount: document.getElementById('unattemptedCount'),
-                    timeTaken: document.getElementById('timeTaken'),
-                    sectionResults: document.getElementById('sectionResults'),
-                    sectionResultsBody: document.getElementById('sectionResultsBody')
-                };
-            }
-            
-            setupWelcomeScreen() {
-                document.getElementById('startBtn').addEventListener('click', () => {
-                    this.els.welcomeScreen.classList.add('hidden');
-                    this.els.examContainer.classList.add('active');
-                    setTimeout(() => this.startExam(), 100);
-                });
-            }
-            
-            setupBeforeUnload() {
-                window.addEventListener('beforeunload', (e) => {
-                    if (!this.isSubmitted) {
-                        e.preventDefault();
-                        e.returnValue = 'Your test is in progress. Are you sure you want to leave?';
-                        return e.returnValue;
-                    }
-                });
-            }
-            
-            startExam() {
-                this.startTime = Date.now();
-                this.lastQuestionTime = this.startTime;
-                this.createNavigator();
-                this.startMainTimer();
-                if (this.sections) {
-                    this.startSectionTimer();
-                    this.updateSectionInfo();
-                }
-                this.loadQuestion(0);
-                this.setupEventListeners();
-            }
-            
-            setupEventListeners() {
-                document.getElementById('engBtn').onclick = () => this.setLanguage(true);
-                document.getElementById('hinBtn').onclick = () => this.setLanguage(false);
-                document.getElementById('prevBtn').onclick = () => this.navigate(-1);
-                document.getElementById('nextBtn').onclick = () => this.navigate(1);
-                document.getElementById('reviewBtn').onclick = () => this.toggleReview();
-                document.getElementById('submitBtn').onclick = () => this.confirmSubmit();
-                document.getElementById('submitBtnDesktop').onclick = () => this.confirmSubmit();
-                document.getElementById('navigatorBtn').onclick = () => this.openMobileNav();
-                document.getElementById('closeNav').onclick = () => this.closeMobileNav();
-                document.getElementById('closeResult').onclick = () => this.closeResultModal();
-                document.getElementById('reviewAnswers').onclick = () => this.reviewAnswers();
-            }
-            
-            createNavigator() {
-                [this.els.desktopNav, this.els.mobileNavGrid].forEach(container => {
-                    container.innerHTML = '';
-                    this.questions.forEach((_, i) => {
-                        const btn = document.createElement('div');
-                        btn.className = 'nav-question';
-                        btn.textContent = i + 1;
-                        btn.onclick = () => this.goToQuestion(i);
-                        container.appendChild(btn);
-                    });
-                });
-            }
-            
-            extractText(html, isEng) {
-                if (!html) return '';
-                const temp = document.createElement('div');
-                temp.innerHTML = html;
-                
-                const langSpans = temp.querySelectorAll('span.eqt, span.hqt');
-                langSpans.forEach(span => {
-                    if ((isEng && span.classList.contains('hqt')) || 
-                        (!isEng && span.classList.contains('eqt'))) {
-                        span.style.display = 'none';
-                    } else {
-                        span.style.display = '';
-                    }
-                });
-                
-                return temp.innerHTML;
-            }
-            
-            getQuestionMarks(qIdx) {
-                if (!this.sections) return marksPerQ;
-                
-                for (const section of this.sections) {
-                    if (qIdx >= section.start && qIdx <= section.end) {
-                        if (section.subsections) {
-                            for (const subsec of section.subsections) {
-                                if (qIdx >= subsec.start && qIdx <= subsec.end) {
-                                    return subsec.marks_per_q;
-                                }
-                            }
-                        }
-                        return marksPerQ;
-                    }
-                }
-                return marksPerQ;
-            }
-            
-            loadQuestion(idx) {
-                if (this.currentQuestion !== idx) {
-                    const now = Date.now();
-                    this.timeSpent[this.currentQuestion] += (now - this.lastQuestionTime) / 1000;
-                    this.lastQuestionTime = now;
-                }
-                
-                this.currentQuestion = idx;
-                const q = this.questions[idx];
-                const qMarks = this.getQuestionMarks(idx);
-                
-                this.els.questionNum.textContent = `Question ${idx + 1} of ${this.questions.length}`;
-                this.els.questionMarks.textContent = `Marks: ${qMarks}`;
-                this.els.progressText.textContent = `Question ${idx + 1} of ${this.questions.length}`;
-                this.updateAnsweredCount();
-                this.updateNavigator();
-                this.updateNavigationButtons();
-                this.updateReviewButton();
-                
-                if (q.comp) {
-                    this.els.comprehension.style.display = 'block';
-                    this.els.comprehensionText.innerHTML = this.extractText(q.comp, this.isEnglish);
-                } else {
-                    this.els.comprehension.style.display = 'none';
-                }
-                
-                this.els.questionText.innerHTML = this.extractText(q.question, this.isEnglish);
-                this.loadOptions(q, idx);
-                
-                if (this.isSubmitted && q.solution) {
-                    const timeSpent = Math.round(this.timeSpent[idx]);
-                    const mins = Math.floor(timeSpent / 60);
-                    const secs = timeSpent % 60;
-                    const timeStr = mins > 0 ? `${mins}m ${secs}s` : `${secs}s`;
-                    
-                    this.els.solutionStats.innerHTML = `
-                        <span><i class="fas fa-clock"></i> Time: ${timeStr}</span>
-                        <span><i class="fas fa-check-circle"></i> Correct: ${String.fromCharCode(65 + q.correct_option_id)}</span>
-                    `;
-                    this.els.solutionText.innerHTML = this.extractText(q.solution, this.isEnglish);
-                    this.els.solutionBox.classList.add('show');
-                } else {
-                    this.els.solutionBox.classList.remove('show');
-                }
-            }
-            
-            loadOptions(q, qIdx) {
-                this.els.optionsList.innerHTML = '';
-                const userAnswer = this.answers[qIdx];
-                const correctAnswer = q.correct_option_id;
-                
-                if (!q.options || !Array.isArray(q.options)) return;
-                
-                q.options.forEach((opt, i) => {
-                    const div = document.createElement('div');
-                    let className = 'option';
-                    
-                    if (this.isSubmitted) className += ' submitted';
-                    if (userAnswer === i) className += ' selected';
-                    
-                    if (this.isSubmitted && correctAnswer !== undefined) {
-                        if (i === correctAnswer) {
-                            className += ' correct';
-                        } else if (userAnswer === i && userAnswer !== correctAnswer) {
-                            className += ' wrong';
-                        }
-                    }
-                    
-                    div.className = className;
-                    
-                    let indicator = '';
-                    if (this.isSubmitted && correctAnswer !== undefined) {
-                        if (i === correctAnswer) {
-                            indicator = '✓';
-                        } else if (userAnswer === i) {
-                            indicator = '✗';
-                        }
-                    } else if (userAnswer === i) {
-                        indicator = '✓';
-                    }
-                    
-                    div.innerHTML = `
-                        <div class="option-indicator">${indicator}</div>
-                        <div class="option-text">${this.extractText(opt, this.isEnglish)}</div>
-                    `;
-                    
-                    if (!this.isSubmitted) {
-                        div.onclick = () => this.selectOption(i, qIdx);
-                    }
-                    
-                    this.els.optionsList.appendChild(div);
-                });
-            }
-            
-            selectOption(optIdx, qIdx) {
-                if (this.isSubmitted) return;
-                this.answers[qIdx] = this.answers[qIdx] === optIdx ? null : optIdx;
-                this.loadOptions(this.questions[qIdx], qIdx);
-                this.updateAnsweredCount();
-                this.updateNavigator();
-            }
-            
-            toggleReview() {
-                if (this.isSubmitted) return;
-                this.markedForReview[this.currentQuestion] = !this.markedForReview[this.currentQuestion];
-                this.updateNavigator();
-                this.updateReviewButton();
-            }
-            
-            updateReviewButton() {
-                const btn = document.getElementById('reviewBtn');
-                if (this.markedForReview[this.currentQuestion]) {
-                    btn.classList.add('marked');
-                    btn.innerHTML = '<i class="fas fa-flag"></i> Marked';
-                } else {
-                    btn.classList.remove('marked');
-                    btn.innerHTML = '<i class="fas fa-flag"></i> Mark for Review';
-                }
-            }
-            
-            navigate(dir) {
-                const newIdx = this.currentQuestion + dir;
-                
-                if (this.isSubmitted) {
-                    if (newIdx >= 0 && newIdx < this.questions.length) {
-                        this.loadQuestion(newIdx);
-                    }
-                    return;
-                }
-                
-                if (this.sections) {
-                    const currentSection = this.sections[this.currentSection];
-                    if (newIdx < currentSection.start || newIdx > currentSection.end) {
-                        return;
-                    }
-                }
-                
-                if (newIdx >= 0 && newIdx < this.questions.length) {
-                    this.loadQuestion(newIdx);
-                }
-            }
-            
-            goToQuestion(idx) {
-                if (this.isSubmitted) {
-                    this.loadQuestion(idx);
-                    this.closeMobileNav();
-                    return;
-                }
-                
-                if (this.sections) {
-                    const currentSection = this.sections[this.currentSection];
-                    if (idx < currentSection.start || idx > currentSection.end) {
-                        return;
-                    }
-                }
-                
-                this.loadQuestion(idx);
-                this.closeMobileNav();
-            }
-            
-            updateNavigator() {
-                [this.els.desktopNav, this.els.mobileNavGrid].forEach(container => {
-                    const btns = container.querySelectorAll('.nav-question');
-                    btns.forEach((btn, i) => {
-                        btn.className = 'nav-question';
-                        
-                        if (i === this.currentQuestion) {
-                            btn.classList.add('current');
-                        } else if (this.isSubmitted) {
-                            if (this.answers[i] !== null && this.questions[i].correct_option_id !== undefined) {
-                                if (this.answers[i] === this.questions[i].correct_option_id) {
-                                    btn.classList.add('answered');
-                                } else {
-                                    btn.classList.add('wrong');
-                                }
-                            }
-                        } else {
-                            if (this.markedForReview[i]) {
-                                btn.classList.add('review');
-                            } else if (this.answers[i] !== null) {
-                                btn.classList.add('answered');
-                            }
-                            
-                            if (this.sections) {
-                                const currentSection = this.sections[this.currentSection];
-                                if (i < currentSection.start || i > currentSection.end) {
-                                    btn.classList.add('disabled');
-                                }
-                            }
-                        }
-                    });
-                });
-            }
-            
-            updateNavigationButtons() {
-                const prevBtn = document.getElementById('prevBtn');
-                const nextBtn = document.getElementById('nextBtn');
-                const reviewBtn = document.getElementById('reviewBtn');
-                
-                prevBtn.disabled = this.currentQuestion === 0;
-                nextBtn.disabled = this.currentQuestion === this.questions.length - 1;
-                
-                if (this.isSubmitted) {
-                    reviewBtn.style.display = 'none';
-                } else {
-                    reviewBtn.style.display = 'inline-flex';
-                }
-                
-                if (this.sections && !this.isSubmitted) {
-                    const currentSection = this.sections[this.currentSection];
-                    prevBtn.disabled = prevBtn.disabled || (this.currentQuestion === currentSection.start);
-                    nextBtn.disabled = nextBtn.disabled || (this.currentQuestion === currentSection.end);
-                }
-            }
-            
-            updateAnsweredCount() {
-                const count = this.answers.filter(a => a !== null).length;
-                this.els.answeredCount.textContent = count;
-            }
-            
-            setLanguage(isEng) {
-                this.isEnglish = isEng;
-                document.getElementById('engBtn').classList.toggle('active', isEng);
-                document.getElementById('hinBtn').classList.toggle('active', !isEng);
-                this.loadQuestion(this.currentQuestion);
-            }
-            
-            startMainTimer() {
-                this.mainTimer = setInterval(() => {
-                    this.totalTimeLeft--;
-                    if (this.totalTimeLeft <= 0) {
-                        clearInterval(this.mainTimer);
-                        this.submitTest();
-                        return;
-                    }
-                    const mins = Math.floor(this.totalTimeLeft / 60);
-                    const secs = this.totalTimeLeft % 60;
-                    this.els.mainTimer.textContent = `${mins}:${secs.toString().padStart(2, '0')}`;
-                }, 1000);
-            }
-            
-            startSectionTimer() {
-                if (!this.sections) return;
-                
-                if (this.sectionTimer) clearInterval(this.sectionTimer);
-                
-                const section = this.sections[this.currentSection];
-                section.time_left = section.timer;
-                
-                this.sectionTimer = setInterval(() => {
-                    section.time_left--;
-                    const mins = Math.floor(section.time_left / 60);
-                    const secs = section.time_left % 60;
-                    this.els.sectionTimer.textContent = ` | ${mins}:${secs.toString().padStart(2, '0')}`;
-                    
-                    if (section.time_left <= 0) {
-                        clearInterval(this.sectionTimer);
-                        this.submitSection();
-                    }
-                }, 1000);
-            }
-            
-            updateSectionInfo() {
-                if (!this.sections) return;
-                const section = this.sections[this.currentSection];
-                this.els.sectionName.textContent = section.name;
-                this.els.sectionBadge.style.display = 'block';
-            }
-            
-            submitSection() {
-                if (!this.sections) return;
-                
-                const section = this.sections[this.currentSection];
-                section.submitted = true;
-                clearInterval(this.sectionTimer);
-                
-                const nextSectionIdx = this.currentSection + 1;
-                if (nextSectionIdx < this.sections.length) {
-                    this.currentSection = nextSectionIdx;
-                    this.startSectionTimer();
-                    this.updateSectionInfo();
-                    this.loadQuestion(this.sections[nextSectionIdx].start);
-                } else {
-                    this.submitTest();
-                }
-                
-                this.updateNavigator();
-            }
-            
-            confirmSubmit() {
-                if (this.sections) {
-                    const section = this.sections[this.currentSection];
-                    const unanswered = this.answers.slice(section.start, section.end + 1)
-                        .filter(a => a === null).length;
-                    
-                    let msg = unanswered > 0 
-                        ? `You have ${unanswered} unanswered questions in this section. Submit anyway?`
-                        : 'Submit this section?';
-                    
-                    if (confirm(msg)) this.submitSection();
-                } else {
-                    const unanswered = this.answers.filter(a => a === null).length;
-                    let msg = unanswered > 0 
-                        ? `You have ${unanswered} unanswered questions. Submit test?`
-                        : 'Submit test?';
-                    
-                    if (confirm(msg)) this.submitTest();
-                }
-            }
-            
-            submitTest() {
-                if (this.isSubmitted) return;
-                
-                const now = Date.now();
-                this.timeSpent[this.currentQuestion] += (now - this.lastQuestionTime) / 1000;
-                
-                this.isSubmitted = true;
-                clearInterval(this.mainTimer);
-                if (this.sectionTimer) clearInterval(this.sectionTimer);
-                
-                document.getElementById('submitBtn').style.display = 'none';
-                document.getElementById('submitBtnDesktop').style.display = 'none';
-                document.getElementById('reviewBtn').style.display = 'none';
-                
-                if (this.sections) {
-                    this.els.sectionBadge.style.display = 'none';
-                }
-                
-                const results = this.calculateResults();
-                this.showResults(results);
-                this.loadQuestion(this.currentQuestion);
-                this.updateNavigator();
-            }
-            
-            calculateResults() {
-                const timeTaken = Math.round((Date.now() - this.startTime) / 60000);
-                let correct = 0, incorrect = 0, unattempted = 0, score = 0;
-                
-                const sectionResults = [];
-                
-                if (this.sections) {
-                    for (const section of this.sections) {
-                        let secCorrect = 0, secIncorrect = 0, secUnattempted = 0, secScore = 0;
-                        const subsecResults = [];
-                        
-                        if (section.subsections) {
-                            for (const subsec of section.subsections) {
-                                let subCorrect = 0, subIncorrect = 0, subUnattempted = 0, subScore = 0;
-                                
-                                for (let i = subsec.start; i <= subsec.end; i++) {
-                                    const userAns = this.answers[i];
-                                    const correctAns = this.questions[i].correct_option_id;
-                                    
-                                    if (userAns === null) {
-                                        subUnattempted++;
-                                    } else if (correctAns !== undefined && userAns === correctAns) {
-                                        subCorrect++;
-                                        subScore += subsec.marks_per_q;
-                                    } else {
-                                        subIncorrect++;
-                                        subScore -= negMarks;
-                                    }
-                                }
-                                
-                                subsecResults.push({
-                                    name: subsec.name,
-                                    attempted: subCorrect + subIncorrect,
-                                    correct: subCorrect,
-                                    incorrect: subIncorrect,
-                                    unattempted: subUnattempted,
-                                    score: Math.max(0, subScore)
-                                });
-                                
-                                secCorrect += subCorrect;
-                                secIncorrect += subIncorrect;
-                                secUnattempted += subUnattempted;
-                                secScore += subScore;
-                            }
-                        } else {
-                            for (let i = section.start; i <= section.end; i++) {
-                                const userAns = this.answers[i];
-                                const correctAns = this.questions[i].correct_option_id;
-                                
-                                if (userAns === null) {
-                                    secUnattempted++;
-                                } else if (correctAns !== undefined && userAns === correctAns) {
-                                    secCorrect++;
-                                    secScore += marksPerQ;
-                                } else {
-                                    secIncorrect++;
-                                    secScore -= negMarks;
-                                }
-                            }
-                        }
-                        
-                        sectionResults.push({
-                            name: section.name,
-                            attempted: secCorrect + secIncorrect,
-                            correct: secCorrect,
-                            incorrect: secIncorrect,
-                            unattempted: secUnattempted,
-                            score: Math.max(0, secScore),
-                            subsections: subsecResults.length > 0 ? subsecResults : null
-                        });
-                        
-                        correct += secCorrect;
-                        incorrect += secIncorrect;
-                        unattempted += secUnattempted;
-                        score += secScore;
-                    }
-                } else {
-                    this.questions.forEach((q, i) => {
-                        const userAns = this.answers[i];
-                        const correctAns = q.correct_option_id;
-                        
-                        if (userAns === null) {
-                            unattempted++;
-                        } else if (correctAns !== undefined && userAns === correctAns) {
-                            correct++;
-                            score += marksPerQ;
-                        } else {
-                            incorrect++;
-                            score -= negMarks;
-                        }
-                    });
-                }
-                
-                return {
-                    score: Math.max(0, score),
-                    correct,
-                    incorrect,
-                    unattempted,
-                    timeTaken,
-                    sectionResults: sectionResults.length > 0 ? sectionResults : null
-                };
-            }
-            
-            showResults(results) {
-                this.els.resultScore.textContent = `${results.score.toFixed(2)}/${this.questions.length * marksPerQ}`;
-                this.els.correctCount.textContent = results.correct;
-                this.els.incorrectCount.textContent = results.incorrect;
-                this.els.unattemptedCount.textContent = results.unattempted;
-                this.els.timeTaken.textContent = results.timeTaken;
-                
-                if (results.sectionResults) {
-                    this.els.sectionResults.style.display = 'block';
-                    this.els.sectionResultsBody.innerHTML = '';
-                    
-                    results.sectionResults.forEach(section => {
-                        const row = document.createElement('tr');
-                        row.innerHTML = `
-                            <td><strong>${section.name}</strong></td>
-                            <td>${section.attempted}</td>
-                            <td>${section.correct}</td>
-                            <td>${section.incorrect}</td>
-                            <td><strong>${section.score.toFixed(2)}</strong></td>
-                        `;
-                        this.els.sectionResultsBody.appendChild(row);
-                        
-                        if (section.subsections) {
-                            section.subsections.forEach(subsec => {
-                                const subRow = document.createElement('tr');
-                                subRow.className = 'subsection-row';
-                                subRow.innerHTML = `
-                                    <td>${subsec.name}</td>
-                                    <td>${subsec.attempted}</td>
-                                    <td>${subsec.correct}</td>
-                                    <td>${subsec.incorrect}</td>
-                                    <td>${subsec.score.toFixed(2)}</td>
-                                `;
-                                this.els.sectionResultsBody.appendChild(subRow);
-                            });
-                        }
-                    });
-                } else {
-                    this.els.sectionResults.style.display = 'none';
-                }
-                
-                this.els.resultModal.classList.add('show');
-            }
-            
-            closeResultModal() {
-                this.els.resultModal.classList.remove('show');
-            }
-            
-            reviewAnswers() {
-                this.closeResultModal();
-                this.loadQuestion(0);
-            }
-            
-            openMobileNav() {
-                this.els.mobileNav.classList.add('open');
-            }
-            
-            closeMobileNav() {
-                this.els.mobileNav.classList.remove('open');
-            }
-        }
-        
-        // Initialize the exam
-        
-        // ── Theme & Fullscreen Controls ─────────────────────────
-        (function() {
-            const html      = document.documentElement;
-            const themeBtn  = document.getElementById('themeToggleBtn');
-            const fsBtn     = document.getElementById('fullscreenBtn');
-            const fsIcon    = document.getElementById('fullscreenIcon');
-
-            // ── Dark Mode ──────────────────────────────────────
-            const THEME_KEY = 'cbt-theme';
-
-            function applyTheme(dark) {
-                if (dark) {
-                    html.setAttribute('data-theme', 'dark');
-                    themeBtn && themeBtn.setAttribute('title', 'Switch to Light Mode');
-                } else {
-                    html.removeAttribute('data-theme');
-                    themeBtn && themeBtn.setAttribute('title', 'Switch to Dark Mode');
-                }
-            }
-
-            // Restore saved preference immediately (before paint)
-            const saved = localStorage.getItem(THEME_KEY);
-            applyTheme(saved === 'dark');
-
-            themeBtn && themeBtn.addEventListener('click', () => {
-                const isDark = html.getAttribute('data-theme') === 'dark';
-                applyTheme(!isDark);
-                localStorage.setItem(THEME_KEY, isDark ? 'light' : 'dark');
-            });
-
-            // ── Fullscreen ────────────────────────────────────
-            function updateFsIcon() {
-                const isFs = !!(
-                    document.fullscreenElement ||
-                    document.webkitFullscreenElement ||
-                    document.mozFullScreenElement
-                );
-                if (fsIcon) {
-                    fsIcon.className = isFs ? 'fas fa-compress' : 'fas fa-expand';
-                }
-                if (fsBtn) {
-                    fsBtn.title = isFs ? 'Exit Fullscreen' : 'Enter Fullscreen';
-                    fsBtn.classList.toggle('fullscreen-active', isFs);
-                }
-            }
-
-            fsBtn && fsBtn.addEventListener('click', () => {
-                if (!document.fullscreenElement) {
-                    (document.documentElement.requestFullscreen ||
-                     document.documentElement.webkitRequestFullscreen ||
-                     document.documentElement.mozRequestFullScreen
-                    ).call(document.documentElement).catch(() => {});
-                } else {
-                    (document.exitFullscreen ||
-                     document.webkitExitFullscreen ||
-                     document.mozCancelFullScreen
-                    ).call(document).catch(() => {});
-                }
-            });
-
-            document.addEventListener('fullscreenchange',       updateFsIcon);
-            document.addEventListener('webkitfullscreenchange', updateFsIcon);
-            document.addEventListener('mozfullscreenchange',    updateFsIcon);
-        })();
-        document.addEventListener('DOMContentLoaded', () => {
-            new CBTExam();
-        });
     </script>
+    
+    <!-- Central JS Controller -->
+    <script src="../../js/mock-core.js"></script>
 </body>
 </html>

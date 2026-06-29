@@ -2852,5 +2852,71 @@
             new CBTExam();
         });
     </script>
+<!-- Fullscreen Widget Inject -->
+<div id="fs-toggle-widget" style="position: fixed; top: 12px; right: 12px; z-index: 999999; display: flex; gap: 8px; align-items: center; pointer-events: none;">
+    <button id="fs-toggle-btn" class="fs-widget-btn" style="pointer-events: auto; background: rgba(0, 0, 0, 0.6); color: #fff; border: 1px solid rgba(255,255,255,0.25); border-radius: 50%; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s; box-shadow: 0 4px 12px rgba(0,0,0,0.15); padding: 0;" title="Toggle Fullscreen">
+        <svg id="fs-icon-expand" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display: block;"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/></svg>
+        <svg id="fs-icon-compress" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display: none;"><path d="M4 14h6v6m10-6h-6v6M4 10h6V4m10 6h-6V4"/></svg>
+    </button>
+</div>
+<style>
+    .fs-widget-btn:hover {
+        background: rgba(0, 0, 0, 0.85) !important;
+        transform: scale(1.08);
+    }
+    .fs-widget-btn:active {
+        transform: scale(0.95);
+    }
+</style>
+<script>
+    (function() {
+        const btn = document.getElementById('fs-toggle-btn');
+        if (!btn) return;
+        const iconExpand = document.getElementById('fs-icon-expand');
+        const iconCompress = document.getElementById('fs-icon-compress');
+        
+        function toggleFullscreen() {
+            if (!document.fullscreenElement) {
+                document.documentElement.requestFullscreen().catch(err => {
+                    console.error(`Error attempting to enable fullscreen: ${err.message}`);
+                });
+            } else {
+                document.exitFullscreen();
+            }
+        }
+        
+        btn.addEventListener('click', toggleFullscreen);
+        
+        function updateUI() {
+            if (document.fullscreenElement) {
+                iconExpand.style.display = 'none';
+                iconCompress.style.display = 'block';
+                btn.title = 'Exit Fullscreen';
+            } else {
+                iconExpand.style.display = 'block';
+                iconCompress.style.display = 'none';
+                btn.title = 'Toggle Fullscreen';
+            }
+        }
+        
+        document.addEventListener('fullscreenchange', updateUI);
+        document.addEventListener('webkitfullscreenchange', updateUI);
+        document.addEventListener('mozfullscreenchange', updateUI);
+        document.addEventListener('MSFullscreenChange', updateUI);
+
+        // Auto-trigger on start button click
+        document.addEventListener('click', (e) => {
+            const target = e.target.closest('#startTestBtn, .start-btn, #start-btn, .welcome-button, #startTest, .start-test-btn');
+            if (target) {
+                if (!document.fullscreenElement) {
+                    document.documentElement.requestFullscreen().catch(err => {
+                        console.error('Fullscreen request failed:', err);
+                    });
+                }
+            }
+        });
+    })();
+</script>
+
 </body>
 </html>

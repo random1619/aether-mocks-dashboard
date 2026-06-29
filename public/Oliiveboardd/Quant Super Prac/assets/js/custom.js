@@ -1576,6 +1576,7 @@
     // Floating Premium Calculator Widget
     // -------------------------------------------------------------
     function setupCalculator() {
+        return; // Calculator disabled
         if (document.getElementById('floatingCalc')) return;
 
         // Create Widget Container
