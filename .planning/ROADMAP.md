@@ -75,8 +75,8 @@ Plans:
 **Plans**: 2 plans
 
 Plans:
-- [ ] 04-01: Implement centralized dark theme variables and toggle actions in CSS/JS.
-- [ ] 04-02: Standardize welcome screen containers and inject toggle buttons into the HTML builder template.
+- [x] 04-01: Implement centralized dark theme variables and toggle actions in CSS/JS.
+- [x] 04-02: Standardize welcome screen containers and inject toggle buttons into the HTML builder template.
 
 ## Progress
 
@@ -88,7 +88,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4
 | 1. Core Design & Scripting | 2/2 | Complete | 2026-06-29 |
 | 2. Page Unification & Cleaning | 2/2 | Complete | 2026-06-29 |
 | 3. Verification & Deployment | 2/2 | Complete | 2026-06-29 |
-| 4. Fullscreen & Dark Theme Integration | 0/2 | Not started | - |
+| 4. Fullscreen & Dark Theme Integration | 2/2 | Complete | 2026-06-29 |
 
 
 
