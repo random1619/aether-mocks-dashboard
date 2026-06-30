@@ -43,7 +43,8 @@ for root, dirs, files in os.walk(root_dir):
     dirs[:] = [d for d in dirs if d.lower() not in ['backup', 'node_modules', 'styles', 'scss', 'css', '.git', '.firebase']]
     
     for file in files:
-        if file.lower().endswith('.html') and file.lower() != 'index.html':
+        file_lower = file.lower()
+        if (file_lower.endswith('.html') and file_lower != 'index.html') or file_lower.endswith('.pdf'):
             full_path = os.path.join(root, file)
             rel_path = os.path.relpath(full_path, root_dir).replace('\\', '/')
             parts = rel_path.split('/')
@@ -56,16 +57,25 @@ for root, dirs, files in os.walk(root_dir):
                 provider = 'Pundits'
             elif raw_provider.lower() == 'the solver':
                 provider = 'The Solver'
+            elif raw_provider.lower() == 'current affairs pdf':
+                provider = 'Current Affairs PDF'
             else:
                 provider = raw_provider
                 
             category = "/".join(parts[1:-1]) if len(parts) > 2 else (parts[1] if len(parts) > 1 else "General")
             
             cleaned = clean_name(file)
-            subject = get_subject(category, cleaned)
+            
+            if file_lower.endswith('.pdf'):
+                subject = 'General Studies'
+                # Redirect PDF paths to our custom pdf reader
+                launch_path = f"pdf-reader.html?file={rel_path}"
+            else:
+                subject = get_subject(category, cleaned)
+                launch_path = rel_path
             
             mocks.append({
-                "path": rel_path,
+                "path": launch_path,
                 "name": cleaned,
                 "provider": provider,
                 "category": category,
@@ -82,4 +92,4 @@ output_file = os.path.join(root_dir, "mocks-data.js")
 with open(output_file, 'w', encoding='utf-8') as f:
     f.write(js_content)
 
-print(f"Successfully generated {output_file} with {len(mocks)} mocks.")
+print(f"Successfully generated {output_file} with {len(mocks)} mocks (including PDFs).")

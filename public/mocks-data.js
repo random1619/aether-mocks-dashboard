@@ -176,6 +176,433 @@ const MOCK_DATA = [
     "subject": "General Studies"
   },
   {
+    "path": "360-Mocks.html",
+    "name": "360 Mocks",
+    "provider": "360-Mocks.html",
+    "category": "General",
+    "subject": "General"
+  },
+  {
+    "path": "Current Affairs/Current Affairs Apr Mock 2026 (Hindi).html",
+    "name": "Current Affairs Apr Mock 2026 (Hindi)",
+    "provider": "Current Affairs",
+    "category": "Current Affairs Apr Mock 2026 (Hindi).html",
+    "subject": "General Studies"
+  },
+  {
+    "path": "Current Affairs/Current Affairs Aug Mock 2025 (Hindi).html",
+    "name": "Current Affairs Aug Mock 2025 (Hindi)",
+    "provider": "Current Affairs",
+    "category": "Current Affairs Aug Mock 2025 (Hindi).html",
+    "subject": "General Studies"
+  },
+  {
+    "path": "Current Affairs/Current Affairs Dec Mock 2025 (Hindi).html",
+    "name": "Current Affairs Dec Mock 2025 (Hindi)",
+    "provider": "Current Affairs",
+    "category": "Current Affairs Dec Mock 2025 (Hindi).html",
+    "subject": "General Studies"
+  },
+  {
+    "path": "Current Affairs/Current Affairs Feb Mock 2026 (Hindi).html",
+    "name": "Current Affairs Feb Mock 2026 (Hindi)",
+    "provider": "Current Affairs",
+    "category": "Current Affairs Feb Mock 2026 (Hindi).html",
+    "subject": "General Studies"
+  },
+  {
+    "path": "Current Affairs/Current Affairs Jan Mock 2026 (Hindi).html",
+    "name": "Current Affairs Jan Mock 2026 (Hindi)",
+    "provider": "Current Affairs",
+    "category": "Current Affairs Jan Mock 2026 (Hindi).html",
+    "subject": "General Studies"
+  },
+  {
+    "path": "Current Affairs/Current Affairs Jul Mock 2025 (Hindi).html",
+    "name": "Current Affairs Jul Mock 2025 (Hindi)",
+    "provider": "Current Affairs",
+    "category": "Current Affairs Jul Mock 2025 (Hindi).html",
+    "subject": "General Studies"
+  },
+  {
+    "path": "Current Affairs/Current Affairs Jun Mock 2025 (Hindi).html",
+    "name": "Current Affairs Jun Mock 2025 (Hindi)",
+    "provider": "Current Affairs",
+    "category": "Current Affairs Jun Mock 2025 (Hindi).html",
+    "subject": "General Studies"
+  },
+  {
+    "path": "Current Affairs/Current Affairs Mar Mock 2026 (Hindi).html",
+    "name": "Current Affairs Mar Mock 2026 (Hindi)",
+    "provider": "Current Affairs",
+    "category": "Current Affairs Mar Mock 2026 (Hindi).html",
+    "subject": "General Studies"
+  },
+  {
+    "path": "Current Affairs/Current Affairs May Mock 2025 (Hindi).html",
+    "name": "Current Affairs May Mock 2025 (Hindi)",
+    "provider": "Current Affairs",
+    "category": "Current Affairs May Mock 2025 (Hindi).html",
+    "subject": "General Studies"
+  },
+  {
+    "path": "Current Affairs/Current Affairs Nov Mock 2025 (Hindi).html",
+    "name": "Current Affairs Nov Mock 2025 (Hindi)",
+    "provider": "Current Affairs",
+    "category": "Current Affairs Nov Mock 2025 (Hindi).html",
+    "subject": "General Studies"
+  },
+  {
+    "path": "Current Affairs/Current Affairs Oct Mock 2025 (Hindi).html",
+    "name": "Current Affairs Oct Mock 2025 (Hindi)",
+    "provider": "Current Affairs",
+    "category": "Current Affairs Oct Mock 2025 (Hindi).html",
+    "subject": "General Studies"
+  },
+  {
+    "path": "Current Affairs/Current Affairs Quizzes May 2026 Test 1 (10) (Hindi).html",
+    "name": "Current Affairs Quizzes May 2026 Test 1 (10) (Hindi)",
+    "provider": "Current Affairs",
+    "category": "Current Affairs Quizzes May 2026 Test 1 (10) (Hindi).html",
+    "subject": "General Studies"
+  },
+  {
+    "path": "Current Affairs/Current Affairs Quizzes May 2026 Test 1 (11) (Hindi).html",
+    "name": "Current Affairs Quizzes May 2026 Test 1 (11) (Hindi)",
+    "provider": "Current Affairs",
+    "category": "Current Affairs Quizzes May 2026 Test 1 (11) (Hindi).html",
+    "subject": "General Studies"
+  },
+  {
+    "path": "Current Affairs/Current Affairs Quizzes May 2026 Test 1 (2) (Hindi).html",
+    "name": "Current Affairs Quizzes May 2026 Test 1 (2) (Hindi)",
+    "provider": "Current Affairs",
+    "category": "Current Affairs Quizzes May 2026 Test 1 (2) (Hindi).html",
+    "subject": "General Studies"
+  },
+  {
+    "path": "Current Affairs/Current Affairs Quizzes May 2026 Test 1 (3) (Hindi).html",
+    "name": "Current Affairs Quizzes May 2026 Test 1 (3) (Hindi)",
+    "provider": "Current Affairs",
+    "category": "Current Affairs Quizzes May 2026 Test 1 (3) (Hindi).html",
+    "subject": "General Studies"
+  },
+  {
+    "path": "Current Affairs/Current Affairs Quizzes May 2026 Test 1 (4) (Hindi).html",
+    "name": "Current Affairs Quizzes May 2026 Test 1 (4) (Hindi)",
+    "provider": "Current Affairs",
+    "category": "Current Affairs Quizzes May 2026 Test 1 (4) (Hindi).html",
+    "subject": "General Studies"
+  },
+  {
+    "path": "Current Affairs/Current Affairs Quizzes May 2026 Test 1 (5) (Hindi).html",
+    "name": "Current Affairs Quizzes May 2026 Test 1 (5) (Hindi)",
+    "provider": "Current Affairs",
+    "category": "Current Affairs Quizzes May 2026 Test 1 (5) (Hindi).html",
+    "subject": "General Studies"
+  },
+  {
+    "path": "Current Affairs/Current Affairs Quizzes May 2026 Test 1 (6) (Hindi).html",
+    "name": "Current Affairs Quizzes May 2026 Test 1 (6) (Hindi)",
+    "provider": "Current Affairs",
+    "category": "Current Affairs Quizzes May 2026 Test 1 (6) (Hindi).html",
+    "subject": "General Studies"
+  },
+  {
+    "path": "Current Affairs/Current Affairs Quizzes May 2026 Test 1 (7) (Hindi).html",
+    "name": "Current Affairs Quizzes May 2026 Test 1 (7) (Hindi)",
+    "provider": "Current Affairs",
+    "category": "Current Affairs Quizzes May 2026 Test 1 (7) (Hindi).html",
+    "subject": "General Studies"
+  },
+  {
+    "path": "Current Affairs/Current Affairs Quizzes May 2026 Test 1 (8) (Hindi).html",
+    "name": "Current Affairs Quizzes May 2026 Test 1 (8) (Hindi)",
+    "provider": "Current Affairs",
+    "category": "Current Affairs Quizzes May 2026 Test 1 (8) (Hindi).html",
+    "subject": "General Studies"
+  },
+  {
+    "path": "Current Affairs/Current Affairs Quizzes May 2026 Test 1 (9) (Hindi).html",
+    "name": "Current Affairs Quizzes May 2026 Test 1 (9) (Hindi)",
+    "provider": "Current Affairs",
+    "category": "Current Affairs Quizzes May 2026 Test 1 (9) (Hindi).html",
+    "subject": "General Studies"
+  },
+  {
+    "path": "Current Affairs/Current Affairs Quizzes May 2026 Test 1 (Hindi).html",
+    "name": "Current Affairs Quizzes May 2026 Test 1 (Hindi)",
+    "provider": "Current Affairs",
+    "category": "Current Affairs Quizzes May 2026 Test 1 (Hindi).html",
+    "subject": "General Studies"
+  },
+  {
+    "path": "Current Affairs/Current Affairs Quizzes May 2026 Test 2 (2) (Hindi).html",
+    "name": "Current Affairs Quizzes May 2026 Test 2 (2) (Hindi)",
+    "provider": "Current Affairs",
+    "category": "Current Affairs Quizzes May 2026 Test 2 (2) (Hindi).html",
+    "subject": "General Studies"
+  },
+  {
+    "path": "Current Affairs/Current Affairs Quizzes May 2026 Test 2 (3) (Hindi).html",
+    "name": "Current Affairs Quizzes May 2026 Test 2 (3) (Hindi)",
+    "provider": "Current Affairs",
+    "category": "Current Affairs Quizzes May 2026 Test 2 (3) (Hindi).html",
+    "subject": "General Studies"
+  },
+  {
+    "path": "Current Affairs/Current Affairs Quizzes May 2026 Test 2 (Hindi).html",
+    "name": "Current Affairs Quizzes May 2026 Test 2 (Hindi)",
+    "provider": "Current Affairs",
+    "category": "Current Affairs Quizzes May 2026 Test 2 (Hindi).html",
+    "subject": "General Studies"
+  },
+  {
+    "path": "Current Affairs/Current Affairs Quizzes May 2026 Test 3 (Hindi).html",
+    "name": "Current Affairs Quizzes May 2026 Test 3 (Hindi)",
+    "provider": "Current Affairs",
+    "category": "Current Affairs Quizzes May 2026 Test 3 (Hindi).html",
+    "subject": "General Studies"
+  },
+  {
+    "path": "Current Affairs/Current Affairs Quizzes May 2026 Test 4 (Hindi).html",
+    "name": "Current Affairs Quizzes May 2026 Test 4 (Hindi)",
+    "provider": "Current Affairs",
+    "category": "Current Affairs Quizzes May 2026 Test 4 (Hindi).html",
+    "subject": "General Studies"
+  },
+  {
+    "path": "Current Affairs/Current Affairs Quizzes May 2026 Test 5 (Hindi).html",
+    "name": "Current Affairs Quizzes May 2026 Test 5 (Hindi)",
+    "provider": "Current Affairs",
+    "category": "Current Affairs Quizzes May 2026 Test 5 (Hindi).html",
+    "subject": "General Studies"
+  },
+  {
+    "path": "Current Affairs/Current Affairs Quizzes May 2026 Test 6 (Hindi).html",
+    "name": "Current Affairs Quizzes May 2026 Test 6 (Hindi)",
+    "provider": "Current Affairs",
+    "category": "Current Affairs Quizzes May 2026 Test 6 (Hindi).html",
+    "subject": "General Studies"
+  },
+  {
+    "path": "Current Affairs/Current Affairs Quizzes May 2026 Test 7 (Hindi).html",
+    "name": "Current Affairs Quizzes May 2026 Test 7 (Hindi)",
+    "provider": "Current Affairs",
+    "category": "Current Affairs Quizzes May 2026 Test 7 (Hindi).html",
+    "subject": "General Studies"
+  },
+  {
+    "path": "Current Affairs/Current Affairs Quizzes May 2026 Test 8 (Hindi).html",
+    "name": "Current Affairs Quizzes May 2026 Test 8 (Hindi)",
+    "provider": "Current Affairs",
+    "category": "Current Affairs Quizzes May 2026 Test 8 (Hindi).html",
+    "subject": "General Studies"
+  },
+  {
+    "path": "Current Affairs/Current Affairs Quizzes May 2026 Test 9 (Hindi).html",
+    "name": "Current Affairs Quizzes May 2026 Test 9 (Hindi)",
+    "provider": "Current Affairs",
+    "category": "Current Affairs Quizzes May 2026 Test 9 (Hindi).html",
+    "subject": "General Studies"
+  },
+  {
+    "path": "Current Affairs/Current Affairs Sep Mock 2025 (Hindi).html",
+    "name": "Current Affairs Sep Mock 2025 (Hindi)",
+    "provider": "Current Affairs",
+    "category": "Current Affairs Sep Mock 2025 (Hindi).html",
+    "subject": "General Studies"
+  },
+  {
+    "path": "pdf-reader.html?file=Current affairs PDF/Appointment 2026-01-08.pdf",
+    "name": "Appointment 2026 01 08",
+    "provider": "Current Affairs PDF",
+    "category": "Appointment 2026-01-08.pdf",
+    "subject": "General Studies"
+  },
+  {
+    "path": "pdf-reader.html?file=Current affairs PDF/Awards 2026-01-08.pdf",
+    "name": "Awards 2026 01 08",
+    "provider": "Current Affairs PDF",
+    "category": "Awards 2026-01-08.pdf",
+    "subject": "General Studies"
+  },
+  {
+    "path": "pdf-reader.html?file=Current affairs PDF/Banking 2026-01-08.pdf",
+    "name": "Banking 2026 01 08",
+    "provider": "Current Affairs PDF",
+    "category": "Banking 2026-01-08.pdf",
+    "subject": "General Studies"
+  },
+  {
+    "path": "pdf-reader.html?file=Current affairs PDF/Books and Authors 2026-01-08.pdf",
+    "name": "Books and Authors 2026 01 08",
+    "provider": "Current Affairs PDF",
+    "category": "Books and Authors 2026-01-08.pdf",
+    "subject": "General Studies"
+  },
+  {
+    "path": "pdf-reader.html?file=Current affairs PDF/Defence 2026-01-08.pdf",
+    "name": "Defence 2026 01 08",
+    "provider": "Current Affairs PDF",
+    "category": "Defence 2026-01-08.pdf",
+    "subject": "General Studies"
+  },
+  {
+    "path": "pdf-reader.html?file=Current affairs PDF/Economic Survey 2026-02-09.pdf",
+    "name": "Economic Survey 2026 02 09",
+    "provider": "Current Affairs PDF",
+    "category": "Economic Survey 2026-02-09.pdf",
+    "subject": "General Studies"
+  },
+  {
+    "path": "pdf-reader.html?file=Current affairs PDF/Environment 2026-01-08.pdf",
+    "name": "Environment 2026 01 08",
+    "provider": "Current Affairs PDF",
+    "category": "Environment 2026-01-08.pdf",
+    "subject": "General Studies"
+  },
+  {
+    "path": "pdf-reader.html?file=Current affairs PDF/Imp days 2026-01-08.pdf",
+    "name": "Imp days 2026 01 08",
+    "provider": "Current Affairs PDF",
+    "category": "Imp days 2026-01-08.pdf",
+    "subject": "General Studies"
+  },
+  {
+    "path": "pdf-reader.html?file=Current affairs PDF/Index 2026-01-08.pdf",
+    "name": "Index 2026 01 08",
+    "provider": "Current Affairs PDF",
+    "category": "Index 2026-01-08.pdf",
+    "subject": "General Studies"
+  },
+  {
+    "path": "pdf-reader.html?file=Current affairs PDF/International 2026-01-08.pdf",
+    "name": "International 2026 01 08",
+    "provider": "Current Affairs PDF",
+    "category": "International 2026-01-08.pdf",
+    "subject": "General Studies"
+  },
+  {
+    "path": "pdf-reader.html?file=Current affairs PDF/Monthly Magazine April26 2026-05-01.pdf",
+    "name": "Monthly Magazine April26 2026 05 01",
+    "provider": "Current Affairs PDF",
+    "category": "Monthly Magazine April26 2026-05-01.pdf",
+    "subject": "General Studies"
+  },
+  {
+    "path": "pdf-reader.html?file=Current affairs PDF/Monthly Magazine February'26 2026-03-13.pdf",
+    "name": "Monthly Magazine February'26 2026 03 13",
+    "provider": "Current Affairs PDF",
+    "category": "Monthly Magazine February'26 2026-03-13.pdf",
+    "subject": "General Studies"
+  },
+  {
+    "path": "pdf-reader.html?file=Current affairs PDF/Monthly Magazine January'26 2026-03-30.pdf",
+    "name": "Monthly Magazine January'26 2026 03 30",
+    "provider": "Current Affairs PDF",
+    "category": "Monthly Magazine January'26 2026-03-30.pdf",
+    "subject": "General Studies"
+  },
+  {
+    "path": "pdf-reader.html?file=Current affairs PDF/Monthly Magazine March'26.pdf",
+    "name": "Monthly Magazine March'26",
+    "provider": "Current Affairs PDF",
+    "category": "Monthly Magazine March'26.pdf",
+    "subject": "General Studies"
+  },
+  {
+    "path": "pdf-reader.html?file=Current affairs PDF/Monthly Magzine May '26 (2).pdf",
+    "name": "Monthly Magzine May '26 (2)",
+    "provider": "Current Affairs PDF",
+    "category": "Monthly Magzine May '26 (2).pdf",
+    "subject": "General Studies"
+  },
+  {
+    "path": "pdf-reader.html?file=Current affairs PDF/Monthly Magzine May '26.pdf",
+    "name": "Monthly Magzine May '26",
+    "provider": "Current Affairs PDF",
+    "category": "Monthly Magzine May '26.pdf",
+    "subject": "General Studies"
+  },
+  {
+    "path": "pdf-reader.html?file=Current affairs PDF/National 2026-01-08.pdf",
+    "name": "National 2026 01 08",
+    "provider": "Current Affairs PDF",
+    "category": "National 2026-01-08.pdf",
+    "subject": "General Studies"
+  },
+  {
+    "path": "pdf-reader.html?file=Current affairs PDF/Obituaries 2026-01-08.pdf",
+    "name": "Obituaries 2026 01 08",
+    "provider": "Current Affairs PDF",
+    "category": "Obituaries 2026-01-08.pdf",
+    "subject": "General Studies"
+  },
+  {
+    "path": "pdf-reader.html?file=Current affairs PDF/Padma Awards (2) 2026-02-21.pdf",
+    "name": "Padma Awards (2) 2026 02 21",
+    "provider": "Current Affairs PDF",
+    "category": "Padma Awards (2) 2026-02-21.pdf",
+    "subject": "General Studies"
+  },
+  {
+    "path": "pdf-reader.html?file=Current affairs PDF/Sawaal April'26 new Edited 2026-05-16.pdf",
+    "name": "Sawaal April'26 new Edited 2026 05 16",
+    "provider": "Current Affairs PDF",
+    "category": "Sawaal April'26 new Edited 2026-05-16.pdf",
+    "subject": "General Studies"
+  },
+  {
+    "path": "pdf-reader.html?file=Current affairs PDF/Sawaal CA Objective PDF February'26 2026-03-03.pdf",
+    "name": "Sawaal CA Objective PDF February'26 2026 03 03",
+    "provider": "Current Affairs PDF",
+    "category": "Sawaal CA Objective PDF February'26 2026-03-03.pdf",
+    "subject": "General Studies"
+  },
+  {
+    "path": "pdf-reader.html?file=Current affairs PDF/Sawaal CA Objective PDF January'26 2026-02-03.pdf",
+    "name": "Sawaal CA Objective PDF January'26 2026 02 03",
+    "provider": "Current Affairs PDF",
+    "category": "Sawaal CA Objective PDF January'26 2026-02-03.pdf",
+    "subject": "General Studies"
+  },
+  {
+    "path": "pdf-reader.html?file=Current affairs PDF/Sawaal CA Objective PDF March'26 2026-04-02.pdf",
+    "name": "Sawaal CA Objective PDF March'26 2026 04 02",
+    "provider": "Current Affairs PDF",
+    "category": "Sawaal CA Objective PDF March'26 2026-04-02.pdf",
+    "subject": "General Studies"
+  },
+  {
+    "path": "pdf-reader.html?file=Current affairs PDF/Sawaal CA Objective PDF May'26.pdf",
+    "name": "Sawaal CA Objective PDF May'26",
+    "provider": "Current Affairs PDF",
+    "category": "Sawaal CA Objective PDF May'26.pdf",
+    "subject": "General Studies"
+  },
+  {
+    "path": "pdf-reader.html?file=Current affairs PDF/Science & Tech 2026-01-08.pdf",
+    "name": "Science & Tech 2026 01 08",
+    "provider": "Current Affairs PDF",
+    "category": "Science & Tech 2026-01-08.pdf",
+    "subject": "General Studies"
+  },
+  {
+    "path": "pdf-reader.html?file=Current affairs PDF/Sports 2026-01-08.pdf",
+    "name": "Sports 2026 01 08",
+    "provider": "Current Affairs PDF",
+    "category": "Sports 2026-01-08.pdf",
+    "subject": "General Studies"
+  },
+  {
+    "path": "pdf-reader.html?file=Current affairs PDF/Union Budget 2026-27 2026-02-09.pdf",
+    "name": "Union Budget 2026 27 2026 02 09",
+    "provider": "Current Affairs PDF",
+    "category": "Union Budget 2026-27 2026-02-09.pdf",
+    "subject": "General Studies"
+  },
+  {
     "path": "English Madhyam/CGL 2026 Pre/@the_solvers_SSC CGL PRE Mock Test 05_9855.html",
     "name": "SSC CGL PRE Mock Test 05",
     "provider": "English Madhyam",
@@ -1308,6 +1735,13 @@ const MOCK_DATA = [
     "provider": "English Madhyam",
     "category": "Chapter Wise PYQS",
     "subject": "General"
+  },
+  {
+    "path": "English-Madhyam.html",
+    "name": "English Madhyam",
+    "provider": "English-Madhyam.html",
+    "category": "General",
+    "subject": "English"
   },
   {
     "path": "Oliiveboardd/Advanced GK current affairs/Advanced_Banking_GK_Apr_2026_Test_204.html",
@@ -6623,6 +7057,13 @@ const MOCK_DATA = [
     "subject": "Reasoning"
   },
   {
+    "path": "Oliveboard.html",
+    "name": "Oliveboard",
+    "provider": "Oliveboard.html",
+    "category": "General",
+    "subject": "General"
+  },
+  {
     "path": "Pundiits/2nd part/2025 Pre/SSC_CGL_2025_Pre_Eduquity_Mock_01.html",
     "name": "SSC CGL 2025 Pre Eduquity Mock 01",
     "provider": "Pundits",
@@ -7211,6 +7652,20 @@ const MOCK_DATA = [
     "subject": "Reasoning"
   },
   {
+    "path": "Pundits.html",
+    "name": "Pundits",
+    "provider": "Pundits.html",
+    "category": "General",
+    "subject": "General"
+  },
+  {
+    "path": "Static-GK.html",
+    "name": "Static GK",
+    "provider": "Static-GK.html",
+    "category": "General",
+    "subject": "General Studies"
+  },
+  {
     "path": "The solver/English/@the_solvers_SSC CGL T-I English Section Test 01.html",
     "name": "SSC CGL T I English Section Test 01",
     "provider": "The Solver",
@@ -7720,6 +8175,13 @@ const MOCK_DATA = [
     "provider": "The Solver",
     "category": "Reasoning Speed",
     "subject": "Reasoning"
+  },
+  {
+    "path": "The-Solver.html",
+    "name": "The Solver",
+    "provider": "The-Solver.html",
+    "category": "General",
+    "subject": "General"
   },
   {
     "path": "static GK/STATIC GK SSC (1).html",

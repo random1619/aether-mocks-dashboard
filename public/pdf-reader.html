@@ -1,0 +1,908 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Static GK & Current Affairs Vault — PDF Reader</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+<!-- Lucide Icons -->
+<script src="https://unpkg.com/lucide@latest"></script>
+<!-- PDF.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<style>
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+:root {
+    --bg-main: #0f172a;
+    --bg-sidebar: #1e293b;
+    --bg-toolbar: #1e293b;
+    --text-main: #f8fafc;
+    --text-muted: #94a3b8;
+    --border-color: #334155;
+    --primary: #06b6d4;
+    --primary-hover: #0891b2;
+    --primary-glow: rgba(6, 182, 212, 0.15);
+    --yellow-hl: rgba(253, 224, 71, 0.4);
+    --green-hl: rgba(74, 222, 128, 0.4);
+    --pink-hl: rgba(244, 114, 182, 0.4);
+    --blue-hl: rgba(96, 165, 250, 0.4);
+    --sidebar-width: 280px;
+    --toolbar-height: 56px;
+    --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+}
+body {
+    font-family: 'Outfit', sans-serif;
+    background-color: var(--bg-main);
+    color: var(--text-main);
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ─── Top Toolbar ─── */
+.toolbar {
+    height: var(--toolbar-height);
+    background-color: var(--bg-toolbar);
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 1.25rem;
+    gap: 1rem;
+    z-index: 10;
+    flex-shrink: 0;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+.toolbar-left {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    min-width: 0;
+}
+.back-btn {
+    background: transparent;
+    border: 1px solid var(--border-color);
+    color: var(--text-main);
+    padding: 0.4rem 0.8rem;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    transition: all 0.2s var(--ease-in-out);
+}
+.back-btn:hover {
+    background-color: var(--border-color);
+    border-color: var(--text-muted);
+}
+.pdf-title {
+    font-size: 0.95rem;
+    font-weight: 700;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: var(--text-main);
+}
+
+.toolbar-center {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--bg-main);
+    padding: 2px;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+}
+.nav-btn {
+    background: transparent;
+    border: none;
+    color: var(--text-main);
+    width: 32px;
+    height: 32px;
+    border-radius: 6px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+}
+.nav-btn:hover {
+    background-color: var(--border-color);
+}
+.nav-btn:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+}
+.page-display {
+    font-family: 'Fira Code', monospace;
+    font-size: 0.8rem;
+    padding: 0 0.5rem;
+    min-width: 90px;
+    text-align: center;
+}
+
+.toolbar-right {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+/* Tool Actions & Options */
+.btn-group {
+    display: flex;
+    background: var(--bg-main);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 2px;
+    gap: 2px;
+}
+.tool-btn {
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    width: 32px;
+    height: 32px;
+    border-radius: 6px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+}
+.tool-btn:hover {
+    color: var(--text-main);
+    background-color: var(--border-color);
+}
+.tool-btn.active {
+    color: var(--primary);
+    background-color: var(--border-color);
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+/* Color Picker */
+.color-picker {
+    display: flex;
+    gap: 4px;
+    align-items: center;
+    padding: 0 4px;
+}
+.color-swatch {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: transform 0.15s;
+}
+.color-swatch:hover {
+    transform: scale(1.15);
+}
+.color-swatch.active {
+    border-color: var(--text-main);
+    transform: scale(1.15);
+}
+.swatch-yellow { background-color: #fde047; }
+.swatch-green { background-color: #4ade80; }
+.swatch-pink { background-color: #f472b6; }
+.swatch-blue { background-color: #60a5fa; }
+
+/* ─── Main View Workspace ─── */
+.workspace {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+    position: relative;
+}
+
+/* Sidebar for other PDFs */
+.sidebar {
+    width: var(--sidebar-width);
+    background-color: var(--bg-sidebar);
+    border-right: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    transition: transform 0.3s var(--ease-in-out);
+}
+.sidebar-header {
+    padding: 1rem 1.25rem;
+    border-bottom: 1px solid var(--border-color);
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-muted);
+}
+.sidebar-search {
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid var(--border-color);
+}
+.sidebar-search input {
+    width: 100%;
+    padding: 0.5rem 0.75rem;
+    background: var(--bg-main);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    color: var(--text-main);
+    font-family: inherit;
+    font-size: 0.8rem;
+    outline: none;
+}
+.sidebar-search input:focus {
+    border-color: var(--primary);
+}
+.sidebar-list {
+    flex: 1;
+    overflow-y: auto;
+    padding: 0.5rem;
+}
+.sidebar-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.65rem 0.75rem;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: all 0.2s;
+    margin-bottom: 2px;
+}
+.sidebar-item:hover {
+    background-color: rgba(255, 255, 255, 0.04);
+    color: var(--text-main);
+}
+.sidebar-item.active {
+    background-color: var(--border-color);
+    color: var(--primary);
+    font-weight: 600;
+}
+.sidebar-item i {
+    flex-shrink: 0;
+}
+
+/* PDF Render Viewer */
+.viewer-viewport {
+    flex: 1;
+    overflow: auto;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 2rem;
+    background-color: var(--bg-main);
+    position: relative;
+}
+.viewer-container {
+    position: relative;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3), 0 8px 10px -6px rgba(0, 0, 0, 0.3);
+    background-color: #fff;
+    margin: 0 auto;
+}
+#pdfCanvas {
+    display: block;
+}
+#drawCanvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    cursor: crosshair;
+}
+
+/* Status Notifications */
+.status-msg {
+    position: fixed;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    background: #10b981;
+    color: #fff;
+    padding: 0.6rem 1.2rem;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.2);
+    z-index: 50;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all 0.25s var(--ease-in-out);
+    pointer-events: none;
+}
+.status-msg.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
+}
+</style>
+</head>
+<body>
+
+<!-- Toolbar Header -->
+<header class="toolbar">
+    <div class="toolbar-left">
+        <a href="index.html" class="back-btn">
+            <i data-lucide="arrow-left" style="width: 14px; height: 14px;"></i>
+            Exit
+        </a>
+        <div class="pdf-title" id="pdfName">Loading Document…</div>
+    </div>
+
+    <!-- Paging Controls -->
+    <div class="toolbar-center">
+        <button class="nav-btn" id="prevPageBtn" title="Previous Page" aria-label="Previous Page">
+            <i data-lucide="chevron-left" style="width: 18px; height: 18px;"></i>
+        </button>
+        <span class="page-display"><span id="pageNum">0</span> / <span id="pageCount">0</span></span>
+        <button class="nav-btn" id="nextPageBtn" title="Next Page" aria-label="Next Page">
+            <i data-lucide="chevron-right" style="width: 18px; height: 18px;"></i>
+        </button>
+    </div>
+
+    <!-- Toolbar Tools -->
+    <div class="toolbar-right">
+        <!-- Straight-line Highlighter lock -->
+        <button class="tool-btn" id="lockLineBtn" title="Lock Horizontal Straight Highlighting" aria-label="Lock Horizontal Straight Highlighting">
+            <i data-lucide="grip-horizontal" style="width: 18px; height: 18px;"></i>
+        </button>
+
+        <!-- Highlighter Type Selection -->
+        <select class="sort-select" id="highlighterType" title="Highlighter Tip/Style" style="height:32px; background:var(--bg-main); border:1px solid var(--border-color); color:var(--text-main); border-radius:6px; padding:0 6px; font-family:inherit; font-size:0.8rem; outline:none; cursor:pointer;">
+            <option value="chisel">Chisel Tip</option>
+            <option value="round">Round Tip</option>
+            <option value="underline">Underline</option>
+            <option value="box">Box Block</option>
+        </select>
+
+        <!-- Highlighter Colors -->
+        <div class="color-picker" id="colorPicker">
+            <div class="color-swatch swatch-yellow active" data-color="yellow"></div>
+            <div class="color-swatch swatch-green" data-color="green"></div>
+            <div class="color-swatch swatch-pink" data-color="pink"></div>
+            <div class="color-swatch swatch-blue" data-color="blue"></div>
+        </div>
+
+        <!-- Tool Selection -->
+        <div class="btn-group">
+            <button class="tool-btn active" id="toolDraw" title="Highlighter Pen" aria-label="Highlighter Pen">
+                <i data-lucide="highlighter" style="width: 18px; height: 18px;"></i>
+            </button>
+            <button class="tool-btn" id="toolErase" title="Eraser" aria-label="Eraser">
+                <i data-lucide="eraser" style="width: 18px; height: 18px;"></i>
+            </button>
+        </div>
+
+        <!-- Action Tools -->
+        <div class="btn-group">
+            <button class="tool-btn" id="actionUndo" title="Undo Last Drawing" aria-label="Undo Last Drawing">
+                <i data-lucide="undo-2" style="width: 18px; height: 18px;"></i>
+            </button>
+            <button class="tool-btn" id="actionClear" title="Clear All Drawings" aria-label="Clear All Drawings">
+                <i data-lucide="trash-2" style="width: 18px; height: 18px;"></i>
+            </button>
+        </div>
+
+        <!-- Save Indicator & Fullscreen -->
+        <button class="tool-btn" id="actionSave" title="Save Annotations Locally" aria-label="Save Annotations Locally">
+            <i data-lucide="save" style="width: 18px; height: 18px;"></i>
+        </button>
+        <button class="tool-btn" id="actionFullscreen" title="Toggle Fullscreen" aria-label="Toggle Fullscreen">
+            <i data-lucide="maximize" id="fullscreenIcon" style="width: 18px; height: 18px;"></i>
+        </button>
+    </div>
+</header>
+
+<div class="workspace">
+    <!-- Sidebar List -->
+    <aside class="sidebar">
+        <div class="sidebar-header">GK Vault PDFs</div>
+        
+        <!-- Local Scheme file:// Warning & Picker -->
+        <input type="file" id="localFilePicker" accept=".pdf" style="display:none">
+        <div class="local-file-warning" id="localWarning" style="display:none; padding: 0.85rem; margin: 0.75rem; background: #7f1d1d; border: 1px solid #ef4444; border-radius: 8px; font-size: 0.75rem; line-height: 1.4;">
+            <p style="font-weight:700; margin-bottom: 0.25rem; color:#fff;">⚠️ CORS Block (Local File Scheme)</p>
+            <p style="margin-bottom: 0.5rem; color:#f8fafc;">Browsers restrict automatic PDF loading under file://. Launch a local web server, or select the PDF manually below:</p>
+            <button class="back-btn" onclick="document.getElementById('localFilePicker').click()" style="width:100%; justify-content:center; padding:4px 0;">
+                <i data-lucide="folder-open" style="width:12px; height:12px;"></i> Choose File Manually
+            </button>
+        </div>
+
+        <div class="sidebar-search">
+            <input type="text" id="sidebarSearch" placeholder="Search files…">
+        </div>
+        <div class="sidebar-list" id="pdfList"></div>
+    </aside>
+
+    <!-- Main Viewer Viewport -->
+    <main class="viewer-viewport">
+        <div class="viewer-container" id="viewerContainer">
+            <canvas id="pdfCanvas"></canvas>
+            <canvas id="drawCanvas"></canvas>
+        </div>
+    </main>
+</div>
+
+<div class="status-msg" id="statusMsg">Annotations Saved Successfully!</div>
+
+<script src="mocks-data.js"></script>
+<script>
+// Configure PDF.js worker
+pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+
+function htmlEnc(s) {
+    return String(s)
+        .replace(/&/g, '&amp;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;');
+}
+
+// Ink Highlighter color definitions
+const HIGHLIGHT_COLORS = {
+    yellow: 'rgba(253, 224, 71, 0.45)',
+    green: 'rgba(74, 222, 128, 0.45)',
+    pink: 'rgba(244, 114, 182, 0.45)',
+    blue: 'rgba(96, 165, 250, 0.45)'
+};
+
+// Application State
+let pdfDoc = null;
+let currentPath = '';
+let currentNum = 1;
+let currentZoom = 1.3;
+let activeTool = 'draw'; // 'draw' or 'erase'
+let activeColor = 'yellow';
+let lockHorizontalLine = true; // Default straight highlighting for lines of text
+let highlighterType = 'chisel'; // 'chisel', 'round', 'underline', 'box'
+let isDrawing = false;
+let drawings = {}; // key: filepath, value: { pageNum: [pathArray] }
+let currentPathPoints = [];
+
+// DOM Elements
+const canvas = document.getElementById('pdfCanvas');
+const drawCanvas = document.getElementById('drawCanvas');
+const ctx = canvas.getContext('2d');
+const dCtx = drawCanvas.getContext('2d');
+const viewerContainer = document.getElementById('viewerContainer');
+const pdfNameDisplay = document.getElementById('pdfName');
+const pageNumDisplay = document.getElementById('pageNum');
+const pageCountDisplay = document.getElementById('pageCount');
+
+// Initialize Drawing State
+function loadDrawings() {
+    drawings = JSON.parse(localStorage.getItem('pdf_annotations') || '{}');
+}
+function saveDrawings() {
+    localStorage.setItem('pdf_annotations', JSON.stringify(drawings));
+    showStatus('Annotations Saved Locally!');
+}
+
+function showStatus(text) {
+    const el = document.getElementById('statusMsg');
+    el.textContent = text;
+    el.classList.add('show');
+    setTimeout(() => el.classList.remove('show'), 2000);
+}
+
+// Render PDF Page with overlay canvas resize
+async function renderPage(num) {
+    if (!pdfDoc) return;
+    currentNum = num;
+    pageNumDisplay.textContent = num;
+    
+    // Disable navigation if on boundary
+    document.getElementById('prevPageBtn').disabled = (num <= 1);
+    document.getElementById('nextPageBtn').disabled = (num >= pdfDoc.numPages);
+
+    const page = await pdfDoc.getPage(num);
+    const viewport = page.getViewport({ scale: currentZoom });
+    
+    // Set matching dimensions
+    canvas.width = viewport.width;
+    canvas.height = viewport.height;
+    drawCanvas.width = viewport.width;
+    drawCanvas.height = viewport.height;
+    
+    viewerContainer.style.width = viewport.width + 'px';
+    viewerContainer.style.height = viewport.height + 'px';
+
+    const renderCtx = {
+        canvasContext: ctx,
+        viewport: viewport
+    };
+    
+    await page.render(renderCtx).promise;
+    
+    // Clear and redraw vector drawings
+    redrawAnnotations();
+}
+
+// Redraw vector paths stored relative to canvas proportions
+function redrawAnnotations() {
+    dCtx.clearRect(0, 0, drawCanvas.width, drawCanvas.height);
+    const fileDrawings = drawings[currentPath] || {};
+    const pageDrawings = fileDrawings[currentNum] || [];
+
+    pageDrawings.forEach(path => {
+        if (path.type === 'box') {
+            const startX = path.points[0].x * drawCanvas.width;
+            const startY = path.points[0].y * drawCanvas.height;
+            const endX = path.points[1].x * drawCanvas.width;
+            const endY = path.points[1].y * drawCanvas.height;
+            
+            dCtx.fillStyle = HIGHLIGHT_COLORS[path.color] || HIGHLIGHT_COLORS.yellow;
+            dCtx.fillRect(startX, startY, endX - startX, endY - startY);
+        } else {
+            dCtx.beginPath();
+            
+            // Set styles based on path type
+            if (path.type === 'underline') {
+                dCtx.lineWidth = 3;
+                dCtx.lineCap = 'round';
+                dCtx.lineJoin = 'round';
+                // Underline gets solid/darker tone of the highlight color
+                dCtx.strokeStyle = path.color === 'yellow' ? '#d97706' : 
+                                   path.color === 'green' ? '#15803d' : 
+                                   path.color === 'pink' ? '#db2777' : '#2563eb';
+            } else {
+                dCtx.lineWidth = (path.widthPercent || 0.02) * drawCanvas.width;
+                dCtx.lineCap = path.type === 'round' ? 'round' : 'square';
+                dCtx.lineJoin = path.type === 'round' ? 'round' : 'miter';
+                dCtx.strokeStyle = HIGHLIGHT_COLORS[path.color] || HIGHLIGHT_COLORS.yellow;
+            }
+
+            path.points.forEach((pt, idx) => {
+                const x = pt.x * drawCanvas.width;
+                const y = pt.y * drawCanvas.height;
+                if (idx === 0) dCtx.moveTo(x, y);
+                else dCtx.lineTo(x, y);
+            });
+            dCtx.stroke();
+        }
+    });
+}
+
+// Mouse/Touch Drawing Logic
+function getCanvasCoords(e) {
+    const rect = drawCanvas.getBoundingClientRect();
+    const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+    const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+    return {
+        x: clientX - rect.left,
+        y: clientY - rect.top
+    };
+}
+
+function startDraw(e) {
+    if (activeTool !== 'draw') return;
+    isDrawing = true;
+    const coords = getCanvasCoords(e);
+    currentPathPoints = [coords];
+}
+
+function draw(e) {
+    if (!isDrawing) return;
+    e.preventDefault();
+    const coords = getCanvasCoords(e);
+    
+    if (lockHorizontalLine && highlighterType !== 'box' && currentPathPoints.length > 0) {
+        // Force horizontal straight highlighting (lock Y coordinate to initial click)
+        coords.y = currentPathPoints[0].y;
+    }
+    
+    currentPathPoints.push(coords);
+
+    dCtx.clearRect(0, 0, drawCanvas.width, drawCanvas.height);
+    redrawAnnotations(); // draw old paths first
+
+    // Draw active path
+    if (highlighterType === 'box') {
+        const start = currentPathPoints[0];
+        dCtx.fillStyle = HIGHLIGHT_COLORS[activeColor];
+        dCtx.fillRect(start.x, start.y, coords.x - start.x, coords.y - start.y);
+    } else {
+        dCtx.beginPath();
+        if (highlighterType === 'underline') {
+            dCtx.lineWidth = 3;
+            dCtx.lineCap = 'round';
+            dCtx.lineJoin = 'round';
+            dCtx.strokeStyle = activeColor === 'yellow' ? '#d97706' : 
+                               activeColor === 'green' ? '#15803d' : 
+                               activeColor === 'pink' ? '#db2777' : '#2563eb';
+        } else {
+            dCtx.lineWidth = 18;
+            dCtx.lineCap = highlighterType === 'round' ? 'round' : 'square';
+            dCtx.lineJoin = highlighterType === 'round' ? 'round' : 'miter';
+            dCtx.strokeStyle = HIGHLIGHT_COLORS[activeColor];
+        }
+        
+        currentPathPoints.forEach((pt, idx) => {
+            if (idx === 0) dCtx.moveTo(pt.x, pt.y);
+            else dCtx.lineTo(pt.x, pt.y);
+        });
+        dCtx.stroke();
+    }
+}
+
+function endDraw() {
+    if (!isDrawing) return;
+    isDrawing = false;
+    
+    if (currentPathPoints.length > 1) {
+        let savedPoints;
+        if (highlighterType === 'box') {
+            // Box block only needs start and end points
+            savedPoints = [
+                { x: currentPathPoints[0].x / drawCanvas.width, y: currentPathPoints[0].y / drawCanvas.height },
+                { x: currentPathPoints[currentPathPoints.length - 1].x / drawCanvas.width, y: currentPathPoints[currentPathPoints.length - 1].y / drawCanvas.height }
+            ];
+        } else {
+            savedPoints = currentPathPoints.map(pt => ({
+                x: pt.x / drawCanvas.width,
+                y: pt.y / drawCanvas.height
+            }));
+        }
+
+        if (!drawings[currentPath]) drawings[currentPath] = {};
+        if (!drawings[currentPath][currentNum]) drawings[currentPath][currentNum] = [];
+
+        drawings[currentPath][currentNum].push({
+            type: highlighterType,
+            color: activeColor,
+            widthPercent: 18 / drawCanvas.width,
+            points: savedPoints
+        });
+    }
+    currentPathPoints = [];
+    redrawAnnotations();
+}
+
+// Eraser Action - click/draw to erase entire path
+function handleEraser(e) {
+    if (activeTool !== 'erase') return;
+    const coords = getCanvasCoords(e);
+    const nX = coords.x / drawCanvas.width;
+    const nY = coords.y / drawCanvas.height;
+    
+    const fileDrawings = drawings[currentPath] || {};
+    const pageDrawings = fileDrawings[currentNum] || [];
+    
+    // Check if clicked close to any path segment
+    let hitIndex = -1;
+    for (let i = pageDrawings.length - 1; i >= 0; i--) {
+        const path = pageDrawings[i];
+        const isNear = path.points.some(pt => {
+            const dx = pt.x - nX;
+            const dy = pt.y - nY;
+            return Math.sqrt(dx*dx + dy*dy) < 0.03; // threshold radius
+        });
+        if (isNear) {
+            hitIndex = i;
+            break;
+        }
+    }
+    
+    if (hitIndex > -1) {
+        pageDrawings.splice(hitIndex, 1);
+        redrawAnnotations();
+    }
+}
+
+// Navigation Load
+async function loadPDF(source) {
+    try {
+        let loadingTask;
+        if (typeof source === 'string') {
+            currentPath = source;
+            // Clean title
+            const filename = source.split('/').pop().replace(/\.pdf$/i, '');
+            pdfNameDisplay.textContent = filename;
+            loadingTask = pdfjsLib.getDocument(source);
+        } else if (source instanceof File) {
+            currentPath = source.name;
+            pdfNameDisplay.textContent = source.name.replace(/\.pdf$/i, '');
+            
+            // Read file as arrayBuffer to bypass local CORS rules
+            const arrayBuffer = await source.arrayBuffer();
+            loadingTask = pdfjsLib.getDocument({ data: arrayBuffer });
+        } else {
+            return;
+        }
+        
+        pdfDoc = await loadingTask.promise;
+        pageCountDisplay.textContent = pdfDoc.numPages;
+        
+        // Hide warning if load succeeded
+        document.getElementById('localWarning').style.display = 'none';
+
+        // Highlight active item in sidebar list
+        if (typeof source === 'string') {
+            document.querySelectorAll('.sidebar-item').forEach(el => {
+                el.classList.toggle('active', el.dataset.path === source);
+            });
+        }
+
+        renderPage(1);
+    } catch(err) {
+        console.error('Error loading PDF:', err);
+        pdfNameDisplay.textContent = 'Error Loading PDF File';
+        
+        // Display manual file chooser warning if running on file:// scheme
+        if (window.location.protocol === 'file:') {
+            document.getElementById('localWarning').style.display = 'block';
+        }
+    }
+}
+
+// Sidebars list building
+function buildSidebar(searchQuery = '') {
+    const list = document.getElementById('pdfList');
+    list.innerHTML = '';
+    
+    // Filter PDFs from generated metadata
+    const pdfs = MOCK_DATA.filter(m => m.path.includes('pdf-reader.html?file='));
+    const filtered = pdfs.filter(m => m.name.toLowerCase().includes(searchQuery.toLowerCase()));
+
+    filtered.forEach(m => {
+        const urlParams = new URLSearchParams(m.path.split('?')[1]);
+        const filePath = urlParams.get('file');
+        
+        const item = document.createElement('div');
+        item.className = 'sidebar-item';
+        item.dataset.path = filePath;
+        item.innerHTML = `<i data-lucide="file-text" style="width:16px;height:16px;"></i> <span>${htmlEnc(m.name)}</span>`;
+        
+        item.addEventListener('click', () => {
+            loadPDF(filePath);
+        });
+        list.appendChild(item);
+    });
+    
+    if (typeof lucide !== 'undefined') lucide.createIcons();
+}
+
+// UI Event Handlers
+document.addEventListener('DOMContentLoaded', () => {
+    loadDrawings();
+
+    // Query Parameter load
+    const params = new URLSearchParams(window.location.search);
+    const fileParam = params.get('file') || 'Current affairs PDF/Appointment 2026-01-08.pdf';
+    
+    // Check if loaded locally via file://
+    if (window.location.protocol === 'file:') {
+        document.getElementById('localWarning').style.display = 'block';
+    }
+
+    buildSidebar();
+    loadPDF(fileParam);
+
+    // Local file picker binder
+    const picker = document.getElementById('localFilePicker');
+    picker.addEventListener('change', e => {
+        const file = e.target.files[0];
+        if (file) {
+            loadPDF(file);
+        }
+    });
+
+    // Sidebar search
+    document.getElementById('sidebarSearch').addEventListener('input', e => {
+        buildSidebar(e.target.value);
+    });
+
+    // Paging
+    document.getElementById('prevPageBtn').addEventListener('click', () => {
+        if (currentNum > 1) renderPage(currentNum - 1);
+    });
+    document.getElementById('nextPageBtn').addEventListener('click', () => {
+        if (currentNum < pdfDoc.numPages) renderPage(currentNum + 1);
+    });
+
+    // Tools setup
+    document.getElementById('toolDraw').addEventListener('click', () => {
+        activeTool = 'draw';
+        document.getElementById('toolDraw').classList.add('active');
+        document.getElementById('toolErase').classList.remove('active');
+        drawCanvas.style.cursor = 'crosshair';
+    });
+    document.getElementById('toolErase').addEventListener('click', () => {
+        activeTool = 'erase';
+        document.getElementById('toolErase').classList.add('active');
+        document.getElementById('toolDraw').classList.remove('active');
+        drawCanvas.style.cursor = 'cell';
+    });
+
+    // Straight line lock toggle
+    const lockBtn = document.getElementById('lockLineBtn');
+    lockBtn.classList.toggle('active', lockHorizontalLine);
+    lockBtn.addEventListener('click', () => {
+        lockHorizontalLine = !lockHorizontalLine;
+        lockBtn.classList.toggle('active', lockHorizontalLine);
+    });
+
+    // Color Swatch Selection
+    document.getElementById('colorPicker').addEventListener('click', e => {
+        const swatch = e.target.closest('.color-swatch');
+        if (!swatch) return;
+        document.querySelectorAll('.color-swatch').forEach(s => s.classList.remove('active'));
+        swatch.classList.add('active');
+        activeColor = swatch.dataset.color;
+    });
+
+    // Undo / Clear
+    document.getElementById('actionUndo').addEventListener('click', () => {
+        if (drawings[currentPath] && drawings[currentPath][currentNum]) {
+            drawings[currentPath][currentNum].pop();
+            redrawAnnotations();
+        }
+    });
+    document.getElementById('actionClear').addEventListener('click', () => {
+        if (confirm('Are you sure you want to clear all annotations on this page?')) {
+            if (drawings[currentPath] && drawings[currentPath][currentNum]) {
+                drawings[currentPath][currentNum] = [];
+                redrawAnnotations();
+            }
+        }
+    });
+
+    // Save
+    document.getElementById('actionSave').addEventListener('click', saveDrawings);
+
+    // Fullscreen Toggle
+    document.getElementById('actionFullscreen').addEventListener('click', () => {
+        if (!document.fullscreenElement) {
+            document.documentElement.requestFullscreen().catch(err => {
+                console.error(`Error attempting to enable fullscreen: ${err.message}`);
+            });
+        } else {
+            document.exitFullscreen();
+        }
+    });
+
+    document.addEventListener('fullscreenchange', () => {
+        const iconEl = document.getElementById('fullscreenIcon');
+        if (document.fullscreenElement) {
+            iconEl.setAttribute('data-lucide', 'minimize');
+        } else {
+            iconEl.setAttribute('data-lucide', 'maximize');
+        }
+        if (typeof lucide !== 'undefined') lucide.createIcons();
+    });
+
+    // Highlighter Type Dropdown change
+    document.getElementById('highlighterType').addEventListener('change', e => {
+        highlighterType = e.target.value;
+    });
+
+    // Mouse Draw binds
+    drawCanvas.addEventListener('mousedown', startDraw);
+    drawCanvas.addEventListener('mousemove', draw);
+    window.addEventListener('mouseup', endDraw);
+    drawCanvas.addEventListener('click', handleEraser);
+
+    // Mobile touch drawing binds
+    drawCanvas.addEventListener('touchstart', startDraw, { passive: false });
+    drawCanvas.addEventListener('touchmove', draw, { passive: false });
+    drawCanvas.addEventListener('touchend', endDraw);
+
+    // Init icons
+    if (typeof lucide !== 'undefined') lucide.createIcons();
+});
+</script>
+</body>
+</html>
+
