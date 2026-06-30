@@ -657,10 +657,12 @@ function loadDrawings() {
     drawings = JSON.parse(localStorage.getItem('pdf_annotations') || '{}');
     bookmarks = JSON.parse(localStorage.getItem('pdf_bookmarks') || '{}');
 }
-function saveDrawings() {
+function saveDrawings(showToast = true) {
     localStorage.setItem('pdf_annotations', JSON.stringify(drawings));
     localStorage.setItem('pdf_bookmarks', JSON.stringify(bookmarks));
-    showStatus('Document Annotations Saved!');
+    if (showToast) {
+        showStatus('Document Annotations Saved!');
+    }
 }
 
 function showStatus(text) {
@@ -1314,6 +1316,13 @@ document.addEventListener('DOMContentLoaded', () => {
     drawCanvas.addEventListener('touchend', endDraw);
 
     if (typeof lucide !== 'undefined') lucide.createIcons();
+
+    // Auto-save annotations silently every 5 seconds
+    setInterval(() => {
+        if (pdfDoc) {
+            saveDrawings(false);
+        }
+    }, 5000);
 });
 </script>
 </body>
