@@ -3,43 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aether Mocks</title>
+    <title>Mocks Wallah</title>
     <!-- Fonts & Icons -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    
+
     <!-- Central Stylesheet -->
     <link rel="stylesheet" href="../css/mock-main.css">
-    
+
     <!-- Math Formula Rendering (KaTeX/MathJax) -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    
+
     <!-- Timer Config -->
-    <meta name="exam-duration" content="60">
+    <meta name="exam-duration" content="56">
 </head>
 <body>
     <!-- Welcome Screen -->
     <div class="welcome-screen" id="welcomeScreen">
         <div class="welcome-container">
             <div class="welcome-header" style="margin-bottom: 24px;">
-                <h1 style="font-size: 2rem; font-weight: 700; color: #0f172a; margin-bottom: 8px;"><i class="fas fa-graduation-cap" style="color: #3b82f6;"></i> Aether Mocks</h1>
-                <p style="color: #64748b;">Computer Based Test Portal</p>
+                <h1 style="font-size: 2rem; font-weight: 700; color: var(--text-main); margin-bottom: 8px;"><i class="fas fa-graduation-cap" style="color: var(--primary);"></i> Mocks Wallah</h1>
+                <p style="color: var(--text-muted);">Computer Based Test Portal</p>
             </div>
-            
+
             <div class="test-details" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-bottom: 32px; text-align: left;">
-                <div class="detail-item" style="padding: 12px; background: #f8fafc; border-radius: 8px; border: 1px solid #e2e8f0;">
-                    <div class="detail-label" style="font-size: 0.8rem; color: #64748b;">Total Questions</div>
-                    <div class="detail-value" style="font-size: 1.1rem; font-weight: 600; color: #0f172a;">10</div>
+                <div class="detail-item" style="padding: 12px; background: var(--bg-color); border-radius: 8px; border: 1px solid var(--border-color);">
+                    <div class="detail-label" style="font-size: 0.8rem; color: var(--text-muted);">Total Questions</div>
+                    <div class="detail-value" style="font-size: 1.1rem; font-weight: 600; color: var(--text-main);">28</div>
                 </div>
-                <div class="detail-item" style="padding: 12px; background: #f8fafc; border-radius: 8px; border: 1px solid #e2e8f0;">
-                    <div class="detail-label" style="font-size: 0.8rem; color: #64748b;">Duration</div>
-                    <div class="detail-value" style="font-size: 1.1rem; font-weight: 600; color: #0f172a;">60 mins</div>
+                <div class="detail-item" style="padding: 12px; background: var(--bg-color); border-radius: 8px; border: 1px solid var(--border-color);">
+                    <div class="detail-label" style="font-size: 0.8rem; color: var(--text-muted);">Duration</div>
+                    <div class="detail-value" style="font-size: 1.1rem; font-weight: 600; color: var(--text-main);">56 mins</div>
                 </div>
             </div>
-            
+
             <div class="welcome-actions">
                 <button class="btn btn-primary" id="startBtn" onclick="document.getElementById('welcomeScreen').style.display='none'; document.getElementById('examContainer').style.display='flex';" style="font-size: 1.1rem; padding: 12px 32px; width: 100%;">
                     <i class="fas fa-play" style="margin-right: 8px;"></i> Start Test
@@ -47,12 +47,12 @@
             </div>
         </div>
     </div>
-    
+
     <!-- Main Exam Interface -->
     <div class="exam-container" id="examContainer" style="display: none; height: 100vh; flex-direction: column;">
         <!-- Top Header -->
         <div class="exam-header">
-            <div class="exam-title">Aether Mocks</div>
+            <div class="exam-title">Mocks Wallah</div>
             <div class="header-actions" style="display: flex; align-items: center; gap: 12px;">
                 <button class="btn-icon" id="themeToggleBtn" title="Switch to Dark Mode"><i class="fas fa-moon"></i></button>
                 <button class="btn-icon" id="fullscreenToggleBtn" title="Toggle Fullscreen"><i class="fas fa-expand"></i></button>
@@ -62,14 +62,14 @@
                 </div>
             </div>
         </div>
-        
+
         <!-- Main Content -->
         <div class="mock-container">
             <!-- Question Area -->
             <div class="question-view">
                 <!-- Dynamically populated question container -->
                 <div id="questionContainer" style="flex: 1; display: flex; flex-direction: column; gap: 24px;"></div>
-                
+
                 <!-- Controls -->
                 <div class="nav-controls">
                     <button class="btn btn-secondary btn-prev"><i class="fas fa-chevron-left" style="margin-right: 8px;"></i> Previous</button>
@@ -79,40 +79,377 @@
                     <button class="btn btn-primary btn-next">Next <i class="fas fa-chevron-right" style="margin-left: 8px;"></i></button>
                 </div>
             </div>
-            
+
             <!-- Desktop Navigator Sidebar -->
             <div class="sidebar">
                 <div class="sidebar-section-title">Summary Status</div>
                 <div class="stats-grid">
                     <div class="stat-item">
-                        <div class="stat-count" id="stat-answered" style="color: #10b981;">0</div>
+                        <div class="stat-count" id="stat-answered" style="color: var(--success);">0</div>
                         <div class="stat-name">Answered</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-count" id="stat-flagged" style="color: #f59e0b;">0</div>
+                        <div class="stat-count" id="stat-flagged" style="color: var(--warning);">0</div>
                         <div class="stat-name">Flagged</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-count" id="stat-not-answered" style="color: #64748b;">0</div>
+                        <div class="stat-count" id="stat-not-answered" style="color: var(--text-muted);">0</div>
                         <div class="stat-name">Unanswered</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-count" id="stat-not-visited" style="color: #94a3b8;">0</div>
+                        <div class="stat-count" id="stat-not-visited" style="color: var(--text-muted);">0</div>
                         <div class="stat-name">Not Visited</div>
                     </div>
                 </div>
-                
+
                 <div class="sidebar-section-title" style="margin-top: 16px;">Question Navigator</div>
                 <div class="questions-grid"></div>
             </div>
         </div>
     </div>
-    
+
     <!-- Inject Question Data -->
     <script>
-        const questions = [];
+        const questions = [
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\">1</span><span style=\"font-family: Cambria Math;\">. </span><span style=\"font-family: Cambria Math;\">Which of the following organizations releases the Global Innovation Index?&nbsp;</span></p>",
+    "options": [
+      "WEF",
+      "INSEAD, Cornell University, WIPO",
+      "UNDP",
+      "WTO"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">1</span><span style=\"font-family: Cambria Math;\">.(b)</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">The Global Innovation Index is an annual ranking of countries by their capacity and success in innovation. It was started in </span><span style=\"font-family: Cambria Math;\">2007 </span><span style=\"font-family: Cambria Math;\">by INSEAD and World Business. It was published by the World Intellectual Property Organization (WIPO).</span></p>",
+    "question_index": 0
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\">2</span><span style=\"font-family: Cambria Math;\">.</span><span style=\"font-family: Cambria Math;\"> The female devotee, Andal belonged to which part of India?&nbsp;</span></p>",
+    "options": [
+      "Western",
+      "Northern",
+      "Southern",
+      "North-eastern"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">2</span><span style=\"font-family: Cambria Math;\">.(c) </span><span style=\"font-family: Cambria Math;\">Andal belonged to the Southern part of India. She is the human incarnation of Goddess Bhudevi and the only female Alvar among the </span><span style=\"font-family: Cambria Math;\">12 </span><span style=\"font-family: Cambria Math;\">Alvar saints of South India. The Alvar saints are known for their affiliation to the Srivaishnava tradition of Hinduism.</span></p>",
+    "question_index": 1
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\">3</span><span style=\"font-family: Cambria Math;\">.</span><span style=\"font-family: Cambria Math;\"> Swami Vivekananda championed the supremacy of Vedantic philosophy in the Chicago (The US) Conference of World Religions held in the year ______.&nbsp;</span></p>",
+    "options": [
+      "1878",
+      "1893",
+      "1884",
+      "1898"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">3</span><span style=\"font-family: Cambria Math;\">.(b)</span><span style=\"font-family: Cambria Math;\"> Swami Vivekananda championed the supremacy of Vedantic philosophy in the Chicago (The US) Conference of World Religions held in the year </span><span style=\"font-family: Cambria Math;\">1893</span><span style=\"font-family: Cambria Math;\">. He was an Indian Hindu monk and philosopher. He was a key figure in the introduction of the Indian teachings of Vedanta to the Western world. </span></p>",
+    "question_index": 2
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\">4</span><span style=\"font-family: Cambria Math;\">. </span><span style=\"font-family: Cambria Math;\">The Ramon Magsaysay Award was established in the year ______.&nbsp;</span></p>",
+    "options": [
+      "1957",
+      "1982",
+      "1962",
+      "1965"
+    ],
+    "correct_option_id": 0,
+    "solution": "<p><span style=\\\"font-family: Cambria Math;\\\">4</span><span style=\\\"font-family: Cambria Math;\\\">.(a) </span><span style=\\\"font-family: Cambria Math;\\\">The Ramon Magsaysay Award was established in </span><span style=\\\"font-family: Cambria Math;\\\">1957</span><span style=\\\"font-family: Cambria Math;\\\">. </span><span style=\\\"font-family: Cambria Math;\\\">It is an annual award established to perpetuate former Philippine President Ramon Magsaysay\\'s example of integrity in governance, courageous service to the people, and pragmatic idealism within a democratic society.</span></p>",
+    "question_index": 3
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\">5</span><span style=\"font-family: Cambria Math;\">. </span><span style=\"font-family: Cambria Math;\">The ICTP Ramanujan Prize is awarded annually for excellence in ______.&nbsp;</span></p>",
+    "options": [
+      "Chemistry",
+      "Physics",
+      "Mathematics",
+      "Biology"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">5</span><span style=\"font-family: Cambria Math;\">.(c) </span><span style=\"font-family: Cambria Math;\">The ICTP Ramanujan Prize is awarded annually for excellence in Mathematics by </span><span style=\"font-family: Cambria Math;\">the International Centre for Theoretical Physics in Italy.</span><span style=\"font-family: Cambria Math;\"> The prize is named after the Indian mathematician Srinivasa Ramanujan. It was first awarded in </span><span style=\"font-family: Cambria Math;\">2005 </span><span style=\"font-family: Cambria Math;\">to Marcelo Viana.</span></p>",
+    "question_index": 4
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\">6</span><span style=\"font-family: Cambria Math;\">. </span><span style=\"font-family: Cambria Math;\">Which of the following is an award for contribution in the field of science and technology?&nbsp;</span></p>",
+    "options": [
+      "Deenanath Mangeshkar Award",
+      "Dronacharya Award",
+      "Jnanpith Award",
+      "Shanti Swarup Bhatnagar (SSB) Award"
+    ],
+    "correct_option_id": 3,
+    "solution": " <p><span style=\"font-family:Cambria Math\">6</span><span style=\"font-family:Cambria Math\">.(d) </span><span style=\"font-family:Cambria Math\">Shanti Swarup Bhatnagar (SSB) is an award for contribution in the field of science and technology. It is an award given annually by the Council of Scientific and Industrial Research (CSIR) for notable and outstanding research in the field of science and technology. It was first awarded in </span><span style=\"font-family:Cambria Math\">1958</span><span style=\"font-family:Cambria Math\">.</span></p>",
+    "question_index": 5
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\">7</span><span style=\"font-family: Cambria Math;\">. </span><span style=\"font-family: Cambria Math;\">The Arjuna Awards are given by the Ministry of Youth Affairs and Sports to recognise outstanding achievement in sports and games. It was instituted in ______. </span></p>",
+    "options": [
+      "1969",
+      "1956",
+      "1961",
+      "1947"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">7</span><span style=\"font-family: Cambria Math;\">.(c) </span><span style=\"font-family: Cambria Math;\">The&nbsp;Arjuna Awards&nbsp;are given by the Ministry of Youth Affairs and Sports to recognize outstanding achievements in sports and games. It was instituted&nbsp;in </span><span style=\"font-family: Cambria Math;\">1961</span><span style=\"font-family: Cambria Math;\">.</span></p>",
+    "question_index": 6
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\">8</span><span style=\"font-family: Cambria Math;\">. </span><span style=\"font-family: Cambria Math;\">Who among the following Sikh Gurus founded the Tarn Taran Sahib?&nbsp;</span></p>",
+    "options": [
+      "Guru Ram Das",
+      "Guru Arjan Dev",
+      "Guru Nanak Dev",
+      "Guru Gobind Sikh"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">8</span><span style=\"font-family: Cambria Math;\">.(b)</span><span style=\"font-family: Cambria Math;\"> The Tarn Taran Sahib was founded by the sikh guru, Guru Arjan Devji. He was the fifth Sikh Guru and laid the foundation of this city in </span><span style=\"font-family: Cambria Math;\">1596</span><span style=\"font-family: Cambria Math;\">.</span></p>",
+    "question_index": 7
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\">9</span><span style=\"font-family: Cambria Math;\">. </span><span style=\"font-family: Cambria Math;\">Who among the following developed the Polio vaccine?&nbsp;</span></p>",
+    "options": [
+      "Edward Jenner",
+      "Jonas Salk",
+      "FG Hopkins",
+      "Robert Koch"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">9</span><span style=\"font-family: Cambria Math;\">.(b)</span><span style=\"font-family: Cambria Math;\"> Jonas Salk developed the Polio vaccine. Salk vaccine contains killed poliovirus and is given by injection. Another polio vaccine is the Sabin vaccine which contains a live attenuated virus or weakened virus. Sabin vaccine is an oral polio vaccine. Edward Jenner developed the vaccine for smallpox and Robert Koch for Tuberculosis ( Tuberculin vaccine ). FG Hopkins discovered Vitamins.</span></p>",
+    "question_index": 8
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\">10</span><span style=\"font-family: Cambria Math;\">.</span><span style=\"font-family: Cambria Math;\"> Which of the following schemes is aimed at helping accelerate the uptake of broadband internet services?</span></p>",
+    "options": [
+      "PM-DHWANI",
+      "PM-WANI",
+      "PM-VAARTA",
+      "PM-INTERNET"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">10</span><span style=\"font-family: Cambria Math;\">.(b) </span><span style=\"font-family: Cambria Math;\">The PM-WANI framework envisages the provision of Broadband through Public Wi-Fi Hotspot providers. It will consist of elements such as Public Data Office (PDO), Public Data Office Aggregator (PDOA), App Provider and Central Registry.</span></p>",
+    "question_index": 9
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\">11</span><span style=\"font-family: Cambria Math;\">. </span><span style=\"font-family: Cambria Math;\">&lsquo;</span><span style=\"font-family: Cambria Math;\">Swasthya Sathi</span><span style=\"font-family: Cambria Math;\">&rsquo; </span><span style=\"font-family: Cambria Math;\">scheme is the health insurance scheme that covers the entire population of which of the following states?&nbsp;</span></p>",
+    "options": [
+      "Assam",
+      "West Bengal",
+      "Meghalaya",
+      "Bihar"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">11</span><span style=\"font-family: Cambria Math;\">.(b)</span><span style=\"font-family: Cambria Math;\"> Swasthya Sathi scheme is the health insurance scheme that covers the entire population of West Bengal. Under this scheme, basic health insurance cover up to Rs </span><span style=\"font-family: Cambria Math;\">5 </span><span style=\"font-family: Cambria Math;\">lakh is provided for both tertiary and secondary medical care for each family.</span><span style=\"font-family: Cambria Math;\"> </span></p>",
+    "question_index": 10
+  },
+  {
+    "question": "<p><span style=\\\"font-family: Cambria Math;\\\">12</span><span style=\\\"font-family: Cambria Math;\\\">.</span><span style=\\\"font-family: Cambria Math;\\\"> In connection with the issue of adoption of villages by parliamentarians, a scheme named </span><span style=\\\"font-family: Cambria Math;\\\">&lsquo;</span><span style=\\\"font-family: Cambria Math;\\\">SAGY</span><span style=\\\"font-family: Cambria Math;\\\">&rsquo; </span><span style=\\\"font-family: Cambria Math;\\\">was launched. What does the \\'A\\' in SAGY stand for?&nbsp;</span></p>",
+    "options": [
+      "Apna",
+      "Anubhav",
+      "Adarsh",
+      "Atma Nirbhar"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p><span style=\\\"font-family: Cambria Math;\\\">12</span><span style=\\\"font-family: Cambria Math;\\\">.(c) </span><span style=\\\"font-family: Cambria Math;\\\">In connection with the issue of the adoption of villages by parliamentarians, a scheme named </span><span style=\\\"font-family: Cambria Math;\\\">&lsquo;</span><span style=\\\"font-family: Cambria Math;\\\">SAGY</span><span style=\\\"font-family: Cambria Math;\\\">&rsquo; </span><span style=\\\"font-family: Cambria Math;\\\">was launched. The \\'A\\' in SAGY stands for Adarsh. Sansad Adarsh Gram Yojana (SAGY) is an initiative of the Indian Government, implemented for the growth and development of rural infrastructures.</span></p>",
+    "question_index": 11
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\">13</span><span style=\"font-family: Cambria Math;\">. </span><span style=\"font-family: Cambria Math;\">AMRUT scheme was launched under the sanitation programme in </span><span style=\"font-family: Cambria Math;\">2015</span><span style=\"font-family: Cambria Math;\">. What is the full form of AMRUT?&nbsp;</span></p>",
+    "options": [
+      "Atal Mission for Rejuvenation and Urban Transformation",
+      "Amar Mission for Renewable and Ultra Transmission",
+      "Aqua Mission for Renewable and Ultra Transformation",
+      "Aqua Mission for Rejuvenation and Urban Transmission"
+    ],
+    "correct_option_id": 0,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">13</span><span style=\"font-family: Cambria Math;\">.(a)</span><span style=\"font-family: Cambria Math;\"> The full form of AMRUT is Atal Mission for Rejuvenation and Urban Transformation. Jawaharlal Nehru National Urban Renewal Mission was renamed as AMRUT scheme in </span><span style=\"font-family: Cambria Math;\">2015 </span><span style=\"font-family: Cambria Math;\">with the focus to establish an infrastructure that could ensure adequate robust sewage networks and water supply for urban transformation by implementing urban revival projects.</span></p>",
+    "question_index": 12
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\">14</span><span style=\"font-family: Cambria Math;\">.</span><span style=\"font-family: Cambria Math;\"> When was the flagship scheme of Skill India Mission launched in India?&nbsp;</span></p>",
+    "options": [
+      "2019",
+      "2008",
+      "2015",
+      "2010"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">14</span><span style=\"font-family: Cambria Math;\">.(c) </span><span style=\"font-family: Cambria Math;\">The flagship scheme of Skill India Mission was launched in </span><span style=\"font-family: Cambria Math;\">2015</span><span style=\"font-family: Cambria Math;\">. Pradhan Mantri Kaushal Vikas Yojana (PMKVY) is the flagship scheme of the Ministry of Skill Development &amp; Entrepreneurship (MSDE) implemented by National Skill Development Corporation. </span></p>",
+    "question_index": 13
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\">15</span><span style=\"font-family: Cambria Math;\">.</span><span style=\"font-family: Cambria Math;\"> In which year was the </span><span style=\"font-family: Cambria Math;\">&lsquo;</span><span style=\"font-family: Cambria Math;\">Target Olympic Podium Scheme</span><span style=\"font-family: Cambria Math;\">&rsquo; </span><span style=\"font-family: Cambria Math;\">(</span><span style=\"font-family: Cambria Math;\">&lsquo;</span><span style=\"font-family: Cambria Math;\">TOPS</span><span style=\"font-family: Cambria Math;\">&rsquo;</span><span style=\"font-family: Cambria Math;\">) formulated by the Ministry of Youth Affairs and Sports?&nbsp;</span></p>",
+    "options": [
+      "2015",
+      "2014",
+      "2013",
+      "2016"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">15</span><span style=\"font-family: Cambria Math;\">.(b) </span><span style=\"font-family: Cambria Math;\">&lsquo;</span><span style=\"font-family: Cambria Math;\">Target Olympic Podium Scheme</span><span style=\"font-family: Cambria Math;\">&rsquo; </span><span style=\"font-family: Cambria Math;\">(</span><span style=\"font-family: Cambria Math;\">&lsquo;</span><span style=\"font-family: Cambria Math;\">TOPS</span><span style=\"font-family: Cambria Math;\">&rsquo;</span><span style=\"font-family: Cambria Math;\">) was formulated by the Ministry of Youth Affairs and Sports in </span><span style=\"font-family: Cambria Math;\">2014</span><span style=\"font-family: Cambria Math;\">. TOPS facilitates selected athletes with support staff and training personnel, sports psychologists, physiotherapists etc including direct financial support of </span><span style=\"font-family: Cambria Math;\">50,000 </span><span style=\"font-family: Cambria Math;\">rupees per month.</span></p>",
+    "question_index": 14
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\">16</span><span style=\"font-family: Cambria Math;\">.</span><span style=\"font-family: Cambria Math;\"> Unique Transaction Reference number is a ______ character code used to uniquely identify a transaction in the RTGS system.&nbsp;</span></p>",
+    "options": [
+      "17",
+      "34",
+      "22",
+      "45"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">16</span><span style=\"font-family: Cambria Math;\">.(c)</span><span style=\"font-family: Cambria Math;\"> Unique Transaction Reference(UTR) number is a </span><span style=\"font-family: Cambria Math;\">22 </span><span style=\"font-family: Cambria Math;\">character code used to uniquely identify a transaction in the RTGS system. </span></p>",
+    "question_index": 15
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\">17</span><span style=\"font-family: Cambria Math;\">.</span><span style=\"font-family: Cambria Math;\"> Which of the following is the application of sciences such as physics, chemistry, biology, computer science and engineering to matters of law and to the identification of various facts of civilian investigation?&nbsp;</span></p>",
+    "options": [
+      "Psychology",
+      "Morphology",
+      "Forensic science",
+      "Kalology"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">17</span><span style=\"font-family: Cambria Math;\">.(c) </span><span style=\"font-family: Cambria Math;\">Forensic science is the use of scientific methods or expertise to investigate crimes or examine evidence that might be presented in a court of law. Forensic science comprises a diverse array of disciplines, from fingerprint and DNA analysis to anthropology and wildlife forensics.</span></p>",
+    "question_index": 16
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\">18</span><span style=\"font-family: Cambria Math;\">. </span><span style=\"font-family: Cambria Math;\">Who among the following was the founder of Homeopathy?&nbsp;</span></p>",
+    "options": [
+      "Samuel Hahnemann",
+      "FG Hopkins",
+      "Robert Koch",
+      "Selman Waksman"
+    ],
+    "correct_option_id": 0,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">18</span><span style=\"font-family: Cambria Math;\">.(a)</span><span style=\"font-family: Cambria Math;\"> Samuel Hahnemann was the founder of Homeopathy. </span><span style=\"font-family: Cambria Math;\">Dr Hahnemann espoused the law of cure known as \"Similia Similibus Curentur\", or \"Like Cures Like\". It means that a remedy that produces symptoms in a healthy person will cure those with the same symptoms when manifested by a person in a diseased state.</span></p>",
+    "question_index": 17
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\">19</span><span style=\"font-family: Cambria Math;\">.</span><span style=\"font-family: Cambria Math;\"> Where is the famous pilgrim spot of Sikhs, Sri Harmandir Sahib located?&nbsp;</span></p>",
+    "options": [
+      "Patna",
+      "Manali",
+      "Jalandhar",
+      "Amritsar"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">19</span><span style=\"font-family: Cambria Math;\">.(d)</span><span style=\"font-family: Cambria Math;\"> The famous pilgrim spot of Sikhs, Sri Harmandir Sahib (Golden Temple), is located in Amritsar. The gurdwara was built by the fourth Sikh Guru, Guru Ram Das, in </span><span style=\"font-family: Cambria Math;\">1577</span><span style=\"font-family: Cambria Math;\">. In </span><span style=\"font-family: Cambria Math;\">1604</span><span style=\"font-family: Cambria Math;\">, Guru Arjan placed a copy of the Adi Granth in Harmandir Sahib.</span></p>",
+    "question_index": 18
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\">20</span><span style=\"font-family: Cambria Math;\">. </span><span style=\"font-family: Cambria Math;\">SIMBEX is a military exercise conducted between the defense forces of which of the following nations?&nbsp;</span></p>",
+    "options": [
+      "India and Thailand",
+      "India and Singapore",
+      "India and the US",
+      "India and Sri Lanka"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">20</span><span style=\"font-family: Cambria Math;\">.(b)</span><span style=\"font-family: Cambria Math;\"> SIMBEX is a military exercise conducted between the defense forces of India and Singapore. </span></p>\n<p><img src=\"data:image/png;base64,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\" width=\"341\" height=\"101\"></p>",
+    "question_index": 19
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\">21</span><span style=\"font-family: Cambria Math;\">. </span><span style=\"font-family: Cambria Math;\">Who among the following is the founder of the field of psychoanalysis?&nbsp;</span></p>",
+    "options": [
+      "Carl Jung",
+      "Kai T Erikson",
+      "Jean Piaget",
+      "Sigmund Freud"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">21</span><span style=\"font-family: Cambria Math;\">.(d) </span><span style=\"font-family: Cambria Math;\">Sigmund Freud is the founder of the field of psychoanalysis. </span></p>",
+    "question_index": 20
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\">22</span><span style=\"font-family: Cambria Math;\">. </span><span style=\"font-family: Cambria Math;\">The scientific study of birds is called ______.&nbsp;</span></p>",
+    "options": [
+      "ornithology",
+      "pomology",
+      "ichthyology",
+      "gerontology"
+    ],
+    "correct_option_id": 0,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">22</span><span style=\"font-family: Cambria Math;\">.(a)</span><span style=\"font-family: Cambria Math;\"> The scientific study of birds is called ornithology. Pomology studies fruit and its cultivation. Ichthyology is the study of fish. Gerontology is the study of the physical aspects of ageing, as well as the mental, social and societal implications of ageing.</span></p>\n<p><span style=\"font-family: Cambria Math;\"> </span></p>",
+    "question_index": 21
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\">23</span><span style=\"font-family: Cambria Math;\">.</span><span style=\"font-family: Cambria Math;\"> Which of the following is the largest sea bird with the longest wingspan?&nbsp;</span></p>",
+    "options": [
+      "Frigatebird",
+      "Booby",
+      "Wandering Albatross",
+      "Auk"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">23</span><span style=\"font-family: Cambria Math;\">.(c)</span><span style=\"font-family: Cambria Math;\"> Wandering Albatross is the largest sea bird with the longest wingspan of up to </span><span style=\"font-family: Cambria Math;\">11 </span><span style=\"font-family: Cambria Math;\">feet. </span></p>",
+    "question_index": 22
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\">24</span><span style=\"font-family: Cambria Math;\">.</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&lsquo;</span><span style=\"font-family: Cambria Math;\">Oolong</span><span style=\"font-family: Cambria Math;\">&rsquo; </span><span style=\"font-family: Cambria Math;\">is a variant of ______.&nbsp;</span></p>",
+    "options": [
+      "jute",
+      "tea",
+      "rubber",
+      "coffee"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">24</span><span style=\"font-family: Cambria Math;\">.(b)</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&lsquo;</span><span style=\"font-family: Cambria Math;\">Oolong</span><span style=\"font-family: Cambria Math;\">&rsquo; </span><span style=\"font-family: Cambria Math;\">is a variant of tea. It is a traditional semi-oxidized Chinese tea.</span></p>",
+    "question_index": 23
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\">25</span><span style=\"font-family: Cambria Math;\">. </span><span style=\"font-family: Cambria Math;\">In medicine, ______ is a device such as a small metal plate or needle that carries electricity from an instrument to a patient for treatment or surgery.&nbsp;</span></p>",
+    "options": [
+      "a venturimeter",
+      "an electrode",
+      "a machmeter",
+      "an electrolyte"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p><span style=\\\"font-family: Cambria Math;\\\">25</span><span style=\\\"font-family: Cambria Math;\\\">.(b) An electrode is a device such as a small metal plate or needle that carries electricity from an instrument to a patient for treatment or surgery. </span><span style=\\\"font-family: Cambria Math;\\\">Venturimeter is a type of flowmeter that works on the principle of Bernoulli\\'s Equation. It is widely used in the water, chemical, pharmaceutical, and oil &amp; gas industries to measure the flow rates of fluids inside a pipe. Electrolytes are minerals in our blood and other body fluids that carry an electric charge. Machmeter is </span><span style=\\\"font-family: Cambria Math;\\\">an instrument in an aircraft indicating airspeed as a Mach number.</span></p>",
+    "question_index": 24
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\">26</span><span style=\"font-family: Cambria Math;\">.</span><span style=\"font-family: Cambria Math;\"> Which of the following is a flightless bird?&nbsp;</span></p>",
+    "options": [
+      "Peacock",
+      "Crane",
+      "Hen",
+      "Kiwi"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">26</span><span style=\"font-family: Cambria Math;\">.(d) </span><span style=\"font-family: Cambria Math;\">Kiwi is a flightless bird. It has tiny wings, but cannot fly. It is the only bird in the world with nostrils at the end of its beak. </span></p>",
+    "question_index": 25
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\">27</span><span style=\"font-family: Cambria Math;\">. </span><span style=\"font-family: Cambria Math;\">BHIM App was introduced by Prime Minister Narendra Modi in _______.&nbsp;</span></p>",
+    "options": [
+      "15 August 2016",
+      "31 october 2016",
+      "26 January 2016",
+      "30 December 2016"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">27</span><span style=\"font-family: Cambria Math;\">.</span><span style=\"font-family: Cambria Math;\">(d)</span><span style=\"font-family: Cambria Math;\">BHIM (Bharat Interface for Money) is a mobile payment app developed by National Payments Corporation of India (NPCI) based on Unified Payments Interface (UPI). It was launched on </span><span style=\"font-family: Cambria Math;\">30 </span><span style=\"font-family: Cambria Math;\">December </span><span style=\"font-family: Cambria Math;\">2016 </span><span style=\"font-family: Cambria Math;\">by Prime Minister Narendra Modi at DigiDhan Mela at Talkatora Stadium in New Delhi.</span></p>",
+    "question_index": 26
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\">28</span><span style=\"font-family: Cambria Math;\">. </span><span style=\"font-family: Cambria Math;\">The rupee symbol, which was introduced in India in </span><span style=\"font-family: Cambria Math;\">2010</span><span style=\"font-family: Cambria Math;\">, is an amalgamation of the Devanagari </span><span style=\"font-family: Cambria Math;\">&lsquo;</span><span style=\"font-family: Cambria Math;\">Ra</span><span style=\"font-family: Cambria Math;\">&rsquo; </span><span style=\"font-family: Cambria Math;\">and the ______ </span><span style=\"font-family: Cambria Math;\">&lsquo;</span><span style=\"font-family: Cambria Math;\">R</span><span style=\"font-family: Cambria Math;\">&rsquo; </span><span style=\"font-family: Cambria Math;\">without the stem.&nbsp;</span></p>",
+    "options": [
+      "Roman",
+      "Ol Chiki",
+      "Cyrillic",
+      "Brahmi"
+    ],
+    "correct_option_id": 0,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">28</span><span style=\"font-family: Cambria Math;\">.(a)</span><span style=\"font-family: Cambria Math;\"> The rupee symbol is an amalgamation of the Devanagari </span><span style=\"font-family: Cambria Math;\">&lsquo;</span><span style=\"font-family: Cambria Math;\">Ra</span><span style=\"font-family: Cambria Math;\">&rsquo; </span><span style=\"font-family: Cambria Math;\">and the Roman </span><span style=\"font-family: Cambria Math;\">&lsquo;</span><span style=\"font-family: Cambria Math;\">R</span><span style=\"font-family: Cambria Math;\">&rsquo; </span><span style=\"font-family: Cambria Math;\">without the stem. </span></p>",
+    "question_index": 27
+  }
+];
     </script>
-    
+
     <!-- Central JS Controller -->
     <script src="../js/mock-core.js"></script>
 </body>

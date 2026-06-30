@@ -3,43 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aether Mocks</title>
+    <title>Mocks Wallah</title>
     <!-- Fonts & Icons -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    
+
     <!-- Central Stylesheet -->
     <link rel="stylesheet" href="../css/mock-main.css">
-    
+
     <!-- Math Formula Rendering (KaTeX/MathJax) -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    
+
     <!-- Timer Config -->
-    <meta name="exam-duration" content="60">
+    <meta name="exam-duration" content="30">
 </head>
 <body>
     <!-- Welcome Screen -->
     <div class="welcome-screen" id="welcomeScreen">
         <div class="welcome-container">
             <div class="welcome-header" style="margin-bottom: 24px;">
-                <h1 style="font-size: 2rem; font-weight: 700; color: #0f172a; margin-bottom: 8px;"><i class="fas fa-graduation-cap" style="color: #3b82f6;"></i> Aether Mocks</h1>
-                <p style="color: #64748b;">Computer Based Test Portal</p>
+                <h1 style="font-size: 2rem; font-weight: 700; color: var(--text-main); margin-bottom: 8px;"><i class="fas fa-graduation-cap" style="color: var(--primary);"></i> Mocks Wallah</h1>
+                <p style="color: var(--text-muted);">Computer Based Test Portal</p>
             </div>
-            
+
             <div class="test-details" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-bottom: 32px; text-align: left;">
-                <div class="detail-item" style="padding: 12px; background: #f8fafc; border-radius: 8px; border: 1px solid #e2e8f0;">
-                    <div class="detail-label" style="font-size: 0.8rem; color: #64748b;">Total Questions</div>
-                    <div class="detail-value" style="font-size: 1.1rem; font-weight: 600; color: #0f172a;">10</div>
+                <div class="detail-item" style="padding: 12px; background: var(--bg-color); border-radius: 8px; border: 1px solid var(--border-color);">
+                    <div class="detail-label" style="font-size: 0.8rem; color: var(--text-muted);">Total Questions</div>
+                    <div class="detail-value" style="font-size: 1.1rem; font-weight: 600; color: var(--text-main);">15</div>
                 </div>
-                <div class="detail-item" style="padding: 12px; background: #f8fafc; border-radius: 8px; border: 1px solid #e2e8f0;">
-                    <div class="detail-label" style="font-size: 0.8rem; color: #64748b;">Duration</div>
-                    <div class="detail-value" style="font-size: 1.1rem; font-weight: 600; color: #0f172a;">60 mins</div>
+                <div class="detail-item" style="padding: 12px; background: var(--bg-color); border-radius: 8px; border: 1px solid var(--border-color);">
+                    <div class="detail-label" style="font-size: 0.8rem; color: var(--text-muted);">Duration</div>
+                    <div class="detail-value" style="font-size: 1.1rem; font-weight: 600; color: var(--text-main);">30 mins</div>
                 </div>
             </div>
-            
+
             <div class="welcome-actions">
                 <button class="btn btn-primary" id="startBtn" onclick="document.getElementById('welcomeScreen').style.display='none'; document.getElementById('examContainer').style.display='flex';" style="font-size: 1.1rem; padding: 12px 32px; width: 100%;">
                     <i class="fas fa-play" style="margin-right: 8px;"></i> Start Test
@@ -47,12 +47,12 @@
             </div>
         </div>
     </div>
-    
+
     <!-- Main Exam Interface -->
     <div class="exam-container" id="examContainer" style="display: none; height: 100vh; flex-direction: column;">
         <!-- Top Header -->
         <div class="exam-header">
-            <div class="exam-title">Aether Mocks</div>
+            <div class="exam-title">Mocks Wallah</div>
             <div class="header-actions" style="display: flex; align-items: center; gap: 12px;">
                 <button class="btn-icon" id="themeToggleBtn" title="Switch to Dark Mode"><i class="fas fa-moon"></i></button>
                 <button class="btn-icon" id="fullscreenToggleBtn" title="Toggle Fullscreen"><i class="fas fa-expand"></i></button>
@@ -62,14 +62,14 @@
                 </div>
             </div>
         </div>
-        
+
         <!-- Main Content -->
         <div class="mock-container">
             <!-- Question Area -->
             <div class="question-view">
                 <!-- Dynamically populated question container -->
                 <div id="questionContainer" style="flex: 1; display: flex; flex-direction: column; gap: 24px;"></div>
-                
+
                 <!-- Controls -->
                 <div class="nav-controls">
                     <button class="btn btn-secondary btn-prev"><i class="fas fa-chevron-left" style="margin-right: 8px;"></i> Previous</button>
@@ -79,40 +79,221 @@
                     <button class="btn btn-primary btn-next">Next <i class="fas fa-chevron-right" style="margin-left: 8px;"></i></button>
                 </div>
             </div>
-            
+
             <!-- Desktop Navigator Sidebar -->
             <div class="sidebar">
                 <div class="sidebar-section-title">Summary Status</div>
                 <div class="stats-grid">
                     <div class="stat-item">
-                        <div class="stat-count" id="stat-answered" style="color: #10b981;">0</div>
+                        <div class="stat-count" id="stat-answered" style="color: var(--success);">0</div>
                         <div class="stat-name">Answered</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-count" id="stat-flagged" style="color: #f59e0b;">0</div>
+                        <div class="stat-count" id="stat-flagged" style="color: var(--warning);">0</div>
                         <div class="stat-name">Flagged</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-count" id="stat-not-answered" style="color: #64748b;">0</div>
+                        <div class="stat-count" id="stat-not-answered" style="color: var(--text-muted);">0</div>
                         <div class="stat-name">Unanswered</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-count" id="stat-not-visited" style="color: #94a3b8;">0</div>
+                        <div class="stat-count" id="stat-not-visited" style="color: var(--text-muted);">0</div>
                         <div class="stat-name">Not Visited</div>
                     </div>
                 </div>
-                
+
                 <div class="sidebar-section-title" style="margin-top: 16px;">Question Navigator</div>
                 <div class="questions-grid"></div>
             </div>
         </div>
     </div>
-    
+
     <!-- Inject Question Data -->
     <script>
-        const questions = [];
+        const questions = [
+  {
+    "question": "<p>1. The festival of &lsquo;Rath Yatra&rsquo; of Puri in Odisha is dedicated to which deity?</p>",
+    "options": [
+      "Lord Jagannath",
+      "Lord Ganesha",
+      "Lord Shiva",
+      "Lord Hanuman"
+    ],
+    "correct_option_id": 0,
+    "solution": "<p>1.(a) <strong>Lord Jagannath.</strong> Rath Yatra Festival : Celebrated on the second day of the bright fortnight in the month of Ashadha, this festival features a public procession with three large chariots carrying the deities Jagannath, Balabhadra, Subhadra. The chariots are pulled towards the Gundicha Temple, located about 3 kilometers away, where the deities stay for seven days before being returned to the main temple. Other festivals in Odisha : Raja Parba, Magha Saptmi, Nuakhai, Chatar Jatra.</p>",
+    "question_index": 0
+  },
+  {
+    "question": "Tera Tali folk dance is primarily associated with which of the following states? ",
+    "options": [
+      "Rajasthan",
+      "Assam",
+      "Madhya Pradesh",
+      "Haryana"
+    ],
+    "correct_option_id": 0,
+    "solution": "<p>2.(a) <strong>Rajasthan</strong>. Terah Tali Dance : This dance is performed in praise of the folk god Ramdevji, primarily by the Kamar tribe. During the performance, women sit on the ground and use thirteen cymbals on various body parts, synchronizing the swinging Manjeeras with the rhythm of the background music. Rajasthani folk dances : Chari, Ghoomar, Kalbelia, Kathputli dance and Gair folk dance.</p>",
+    "question_index": 1
+  },
+  {
+    "question": "<p>3. Identify the Indian classical dancer associated with Kathak.</p>",
+    "options": [
+      "Vedantam Satyanarayana Sarma",
+      "Kelucharan Mohapatra",
+      "Rohini Bhate",
+      "Sharodi Saikia"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p>3.(c) <strong>Rohini Bhate. </strong>She received the Sangeet Natak Akademi Award in 1979. Other Exponents : Kathak (Uttar Pradesh) - Pandit Birju Maharaj, Sonal Mansingh, Shambhu Maharaj. Kuchipudi (Andhra Pradesh) - Vedantam Satyanarayana Sarma, Mallika Sarabhai, Bhavana Reddy. Odissi (Odisha) - Kelucharan Mohapatra, Sanjukta Panigrahi, Gangadhar Pradhan. Sattriya (Assam) - Sharodi Saikia, Guru Jatin Goswami.</p>",
+    "question_index": 2
+  },
+  {
+    "question": "<p>4. In Pradhan Mantri Kisan Samman Nidhi Yojana, beneficiaries are provided with how much amount every year?</p>",
+    "options": [
+      "₹6,000",
+      "₹4,000",
+      "₹5,000",
+      "₹3,000"
+    ],
+    "correct_option_id": 0,
+    "solution": "<p>4.(a) <strong>₹6,000 -</strong> per year in three equal installments, every four months is transferred into the bank accounts of farmers&rsquo; families across the country through Direct Benefit Transfer (DBT) mode. Implemented by the Ministry of Agriculture and Farmers Welfare. Pradhan Mantri Kisan Samman Nidhi Yojana launched on 24th February, 2019.</p>",
+    "question_index": 3
+  },
+  {
+    "question": "<p>5. When was the pro kabaddi league inaugurated for the first time in India?</p>",
+    "options": [
+      "2007",
+      "2008",
+      "2015",
+      "2014"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p>5.(d) <strong>2014</strong>. The duration of the match is divided into two halves of 20 minutes each. The Kabaddi court measures 13 &times; 10 meters for men and 12 &times; 8 meters for women. The Women Kabaddi Challenge was first played in 2016. The 2019 Kabaddi World Cup was held in Malaysia. It is the largest World Cup in the history of kabaddi, consisting of 32 men&rsquo;s teams and 24 women&rsquo;s teams.</p>",
+    "question_index": 4
+  },
+  {
+    "question": "<p>6. In which year was the MPLADS scheme implemented?</p>",
+    "options": [
+      "2003",
+      "1983",
+      "1993",
+      "2013"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p>6.(c) <strong>1993</strong>. Objective : The Member of Parliament Local Area Development Scheme (MPLADS) aims to empower MPs to recommend developmental projects that focus on creating durable community assets in areas such as drinking water, primary education, public health, sanitation, and road infrastructure, primarily within their constituencies. Each year, MPs receive ₹5 crore in two installments of ₹2.5 crore each. Notably, the funds allocated under MPLADS are non-lapsable.</p>",
+    "question_index": 5
+  },
+  {
+    "question": "<p>7. Prabha Atre, who received the Padma Vibhushan Award 2022, belongs to which Gharana?</p>",
+    "options": [
+      "Indore gharana",
+      "Kirana gharana",
+      "Agra gharana",
+      "Mewati gharana"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p>7.(b) <strong>Kirana gharana.</strong> It was founded by Ustad Abdul Karim Khan. Famous artists such as Abdul Wahid Khan, Suresh Babu Mane, Hira Bai Badodekar and Roshanara Begum belong to this Gharana. Awards of Prabha Atre : Sangeet Natak Akademi Award (1991) for her contribution to Hindustani vocal music. Gharana and their Founders : Indore gharana (Amir Khan), Agra gharana (Hajisujan Khan), Mewati gharana (Ustad Wahid Khan and Ustad Ghagge Nazir Khan), Jaipur Atrauli (Alladiya Khan).</p>",
+    "question_index": 6
+  },
+  {
+    "question": "<p>8. Bhupen Hazarika was one of the most well-known personalities from the state of ___.</p>",
+    "options": [
+      "Odisha",
+      "Assam",
+      "Nagaland",
+      "Manipur"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p>8.(b) <strong>Assam</strong>. Bhupen Hazarika was a singer known for his baritone voice. He received the National Film Award for Best Music Direction in 1975, the Sangeet Natak Akademi Award (1987), Bharat Ratna (2019), Padma Vibhushan (2012), Padma Bhushan (2001), and Padma Shri (1977), Dada Saheb Phalke Award (1992), Asom Ratna (2009).</p>",
+    "question_index": 7
+  },
+  {
+    "question": "<p>9. Which of the following numbers best describes the number of white pieces used in chess?</p>",
+    "options": [
+      "18",
+      "16",
+      "19",
+      "17"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p>9.(b) <strong>16</strong>. There are six different types of chess pieces. Each side starts with 16 pieces : eight pawns, two bishops, two knights, two rooks, one queen, and one king. King : Moves one square in any direction. Queen : Moves any number of squares diagonally, horizontally, or vertically. Rook : Moves any number of squares horizontally or vertically. Bishop : Moves any number of squares diagonally. Knight : Moves in an \\'L-shape\\' (two squares in one direction and then one square perpendicular). Pawn : Moves one square forward (two squares on its first move) and captures diagonally one square forward.</p>",
+    "question_index": 8
+  },
+  {
+    "question": "<p>10. Paryushana festival is celebrated by the people of which of the following communities?</p>",
+    "options": [
+      "Jain",
+      "Muslim",
+      "Hindu",
+      "Sikh"
+    ],
+    "correct_option_id": 0,
+    "solution": "<p>10.(a) <strong>Jain</strong>. This 8-10 days festival inspires Jains worldwide to remember the roots and philosophies of Jainism. Celebrating paryushan also brings a social purpose as well. Other Religious festivals : Jain - Mahavir Jayanti, Rohini Vrat, Samvatsari, Meru Trayodashi etc. Muslim - Eid ul Fitr, Eid ul Adha, Ramadan, Muharram etc. Sikh - Hola Mohalla, Vaisakhi, Maghi etc. Hindu - Holi, Diwali, Rakshabndahn etc.</p>",
+    "question_index": 9
+  },
+  {
+    "question": "<p>11. Indira PP Bora is a Padma Shri Awardee 2020 for her contribution to which Indian classical dance?</p>",
+    "options": [
+      "Sattriya",
+      "Kathak",
+      "Kuchipudi",
+      "Bharatanatyam"
+    ],
+    "correct_option_id": 0,
+    "solution": "<p>11.(a) <strong>Sattriya</strong>. Indira P. P. Bora has won Sangeet Natak Akademi Award in 1996. Dance and their exponents : Sattriya - Sharodi Saikia, Guru Jatin Goswami, Guru Ghanakanta Bora, Manik Barbayan, Pushpa Bhuyan. Kathak - Pandit Birju Maharaj, Ishwari Prasad, Kumudini Lakhia, etc. Kuchipudi - Raja and Radha Reddy, Lakshmi Narayan Shastri, Swapna Sundari, etc. Bharatanatyam - Rukmini Devi Arundale, Meenakshi Sundaram Pillai, T Bala Saraswati, etc.</p>",
+    "question_index": 10
+  },
+  {
+    "question": "<p>12. Follow On is related to which of the following cricket formats?</p>",
+    "options": [
+      "Only T20 matches",
+      "Only Test Matches",
+      "Only One Day matches",
+      "Both test and One-day matches"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p>12.(b) <strong>Only Test Matches.</strong> Follow-on: The follow on forces the team batting second to bat again just after the original innings has finished. In a match of five days or more, a side which bats first and leads by at least 200 runs has the option of requiring the other side to follow-on.</p>",
+    "question_index": 11
+  },
+  {
+    "question": "<p>13. Who among the following is a Sarod player popularly known as \\'Sarod Samrat\\'?</p>",
+    "options": [
+      "Pandit Kishan Maharaj",
+      "Pandit Ravi Shankar",
+      "Ustad Amjad Ali Khan Bangash",
+      "Pandit Shivkumar Sharma"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p>13.(c) <strong>Ustad Amjad Ali Khan Bangash: </strong>Awards - Padma Shri (1975), Padma Bhushan (1991), Padma Vibhushan (2001). Other Sarod Players: Allauddin Khan, Hafiz Ali Khan, Ali Akbar Khan, Radhika Mohan Maitra, Sharan Rani Backliwal, Zarin Sharma, Buddhadev Das Gupta, Rajeev Taranath, Aashish Khan, Tejendra Majumdar etc.</p>",
+    "question_index": 12
+  },
+  {
+    "question": "<p>14. Which of the following festivals is celebrated in Madhya Pradesh?</p>",
+    "options": [
+      "Thaipusam Festival",
+      "Jaisalmer Desert Festival",
+      "Bihu Festival",
+      "Khajuraho Dance Festival"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p>14.(d) <strong>Khajuraho Dance Festival </strong>- Organized by the Kala Parishad of the Madhya Pradesh government. It is a seven-day long festival which usually takes place from the 20th of February to the 26th of February. It is held at Khajuraho temples. It was started in 1975. Some festivals which have been organized in Madhya Pradesh are Jal Mahotsav, Mandu Mahotsav, Orchha Mahotsav, Satpura Cycle Safari, Heritage Run.</p>",
+    "question_index": 13
+  },
+  {
+    "question": "<p>15. The Maharashtra Bhushan was conferred upon ___ in the year 2002.</p>",
+    "options": [
+      "Pandit Ravi Shankar",
+      "Pandit Bhimsen Joshi",
+      "Pandit Jasraj",
+      "Pandit Hari Prasad Chaurasia"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p>15.(b) <strong>Pandit Bhimsen Joshi. </strong>He belongs to the Kirana gharana tradition of Hindustani Classical Music. Awards - Bharat Ratna (2009), Padma Vibhushan (1999), Padma Bhushan (1985), Padma Shri (1972), Sangeet Natak Akademi Award for Hindustani vocal music (1975), Aditya Vikram Birla Kalashikhar Puraskar (2000).</p>",
+    "question_index": 14
+  }
+];
     </script>
-    
+
     <!-- Central JS Controller -->
     <script src="../js/mock-core.js"></script>
 </body>

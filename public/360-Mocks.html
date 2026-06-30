@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>360 Mocks — GK Challenge Arena</title>
+<meta name="description" content="Engaging 360-degree mock test arena covering history, geography, and general sciences.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800;900&family=Share+Tech+Mono&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --rose:#ec4899;--rose-glow:rgba(236,72,153,0.3);
+  --dark:#0b0f19;--dark-card:#131a2e;--dark-border:#212e52;
+  --cyber-blue:#06b6d4;--cyber-blue-glow:rgba(6,182,212,0.3);
+  --text:#e2e8f0;--sub:#94a3b8;--muted:#475569;
+  --success:#10b981;
+  --r:10px;
+}
+html{font-family:'Rajdhani',sans-serif;-webkit-font-smoothing:antialiased}
+body{background:var(--dark);color:var(--text);min-height:100vh;overflow-x:hidden}
+
+/* ── Cyber Header ── */
+.header{
+  border-bottom: 2px solid var(--rose);
+  background: var(--dark-card);
+  padding: 1rem 2rem;
+  box-shadow: 0 0 15px var(--rose-glow);
+}
+.header-inner{
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+.brand{
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+}
+.brand-logo{
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--rose);
+  border: 2px solid var(--rose);
+  padding: 4px 10px;
+  box-shadow: 0 0 10px var(--rose-glow);
+  background: rgba(236,72,153,0.05);
+}
+.brand-text h1{
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1.3rem;
+  font-weight: 800;
+  letter-spacing: .05em;
+  color: #fff;
+}
+.brand-text p{
+  font-family: 'Share Tech Mono', monospace;
+  font-size: .7rem;
+  color: var(--cyber-blue);
+  letter-spacing: .15em;
+}
+.back-btn{
+  font-family: 'Share Tech Mono', monospace;
+  font-size: .8rem;
+  color: var(--cyber-blue);
+  text-decoration: none;
+  border: 1px solid var(--cyber-blue);
+  padding: 6px 15px;
+  transition: all .2s;
+  background: rgba(6,182,212,0.05);
+  box-shadow: 0 0 5px var(--cyber-blue-glow);
+}
+.back-btn:hover{
+  background: var(--cyber-blue);
+  color: var(--dark);
+  box-shadow: 0 0 15px var(--cyber-blue);
+}
+
+/* ── Content Grid ── */
+.container{
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2.5rem 2rem;
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 2.5rem;
+}
+
+/* ── Cyber Panel ── */
+.panel{
+  background: var(--dark-card);
+  border: 1px solid var(--dark-border);
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
+}
+.panel-title{
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1rem;
+  font-weight: 800;
+  color: var(--rose);
+  border-left: 3px solid var(--rose);
+  padding-left: .5rem;
+  letter-spacing: .05em;
+}
+.search-input{
+  width: 100%;
+  padding: .6rem;
+  background: var(--dark);
+  border: 1px solid var(--dark-border);
+  font-family: 'Share Tech Mono', monospace;
+  font-size: .8rem;
+  color: #fff;
+  outline: none;
+  transition: border-color .2s;
+}
+.search-input:focus{
+  border-color: var(--cyber-blue);
+  box-shadow: 0 0 8px var(--cyber-blue-glow);
+}
+.filter-list{
+  display: flex;
+  flex-direction: column;
+  gap: .4rem;
+}
+.filter-item{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: .5rem;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: .8rem;
+  color: var(--sub);
+  background: rgba(255,255,255,0.02);
+  border: 1px solid var(--dark-border);
+  text-align: left;
+  cursor: pointer;
+  transition: all .2s;
+}
+.filter-item:hover{
+  border-color: var(--cyber-blue);
+  color: #fff;
+}
+.filter-item.active{
+  border-color: var(--rose);
+  background: rgba(236,72,153,0.08);
+  color: #fff;
+  box-shadow: 0 0 8px rgba(236,72,153,0.15);
+}
+.item-count{
+  font-size: .7rem;
+  background: var(--dark);
+  border: 1px solid var(--dark-border);
+  padding: 1px 5px;
+}
+.filter-item.active .item-count{
+  border-color: var(--rose);
+  color: var(--rose);
+}
+
+.stats-cyber{
+  border: 1px solid var(--dark-border);
+  background: rgba(0,0,0,0.3);
+  padding: 1rem;
+}
+.stat-row{
+  display: flex;
+  justify-content: space-between;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: .8rem;
+  margin-bottom: .4rem;
+}
+.stat-val{
+  font-weight: 700;
+  color: #fff;
+}
+.stat-val.rose{
+  color: var(--rose);
+}
+.stat-progress{
+  margin-top: .75rem;
+  height: 4px;
+  background: var(--dark);
+}
+.stat-bar{
+  height: 100%;
+  background: linear-gradient(90deg, var(--rose), var(--cyber-blue));
+  width: 0%;
+  transition: width .5s;
+}
+
+/* ── Arena Cards Grid ── */
+.arena-content{
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+.toolbar{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--dark-border);
+  padding-bottom: .75rem;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: .8rem;
+}
+.sort-select{
+  background: var(--dark-card);
+  border: 1px solid var(--dark-border);
+  color: var(--text);
+  padding: .3rem .5rem;
+  font-family: inherit;
+  outline: none;
+}
+.arena-grid{
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.25rem;
+}
+.challenge-card{
+  background: var(--dark-card);
+  border: 1px solid var(--dark-border);
+  padding: 1.5rem;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 200px;
+  transition: all .25s;
+}
+.challenge-card::after{
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; height: 3px;
+  background: var(--dark-border);
+  transition: background .2s;
+}
+.challenge-card:hover{
+  border-color: var(--cyber-blue);
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(6,182,212,0.1);
+}
+.challenge-card:hover::after{
+  background: var(--cyber-blue);
+}
+.card-subj{
+  font-family: 'Share Tech Mono', monospace;
+  font-size: .75rem;
+  color: var(--cyber-blue);
+  letter-spacing: .05em;
+  margin-bottom: .5rem;
+}
+.card-title{
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 1.2rem;
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 1rem;
+}
+.card-meta{
+  font-family: 'Share Tech Mono', monospace;
+  font-size: .7rem;
+  color: var(--sub);
+  margin-bottom: 1.25rem;
+}
+.card-footer{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: .5rem;
+}
+.done-toggle{
+  width: 32px;
+  height: 32px;
+  background: transparent;
+  border: 1px solid var(--dark-border);
+  color: var(--muted);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all .2s;
+}
+.done-toggle:hover{
+  border-color: var(--rose);
+  color: var(--rose);
+}
+.done-toggle.done{
+  background: var(--rose);
+  border-color: var(--rose);
+  color: var(--dark);
+  box-shadow: 0 0 8px var(--rose-glow);
+}
+.launch-btn{
+  flex: 1;
+  height: 32px;
+  font-family: 'Orbitron', sans-serif;
+  font-size: .75rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: #fff;
+  background: var(--cyber-blue);
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  transition: all .2s;
+}
+.launch-btn:hover{
+  background: #0891b2;
+  box-shadow: 0 0 12px var(--cyber-blue);
+}
+
+.lm-wrap{
+  display: flex;
+  justify-content: center;
+  margin-top: 1.5rem;
+}
+.lm-btn{
+  font-family: 'Orbitron', sans-serif;
+  font-size: .8rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  padding: .6rem 1.75rem;
+  background: transparent;
+  border: 1px solid var(--rose);
+  color: var(--rose);
+  cursor: pointer;
+  transition: all .2s;
+  box-shadow: 0 0 5px var(--rose-glow);
+}
+.lm-btn:hover{
+  background: var(--rose);
+  color: var(--dark);
+  box-shadow: 0 0 15px var(--rose);
+}
+
+.empty{
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 4rem 2rem;
+  border: 1px dashed var(--dark-border);
+  background: var(--dark-card);
+}
+.empty-t{
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: var(--rose);
+  margin-bottom: .25rem;
+}
+.empty-s{
+  font-family: 'Share Tech Mono', monospace;
+  font-size: .8rem;
+  color: var(--sub);
+}
+
+@media(max-width: 800px){
+  .container{
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+}
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="header-inner">
+    <div class="brand">
+      <div class="brand-logo">360</div>
+      <div class="brand-text">
+        <h1>360 Mocks</h1>
+        <p>GK Challenge Arena</p>
+      </div>
+    </div>
+    <a href="index.html" class="back-btn">
+      All Portals
+    </a>
+  </div>
+</header>
+
+<div class="container">
+  <aside class="panel">
+    <div>
+      <div class="panel-title">System Search</div>
+      <div style="margin-top: .75rem;">
+        <input type="text" class="search-input" id="searchInput" placeholder="Enter keywords…">
+      </div>
+    </div>
+
+    <div>
+      <div class="panel-title">Challenge Sectors</div>
+      <div class="filter-list" id="catList" style="margin-top: .75rem;"></div>
+    </div>
+
+    <div class="stats-cyber">
+      <div class="stat-row"><span>Missions Active</span><span class="stat-val" id="statTotal">—</span></div>
+      <div class="stat-row"><span>Missions Cleared</span><span class="stat-val rose" id="statDone">—</span></div>
+      <div class="stat-row"><span>Completion Index</span><span class="stat-val" id="statPct">0%</span></div>
+      <div class="stat-progress">
+        <div class="stat-bar" id="statBar"></div>
+      </div>
+    </div>
+  </aside>
+
+  <main class="arena-content">
+    <div class="toolbar">
+      <span id="resultsCount">System Ready…</span>
+      <select class="sort-select" id="sortSelect">
+        <option value="name-asc">Sort Name (A-Z)</option>
+        <option value="name-desc">Sort Name (Z-A)</option>
+      </select>
+    </div>
+
+    <div class="arena-grid" id="arenaGrid"></div>
+
+    <div class="lm-wrap" id="lmWrap" style="display:none">
+      <button class="lm-btn" id="lmBtn">Load More Missions</button>
+    </div>
+  </main>
+</div>
+
+<script src="mocks-data.js"></script>
+<script src="js/provider-page.js"></script>
+<script>
+const page = new ProviderPage({
+  providerKey: '360 Mocks',
+  limit: 24,
+  onUpdate({ mocks, total, hasMore, stats, append }) {
+    document.getElementById('statTotal').textContent = stats.total;
+    document.getElementById('statDone').textContent = stats.done;
+    document.getElementById('statPct').textContent = stats.pct + '%';
+    document.getElementById('statBar').style.width = stats.pct + '%';
+    document.getElementById('resultsCount').innerHTML = `Found <strong>${total}</strong> operational mock runs`;
+    document.getElementById('lmWrap').style.display = hasMore ? 'flex' : 'none';
+
+    const grid = document.getElementById('arenaGrid');
+    if (!append) grid.innerHTML = '';
+    if (mocks.length === 0 && !append) {
+      grid.innerHTML = `<div class="empty">
+        <div class="empty-t">No missions matches search pattern</div>
+        <div class="empty-s">Readjust search coordinates and retry.</div>
+      </div>`;
+      return;
+    }
+
+    mocks.forEach(m => {
+      const done = page.isDone(m.path);
+      const card = document.createElement('div');
+      card.className = 'challenge-card';
+      card.innerHTML = `
+        <div>
+          <div class="card-subj">${htmlEnc(m.subject)}</div>
+          <div class="card-title" title="${htmlEnc(m.name)}">${htmlEnc(m.name)}</div>
+          <div class="card-meta">
+            Sector: ${htmlEnc(m.category.replace(/\.html$/i, ''))}
+          </div>
+        </div>
+        <div class="card-footer">
+          <button class="done-toggle ${done ? 'done' : ''}" data-path="${htmlEnc(m.path)}">
+            <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+              <polyline points="20 6 9 17 4 12"/>
+            </svg>
+          </button>
+          <a class="launch-btn" href="${htmlEnc(m.path)}" target="_blank">Launch Run</a>
+        </div>
+      `;
+      grid.appendChild(card);
+    });
+  }
+});
+
+// Categories list
+(function() {
+  const list = document.getElementById('catList');
+  const allBtn = document.createElement('button');
+  allBtn.className = 'filter-item active';
+  allBtn.dataset.cat = 'all';
+  allBtn.innerHTML = `<span>All Sectors</span><span class="item-count">${page._all.length}</span>`;
+  list.appendChild(allBtn);
+
+  page.categories.forEach(c => {
+    const count = page._all.filter(m => m.category === c).length;
+    const btn = document.createElement('button');
+    btn.className = 'filter-item';
+    btn.dataset.cat = c;
+    const name = c.replace(/\.html$/i, '');
+    btn.innerHTML = `<span title="${htmlEnc(name)}">${htmlEnc(name)}</span><span class="item-count">${count}</span>`;
+    list.appendChild(btn);
+  });
+
+  list.addEventListener('click', e => {
+    const btn = e.target.closest('.filter-item');
+    if (!btn) return;
+    list.querySelectorAll('.filter-item').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    page.category(btn.dataset.cat);
+  });
+})();
+
+document.getElementById('searchInput').addEventListener('input', e => page.search(e.target.value));
+document.getElementById('sortSelect').addEventListener('change', e => page.sort(e.target.value));
+document.getElementById('lmBtn').addEventListener('click', () => page.more());
+document.getElementById('arenaGrid').addEventListener('click', e => {
+  const btn = e.target.closest('.done-toggle');
+  if (!btn) return;
+  btn.classList.toggle('done', page.toggle(btn.dataset.path));
+});
+
+page.refresh();
+</script>
+</body>
+</html>

@@ -3,43 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aether Mocks</title>
+    <title>Mocks Wallah</title>
     <!-- Fonts & Icons -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    
+
     <!-- Central Stylesheet -->
     <link rel="stylesheet" href="../css/mock-main.css">
-    
+
     <!-- Math Formula Rendering (KaTeX/MathJax) -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    
+
     <!-- Timer Config -->
-    <meta name="exam-duration" content="60">
+    <meta name="exam-duration" content="30">
 </head>
 <body>
     <!-- Welcome Screen -->
     <div class="welcome-screen" id="welcomeScreen">
         <div class="welcome-container">
             <div class="welcome-header" style="margin-bottom: 24px;">
-                <h1 style="font-size: 2rem; font-weight: 700; color: #0f172a; margin-bottom: 8px;"><i class="fas fa-graduation-cap" style="color: #3b82f6;"></i> Aether Mocks</h1>
-                <p style="color: #64748b;">Computer Based Test Portal</p>
+                <h1 style="font-size: 2rem; font-weight: 700; color: var(--text-main); margin-bottom: 8px;"><i class="fas fa-graduation-cap" style="color: var(--primary);"></i> Mocks Wallah</h1>
+                <p style="color: var(--text-muted);">Computer Based Test Portal</p>
             </div>
-            
+
             <div class="test-details" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-bottom: 32px; text-align: left;">
-                <div class="detail-item" style="padding: 12px; background: #f8fafc; border-radius: 8px; border: 1px solid #e2e8f0;">
-                    <div class="detail-label" style="font-size: 0.8rem; color: #64748b;">Total Questions</div>
-                    <div class="detail-value" style="font-size: 1.1rem; font-weight: 600; color: #0f172a;">10</div>
+                <div class="detail-item" style="padding: 12px; background: var(--bg-color); border-radius: 8px; border: 1px solid var(--border-color);">
+                    <div class="detail-label" style="font-size: 0.8rem; color: var(--text-muted);">Total Questions</div>
+                    <div class="detail-value" style="font-size: 1.1rem; font-weight: 600; color: var(--text-main);">15</div>
                 </div>
-                <div class="detail-item" style="padding: 12px; background: #f8fafc; border-radius: 8px; border: 1px solid #e2e8f0;">
-                    <div class="detail-label" style="font-size: 0.8rem; color: #64748b;">Duration</div>
-                    <div class="detail-value" style="font-size: 1.1rem; font-weight: 600; color: #0f172a;">60 mins</div>
+                <div class="detail-item" style="padding: 12px; background: var(--bg-color); border-radius: 8px; border: 1px solid var(--border-color);">
+                    <div class="detail-label" style="font-size: 0.8rem; color: var(--text-muted);">Duration</div>
+                    <div class="detail-value" style="font-size: 1.1rem; font-weight: 600; color: var(--text-main);">30 mins</div>
                 </div>
             </div>
-            
+
             <div class="welcome-actions">
                 <button class="btn btn-primary" id="startBtn" onclick="document.getElementById('welcomeScreen').style.display='none'; document.getElementById('examContainer').style.display='flex';" style="font-size: 1.1rem; padding: 12px 32px; width: 100%;">
                     <i class="fas fa-play" style="margin-right: 8px;"></i> Start Test
@@ -47,12 +47,12 @@
             </div>
         </div>
     </div>
-    
+
     <!-- Main Exam Interface -->
     <div class="exam-container" id="examContainer" style="display: none; height: 100vh; flex-direction: column;">
         <!-- Top Header -->
         <div class="exam-header">
-            <div class="exam-title">Aether Mocks</div>
+            <div class="exam-title">Mocks Wallah</div>
             <div class="header-actions" style="display: flex; align-items: center; gap: 12px;">
                 <button class="btn-icon" id="themeToggleBtn" title="Switch to Dark Mode"><i class="fas fa-moon"></i></button>
                 <button class="btn-icon" id="fullscreenToggleBtn" title="Toggle Fullscreen"><i class="fas fa-expand"></i></button>
@@ -62,14 +62,14 @@
                 </div>
             </div>
         </div>
-        
+
         <!-- Main Content -->
         <div class="mock-container">
             <!-- Question Area -->
             <div class="question-view">
                 <!-- Dynamically populated question container -->
                 <div id="questionContainer" style="flex: 1; display: flex; flex-direction: column; gap: 24px;"></div>
-                
+
                 <!-- Controls -->
                 <div class="nav-controls">
                     <button class="btn btn-secondary btn-prev"><i class="fas fa-chevron-left" style="margin-right: 8px;"></i> Previous</button>
@@ -79,40 +79,221 @@
                     <button class="btn btn-primary btn-next">Next <i class="fas fa-chevron-right" style="margin-left: 8px;"></i></button>
                 </div>
             </div>
-            
+
             <!-- Desktop Navigator Sidebar -->
             <div class="sidebar">
                 <div class="sidebar-section-title">Summary Status</div>
                 <div class="stats-grid">
                     <div class="stat-item">
-                        <div class="stat-count" id="stat-answered" style="color: #10b981;">0</div>
+                        <div class="stat-count" id="stat-answered" style="color: var(--success);">0</div>
                         <div class="stat-name">Answered</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-count" id="stat-flagged" style="color: #f59e0b;">0</div>
+                        <div class="stat-count" id="stat-flagged" style="color: var(--warning);">0</div>
                         <div class="stat-name">Flagged</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-count" id="stat-not-answered" style="color: #64748b;">0</div>
+                        <div class="stat-count" id="stat-not-answered" style="color: var(--text-muted);">0</div>
                         <div class="stat-name">Unanswered</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-count" id="stat-not-visited" style="color: #94a3b8;">0</div>
+                        <div class="stat-count" id="stat-not-visited" style="color: var(--text-muted);">0</div>
                         <div class="stat-name">Not Visited</div>
                     </div>
                 </div>
-                
+
                 <div class="sidebar-section-title" style="margin-top: 16px;">Question Navigator</div>
                 <div class="questions-grid"></div>
             </div>
         </div>
     </div>
-    
+
     <!-- Inject Question Data -->
     <script>
-        const questions = [];
+        const questions = [
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\">What </span><span style=\"font-family: Cambria Math;\">is the age criteria</span><span style=\"font-family: Cambria Math;\"> for the subscribers of Atal Pension Yojana?</span></p>\n",
+    "options": [
+      "20 - 30 Years",
+      "25 - 35 Years",
+      "18 - 40 Years",
+      "40 - 60 Years"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">1</span><span style=\"font-family: Cambria Math;\">.(</span><span style=\"font-family: Cambria Math;\">c) <strong>18-40 Years. Atal Pension Yojana </strong>-</span><span style=\"font-family: Cambria Math;\"> Launched in 2015 under Ministry of Finance and administered by Pension Fund Regulatory and Development Authority (PFRDA), mainly focused on providing old age securi</span><span style=\"font-family: Cambria Math;\">ty to the unorganized workers. A minimum guaranteed pension for the subscribers ranging between Rs.1000 - Rs. 5000, depending upon his contribution, at the age of 60 years. </span><span style=\"font-family: Cambria Math;\"><strong>Other pension schemes</strong> </span><span style=\"font-family: Cambria Math;\">for senior citizens - National Pension System (2004), Pradhan</span><span style=\"font-family: Cambria Math;\"> Mantri Vaya Vandana Yojana (2017), Varishtha Pension Bima Yojana (2014), National Social Assistance Programme (1995).</span></p>\n",
+    "question_index": 0
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\">How many main styles of Chhau folk dance exist?</span></p>\n",
+    "options": [
+      "7",
+      "3",
+      "9",
+      "5"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">2</span><span style=\"font-family: Cambria Math;\">.(</span><span style=\"font-family: Cambria Math;\">b) 3. </span><span style=\"font-family: Cambria Math;\"><strong>Chhau </strong>- </span><span style=\"font-family: Cambria Math;\">A classical Indian dance with martial, tribal and folk traditions, with origins in eastern India (Jharkhand, West Bengal and Odisha).</span><span style=\"font-family: Cambria Math;\"> The dancer remains mute, with no singing involved. </span><span style=\"font-family: Cambria Math;\"><strong>Types of Chhau dance forms</strong> - </span><span style=\"font-family: Cambria Math;\">Saraikela (Jharkhand), Mayurbhanj (Orissa)</span><span style=\"font-family: Cambria Math;\"> and Purulia (West Bengal). The dance was inscribed in the UNESCO&rsquo;s Representative List of the Intangible Cultural Heritage of Humanity in 2010.</span></p>\n",
+    "question_index": 1
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\">FTX Crypto Cup is associated with which of the following sports events?</span></p>\n",
+    "options": [
+      "Snooker",
+      "Chess",
+      "Billiards",
+      "Golf"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p><span style=\\\"font-family: Cambria Math;\\\">3</span><span style=\\\"font-family: Cambria Math;\\\">.(</span><span style=\\\"font-family: Cambria Math;\\\">b) <strong>Chess. Sports with other Cups/Trophies: Snooker</strong> - </span><span style=\\\"font-family: Cambria Math;\\\">World Snooker Championship, Scottish Open, World Grand Prix. </span><span style=\\\"font-family: Cambria Math;\\\"><strong>Billiards </strong>-</span><span style=\\\"font-family: Cambria Math;\\\"> Arthur Walker Trophy.</span><span style=\\\"font-family: Cambria Math;\\\"> </span><span style=\\\"font-family: Cambria Math;\\\"><strong>Golf </strong>- </span><span style=\\\"font-family: Cambria Math;\\\">Ryder Cup, Walker Cup, Solheim Cu</span><span style=\\\"font-family: Cambria Math;\\\">p, Prince of Wales Cup.</span><span style=\\\"font-family: Cambria Math;\\\"> </span><span style=\\\"font-family: Cambria Math;\\\"><strong>Polo </strong>-</span><span style=\\\"font-family: Cambria Math;\\\"> Ezar Cup, President Cup.</span><span style=\\\"font-family: Cambria Math;\\\"> </span><span style=\\\"font-family: Cambria Math;\\\"><strong>Tennis </strong>- </span><span style=\\\"font-family: Cambria Math;\\\">Ambre Solaire Cup, ATP President\\'s Cup, Watson\\'s Water Trophy, Wightman Cup.</span><span style=\\\"font-family: Cambria Math;\\\"> </span><span style=\\\"font-family: Cambria Math;\\\"><strong>Football </strong>-</span><span style=\\\"font-family: Cambria Math;\\\"> African Nations Cup, McDowell Cup, Merdeka Cup.</span><span style=\\\"font-family: Cambria Math;\\\"> </span></p>\\n",
+    "question_index": 2
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\"> Shivaputra Siddaramaiah Komkalimath is the original name of which of the following Indian classical singers?</span></p>\n",
+    "options": [
+      "Pandit Omkarnath Thakur",
+      "Pandit Kumar Gandharva",
+      "Pandit Jasraj",
+      "Pandit Dinkar Kaikini"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">4</span><span style=\"font-family: Cambria Math;\">.(</span><span style=\"font-family: Cambria Math;\">b) <strong>Pandit Kumar Gandharva. Awards</strong> </span><span style=\"font-family: Cambria Math;\">- Padma</span><span style=\"font-family: Cambria Math;\"> Vibhushan (1990). </span><strong><span style=\"font-family: Cambria Math;\">Pandit Omkarnath Thakur </span></strong><span style=\"font-family: Cambria Math;\">(Pranav Rang) - An influential Indian educator, musicologist and Hindustani Classical Vocalist.</span><span style=\"font-family: Cambria Math;\"> Pandit Jasraj</span><span style=\"font-family: Cambria Math;\"> (Rasr</span><span style=\"font-family: Cambria Math;\">aj) - An Indian Classical vocalist and was associated with Mewati Gharana. <strong>Other </strong></span><span style=\"font-family: Cambria Math;\"><strong>famous Indian classical singers</strong> - </span><span style=\"font-family: Cambria Math;\">M.S. </span><span style=\"font-family: Cambria Math;\">Subbulakshmi, Gangubai Hangal, Kesarbai Kerkar, Pandit Bhimsen Joshi, Ustad Bade Ghulam Ali Khan, K. J. Yesudas, Shubha Mudgal.</span></p>\n",
+    "question_index": 3
+  },
+  {
+    "question": "<p>5.<span style=\"font-family: Cambria Math;\"> Someity is related to which of the following events?</span></p>\n",
+    "options": [
+      "Tokyo Olympics 2020",
+      "Winter Olympics 2022 ",
+      "Commonwealth games 2022",
+      "Tokyo paralympic 2020"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p><span style=\\\"font-family: Cambria Math;\\\">5.(</span><span style=\\\"font-family: Cambria Math;\\\">d) <strong>Tokyo Paralympics 2020.</strong> </span><span style=\\\"font-family: Cambria Math;\\\">Someity - is the official mascot of the 2020 Summer Paralympics, Tokyo. </span><span style=\\\"font-family: Cambria Math;\\\">Someity,</span><span style=\\\"font-family: Cambria Math;\\\"> is a figure with pink-checkered patterns inspired by cherry blossoms and also the Games\\' official logo. Someity is named after someiyoshino,</span><span style=\\\"font-family: Cambria Math;\\\"> a type of cherry blossom. Miraitowa - The official mascot of the 2020 Summer Olympics</span><span style=\\\"font-family: Cambria Math;\\\">,Tokyo</span><span style=\\\"font-family: Cambria Math;\\\">. </span><span style=\\\"font-family: Cambria Math;\\\">Miraitowa,</span><span style=\\\"font-family: Cambria Math;\\\"> is a figure with blue-checkered patterns inspired by the Games\\' official logo. </span></p>\\n",
+    "question_index": 4
+  },
+  {
+    "question": "<p>6. <span style=\"font-family: Cambria Math;\">Pandit Kishan Maharaj of Benaras Gharana was a __________ player.</span></p>\n",
+    "options": [
+      "santoor ",
+      "flute",
+      "sarangi",
+      "tabla"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">6.(</span><span style=\"font-family: Cambria Math;\">d) <strong>Tabla</strong></span><span style=\"font-family: Cambria Math;\">. </span><span style=\"font-family: Cambria Math;\">Awards of Kishan Maharaj - Padma Shri (1973), Padma Vibhushan (2002).</span><span style=\"font-family: Cambria Math;\"> Hariprasad Chaurasia (Padma Bhushan in 1992, Padma Vibhushan in 2000) - An Indian music director and classical flutist. Pandit Shivkumar Sharma (Padma Shri in 1991, and Padma Vibhushan</span><span style=\"font-family: Cambria Math;\"> in 2001) - Santoor player. Ram Narayan (Padma Shri in 1976, Padma Bhushan in 1991, and Padma Vibhushan in 2005) - Sarangi player.</span></p>\n",
+    "question_index": 5
+  },
+  {
+    "question": "<p><span style=\\\"font-family: Cambria Math;\\\">The </span><span style=\\\"font-family: Cambria Math;\\\">term \\'Straight drive\\' is related to which of the following sports?</span></p>\\n",
+    "options": [
+      "Hockey ",
+      "Cricket ",
+      "Football",
+      "Badminton\\r\\n "
+    ],
+    "correct_option_id": 1,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">7</span><span style=\"font-family: Cambria Math;\">.(</span><span style=\"font-family: Cambria Math;\">b) <strong>Cricket</strong>. </span><span style=\"font-family: Cambria Math;\">Other </span><span style=\"font-family: Cambria Math;\">terminologies :</span><span style=\"font-family: Cambria Math;\"> Cricket- Beamer, Belter, Chinaman, Chucker, Dolly, Doosra, Duck, Googly, Maiden, Mankad, Nurdle, Paddle etc. Hockey - Center forward, Forward, Boarding, Goaltender, Hockey Puck, Snapshot. Football </span><span style=\"font-family: Cambria Math;\">- Kick</span><span style=\"font-family: Cambria Math;\">, Goal, He</span><span style=\"font-family: Cambria Math;\">ad, Penalty kick, Dribble, Offside, Move, Hattrick, Foul, Left out, Right out, Stopper. </span><span style=\"font-family: Cambria Math;\">Badminton - Back Alley, Backcourt, Baseline.</span><span style=\"font-family: Cambria Math;\"> </span></p>\n",
+    "question_index": 6
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\">The Sikhs celebrate Bandi Chhorh Divas which coincides with which Hindu festival?</span></p>\n",
+    "options": [
+      "Ganesh Chaturthi",
+      "Holi",
+      "Diwali",
+      "Dussehra"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">8</span><span style=\"font-family: Cambria Math;\">.(</span><span style=\"font-family: Cambria Math;\">c) <strong>Diwali</strong>.</span><span style=\"font-family: Cambria Math;\"> Bandi Chhor Divas - A Sikh celebration that commemorates the day on which, the sixth Guru of Sikhs, Guru Hargobind released 52 prisoners from Gwalior Fort, who had been imprisoned by Mughal Emperor Jahangir. Emperor Jahangir had held 52 Kings at Gwalior. </span><span style=\"font-family: Cambria Math;\">Other Sikh Festivals - Muktsar Mela, Parkash Utsav Dasveh Patshah, Holla Mohalla, Gurpurab.</span></p>\n",
+    "question_index": 7
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">Under the PL 480 scheme, India used to import whea</span><span style=\"font-family: Cambria Math;\">t from which country?</span></p>\n",
+    "options": [
+      "USSR ",
+      "USA",
+      "France",
+      "UK"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">9</span><span style=\"font-family: Cambria Math;\">.(</span><span style=\"font-family: Cambria Math;\">b) <strong>USA</strong>. </span><span style=\"font-family: Cambria Math;\">After independence, India relied on food crop supplies from the United States under Public Law 480 (PL-480) against rupee payments. The P. L. 480 agreements aim at supply of surplus agricultural commodities from the U.S.A.</span></p>\n",
+    "question_index": 8
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\">10</span><span style=\"font-family: Cambria Math;\">.</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">Kalakshetra style is associated with w</span><span style=\"font-family: Cambria Math;\">hich Indian classical dance form?</span></p>\n",
+    "options": [
+      "Odissi ",
+      "Kathak",
+      "Kuchipudi",
+      "Bharatanatyam"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">10</span><span style=\"font-family: Cambria Math;\">.(d) <strong>Bharatanatyam. Features</strong></span><span style=\"font-family: Cambria Math;\"><strong>:</strong>-</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">It encompasses Bhav, Rag, Ras and Taal. Its three important features are Nritta (pure dance, solo)</span><span style=\"font-family: Cambria Math;\">,Natya</span><span style=\"font-family: Cambria Math;\"> (dramatic dance, group) and Nritya (dance with emotions, solo). It consists of six portions: Alarippu (Invocation), Jath</span><span style=\"font-family: Cambria Math;\">iswaram (Nritta part), Shabdam (Short compositions with word), Varnam (a </span><span style=\"font-family: Cambria Math;\">story, that</span><span style=\"font-family: Cambria Math;\"> includes both Nritta and Nritya), Padam (Religious prayer, Bhajan, Keerthanam) and Tillana (Origin in the Tarana of Hindustani Music).</span></p>\n",
+    "question_index": 9
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\">11</span><span style=\"font-family: Cambria Math;\">. </span><span style=\"font-family: Cambria Math;\">V Satyanarayana Sarma, a Padma Shri awardee, was recognised for which of the followin</span><span style=\"font-family: Cambria Math;\">g dance forms?</span></p>\n",
+    "options": [
+      "Odissi",
+      "Bharatanatyam",
+      "Kathak",
+      "Kuchipudi"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">11</span><span style=\"font-family: Cambria Math;\">.(</span><span style=\"font-family: Cambria Math;\">d) <strong>Kuchipudi. </strong></span><span style=\"font-family: Cambria Math;\"><strong>Awards </strong>:</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">Sangeet Natak Akademi Award (1961),</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">Padma Shri (1970), Sangeet Natak Akademi Ratna (1967), Kalidas Samman (1988). </span><span style=\"font-family: Cambria Math;\">A dance-drama performance, with its roots in the ancient Hindu Sanskrit text of Natya Shastra.</span><span style=\"font-family: Cambria Math;\"> It originates</span><span style=\"font-family: Cambria Math;\"> from a village named Kuchipudi in Andhra Pradesh. </span><span style=\"font-family: Cambria Math;\">Famous Dancers of Kuchipudi - Indrani Bajpai, Yamini Krishnamurthy, Lakshmi Narayn Shastri.</span></p>\n",
+    "question_index": 10
+  },
+  {
+    "question": "<p><span style=\\\"font-family: Cambria Math;\\\">12</span><span style=\\\"font-family: Cambria Math;\\\">. </span><span style=\\\"font-family: Cambria Math;\\\">Which of the following cities of Nepal does NOT have a branch of \\'Indian Citizen\\'s Association of Nepal\\'?</span></p>\\n",
+    "options": [
+      "Pokhara",
+      "Lalitpur",
+      "Bhairahawa",
+      "Damak"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p><span style=\\\"font-family: Cambria Math;\\\">12</span><span style=\\\"font-family: Cambria Math;\\\">.(b) <strong>Lalitpur</strong>. </span><span style=\\\"font-family: Cambria Math;\\\">An Indian Citizens\\' Association (ICA) of Nepal was fo</span><span style=\\\"font-family: Cambria Math;\\\">rmed on 14 September 1990. This is the only association of resident Indian Citizens of Nepal, and presently the Kathmandu unit of the Association has 462 members. They also have branches at Pokhara, Damak and Bhairahawa. The Swami Vivekananda Centre for In</span><span style=\\\"font-family: Cambria Math;\\\">dian Culture was set up in Kathmandu in 2008 to showcase the best of Indian culture. The Nepal-Bharat Library was founded in 1951 in Kathmandu. The India-Nepal Treaty of Peace and Friendship of 1950 forms the bedrock of the special relations that exist bet</span><span style=\\\"font-family: Cambria Math;\\\">ween India and Nepal.</span></p>\\n",
+    "question_index": 11
+  },
+  {
+    "question": "<p>13<span style=\"font-family: Cambria Math;\">.</span><span style=\"font-family: Cambria Math;\"> The first modern Olympic Games was held in the year_________</span></p>\n",
+    "options": [
+      "1894",
+      "1892",
+      "1896",
+      "1900"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p>13<span style=\\\"font-family: Cambria Math;\\\">.(c) <strong>1896</strong>.</span><span style=\\\"font-family: Cambria Math;\\\"> First modern Olympics held at Athens. The first Winter Games were held in Chamonix (France), in </span><span style=\\\"font-family: Cambria Math;\\\">1924 .</span><span style=\\\"font-family: Cambria Math;\\\"> </span><span style=\\\"font-family: Cambria Math;\\\">2024 Olympics - Paris.</span><span style=\\\"font-family: Cambria Math;\\\"> </span><span style=\\\"font-family: Cambria Math;\\\"> </span><span style=\\\"font-family: Cambria Math;\\\">2028 Olympics - Los Angeles (USA).</span><span style=\\\"font-family: Cambria Math;\\\"> K D Jadhav was India\\'s first wrestler from independent India to win an individual medal in the Olympics (In 1952 Helsinki). </span></p>\\n",
+    "question_index": 12
+  },
+  {
+    "question": "<p>14<span style=\\\"font-family: Cambria Math;\\\">.</span><span style=\\\"font-family: Cambria Math;\\\"> In which month of the Islamic calendar is \\'Ramadan\\'</span><span style=\\\"font-family: Cambria Math;\\\">,a</span><span style=\\\"font-family: Cambria Math;\\\"> </span><span style=\\\"font-family: Cambria Math;\\\">holy time when Muslims around the world fast and focus their attention on giving to charity (known as Zakat), observed?</span></p>\\n",
+    "options": [
+      "Ninth",
+      "Second",
+      "Seventh",
+      "Sixth"
+    ],
+    "correct_option_id": 0,
+    "solution": "<p>14<span style=\"font-family: Cambria Math;\">.(a) <strong>Ninth</strong>.</span><span style=\"font-family: Cambria Math;\"> Ramadan begins and ends with the appearance of the crescent moon. </span><span style=\"font-family: Cambria Math;\">Islamic months-</span><span style=\"font-family: Cambria Math;\"> (1) Muharram, (2) Safar, (3) Rabi al-Awwal, (4) Rabi al-Thani, (5) Jumada al-Awwal, (6) Jumada al-Thani, (7) Rajab, (8) Shaban, (9) Ramadan, (10) Shawwal, (11) Dhu al-Qadah, (12) Dhu al-Hijjah (month of Hajj). Other festivals of </span><span style=\"font-family: Cambria Math;\">muslims</span><span style=\"font-family: Cambria Math;\">: Muharram, Eid a</span><span style=\"font-family: Cambria Math;\">l-Adha, Eid al-Fitr, Mawlid an-Nabi and Eid ul-Azha.</span></p>\n",
+    "question_index": 13
+  },
+  {
+    "question": "<p>15<span style=\"font-family: Cambria Math;\">. </span><span style=\"font-family: Cambria Math;\">Padma Shri awardee, Darshana Jhaveri is a___________dancer of India.</span></p>\n",
+    "options": [
+      "Kathakali",
+      "Bharatanatyam",
+      "Kathak",
+      "Manipuri"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p>15<span style=\"font-family: Cambria Math;\">.(d) <strong>Manipuri</strong>.</span><span style=\"font-family: Cambria Math;\"> Darshana Jhaveri is the you</span><span style=\"font-family: Cambria Math;\">ngest of the four Jhaveri sisters (Nayana, Ranjana, Suverna, and Darshana). She is one of the founders of the Manipuri Narthanalaya established in 1972. Awards: Sangeet Natak Akademi Award (1996), Padma Shri (2002). </span><span style=\"font-family: Cambria Math;\">Other Manipuri dancers - Yumlembam Gambh</span><span style=\"font-family: Cambria Math;\">ini Devi, Guru Bipin Singh (Father of Manipuri Dance).</span></p>\n",
+    "question_index": 14
+  }
+];
     </script>
-    
+
     <!-- Central JS Controller -->
     <script src="../js/mock-core.js"></script>
 </body>

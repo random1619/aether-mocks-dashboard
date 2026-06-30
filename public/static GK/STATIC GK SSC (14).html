@@ -3,43 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aether Mocks</title>
+    <title>Mocks Wallah</title>
     <!-- Fonts & Icons -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    
+
     <!-- Central Stylesheet -->
     <link rel="stylesheet" href="../css/mock-main.css">
-    
+
     <!-- Math Formula Rendering (KaTeX/MathJax) -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    
+
     <!-- Timer Config -->
-    <meta name="exam-duration" content="60">
+    <meta name="exam-duration" content="30">
 </head>
 <body>
     <!-- Welcome Screen -->
     <div class="welcome-screen" id="welcomeScreen">
         <div class="welcome-container">
             <div class="welcome-header" style="margin-bottom: 24px;">
-                <h1 style="font-size: 2rem; font-weight: 700; color: #0f172a; margin-bottom: 8px;"><i class="fas fa-graduation-cap" style="color: #3b82f6;"></i> Aether Mocks</h1>
-                <p style="color: #64748b;">Computer Based Test Portal</p>
+                <h1 style="font-size: 2rem; font-weight: 700; color: var(--text-main); margin-bottom: 8px;"><i class="fas fa-graduation-cap" style="color: var(--primary);"></i> Mocks Wallah</h1>
+                <p style="color: var(--text-muted);">Computer Based Test Portal</p>
             </div>
-            
+
             <div class="test-details" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-bottom: 32px; text-align: left;">
-                <div class="detail-item" style="padding: 12px; background: #f8fafc; border-radius: 8px; border: 1px solid #e2e8f0;">
-                    <div class="detail-label" style="font-size: 0.8rem; color: #64748b;">Total Questions</div>
-                    <div class="detail-value" style="font-size: 1.1rem; font-weight: 600; color: #0f172a;">10</div>
+                <div class="detail-item" style="padding: 12px; background: var(--bg-color); border-radius: 8px; border: 1px solid var(--border-color);">
+                    <div class="detail-label" style="font-size: 0.8rem; color: var(--text-muted);">Total Questions</div>
+                    <div class="detail-value" style="font-size: 1.1rem; font-weight: 600; color: var(--text-main);">15</div>
                 </div>
-                <div class="detail-item" style="padding: 12px; background: #f8fafc; border-radius: 8px; border: 1px solid #e2e8f0;">
-                    <div class="detail-label" style="font-size: 0.8rem; color: #64748b;">Duration</div>
-                    <div class="detail-value" style="font-size: 1.1rem; font-weight: 600; color: #0f172a;">60 mins</div>
+                <div class="detail-item" style="padding: 12px; background: var(--bg-color); border-radius: 8px; border: 1px solid var(--border-color);">
+                    <div class="detail-label" style="font-size: 0.8rem; color: var(--text-muted);">Duration</div>
+                    <div class="detail-value" style="font-size: 1.1rem; font-weight: 600; color: var(--text-main);">30 mins</div>
                 </div>
             </div>
-            
+
             <div class="welcome-actions">
                 <button class="btn btn-primary" id="startBtn" onclick="document.getElementById('welcomeScreen').style.display='none'; document.getElementById('examContainer').style.display='flex';" style="font-size: 1.1rem; padding: 12px 32px; width: 100%;">
                     <i class="fas fa-play" style="margin-right: 8px;"></i> Start Test
@@ -47,12 +47,12 @@
             </div>
         </div>
     </div>
-    
+
     <!-- Main Exam Interface -->
     <div class="exam-container" id="examContainer" style="display: none; height: 100vh; flex-direction: column;">
         <!-- Top Header -->
         <div class="exam-header">
-            <div class="exam-title">Aether Mocks</div>
+            <div class="exam-title">Mocks Wallah</div>
             <div class="header-actions" style="display: flex; align-items: center; gap: 12px;">
                 <button class="btn-icon" id="themeToggleBtn" title="Switch to Dark Mode"><i class="fas fa-moon"></i></button>
                 <button class="btn-icon" id="fullscreenToggleBtn" title="Toggle Fullscreen"><i class="fas fa-expand"></i></button>
@@ -62,14 +62,14 @@
                 </div>
             </div>
         </div>
-        
+
         <!-- Main Content -->
         <div class="mock-container">
             <!-- Question Area -->
             <div class="question-view">
                 <!-- Dynamically populated question container -->
                 <div id="questionContainer" style="flex: 1; display: flex; flex-direction: column; gap: 24px;"></div>
-                
+
                 <!-- Controls -->
                 <div class="nav-controls">
                     <button class="btn btn-secondary btn-prev"><i class="fas fa-chevron-left" style="margin-right: 8px;"></i> Previous</button>
@@ -79,40 +79,221 @@
                     <button class="btn btn-primary btn-next">Next <i class="fas fa-chevron-right" style="margin-left: 8px;"></i></button>
                 </div>
             </div>
-            
+
             <!-- Desktop Navigator Sidebar -->
             <div class="sidebar">
                 <div class="sidebar-section-title">Summary Status</div>
                 <div class="stats-grid">
                     <div class="stat-item">
-                        <div class="stat-count" id="stat-answered" style="color: #10b981;">0</div>
+                        <div class="stat-count" id="stat-answered" style="color: var(--success);">0</div>
                         <div class="stat-name">Answered</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-count" id="stat-flagged" style="color: #f59e0b;">0</div>
+                        <div class="stat-count" id="stat-flagged" style="color: var(--warning);">0</div>
                         <div class="stat-name">Flagged</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-count" id="stat-not-answered" style="color: #64748b;">0</div>
+                        <div class="stat-count" id="stat-not-answered" style="color: var(--text-muted);">0</div>
                         <div class="stat-name">Unanswered</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-count" id="stat-not-visited" style="color: #94a3b8;">0</div>
+                        <div class="stat-count" id="stat-not-visited" style="color: var(--text-muted);">0</div>
                         <div class="stat-name">Not Visited</div>
                     </div>
                 </div>
-                
+
                 <div class="sidebar-section-title" style="margin-top: 16px;">Question Navigator</div>
                 <div class="questions-grid"></div>
             </div>
         </div>
     </div>
-    
+
     <!-- Inject Question Data -->
     <script>
-        const questions = [];
+        const questions = [
+  {
+    "question": "<p>1. With which of the following states is the Bhatiali folk music, which is mostly sung by&nbsp;the fishermen, associated ?</p>",
+    "options": [
+      "Kerala",
+      "Andhra Pradesh",
+      "West Bengal",
+      "Odisha"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p>1.(c) <strong>West Bengal. </strong>Bhatiali music is a river song characterized by its soulful and melancholic tunes, reflecting the lives and struggles of the fishermen community. Other folk music of West Bengal: Baul, Bhawaia, Kirtan, Gambhira, Shyama Sangeet, Lalon Geeti. Other States and their folk music: Kerala - Kathakali Music, Mappila Pattu, Ottamthullal Songs, Sopanam, Kolkali. Andhra Pradesh - Madiga Dappu, Mala Jamidika. Odisha - Avanti, Panchali, Odramagadhi.</p>",
+    "question_index": 0
+  },
+  {
+    "question": "<p>2. National Institute of Mountaineering and Adventure Sports (NIMAS) is located at_______</p>",
+    "options": [
+      "Nagaland",
+      "Arunachal Pradesh",
+      "Mizoram",
+      "Himachal Pradesh"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p>2.(b) <strong>Arunachal Pradesh.</strong> NIMAS was established in 2013 and is located in the picturesque Dirang Valley within the West Kameng district of Arunachal Pradesh. Other Mountaineering Institutes in India: Himalayan Mountaineering Institute, Darjeeling (West Bengal). National Institute of Mountaineering and Adventure Sports, Dirang (Arunachal Pradesh). Indian Institute of Skiing and Mountaineering (IISM) Gulmarg (Kashmir). Atal Bihari Vajpayee Institute of Mountaineering and Allied Sports, Manali (Himachal Pradesh).</p>",
+    "question_index": 1
+  },
+  {
+    "question": "<p>3. Which of the following states/UTs has the first 100% fully digital literate Panchayat in India ?</p>",
+    "options": [
+      "Kerala",
+      "Puducherry",
+      "Maharashtra",
+      "Delhi"
+    ],
+    "correct_option_id": 0,
+    "solution": "<p>3.(a) <strong>Kerala.</strong> Pullampara grama panchayat in Thiruvananthapuram has become the first digitally literate panchayat in Kerala. The Digi Pullampara project was started on August 15, 2021.</p>",
+    "question_index": 2
+  },
+  {
+    "question": "<p>4. Langvir Nritya is a folk dance from the state of________</p>",
+    "options": [
+      "Gujarat",
+      "Uttar Pradesh",
+      "Uttarakhand",
+      "Haryana"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p>4.(c) <strong>Uttarakhand.</strong> Langvir Nritya is a dance form practiced by only men. The dancers use a long bamboo pole. States and their Folk dances : Gujarat - Garba and Dandiya Raas. Haryana - Phalgun dance, Luur dance, Daf dance, Gugga dance, and Khoria dance. Uttar Pradesh - Charkula, Rasiya, Nautanki.</p>",
+    "question_index": 3
+  },
+  {
+    "question": "<p>5. How many squares are there on a chessboard ?</p>",
+    "options": [
+      "67",
+      "68",
+      "64",
+      "69"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p>5.(c) <strong>64. </strong>A standard chessboard consists of 8 rows and 8 columns, resulting in a total of 64 squares. This is calculated by multiplying the number of rows by the number of columns (8 &times; 8 = 64).</p>",
+    "question_index": 4
+  },
+  {
+    "question": "<p>6. Daler Mehndi is primarily a famous singer of pop songs in which Indian language ?</p>",
+    "options": [
+      "Punjabi",
+      "English",
+      "Bengali",
+      "Hindi"
+    ],
+    "correct_option_id": 0,
+    "solution": "<p>6.(a) <strong>Punjabi. </strong>Daler Mehndi (King of Bhangra). Other notable Punjabi singers : Diljit Dosanjh, Mikka Singh, Sukhbir Singh, Gurdas Maan, Hans Raj Hans, and Babbu Maan, Sukhwinder Singh.</p>",
+    "question_index": 5
+  },
+  {
+    "question": "<p>7. In which year has India hosted the Asian Games for the first time ?</p>",
+    "options": [
+      "1949",
+      "1948",
+      "1951",
+      "1950"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p>7.(c) <strong>1951 </strong>(New Delhi). Motto: The motto for the first Asian Games was \"Ever Onward,\" reflecting the spirit of progress and unity among Asian nations. The second time India hosted Asian games was in 1982.</p>",
+    "question_index": 6
+  },
+  {
+    "question": "<p>8. Average function is listed in the drop-down menu of which of the following tools ?</p>",
+    "options": [
+      "Move function",
+      "Insert function",
+      "Financial function",
+      "Auto Sum function"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p>8.(d) <strong>Auto Sum function. </strong>The Average function is typically listed in the AutoSum function drop-down menu in spreadsheet software like Microsoft Excel. The AutoSum function provides a quick way to calculate common functions like Sum, Average, Count, Max, and Min.</p>",
+    "question_index": 7
+  },
+  {
+    "question": "<p>9. Sakewa is a religious festival celebrated by the Kirat Khambu Rai community of _______.</p>",
+    "options": [
+      "Arunachal Pradesh",
+      "Goa",
+      "Sikkim",
+      "Himachal Pradesh"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p>9.(c)<strong> Sikkim.</strong> \\'Sakewa\\' is an annual festival and is celebrated as a tribute to mother nature. The rituals for this particular festival are performed in an open space, which is also known as Bhoomi Puja or Chandi Puja. Other important festivals of Sikkim: Losung, Drupka Tesh, Bumchu, Saga Dawa, Dasin and Phang Lhabsol .</p>",
+    "question_index": 8
+  },
+  {
+    "question": "<p>10. Where can you find the emoticons in an instant messaging conversation window ?</p>",
+    "options": [
+      "At the bottom of the chat window",
+      "Any where in the chat window",
+      "At the middle of the chat window",
+      "At the top of the chat window"
+    ],
+    "correct_option_id": 0,
+    "solution": "<p>10.(a)&nbsp;<strong>At the bottom of the chat window. </strong>In most instant messaging platforms, emoticons are typically found at the bottom of the chat window, alongside the text input field. This allows users to easily access and insert emoticons into their messages. A common layout: Chat conversation (top), Text input field (bottom), Emoticon button/icon (bottom, near the text input field).</p>",
+    "question_index": 9
+  },
+  {
+    "question": "<p>11. Which of the following is NOT a stringed instrument ?</p>",
+    "options": [
+      "Mandolin",
+      "Guitar",
+      "Flute",
+      "Violin"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p>11.(c) <strong>Flute </strong>is a wind instrument where sound is produced by vibration of the air column inside it. Instruments without strings include the tabla, drums, and harmonium. Instruments with strings include the guitar, cello, banjo, ukulele, and harp.</p>",
+    "question_index": 10
+  },
+  {
+    "question": "<p>12. Which of the following is NOT one of the main pillars of the &lsquo;Namami Gange&nbsp;Programme&rsquo;, launched by the Government of India in 2014 ?</p>",
+    "options": [
+      "Sewerage Treatment Infrastructure",
+      "Industrial Effluent Monitoring",
+      "River Linkage Development",
+      "River-Front Development"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p>12.(c) <strong>River Linkage Development. </strong>The \\'Namami Gange Programme\\' is an integrated conservation mission approved as a flagship program by the Union Government in June 2014. It has a budget outlay of Rs. 20,000 crore and aims to achieve the twin objectives of effective pollution abatement and the conservation and rejuvenation of the National River Ganga. Main pillars of the Namami Gange Programme River-Surface Cleaning, Afforestation, Ganga Gram, and Bio-Diversity.</p>",
+    "question_index": 11
+  },
+  {
+    "question": "<p>13. Which of the following dances developed in the monasteries of Assam ?</p>",
+    "options": [
+      "Bharatanatyam",
+      "Kathak",
+      "Sattriya",
+      "Kuchipudi"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p>13.(c) <strong>Sattriya</strong> originated in the Sattra (monastery) as part of the neo-Vaishnavite movement started by Srimanta Sankardev in the 15th century. He promoted &ldquo;ek sharan naam dharma&rdquo; (devotional chanting of one God&rsquo;s name). In 2000, the Sangeet Natak Akademi recognized Sattriya as a classical dance. Other classical dances of India include Bharatnatyam (Tamil Nadu), Kathakali (Kerala), Kuchipudi (Andhra Pradesh), Kathak (North India), Mohiniyattam (Kerala), Manipuri (Manipur), and Odissi (Odisha).</p>",
+    "question_index": 12
+  },
+  {
+    "question": "<p>14. When was the Swarnajayanti Gram Swarozgar Yojana (SGSY) launched by the&nbsp;Government of India ?</p>",
+    "options": [
+      "1999",
+      "2000",
+      "1995",
+      "1991"
+    ],
+    "correct_option_id": 0,
+    "solution": "<p>14.(a) <strong>1999. </strong>The objective of the SGSY is to bring the assisted Swarozgaris above the poverty line by providing them income generating assets through bank credit and Government subsidy. Some important Government Schemes : Pradhan Mantri Jan Dhan Yojana (2014), Pradhan Mantri Rojgar Protsahan Yojana (2016), Make in India (2014), Atal Pension Yojana (2015), Digital India (2015).</p>",
+    "question_index": 13
+  },
+  {
+    "question": "<p>15. &lsquo;Hampi Utsava,&rsquo; which is celebrated in Karnataka, is also called _______. The&nbsp;festival that captures the pomp, splendour and glory of the historical period of&nbsp;Karnataka is celebrated over a week.</p>",
+    "options": [
+      "Vijaya Utsava",
+      "Sarhul Mahotsava",
+      "Rajasi Utsava",
+      "Nritya Mahotsav"
+    ],
+    "correct_option_id": 0,
+    "solution": "<p>15.(a) <strong>Vijaya Utsava </strong>celebrates the grandeur of the Vijayanagara Empire and is held over a week in Karnataka. Festivals Of Karnataka: Vairamudi Festival, Kambala Festival, Karaga Festival, Ugadi. The Sarhul festival marks the beginning of the New Year and is celebrated by the Oraon, Munda, and Ho tribes of&nbsp; Jharkhand.</p>",
+    "question_index": 14
+  }
+];
     </script>
-    
+
     <!-- Central JS Controller -->
     <script src="../js/mock-core.js"></script>
 </body>

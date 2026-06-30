@@ -3,43 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aether Mocks</title>
+    <title>Mocks Wallah</title>
     <!-- Fonts & Icons -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    
+
     <!-- Central Stylesheet -->
     <link rel="stylesheet" href="../css/mock-main.css">
-    
+
     <!-- Math Formula Rendering (KaTeX/MathJax) -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    
+
     <!-- Timer Config -->
-    <meta name="exam-duration" content="60">
+    <meta name="exam-duration" content="30">
 </head>
 <body>
     <!-- Welcome Screen -->
     <div class="welcome-screen" id="welcomeScreen">
         <div class="welcome-container">
             <div class="welcome-header" style="margin-bottom: 24px;">
-                <h1 style="font-size: 2rem; font-weight: 700; color: #0f172a; margin-bottom: 8px;"><i class="fas fa-graduation-cap" style="color: #3b82f6;"></i> Aether Mocks</h1>
-                <p style="color: #64748b;">Computer Based Test Portal</p>
+                <h1 style="font-size: 2rem; font-weight: 700; color: var(--text-main); margin-bottom: 8px;"><i class="fas fa-graduation-cap" style="color: var(--primary);"></i> Mocks Wallah</h1>
+                <p style="color: var(--text-muted);">Computer Based Test Portal</p>
             </div>
-            
+
             <div class="test-details" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-bottom: 32px; text-align: left;">
-                <div class="detail-item" style="padding: 12px; background: #f8fafc; border-radius: 8px; border: 1px solid #e2e8f0;">
-                    <div class="detail-label" style="font-size: 0.8rem; color: #64748b;">Total Questions</div>
-                    <div class="detail-value" style="font-size: 1.1rem; font-weight: 600; color: #0f172a;">10</div>
+                <div class="detail-item" style="padding: 12px; background: var(--bg-color); border-radius: 8px; border: 1px solid var(--border-color);">
+                    <div class="detail-label" style="font-size: 0.8rem; color: var(--text-muted);">Total Questions</div>
+                    <div class="detail-value" style="font-size: 1.1rem; font-weight: 600; color: var(--text-main);">15</div>
                 </div>
-                <div class="detail-item" style="padding: 12px; background: #f8fafc; border-radius: 8px; border: 1px solid #e2e8f0;">
-                    <div class="detail-label" style="font-size: 0.8rem; color: #64748b;">Duration</div>
-                    <div class="detail-value" style="font-size: 1.1rem; font-weight: 600; color: #0f172a;">60 mins</div>
+                <div class="detail-item" style="padding: 12px; background: var(--bg-color); border-radius: 8px; border: 1px solid var(--border-color);">
+                    <div class="detail-label" style="font-size: 0.8rem; color: var(--text-muted);">Duration</div>
+                    <div class="detail-value" style="font-size: 1.1rem; font-weight: 600; color: var(--text-main);">30 mins</div>
                 </div>
             </div>
-            
+
             <div class="welcome-actions">
                 <button class="btn btn-primary" id="startBtn" onclick="document.getElementById('welcomeScreen').style.display='none'; document.getElementById('examContainer').style.display='flex';" style="font-size: 1.1rem; padding: 12px 32px; width: 100%;">
                     <i class="fas fa-play" style="margin-right: 8px;"></i> Start Test
@@ -47,12 +47,12 @@
             </div>
         </div>
     </div>
-    
+
     <!-- Main Exam Interface -->
     <div class="exam-container" id="examContainer" style="display: none; height: 100vh; flex-direction: column;">
         <!-- Top Header -->
         <div class="exam-header">
-            <div class="exam-title">Aether Mocks</div>
+            <div class="exam-title">Mocks Wallah</div>
             <div class="header-actions" style="display: flex; align-items: center; gap: 12px;">
                 <button class="btn-icon" id="themeToggleBtn" title="Switch to Dark Mode"><i class="fas fa-moon"></i></button>
                 <button class="btn-icon" id="fullscreenToggleBtn" title="Toggle Fullscreen"><i class="fas fa-expand"></i></button>
@@ -62,14 +62,14 @@
                 </div>
             </div>
         </div>
-        
+
         <!-- Main Content -->
         <div class="mock-container">
             <!-- Question Area -->
             <div class="question-view">
                 <!-- Dynamically populated question container -->
                 <div id="questionContainer" style="flex: 1; display: flex; flex-direction: column; gap: 24px;"></div>
-                
+
                 <!-- Controls -->
                 <div class="nav-controls">
                     <button class="btn btn-secondary btn-prev"><i class="fas fa-chevron-left" style="margin-right: 8px;"></i> Previous</button>
@@ -79,40 +79,221 @@
                     <button class="btn btn-primary btn-next">Next <i class="fas fa-chevron-right" style="margin-left: 8px;"></i></button>
                 </div>
             </div>
-            
+
             <!-- Desktop Navigator Sidebar -->
             <div class="sidebar">
                 <div class="sidebar-section-title">Summary Status</div>
                 <div class="stats-grid">
                     <div class="stat-item">
-                        <div class="stat-count" id="stat-answered" style="color: #10b981;">0</div>
+                        <div class="stat-count" id="stat-answered" style="color: var(--success);">0</div>
                         <div class="stat-name">Answered</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-count" id="stat-flagged" style="color: #f59e0b;">0</div>
+                        <div class="stat-count" id="stat-flagged" style="color: var(--warning);">0</div>
                         <div class="stat-name">Flagged</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-count" id="stat-not-answered" style="color: #64748b;">0</div>
+                        <div class="stat-count" id="stat-not-answered" style="color: var(--text-muted);">0</div>
                         <div class="stat-name">Unanswered</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-count" id="stat-not-visited" style="color: #94a3b8;">0</div>
+                        <div class="stat-count" id="stat-not-visited" style="color: var(--text-muted);">0</div>
                         <div class="stat-name">Not Visited</div>
                     </div>
                 </div>
-                
+
                 <div class="sidebar-section-title" style="margin-top: 16px;">Question Navigator</div>
                 <div class="questions-grid"></div>
             </div>
         </div>
     </div>
-    
+
     <!-- Inject Question Data -->
     <script>
-        const questions = [];
+        const questions = [
+  {
+    "question": "<p>1. Which of the following is the highest award for dance in India ?</p>",
+    "options": [
+      "Guru Debaprasad Award",
+      "Nritya Shiromani",
+      "Kalidas Samman",
+      "Sangeet Natak Akademi Award"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p>1.(d) <strong>Sangeet Natak Akademi Award</strong> is given by the Sangeet Natak Akademi and was first awarded in 1952. It consists of a cash prize of ₹1,00,000, a citation, an angavastram (a shawl), and a tamrapatra (a brass plaque). The National Nritya Shiromani Award is given to outstanding dance performers and musicians from India and abroad. The Kalidas Samman is presented by the Government of Madhya Pradesh.</p>",
+    "question_index": 0
+  },
+  {
+    "question": "<p>2. Which sport is played by the Indian sportsperson Anaka Alankamony ?</p>",
+    "options": [
+      "Squash",
+      "Table Tennis",
+      "Badminton",
+      "Hockey"
+    ],
+    "correct_option_id": 0,
+    "solution": "<p>2.(a)<strong> Squash. </strong>Anaka Alankamony received the Arjuna Award in 2014. Indian Squash players: Sourav Ghosal, Joshna Chinnapa, Dippika Rebecca Pallikal, and Anahat Singh.</p>",
+    "question_index": 1
+  },
+  {
+    "question": "<p>3. The \"Losar\" festival, celebrated in Ladakh and Tibetan communities, marks the _____.</p>",
+    "options": [
+      "New Year Festival",
+      "Winter Solstice Festival",
+      "Harvest Festival",
+      "Monsoon Festival"
+    ],
+    "correct_option_id": 0,
+    "solution": "<p>3.(a) <strong>New Year Festival.</strong> Losar festival traces its origin to the Tibetan New Year. In Ladakh, it is celebrated every year at the end of the harvesting season. Buddhist festivals: Saga Dawa, Buddha Purnima, Ullambana, Kathina, Hemis Festival, and Madhu Purnima.</p>",
+    "question_index": 2
+  },
+  {
+    "question": "<p>4. Who among the following was honoured by the Sangeet Natak Akademi for his contribution to the Bharatanatyam dance form ?</p>",
+    "options": [
+      "Maulik Shah",
+      "Akham Lakshmi Devi",
+      "Surupa Sen",
+      "Radha Sridhar"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p>4.(d) <strong>Radha Sridhar. </strong>She received this award in 2018. Other exponents of the sangeet natak academy awards (2018) include: Shri Maulik Shah for Kathak, Akham Lakshmi Devi for Manipuri dance, Shrimati Surupa Sen for Odissi dance.</p>",
+    "question_index": 3
+  },
+  {
+    "question": "<p>5. Bohag Bihu is also known as ______ .</p>",
+    "options": [
+      "Magh Bihu",
+      "Rongali Bihu",
+      "Kati Bihu",
+      "Kongali Bihu"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p>5.(b) <strong>Rongali Bihu.</strong> It is a festival of merriment and heralds the Assamese New Year and the onset of spring. Magh Bihu is also called Bhogali Bihu. Kati Bihu also called Kongali Bihu. Other festivals of Assam : Me-Dum-Me-Phi, Majuli Festival, Dehing Patkai Festival, Ali Ai Ligang.</p>",
+    "question_index": 4
+  },
+  {
+    "question": "<p>6. The _____is a cricket shot in which the batsman swings his bat vertically and hits the ball along the ground. The ball is hit between cover and mid-off.</p>",
+    "options": [
+      "Front Foot Defense",
+      "Straight Drive",
+      "Off drive",
+      "On Drive"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p>6.(c) <strong>Off drive. </strong>Other shots of Cricket : On Drive - It can be used to rotate the strike and hit occasional boundaries. Straight drive - It effectively combines all three methods to produce an aesthetically pleasing shot. Front Foot Defense - It is a deliberate shot that aims to prevent the ball from hitting the wicket or the player\\'s pads.</p>",
+    "question_index": 5
+  },
+  {
+    "question": "<p>7. Ankita Raina plays which of the following sports ?</p>",
+    "options": [
+      "Football",
+      "Lawn Tennis",
+      "Cricket",
+      "Badminton"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p>7.(b) <strong>Lawn Tennis.</strong> Ankita Raina received the prestigious Arjuna Award in 2021. Other tennis players: Vijay Amritraj, Ramesh Krishnan, Mahesh Bhupathi, Rohan Bopanna, Sania Mirza.</p>",
+    "question_index": 6
+  },
+  {
+    "question": "<p>8. Ranjit Singh Gold Cup is related to which of the following sports ?</p>",
+    "options": [
+      "Cricket",
+      "Kabaddi",
+      "Hockey",
+      "Polo"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p>8.(c) <strong>Hockey.</strong> Other cups and trophies: Hockey - Agha Khan Cup, Allwyn Asia Cup, Azlan Shah Cup, Beighton Cup, Bhim Sain Trophy, BMW Trophy. Cricket - Duleep Trophy, Vijay hazare Trophy, Vijay Merchant Trophy. Polo - Ezar Cup, Gold Cup, King&rsquo;s Cup, President Cup. Kabaddi - Federation Cup.</p>",
+    "question_index": 7
+  },
+  {
+    "question": "<p>9. \\'Bhaamaakalaapam\\', the story of Lord Krishna and his queen Satyabhama, is related to which dance form ?</p>",
+    "options": [
+      "Kathak",
+      "Bharatanatyam",
+      "Kuchipudi",
+      "Odissi"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p>9.(c) <strong>Kuchipudi </strong>(Andhra Pradesh). \\'Bhaamaakalaapam\\' dance entirely revolves around Satyabhama, wife of Lord Krishna. &lsquo;Daru,&rsquo; is a small song and dance sequence related to the character. The artists wear ornaments made from a lightweight wood locally called &lsquo;Boorugu&rsquo;.</p>",
+    "question_index": 8
+  },
+  {
+    "question": "<p>10. To which of the following states of India does the dance form Dandari belong ?</p>",
+    "options": [
+      "Kerala",
+      "Maharashtra",
+      "Haryana",
+      "Telangana"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p>10.(d) <strong>Telangana</strong>. Folk Dances : Kerala - Thirayattam, Padayani, Kali Kakrisi, Kuttiyottama, and Kaikottikali. Maharashtra - Lavani, Dhangarigaja, Lezim, Koli. Haryana - Jhumar, Phag Dance, Daph, Dhamal, Loor, Gugga, Khor, Gagor. Telangana - Perini Shivatandavam, Keisabadi.</p>",
+    "question_index": 9
+  },
+  {
+    "question": "<p>11. Hareli, Kajari, and Madai festival are associated with which of the following states ?</p>",
+    "options": [
+      "Uttar Pradesh",
+      "Chhattisgarh",
+      "Punjab",
+      "Haryana"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p>11.(b) <strong>Chhattisgarh.</strong> Other Festivals : Uttar Pradesh - Ram Navmi, Ganga Mahotsav, Navaratri, Khichdi. Punjab - Lohri, Baisakhi. Haryana - Surajkund International Crafts Mela, Mango Mela, Pinjore Heritage Festival, International Gita Mahotsav.</p>",
+    "question_index": 10
+  },
+  {
+    "question": "<p>12. Famed Bharatnatyam exponent and founder of Kalakshetra, Rukmini Devi Arundale was the proud recipient of 1956 ______.</p>",
+    "options": [
+      "Natraj Academy award",
+      "Bharat Ratna",
+      "Kalidas Samman",
+      "Padma Bhushan"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p>12.(d) <strong>Padma Bhushan</strong> (The third-highest civilian award). First awarded - 1954. Kalakshetra Foundation, formerly simply Kalakshetra, was established in January 1936. Rukmini Devi Arundale was the first woman in Indian history to be nominated as a member of the Rajya Sabha (The upper house of the Parliament of India).</p>",
+    "question_index": 11
+  },
+  {
+    "question": "<p>13. Cricket became an international game with the formation of the ______ in 1909.</p>",
+    "options": [
+      "ICC",
+      "IYC",
+      "IPL",
+      "BCC"
+    ],
+    "correct_option_id": 0,
+    "solution": "<p>13.(a) <strong>ICC</strong> (International Cricket Council) is the global governing body of cricket. It was founded as the Imperial Cricket Conference by representatives from Australia, England, and South Africa. Formation - 15 June 1909. Headquarters - Dubai (United Arab Emirates). Official language - English. CEO - Geoff Allardice.</p>",
+    "question_index": 12
+  },
+  {
+    "question": "<p>14. India became the winner of the Cricket World Cup for the first time in:</p>",
+    "options": [
+      "1983",
+      "1981",
+      "1999",
+      "1975"
+    ],
+    "correct_option_id": 0,
+    "solution": "<p>14.(a)<strong> 1983.</strong> India won its first ODI World Cup under Kapil Dev&rsquo;s captaincy by defeating the West Indies. The second ODI World Cup was won in 2011, when India, under MS Dhoni&rsquo;s captaincy, defeated Sri Lanka in a thrilling final at the Wankhede Stadium in Mumbai.</p>",
+    "question_index": 13
+  },
+  {
+    "question": "<p>15. A typical freestyle wrestling bout, is divided into_____ periods of three minutes each with a 30-second break in between</p>",
+    "options": [
+      "4",
+      "5",
+      "2",
+      "3"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p>15.(c) <strong>2.</strong> Freestyle wrestling made its debut at the Olympics at the 1904 St. Louis Summer Games. Duration of the Bout : For official Under-15, cadets and veteran competitions, the periods are curtailed to two minutes each.</p>",
+    "question_index": 14
+  }
+];
     </script>
-    
+
     <!-- Central JS Controller -->
     <script src="../js/mock-core.js"></script>
 </body>

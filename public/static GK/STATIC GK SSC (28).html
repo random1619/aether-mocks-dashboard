@@ -3,43 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aether Mocks</title>
+    <title>Mocks Wallah</title>
     <!-- Fonts & Icons -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    
+
     <!-- Central Stylesheet -->
     <link rel="stylesheet" href="../css/mock-main.css">
-    
+
     <!-- Math Formula Rendering (KaTeX/MathJax) -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    
+
     <!-- Timer Config -->
-    <meta name="exam-duration" content="60">
+    <meta name="exam-duration" content="30">
 </head>
 <body>
     <!-- Welcome Screen -->
     <div class="welcome-screen" id="welcomeScreen">
         <div class="welcome-container">
             <div class="welcome-header" style="margin-bottom: 24px;">
-                <h1 style="font-size: 2rem; font-weight: 700; color: #0f172a; margin-bottom: 8px;"><i class="fas fa-graduation-cap" style="color: #3b82f6;"></i> Aether Mocks</h1>
-                <p style="color: #64748b;">Computer Based Test Portal</p>
+                <h1 style="font-size: 2rem; font-weight: 700; color: var(--text-main); margin-bottom: 8px;"><i class="fas fa-graduation-cap" style="color: var(--primary);"></i> Mocks Wallah</h1>
+                <p style="color: var(--text-muted);">Computer Based Test Portal</p>
             </div>
-            
+
             <div class="test-details" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-bottom: 32px; text-align: left;">
-                <div class="detail-item" style="padding: 12px; background: #f8fafc; border-radius: 8px; border: 1px solid #e2e8f0;">
-                    <div class="detail-label" style="font-size: 0.8rem; color: #64748b;">Total Questions</div>
-                    <div class="detail-value" style="font-size: 1.1rem; font-weight: 600; color: #0f172a;">10</div>
+                <div class="detail-item" style="padding: 12px; background: var(--bg-color); border-radius: 8px; border: 1px solid var(--border-color);">
+                    <div class="detail-label" style="font-size: 0.8rem; color: var(--text-muted);">Total Questions</div>
+                    <div class="detail-value" style="font-size: 1.1rem; font-weight: 600; color: var(--text-main);">15</div>
                 </div>
-                <div class="detail-item" style="padding: 12px; background: #f8fafc; border-radius: 8px; border: 1px solid #e2e8f0;">
-                    <div class="detail-label" style="font-size: 0.8rem; color: #64748b;">Duration</div>
-                    <div class="detail-value" style="font-size: 1.1rem; font-weight: 600; color: #0f172a;">60 mins</div>
+                <div class="detail-item" style="padding: 12px; background: var(--bg-color); border-radius: 8px; border: 1px solid var(--border-color);">
+                    <div class="detail-label" style="font-size: 0.8rem; color: var(--text-muted);">Duration</div>
+                    <div class="detail-value" style="font-size: 1.1rem; font-weight: 600; color: var(--text-main);">30 mins</div>
                 </div>
             </div>
-            
+
             <div class="welcome-actions">
                 <button class="btn btn-primary" id="startBtn" onclick="document.getElementById('welcomeScreen').style.display='none'; document.getElementById('examContainer').style.display='flex';" style="font-size: 1.1rem; padding: 12px 32px; width: 100%;">
                     <i class="fas fa-play" style="margin-right: 8px;"></i> Start Test
@@ -47,12 +47,12 @@
             </div>
         </div>
     </div>
-    
+
     <!-- Main Exam Interface -->
     <div class="exam-container" id="examContainer" style="display: none; height: 100vh; flex-direction: column;">
         <!-- Top Header -->
         <div class="exam-header">
-            <div class="exam-title">Aether Mocks</div>
+            <div class="exam-title">Mocks Wallah</div>
             <div class="header-actions" style="display: flex; align-items: center; gap: 12px;">
                 <button class="btn-icon" id="themeToggleBtn" title="Switch to Dark Mode"><i class="fas fa-moon"></i></button>
                 <button class="btn-icon" id="fullscreenToggleBtn" title="Toggle Fullscreen"><i class="fas fa-expand"></i></button>
@@ -62,14 +62,14 @@
                 </div>
             </div>
         </div>
-        
+
         <!-- Main Content -->
         <div class="mock-container">
             <!-- Question Area -->
             <div class="question-view">
                 <!-- Dynamically populated question container -->
                 <div id="questionContainer" style="flex: 1; display: flex; flex-direction: column; gap: 24px;"></div>
-                
+
                 <!-- Controls -->
                 <div class="nav-controls">
                     <button class="btn btn-secondary btn-prev"><i class="fas fa-chevron-left" style="margin-right: 8px;"></i> Previous</button>
@@ -79,40 +79,221 @@
                     <button class="btn btn-primary btn-next">Next <i class="fas fa-chevron-right" style="margin-left: 8px;"></i></button>
                 </div>
             </div>
-            
+
             <!-- Desktop Navigator Sidebar -->
             <div class="sidebar">
                 <div class="sidebar-section-title">Summary Status</div>
                 <div class="stats-grid">
                     <div class="stat-item">
-                        <div class="stat-count" id="stat-answered" style="color: #10b981;">0</div>
+                        <div class="stat-count" id="stat-answered" style="color: var(--success);">0</div>
                         <div class="stat-name">Answered</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-count" id="stat-flagged" style="color: #f59e0b;">0</div>
+                        <div class="stat-count" id="stat-flagged" style="color: var(--warning);">0</div>
                         <div class="stat-name">Flagged</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-count" id="stat-not-answered" style="color: #64748b;">0</div>
+                        <div class="stat-count" id="stat-not-answered" style="color: var(--text-muted);">0</div>
                         <div class="stat-name">Unanswered</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-count" id="stat-not-visited" style="color: #94a3b8;">0</div>
+                        <div class="stat-count" id="stat-not-visited" style="color: var(--text-muted);">0</div>
                         <div class="stat-name">Not Visited</div>
                     </div>
                 </div>
-                
+
                 <div class="sidebar-section-title" style="margin-top: 16px;">Question Navigator</div>
                 <div class="questions-grid"></div>
             </div>
         </div>
     </div>
-    
+
     <!-- Inject Question Data -->
     <script>
-        const questions = [];
+        const questions = [
+  {
+    "question": "<p>1. <span style=\"font-family: Cambria Math;\">According to the Mukhyamantri Ladli Behna Yojana, which of the following is NOT the correct eligibility?</span></p>\n",
+    "options": [
+      "Should be belonging to Madhya Pradesh",
+      "Age of 23-60",
+      "Candidates can be married, widowed or divorced women",
+      "Annual family income should be below 4.50 Lakh"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">1.(</span><span style=\"font-family: Cambria Math;\">d). <strong>Mukhyamantri Ladli Behna Yojana</strong></span><span style=\"font-family: Cambria Math;\"><strong>:</strong> Madhya Pradesh Government announced the implementation of &ldquo;Mukhyamantri Ladli Behna Yojana&rdquo; in entire Madhya Prades</span><span style=\"font-family: Cambria Math;\">h on 28 January 2023. Objective - Support women&rsquo;s empowerment. Eligibilities - Female applicant, Permanent resident of Madhya Pradesh, Married, divorcee or destitute woman. Women&rsquo;s Annual Family income - Below 2.50 Lakh. </span></p>\n",
+    "question_index": 0
+  },
+  {
+    "question": "<p>2. <span style=\"font-family: Cambria Math;\">Ustad Zakir Hussain plays which of the following instruments?</span></p>\n",
+    "options": [
+      "Sitar",
+      "Tabla",
+      "Flute",
+      "Shehnai"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">2.(</span><span style=\"font-family: Cambria Math;\">b) <strong>Tabla.</strong> </span><span style=\"font-family: Cambria Math;\">Ustad Zakir Hussain: Awards - Padma Vibhushan (2023), Padma Bhushan (2002), Padms Shri (1988), Sangeet Natak Akademi</span><span style=\"font-family: Cambria Math;\"> Award (1990). Other Tabla Players - Ahmed Jan Thirakwa, Swapan Chaudhuri, Tanmoy Bose, Bickram Ghosh.</span></p>\n",
+    "question_index": 1
+  },
+  {
+    "question": "<p>3. <span style=\\\"font-family: Cambria Math;\\\">Which of the following is named as Asia\\'s largest slum?</span></p>\\n",
+    "options": [
+      "Orangi town",
+      "Dharavi",
+      "Niza",
+      "Khayelitsha"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">3.(</span><span style=\"font-family: Cambria Math;\">b) <strong>Dharavi</strong> (</span><span style=\"font-family: Cambria Math;\">Mumbai, Maharashtra). Population - Approx. 850,000 people. Population density - 277,136/ <math xmlns=\"http://www.w3.org/1998/Math/MathML\"><mi>k</mi><msup><mi>m</mi><mn>2</mn></msup></math></span><span style=\"font-family: Cambria Math;\">. Founded in 1884. Other Slums In India - Bhalswa Slum (Delhi), Nochikuppam Slum (Chennai), Rajendra Nagar Slum (Bangalore)</span><span style=\"font-family: Cambria Math;\">, Basanti</span><span style=\"font-family: Cambria Math;\"> Slum (Kolkata). </span></p>\n",
+    "question_index": 2
+  },
+  {
+    "question": "<p>4. <span style=\"font-family: Cambria Math;\">Ghurehi is the folk dance of which of the following Indian states?</span></p>\n",
+    "options": [
+      "West Bengal",
+      "Himachal Pradesh",
+      "Karnataka",
+      "Jharkhand"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">4.(</span><span style=\"font-family: Cambria Math;\">b) <strong>Himachal Pradesh.</strong> </span><span style=\"font-family: Cambria Math;\">Ghurehi Dance - Performed by Ladies of Chamba</span><span style=\"font-family: Cambria Math;\"> Region, during the annual fairs. It is a devotional dance form dedicated to Lord Shiva and performed during the Shivratri festival. </span><strong><span style=\"font-family: Cambria Math;\">Other dances </span></strong><span style=\"font-family: Cambria Math;\"><strong>of Himachal Pradesh</strong> - Rakshasa, Kayang, Nati, Jhanjhar.</span></p>\n",
+    "question_index": 3
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\"> Which of the following government schemes provides subsidised food grains to poor households in India?</span></p>\n",
+    "options": [
+      "Pradhan Mantri Kaushal Vikas Yojana",
+      "Pradhan Mantri Garib Kalyan Anna Yojana",
+      "Pradhan Mantri Jan Arogya Yojana",
+      "Atal Pension Yojana"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">5.(</span><span style=\"font-family: Cambria Math;\">b) <strong>Pradhan Mantri Garib Kalyan Anna Yojana (March, 2020)</strong>. </span><span style=\"font-family: Cambria Math;\">Scheme aims to provide 5 kg of grains (wheat or rice) for free to each individual who is covered under National Food Security Act, 2013.</span><span style=\"font-family: Cambria Math;\"> <strong>Pradhan Mantri Kaushal Vikas Yojana</strong></span><strong><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">( 2015</span></strong><span style=\"font-family: Cambria Math;\"><strong>)</strong>: </span><span style=\"font-family: Cambria Math;\">To encourage and promote skill development among youths. </span><span style=\"font-family: Cambria Math;\"><strong>Pradhan Mantri Jan Arogya Yojana-Ayushman Bharat</strong>- (2018): </span><span style=\"font-family: Cambria Math;\">free health insurance of Rs. 5 Lakh per family for secondary and tertiary care hospitalization. </span><strong><span style=\"font-family: Cambria Math;\">Atal Pension Yojana (2015)</span></strong><span style=\"font-family: Cambria Math;\">: pensio</span><span style=\"font-family: Cambria Math;\">n scheme for citizens of India is focused on the unorganized sector workers. </span></p>\n",
+    "question_index": 4
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\">Who is called the father of the modern Indian </span><span style=\"font-family: Cambria Math;\">dance ?</span></p>\n",
+    "options": [
+      "Uday Shankar",
+      "Ambui Singh",
+      "CV Chandrasekhar",
+      "Raja Reddy"
+    ],
+    "correct_option_id": 0,
+    "solution": "<p><span style=\\\"font-family: Cambria Math;\\\">6.(</span><span style=\\\"font-family: Cambria Math;\\\">a) <strong>Uday Shankar. </strong></span><span style=\\\"font-family: Cambria Math;\\\">A proponent of the fusion style of dance. His dance - \\'Hi-dance</span><span style=\\\"font-family: Cambria Math;\\\">&rsquo; (later renamed it to &lsquo;Creative dance\\'). Awards </span><span style=\\\"font-family: Cambria Math;\\\">- Padma</span><span style=\\\"font-family: Cambria Math;\\\"> Vibhushan (1971).<strong> </strong></span><strong><span style=\\\"font-family: Cambria Math;\\\">Ambui Singh:</span></strong><span style=\\\"font-family: Cambria Math;\\\"> Manipuri dancer. </span><strong><span style=\\\"font-family: Cambria Math;\\\">CV </span></strong><span style=\\\"font-family: Cambria Math;\\\"><strong>Chandrasekhar</strong> :</span><span style=\\\"font-family: Cambria Math;\\\"> Bharatnatyam Dancer. </span><strong><span style=\\\"font-family: Cambria Math;\\\">Raja </span></strong><span style=\\\"font-family: Cambria Math;\\\"><strong>Reddy </strong>:</span><span style=\\\"font-family: Cambria Math;\\\"> Kuchipudi Dancer. </span></p>\\n",
+    "question_index": 5
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\">Which of the following festivals is celebrated on the Makar Sankranti day in Assam?</span></p>\n",
+    "options": [
+      "Kati Bihu",
+      "Magh Bihu",
+      "Bohag Bihu",
+      "Raksha Bandhan"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">7.(</span><span style=\"font-family: Cambria Math;\">b) <strong>Magh Bihu</strong>. </span><span style=\"font-family: Cambria Math;\">Types of Bihu </span><span style=\"font-family: Cambria Math;\">festival :</span><span style=\"font-family: Cambria Math;\"> Rongali or Bohag Bihu (April), Kongali or Kati Bihu (October), Bhogali or Magh Bihu (January).</span><span style=\"font-family: Cambria Math;\"> <strong>Other Festivals of </strong></span><span style=\"font-family: Cambria Math;\"><strong>Assam</strong> :</span><span style=\"font-family: Cambria Math;\"> Ambubachi Fair ,Dehing patkai festival, Majuli Festival, Baikho etc.</span><span style=\"font-family: Cambria Math;\"> <strong>Name of Makar Sankranti in different </strong></span><span style=\"font-family: Cambria Math;\"><strong>states</strong> :</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">Magha saaji - Himachal Pradesh, Poush sankranti - West bengal, Pongal - Tamil Nadu, Uttarayan - Gujarat, Makaravilakku - Kerala, Pedda Pand</span><span style=\"font-family: Cambria Math;\">uga - Andhra pradesh. </span></p>\n",
+    "question_index": 6
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\">The Pradhan Mantri Jan Dhan Yojana (PMJDY) was placed in the G</span><span style=\"font-family: Cambria Math;\">uinness Book of World Records for which of the following achievements?</span></p>\n",
+    "options": [
+      "Opening the largest number of bank accounts in one month",
+      "Opening the largest number of bank accounts in one week",
+      "Opening the largest number of bank accounts in one fortnight",
+      "Opening the largest number of bank accounts in one day"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">8.(</span><span style=\"font-family: Cambria Math;\">b).</span><span style=\"font-family: Cambria Math;\"> </span><strong><span style=\"font-family: Cambria Math;\">PMJDY (28 </span><span style=\"font-family: Cambria Math;\">Aug ,</span><span style=\"font-family: Cambria Math;\"> 2014)</span></strong><span style=\"font-family: Cambria Math;\">. A National Mission for financial inclusion. </span><span style=\"font-family: Cambria Math;\"><strong>Objectives</strong> :</span><span style=\"font-family: Cambria Math;\"> to ensure access to financial products and services, i.e, (Banking/ Savings and Deposit Accounts, Remittance) at affordable cost. </span><span style=\"font-family: Cambria Math;\"><strong>Benefits</strong> </span><span style=\"font-family: Cambria Math;\">- free accident insurance coverage of Rs. 2 lakh, an overdraft facility up to Rs. 10,000 to eligible account holders</span><span style=\"font-family: Cambria Math;\">. </span><span style=\"font-family: Cambria Math;\"><strong>Under</strong> </span><span style=\"font-family: Cambria Math;\">- Ministry of Finance. </span></p>\n",
+    "question_index": 7
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\">Santoor is associated with whom among the following?</span></p>\n",
+    "options": [
+      "Pandit Shivkumar Sharma",
+      "Pandit Jasraj",
+      "Pandit Bhimsen Joshi",
+      "Hari prasad Chaurasia"
+    ],
+    "correct_option_id": 0,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">9.(</span><span style=\"font-family: Cambria Math;\">a) <strong>Pandit Shivkumar Sharma</strong>: </span><span style=\"font-family: Cambria Math;\">Awards - Sangeet Natak Akademi Award (1986), Padma Shri (1991), Padma Vibhushan (2001). </span><span style=\"font-family: Cambria Math;\"><strong>Other Santoor players</strong>: </span><span style=\"font-family: Cambria Math;\">Tarun Bhattacharya, Bhajan Sopori, Ulhas Bapat and Satish Vyas.<strong> </strong></span><span style=\"font-family: Cambria Math;\"><strong>Other Instrument Artists</strong>:</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">Pandit Jasraj </span><span style=\"font-family: Cambria Math;\">(Vocalist from Mewati gharana)</span><span style=\"font-family: Cambria Math;\">,</span><span style=\"font-family: Cambria Math;\"> First Ind</span><span style=\"font-family: Cambria Math;\">ian musician whose name is given to an asteroid (2006 VP32).<strong> </strong></span><strong><span style=\"font-family: Cambria Math;\">Pandit Bhimsen Joshi</span></strong><span style=\"font-family: Cambria Math;\"> (Hindustani classical vocalist from Kirana Gharana)</span><span style=\"font-family: Cambria Math;\">. <strong>Hari Prasad Chaurasia</strong></span><span style=\"font-family: Cambria Math;\"> (flutist from Senia Gharana). </span></p>\n",
+    "question_index": 8
+  },
+  {
+    "question": "<p><span style=\\\"font-family: Cambria Math;\\\">10</span><span style=\\\"font-family: Cambria Math;\\\">. </span><span style=\\\"font-family: Cambria Math;\\\">Who among the following personalities won the Sangeet Natak Akademi Award 2021 for their contribution to the \\'Chhau\\' dance?</span></p>\\n",
+    "options": [
+      "Bijay Kumar Jena",
+      "Rabindra Atibudhi",
+      "Bhuvan Kumar",
+      "Trilochan Mohanta"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">10</span><span style=\"font-family: Cambria Math;\">.(c)<strong> Bhuvan Kumar.</strong></span><strong><span style=\"font-family: Cambria Math;\"> </span></strong><span style=\"font-family: Cambria Math;\"><strong>Chhau Dance:</strong> </span><span style=\"font-family: Cambria Math;\">Performed mainly in Odisha (Mayurbhanj Chhau), Jharkhand (Seraikella Chhau) and West Bengal (Purulia Chhau). Bamnia Chhau Dance festival is organized in West Bengal. Some Prominent Chhau dancers: Guru Shashadhar Acharya, Sambhunath Karmakar, Hem Mahato, De</span><span style=\"font-family: Cambria Math;\">bilal Karmakar.</span></p>\n",
+    "question_index": 9
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\">1</span><span style=\"font-family: Cambria Math;\">1</span><span style=\"font-family: Cambria Math;\">.</span><span style=\"font-family: Cambria Math;\"> Ramnad V Raghavan is associated with which of the following musical instruments?</span></p>\n",
+    "options": [
+      "Mridangam",
+      "Flute",
+      "Sitar",
+      "Sarod"
+    ],
+    "correct_option_id": 0,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">11</span><span style=\"font-family: Cambria Math;\">.(a) <strong>Mridangam.</strong> <strong>Famous Mridangam Players</strong>: </span><span style=\"font-family: Cambria Math;\">A.V. Anand, Muthiah Bhagavatar, Guruvayur Dorai, Palghat Mani Iyer Karaikudi Mani, T. K. Murthy.</span><span style=\"font-family: Cambria Math;\"> <strong>Flute players</strong></span><span style=\"font-family: Cambria Math;\"> - Pandit Hariprasad Chaurasia, Pannalal Ghosh, Rajendra Prasad, V Kunjamani, etc. </span><strong><span style=\"font-family: Cambria Math;\">S</span></strong><span style=\"font-family: Cambria Math;\"><strong>itar Players</strong>: </span><span style=\"font-family: Cambria Math;\">Ravi Shankar, Anoushka Shankar, Annapurna Devi, Nikhil Banerjee, Vilayat Khan.<strong> </strong></span><strong><span style=\"font-family: Cambria Math;\">Sarod Players</span></strong><span style=\"font-family: Cambria Math;\"> - Satyaki Banerjee, Jotin Bhattacharya, Amjad Ali Khan, Ali Akbar Khan, Allauddin Khan.</span></p>\n",
+    "question_index": 10
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\">12</span><span style=\"font-family: Cambria Math;\">. </span><span style=\"font-family: Cambria Math;\">Padma Shri Award 2022 was given to whom among the following Kuchipudi dancers?</span></p>\n",
+    "options": [
+      "Pallavi Krishnan",
+      "Sunanda Nair",
+      "Padmaja Reddy",
+      "Sitara Devi"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">12</span><span style=\"font-family: Cambria Math;\">.(</span><span style=\"font-family: Cambria Math;\">c)<strong> Padmaja Reddy: </strong></span><span style=\"font-family: Cambria Math;\"><strong>Awards </strong>- Sangeet Natak Akademi Award (2015). Padma </span><span style=\"font-family: Cambria Math;\">Shri is</span><span style=\"font-family: Cambria Math;\"> the fourth-highest civilian award. </span><strong><span style=\"font-family: Cambria Math;\">Kuchipudi </span></strong><span style=\"font-family: Cambria Math;\">- It is one of the eight major Indian classical dances. It originates from Andhra Pradesh and has its roots in the ancient Hindu Sans</span><span style=\"font-family: Cambria Math;\">krit text of Natya Shastra. </span><strong><span style=\"font-family: Cambria Math;\">Famous Kuchipudi dancers</span></strong><span style=\"font-family: Cambria Math;\"> - Raja and Radha Reddy, Lakshmi Narayn Shastri, Bhavana Reddy, Atisha Pratap Singh, Sreelakshmy Govardhanan, Haleem Khan, Vyjayanthi Kashi, etc. </span></p>\n",
+    "question_index": 11
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\">13</span><span style=\"font-family: Cambria Math;\">. </span><span style=\"font-family: Cambria Math;\">Match the columns.</span></p>\r\n<p><span style=\"font-family: Cambria Math;\">&nbsp;<img src=\"https://ssccglpinnacle.com/images/Capture1,59.PNG\" alt=\"\" width=\"290\" height=\"178\"></span></p>\n",
+    "options": [
+      "A-IV, B-II, C-I, D-III",
+      "A-III, B-I, C-IV, D-II ",
+      "A-I, B-IV, C-III, D-II",
+      "A-I, B-II, C-III, D-IV"
+    ],
+    "correct_option_id": 0,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">13</span><span style=\"font-family: Cambria Math;\">.(a) <strong>A-IV, B-II, C-I, D-III. Cultural festivals of States:</strong> <strong>Bihar </strong>- </span><span style=\"font-family: Cambria Math;\">Makar-Sankranti, Rajgir Mahotsav, Sama-Chakeva, Bihula, Madhushravani. </span><strong><span style=\"font-family: Cambria Math;\">Arunachal Prade</span></strong><span style=\"font-family: Cambria Math;\"><strong>sh </strong>- </span><span style=\"font-family: Cambria Math;\">Reh, Boori Boot, Myoko, Dree, Pongtu, Losar, Murung, Solang, Mopin, Monpa. </span><span style=\"font-family: Cambria Math;\"><strong>Assam</strong> -</span><span style=\"font-family: Cambria Math;\"> Bihu, Majuli, Dehing Patkai, Ali Ai Ligang.</span><span style=\"font-family: Cambria Math;\"> <strong>Goa</strong>:</span><span style=\"font-family: Cambria Math;\"> Goa Carnival, Sunburn, Ladain, Mando, Sao Joao Festival.</span></p>\n",
+    "question_index": 12
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\">14</span><span style=\"font-family: Cambria Math;\">.</span><span style=\"font-family: Cambria Math;\"> According to the Indian Minerals Yearbook 2020, which state in India has the highest share of limestone production?</span></p>\n",
+    "options": [
+      "Telangana",
+      "Chhattisgarh",
+      "Madhya Pradesh",
+      "Rajasthan"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">14</span><span style=\"font-family: Cambria Math;\">.(d) <strong>Rajasthan. Limestone </strong></span><span style=\"font-family: Cambria Math;\">(Calcium Carbonate (</span><math xmlns=\"http://www.w3.org/1998/Math/MathML\"><mi>C</mi><mi>a</mi><mi>C</mi><msub><mi>O</mi><mn>3</mn></msub></math><span style=\"font-family: Cambria Math;\">)). Mineral Producing State: </span><strong><span style=\"font-family: Cambria Math;\">Iron ore</span></strong><span style=\"font-family: Cambria Math;\"> - Orissa, Chattisgarh, Karnataka.</span><strong><span style=\"font-family: Cambria Math;\">Manganese</span></strong><span style=\"font-family: Cambria Math;\"><strong> </strong>-Orissa, Karnataka, </span><span style=\"font-family: Cambria Math;\">Madhya</span><span style=\"font-family: Cambria Math;\"> Pradesh. </span><strong><span style=\"font-family: Cambria Math;\">Gold</span></strong><span style=\"font-family: Cambria Math;\"> - Bihar, Rajasthan, Karnataka. </span><strong><span style=\"font-family: Cambria Math;\">Diamond</span></strong><span style=\"font-family: Cambria Math;\"> - Madhya Pradesh. <strong>Coal </strong>- Chhattisgarh, Jharkhand, Orissa.</span></p>\n",
+    "question_index": 13
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\">15</span><span style=\"font-family: Cambria Math;\">.</span><span style=\"font-family: Cambria Math;\"> Which Asian country was the host of the first Asian Games?</span></p>\n",
+    "options": [
+      "Thailand",
+      "Indonesia",
+      "India",
+      "Japan"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p>15<span style=\"font-family: Cambria Math;\">.(c) <strong>I</strong></span><strong><span style=\"font-family: Cambria Math;\">ndia. Asian Games</span></strong><span style=\"font-family: Cambria Math;\">: Motto - Ever Onward. India hosted in 1951. Like the Olympic Games, they are held every four years. The Asian Games was hosted by India in 1951. Second time (1982) - Organised by the Olympic Council of Asia (OCA) whose headquarters are ba</span><span style=\"font-family: Cambria Math;\">sed in Kuwait, and recognised by IOC (International Olympic Committee). Japan topped the medal table with 24 gold, 21 silver and 15 bronze medals in the first Asian games. Thailand hosted four Asian Games in 1966, 1970, 1978 and 1998.</span></p>\n",
+    "question_index": 14
+  }
+];
     </script>
-    
+
     <!-- Central JS Controller -->
     <script src="../js/mock-core.js"></script>
 </body>

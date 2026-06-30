@@ -3,43 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aether Mocks</title>
+    <title>Mocks Wallah</title>
     <!-- Fonts & Icons -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    
+
     <!-- Central Stylesheet -->
     <link rel="stylesheet" href="../css/mock-main.css">
-    
+
     <!-- Math Formula Rendering (KaTeX/MathJax) -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    
+
     <!-- Timer Config -->
-    <meta name="exam-duration" content="60">
+    <meta name="exam-duration" content="30">
 </head>
 <body>
     <!-- Welcome Screen -->
     <div class="welcome-screen" id="welcomeScreen">
         <div class="welcome-container">
             <div class="welcome-header" style="margin-bottom: 24px;">
-                <h1 style="font-size: 2rem; font-weight: 700; color: #0f172a; margin-bottom: 8px;"><i class="fas fa-graduation-cap" style="color: #3b82f6;"></i> Aether Mocks</h1>
-                <p style="color: #64748b;">Computer Based Test Portal</p>
+                <h1 style="font-size: 2rem; font-weight: 700; color: var(--text-main); margin-bottom: 8px;"><i class="fas fa-graduation-cap" style="color: var(--primary);"></i> Mocks Wallah</h1>
+                <p style="color: var(--text-muted);">Computer Based Test Portal</p>
             </div>
-            
+
             <div class="test-details" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-bottom: 32px; text-align: left;">
-                <div class="detail-item" style="padding: 12px; background: #f8fafc; border-radius: 8px; border: 1px solid #e2e8f0;">
-                    <div class="detail-label" style="font-size: 0.8rem; color: #64748b;">Total Questions</div>
-                    <div class="detail-value" style="font-size: 1.1rem; font-weight: 600; color: #0f172a;">10</div>
+                <div class="detail-item" style="padding: 12px; background: var(--bg-color); border-radius: 8px; border: 1px solid var(--border-color);">
+                    <div class="detail-label" style="font-size: 0.8rem; color: var(--text-muted);">Total Questions</div>
+                    <div class="detail-value" style="font-size: 1.1rem; font-weight: 600; color: var(--text-main);">15</div>
                 </div>
-                <div class="detail-item" style="padding: 12px; background: #f8fafc; border-radius: 8px; border: 1px solid #e2e8f0;">
-                    <div class="detail-label" style="font-size: 0.8rem; color: #64748b;">Duration</div>
-                    <div class="detail-value" style="font-size: 1.1rem; font-weight: 600; color: #0f172a;">60 mins</div>
+                <div class="detail-item" style="padding: 12px; background: var(--bg-color); border-radius: 8px; border: 1px solid var(--border-color);">
+                    <div class="detail-label" style="font-size: 0.8rem; color: var(--text-muted);">Duration</div>
+                    <div class="detail-value" style="font-size: 1.1rem; font-weight: 600; color: var(--text-main);">30 mins</div>
                 </div>
             </div>
-            
+
             <div class="welcome-actions">
                 <button class="btn btn-primary" id="startBtn" onclick="document.getElementById('welcomeScreen').style.display='none'; document.getElementById('examContainer').style.display='flex';" style="font-size: 1.1rem; padding: 12px 32px; width: 100%;">
                     <i class="fas fa-play" style="margin-right: 8px;"></i> Start Test
@@ -47,12 +47,12 @@
             </div>
         </div>
     </div>
-    
+
     <!-- Main Exam Interface -->
     <div class="exam-container" id="examContainer" style="display: none; height: 100vh; flex-direction: column;">
         <!-- Top Header -->
         <div class="exam-header">
-            <div class="exam-title">Aether Mocks</div>
+            <div class="exam-title">Mocks Wallah</div>
             <div class="header-actions" style="display: flex; align-items: center; gap: 12px;">
                 <button class="btn-icon" id="themeToggleBtn" title="Switch to Dark Mode"><i class="fas fa-moon"></i></button>
                 <button class="btn-icon" id="fullscreenToggleBtn" title="Toggle Fullscreen"><i class="fas fa-expand"></i></button>
@@ -62,14 +62,14 @@
                 </div>
             </div>
         </div>
-        
+
         <!-- Main Content -->
         <div class="mock-container">
             <!-- Question Area -->
             <div class="question-view">
                 <!-- Dynamically populated question container -->
                 <div id="questionContainer" style="flex: 1; display: flex; flex-direction: column; gap: 24px;"></div>
-                
+
                 <!-- Controls -->
                 <div class="nav-controls">
                     <button class="btn btn-secondary btn-prev"><i class="fas fa-chevron-left" style="margin-right: 8px;"></i> Previous</button>
@@ -79,40 +79,221 @@
                     <button class="btn btn-primary btn-next">Next <i class="fas fa-chevron-right" style="margin-left: 8px;"></i></button>
                 </div>
             </div>
-            
+
             <!-- Desktop Navigator Sidebar -->
             <div class="sidebar">
                 <div class="sidebar-section-title">Summary Status</div>
                 <div class="stats-grid">
                     <div class="stat-item">
-                        <div class="stat-count" id="stat-answered" style="color: #10b981;">0</div>
+                        <div class="stat-count" id="stat-answered" style="color: var(--success);">0</div>
                         <div class="stat-name">Answered</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-count" id="stat-flagged" style="color: #f59e0b;">0</div>
+                        <div class="stat-count" id="stat-flagged" style="color: var(--warning);">0</div>
                         <div class="stat-name">Flagged</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-count" id="stat-not-answered" style="color: #64748b;">0</div>
+                        <div class="stat-count" id="stat-not-answered" style="color: var(--text-muted);">0</div>
                         <div class="stat-name">Unanswered</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-count" id="stat-not-visited" style="color: #94a3b8;">0</div>
+                        <div class="stat-count" id="stat-not-visited" style="color: var(--text-muted);">0</div>
                         <div class="stat-name">Not Visited</div>
                     </div>
                 </div>
-                
+
                 <div class="sidebar-section-title" style="margin-top: 16px;">Question Navigator</div>
                 <div class="questions-grid"></div>
             </div>
         </div>
     </div>
-    
+
     <!-- Inject Question Data -->
     <script>
-        const questions = [];
+        const questions = [
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\">The Chari Folk dance is primarily performed by women of which Indian state? </span></p>\n",
+    "options": [
+      "Odisha",
+      "Karnataka",
+      "Jharkhand",
+      "Rajasthan"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">1.(</span><span style=\"font-family: Cambria Math;\">d) <strong>Rajasthan. Folk dances: Rajasthan -</strong> </span><span style=\"font-family: Cambria Math;\">Ghoomar, Kalbeliya, Kachhi Ghodi, Gair, Chari, Kathputli, Fire Dance, Terah Taali, Drum Dance. </span><strong><span style=\"font-family: Cambria Math;\">Odisha </span></strong><span style=\"font-family: Cambria Math;\">- Ghumura Dance, Bagha Dance, Gotipua Dance, </span><span style=\"font-family: Cambria Math;\">Dhan Dance, Changu Dance, Ranapa Dance, Karma Dance, Jodi Sankha Dance. </span><strong><span style=\"font-family: Cambria Math;\">Karnataka</span></strong><span style=\"font-family: Cambria Math;\"><strong> </strong>- Balakat Dance, Dollu Kunita, Togalu Gombeyata, Veeragaase, Kamsale, Goravara Kunita, Huttari, Suggi etc. </span><span style=\"font-family: Cambria Math;\"><strong>Jharkhand </strong>- </span><span style=\"font-family: Cambria Math;\">Jhumair, Chhau, Paika, Domkach.</span></p>\n",
+    "question_index": 0
+  },
+  {
+    "question": "<p>2. <span style=\"font-family: Cambria Math;\">Film actress Hema Malini is a trained ______ dancer. </span></p>\n",
+    "options": [
+      "Bharatanatyam",
+      "Kathakali",
+      "Kuchipudi",
+      "Kathak"
+    ],
+    "correct_option_id": 0,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">2.(</span><span style=\"font-family: Cambria Math;\">a) <strong>Bharatanatyam </strong></span><span style=\"font-family: Cambria Math;\">(Tamil Nadu)</span><span style=\"font-family: Cambria Math;\">. <strong>Other dancers</strong>: </span><span style=\"font-family: Cambria Math;\">Rukmini Devi Arundale, Mrinalini Sarabhai, Sonal Mansingh, Padma Subramanyam, Yamini Krishnamurthy, Mallika Sarabhai. </span><strong><span style=\"font-family: Cambria Math;\">Kathakali </span></strong><span style=\"font-family: Cambria Math;\">(Kerala): Kalamandalam Gopi, Padmanabhan Nair, Ramankutty Nair, Kanak Rele, Kavungal Chathunni Panicker. </span><strong><span style=\"font-family: Cambria Math;\">Kuchipudi </span></strong><span style=\"font-family: Cambria Math;\">(Andhra Prade</span><span style=\"font-family: Cambria Math;\">sh): Vempati Chinna Satyam, Vijaya Prasad, Kalpalathika, Raja and Radha Reddy, Bhavana Reddy. </span><strong><span style=\"font-family: Cambria Math;\">Kathak</span></strong><span style=\"font-family: Cambria Math;\"><strong> </strong>(Uttar Pradesh): Birju Maharaj, Lachhu Maharaj, Sitara Devi, Damayanti Joshi.</span></p>\n",
+    "question_index": 1
+  },
+  {
+    "question": "<p>3. <span style=\"font-family: Cambria Math;\">Which of the following is NOT the first day event in the decathlon?</span></p>\n",
+    "options": [
+      "Discus throw ",
+      "Shot put",
+      "100 metre dash",
+      "400 metre dash"
+    ],
+    "correct_option_id": 0,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">3.(</span><span style=\"font-family: Cambria Math;\">a) <strong>Discus throw. Men&rsquo;s decathlon:</strong> </span><span style=\"font-family: Cambria Math;\">Day 1 - 100 meters running, Long jump, Shot put, High jump, 400 meters running. Day 2 - 110 meters hurdles, Discus throw, Pole vault, Javelin throw, 1500 meters running.<strong> </strong></span><span style=\"font-family: Cambria Math;\"><strong>Women&rsquo;s decathlon</strong>: </span><span style=\"font-family: Cambria Math;\">Day 1 - 100 meters running, Discus throw, Pole vault, Javelin throw, 400 meters running. Day 2 - 100 meters hurdles, Long jump, Short put, High jump, 1500 meters running.</span></p>\n",
+    "question_index": 2
+  },
+  {
+    "question": "<p>4. <span style=\"font-family: Cambria Math;\">Which of the following is the famous festival of Andhra Pradesh?</span></p>\n",
+    "options": [
+      "Kanuma",
+      "Elephanta",
+      "Bonalu",
+      "Konark"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">4.(</span><span style=\"font-family: Cambria Math;\">c) <strong>Bonalu</strong>. <strong>Other festivals of Andhra Pradesh:</strong> </span><span style=\"font-family: Cambria Math;\">Ugadi, Ratha Saptami, Mahashivaratri, Lumbini, Brahmotsavam</span><span style=\"font-family: Cambria Math;\">, Visakha</span><span style=\"font-family: Cambria Math;\"> Utsav. </span><strong><span style=\"font-family: Cambria Math;\">K</span><span style=\"font-family: Cambria Math;\">anuma</span></strong><span style=\"font-family: Cambria Math;\"><strong> </strong>- Telangana. </span><strong><span style=\"font-family: Cambria Math;\">Elephanta</span></strong><span style=\"font-family: Cambria Math;\"><strong> </strong>- Maharashtra.</span><span style=\"font-family: Cambria Math;\"> <strong>Konark Dance Festival </strong></span><span style=\"font-family: Cambria Math;\">(Five day festival in the month of December) - Odisha.</span></p>\n",
+    "question_index": 3
+  },
+  {
+    "question": "<p>5. <span style=\"font-family: Cambria Math;\">Yamini Krishnamurthy, a legendary figure of Indian classical dance, was honoured with the ________ in 2016.</span></p>\n",
+    "options": [
+      "Saraswati Samman",
+      "Padma Vibhushan",
+      "Moortidevi Award",
+      "Bharat Ratna"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">5.(</span><span style=\"font-family: Cambria Math;\">b) <strong>Padma Vibhushan.</strong> </span><span style=\"font-family: Cambria Math;\">Other awards of Yamini Krishnamurty (Bharatnatyam, Kuchipudi): Padma Shri (1968), Padma Bhusan (2001).<strong> </strong></span><strong><span style=\"font-family: Cambria Math;\">Bharatnatyam dancers</span></strong><span style=\"font-family: Cambria Math;\"><strong> -</strong> Rukmini Devi Arundale, Mrinalini Sarabhai, Sonal Mansingh, Padma Subramanyam, Mallika Sar</span><span style=\"font-family: Cambria Math;\">abhai. </span><strong><span style=\"font-family: Cambria Math;\">Kuchipudi dancers</span></strong><span style=\"font-family: Cambria Math;\"><strong> -</strong> Vempati Chinna Satyam, Vijaya Prasad, Kalpalathika, Raja and Radha Reddy, Bhavan Reddy.</span></p>\n",
+    "question_index": 4
+  },
+  {
+    "question": "<p>6. <span style=\"font-family: Cambria Math;\">Bismillah Khan played which of the following musical instrumen</span><span style=\"font-family: Cambria Math;\">ts?</span></p>\n",
+    "options": [
+      "Sitar",
+      "Shehnai",
+      "Tabla",
+      "Harmonium"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">6.(</span><span style=\"font-family: Cambria Math;\">b) <strong>Shehnai.</strong> </span><span style=\"font-family: Cambria Math;\">Awards - Bharat Ratna (2001), Padma Vibhushan (1980), Padma Bhushan (1968), Padma Shri (1961), Sangeet Natak Akademi (1956). </span><strong><span style=\"font-family: Cambria Math;\">Shehnai Players</span></strong><span style=\"font-family: Cambria Math;\"><strong> -</strong> Anant Lal, Ali Ahmed Hussain Khan, Raghunath Prasanna, S. Ballesh.</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">Sitar Players</span><span style=\"font-family: Cambria Math;\"> - Ravi Shankar, Imrat Khan, Nish</span><span style=\"font-family: Cambria Math;\">at Khan, Nikhil Banerjee, Enayat Khan.</span><span style=\"font-family: Cambria Math;\"> </span><strong><span style=\"font-family: Cambria Math;\">Tabla Players</span></strong><span style=\"font-family: Cambria Math;\"><strong> -</strong> Zakir Hussain, Ahmed Jan Thirakwa, Shankar Ghosh, Swapan Chaudhuri, Bickram Ghosh, Kishan Maharaj, Alla Rakha. </span><strong><span style=\"font-family: Cambria Math;\">Harmonium Players</span></strong><span style=\"font-family: Cambria Math;\"><strong> -</strong> Pandit Rambhau Bijapure, Aditya oke, Amjad Sabri, Bhupen Hazarika.</span></p>\n",
+    "question_index": 5
+  },
+  {
+    "question": "<p>7. <span style=\"font-family: Cambria Math;\">Who among the following personalities is associated </span><span style=\"font-family: Cambria Math;\">with synthesising classical and modern Indian dance through a theatre group called Ranga Sri Little Ballet </span><span style=\"font-family: Cambria Math;\">Troupe ?</span></p>\n",
+    "options": [
+      "Guru Bipin Singh",
+      "Pandit Birju Maharaj",
+      "Shanti Bardhan",
+      "Remo Fernandes"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">7.(</span><span style=\"font-family: Cambria Math;\">c) <strong>Shanti Bardhan - </strong></span><span style=\"font-family: Cambria Math;\">A junior colleague of Uday Shankar, produced some of the most imaginative dance-dramas of the 20th century. He produced Ramayana, in which the actors moved and danced like puppets. </span><span style=\"font-family: Cambria Math;\"><strong>Guru Bipin</strong> <strong>Singh</strong></span><span style=\"font-family: Cambria Math;\"><strong> </strong>- A director, choreographer, and teacher of Manipuri dance</span><span style=\"font-family: Cambria Math;\">, awarded with Sangeet Natak Akademi Award in 1966. </span><strong><span style=\"font-family: Cambria Math;\">Pandit Birju Maharaj</span></strong><span style=\"font-family: Cambria Math;\"><strong> -</strong> The world famous Kathak dancer and was the face of the Kalka-Bindadin Gharana of Lucknow.</span><span style=\"font-family: Cambria Math;\"> <strong>Remo Fernandes</strong></span><span style=\"font-family: Cambria Math;\"><strong> -</strong> A well known Indian Musician Playback Singer, who was honoured with Padma </span><span style=\"font-family: Cambria Math;\">Shri in 2007.</span></p>\n",
+    "question_index": 6
+  },
+  {
+    "question": "<p>8. <span style=\"font-family: Cambria Math;\">Who among the following singers became the first Indian folk artist to attend the Cannes Film Festival </span><span style=\"font-family: Cambria Math;\">2022 ?</span></p>\n",
+    "options": [
+      "Gurudas Man",
+      "Daler Mehendi",
+      "Teejan Bai",
+      "Mame Khan"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">8.(</span><span style=\"font-family: Cambria Math;\">d) <strong>Mame Khan </strong></span><span style=\"font-family: Cambria Math;\">- An Indian Rajasthani folk singer who is known for his Sufi and folk musi</span><span style=\"font-family: Cambria Math;\">c performances. </span><strong><span style=\"font-family: Cambria Math;\">Cannes Film Festival</span></strong><span style=\"font-family: Cambria Math;\"> (Festival de Cannes) - A film festival held annually in Cannes (France). </span><span style=\"font-family: Cambria Math;\">First held - 1946.</span><span style=\"font-family: Cambria Math;\"> The festival came to provide a rendezvous for those interested in the art and influence of the movies.</span></p>\n",
+    "question_index": 7
+  },
+  {
+    "question": "<p>9. <span style=\\\"font-family: Cambria Math;\\\">What is the distance between the h</span><span style=\\\"font-family: Cambria Math;\\\">urdles in 100 m women\\'s hurdles in </span><span style=\\\"font-family: Cambria Math;\\\">metres ?</span></p>\\n",
+    "options": [
+      "7.50",
+      "9.00",
+      "8.00",
+      "8.50"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">9.(</span><span style=\"font-family: Cambria Math;\">d)<strong> 8.50 m.</strong></span><span style=\"font-family: Cambria Math;\"><strong> </strong>In sprint hurdle races for women, the first hurdle is 13 m (42 ft 8 in) from the starting line. In the long hurdle events, whether for men or women, the first hurdle is 45 m (147 ft 8 in) from the starting line and the distance between hurdles is 35 m (11</span><span style=\"font-family: Cambria Math;\">4 ft 10 in).</span></p>\n",
+    "question_index": 8
+  },
+  {
+    "question": "<p>10<span style=\\\"font-family: Cambria Math;\\\">. </span><span style=\\\"font-family: Cambria Math;\\\">Which of the following is India\\'s first all-women-managed railway station?</span></p>\\n",
+    "options": [
+      "Chennai Egmore Railway Station, Chennai",
+      "Gandhinagar Railway Station, Jaipur",
+      "Trivandrum Central Railway Station, Thiruvananthapuram",
+      "Matunga Railway Station, Mumbai"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p><span style=\\\"font-family: Cambria Math;\\\">10</span><span style=\\\"font-family: Cambria Math;\\\">.(b) <strong>Gandhinagar Railway Station, Jaipur.</strong> </span><span style=\\\"font-family: Cambria Math;\\\">Matunga Railway Station, Mumbai is also managed by all women crew in the sub-urban category.<strong> </strong></span><span style=\\\"font-family: Cambria Math;\\\"><strong>Surekha Yadav</strong> </span><span style=\\\"font-family: Cambria Math;\\\">became the country\\'s first female train driver in 1988, also Asia\\'s first female locomotive pilot. </span></p>\\n",
+    "question_index": 9
+  },
+  {
+    "question": "<p>11<span style=\"font-family: Cambria Math;\">. </span><span style=\"font-family: Cambria Math;\">Which of the following personalities is a well-known Indian plant physiologist and </span><span style=\"font-family: Cambria Math;\">physicist ?</span></p>\n",
+    "options": [
+      "JC Bose",
+      "CV Raman",
+      "CNR Rao",
+      "JRD Tata"
+    ],
+    "correct_option_id": 0,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">11</span><span style=\"font-family: Cambria Math;\">.(a) <strong>JC Bose </strong></span><span style=\"font-family: Cambria Math;\">(Father of Indian Pla</span><span style=\"font-family: Cambria Math;\">nt Physiology) invented the &lsquo;crescograph&rsquo; for measuring plant growth. </span><span style=\"font-family: Cambria Math;\"><strong>CV Raman</strong> </span><span style=\"font-family: Cambria Math;\">was awarded the 1930 Nobel Prize in Physics for his discovery of the &lsquo;Raman Effect&rsquo;. </span><strong><span style=\"font-family: Cambria Math;\">CNR Rao </span></strong><span style=\"font-family: Cambria Math;\">- An Indian chemist who was awarded Bharat Ratna in 2014.</span><strong><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">JRD Tata</span></strong><span style=\"font-family: Cambria Math;\"> (Father of Indian</span><span style=\"font-family: Cambria Math;\"> Civil Aviation) - The first person in India to own a flying licence.</span></p>\n",
+    "question_index": 10
+  },
+  {
+    "question": "<p>12<span style=\"font-family: Cambria Math;\">. </span><span style=\"font-family: Cambria Math;\">Kamsale is the folk dance of which of the following Indian </span><span style=\"font-family: Cambria Math;\">states ?</span></p>\n",
+    "options": [
+      "Jharkhand",
+      "Karnataka",
+      "Kerala",
+      "Bihar"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">12</span><span style=\"font-family: Cambria Math;\">.(b) <strong>Karnataka. Kamsale dance</strong></span><span style=\"font-family: Cambria Math;\"> (Beesu Kamsale) - A unique folk art performed by the devotees of God Mahadeshwara. It also refers to a brass made musical instrument. It is a group dance form performed by the menfolk in v</span><span style=\"font-family: Cambria Math;\">illages in the Mysore, Nanjangud, Kollegala and Bangalore areas. </span><strong><span style=\"font-family: Cambria Math;\">Other folk dances </span></strong><span style=\"font-family: Cambria Math;\"><strong>-</strong> Dollu Kunitha, Bolak-aat (Bolak Dance), Bhootha Aradhane, Nagamandala Dance, Veeragase, Yakshagana.</span><span style=\"font-family: Cambria Math;\"> </span></p>\n",
+    "question_index": 11
+  },
+  {
+    "question": "<p>13<span style=\"font-family: Cambria Math;\">. </span><span style=\"font-family: Cambria Math;\">Ambubachi fair is held every year in which of the following </span><span style=\"font-family: Cambria Math;\">states ?</span></p>\n",
+    "options": [
+      "Manipur",
+      "Arunachal Pradesh",
+      "Nagaland",
+      "Assam"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">13</span><span style=\"font-family: Cambria Math;\">.(d) <strong>Assam</strong>. </span><span style=\"font-family: Cambria Math;\">It is an annual Hindu mela held at </span><strong><span style=\"font-family: Cambria Math;\">Kamakhya Temple</span></strong><span style=\"font-family: Cambria Math;\"> in Guwahati, symbolising</span><span style=\"font-family: Cambria Math;\"> the fertility cult of Goddess Kamakhya.<strong> </strong></span><span style=\"font-family: Cambria Math;\"><strong>Important Fairs of Indian</strong> </span><span style=\"font-family: Cambria Math;\"><strong>States </strong>:</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">Baneshwar Fair (Dungarpur Mahadev Temple Rajasthan), Kumbh Mela (Nasik, Ujjain, Prayagraj, Haridwar), Surajkund Handicrafts Mela (Haryana), Madhavpur Mela (Porbandar, Gujarat), Nau</span><span style=\"font-family: Cambria Math;\">chandi Fair (Meerut, Uttar Pradesh), Sonepur Cattle Fair (Bihar).</span></p>\n",
+    "question_index": 12
+  },
+  {
+    "question": "<p>14<span style=\"font-family: Cambria Math;\">. </span><span style=\"font-family: Cambria Math;\">In November 2022, Manika Batra created</span><span style=\"font-family: Cambria Math;\"> history by becoming the first Indian woman paddler to win a bronze medal in which </span><span style=\"font-family: Cambria Math;\">event ?</span></p>\n",
+    "options": [
+      "Euro-Asia Cup",
+      "Pan America Table Tennis Cup",
+      "ITTF-AATU Asian Cup",
+      "Table Tennis World Cup"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">14</span><span style=\"font-family: Cambria Math;\">.(c) <strong>ITTF-AATU Asian Cup. Manika Batra</strong></span><span style=\"font-family: Cambria Math;\"><strong> - </strong>Indian table tennis player. She is currently World number 39 in the International Table Tennis Federation (as of May 2023). </span><span style=\"font-family: Cambria Math;\"><strong>Awarded </strong>:</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">Major Dhyan Chand Khel Ratna (2020), Arjuna Award (2018), The Breakthrough Star Award by ITTF (2018). Table tennis players (India</span><span style=\"font-family: Cambria Math;\">) :</span><span style=\"font-family: Cambria Math;\"> Achanta Sharath Kamal, Kamlesh Mehta, Mouma Das, Sathiyan Gnanasekaran. </span></p>\n",
+    "question_index": 13
+  },
+  {
+    "question": "<p>15<span style=\"font-family: Cambria Math;\">. </span><span style=\"font-family: Cambria Math;\">Manju Barggavee was awarded the Sangeet Natak Akademi Award 2019 for her contribution to Indian classical </span><span style=\"font-family: Cambria Math;\">dance ?</span></p>\n",
+    "options": [
+      "Kathak",
+      "Bharatanatyam",
+      "Kuchipudi",
+      "Mohiniyattam"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">15</span><span style=\"font-family: Cambria Math;\">.(c) <strong>Kuchipudi</strong></span><span style=\"font-family: Cambria Math;\"><strong> </strong>(Andhra Pradesh). </span><strong><span style=\"font-family: Cambria Math;\">Famous Kuchipudi </span><span style=\"font-family: Cambria Math;\">Dance</span></strong><span style=\"font-family: Cambria Math;\"><strong>rs </strong>:</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">Raja and Radha Reddy, Yamini Reddy, Kaushalya Reddy, Bhavana Reddy, Lakshmi Narayn Shastri, Swapana Sundari. </span><strong><span style=\"font-family: Cambria Math;\">Classical dances of India :</span></strong><span style=\"font-family: Cambria Math;\"> Bharatanatyam (Tamil Nadu), Kathak (Uttar Pradesh), Kathakali (Kerala), Kuchipudi (Andhra Pradesh), Manipuri (Ma</span><span style=\"font-family: Cambria Math;\">nipur), Mohiniyattam (Kerala), Odissi (Odisha), Sattriya (Assam). </span></p>\n",
+    "question_index": 14
+  }
+];
     </script>
-    
+
     <!-- Central JS Controller -->
     <script src="../js/mock-core.js"></script>
 </body>

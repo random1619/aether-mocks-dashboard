@@ -3,43 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aether Mocks</title>
+    <title>Mocks Wallah</title>
     <!-- Fonts & Icons -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    
+
     <!-- Central Stylesheet -->
     <link rel="stylesheet" href="../css/mock-main.css">
-    
+
     <!-- Math Formula Rendering (KaTeX/MathJax) -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    
+
     <!-- Timer Config -->
-    <meta name="exam-duration" content="60">
+    <meta name="exam-duration" content="30">
 </head>
 <body>
     <!-- Welcome Screen -->
     <div class="welcome-screen" id="welcomeScreen">
         <div class="welcome-container">
             <div class="welcome-header" style="margin-bottom: 24px;">
-                <h1 style="font-size: 2rem; font-weight: 700; color: #0f172a; margin-bottom: 8px;"><i class="fas fa-graduation-cap" style="color: #3b82f6;"></i> Aether Mocks</h1>
-                <p style="color: #64748b;">Computer Based Test Portal</p>
+                <h1 style="font-size: 2rem; font-weight: 700; color: var(--text-main); margin-bottom: 8px;"><i class="fas fa-graduation-cap" style="color: var(--primary);"></i> Mocks Wallah</h1>
+                <p style="color: var(--text-muted);">Computer Based Test Portal</p>
             </div>
-            
+
             <div class="test-details" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-bottom: 32px; text-align: left;">
-                <div class="detail-item" style="padding: 12px; background: #f8fafc; border-radius: 8px; border: 1px solid #e2e8f0;">
-                    <div class="detail-label" style="font-size: 0.8rem; color: #64748b;">Total Questions</div>
-                    <div class="detail-value" style="font-size: 1.1rem; font-weight: 600; color: #0f172a;">10</div>
+                <div class="detail-item" style="padding: 12px; background: var(--bg-color); border-radius: 8px; border: 1px solid var(--border-color);">
+                    <div class="detail-label" style="font-size: 0.8rem; color: var(--text-muted);">Total Questions</div>
+                    <div class="detail-value" style="font-size: 1.1rem; font-weight: 600; color: var(--text-main);">15</div>
                 </div>
-                <div class="detail-item" style="padding: 12px; background: #f8fafc; border-radius: 8px; border: 1px solid #e2e8f0;">
-                    <div class="detail-label" style="font-size: 0.8rem; color: #64748b;">Duration</div>
-                    <div class="detail-value" style="font-size: 1.1rem; font-weight: 600; color: #0f172a;">60 mins</div>
+                <div class="detail-item" style="padding: 12px; background: var(--bg-color); border-radius: 8px; border: 1px solid var(--border-color);">
+                    <div class="detail-label" style="font-size: 0.8rem; color: var(--text-muted);">Duration</div>
+                    <div class="detail-value" style="font-size: 1.1rem; font-weight: 600; color: var(--text-main);">30 mins</div>
                 </div>
             </div>
-            
+
             <div class="welcome-actions">
                 <button class="btn btn-primary" id="startBtn" onclick="document.getElementById('welcomeScreen').style.display='none'; document.getElementById('examContainer').style.display='flex';" style="font-size: 1.1rem; padding: 12px 32px; width: 100%;">
                     <i class="fas fa-play" style="margin-right: 8px;"></i> Start Test
@@ -47,12 +47,12 @@
             </div>
         </div>
     </div>
-    
+
     <!-- Main Exam Interface -->
     <div class="exam-container" id="examContainer" style="display: none; height: 100vh; flex-direction: column;">
         <!-- Top Header -->
         <div class="exam-header">
-            <div class="exam-title">Aether Mocks</div>
+            <div class="exam-title">Mocks Wallah</div>
             <div class="header-actions" style="display: flex; align-items: center; gap: 12px;">
                 <button class="btn-icon" id="themeToggleBtn" title="Switch to Dark Mode"><i class="fas fa-moon"></i></button>
                 <button class="btn-icon" id="fullscreenToggleBtn" title="Toggle Fullscreen"><i class="fas fa-expand"></i></button>
@@ -62,14 +62,14 @@
                 </div>
             </div>
         </div>
-        
+
         <!-- Main Content -->
         <div class="mock-container">
             <!-- Question Area -->
             <div class="question-view">
                 <!-- Dynamically populated question container -->
                 <div id="questionContainer" style="flex: 1; display: flex; flex-direction: column; gap: 24px;"></div>
-                
+
                 <!-- Controls -->
                 <div class="nav-controls">
                     <button class="btn btn-secondary btn-prev"><i class="fas fa-chevron-left" style="margin-right: 8px;"></i> Previous</button>
@@ -79,40 +79,221 @@
                     <button class="btn btn-primary btn-next">Next <i class="fas fa-chevron-right" style="margin-left: 8px;"></i></button>
                 </div>
             </div>
-            
+
             <!-- Desktop Navigator Sidebar -->
             <div class="sidebar">
                 <div class="sidebar-section-title">Summary Status</div>
                 <div class="stats-grid">
                     <div class="stat-item">
-                        <div class="stat-count" id="stat-answered" style="color: #10b981;">0</div>
+                        <div class="stat-count" id="stat-answered" style="color: var(--success);">0</div>
                         <div class="stat-name">Answered</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-count" id="stat-flagged" style="color: #f59e0b;">0</div>
+                        <div class="stat-count" id="stat-flagged" style="color: var(--warning);">0</div>
                         <div class="stat-name">Flagged</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-count" id="stat-not-answered" style="color: #64748b;">0</div>
+                        <div class="stat-count" id="stat-not-answered" style="color: var(--text-muted);">0</div>
                         <div class="stat-name">Unanswered</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-count" id="stat-not-visited" style="color: #94a3b8;">0</div>
+                        <div class="stat-count" id="stat-not-visited" style="color: var(--text-muted);">0</div>
                         <div class="stat-name">Not Visited</div>
                     </div>
                 </div>
-                
+
                 <div class="sidebar-section-title" style="margin-top: 16px;">Question Navigator</div>
                 <div class="questions-grid"></div>
             </div>
         </div>
     </div>
-    
+
     <!-- Inject Question Data -->
     <script>
-        const questions = [];
+        const questions = [
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\">1. Who has become the first woman director general of the Council of Scientific and Industrial Research?</span></p>",
+    "options": [
+      "Sanjay Verma",
+      "Vinod Aggarwal",
+      "Nallathamby Kalaiselvi",
+      "Prakash Chand"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">1.(</span><span style=\"font-family: Cambria Math;\">c)</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\"><strong>Nallathamby Kalaiselvi</strong> </span><span style=\"font-family: Cambria Math;\">became the first women director general of the Council of S</span><span style=\"font-family: Cambria Math;\">cientific and Industrial Research (CSIR).</span><span style=\"font-family: Cambria Math;\"> <strong>CSIR</strong>: </span><span style=\"font-family: Cambria Math;\">Founded:</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">26 </span><span style=\"font-family: Cambria Math;\">september</span><span style=\"font-family: Cambria Math;\"> 1942, Headquarters: New Delhi. </span><span style=\"font-family: Cambria Math;\"><strong>Prakash Chand </strong>{</span><span style=\"font-family: Cambria Math;\">Ambassador: Eritrea}. </span><strong><span style=\"font-family: Cambria Math;\">Vinod Aggarwal</span></strong><span style=\"font-family: Cambria Math;\"><strong>:</strong> {President of </span><strong><span style=\"font-family: Cambria Math;\">SIAM</span></strong><span style=\"font-family: Cambria Math;\"><strong> </strong>(</span><span style=\"font-family: Cambria Math;\">Society of Indian Automobile Manufacturers)</span><span style=\"font-family: Cambria Math;\">}.</span></p>",
+    "question_index": 0
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\">2. By</span><span style=\"font-family: Cambria Math;\"> which name is the birthday of Lord Krishna famous?</span></p>",
+    "options": [
+      "Mahashtami",
+      "Maha Navami",
+      "Janmashtami",
+      "Akshaya Tritiya"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p><span style=\\\"font-family: Cambria Math;\\\">2.(</span><span style=\\\"font-family: Cambria Math;\\\">c) <strong>Janmashtami </strong></span><span style=\\\"font-family: Cambria Math;\\\">(August-September), also known as Gokulashtami, is an annual Hindu festival celebrated to celebrate the birth of Lord Krishna, the eighth of Vishnu\\'s Dashavatara and the twenty-second of the twenty-four incarnations. It is celebrated</span><span style=\\\"font-family: Cambria Math;\\\"> in Bhadrapada on the eighth day (Ashtami) of Krishna Paksha (dark fortnight), according to the Hindu lunisolar calendar.</span></p>",
+    "question_index": 1
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\">3. Vempati Chinna Satyam was awarded the Padma Bhushan </span><span style=\"font-family: Cambria Math;\">in 1998. He was a ________ dancer.</span></p>",
+    "options": [
+      "Kuchipudi",
+      "Kathak",
+      "Manipuri",
+      "Kathakali"
+    ],
+    "correct_option_id": 0,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">3.(</span><span style=\"font-family: Cambria Math;\">a) <strong>Vempati Chinna Satyam</strong></span><span style=\"font-family: Cambria Math;\"><strong> </strong>(Andhra Pradesh) is a great dancer and master of Kuchipudi dance. He started the </span><span style=\"font-family: Cambria Math;\"><strong>Kuchipudi Kala Academy</strong> </span><span style=\"font-family: Cambria Math;\">in 1963 in Madras. </span><span style=\"font-family: Cambria Math;\"><strong>Awards and honors</strong>: </span><span style=\"font-family: Cambria Math;\">Kalidas Award by the Government of Madhya Pradesh and Kalaimamani by the Governme</span><span style=\"font-family: Cambria Math;\">nt of Tamil Nadu. He was awarded the doctorate degree by Andhra University. </span><span style=\"font-family: Cambria Math;\"><strong>Other famous proponents of Kuchipudi Dance include-</strong> </span><span style=\"font-family: Cambria Math;\">Raja and Radha Reddy, their daughter Yamini Reddy; Kaushalya Reddy; Bhavana Reddy, etc.</span><span style=\"font-family: Cambria Math;\"> <strong>Indrani Bajpai</strong></span><span style=\"font-family: Cambria Math;\"><strong> </strong>(Indrani Rahman) is a fam</span><span style=\"font-family: Cambria Math;\">ous exponent of Kuchipudi Dance. </span></p>",
+    "question_index": 2
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\">4. Which of the following folk dance forms is NOT associated with the state of Gujarat?</span></p>",
+    "options": [
+      "Hojagiri",
+      "Dandiya",
+      "Bhavai",
+      "Garba"
+    ],
+    "correct_option_id": 0,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">4.(</span><span style=\"font-family: Cambria Math;\">a) <strong>Dance Forms of Gujarat:</strong> </span><span style=\"font-family: Cambria Math;\">Dandiya, Garba, Bhavai, Tippani, Padhar, Hoodo. </span><span style=\"font-family: Cambria Math;\"><strong>Tripura</strong>: </span><span style=\"font-family: Cambria Math;\">Hojagiri ,</span><span style=\"font-family: Cambria Math;\"> Goria, Lebang Boomani</span><span style=\"font-family: Cambria Math;\">, Hai-hak, jhum, Sangrai. </span></p>",
+    "question_index": 3
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\">5. Which</span><span style=\"font-family: Cambria Math;\"> of the following countries hosted the first edition of the Summer Youth Olym</span><span style=\"font-family: Cambria Math;\">pic Games in 2010?</span></p>",
+    "options": [
+      "China",
+      "Singapore",
+      "Argentina",
+      "Senegal"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">5.(</span><span style=\"font-family: Cambria Math;\">b) </span><span style=\"font-family: Cambria Math;\">The first summer edition was held in </span><strong><span style=\"font-family: Cambria Math;\">Singapore</span></strong><span style=\"font-family: Cambria Math;\"><strong> </strong>from </span><span style=\"font-family: Cambria Math;\"><strong>14 to 26 August 2010.</strong> <strong>Winner</strong>: <strong>China</strong>. </span><span style=\"font-family: Cambria Math;\">2nd edition 2014 {Nanjing (China), Winner: China}, 3rd edition 2018 {Buenos Aires (Argentina), Winner: Russia}.</span></p>",
+    "question_index": 4
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\"> The height of stumps in cricket is______</span></p>",
+    "options": [
+      "28 inches",
+      "20 inches",
+      "25 inches",
+      "22 inches"
+    ],
+    "correct_option_id": 0,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">6.(</span><span style=\"font-family: Cambria Math;\">a)</span><span style=\"font-family: Cambria Math;\"> Height of stumps in cricket</span><span style=\"font-family: Cambria Math;\"> <strong>28 inches.</strong></span><strong><span style=\"font-family: Cambria Math;\"> </span></strong><span style=\"font-family: Cambria Math;\">Cricket pitch </span><span style=\"font-family: Cambria Math;\">breadth :</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\"><strong>10 feet.</strong> </span><span style=\"font-family: Cambria Math;\">Important</span><span style=\"font-family: Cambria Math;\"> <strong>terminologies </strong></span><span style=\"font-family: Cambria Math;\">used in </span><span style=\"font-family: Cambria Math;\">Cricket: Striker, Off-side/leg-side, Run, Four, Bowled, Caught, LBW, Stumped, Innings, etc.</span></p>",
+    "question_index": 5
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\">7. Rukmani</span><span style=\"font-family: Cambria Math;\"> Devi Arundale was a famous dancer of which Indian classical dance form?</span></p>",
+    "options": [
+      "Bharatanatyam",
+      "Kathak",
+      "Mohiniyattam",
+      "Kathakali"
+    ],
+    "correct_option_id": 0,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">7.(</span><span style=\"font-family: Cambria Math;\">a) <strong>Rukmani Devi Arundale (Tamil Nadu)</strong> </span><span style=\"font-family: Cambria Math;\">is a famous dancer of Bharatanatyam classical dance form. </span><strong><span style=\"font-family: Cambria Math;\">Awards and hono</span><span style=\"font-family: Cambria Math;\">rs:</span></strong><span style=\"font-family: Cambria Math;\"> Padma Bhushan (1956), Sangeet Natak Award (1957), Sangeet Natak Akademi Fellowship (1967). </span><strong><span style=\"font-family: Cambria Math;\">Bharatanatyam Dancers</span></strong><span style=\"font-family: Cambria Math;\"><strong>:</strong>Mallika</span><span style=\"font-family: Cambria Math;\"> Sarabhai, Yamini Krishnamurthy, Alarmel Valli, Padma Subrahmanyam etc.</span></p>",
+    "question_index": 6
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\">8. Who</span><span style=\"font-family: Cambria Math;\"> among the following is a famous performer of the Kathakali classical dance?</span></p>",
+    "options": [
+      "Pankaj Charan Das",
+      "Sunanda Nayar",
+      "Gopinath",
+      "Raja Reddy"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p><span style=\\\"font-family: Cambria Math;\\\">8.(</span><span style=\\\"font-family: Cambria Math;\\\">c) <strong>Guru Gopinath</strong> </span><span style=\\\"font-family: Cambria Math;\\\">was a well known Kathakali dancer.</span><span style=\\\"font-family: Cambria Math;\\\"> <strong>Awards and Honors</strong>:</span><span style=\\\"font-family: Cambria Math;\\\"> Sangeet Natak Akademi\\'s award (1965), \\'Kala Tilakam\\' by the Guruvayur Devaswom (1968), \\'Kala RatIn&rsquo; title by the Travancore Devaswom Board (1973), etc. </span><span style=\\\"font-family: Cambria Math;\\\">Pankaj Charan Das (Odissi dancer), Sunanda Nair (Mohiniattam dancer), Raja Reddy (Kuchipudi dancer).</span><span style=\\\"font-family: Cambria Math;\\\"> </span></p>",
+    "question_index": 7
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\">9. Shovana Narayan was awarded which of the following awards in 2013?</span></p>",
+    "options": [
+      "Guru Deba Prasad",
+      "Sangam Kala",
+      "Kalidas Samman",
+      "Bharat Muni Samman"
+    ],
+    "correct_option_id": 0,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">9.(</span><span style=\"font-family: Cambria Math;\">a) <strong>Shovana Narayan</strong> </span><span style=\"font-family: Cambria Math;\">was awarded Guru Deba Prasad in 2013.</span><span style=\"font-family: Cambria Math;\"> <strong>Awards and Honors:</strong> </span><span style=\"font-family: Cambria Math;\">Padma</span><span style=\"font-family: Cambria Math;\"> Shri (1992), Sangeet Natak Akademi Award (1999&ndash;2000), Oisca Award (Japan) (1990&ndash;91), Dadabhai Naoroji Award (1993), </span><span style=\"font-family: Cambria Math;\">Bihar Gaurav Puraskar (1985), Guru ML Koser Award (2013), Art Karat Award (2014), Bharat Nirman&rsquo;s Social Responsibility Award 2014 etc. </span></p>",
+    "question_index": 8
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\">10</span><span style=\"font-family: Cambria Math;\">. The abbreviation &ldquo;CPCL&rdquo; is associated with the petroleum industry in India. Expand </span><span style=\"font-family: Cambria Math;\">&ldquo;CPCL&rdquo;:</span></p>",
+    "options": [
+      "Central Petroleum Corporation Limited",
+      "Coimbatore Petroleum Corporation Limited",
+      "Chennai Petroleum Corporation Limited",
+      "Corporation of Petroleum and Chemicals Limited"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p>10<span style=\"font-family: Cambria Math;\">.(c) <strong>Chennai Petroleum Corporation Limited (CPCL)</strong> </span><span style=\"font-family: Cambria Math;\">is a subsidiary </span><span style=\"font-family: Cambria Math;\">of Indian Oil Corporation which is under the ownership of the Ministry of Petroleum and Natural Gas of the Government of India. </span><span style=\"font-family: Cambria Math;\">Headquarters</span><span style=\"font-family: Cambria Math;\">: Chennai, </span><strong><span style=\"font-family: Cambria Math;\">Founded</span></strong><span style=\"font-family: Cambria Math;\">: 18 November 1965, </span><strong><span style=\"font-family: Cambria Math;\">Chairman</span></strong><span style=\"font-family: Cambria Math;\">: Shrikant Madhav Vaidya, </span><strong><span style=\"font-family: Cambria Math;\">Managing Director</span></strong><span style=\"font-family: Cambria Math;\"><strong>:</strong> Arvind Kumar (As of Decem</span><span style=\"font-family: Cambria Math;\">ber 2022).</span></p>",
+    "question_index": 9
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\">11</span><span style=\"font-family: Cambria Math;\">.</span><span style=\"font-family: Cambria Math;\"> In which of the following Olympic </span><span style=\"font-family: Cambria Math;\">games</span><span style=\"font-family: Cambria Math;\"> did India NOT win Gold?</span></p>",
+    "options": [
+      "1948",
+      "1928",
+      "1932",
+      "1960"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p>11<span style=\"font-family: Cambria Math;\">.(d) </span><span style=\"font-family: Cambria Math;\">India has won</span><span style=\"font-family: Cambria Math;\"> <strong>35 medals</strong></span><span style=\"font-family: Cambria Math;\"> at the Olympics since the 1900 edition.</span><span style=\"font-family: Cambria Math;\"> <strong>Gold medal winners</strong></span><span style=\"font-family: Cambria Math;\"> from India: Jaipal Singh (</span><strong><span style=\"font-family: Cambria Math;\">1928</span></strong><span style=\"font-family: Cambria Math;\"><strong> </strong>- Amsterdam), Lal Bokhari (</span><strong><span style=\"font-family: Cambria Math;\">1932 </span></strong><span style=\"font-family: Cambria Math;\">- Los Angeles), Dhyan Chand (</span><strong><span style=\"font-family: Cambria Math;\">1936</span></strong><span style=\"font-family: Cambria Math;\"><strong> </strong>- Berlin)</span><span style=\"font-family: Cambria Math;\">, Kishan</span><span style=\"font-family: Cambria Math;\"> Lal (</span><span style=\"font-family: Cambria Math;\"><strong>1948</strong> </span><span style=\"font-family: Cambria Math;\">- London), K.D. Singh </span><span style=\"font-family: Cambria Math;\">(<strong>1952</strong> -</span><span style=\"font-family: Cambria Math;\"> Helsinki), Balbir Singh Sr (</span><strong><span style=\"font-family: Cambria Math;\">1956 </span></strong><span style=\"font-family: Cambria Math;\">- Melbourne), Charanjit Singh (</span><span style=\"font-family: Cambria Math;\">1964</span><span style=\"font-family: Cambria Math;\"> - Tokyo), Vasudevan Bhaskaran (</span><strong><span style=\"font-family: Cambria Math;\">1980 </span></strong><span style=\"font-family: Cambria Math;\">- Moscow), Abhinav Bindra </span><span style=\"font-family: Cambria Math;\">(2008-</span><span style=\"font-family: Cambria Math;\">Beijing), and Neeraj Chopra (</span><strong><span style=\"font-family: Cambria Math;\">2021</span></strong><span style=\"font-family: Cambria Math;\">-Tokyo ). </span></p>",
+    "question_index": 10
+  },
+  {
+    "question": "<p><span style=\\\"font-family: Cambria Math;\\\">12</span><span style=\\\"font-family: Cambria Math;\\\">. Which Indian tabla virtuoso and musician won the \\'Best Contemporary World </span><span style=\\\"font-family: Cambria Math;\\\">Musi </span><span style=\\\"font-family: Cambria Math;\\\">Album\\' Grammy award for \\'Global</span><span style=\\\"font-family: Cambria Math;\\\"> Drum Project\\'?</span></p>",
+    "options": [
+      "Pandit Sandeep Das",
+      "Ustad Alla Rakha",
+      "Ustad Zakir Hussain",
+      "Pandit Anindo Chatterjee"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p>12<span style=\\\"font-family: Cambria Math;\\\">.(c) <strong>Ustad Zakir </strong></span><strong><span style=\\\"font-family: Cambria Math;\\\">Hussain</span></strong><span style=\\\"font-family: Cambria Math;\\\"> (tabla player) won <strong>51st Grammy award </strong>on 8 February 2009. <strong>Awards </strong>and Honors: Padma Shri (1988), Padma Bhushan (2002), Sangeet Natak Akademi Award (1990), Kalidas Samman (2006), Lifetime Achievement Award (2017, San Francisco Jazz Center), Academy Fe</span><span style=\\\"font-family: Cambria Math;\\\">llow award (2019), Kyoto Prize (2022, Japan\\'s highest private award for global achievement). </span></p>",
+    "question_index": 11
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\">13</span><span style=\"font-family: Cambria Math;\">.</span><span style=\"font-family: Cambria Math;\"> Who was recognised as &lsquo;Asthana Nart</span><span style=\"font-family: Cambria Math;\">aki&rsquo; (resident dancer) of the Tirumala </span><span style=\"font-family: Cambria Math;\">Tirupati </span><span style=\"font-family: Cambria Math;\">Devasthanam for her contribution in the development and promotion of the Indian </span><span style=\"font-family: Cambria Math;\">classical</span><span style=\"font-family: Cambria Math;\"> dance forms?</span></p>",
+    "options": [
+      "Rukmini Devi",
+      "Ragini Devi",
+      "Yamini Krishnamurthy",
+      "Uma Sharma"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p>13<span style=\"font-family: Cambria Math;\">.(c) <strong>Mungara Yamini Krishnamurthy </strong></span><span style=\"font-family: Cambria Math;\">(Bharatanatyam and Kuchipudi dancer). </span><span style=\"font-family: Cambria Math;\">She was</span><span style=\"font-family: Cambria Math;\"> also known as the \"torch bearer\" of Kuchipudi form of dance. Her autobiography: &lsquo;A passion for dance&rsquo;. </span><strong><span style=\"font-family: Cambria Math;\">Awards and Honors:</span></strong><span style=\"font-family: Cambria Math;\"> Padma </span><span style=\"font-family: Cambria Math;\">Shri (1968), Padma </span><span style=\"font-family: Cambria Math;\">Bhushan (2001), Padma Vibhushan (2016), \"Natya Shastra\" (2014, by Shambhavi School of Dance), etc. Rukmini Devi Arundale (Bharatnatyam dancer), Ragini Devi (Bharata Natyam, Kuchipudi, Kathakali and Odissi dancer), Uma Sharma (Kathak dancer). </span></p>",
+    "question_index": 12
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\">14</span><span style=\"font-family: Cambria Math;\">. Manimekalai describes the story of which of the following?</span></p>",
+    "options": [
+      "Kovalan and Madhavi&rsquo;s Daughter",
+      "Kovalan&rsquo;s wife Madhavi",
+      "Kovalan&rsquo;s first wife Kannagi",
+      "Kovalan and Madhavi&rsquo;s Son"
+    ],
+    "correct_option_id": 0,
+    "solution": "<p>14<span style=\"font-family: Cambria Math;\">.(a) <strong>Manimekalai </strong></span><span style=\"font-family: Cambria Math;\">describes the story of the daughter of </span><strong><span style=\"font-family: Cambria Math;\">Kovalan and Madhavi.</span></strong><span style=\"font-family: Cambria Math;\"> It</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">is a Tamil-Buddhist epic written by Kulavanikan Seethalai Sataar in the 6th century. Other</span><span style=\"font-family: Cambria Math;\"> <strong>Great Epics</strong></span><span style=\"font-family: Cambria Math;\"> of Tamil Literature are Cilappatikaram (written by Ilango Adigal, story of Kannaki and </span><span style=\"font-family: Cambria Math;\">Kovalan )</span><span style=\"font-family: Cambria Math;\">, Civaka Cintamani (written by Tirutakkatevar, story of King Caccantan), Kundalakesi (composed by Nagasena, story of Kundalakesi and Kalan), and Va</span><span style=\"font-family: Cambria Math;\">layapathi (story of a father who has two wives). </span></p>",
+    "question_index": 13
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\">15</span><span style=\"font-family: Cambria Math;\">.</span><span style=\"font-family: Cambria Math;\"> With which of the following Indian states is the folk dance Lezim associated?</span></p>",
+    "options": [
+      "Maharashtra",
+      "Kerala",
+      "Arunachal Pradesh",
+      "Jharkhand"
+    ],
+    "correct_option_id": 0,
+    "solution": "<p>15<span style=\"font-family: Cambria Math;\">.(a) </span><span style=\"font-family: Cambria Math;\">Folk dances of </span><strong><span style=\"font-family: Cambria Math;\">Maharashtra</span><span style=\"font-family: Cambria Math;\">: </span></strong><span style=\"font-family: Cambria Math;\"><strong>Lezim,</strong> </span><span style=\"font-family: Cambria Math;\">Lavani, Nakata, Koli, Gafa, Dahikala Dasavtar or Bohada, Tamasha, Mauni, Powara, Gouricha, etc. </span><strong><span style=\"font-family: Cambria Math;\">Kerala</span></strong><span style=\"font-family: Cambria Math;\">: Ottam Thulal, Kaikottikali, Tappatikali, Kali Auttam, etc. </span><strong><span style=\"font-family: Cambria Math;\">Arunachal Prade</span><span style=\"font-family: Cambria Math;\">sh: </span></strong><span style=\"font-family: Cambria Math;\">Chham, Mask dance (Mukhauta Nritya), War dance, Buiya, Chalo, Wancho, Pasi Kongki, Ponung, Popir, Bardo , etc. </span><span style=\"font-family: Cambria Math;\"><strong>Jharkhand</strong>: </span><span style=\"font-family: Cambria Math;\">Karma, Agni, Jhumar, Janani Jhumar, Mardana Jhumar, Paika, Phagua, Chhanu, Sarahul, Jat-Jatin, Karma, Danga, Bidesia, Sohrai, Hunt</span><span style=\"font-family: Cambria Math;\">a Dance, Mundari Dance, Sarhul, Barao, Jhitka, Danga, Domkach, Ghora Naach, etc. </span></p>",
+    "question_index": 14
+  }
+];
     </script>
-    
+
     <!-- Central JS Controller -->
     <script src="../js/mock-core.js"></script>
 </body>

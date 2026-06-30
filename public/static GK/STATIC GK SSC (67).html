@@ -3,43 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aether Mocks</title>
+    <title>Mocks Wallah</title>
     <!-- Fonts & Icons -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    
+
     <!-- Central Stylesheet -->
     <link rel="stylesheet" href="../css/mock-main.css">
-    
+
     <!-- Math Formula Rendering (KaTeX/MathJax) -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    
+
     <!-- Timer Config -->
-    <meta name="exam-duration" content="60">
+    <meta name="exam-duration" content="30">
 </head>
 <body>
     <!-- Welcome Screen -->
     <div class="welcome-screen" id="welcomeScreen">
         <div class="welcome-container">
             <div class="welcome-header" style="margin-bottom: 24px;">
-                <h1 style="font-size: 2rem; font-weight: 700; color: #0f172a; margin-bottom: 8px;"><i class="fas fa-graduation-cap" style="color: #3b82f6;"></i> Aether Mocks</h1>
-                <p style="color: #64748b;">Computer Based Test Portal</p>
+                <h1 style="font-size: 2rem; font-weight: 700; color: var(--text-main); margin-bottom: 8px;"><i class="fas fa-graduation-cap" style="color: var(--primary);"></i> Mocks Wallah</h1>
+                <p style="color: var(--text-muted);">Computer Based Test Portal</p>
             </div>
-            
+
             <div class="test-details" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-bottom: 32px; text-align: left;">
-                <div class="detail-item" style="padding: 12px; background: #f8fafc; border-radius: 8px; border: 1px solid #e2e8f0;">
-                    <div class="detail-label" style="font-size: 0.8rem; color: #64748b;">Total Questions</div>
-                    <div class="detail-value" style="font-size: 1.1rem; font-weight: 600; color: #0f172a;">10</div>
+                <div class="detail-item" style="padding: 12px; background: var(--bg-color); border-radius: 8px; border: 1px solid var(--border-color);">
+                    <div class="detail-label" style="font-size: 0.8rem; color: var(--text-muted);">Total Questions</div>
+                    <div class="detail-value" style="font-size: 1.1rem; font-weight: 600; color: var(--text-main);">15</div>
                 </div>
-                <div class="detail-item" style="padding: 12px; background: #f8fafc; border-radius: 8px; border: 1px solid #e2e8f0;">
-                    <div class="detail-label" style="font-size: 0.8rem; color: #64748b;">Duration</div>
-                    <div class="detail-value" style="font-size: 1.1rem; font-weight: 600; color: #0f172a;">60 mins</div>
+                <div class="detail-item" style="padding: 12px; background: var(--bg-color); border-radius: 8px; border: 1px solid var(--border-color);">
+                    <div class="detail-label" style="font-size: 0.8rem; color: var(--text-muted);">Duration</div>
+                    <div class="detail-value" style="font-size: 1.1rem; font-weight: 600; color: var(--text-main);">30 mins</div>
                 </div>
             </div>
-            
+
             <div class="welcome-actions">
                 <button class="btn btn-primary" id="startBtn" onclick="document.getElementById('welcomeScreen').style.display='none'; document.getElementById('examContainer').style.display='flex';" style="font-size: 1.1rem; padding: 12px 32px; width: 100%;">
                     <i class="fas fa-play" style="margin-right: 8px;"></i> Start Test
@@ -47,12 +47,12 @@
             </div>
         </div>
     </div>
-    
+
     <!-- Main Exam Interface -->
     <div class="exam-container" id="examContainer" style="display: none; height: 100vh; flex-direction: column;">
         <!-- Top Header -->
         <div class="exam-header">
-            <div class="exam-title">Aether Mocks</div>
+            <div class="exam-title">Mocks Wallah</div>
             <div class="header-actions" style="display: flex; align-items: center; gap: 12px;">
                 <button class="btn-icon" id="themeToggleBtn" title="Switch to Dark Mode"><i class="fas fa-moon"></i></button>
                 <button class="btn-icon" id="fullscreenToggleBtn" title="Toggle Fullscreen"><i class="fas fa-expand"></i></button>
@@ -62,14 +62,14 @@
                 </div>
             </div>
         </div>
-        
+
         <!-- Main Content -->
         <div class="mock-container">
             <!-- Question Area -->
             <div class="question-view">
                 <!-- Dynamically populated question container -->
                 <div id="questionContainer" style="flex: 1; display: flex; flex-direction: column; gap: 24px;"></div>
-                
+
                 <!-- Controls -->
                 <div class="nav-controls">
                     <button class="btn btn-secondary btn-prev"><i class="fas fa-chevron-left" style="margin-right: 8px;"></i> Previous</button>
@@ -79,40 +79,221 @@
                     <button class="btn btn-primary btn-next">Next <i class="fas fa-chevron-right" style="margin-left: 8px;"></i></button>
                 </div>
             </div>
-            
+
             <!-- Desktop Navigator Sidebar -->
             <div class="sidebar">
                 <div class="sidebar-section-title">Summary Status</div>
                 <div class="stats-grid">
                     <div class="stat-item">
-                        <div class="stat-count" id="stat-answered" style="color: #10b981;">0</div>
+                        <div class="stat-count" id="stat-answered" style="color: var(--success);">0</div>
                         <div class="stat-name">Answered</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-count" id="stat-flagged" style="color: #f59e0b;">0</div>
+                        <div class="stat-count" id="stat-flagged" style="color: var(--warning);">0</div>
                         <div class="stat-name">Flagged</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-count" id="stat-not-answered" style="color: #64748b;">0</div>
+                        <div class="stat-count" id="stat-not-answered" style="color: var(--text-muted);">0</div>
                         <div class="stat-name">Unanswered</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-count" id="stat-not-visited" style="color: #94a3b8;">0</div>
+                        <div class="stat-count" id="stat-not-visited" style="color: var(--text-muted);">0</div>
                         <div class="stat-name">Not Visited</div>
                     </div>
                 </div>
-                
+
                 <div class="sidebar-section-title" style="margin-top: 16px;">Question Navigator</div>
                 <div class="questions-grid"></div>
             </div>
         </div>
     </div>
-    
+
     <!-- Inject Question Data -->
     <script>
-        const questions = [];
+        const questions = [
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\">Of which of the following states is Jallikattu a famous bull-taming festival ? </span></p>\n",
+    "options": [
+      "Karnataka",
+      "Kerala",
+      "Arunachal Pradesh",
+      "Tamil Nadu"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p>1.(d) <strong>Tamil Nadu. Jallikattu</strong> : <span style=\"font-family: Cambria Math;\">Part of Pongal celebrations on Mattu Pongal day which</span><span style=\"font-family: Cambria Math;\"> occurs annually in January. </span><span style=\"font-family: Cambria Math;\"><strong>Some Other Festivals</strong> :</span><span style=\"font-family: Cambria Math;\"> Natyanjali Dance Festival, Karthigai Deepam, Aadi Perukku. </span><span style=\"font-family: Cambria Math;\"><strong>Kerala</strong> : </span><span style=\"font-family: Cambria Math;\">Onam Festival, Thrissur Pooram Festival, Vishu</span><span style=\"font-family: Cambria Math;\">. <strong>Arunachal Pradesh:</strong> </span><span style=\"font-family: Cambria Math;\">Nyokum, Dree Festival, Boori Boot. </span><strong><span style=\"font-family: Cambria Math;\">Karnataka:</span></strong><span style=\"font-family: Cambria Math;\"> Kambala (buffalo race), Hampi, Pattadakal. </span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\"> </span></p>\n",
+    "question_index": 0
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\"> Defence Research Development Organisation (DRDO), which is under the Ministry of Defence Government o</span><span style=\"font-family: Cambria Math;\">f India, was formed in the year _______.</span></p>\n",
+    "options": [
+      "1948",
+      "1958",
+      "1975",
+      "1981"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p>2.(b) <strong>1958. Defence Research and Development Organisation (DRDO)</strong> : <span style=\\\"font-family: Cambria Math;\\\">The Research and Development wing of the military\\'s research and development, headquartered in Delhi. Achievements of DRDO :</span><span style=\\\"font-family: Cambria Math;\\\"> Agni and Prithvi series of missiles, Light combat a</span><span style=\\\"font-family: Cambria Math;\\\">ircraft (Tejas), Multi-barrel rocket launcher (Pinaka) Mk-I, Pilotless Target Aircraft &lsquo;Lakshya-I.</span><span style=\\\"font-family: Cambria Math;\\\"> </span></p>\\n",
+    "question_index": 1
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\">Kottakkal Nandakumaran Nair is a Sangeet Natak Akademi 2019 Awardee for his contribution to ________.</span></p>\n",
+    "options": [
+      "Bharatanatyam",
+      "Contemporary",
+      "Kathakali",
+      "Odissi"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p>3.(c) <strong>Kathakali </strong><span style=\"font-family: Cambria Math;\">(Classical Indian dance of Kerala). Kottakal Nandakumaran Nair - He is famous for his &lsquo;Kathi&rsquo; Veshas and has skill in enacting &lsquo;Pacha&rsquo; and &lsquo;Minukku&rsquo; veshas.<strong> </strong></span><span style=\"font-family: Cambria Math;\"><strong>Exponents of Kathakali</strong> : </span><span style=\"font-family: Cambria Math;\">Kalamandalam Gopi, Guru Raghavan Nair, Kalamandalam Murali, K. Shankaranarayan, Govindan Kutty, K. Vasunni. </span><span style=\"font-family: Cambria Math;\"><strong>Bharatanatyam</strong> </span><span style=\"font-family: Cambria Math;\">(Tamil Nadu) - Rukmini Devi, Padma Subrahmanyam, Alarmel Valli, Yamini Krishnamurthy, Mallika Sarabhai. </span><strong><span style=\"font-family: Cambria Math;\">Odissi </span></strong><span style=\"font-family: Cambria Math;\">(Odisha)</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">- Kelucharan M</span><span style=\"font-family: Cambria Math;\">ohapatra, Sonal Mansingh, Gangadhar Pradhan, Madhavi Mudgal. </span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\"> </span></p>\n",
+    "question_index": 2
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\"> Which musical instrument Dr </span><span style=\"font-family: Cambria Math;\">A P J Abdul Kalam, former President of India, used to play ?</span></p>\n",
+    "options": [
+      "Guitar",
+      "Sarod",
+      "Veena",
+      "Piano"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p>4.(c) <strong>Veena </strong><span style=\"font-family: Cambria Math;\">(Stringed instrument)</span><span style=\"font-family: Cambria Math;\">. <strong>APJ Abdul Kalam </strong>:</span><span style=\"font-family: Cambria Math;\"> He served as the 11th president of India and known as the Missile Man of India.</span><span style=\"font-family: Cambria Math;\"> <strong>His Famous Books </strong>: &ldquo;</span><span style=\"font-family: Cambria Math;\">Wings of Fire&rdquo; (1999), &ldquo;Ignited Minds&rdquo; (2002), &ldquo;Turning Points&rdquo; (2012), &ldquo;Learning How to Fly&rdquo; (2</span><span style=\"font-family: Cambria Math;\">016), &ldquo;Enlightened Minds&rdquo; (2017). </span><span style=\"font-family: Cambria Math;\"><strong>Exponents of Veena </strong>:</span><span style=\"font-family: Cambria Math;\"> Rajhesh Vaidhya, Jayanthi Kumaresh, Veena E. Gayathri, Emani Sankara Sastry. </span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\"> </span></p>\n",
+    "question_index": 3
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\">Kerala is famous for which of the following festivals?</span></p>\n",
+    "options": [
+      "Pongal",
+      "Ugadi",
+      "Bihu",
+      "Onam"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p>5.(d) <strong>Onam</strong> - <span style=\"font-family: Cambria Math;\">It is a 10-day harvest festival in Kerala.</span><span style=\"font-family: Cambria Math;\"> <strong>Other festivals in Kerala</strong></span><span style=\"font-family: Cambria Math;\"><strong> </strong>: Vishu Thrissur Pooram, Thiruvathira, Theyyam Festival, Attukal Pongala, Makaravilakku. </span><strong><span style=\"font-family: Cambria Math;\">Pongal</span></strong><span style=\"font-family: Cambria Math;\"> (Tamil Nadu), </span><span style=\"font-family: Cambria Math;\"><strong>Ugadi</strong> </span><span style=\"font-family: Cambria Math;\">(Andhra Pradesh, Karnataka, and Telangana), </span><strong><span style=\"font-family: Cambria Math;\">B</span></strong><span style=\"font-family: Cambria Math;\"><strong>ihu</strong> </span><span style=\"font-family: Cambria Math;\">(Assam). </span></p>\n",
+    "question_index": 4
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\">Guru Gopinath National Award 2021 was honoured to whom among the following Kathak dancers?</span></p>\n",
+    "options": [
+      "Durga Lal",
+      "Roshan Kumari",
+      "Kumudini Lakhia",
+      "Shambhu Maharaj"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p>6.(c) <strong>Kumidini Lakhia,</strong> <span style=\"font-family: Cambria Math;\">an Indian Kathak dancer and choreographer. Awards - Padma shri (1987), Padma Bhushan (2010), Kalidas Samman (2002-03), Sangeet Natak Akademi Award (1982). &ldquo;Guru Gopinath Desiya Natya Puraskaram&rdquo; is the</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">highest award conferred by the Government of Kerala fo</span><span style=\"font-family: Cambria Math;\">r excellence in dance. Durga Lal (Kathak dancer of the Jaipur Gharana), Roshan Kumari (Kathak dancer of the Jaipur Gharana), Shambhu Maharaj (Kathak dancer of the Lucknow Gharana).</span></p>\n",
+    "question_index": 5
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\">Indian Academy of Sciences, founded in 1934 by CV Raman, is situated in__________</span></p>\n",
+    "options": [
+      "Mumbai",
+      "Hyderabad",
+      "Bangalore",
+      "New Delhi"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p>7.(c) <strong>Bangalore.</strong> <span style=\"font-family: Cambria Math;\">The Indian Academy of Sciences -</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">Registered as a society in 1934 with the aim of promoting the progress and upholding the cause of science, in both pure and applied branches. C.V. Raman, won the Nobel Prize in Physics (1930) for his work on the scattering of light. India celebrates Nation</span><span style=\"font-family: Cambria Math;\">al Science Day on 28 February of every year to commemorate the discovery of the &ldquo;Raman effect&rdquo;.</span></p>\n",
+    "question_index": 6
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\">Gurucharan Singh received the Padma Shri from the Government of India in 2023 for his contributions to the sport of__________.</span></p>\n",
+    "options": [
+      "football",
+      "basketball",
+      "kabaddi",
+      "cricket"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p>8.(d) <strong>Cricket.</strong> <span style=\"font-family: Cambria Math;\">Gurucharan Singh is a cricket coach, the second cricket coach to be awarded the Dronacharya Award (1987) after Desh Prem Azad (awarded in 1986).</span></p>\n",
+    "question_index": 7
+  },
+  {
+    "question": "<p><span style=\\\"font-family: Cambria Math;\\\">Who was the author of the famous book \\'The Economic History of India\\\"?</span></p>\\n",
+    "options": [
+      "Dadabhai Naoroji",
+      "PC Dutta",
+      "RG Bhandarkar",
+      "RC Dutt"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p>9.(d)<strong> RC Dutt</strong>. <span style=\"font-family: Cambria Math;\">Romesh Chunder Dutt, an Indian civil servant, economic historian, and translator </span><span style=\"font-family: Cambria Math;\">of Ramayana and Mahabharata, was the president of Indian National Congress in 1899. Other Books: &ldquo;The Epic Of The Bharatas Mahabharatas&rdquo;, &ldquo;The peasantry of Bengal&rdquo;. </span><strong><span style=\"font-family: Cambria Math;\">Dadabhai Naoroji</span></strong><span style=\"font-family: Cambria Math;\">: &ldquo;Poverty and Un-British Rule in India&rdquo;. </span><strong><span style=\"font-family: Cambria Math;\">RG Bhandarkar</span></strong><span style=\"font-family: Cambria Math;\">: &ldquo;Early History of </span><span style=\"font-family: Cambria Math;\">the Deccan&rdquo;</span></p>\n",
+    "question_index": 8
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\">Jagoi and Thabal Chongba are the famous dances of which Indian state?</span></p>\n",
+    "options": [
+      "Uttar Pradesh",
+      "Odisha",
+      "Manipur",
+      "Nagaland"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p><span style=\\\"font-family: Cambria Math;\\\">10</span><span style=\\\"font-family: Cambria Math;\\\">.(c) <strong>Manipur.</strong> </span><span style=\\\"font-family: Cambria Math;\\\">Manipuri classical dance, also known as Manipuri Ras Leela dance. Performed during the \\'Lai Haroba\\' festival in honor of the sylvan deities. The musical instruments used in this art are pung, harmonium, flute. Other Dances: </span><span style=\\\"font-family: Cambria Math;\\\"><strong>Uttar Pradesh</strong> </span><span style=\\\"font-family: Cambria Math;\\\">- Nautanki, Raslil</span><span style=\\\"font-family: Cambria Math;\\\">a, Kajri, Jaita. </span><span style=\\\"font-family: Cambria Math;\\\"><strong>Odisha</strong> </span><span style=\\\"font-family: Cambria Math;\\\">- Savari, Ghumara, Painka, Munari. </span><span style=\\\"font-family: Cambria Math;\\\"><strong>Nagaland</strong> </span><span style=\\\"font-family: Cambria Math;\\\">- Rangma, Zeliang, Nsuirolians. </span></p>\\n",
+    "question_index": 9
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\">In 2023, which Indian Tennis play</span><span style=\"font-family: Cambria Math;\">er became the oldest to win the ATP Masters 1000 title?</span></p>\n",
+    "options": [
+      "Rohan Bopanna",
+      "Mahesh Bhupathi",
+      "Vijay Amritraj",
+      "Ramanathan Krishnan"
+    ],
+    "correct_option_id": 0,
+    "solution": "<p><span style=\\\"font-family: Cambria Math;\\\">11</span><span style=\\\"font-family: Cambria Math;\\\">.(a) <strong>Rohan Bopanna.</strong> </span><span style=\\\"font-family: Cambria Math;\\\">A member of In</span><span style=\\\"font-family: Cambria Math;\\\">dia\\'s Davis Cup team since 2002, he also represented India in the 2012 and 2016 editions of the Olympics. Awards: Arjuna Award for Lawn Tennis (2018), Grand Slam title mixed doubles event at the 2017 French Open. The Association of Tennis Professionals (AT</span><span style=\\\"font-family: Cambria Math;\\\">P) Masters 1000, launched in 1990, consists of the top male tennis players at nine ATP Tour tournaments, with the winner earning a 1,000 Pepperstone ATP ranking.</span></p>\\n",
+    "question_index": 10
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\"> Who was the first American male athlete to win the Marathon gold medal in the Olympic Games?</span></p>\n",
+    "options": [
+      "Abebe Bikila",
+      "Thomas Hicks",
+      "Frank Shorter",
+      "John Hayes"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">12</span><span style=\"font-family: Cambria Math;\">.(b) <strong>Thomas Hicks. Abebe Bikila</strong></span><span style=\"font-family: Cambria Math;\"> was an Ethiopian marathon runner who was a back-to-back Olympic marathon champio</span><span style=\"font-family: Cambria Math;\">n (1960 and 1964). </span><span style=\"font-family: Cambria Math;\"><strong>Johnny Hayes</strong></span><span style=\"font-family: Cambria Math;\"> is probably best known for winning the controversial marathon race at the London Olympics and is one of only three male American athletes to win the Olympic marathon (1908), the other two being Thomas Hicks (1904) and Frank Shorter (1972).</span></p>\n",
+    "question_index": 11
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\"> Begum Akhtar is associated with which of the following fields?</span></p>\n",
+    "options": [
+      "Writing",
+      "Politics",
+      "Painting",
+      "Ghazal"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">13</span><span style=\"font-family: Cambria Math;\">.(d) <strong>Ghazal.</strong> </span><span style=\"font-family: Cambria Math;\">Begum Akhtar (Akhtari Bai Faizabadi) - A renowned Indian singer and actress, known as the Queen of Ghazals, renowned for her exceptional performances in Hindustani classical music. Awards: Padma Bhushan(1975), Padma Shri (1968), Sangeet Natak Akademi Award</span><span style=\"font-family: Cambria Math;\">(1972). </span></p>\n",
+    "question_index": 12
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\"> The Indian National Science Academy is situated in _____.</span></p>\n",
+    "options": [
+      "New Delhi",
+      "Hyderabad",
+      "Allahabad",
+      "Bangaluru"
+    ],
+    "correct_option_id": 0,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">14</span><span style=\"font-family: Cambria Math;\">.(a) <strong>New Delhi.</strong> </span><span style=\"font-family: Cambria Math;\">The Indian National Science Academy (formerly known as The National Institute of Sciences of India). Established - January 1935 at Calcutta. Headquarters - Delhi. Aim: Promotion of scientific knowledge.</span><span style=\"font-family: Cambria Math;\"> <strong>Institutions and Place</strong></span><span style=\"font-family: Cambria Math;\"> - The Defence Research and Dev</span><span style=\"font-family: Cambria Math;\">elopment Organisation (DRDO) - New Delhi; Indian Space Research Organisation (ISRO) - Bengaluru; Indian Institute of Sciences (IISC) - Bengaluru; Council of Scientific and Industrial Research (CSIR) - New Delhi; Bhabha Atomic Research Centre (BARC) - Trom</span><span style=\"font-family: Cambria Math;\">bay, Mumbai.</span></p>\n",
+    "question_index": 13
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\">The famous Rath Yatra, Car Festival is associated with which Lord?</span></p>\n",
+    "options": [
+      "Lord Shiva",
+      "Lord Jagannath",
+      "Lord Indra",
+      "Lord Brahma"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">15</span><span style=\"font-family: Cambria Math;\">.(b) <strong>Lord Jagannath</strong></span><strong><span style=\"font-family: Cambria Math;\">.</span></strong><span style=\"font-family: Cambria Math;\"><strong> Rath Yatra</strong> - </span><span style=\"font-family: Cambria Math;\">It is Hindu chariot festival celebrated annually, on the bright half of the lunar month of Ashadh</span><span style=\"font-family: Cambria Math;\"> (June - July). Jagannath temple - Built by King Anantavarman of the Chodaganga dynasty in the 12th century and recognised by European sailors as the white pagoda in the 19th century. </span></p>\n",
+    "question_index": 14
+  }
+];
     </script>
-    
+
     <!-- Central JS Controller -->
     <script src="../js/mock-core.js"></script>
 </body>

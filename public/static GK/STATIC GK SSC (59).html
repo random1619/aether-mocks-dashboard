@@ -3,43 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aether Mocks</title>
+    <title>Mocks Wallah</title>
     <!-- Fonts & Icons -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    
+
     <!-- Central Stylesheet -->
     <link rel="stylesheet" href="../css/mock-main.css">
-    
+
     <!-- Math Formula Rendering (KaTeX/MathJax) -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    
+
     <!-- Timer Config -->
-    <meta name="exam-duration" content="60">
+    <meta name="exam-duration" content="30">
 </head>
 <body>
     <!-- Welcome Screen -->
     <div class="welcome-screen" id="welcomeScreen">
         <div class="welcome-container">
             <div class="welcome-header" style="margin-bottom: 24px;">
-                <h1 style="font-size: 2rem; font-weight: 700; color: #0f172a; margin-bottom: 8px;"><i class="fas fa-graduation-cap" style="color: #3b82f6;"></i> Aether Mocks</h1>
-                <p style="color: #64748b;">Computer Based Test Portal</p>
+                <h1 style="font-size: 2rem; font-weight: 700; color: var(--text-main); margin-bottom: 8px;"><i class="fas fa-graduation-cap" style="color: var(--primary);"></i> Mocks Wallah</h1>
+                <p style="color: var(--text-muted);">Computer Based Test Portal</p>
             </div>
-            
+
             <div class="test-details" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-bottom: 32px; text-align: left;">
-                <div class="detail-item" style="padding: 12px; background: #f8fafc; border-radius: 8px; border: 1px solid #e2e8f0;">
-                    <div class="detail-label" style="font-size: 0.8rem; color: #64748b;">Total Questions</div>
-                    <div class="detail-value" style="font-size: 1.1rem; font-weight: 600; color: #0f172a;">10</div>
+                <div class="detail-item" style="padding: 12px; background: var(--bg-color); border-radius: 8px; border: 1px solid var(--border-color);">
+                    <div class="detail-label" style="font-size: 0.8rem; color: var(--text-muted);">Total Questions</div>
+                    <div class="detail-value" style="font-size: 1.1rem; font-weight: 600; color: var(--text-main);">15</div>
                 </div>
-                <div class="detail-item" style="padding: 12px; background: #f8fafc; border-radius: 8px; border: 1px solid #e2e8f0;">
-                    <div class="detail-label" style="font-size: 0.8rem; color: #64748b;">Duration</div>
-                    <div class="detail-value" style="font-size: 1.1rem; font-weight: 600; color: #0f172a;">60 mins</div>
+                <div class="detail-item" style="padding: 12px; background: var(--bg-color); border-radius: 8px; border: 1px solid var(--border-color);">
+                    <div class="detail-label" style="font-size: 0.8rem; color: var(--text-muted);">Duration</div>
+                    <div class="detail-value" style="font-size: 1.1rem; font-weight: 600; color: var(--text-main);">30 mins</div>
                 </div>
             </div>
-            
+
             <div class="welcome-actions">
                 <button class="btn btn-primary" id="startBtn" onclick="document.getElementById('welcomeScreen').style.display='none'; document.getElementById('examContainer').style.display='flex';" style="font-size: 1.1rem; padding: 12px 32px; width: 100%;">
                     <i class="fas fa-play" style="margin-right: 8px;"></i> Start Test
@@ -47,12 +47,12 @@
             </div>
         </div>
     </div>
-    
+
     <!-- Main Exam Interface -->
     <div class="exam-container" id="examContainer" style="display: none; height: 100vh; flex-direction: column;">
         <!-- Top Header -->
         <div class="exam-header">
-            <div class="exam-title">Aether Mocks</div>
+            <div class="exam-title">Mocks Wallah</div>
             <div class="header-actions" style="display: flex; align-items: center; gap: 12px;">
                 <button class="btn-icon" id="themeToggleBtn" title="Switch to Dark Mode"><i class="fas fa-moon"></i></button>
                 <button class="btn-icon" id="fullscreenToggleBtn" title="Toggle Fullscreen"><i class="fas fa-expand"></i></button>
@@ -62,14 +62,14 @@
                 </div>
             </div>
         </div>
-        
+
         <!-- Main Content -->
         <div class="mock-container">
             <!-- Question Area -->
             <div class="question-view">
                 <!-- Dynamically populated question container -->
                 <div id="questionContainer" style="flex: 1; display: flex; flex-direction: column; gap: 24px;"></div>
-                
+
                 <!-- Controls -->
                 <div class="nav-controls">
                     <button class="btn btn-secondary btn-prev"><i class="fas fa-chevron-left" style="margin-right: 8px;"></i> Previous</button>
@@ -79,40 +79,221 @@
                     <button class="btn btn-primary btn-next">Next <i class="fas fa-chevron-right" style="margin-left: 8px;"></i></button>
                 </div>
             </div>
-            
+
             <!-- Desktop Navigator Sidebar -->
             <div class="sidebar">
                 <div class="sidebar-section-title">Summary Status</div>
                 <div class="stats-grid">
                     <div class="stat-item">
-                        <div class="stat-count" id="stat-answered" style="color: #10b981;">0</div>
+                        <div class="stat-count" id="stat-answered" style="color: var(--success);">0</div>
                         <div class="stat-name">Answered</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-count" id="stat-flagged" style="color: #f59e0b;">0</div>
+                        <div class="stat-count" id="stat-flagged" style="color: var(--warning);">0</div>
                         <div class="stat-name">Flagged</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-count" id="stat-not-answered" style="color: #64748b;">0</div>
+                        <div class="stat-count" id="stat-not-answered" style="color: var(--text-muted);">0</div>
                         <div class="stat-name">Unanswered</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-count" id="stat-not-visited" style="color: #94a3b8;">0</div>
+                        <div class="stat-count" id="stat-not-visited" style="color: var(--text-muted);">0</div>
                         <div class="stat-name">Not Visited</div>
                     </div>
                 </div>
-                
+
                 <div class="sidebar-section-title" style="margin-top: 16px;">Question Navigator</div>
                 <div class="questions-grid"></div>
             </div>
         </div>
     </div>
-    
+
     <!-- Inject Question Data -->
     <script>
-        const questions = [];
+        const questions = [
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\">1. Who among the following was the guru of Pandit Ravi Shankar ?</span></p>",
+    "options": [
+      "Bismillah Khan",
+      "Amjad Ali Khan",
+      "Ali Akbar Khan",
+      "Allaudin Khan"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p>1.(d) <strong>Allauddin Khan</strong><span style=\"font-family: Cambria Math;\"> (Sarod player) was the guru of Pandit Ravi Shankar. He was the court musician for the Maharaja of Maihar. He was the founder of modern </span><span style=\"font-family: Cambria Math;\"><strong>Maihar</strong> </span><span style=\"font-family: Cambria Math;\">gharana. He was </span><span style=\"font-family: Cambria Math;\"><strong>awarded</strong> </span><span style=\"font-family: Cambria Math;\">the Padma Bhushan</span><span style=\"font-family: Cambria Math;\"> (1958) and the Padma Vibhushan (1971), Sangeet Natak Akademi award and Sangeet Natak Akademi Fellowship (1954). Bismillah Khan (Shehnai player); Amjad Ali Khan (Sarod player); Ali Akbar Khan (Sarod player; Maihar Gharana). </span></p>",
+    "question_index": 0
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\">2. In AIBA Boxing Junior Boys and Girls Competitions, the bouts must consist of each round of ________minutes.</span></p>",
+    "options": [
+      "5 min",
+      "3 min",
+      "1 min",
+      "2 min"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p>2.(d)<span style=\\\"font-family: Cambria Math;\\\"> In all AOB Junior Boys\\' and Girls\\' Competitions, the </span><strong><span style=\\\"font-family: Cambria Math;\\\">Bouts </span></strong><span style=\\\"font-family: Cambria Math;\\\">(boxing match) must consist of three rounds of</span><span style=\\\"font-family: Cambria Math;\\\"><strong> two minutes</strong> </span><span style=\\\"font-family: Cambria Math;\\\">each. A </span><span style=\\\"font-family: Cambria Math;\\\">standard<strong> </strong></span><span style=\\\"font-family: Cambria Math;\\\"><strong>ring</strong> </span><span style=\\\"font-family: Cambria Math;\\\">is between 16 and 24 feet (4.9 and 7.3 m) to a side between the ropes with another 2 feet (0.61 m) outside.</span></p>",
+    "question_index": 1
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\">3. The &lsquo;Rann Utsav&rsquo; is organized in which of the following states of India to promote tourism?</span></p>",
+    "options": [
+      "Gujarat",
+      "Rajasthan",
+      "Punjab",
+      "Maharashtra"
+    ],
+    "correct_option_id": 0,
+    "solution": "<p>3.(a) <strong>Rann Utsav</strong><span style=\"font-family: Cambria Math;\"> is celebrated every year from November till Holi in the Dhordo village of Kutch district in the state of </span><strong><span style=\"font-family: Cambria Math;\">Gujarat</span></strong><span style=\"font-family: Cambria Math;\">. Other </span><span style=\"font-family: Cambria Math;\"><strong>festivals</strong> </span><span style=\"font-family: Cambria Math;\">of Gujarat: Navratri, Uttarayan, Shamlaji Melo, Vautha Mela, Rath Yatra, Modhera Dance Festival, Bhadra Purnima, Bhavnath Mah</span><span style=\"font-family: Cambria Math;\">adev Fair, etc. </span></p>",
+    "question_index": 2
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\">4</span><span style=\"font-family: Cambria Math;\">. Who among the following choreographers from Bollywood was a three time National Award winner in 2003, 2007 and 2009 ? He/She worked in many Hindi movies including Sanjay Leela Bhansali&rsquo;s movie &rsquo;Devdas&rsquo;?</span></p>",
+    "options": [
+      "Geeta Kapoor",
+      "Saroj Khan",
+      "Farah Khan",
+      "Vaibhavi Marchant"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p>4.(b)<strong><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">Saroj Khan</span></strong><span style=\"font-family: Cambria Math;\"> won three National Awards in 2003, 2007, and 2009 for the films Devdas, Sringaram, and Jab we met respectively. She was an Indian dance choreographer in Hindi cinema and was best known for the dance form </span><span style=\"font-family: Cambria Math;\"><strong>mujra</strong>.</span><span style=\"font-family: Cambria Math;\"> She won Filmfare Best Choreography Award 8 </span><span style=\"font-family: Cambria Math;\">times (1989 (first recipient of this award), 1990, 1991, 1993, 1994, 2000, 2003, and 2008).</span></p>",
+    "question_index": 3
+  },
+  {
+    "question": "<p>5.<span style=\"font-family: Cambria Math;\">The Asian Games 2018 were </span><span style=\"font-family: Cambria Math;\">held in which of the following countries?</span></p>",
+    "options": [
+      "South Korea",
+      "Indonesia",
+      "Japan",
+      "China"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p>5.(b) <span style=\"font-family: Cambria Math;\">Asian Games </span><span style=\"font-family: Cambria Math;\"><strong>2018</strong>:</span><span style=\"font-family: Cambria Math;\"> Host {Jakarta and Palembang (Indonesia)}; Top Ranked Team (China).</span><span style=\"font-family: Cambria Math;\"> <strong>2022</strong>: </span><span style=\"font-family: Cambria Math;\">Host {Hangzhou (China); will be held from 23 September to 8 October 2023}; </span><span style=\"font-family: Cambria Math;\"><strong>2026</strong>: </span><span style=\"font-family: Cambria Math;\">Host { Aichi-Nagoya (Japan)}; </span><span style=\"font-family: Cambria Math;\"><strong>2030</strong>:</span><span style=\"font-family: Cambria Math;\"> Host {Doha (Qatar)}; </span><span style=\"font-family: Cambria Math;\"><strong>2034</strong>: </span><span style=\"font-family: Cambria Math;\">Host {Riyadh (Saudi A</span><span style=\"font-family: Cambria Math;\">rabia)}. </span></p>",
+    "question_index": 4
+  },
+  {
+    "question": "<p>6.<span style=\"font-family: Cambria Math;\"> When is Raksha Bandhan celebrated in India as per the Hindu calendar?</span></p>",
+    "options": [
+      "Amavasya, Shravan month",
+      "Poornima, Ashadha month",
+      "Amavasya, Ashadha month",
+      "Poornima, Shravan month"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p>6.(d) <strong>Raksha Bandhan</strong><span style=\"font-family: Cambria Math;\"> is a festival that is celebrated on the full moon day in the month of </span><strong><span style=\"font-family: Cambria Math;\">Shravan</span></strong><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">(July 23 - August 22) according to the Hindu Lunar calendar. Other </span><span style=\"font-family: Cambria Math;\"><strong>months</strong> </span><span style=\"font-family: Cambria Math;\">of Hindu calendar: Chaitra (March &ndash; April), Vaishakha (April - May), Jyeshtha (May - June), Ashadha (June - July), Bhadra (August - September), Ashwin (September - October), Kartik</span><span style=\"font-family: Cambria Math;\">a (October - November), Agrahayana (November - December), Pausha</span><span style=\"font-family: Cambria Math;\">(December - January), Magha (January - February), and Phalguna (February - March). </span></p>",
+    "question_index": 5
+  },
+  {
+    "question": "<p>7. <span style=\"font-family: Cambria Math;\">Decadal grow</span><span style=\"font-family: Cambria Math;\">th rate of population between 2001 - 2011 is _________.</span></p>",
+    "options": [
+      "18.70 percent",
+      "15.70 percent",
+      "17.70 percent",
+      "16.70 percent"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p>7.(c) <span style=\\\"font-family: Cambria Math;\\\">According to the first results of Census 2011, India\\'s population growth rate has decelerated to 17</span><span style=\\\"font-family: Cambria Math;\\\">.64 per cent in the decade 2001-11. </span><span style=\\\"font-family: Cambria Math;\\\"><strong>2011 Census</strong>:</span><span style=\\\"font-family: Cambria Math;\\\"> State with the highest population density </span><strong><span style=\\\"font-family: Cambria Math;\\\">(Bihar)</span></strong><span style=\\\"font-family: Cambria Math;\\\">, State with the lowest population density</span><span style=\\\"font-family: Cambria Math;\\\"> <strong>(Arunachal Pradesh)</strong></span><span style=\\\"font-family: Cambria Math;\\\">, Union territory with least population </span><span style=\\\"font-family: Cambria Math;\\\"><strong>(Lakshadweep)</strong>,</span><span style=\\\"font-family: Cambria Math;\\\"> State with the highest population<strong> </strong></span><strong><span style=\\\"font-family: Cambria Math;\\\">(Utta</span><span style=\\\"font-family: Cambria Math;\\\">r Pradesh)</span></strong><span style=\\\"font-family: Cambria Math;\\\">, State with the lowest population</span><span style=\\\"font-family: Cambria Math;\\\"> <strong>(Sikkim)</strong>. </span></p>",
+    "question_index": 6
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\">Which of the following folk dances does NOT belong to the s</span><span style=\"font-family: Cambria Math;\">tate of Madhya Pradesh ?</span></p>",
+    "options": [
+      "Laho",
+      "Phulpati",
+      "Matki",
+      "Jawara"
+    ],
+    "correct_option_id": 0,
+    "solution": "<p>8.(a)<strong><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">Laho dance</span></strong><span style=\"font-family: Cambria Math;\"> is a part of Behdienkhlam fest</span><span style=\"font-family: Cambria Math;\">ival, performed by the Jaintia tribe of Meghalaya. Some other famous dances of Meghalaya include Nоngkrem Dance, Shad Suk Mynsiem, Wangala Dance, Dоrsegata Dance, etc. Folk dances of </span><strong><span style=\"font-family: Cambria Math;\">Madhya Pradesh</span></strong><span style=\"font-family: Cambria Math;\"> include </span><span style=\"font-family: Cambria Math;\"><strong>Jawara</strong>, <strong>Matki</strong></span><span style=\"font-family: Cambria Math;\">, Aada, Khada Nach, </span><strong><span style=\"font-family: Cambria Math;\">Phulpati</span></strong><span style=\"font-family: Cambria Math;\">, Grida Dance, Selalarki, Selabhadoni, Maanch, etc. </span></p>",
+    "question_index": 7
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\">How much purse money was given to a Sangeet Natak Akademi fellow in 2019?</span></p>",
+    "options": [
+      "₹4 lakh",
+      "₹3 lakh",
+      "₹2 lakh",
+      "₹1 lakh"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p>9.(b) <strong>Sangeet Natak Akademi Fellowship</strong>: <span style=\"font-family: Cambria Math;\">Awarded for the performing arts in India, Sponsored by (Sangeet Natak Academy), Reward(s) </span><span style=\"font-family: Cambria Math;\">(<strong>₹3 lakh</strong>)</span><span style=\"font-family: Cambria Math;\">, First </span><span style=\"font-family: Cambria Math;\">awarded (1954: Allauddin Khan, Hafiz Ali Khan, Ariyakudi Ramanuja Iyengar, Karaikudi Sambasiva Iyer, and Prithviraj Kapoor). </span></p>",
+    "question_index": 8
+  },
+  {
+    "question": "<p><span style=\\\"font-family: Cambria Math;\\\">In which of the following states was \\'Kudumbashree,\\' women-oriented, community-- based, poverty-reduction programme imp</span><span style=\\\"font-family: Cambria Math;\\\">lemented?</span></p>",
+    "options": [
+      "Maharashtra",
+      "Kerala",
+      "Bihar",
+      "Uttar Pradesh"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p>10.(b) <strong>Kudumbashree</strong> <span style=\\\"font-family: Cambria Math;\\\">is the poverty eradication and women empowerment programme implemented by the State Poverty Eradication Mission (SPEM) of the Government of </span><strong><span style=\\\"font-family: Cambria Math;\\\">Kerala</span></strong><span style=\\\"font-family: Cambria Math;\\\">. The name Kudumbashree in Malayalam language means</span><span style=\\\"font-family: Cambria Math;\\\"> \\'<strong>pros</strong></span><span style=\\\"font-family: Cambria Math;\\\"><strong>perity of the family</strong>\\'. </span><span style=\\\"font-family: Cambria Math;\\\">The \\'Kudumbashree\\' SHG (Self Help Groups) was started in 1998. </span></p>",
+    "question_index": 9
+  },
+  {
+    "question": "<p>11. What does the letter \\'M\\' stand for in the MRTP Act 1969?</p>",
+    "options": [
+      "Monopolistic",
+      "Monopolies",
+      "Multi",
+      "Monopoly"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p>11.(b)<span style=\"font-family: Cambria Math;\"> The </span><strong><span style=\"font-family: Cambria Math;\">Monopolies and Restrictive Trade Practices Act</span></strong><span style=\"font-family: Cambria Math;\"> (MRTP Act) was</span><span style=\"font-family: Cambria Math;\"> enacted in 1969 and came into force from June 1, 1970. This act was replaced by </span><strong><span style=\"font-family: Cambria Math;\">Competition Act 2002</span></strong><span style=\"font-family: Cambria Math;\"><strong> </strong>(on the recommendations of Raghavan committee), with effect from September 1, 2009.</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">The Competition Act 2002 was amended by the</span><strong><span style=\"font-family: Cambria Math;\"> Competition (Amendment) Ac</span></strong><span style=\"font-family: Cambria Math;\"><strong>t, 2007</strong>.</span></p>",
+    "question_index": 10
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\">12. In which season is Sarhul celebrated in Jharkhand?</span></p>",
+    "options": [
+      "Spring",
+      "Autumn",
+      "Monsoon",
+      "Winter"
+    ],
+    "correct_option_id": 0,
+    "solution": "<p>12.(a)<strong> Sarhul </strong><span style=\"font-family: Cambria Math;\">is a<strong> </strong></span><span style=\"font-family: Cambria Math;\"><strong>spring</strong> </span><span style=\"font-family: Cambria Math;\">festival celebrated for three days, from the 3rd day of Chaitra month (March - April) in </span><span style=\"font-family: Cambria Math;\">Sukla Paksh to Chaitra Purnima in the Indian state of </span><strong><span style=\"font-family: Cambria Math;\">Jharkhand</span></strong><span style=\"font-family: Cambria Math;\">. It is an important festival observed by the ethnic groups, Kurukh and Sadan. Other<strong> </strong></span><span style=\"font-family: Cambria Math;\"><strong>festivals</strong> </span><span style=\"font-family: Cambria Math;\">celebrated in Jharkhand are Karam, Jawa, Makar or Tusu Parab, Hal Punhya, Bhagta Parab, Rohini, Ba</span><span style=\"font-family: Cambria Math;\">ndna, etc. </span></p>",
+    "question_index": 11
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\">Which of the following pairs of musicians and their instruments is INCORRECT?</span></p>",
+    "options": [
+      "K Vaidyanathan - Sitar",
+      "Pt. Ram Narayan - Sarangi",
+      "Ustad Vilayat Khan - Sitar",
+      "Bismillah Khan - Shehnai"
+    ],
+    "correct_option_id": 0,
+    "solution": "<p>13.(a)<strong> Kunnakudi Vaidyanathan</strong><span style=\"font-family: Cambria Math;\"> was an Indian classical music<strong> </strong></span><span style=\"font-family: Cambria Math;\"><strong>violinist</strong> </span><span style=\"font-family: Cambria Math;\">and music composer. </span><span style=\"font-family: Cambria Math;\"><strong>Awards and Honours</strong>:</span><span style=\"font-family: Cambria Math;\"> Padma Shri (1993), Kalaimamani award (1993), Sangeet Natak Akademi Award (1993), Sangeetha Kalasikhamani award (1996), Tamil Nadu State Film Award for Best Music Director (1970) , and Tamil Nadu State Film Honorary Award - Raja Sando Award (2000). </span></p>",
+    "question_index": 12
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\">In India census is held regularly every_______year. </span></p>",
+    "options": [
+      "8th",
+      "10th",
+      "12th",
+      "5th"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p>14.(b) <strong>Indian Census</strong><span style=\"font-family: Cambria Math;\"> is conducted after every<strong> </strong></span><strong><span style=\"font-family: Cambria Math;\">10 years</span></strong><span style=\"font-family: Cambria Math;\"> by the Office of the Registrar General and Census Commissioner, Ministry of Home Af</span><span style=\"font-family: Cambria Math;\">fairs. The first census of India was conducted in<strong> </strong></span><strong><span style=\"font-family: Cambria Math;\">1881.</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">Under Article 246</span></strong><span style=\"font-family: Cambria Math;\"><strong>,</strong> The population census is a Union subject (listed </span><span style=\"font-family: Cambria Math;\"><strong>69</strong>)</span><span style=\"font-family: Cambria Math;\"> of the seventh schedule of the constitution. The first complete census of an Indian city was conducted in 1830 by </span><strong><span style=\"font-family: Cambria Math;\">Henry Walter</span></strong><span style=\"font-family: Cambria Math;\"> (</span><span style=\"font-family: Cambria Math;\">father of Indian Census) in Dacca (now Dhaka).</span></p>",
+    "question_index": 13
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\"> Which of the following dance forms is associated with</span><span style=\"font-family: Cambria Math;\"> the state of Arunachal Pradesh?</span></p>",
+    "options": [
+      "Panwariya",
+      "Dhaman",
+      "Buiya",
+      "Garba"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p>15.(c)<span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\"><strong>Buiya</strong> </span><span style=\"font-family: Cambria Math;\">is a folk dance of </span><strong><span style=\"font-family: Cambria Math;\">Arunachal Pradesh</span></strong><span style=\"font-family: Cambria Math;\"> performed by the Digaru Mishmi tribe. This dance is performed in multiple festivals like Tazampu, Duiya, and Tanuya. Other </span><span style=\"font-family: Cambria Math;\"><strong>dances</strong> </span><span style=\"font-family: Cambria Math;\">of Arunachal Pradesh include Chalo </span><span style=\"font-family: Cambria Math;\">dance (Nocte tribe), Oriah Dance (Wancho tribe), Pasi </span><span style=\"font-family: Cambria Math;\">Kongki (Adi Tribe), Ponung Dance (Adi Tribe), Popir Dance (Galo tribe), Bardo Chham (Sherdukpens community), etc. Panwariya dance (Bihar), Dhaman dance (Himachal Pradesh), and Garba (Gujarat). </span></p>",
+    "question_index": 14
+  }
+];
     </script>
-    
+
     <!-- Central JS Controller -->
     <script src="../js/mock-core.js"></script>
 </body>

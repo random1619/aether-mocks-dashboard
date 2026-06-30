@@ -3,43 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aether Mocks</title>
+    <title>Mocks Wallah</title>
     <!-- Fonts & Icons -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    
+
     <!-- Central Stylesheet -->
     <link rel="stylesheet" href="../css/mock-main.css">
-    
+
     <!-- Math Formula Rendering (KaTeX/MathJax) -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    
+
     <!-- Timer Config -->
-    <meta name="exam-duration" content="60">
+    <meta name="exam-duration" content="30">
 </head>
 <body>
     <!-- Welcome Screen -->
     <div class="welcome-screen" id="welcomeScreen">
         <div class="welcome-container">
             <div class="welcome-header" style="margin-bottom: 24px;">
-                <h1 style="font-size: 2rem; font-weight: 700; color: #0f172a; margin-bottom: 8px;"><i class="fas fa-graduation-cap" style="color: #3b82f6;"></i> Aether Mocks</h1>
-                <p style="color: #64748b;">Computer Based Test Portal</p>
+                <h1 style="font-size: 2rem; font-weight: 700; color: var(--text-main); margin-bottom: 8px;"><i class="fas fa-graduation-cap" style="color: var(--primary);"></i> Mocks Wallah</h1>
+                <p style="color: var(--text-muted);">Computer Based Test Portal</p>
             </div>
-            
+
             <div class="test-details" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-bottom: 32px; text-align: left;">
-                <div class="detail-item" style="padding: 12px; background: #f8fafc; border-radius: 8px; border: 1px solid #e2e8f0;">
-                    <div class="detail-label" style="font-size: 0.8rem; color: #64748b;">Total Questions</div>
-                    <div class="detail-value" style="font-size: 1.1rem; font-weight: 600; color: #0f172a;">10</div>
+                <div class="detail-item" style="padding: 12px; background: var(--bg-color); border-radius: 8px; border: 1px solid var(--border-color);">
+                    <div class="detail-label" style="font-size: 0.8rem; color: var(--text-muted);">Total Questions</div>
+                    <div class="detail-value" style="font-size: 1.1rem; font-weight: 600; color: var(--text-main);">15</div>
                 </div>
-                <div class="detail-item" style="padding: 12px; background: #f8fafc; border-radius: 8px; border: 1px solid #e2e8f0;">
-                    <div class="detail-label" style="font-size: 0.8rem; color: #64748b;">Duration</div>
-                    <div class="detail-value" style="font-size: 1.1rem; font-weight: 600; color: #0f172a;">60 mins</div>
+                <div class="detail-item" style="padding: 12px; background: var(--bg-color); border-radius: 8px; border: 1px solid var(--border-color);">
+                    <div class="detail-label" style="font-size: 0.8rem; color: var(--text-muted);">Duration</div>
+                    <div class="detail-value" style="font-size: 1.1rem; font-weight: 600; color: var(--text-main);">30 mins</div>
                 </div>
             </div>
-            
+
             <div class="welcome-actions">
                 <button class="btn btn-primary" id="startBtn" onclick="document.getElementById('welcomeScreen').style.display='none'; document.getElementById('examContainer').style.display='flex';" style="font-size: 1.1rem; padding: 12px 32px; width: 100%;">
                     <i class="fas fa-play" style="margin-right: 8px;"></i> Start Test
@@ -47,12 +47,12 @@
             </div>
         </div>
     </div>
-    
+
     <!-- Main Exam Interface -->
     <div class="exam-container" id="examContainer" style="display: none; height: 100vh; flex-direction: column;">
         <!-- Top Header -->
         <div class="exam-header">
-            <div class="exam-title">Aether Mocks</div>
+            <div class="exam-title">Mocks Wallah</div>
             <div class="header-actions" style="display: flex; align-items: center; gap: 12px;">
                 <button class="btn-icon" id="themeToggleBtn" title="Switch to Dark Mode"><i class="fas fa-moon"></i></button>
                 <button class="btn-icon" id="fullscreenToggleBtn" title="Toggle Fullscreen"><i class="fas fa-expand"></i></button>
@@ -62,14 +62,14 @@
                 </div>
             </div>
         </div>
-        
+
         <!-- Main Content -->
         <div class="mock-container">
             <!-- Question Area -->
             <div class="question-view">
                 <!-- Dynamically populated question container -->
                 <div id="questionContainer" style="flex: 1; display: flex; flex-direction: column; gap: 24px;"></div>
-                
+
                 <!-- Controls -->
                 <div class="nav-controls">
                     <button class="btn btn-secondary btn-prev"><i class="fas fa-chevron-left" style="margin-right: 8px;"></i> Previous</button>
@@ -79,40 +79,221 @@
                     <button class="btn btn-primary btn-next">Next <i class="fas fa-chevron-right" style="margin-left: 8px;"></i></button>
                 </div>
             </div>
-            
+
             <!-- Desktop Navigator Sidebar -->
             <div class="sidebar">
                 <div class="sidebar-section-title">Summary Status</div>
                 <div class="stats-grid">
                     <div class="stat-item">
-                        <div class="stat-count" id="stat-answered" style="color: #10b981;">0</div>
+                        <div class="stat-count" id="stat-answered" style="color: var(--success);">0</div>
                         <div class="stat-name">Answered</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-count" id="stat-flagged" style="color: #f59e0b;">0</div>
+                        <div class="stat-count" id="stat-flagged" style="color: var(--warning);">0</div>
                         <div class="stat-name">Flagged</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-count" id="stat-not-answered" style="color: #64748b;">0</div>
+                        <div class="stat-count" id="stat-not-answered" style="color: var(--text-muted);">0</div>
                         <div class="stat-name">Unanswered</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-count" id="stat-not-visited" style="color: #94a3b8;">0</div>
+                        <div class="stat-count" id="stat-not-visited" style="color: var(--text-muted);">0</div>
                         <div class="stat-name">Not Visited</div>
                     </div>
                 </div>
-                
+
                 <div class="sidebar-section-title" style="margin-top: 16px;">Question Navigator</div>
                 <div class="questions-grid"></div>
             </div>
         </div>
     </div>
-    
+
     <!-- Inject Question Data -->
     <script>
-        const questions = [];
+        const questions = [
+  {
+    "question": "<p>1. Who among the following was the youngest instrumentalist to be awarded the Padma Bhushan, the third highest civilian award of India in 2002?</p>",
+    "options": [
+      "Pandit Ravi Shankar",
+      "Ustad Zakir Hussain",
+      "Pandit Bhimsen Joshi",
+      "Ustad Bismillah Khan"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p>1.(b) <strong>Ustad Zakir Hussain</strong> (Tabla player). His Awards : Padma Vibhushan (2023); Padma bhusan (2002); Padma Shri (1988); Sangeet Natak Akademi (1991). Other Tabla Players : Anuradha Pal; Pandit Swapan Chaudhuri; Pandit Kumar Bose. Pandit Ravi Shankar (Sitar); Pandit Bhimsen Joshi (Vocalist); Ustad Bismillah Khan (Shehnai).</p>",
+    "question_index": 0
+  },
+  {
+    "question": "<p>2. In which of the following cities of Manipur is the Jawaharlal Nehru Manipur Dance Academy located ?</p>",
+    "options": [
+      "Imphal",
+      "Ukhrul",
+      "Chandel",
+      "Thoubal"
+    ],
+    "correct_option_id": 0,
+    "solution": "<p>2.(a) <strong>Imphal. </strong>Jawaharlal Nehru Manipur Dance Academy, a unit of the Sangeet Natak Academy in New Delhi, is dedicated to teaching Manipuri dance and music. Established in 1954. Other renowned Dance Institutes : National Institute of Kathak Dance (New Delhi), Nalanda Nritya Kala Mahavidyalaya (Mumbai), Ballet Repertoire Academy of India (Mumbai), Sri Thyagaraja College of Music and Dance (Hyderabad), and Nrityanjali Institute of Performing Arts (Mumbai).</p>",
+    "question_index": 1
+  },
+  {
+    "question": "<p>3. By which of the following state governments is the Tansen Music Festival organised?</p>",
+    "options": [
+      "Maharashtra Government",
+      "Madhya Pradesh Government",
+      "Rajasthan Government",
+      "Uttar Pradesh Government"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p>3.(b) <strong>Madhya Pradesh Government.</strong> Tansen Samaroh, an annual event in Behat village, Gwalior, Madhya Pradesh, honors the legendary singer Tansen. States and their music festival : Madhya Pradesh - Malwa Utsav, Lokrang Festival, Pachmarhi Utsav, Akhil Bhartiya Kalidas Samaroh. Maharashtra - Banganga, Ellora Ajanta, Elephanta. Rajasthan - Udaipur World Music Festival, Mewar Festival, Jaisalmer Desert Festival. Uttar Pradesh - Taj Mahotsav, Lucknow Mahotsav, Vrindavan Sharadotsav, Sankat Mochan Sangeet Samaroh.</p>",
+    "question_index": 2
+  },
+  {
+    "question": "<p>4. Which of the following festivals is celebrated as the birth anniversary of Guru Nanak Dev?</p>",
+    "options": [
+      "Hola Mohalla",
+      "Baisakhi",
+      "Gurpurab",
+      "Chappar Mela"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p>4.(c) <strong>Gurpurab.</strong> Guru Nanak Jayanti, also known as Gurpurab, celebrates the birth anniversary of the first Sikh Guru, Guru Nanak Dev. This festival occurs on Kartik Poornima, the fifteenth lunar day of the month of Kartik, typically in November on the Gregorian calendar. Hola Mohalla, or Hola, is a three-day Sikh festival that usually takes place in March. Vaisakhi, celebrated on April 13 or sometimes April 14, marks the first day of the month of Vaisakh. Chhapar Mela, a popular Punjabi fair, occurs annually in September in the village of Chhapar in the Ludhiana district of Punjab.</p>",
+    "question_index": 3
+  },
+  {
+    "question": "<p>5. When was the 1st Asian Kabaddi Championship held?</p>",
+    "options": [
+      "1970",
+      "1985",
+      "1980",
+      "1975"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p>5.(c)<strong> 1980. </strong>The 1st Asian Kabaddi Championship was held in 1980 and included as a demonstration game in the 9th Asian Games in New Delhi in 1982. The 9th Championship took place in the Republic of Korea, where India secured its 8th title. Kabaddi was also included in the South Asian Federation (SAF) Games started in 1984 in Dhaka, Bangladesh.</p>",
+    "question_index": 4
+  },
+  {
+    "question": "<p>6. Harela is a festival of greenery, peace, prosperity, and environmental conservation, primarily celebrated in which of the following states?</p>",
+    "options": [
+      "Madhya Pradesh",
+      "Haryana",
+      "Assam",
+      "Uttarakhand"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p>6.(d) <strong>Uttarakhand. </strong>Harela, meaning \"Day of Green,\" marks the new harvest brought by the rainy season and is celebrated annually during the Shravan month in the Kumaon region. Important Indian Festivals - Uttarakhand : Phool Dei, Olgia/Ghee Sankranti, Bat Savitri, Ganga Dussehra/Dasar, Nanda Devi Rajjaat. Assam : Ambubachi festival, Bihu, Majuli festival. Madhya Pradesh : Khajuraho festival, Lokrang Festival, Bhagoria Haat Festival.</p>",
+    "question_index": 5
+  },
+  {
+    "question": "<p>7. Ustad Vilayat Ali Khan is a maestro in __________ .</p>",
+    "options": [
+      "Tabla",
+      "Mridangam",
+      "Sitar",
+      "Flute"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p>7.(c) <strong>Sitar.</strong> Indian musicians and their instruments - Sitar : Pt. Ravi Shankar, Shahid Parvez Khan, Budhaditya Mukherjee, Anushka Shankar. Tabla : Zakir Hussain, Allah Rakha, Sabir Khan, Pt. Kishan Maharaj. Mridangam : KV Prasad, SV Rajarao, Umalayapuram Sivaraman. Flute : Hari Prasad Chaurasia, Pannalal Ghosh, TR Mahalingam.</p>",
+    "question_index": 6
+  },
+  {
+    "question": "<p>8. Which state initiated the implementation of the Mid-day Meal scheme in elementary schools?</p>",
+    "options": [
+      "Tamil Nadu",
+      "Madhya Pradesh",
+      "Uttar Pradesh",
+      "Karnataka"
+    ],
+    "correct_option_id": 0,
+    "solution": "<p>8.(a)<strong> Tamil Nadu.</strong> Mid-day Meal Scheme : Introduced in 1956 by Tamil Nadu\\'s Chief Minister K. Kamaraj, the scheme aimed to reduce school dropout rates and increase enrollment by providing free meals to students. Government schemes for schools : Sarva Shiksha Abhiyan (2001-2002), Institution of Eminence Abhiyan (2017), Rashtriya Madhyamik Shiksha Abhiyan (2009), Padhe Bharat, Badhe Bharat (2014).</p>",
+    "question_index": 7
+  },
+  {
+    "question": "<p>9. Sitar maestro, Pandit Ravi Shankar was awarded which of the following awards by the Government of India in 1999?</p>",
+    "options": [
+      "Padma Shri",
+      "Padma Bhushan",
+      "Bharat Ratna",
+      "Padma Vibhushan"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p>9.(c) <strong>Bharat Ratna.</strong> It is the highest civilian award in India, introduced in 1954. Recipients receive a Sanad (certificate) signed by the President and a peepal leaf-shaped medallion. First Recipients: C. Rajagopalachari, S. Radhakrishnan, C. V. Raman. Other Recipients (in 1999) : J.P. Narayan (Posthumous), Amartya Sen, Gopinath Bordoloi (Posthumous).</p>",
+    "question_index": 8
+  },
+  {
+    "question": "<p>10. In which year was the International Olympic Committee formed?</p>",
+    "options": [
+      "1896",
+      "1892",
+      "1898",
+      "1894"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p>10.(d) <strong>1894.</strong> International Olympic Committee (IOC) : Established - June 23, 1894. Founders - Pierre de Coubertin and Demetrios Vikelas. Function - Organizes the Winter and Summer Olympics. Headquarters : Lausanne, Switzerland. Status : Granted \\'Permanent Observer\\' status at the United Nations in 2009.</p>",
+    "question_index": 9
+  },
+  {
+    "question": "<p>11. In which of the following games is one player known as the Wicketkeeper?</p>",
+    "options": [
+      "Football",
+      "Basketball",
+      "Cricket",
+      "Hockey"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p>11.(c) <strong>Cricket</strong> is a bat-and-ball game played between two teams of eleven players, on a field with a 22-yard (20-meter; 66-foot) pitch at its center. Each end features a wicket, consisting of two bails balanced on three stumps. The wicketkeeper stands behind the wickets, catches missed or edged balls, stumps batsmen outside their crease, and appeals for dismissals. Terms used in Cricket are Maiden Over, Follow-on, Catch, Bowled, Stump Out, Run Out, L.B.W, Hit Wicket.</p>",
+    "question_index": 10
+  },
+  {
+    "question": "<p>12. Mohiniyattam is associated with which of the following traditional dance styles?</p>",
+    "options": [
+      "Samapadam",
+      "Tribhanga",
+      "Chowk",
+      "Lasya style"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p>12.(d) <strong>Lasya style.</strong> Mohiniyattam : A classical dance form from Kerala known for its graceful, fluid movements, emphasizing expressions and storytelling through delicate, swaying gestures in the Lasya style. Samapadam : A steady, rhythmic movement in Bharatanatyam. Tribhanga : A pose in Odissi dance with three bends (head, waist, and knees). Chowk : A position imitating a square &ndash; a very masculine stance with the weight of the body equally balanced.</p>",
+    "question_index": 11
+  },
+  {
+    "question": "<p>13. Madhuri Barthwal, a folk singer and Padma Shri 2022 awardee, belongs to which of the following states of India?</p>",
+    "options": [
+      "Uttarakhand",
+      "Himachal Pradesh",
+      "Uttar Pradesh",
+      "Maharashtra"
+    ],
+    "correct_option_id": 0,
+    "solution": "<p>13.(a) <strong>Uttarakhand.</strong> Madhuri Barthwal is the first woman to be a music composer in All India Radio. On International Women\\'s Day in 2019, she was awarded the Nari Shakti Puraskar by Ram Nath Kovind. Other folk singers of Uttarakhand: Narendra Singh Negi, Pritam Bhartwan, Basanti Devi Bisht.</p>",
+    "question_index": 12
+  },
+  {
+    "question": "<p>14. National Sports University is situated in ________.</p>",
+    "options": [
+      "Mizoram",
+      "Tripura",
+      "Meghalaya",
+      "Manipur"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p>14.(d) <strong>Manipur. </strong>National Sports University: Established in 2018. Other Sports Universities : Netaji Subhas National Institute of Sports (Patiala), Lakshmibai National College of Physical Education (Kerala), and Tamil Nadu Physical Education and Sports University (Chennai).</p>",
+    "question_index": 13
+  },
+  {
+    "question": "<p>---Can\\'t read from the Document---</p>",
+    "options": [
+      "Aurobindo Ghose",
+      "Rudyard Kipling",
+      "bankim Chandra Chattopadhyay\\n&nbsp;",
+      "Rabindranath Tagore"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p>15.(d) <strong>Rabindranath Tagore.</strong> He was also referred to as &lsquo;Gurudev&rsquo;, &lsquo;Kabiguru&rsquo;, and &lsquo;Biswakabi&rsquo;. He got Nobel Prize for his work Gitanjali. He was a Bengali poet, novelist, and painter, who was highly influential in introducing Indian culture to the west. He was the first non-European to receive the Nobel Prize.</p>",
+    "question_index": 14
+  }
+];
     </script>
-    
+
     <!-- Central JS Controller -->
     <script src="../js/mock-core.js"></script>
 </body>

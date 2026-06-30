@@ -3,43 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aether Mocks</title>
+    <title>Mocks Wallah</title>
     <!-- Fonts & Icons -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    
+
     <!-- Central Stylesheet -->
     <link rel="stylesheet" href="../css/mock-main.css">
-    
+
     <!-- Math Formula Rendering (KaTeX/MathJax) -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    
+
     <!-- Timer Config -->
-    <meta name="exam-duration" content="60">
+    <meta name="exam-duration" content="30">
 </head>
 <body>
     <!-- Welcome Screen -->
     <div class="welcome-screen" id="welcomeScreen">
         <div class="welcome-container">
             <div class="welcome-header" style="margin-bottom: 24px;">
-                <h1 style="font-size: 2rem; font-weight: 700; color: #0f172a; margin-bottom: 8px;"><i class="fas fa-graduation-cap" style="color: #3b82f6;"></i> Aether Mocks</h1>
-                <p style="color: #64748b;">Computer Based Test Portal</p>
+                <h1 style="font-size: 2rem; font-weight: 700; color: var(--text-main); margin-bottom: 8px;"><i class="fas fa-graduation-cap" style="color: var(--primary);"></i> Mocks Wallah</h1>
+                <p style="color: var(--text-muted);">Computer Based Test Portal</p>
             </div>
-            
+
             <div class="test-details" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-bottom: 32px; text-align: left;">
-                <div class="detail-item" style="padding: 12px; background: #f8fafc; border-radius: 8px; border: 1px solid #e2e8f0;">
-                    <div class="detail-label" style="font-size: 0.8rem; color: #64748b;">Total Questions</div>
-                    <div class="detail-value" style="font-size: 1.1rem; font-weight: 600; color: #0f172a;">10</div>
+                <div class="detail-item" style="padding: 12px; background: var(--bg-color); border-radius: 8px; border: 1px solid var(--border-color);">
+                    <div class="detail-label" style="font-size: 0.8rem; color: var(--text-muted);">Total Questions</div>
+                    <div class="detail-value" style="font-size: 1.1rem; font-weight: 600; color: var(--text-main);">15</div>
                 </div>
-                <div class="detail-item" style="padding: 12px; background: #f8fafc; border-radius: 8px; border: 1px solid #e2e8f0;">
-                    <div class="detail-label" style="font-size: 0.8rem; color: #64748b;">Duration</div>
-                    <div class="detail-value" style="font-size: 1.1rem; font-weight: 600; color: #0f172a;">60 mins</div>
+                <div class="detail-item" style="padding: 12px; background: var(--bg-color); border-radius: 8px; border: 1px solid var(--border-color);">
+                    <div class="detail-label" style="font-size: 0.8rem; color: var(--text-muted);">Duration</div>
+                    <div class="detail-value" style="font-size: 1.1rem; font-weight: 600; color: var(--text-main);">30 mins</div>
                 </div>
             </div>
-            
+
             <div class="welcome-actions">
                 <button class="btn btn-primary" id="startBtn" onclick="document.getElementById('welcomeScreen').style.display='none'; document.getElementById('examContainer').style.display='flex';" style="font-size: 1.1rem; padding: 12px 32px; width: 100%;">
                     <i class="fas fa-play" style="margin-right: 8px;"></i> Start Test
@@ -47,12 +47,12 @@
             </div>
         </div>
     </div>
-    
+
     <!-- Main Exam Interface -->
     <div class="exam-container" id="examContainer" style="display: none; height: 100vh; flex-direction: column;">
         <!-- Top Header -->
         <div class="exam-header">
-            <div class="exam-title">Aether Mocks</div>
+            <div class="exam-title">Mocks Wallah</div>
             <div class="header-actions" style="display: flex; align-items: center; gap: 12px;">
                 <button class="btn-icon" id="themeToggleBtn" title="Switch to Dark Mode"><i class="fas fa-moon"></i></button>
                 <button class="btn-icon" id="fullscreenToggleBtn" title="Toggle Fullscreen"><i class="fas fa-expand"></i></button>
@@ -62,14 +62,14 @@
                 </div>
             </div>
         </div>
-        
+
         <!-- Main Content -->
         <div class="mock-container">
             <!-- Question Area -->
             <div class="question-view">
                 <!-- Dynamically populated question container -->
                 <div id="questionContainer" style="flex: 1; display: flex; flex-direction: column; gap: 24px;"></div>
-                
+
                 <!-- Controls -->
                 <div class="nav-controls">
                     <button class="btn btn-secondary btn-prev"><i class="fas fa-chevron-left" style="margin-right: 8px;"></i> Previous</button>
@@ -79,40 +79,221 @@
                     <button class="btn btn-primary btn-next">Next <i class="fas fa-chevron-right" style="margin-left: 8px;"></i></button>
                 </div>
             </div>
-            
+
             <!-- Desktop Navigator Sidebar -->
             <div class="sidebar">
                 <div class="sidebar-section-title">Summary Status</div>
                 <div class="stats-grid">
                     <div class="stat-item">
-                        <div class="stat-count" id="stat-answered" style="color: #10b981;">0</div>
+                        <div class="stat-count" id="stat-answered" style="color: var(--success);">0</div>
                         <div class="stat-name">Answered</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-count" id="stat-flagged" style="color: #f59e0b;">0</div>
+                        <div class="stat-count" id="stat-flagged" style="color: var(--warning);">0</div>
                         <div class="stat-name">Flagged</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-count" id="stat-not-answered" style="color: #64748b;">0</div>
+                        <div class="stat-count" id="stat-not-answered" style="color: var(--text-muted);">0</div>
                         <div class="stat-name">Unanswered</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-count" id="stat-not-visited" style="color: #94a3b8;">0</div>
+                        <div class="stat-count" id="stat-not-visited" style="color: var(--text-muted);">0</div>
                         <div class="stat-name">Not Visited</div>
                     </div>
                 </div>
-                
+
                 <div class="sidebar-section-title" style="margin-top: 16px;">Question Navigator</div>
                 <div class="questions-grid"></div>
             </div>
         </div>
     </div>
-    
+
     <!-- Inject Question Data -->
     <script>
-        const questions = [];
+        const questions = [
+  {
+    "question": "<p><span style=\"font-family: Roboto;\">The Commonwealth Games 2018 were held at which of the following places?</span></p>",
+    "options": [
+      "Gold coast",
+      "Edinburgh",
+      "Victoria",
+      "Kuala Lumpur"
+    ],
+    "correct_option_id": 0,
+    "solution": "<p>1.(a) <span style=\"font-family: Roboto;\">Commonwealth Games</span><span style=\"font-family: Roboto;\"> <strong>2018</strong> :</span><span style=\"font-family: Roboto;\"> Host (</span><span style=\"font-family: Roboto;\"><strong>Gold Coast</strong>,</span><span style=\"font-family: Roboto;\"> Australia), Top Association (Australia). </span><span style=\"font-family: Roboto;\"><strong>2022:</strong> </span><span style=\"font-family: Roboto;\">Host (Birmingham, England England), Top Association (Australia).</span><span style=\"font-family: Roboto;\"> <strong>2026</strong>: </span><span style=\"font-family: Roboto;\">Host (State of Victoria, Australia). </span></p>",
+    "question_index": 0
+  },
+  {
+    "question": "<p><span style=\"font-family: Roboto;\">The word Manuscripts derived from which of the following language?</span></p>",
+    "options": [
+      "Latin",
+      "Prakrit",
+      "Sanskrit",
+      "Greek"
+    ],
+    "correct_option_id": 0,
+    "solution": "<p>2.(a) <span style=\"font-family: Roboto;\">The </span><span style=\"font-family: Roboto;\"><strong>manuscript</strong> </span><span style=\"font-family: Roboto;\">word evolved from the </span><strong><span style=\"font-family: Roboto;\">Latin Manu S</span><span style=\"font-family: Roboto;\">criptus</span></strong><span style=\"font-family: Roboto;\">,</span><span style=\"font-family: Roboto;\"> meaning &ldquo;written by hand.&rdquo; Manu is &ldquo;hand&rdquo; and S</span><span style=\"font-family: Roboto;\">criptus</span><span style=\"font-family: Roboto;\"> is &ldquo;to write.\" These were written on palm leaves and on the bark of birch trees. </span><span style=\"font-family: Roboto;\"><strong>Palaeography</strong> </span><span style=\"font-family: Roboto;\">is the study of pre-modern manuscripts: hand-written books, rolls, scrolls and single-sheet documents.</span></p>",
+    "question_index": 1
+  },
+  {
+    "question": "<p>3. <span style=\"font-family: Roboto;\">For</span><span style=\"font-family: Roboto;\"> how many days is the Hornbill festival held?</span></p>",
+    "options": [
+      "5",
+      "10",
+      "15",
+      "20"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p>3.(b)<span style=\"font-family: Roboto;\"> The</span><span style=\"font-family: Roboto;\"><strong> Hornbill</strong> Festival</span><span style=\"font-family: Roboto;\"> is an annual festival celebrated by Warrior Tribes of Nagaland from 1 to 10 of December</span><span style=\"font-family: Roboto;\"> (<strong>10 days</strong>)</span><span style=\"font-family: Roboto;\">. Other festivals of<strong> </strong></span><span style=\"font-family: Roboto;\"><strong>Nagaland</strong> </span><span style=\"font-family: Roboto;\">include Sekrenyi (Angami tribe), Tsukheneye (Chakhesang tribe), Aoleang (Konyak tribe), Naknyulem (Chang tribe), Mimkut (Kuki Tribe), Tokhu Emong (Lotha tribe), Tuluni (Sumi Tribe), etc. </span></p>",
+    "question_index": 2
+  },
+  {
+    "question": "<p>4. <span style=\"font-family: Roboto;\"> Bimbavati Devi is an exponent of which Indian dance form?</span></p>",
+    "options": [
+      "Chhau",
+      "Manipuri",
+      "Kathakali",
+      "Odissi"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p><span style=\"font-family: Roboto;\">4.(b)</span><span style=\"font-family: Roboto;\"> Bimbavati Devi is the exponent of </span><strong><span style=\"font-family: Roboto;\">Manipuri</span></strong><span style=\"font-family: Roboto;\"> dance form. Some of other<strong> </strong></span><span style=\"font-family: Roboto;\"><strong>Manipuri</strong> </span><span style=\"font-family: Roboto;\">dancers: Guru Bipin Singh, Rajkumar Singhjit Singh, Charu Sija Mathur.<strong> </strong></span><span style=\"font-family: Roboto;\"><strong>Kathakali</strong> </span><span style=\"font-family: Roboto;\">(Kerala): Kalamandalam Ramankutty Nair, Kalamandalam Gopi, Madavoor Vasudevan Nair, Milena Salvini. </span><strong><span style=\"font-family: Roboto;\">Odissi</span></strong><span style=\"font-family: Roboto;\"> (Odisha): Kelucharan Mohapatra, Sonal Mansingh. </span><strong><span style=\"font-family: Roboto;\">Chhau</span></strong><span style=\"font-family: Roboto;\"> (Odisha, Chhattisgarh, Jharkhand, West-Bengal).</span></p>",
+    "question_index": 3
+  },
+  {
+    "question": "<p>5. The Kuchipudi classical dance is accompanied with which type of music?</p>",
+    "options": [
+      "Kajri",
+      "Chaiti",
+      "Carnatic Music",
+      "Hindustani Music"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p><span style=\"font-family: Roboto;\">5.(c)<strong> Kuchipudi</strong> </span><span style=\"font-family: Roboto;\">dance is accompanied with Carnatic music, while the recital is in Telugu language. </span><strong><span style=\"font-family: Roboto;\">Bharatnatyam</span><span style=\"font-family: Roboto;\">, </span></strong><span style=\"font-family: Roboto;\"><strong>Kathakali</strong>, </span><span style=\"font-family: Roboto;\">and </span><strong><span style=\"font-family: Roboto;\">Mohiniattam</span></strong><span style=\"font-family: Roboto;\">, are accompanied by the classical southern Indian Carnatic music. </span><span style=\"font-family: Roboto;\"><strong>Manipuri</strong> </span><span style=\"font-family: Roboto;\">: Devotional music,</span><span style=\"font-family: Roboto;\"> <strong>Odisha</strong></span><span style=\"font-family: Roboto;\">: Odissi Music, </span><strong><span style=\"font-family: Roboto;\">Sattriya</span></strong><span style=\"font-family: Roboto;\">: Borgeet music, </span><span style=\"font-family: Roboto;\"><strong>Kathak</strong>:</span><span style=\"font-family: Roboto;\"> Hindustani Music. Kajri and Chaiti Dance (Uttar pradesh).</span></p>",
+    "question_index": 4
+  },
+  {
+    "question": "<p><span style=\"font-family: Roboto;\">6. At present, the Grand Trunk Road extends from_______________ in India.</span></p>",
+    "options": [
+      "Kashmir to Kanyakumari",
+      "Amritsar to Kolkata",
+      "Chennai to Kolkata",
+      "Agra to Kolkata"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p><span style=\"font-family: Roboto;\">6.(b) </span><span style=\"font-family: Roboto;\">The Grand Trunk Road runs from </span><strong><span style=\"font-family: Roboto;\">Amritsar to Kolkata</span></strong><span style=\"font-family: Roboto;\"> in India. This road was built by </span><strong><span style=\"font-family: Roboto;\">Sher Shah Suri</span></strong><span style=\"font-family: Roboto;\"> in the 16th century. National Highway 1 is known as Sher Shah Suri Marg. Sher Shah Suri {(Farid Khan), founder of the Suri Empire in India, capital in Sasaram in modern-day Bihar}. Sher Shah issued a coin of silver which was termed the </span><strong><span style=\"font-family: Roboto;\">Rupiya</span></strong><span style=\"font-family: Roboto;\">.</span></p>",
+    "question_index": 5
+  },
+  {
+    "question": "<p><span style=\"font-family: Roboto;\">7. What is the average circumference of the standard cricket ball in international cricket?</span></p>",
+    "options": [
+      "7.89 inches - 8.45 inches",
+      "10.46 inches - 10.90 inches",
+      "9.45 inches - 10.20 inches",
+      "8.81 inches-9 inches"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p><span style=\"font-family: Roboto;\">7.(d) </span><span style=\"font-family: Roboto;\">The standard cricket ball in international cricket has an average circumference of </span><strong><span style=\"font-family: Roboto;\">8.81inches - 9 inches</span></strong><span style=\"font-family: Roboto;\">. Cricket pitch breadth : </span><span style=\"font-family: Roboto;\"><strong>10 feet</strong>. </span><span style=\"font-family: Roboto;\">Important</span><span style=\"font-family: Roboto;\"> <strong>terminologies</strong> </span><span style=\"font-family: Roboto;\">used in Cricket: Striker, Off-side/leg-side, Run, Four, Bowled, Caught, LBW, Stumped, Innings, etc.</span></p>",
+    "question_index": 6
+  },
+  {
+    "question": "<p><span style=\"font-family: Roboto;\">8. Which of the following festivals is known as Vijaya Utsav?</span></p>",
+    "options": [
+      "Hampi Festival",
+      "Gangasagar Mela",
+      "Pushkar Fair",
+      "Konark Dance Festival"
+    ],
+    "correct_option_id": 0,
+    "solution": "<p><span style=\"font-family: Roboto;\">8.(a) <strong>Hampi festival</strong></span><span style=\"font-family: Roboto;\"> (Karnataka), also known as Vijay Utsav, is celebrated for 2 or 3 days and reflects the pomp, splendor and glory of the Vijayanagara Empire. </span><span style=\"font-family: Roboto;\"><strong>Other Festivals of Karnataka</strong>: </span><span style=\"font-family: Roboto;\">Kambala, Ugadi, Pattadakal Dance festival, Vairamundi, Karaga, Vara Mahalakshmi pooja, ganesh Chaturthi, Gowri. </span><span style=\"font-family: Roboto;\"><strong>Pushkar Fair</strong>:</span><span style=\"font-family: Roboto;\"> Rajasthan</span><span style=\"font-family: Roboto;\">. <strong>Konark</strong> </span><span style=\"font-family: Roboto;\">Dance festival: Odisha</span><span style=\"font-family: Roboto;\">. <strong>Gangasagar Mela</strong></span><span style=\"font-family: Roboto;\">: West Bengal.</span></p>",
+    "question_index": 7
+  },
+  {
+    "question": "<p><span style=\"font-family: Roboto;\"> Which of the following is the most important festival celebrated by the Muslim community in India to mark the beginning of the Islamic New Year?</span></p>",
+    "options": [
+      "Milad-Un-Nabi",
+      "Muharram",
+      "Idu\\'l Zuha",
+      "Idul Fitr"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p><span style=\"font-family: Roboto;\">9.(b) <strong>Muharram</strong></span><span style=\"font-family: Roboto;\"> (July). Muharram is the name of the first month of the Hijri calendar. In Islam there are 4 months (Zu al-Qada, Zu al-Hajja, Muharram and Rajab) which are considered the most sacred. </span><strong><span style=\"font-family: Roboto;\">Milad-un-Nabi</span></strong><span style=\"font-family: Roboto;\"> (festival to commemorate the birth anniversary of Prophet Muhammad), </span><strong><span style=\"font-family: Roboto;\">Id ul Z</span><span style=\"font-family: Roboto;\">uha</span></strong><span style=\"font-family: Roboto;\"> (to commemorate the obedience, willingness, and devotion of Prophet Ibrahim towards his God), </span><strong><span style=\"font-family: Roboto;\">Eid al-Fitr</span></strong><span style=\"font-family: Roboto;\"> (end of Ramadan, the Muslim holy month of fasting). </span></p>",
+    "question_index": 8
+  },
+  {
+    "question": "<p><span style=\"font-family: Roboto;\">10. According to census 2011, the male literacy rate in India is__________</span></p>",
+    "options": [
+      "81.14 percent",
+      "82.14 percent",
+      "84.14 percent",
+      "83.14 percent"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p><span style=\"font-family: Roboto;\">10.(b) </span><span style=\"font-family: Roboto;\">According to census 2011, the male literacy rate in India is<strong> </strong></span><strong><span style=\"font-family: Roboto;\">82.14 %</span></strong><span style=\"font-family: Roboto;\">. Female literacy rate: </span><strong><span style=\"font-family: Roboto;\">65.46%</span></strong><span style=\"font-family: Roboto;\"><strong>.</strong> literacy rate of India:<strong> </strong></span><strong><span style=\"font-family: Roboto;\">74.04%</span></strong><span style=\"font-family: Roboto;\">. Highest literacy rate:<strong> </strong></span><strong><span style=\"font-family: Roboto;\">Kerala</span></strong><span style=\"font-family: Roboto;\"><strong> </strong>(94.0%) {male literacy rate is 96.11% and the female literacy rate is 92.07%}. Lowest literacy rate :<strong> </strong></span><strong><span style=\"font-family: Roboto;\">Bihar</span></strong><span style=\"font-family: Roboto;\"><strong> </strong>(61.8%).</span></p>",
+    "question_index": 9
+  },
+  {
+    "question": "<p>11. Who among the following is known as a pioneering dance educationist and a prominent Mohiniyattam exponent?</p>",
+    "options": [
+      "Madhavi Mudgal",
+      "Shagun Butani",
+      "Mohanrao Kallianpurkar",
+      "Dr Kanak Rele"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p>11.(d) <strong>Dr. Kanak Rele</strong>. <span style=\"font-family: Roboto;\">She is the founder-director of the Nalanda Dance Research Centre (1967) and the founder-principal of the Nalanda Nritya Kala Mahavidyalaya in Mumbai. </span><span style=\"font-family: Roboto;\"><strong>Awards and Honors</strong>:</span><span style=\"font-family: Roboto;\"> Gaurav Puraskar (Gujarat ; 1989), Padma Shri (1990), Kala Vipanchee (Vipanchee institution ; 2005), Kalidas Samman (Madhya Pradesh, 2006), Sangeet Natak Akademi Award (1994), Padma Bhushan (2013). </span><strong><span style=\"font-family: Roboto;\">Madhavi Mudgal</span></strong><span style=\"font-family: Roboto;\"> (Odissi dancer), </span><strong><span style=\"font-family: Roboto;\">Shagun Bhutan</span></strong><span style=\"font-family: Roboto;\"> (Odissi Dancer), </span><strong><span style=\"font-family: Roboto;\">Mohanrao Kallianpurka</span></strong><span style=\"font-family: Roboto;\"> (Kathak dancer). </span></p>",
+    "question_index": 10
+  },
+  {
+    "question": "<p>12. Which of the following Indian classical dance forms uses various colours on face to symbolise the characters?</p>",
+    "options": [
+      "Odissi",
+      "Kathakali",
+      "Bharatanatyam",
+      "Mohiniattam"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p>12.(b) <strong>Kathakali</strong> <span style=\"font-family: Roboto;\">is famous for its intricate choreography and elaborate makeup and costumes. The makeup and costumes inform the viewer of the type of character on stage, as there is no dialogue throughout the performance. This dance originates primarily from the Indian state of </span><strong><span style=\"font-family: Roboto;\">Kerala</span></strong><span style=\"font-family: Roboto;\">. The characters in a Kathakali performance are broadly divided into </span><strong><span style=\"font-family: Roboto;\">Satvika, Rajasika and T</span><span style=\"font-family: Roboto;\">amasika</span></strong><span style=\"font-family: Roboto;\">. </span></p>",
+    "question_index": 11
+  },
+  {
+    "question": "<p><span style=\"font-family: Roboto;\">13. Merchants and migrants first brought the teachings of the holy Quran to India in the_______century.</span></p>",
+    "options": [
+      "fourth",
+      "seventh",
+      "ninth",
+      "sixth"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p>13.(b) <span style=\"font-family: Roboto;\">Merchants and migrants first brought the teachings of the holy Quran to India in the </span><span style=\"font-family: Roboto;\"><strong>seventh</strong> </span><span style=\"font-family: Roboto;\">century. </span><span style=\"font-family: Roboto;\"><strong>Different religions and their holy books</strong>:</span><span style=\"font-family: Roboto;\"> Islam (Quran and Sunnah), Sikhism (Guru Granth Sahib), Jainism (Jain Agamas), Buddhist (Tipitaka), Hinduism (Bhagwat Gita, Ved, Upnishad), Christianity (Bible), Rastafari (Bible, Kebra Nagast, The Promise Key, Holy Piby), Shinto (Kojiki, Nihon Shoki, Fudoki), Zoroastrianism (Zend Avesta), etc. </span></p>",
+    "question_index": 12
+  },
+  {
+    "question": "<p><span style=\"font-family: Roboto;\">14.Which of the following is celebrated as the \"Tibetan New Year\"?</span></p>",
+    "options": [
+      "Lohang",
+      "Losar",
+      "Myoko",
+      "Murung"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p>14.(b) <strong>Losar</strong><span style=\"font-family: Roboto;\">, also known as Tibetan New Year, is a festival in Tibetan Buddhism. It is mainly celebrated in Tibet, Bhutan, Nepal (called Lhochhar), and India (Arunachal Pradesh, Sikkim, and Ladakh).</span><span style=\"font-family: Roboto;\"> <strong>Myoko</strong> </span><span style=\"font-family: Roboto;\">festival and </span><span style=\"font-family: Roboto;\"><strong>Murung</strong> </span><span style=\"font-family: Roboto;\">festivals are celebrated by the Apatani Tribe of Ziro valley in Arunachal Pradesh. </span></p>",
+    "question_index": 13
+  },
+  {
+    "question": "<p><span style=\"font-family: Roboto;\">15.In Table Tennis, how many lets are allowed in a row on a serve?</span></p>",
+    "options": [
+      "Three",
+      "Unlimited",
+      "Two",
+      "One"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p>15.(b) <span style=\\\"font-family: Roboto;\\\">There\\'s</span><span style=\\\"font-family: Roboto;\\\"><strong> no limit</strong> </span><span style=\\\"font-family: Roboto;\\\">on the number of times one can replay when it has hit the net. </span><strong><span style=\\\"font-family: Roboto;\\\">Table tennis</span></strong><span style=\\\"font-family: Roboto;\\\"> is played on a 2.74 x 1.53 metre rectangular table made of fiber wood and is split into two halves. The game was invented in </span><span style=\\\"font-family: Roboto;\\\"><strong>England</strong> </span><span style=\\\"font-family: Roboto;\\\">and was originally called </span><strong><span style=\\\"font-family: Roboto;\\\">Ping-Pong</span></strong><span style=\\\"font-family: Roboto;\\\">, a trademark name. International Table Tennis Federation (founded in 1926). </span></p>",
+    "question_index": 14
+  }
+];
     </script>
-    
+
     <!-- Central JS Controller -->
     <script src="../js/mock-core.js"></script>
 </body>

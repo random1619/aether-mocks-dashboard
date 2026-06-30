@@ -3,43 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aether Mocks</title>
+    <title>Mocks Wallah</title>
     <!-- Fonts & Icons -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    
+
     <!-- Central Stylesheet -->
     <link rel="stylesheet" href="../css/mock-main.css">
-    
+
     <!-- Math Formula Rendering (KaTeX/MathJax) -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    
+
     <!-- Timer Config -->
-    <meta name="exam-duration" content="60">
+    <meta name="exam-duration" content="30">
 </head>
 <body>
     <!-- Welcome Screen -->
     <div class="welcome-screen" id="welcomeScreen">
         <div class="welcome-container">
             <div class="welcome-header" style="margin-bottom: 24px;">
-                <h1 style="font-size: 2rem; font-weight: 700; color: #0f172a; margin-bottom: 8px;"><i class="fas fa-graduation-cap" style="color: #3b82f6;"></i> Aether Mocks</h1>
-                <p style="color: #64748b;">Computer Based Test Portal</p>
+                <h1 style="font-size: 2rem; font-weight: 700; color: var(--text-main); margin-bottom: 8px;"><i class="fas fa-graduation-cap" style="color: var(--primary);"></i> Mocks Wallah</h1>
+                <p style="color: var(--text-muted);">Computer Based Test Portal</p>
             </div>
-            
+
             <div class="test-details" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-bottom: 32px; text-align: left;">
-                <div class="detail-item" style="padding: 12px; background: #f8fafc; border-radius: 8px; border: 1px solid #e2e8f0;">
-                    <div class="detail-label" style="font-size: 0.8rem; color: #64748b;">Total Questions</div>
-                    <div class="detail-value" style="font-size: 1.1rem; font-weight: 600; color: #0f172a;">10</div>
+                <div class="detail-item" style="padding: 12px; background: var(--bg-color); border-radius: 8px; border: 1px solid var(--border-color);">
+                    <div class="detail-label" style="font-size: 0.8rem; color: var(--text-muted);">Total Questions</div>
+                    <div class="detail-value" style="font-size: 1.1rem; font-weight: 600; color: var(--text-main);">15</div>
                 </div>
-                <div class="detail-item" style="padding: 12px; background: #f8fafc; border-radius: 8px; border: 1px solid #e2e8f0;">
-                    <div class="detail-label" style="font-size: 0.8rem; color: #64748b;">Duration</div>
-                    <div class="detail-value" style="font-size: 1.1rem; font-weight: 600; color: #0f172a;">60 mins</div>
+                <div class="detail-item" style="padding: 12px; background: var(--bg-color); border-radius: 8px; border: 1px solid var(--border-color);">
+                    <div class="detail-label" style="font-size: 0.8rem; color: var(--text-muted);">Duration</div>
+                    <div class="detail-value" style="font-size: 1.1rem; font-weight: 600; color: var(--text-main);">30 mins</div>
                 </div>
             </div>
-            
+
             <div class="welcome-actions">
                 <button class="btn btn-primary" id="startBtn" onclick="document.getElementById('welcomeScreen').style.display='none'; document.getElementById('examContainer').style.display='flex';" style="font-size: 1.1rem; padding: 12px 32px; width: 100%;">
                     <i class="fas fa-play" style="margin-right: 8px;"></i> Start Test
@@ -47,12 +47,12 @@
             </div>
         </div>
     </div>
-    
+
     <!-- Main Exam Interface -->
     <div class="exam-container" id="examContainer" style="display: none; height: 100vh; flex-direction: column;">
         <!-- Top Header -->
         <div class="exam-header">
-            <div class="exam-title">Aether Mocks</div>
+            <div class="exam-title">Mocks Wallah</div>
             <div class="header-actions" style="display: flex; align-items: center; gap: 12px;">
                 <button class="btn-icon" id="themeToggleBtn" title="Switch to Dark Mode"><i class="fas fa-moon"></i></button>
                 <button class="btn-icon" id="fullscreenToggleBtn" title="Toggle Fullscreen"><i class="fas fa-expand"></i></button>
@@ -62,14 +62,14 @@
                 </div>
             </div>
         </div>
-        
+
         <!-- Main Content -->
         <div class="mock-container">
             <!-- Question Area -->
             <div class="question-view">
                 <!-- Dynamically populated question container -->
                 <div id="questionContainer" style="flex: 1; display: flex; flex-direction: column; gap: 24px;"></div>
-                
+
                 <!-- Controls -->
                 <div class="nav-controls">
                     <button class="btn btn-secondary btn-prev"><i class="fas fa-chevron-left" style="margin-right: 8px;"></i> Previous</button>
@@ -79,40 +79,221 @@
                     <button class="btn btn-primary btn-next">Next <i class="fas fa-chevron-right" style="margin-left: 8px;"></i></button>
                 </div>
             </div>
-            
+
             <!-- Desktop Navigator Sidebar -->
             <div class="sidebar">
                 <div class="sidebar-section-title">Summary Status</div>
                 <div class="stats-grid">
                     <div class="stat-item">
-                        <div class="stat-count" id="stat-answered" style="color: #10b981;">0</div>
+                        <div class="stat-count" id="stat-answered" style="color: var(--success);">0</div>
                         <div class="stat-name">Answered</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-count" id="stat-flagged" style="color: #f59e0b;">0</div>
+                        <div class="stat-count" id="stat-flagged" style="color: var(--warning);">0</div>
                         <div class="stat-name">Flagged</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-count" id="stat-not-answered" style="color: #64748b;">0</div>
+                        <div class="stat-count" id="stat-not-answered" style="color: var(--text-muted);">0</div>
                         <div class="stat-name">Unanswered</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-count" id="stat-not-visited" style="color: #94a3b8;">0</div>
+                        <div class="stat-count" id="stat-not-visited" style="color: var(--text-muted);">0</div>
                         <div class="stat-name">Not Visited</div>
                     </div>
                 </div>
-                
+
                 <div class="sidebar-section-title" style="margin-top: 16px;">Question Navigator</div>
                 <div class="questions-grid"></div>
             </div>
         </div>
     </div>
-    
+
     <!-- Inject Question Data -->
     <script>
-        const questions = [];
+        const questions = [
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\">A football match lasts two equal periods of_________.</span></p>\n",
+    "options": [
+      "40 minutes",
+      "50 minutes",
+      "20 minutes",
+      "45 minutes"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">1</span><span style=\"font-family: Cambria Math;\">.(</span><span style=\"font-family: Cambria Math;\">d)&nbsp;</span><strong>&nbsp;45 minutes. </strong><span style=\"font-weight: 400;\">A football team consists of 11 players on the field, including 1 goalkeeper and 10 position players. Football Terminology:&nbsp; Back heel, cross, far post, futsal, Header, Inswinger.</span><strong> Games and their duration</strong><span style=\"font-weight: 400;\">: Hockey (two periods of 35 minutes), Basketball (48 minutes or 12 minutes each quarter), Kabaddi (two halves of 20 minutes).&nbsp;</span></p>\n",
+    "question_index": 0
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\">Ricky Kej won his third Grammy under which of the following categories?</span></p>\n",
+    "options": [
+      "Song of the Year",
+      "Best Contemporary Instrumental Album",
+      "Best Immersive Audio Album",
+      "Album of the Year"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">2</span><span style=\"font-family: Cambria Math;\">.(</span><span style=\"font-family: Cambria Math;\">c)<strong> Best Immersive Audio Album </strong></span><span style=\"font-family: Cambria Math;\">(Divine Tides). The 65</span><span style=\"font-family: Cambria Math;\">th </span><span style=\"font-family: Cambria Math;\">Grammy Awards (music industry) 2023 were held at the Crypto.com arena in Los Angeles (South California). Category and winner: Album of the Year - (Harry Styles-Harry&rsquo;s House), Song of the Year - (Lizzo-About Damn time), Best Traditional Pop Vocal Album - (</span><span style=\"font-family: Cambria Math;\">Michael Buble-Higher), Best Country Song - &lsquo;Til You Can&rsquo;t&rsquo; (Cody Johnson). </span></p>\n",
+    "question_index": 1
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\"> Which of the following states </span><span style=\"font-family: Cambria Math;\">are a part</span><span style=\"font-family: Cambria Math;\"> of Ga</span><span style=\"font-family: Cambria Math;\">rib Kalyan Rojgar Abhiyaan?</span></p>\n",
+    "options": [
+      "Madhya Pradesh and Gujarat",
+      "Bihar and Madhya Pradesh",
+      "Haryana and Bihar",
+      "Assam and West Bengal"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">3</span><span style=\"font-family: Cambria Math;\">.(</span><span style=\"font-family: Cambria Math;\">b)</span><strong>&nbsp;Bihar and Madhya Pradesh. </strong><span style=\"font-weight: 400;\">Garib Kalyan Rojgar Abhiyaan: Launched - 20 June 2020 (by Prime Minister Narender Modi). Started - Khagaria district of Bihar. </span><strong>Aim </strong><span style=\"font-weight: 400;\">- It will help in creating modern facilities in the rural areas. It will run for 125 days in 116 districts across six states - Bihar, Uttar Pradesh, Madhya Pradesh, Jharkhand, Odisha and Rajasthan. 50000 crore rupees will be spent on this mega campaign. Under the scheme, the government will provide these migrant labourers with 25 work options.</span></p>\n",
+    "question_index": 2
+  },
+  {
+    "question": "<p><span style=\\\"font-family: Cambria Math;\\\">Who was given the title of \\'Hanjaba\\' by the Maharaj of Manipur for reviving Manipuri dance?</span></p>\\n",
+    "options": [
+      "Charu Malhar",
+      "Darshana Jhaveri",
+      "Bipin Singh",
+      "Kalavati Devi\\r\\n "
+    ],
+    "correct_option_id": 2,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">4</span><span style=\"font-family: Cambria Math;\">.(</span><span style=\"font-family: Cambria Math;\">c) </span><strong>Bipin Singh. </strong><span style=\"font-weight: 400;\">He is regarded as the father of modern Manipuri dance and style belonging to the Bishnupriya Manipuri community. Awards: Sangeet Natak Akademy (1966), Kalidas Samman (1989-90). </span><strong>Famous Manipuri Dancers</strong><span style=\"font-weight: 400;\">: Darshana Jhaveri, Yumlembam Gambhini Devi, Nirmala Mehta, Charu Mathur, Nayana, Devyani Chalia, Darshana Jhaveri, Kalavati Devi.</span></p>\n",
+    "question_index": 3
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\"> Which player among the following is the twenty-third Woman Grandmaster of India?</span></p>\n",
+    "options": [
+      "Priyanka Nutakki",
+      "Eesha Karavade",
+      "Bhakti Kulkarni",
+      "Subbaraman Vijayalakshmi "
+    ],
+    "correct_option_id": 0,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">5</span><span style=\"font-family: Cambria Math;\">.(</span><span style=\"font-family: Cambria Math;\">a)&nbsp;</span><strong>Priyanka Nutakki. Bhakti kulkarni</strong><span style=\"font-weight: 400;\"> - She became Goa&rsquo;s first woman grandmaster after her name was cleared by the world chess federation. </span><strong>Subbaraman Vijayalakshmi</strong><span style=\"font-weight: 400;\"> - She is the first female Indian Grandmaster in chess (2001) and FIDE title of International Master. She was awarded the Arjuna Award (2001). </span><strong>Eesha Karavade </strong><span style=\"font-weight: 400;\">(Chess Player from Pune) - Titles of International Master and Woman Grandmaster (2005).</span></p>\n",
+    "question_index": 4
+  },
+  {
+    "question": "<p>6. <span style=\\\"font-family: Cambria Math;\\\">Who among the following Indian musicians is known as \\'Pancham Da\\'?</span></p>\\n",
+    "options": [
+      "Sachin Dev Barman ",
+      "Kishore Kumar ",
+      "Nitin Mukesh ",
+      "Rahul Dev Barman"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">6</span><span style=\"font-family: Cambria Math;\">.(</span><span style=\"font-family: Cambria Math;\">d) <strong>Rahul Dev Barman</strong></span><span style=\"font-family: Cambria Math;\">. He composed musical scores for 331 films. </span><span style=\"font-family: Cambria Math;\">Awards :</span><span style=\"font-family: Cambria Math;\"> Filmfare for Best Music Director for Sanam Teri Kasam (1983). Other musicians and their </span><span style=\"font-family: Cambria Math;\">nicknames :</span><span style=\"font-family: Cambria Math;\"> Lata Mangeshkar - &ldquo;Queen of melody&rdquo;. Kishore Kumar - Kishore Da, AR Rahman - The </span><span style=\"font-family: Cambria Math;\">Mozart of Madras. Usha Uthup - The Queen of Indipop. </span></p>\n",
+    "question_index": 5
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\">Where were the 35th National Games held in the year </span><span style=\"font-family: Cambria Math;\">2015 ?</span></p>\n",
+    "options": [
+      "Delhi",
+      "Mumbai ",
+      "Punjab",
+      "Kerala"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">7</span><span style=\"font-family: Cambria Math;\">.</span><span style=\"font-family: Cambria Math;\">(</span><span style=\"font-family: Cambria Math;\">d)&nbsp;</span><strong>Kerala.</strong><span style=\"font-weight: 400;\"> National Games:- Kerala hosted this second time&nbsp; (first time hosted 27th National Games in1987). 35th National Games: Opening ceremony held&nbsp; at Greenfield Stadium inaugurated by Shri Venkaiah Naidu. First National Games organised in Lahore (1924). First Modern National Games -&nbsp; New Delhi (1985). They were hosted in various Places, including Bombay and Pune (1994), Bangalore and Mysore (1997), Imphal (1999), Punjab (2001), Andhra Pradesh (2002), Guwahati (2007), Jharkhand (2011), and Gujarat (2022). </span><strong>37th National Games</strong><span style=\"font-weight: 400;\">&nbsp; - Goa ( October 2023).&nbsp;</span></p>\n",
+    "question_index": 6
+  },
+  {
+    "question": "<p><span style=\\\"font-family: Cambria Math;\\\">\\'Kalasam\\' is a dance sequence in which of the following classical dances of India?</span></p>\\n",
+    "options": [
+      "Kathak",
+      "Kathakali",
+      "Bharatanatyam",
+      "Manipuri"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">8</span><span style=\"font-family: Cambria Math;\">.(</span><span style=\"font-family: Cambria Math;\">b) <strong>Kathakali</strong>.</span><span style=\"font-family: Cambria Math;\"> It is a classical Indian dance form of Kerala. </span><span style=\"font-family: Cambria Math;\">The text of Kathakali songs known as Attakkatha.</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">Major instruments</span><span style=\"font-family: Cambria Math;\"> used in Kathakali music - Chenda, Maddalam, Chengila and Elathalam. Other Indian classical </span><span style=\"font-family: Cambria Math;\">dances - Kathak (Uttar Pradesh) , Bharatanatyam </span><span style=\"font-family: Cambria Math;\">(Tamil Nadu), Manipuri (Manipur), Odissi (Odisha), Kuchipudi (Andhra Pradesh), Sattriya (Assam), Mohiniyattam (Kerala).</span></p>\n",
+    "question_index": 7
+  },
+  {
+    "question": "<p>9.<span style=\"font-family: Cambria Math;\"> Padma Shri </span><span style=\"font-family: Cambria Math;\">and Padma Bhushan awardee, Yamini Krishnamurthy is renowned for Bharatanatyam and which of the following dances?</span></p>\n",
+    "options": [
+      "Kathak",
+      "Manipuri",
+      "Kuchipudi",
+      "Kathakali"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">9.(</span><span style=\"font-family: Cambria Math;\">c)&nbsp;</span><strong>Kuchipudi </strong><span style=\"font-weight: 400;\">(Andhra Pradesh)</span><strong>. Awards of Yamini Krishnamurthy -</strong><span style=\"font-weight: 400;\"> Padma Shri (1968), Padma Bhushan (2001), Padma Vibhushan (2016), Natya Shastra Award (2014). </span><strong>Other Dancers of Kuchipudi </strong><span style=\"font-weight: 400;\">- Radha Reddy And Raja Reddy, Yamini Reddy, Kaushalya Reddy, Bhavana Reddy, Lakshmi Narayn Shastri, Indrani Rehman. </span><strong>Manipuri Dancers -</strong><span style=\"font-weight: 400;\"> Yumlembam Gambhini Devi, Nirmala Mehta, Guru Bipin Singh, Jhaveri Sisters.</span></p>\n",
+    "question_index": 8
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\">10</span><span style=\"font-family: Cambria Math;\">.</span><span style=\"font-family: Cambria Math;\"> Which of the following personalities is a famous Bharatanatyam dancer?</span></p>\n",
+    "options": [
+      "Birju Maharaj",
+      "Padma Subrahmanyam",
+      "Naik Siddiqui",
+      "Saswati Sen"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">10</span><span style=\"font-family: Cambria Math;\">.(b)</span><strong>&nbsp;Padma Subrahmanyam. Awards - </strong><span style=\"font-weight: 400;\">Sangeet Natak Akademi Award (1983), Padma Shri (1981), Padma Bhushan (2003). </span><strong>Other Bharatanatyam dancers - </strong><span style=\"font-weight: 400;\">Rukmini Devi Arundale, Alarmel Valli, Yamini Krishnamurthy, Mallika Sarabhai, T. Bala Saraswati, Shobhana Pillai, Sonal Mansingh, Shudha Chandran, Vyjayantimala, Mrinalini Sarabhai. </span><strong>Kathak dancers -</strong><span style=\"font-weight: 400;\"> Birju Maharaj, Shovana Narayan, Nahid Siddiqui, Saswati Sen, Lachhu Maharaj, Shambhu Maharaj, Uday Shankar, Sitara devi.&nbsp;</span></p>\n",
+    "question_index": 9
+  },
+  {
+    "question": "<p><span style=\\\"font-family: Cambria Math;\\\">11</span><span style=\\\"font-family: Cambria Math;\\\">. </span><span style=\\\"font-family: Cambria Math;\\\">Where did Vivek</span><span style=\\\"font-family: Cambria Math;\\\">ananda participate at the World\\'s Parliament of Religions?</span></p>\\n",
+    "options": [
+      "San Francisco",
+      "New York",
+      "Washington",
+      "Chicago"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p>11<span style=\\\"font-family: Cambria Math;\\\">.(d) </span><strong>Chicago (1893). Narendranath Datta</strong><span style=\\\"font-weight: 400;\\\"> (Maharaja Ajit Singh of the Khetri gave him the name &lsquo;Vivekananda\\') - He Introduced the world to the Indian philosophies of Vedanta and Yoga. Netaji Subhas Chandra Bose had called Vivekananda &ldquo;Maker of modern India&rdquo;. He established the Ramakrishna Mission and Belur Math in West Bengal. </span><strong>Books -</strong><span style=\\\"font-weight: 400;\\\"> Raja-yoga, Karma-yoga, Jnana-yoga and Bhakti-yoga.</span></p>\\n",
+    "question_index": 10
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\">12</span><span style=\"font-family: Cambria Math;\">. </span><span style=\"font-family: Cambria Math;\">In which district of Gujarat is the Modhera dance festival organized by the Government of Gujarat?</span></p>\n",
+    "options": [
+      "Amreli",
+      "Bharuch",
+      "Dang",
+      "Mehsana\\r\\n "
+    ],
+    "correct_option_id": 3,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">12</span><span style=\"font-family: Cambria Math;\">.(d)&nbsp;</span><strong>Mehsana. </strong><span style=\"font-weight: 400;\">The Sun Temple of Modhera is a masterpiece of the Solanki Empire, which hosts the annual Modhera Dance Festival. </span><strong>States and their festivals : Gujarat - </strong><span style=\"font-weight: 400;\">Navratri, Janmashtami, Rann Utsav, Uttarayana, Shamlaji Mela, Vautha Mela, Bhadra Purnima; </span><strong>Maharashtra - </strong><span style=\"font-weight: 400;\">Ganesh Chathurthi, Gudi Padva, Bhau Beej, Ellora Festival, Ashadhi Ekadashi, Mangala Gauri, Pola, Kojagiri Purnima,&nbsp; Banganga.&nbsp;&nbsp;</span></p>\n",
+    "question_index": 11
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\">13</span><span style=\"font-family: Cambria Math;\">. </span><span style=\"font-family: Cambria Math;\">Identify the musician who is associate</span><span style=\"font-family: Cambria Math;\">d with the musical instrument Sarod.</span></p>\n",
+    "options": [
+      "Vilayat Khan",
+      "Hariprasad Chaurasia",
+      "Annapurna Devi",
+      "Allaudin Khan"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p>13<span style=\"font-family: Cambria Math;\">.(d) </span><strong>Allaudin Khan. Awards - </strong><span style=\"font-weight: 400;\">Sangeet Natak Akademi Award (1952), Padma Bhushan (1958), Padma Vibhushan (1971).&nbsp; </span><strong>Proponents of</strong><span style=\"font-weight: 400;\"> </span><strong>Sarod -</strong><span style=\"font-weight: 400;\"> Ali Akbar Khan, Amjad Ali Khan, Buddhadev Das Gupta, Tejendra Majumdar. </span><strong>Flute -</strong><span style=\"font-weight: 400;\"> Hari Prasad Chaurasia, Pannalal Ghosh, Palladam Sanjiva Rao. </span><strong>Sitar - </strong><span style=\"font-weight: 400;\">Pandit Ravi Shankar, Shahid Parvez Khan, Budhaditya Mukherjee, Anushka Shankar, Annapurna Devi, Vilayat Khan.</span></p>\n",
+    "question_index": 12
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\">14</span><span style=\"font-family: Cambria Math;\">. </span><span style=\"font-family: Cambria Math;\">Krishnadeva Raya composed a work on ______ in Telugu known as the Amuktamalyada.</span></p>\n",
+    "options": [
+      "statecraft",
+      "dance",
+      "medicine",
+      "music"
+    ],
+    "correct_option_id": 0,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">14</span><span style=\"font-family: Cambria Math;\">.(a)&nbsp;</span><strong>Statecraft. Krishnadevaraya</strong><span style=\"font-weight: 400;\"> : Ruler of the Tuluva dynasty of Vijayanagar empire (1509-29 AD). He also founded a suburban township near Vijayanagar called Nagalapuram. </span><strong>Vijayanagara Empire (</strong><span style=\"font-weight: 400;\">City of victory</span><strong>) :</strong><span style=\"font-weight: 400;\"> Founded in 1336 AD by Harihara and Bukka of the Sangama dynasty. Capital - Hampi (along the river Tungabhadra). Vijayanagar Empire was ruled by Sangama, Saluva, Tuluva, Aravidu Dynasties.&nbsp;</span></p>\n",
+    "question_index": 13
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\">15</span><span style=\"font-family: Cambria Math;\">.</span><span style=\"font-family: Cambria Math;\"> The colours of the squares used in a chessboard are_____.</span></p>\n",
+    "options": [
+      "white and black",
+      "red and black",
+      "white and green",
+      "white and red"
+    ],
+    "correct_option_id": 0,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">15</span><span style=\"font-family: Cambria Math;\">.(a)&nbsp;</span><strong>White and Black. FIDE</strong><span style=\"font-weight: 400;\"> (International Chess Federation), the governing body of the sport of chess, and it regulates all international chess competitions. Headquarter - Lausanne (Switzerland). Establishment&nbsp; - 1924. Minimum FIDE rating required to earn the &ldquo;Grandmaster&rdquo; (GM) title - 2500. </span><strong>First Indian Chess GrandMaster</strong><span style=\"font-weight: 400;\"> - Viswanathan Anand. </span><strong>Famous Players -</strong><span style=\"font-weight: 400;\"> Gukesh D,&nbsp; Magnus Carlsen, Mitrabha Guha, Vuppala Praneeth, Aditya Mittal, Koneru Humpy.</span><strong>&nbsp;&nbsp;&nbsp;</strong></p>\n",
+    "question_index": 14
+  }
+];
     </script>
-    
+
     <!-- Central JS Controller -->
     <script src="../js/mock-core.js"></script>
 </body>

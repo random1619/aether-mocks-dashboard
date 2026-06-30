@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>English Madhyam — Practice Studio</title>
+<meta name="description" content="Dedicated English vocabulary, grammar, and passage practice portal.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --warm-bg:#fdfbf7;--warm-card:#faf6ee;--warm-border:#eadecc;
+  --amber:#d97706;--amber-d:#b45309;--amber-l:#fef3c7;
+  --text:#292524;--sub:#57534e;--muted:#a8a29e;
+  --success:#15803d;--white:#fff;
+  --r:8px;
+}
+html{font-family:'Outfit',sans-serif;-webkit-font-smoothing:antialiased}
+body{background:var(--warm-bg);color:var(--text);min-height:100vh}
+
+/* ── Editorial Header ── */
+.header{
+  border-bottom: 2px solid var(--text);
+  padding: 1.5rem 2rem;
+  background: var(--warm-card);
+}
+.header-inner{
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+.brand{
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.brand-logo{
+  font-family: 'Playfair Display', serif;
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: var(--text);
+  border: 2px solid var(--text);
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--amber-l);
+}
+.brand-text h1{
+  font-family: 'Playfair Display', serif;
+  font-size: 1.6rem;
+  font-weight: 700;
+  line-height: 1.1;
+}
+.brand-text p{
+  font-size: .75rem;
+  color: var(--sub);
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  font-weight: 600;
+}
+.back-btn{
+  font-size: .8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+  color: var(--text);
+  text-decoration: none;
+  border-bottom: 2px solid var(--text);
+  padding-bottom: 2px;
+  display: inline-flex;
+  align-items: center;
+  gap: .3rem;
+  transition: opacity .2s;
+}
+.back-btn:hover{
+  opacity: 0.7;
+}
+
+/* ── Main Layout ── */
+.container{
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 2.5rem;
+}
+
+/* ── Left Sidebar (Editorial Style) ── */
+.sidebar{
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+.section-title{
+  font-family: 'Playfair Display', serif;
+  font-size: 1.2rem;
+  font-weight: 700;
+  border-bottom: 1px solid var(--text);
+  padding-bottom: .5rem;
+  margin-bottom: 1rem;
+}
+.search-box{
+  position: relative;
+}
+.search-input{
+  width: 100%;
+  padding: .6rem .75rem;
+  border: 1px solid var(--warm-border);
+  background: var(--warm-card);
+  font-family: inherit;
+  font-size: .85rem;
+  color: var(--text);
+  outline: none;
+}
+.search-input:focus{
+  border-color: var(--text);
+}
+.filter-list{
+  display: flex;
+  flex-direction: column;
+  gap: .35rem;
+}
+.filter-item{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: .5rem .75rem;
+  font-family: inherit;
+  font-size: .82rem;
+  font-weight: 500;
+  color: var(--sub);
+  background: transparent;
+  border: 1px solid transparent;
+  text-align: left;
+  cursor: pointer;
+  transition: all .2s;
+}
+.filter-item:hover{
+  background: var(--warm-card);
+  color: var(--text);
+}
+.filter-item.active{
+  background: var(--text);
+  color: var(--warm-bg);
+  font-weight: 600;
+}
+.item-count{
+  font-size: .7rem;
+  font-weight: 600;
+  padding: 1px 6px;
+  border: 1px solid var(--warm-border);
+  background: var(--warm-card);
+  color: var(--sub);
+}
+.filter-item.active .item-count{
+  background: var(--warm-bg);
+  color: var(--text);
+  border-color: var(--warm-bg);
+}
+
+.stats-panel{
+  background: var(--warm-card);
+  border: 1px solid var(--warm-border);
+  padding: 1.25rem;
+}
+.stat-row{
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: .5rem;
+  font-size: .85rem;
+}
+.stat-val{
+  font-weight: 700;
+}
+.prog-container{
+  margin-top: .75rem;
+}
+.prog-track{
+  height: 6px;
+  background: var(--warm-border);
+}
+.prog-fill{
+  height: 100%;
+  background: var(--text);
+  width: 0%;
+  transition: width .5s;
+}
+
+/* ── Mocks Content ── */
+.content{
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+.toolbar{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--warm-border);
+  padding-bottom: .75rem;
+}
+.sort-select{
+  padding: .35rem .5rem;
+  font-family: inherit;
+  font-size: .8rem;
+  background: var(--warm-card);
+  border: 1px solid var(--warm-border);
+  color: var(--text);
+  outline: none;
+}
+.mock-grid{
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+.mock-card{
+  background: var(--warm-card);
+  border: 1px solid var(--warm-border);
+  padding: 1.25rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1.5rem;
+  transition: border-color .2s;
+}
+.mock-card:hover{
+  border-color: var(--text);
+}
+.card-details{
+  flex: 1;
+  min-width: 0;
+}
+.card-subj{
+  font-size: .68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--amber);
+  margin-bottom: .25rem;
+}
+.card-title{
+  font-family: 'Playfair Display', serif;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: .5rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.card-meta{
+  display: flex;
+  gap: .5rem;
+}
+.card-badge{
+  font-size: .7rem;
+  font-weight: 600;
+  color: var(--sub);
+  background: var(--warm-bg);
+  border: 1px solid var(--warm-border);
+  padding: 2px 8px;
+}
+.card-actions{
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+}
+.done-btn{
+  width: 36px;
+  height: 36px;
+  border: 1px solid var(--warm-border);
+  background: var(--warm-bg);
+  color: var(--muted);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all .2s;
+}
+.done-btn:hover{
+  border-color: var(--text);
+  color: var(--text);
+}
+.done-btn.done{
+  background: var(--text);
+  border-color: var(--text);
+  color: var(--warm-bg);
+}
+.start-btn{
+  height: 36px;
+  padding: 0 1.25rem;
+  background: var(--text);
+  color: var(--warm-bg);
+  border: none;
+  font-family: inherit;
+  font-size: .8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background .2s;
+}
+.start-btn:hover{
+  background: var(--amber-d);
+}
+
+.lm-wrap{
+  display: flex;
+  justify-content: center;
+  margin-top: 1.5rem;
+}
+.lm-btn{
+  padding: .6rem 1.5rem;
+  font-family: inherit;
+  font-size: .8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  background: transparent;
+  border: 2px solid var(--text);
+  color: var(--text);
+  cursor: pointer;
+  transition: all .2s;
+}
+.lm-btn:hover{
+  background: var(--text);
+  color: var(--warm-bg);
+}
+
+.empty{
+  text-align: center;
+  padding: 4rem 2rem;
+  border: 1px dashed var(--warm-border);
+}
+.empty-t{
+  font-family: 'Playfair Display', serif;
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: .25rem;
+}
+.empty-s{
+  font-size: .85rem;
+  color: var(--sub);
+}
+
+@media(max-width: 800px){
+  .container{
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+}
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="header-inner">
+    <div class="brand">
+      <div class="brand-logo">E</div>
+      <div class="brand-text">
+        <h1>English Madhyam</h1>
+        <p>Practice Studio</p>
+      </div>
+    </div>
+    <a href="index.html" class="back-btn">
+      <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+        <polyline points="15 18 9 12 15 6"/>
+      </svg>
+      All Providers
+    </a>
+  </div>
+</header>
+
+<div class="container">
+  <aside class="sidebar">
+    <div>
+      <div class="section-title">Search</div>
+      <div class="search-box">
+        <input type="text" class="search-input" id="searchInput" placeholder="Search keywords…">
+      </div>
+    </div>
+
+    <div>
+      <div class="section-title">Categories</div>
+      <div class="filter-list" id="catList"></div>
+    </div>
+
+    <div class="stats-panel">
+      <div class="section-title" style="border:none;margin:0 0 .5rem 0;padding:0">My Scorecard</div>
+      <div class="stat-row"><span>Total Practice Files</span><span class="stat-val" id="statTotal">—</span></div>
+      <div class="stat-row"><span>Completed</span><span class="stat-val" id="statDone">—</span></div>
+      <div class="stat-row"><span>Percentage Done</span><span class="stat-val" id="statPct">0%</span></div>
+      <div class="prog-container">
+        <div class="prog-track"><div class="prog-fill" id="progFill"></div></div>
+      </div>
+    </div>
+  </aside>
+
+  <main class="content">
+    <div class="toolbar">
+      <span style="font-size:.85rem;color:var(--sub)" id="resultsCount">Loading…</span>
+      <select class="sort-select" id="sortSelect">
+        <option value="name-asc">Alphabetical (A-Z)</option>
+        <option value="name-desc">Alphabetical (Z-A)</option>
+      </select>
+    </div>
+
+    <div class="mock-grid" id="mockGrid"></div>
+
+    <div class="lm-wrap" id="lmWrap" style="display:none">
+      <button class="lm-btn" id="lmBtn">Load More</button>
+    </div>
+  </main>
+</div>
+
+<script src="mocks-data.js"></script>
+<script src="js/provider-page.js"></script>
+<script>
+const page = new ProviderPage({
+  providerKey: 'English Madhyam',
+  limit: 40,
+  onUpdate({ mocks, total, hasMore, stats, append }) {
+    document.getElementById('statTotal').textContent = stats.total;
+    document.getElementById('statDone').textContent = stats.done;
+    document.getElementById('statPct').textContent = stats.pct + '%';
+    document.getElementById('progFill').style.width = stats.pct + '%';
+    document.getElementById('resultsCount').innerHTML = `Showing <strong>${total}</strong> English drills`;
+    document.getElementById('lmWrap').style.display = hasMore ? 'flex' : 'none';
+
+    const grid = document.getElementById('mockGrid');
+    if (!append) grid.innerHTML = '';
+    if (mocks.length === 0 && !append) {
+      grid.innerHTML = `<div class="empty">
+        <div class="empty-t">No drills found</div>
+        <div class="empty-s">Try clearing your search query or selecting a different category.</div>
+      </div>`;
+      return;
+    }
+
+    mocks.forEach(m => {
+      const done = page.isDone(m.path);
+      const card = document.createElement('div');
+      card.className = 'mock-card';
+      card.innerHTML = `
+        <div class="card-details">
+          <div class="card-subj">${htmlEnc(m.subject)}</div>
+          <div class="card-title" title="${htmlEnc(m.name)}">${htmlEnc(m.name)}</div>
+          <div class="card-meta">
+            <span class="card-badge">${htmlEnc(m.category)}</span>
+          </div>
+        </div>
+        <div class="card-actions">
+          <button class="done-btn ${done ? 'done' : ''}" data-path="${htmlEnc(m.path)}">
+            <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+              <polyline points="20 6 9 17 4 12"/>
+            </svg>
+          </button>
+          <a class="start-btn" href="${htmlEnc(m.path)}" target="_blank">Practice</a>
+        </div>
+      `;
+      grid.appendChild(card);
+    });
+  }
+});
+
+// Categories list
+(function() {
+  const list = document.getElementById('catList');
+  const allBtn = document.createElement('button');
+  allBtn.className = 'filter-item active';
+  allBtn.dataset.cat = 'all';
+  allBtn.innerHTML = `<span>All Materials</span><span class="item-count">${page._all.length}</span>`;
+  list.appendChild(allBtn);
+
+  page.categories.forEach(c => {
+    const count = page._all.filter(m => m.category === c).length;
+    const btn = document.createElement('button');
+    btn.className = 'filter-item';
+    btn.dataset.cat = c;
+    btn.innerHTML = `<span>${htmlEnc(c)}</span><span class="item-count">${count}</span>`;
+    list.appendChild(btn);
+  });
+
+  list.addEventListener('click', e => {
+    const btn = e.target.closest('.filter-item');
+    if (!btn) return;
+    list.querySelectorAll('.filter-item').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    page.category(btn.dataset.cat);
+  });
+})();
+
+document.getElementById('searchInput').addEventListener('input', e => page.search(e.target.value));
+document.getElementById('sortSelect').addEventListener('change', e => page.sort(e.target.value));
+document.getElementById('lmBtn').addEventListener('click', () => page.more());
+document.getElementById('mockGrid').addEventListener('click', e => {
+  const btn = e.target.closest('.done-btn');
+  if (!btn) return;
+  btn.classList.toggle('done', page.toggle(btn.dataset.path));
+});
+
+page.refresh();
+</script>
+</body>
+</html>

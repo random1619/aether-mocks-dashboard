@@ -3,43 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aether Mocks</title>
+    <title>Mocks Wallah</title>
     <!-- Fonts & Icons -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    
+
     <!-- Central Stylesheet -->
     <link rel="stylesheet" href="../css/mock-main.css">
-    
+
     <!-- Math Formula Rendering (KaTeX/MathJax) -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    
+
     <!-- Timer Config -->
-    <meta name="exam-duration" content="60">
+    <meta name="exam-duration" content="30">
 </head>
 <body>
     <!-- Welcome Screen -->
     <div class="welcome-screen" id="welcomeScreen">
         <div class="welcome-container">
             <div class="welcome-header" style="margin-bottom: 24px;">
-                <h1 style="font-size: 2rem; font-weight: 700; color: #0f172a; margin-bottom: 8px;"><i class="fas fa-graduation-cap" style="color: #3b82f6;"></i> Aether Mocks</h1>
-                <p style="color: #64748b;">Computer Based Test Portal</p>
+                <h1 style="font-size: 2rem; font-weight: 700; color: var(--text-main); margin-bottom: 8px;"><i class="fas fa-graduation-cap" style="color: var(--primary);"></i> Mocks Wallah</h1>
+                <p style="color: var(--text-muted);">Computer Based Test Portal</p>
             </div>
-            
+
             <div class="test-details" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-bottom: 32px; text-align: left;">
-                <div class="detail-item" style="padding: 12px; background: #f8fafc; border-radius: 8px; border: 1px solid #e2e8f0;">
-                    <div class="detail-label" style="font-size: 0.8rem; color: #64748b;">Total Questions</div>
-                    <div class="detail-value" style="font-size: 1.1rem; font-weight: 600; color: #0f172a;">10</div>
+                <div class="detail-item" style="padding: 12px; background: var(--bg-color); border-radius: 8px; border: 1px solid var(--border-color);">
+                    <div class="detail-label" style="font-size: 0.8rem; color: var(--text-muted);">Total Questions</div>
+                    <div class="detail-value" style="font-size: 1.1rem; font-weight: 600; color: var(--text-main);">15</div>
                 </div>
-                <div class="detail-item" style="padding: 12px; background: #f8fafc; border-radius: 8px; border: 1px solid #e2e8f0;">
-                    <div class="detail-label" style="font-size: 0.8rem; color: #64748b;">Duration</div>
-                    <div class="detail-value" style="font-size: 1.1rem; font-weight: 600; color: #0f172a;">60 mins</div>
+                <div class="detail-item" style="padding: 12px; background: var(--bg-color); border-radius: 8px; border: 1px solid var(--border-color);">
+                    <div class="detail-label" style="font-size: 0.8rem; color: var(--text-muted);">Duration</div>
+                    <div class="detail-value" style="font-size: 1.1rem; font-weight: 600; color: var(--text-main);">30 mins</div>
                 </div>
             </div>
-            
+
             <div class="welcome-actions">
                 <button class="btn btn-primary" id="startBtn" onclick="document.getElementById('welcomeScreen').style.display='none'; document.getElementById('examContainer').style.display='flex';" style="font-size: 1.1rem; padding: 12px 32px; width: 100%;">
                     <i class="fas fa-play" style="margin-right: 8px;"></i> Start Test
@@ -47,12 +47,12 @@
             </div>
         </div>
     </div>
-    
+
     <!-- Main Exam Interface -->
     <div class="exam-container" id="examContainer" style="display: none; height: 100vh; flex-direction: column;">
         <!-- Top Header -->
         <div class="exam-header">
-            <div class="exam-title">Aether Mocks</div>
+            <div class="exam-title">Mocks Wallah</div>
             <div class="header-actions" style="display: flex; align-items: center; gap: 12px;">
                 <button class="btn-icon" id="themeToggleBtn" title="Switch to Dark Mode"><i class="fas fa-moon"></i></button>
                 <button class="btn-icon" id="fullscreenToggleBtn" title="Toggle Fullscreen"><i class="fas fa-expand"></i></button>
@@ -62,14 +62,14 @@
                 </div>
             </div>
         </div>
-        
+
         <!-- Main Content -->
         <div class="mock-container">
             <!-- Question Area -->
             <div class="question-view">
                 <!-- Dynamically populated question container -->
                 <div id="questionContainer" style="flex: 1; display: flex; flex-direction: column; gap: 24px;"></div>
-                
+
                 <!-- Controls -->
                 <div class="nav-controls">
                     <button class="btn btn-secondary btn-prev"><i class="fas fa-chevron-left" style="margin-right: 8px;"></i> Previous</button>
@@ -79,40 +79,221 @@
                     <button class="btn btn-primary btn-next">Next <i class="fas fa-chevron-right" style="margin-left: 8px;"></i></button>
                 </div>
             </div>
-            
+
             <!-- Desktop Navigator Sidebar -->
             <div class="sidebar">
                 <div class="sidebar-section-title">Summary Status</div>
                 <div class="stats-grid">
                     <div class="stat-item">
-                        <div class="stat-count" id="stat-answered" style="color: #10b981;">0</div>
+                        <div class="stat-count" id="stat-answered" style="color: var(--success);">0</div>
                         <div class="stat-name">Answered</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-count" id="stat-flagged" style="color: #f59e0b;">0</div>
+                        <div class="stat-count" id="stat-flagged" style="color: var(--warning);">0</div>
                         <div class="stat-name">Flagged</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-count" id="stat-not-answered" style="color: #64748b;">0</div>
+                        <div class="stat-count" id="stat-not-answered" style="color: var(--text-muted);">0</div>
                         <div class="stat-name">Unanswered</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-count" id="stat-not-visited" style="color: #94a3b8;">0</div>
+                        <div class="stat-count" id="stat-not-visited" style="color: var(--text-muted);">0</div>
                         <div class="stat-name">Not Visited</div>
                     </div>
                 </div>
-                
+
                 <div class="sidebar-section-title" style="margin-top: 16px;">Question Navigator</div>
                 <div class="questions-grid"></div>
             </div>
         </div>
     </div>
-    
+
     <!-- Inject Question Data -->
     <script>
-        const questions = [];
+        const questions = [
+  {
+    "question": "<p>1. In MS Word, which feature allows you to create different headers and footers for odd and even pages in a document?</p>",
+    "options": [
+      "Different Odd &amp; Even Pages",
+      "Page Breaks",
+      "Section Breaks",
+      "Different First Page"
+    ],
+    "correct_option_id": 0,
+    "solution": "<p>1.(a) <strong>Different Odd &amp; Even Pages</strong>. Microsoft Word is a word processor program developed by Microsoft. It was first released on October 25, 1983, under the name Multi-Tool Word for Xenix systems. Initial release - October 25, 1983.</p>",
+    "question_index": 0
+  },
+  {
+    "question": "<p>2. In which year was tennis included in the Olympic games?</p>",
+    "options": [
+      "1927",
+      "1896",
+      "1935",
+      "1948"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p>2.(b) <strong>1896.</strong> The first Olympic Games of the modern era took place in Athens, in the country where the original Games took place in Antiquity, in April 1896. Leander Paes is still the only Indian to win an Olympics tennis medal, bagging a men\\'s singles bronze at Atlanta 1996.</p>",
+    "question_index": 1
+  },
+  {
+    "question": "<p>3. Match the following musical instruments with the maestros who play them.<br>a. Santoor&nbsp; &nbsp; &nbsp; &nbsp;i. Bismillah Khan<br>b. Sitar&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; ii. Ustad Binda Khan<br>c. Shehnai&nbsp; &nbsp; &nbsp; iii. Pt Shiv Kumar Sharma<br>d. Sarangi&nbsp; &nbsp; &nbsp; &nbsp;iv. Anushka Shankar</p>",
+    "options": [
+      "a-ii, b-iii, c-i, d-iv",
+      "a-iv, b-iii, c-ii, d-i",
+      "a-iii, b-iv, c-i, d-ii",
+      "a-i, b-ii, c-iii, d-iv"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p>3.(c) <strong>a-iii, b-iv, c-i, d-ii.</strong> Famous musical instruments and their exponents: Santoor - Bhajan Sopori, Pt Tarun Bhattacharya.&nbsp;Sitar - Ustad Vilayat Khan, Pt Ravi Shankar, Shujaat Hussain Khan, Shahid Parvez Khan, Anushka Shankar, Nikhil Banerjee, Mustaq Ali Khan, Budhaditya Mukherjee. Shehnai - Daya Shankar,Ali Ahmad Hussain. Sarangi: Abdul Latif Khan, Ramesh Mishra, Sultan Khan, Pt Ram Narayan, Shakoor Khan.</p>",
+    "question_index": 2
+  },
+  {
+    "question": "<p>4. Who among the following is a famous classical dancer?</p>",
+    "options": [
+      "S Janaki",
+      "Sonal Mansingh",
+      "Asha Bhosle",
+      "Pratibha Ray"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p>4.(b) <strong>Sonal Mansingh.</strong> She is an Indian classical dancer and Guru in Bharatanatyam and Odissi dancing style. Sistla Janaki is an Indian playback singer and occasional music composer from Andhra Pradesh. Asha Bhosle is an Indian singer who records songs for movies. Pratibha Ray is an Indian academic and writer of Odia-language novels and stories.</p>",
+    "question_index": 3
+  },
+  {
+    "question": "<p>5. Match List-I (Name of the composition) with List-II (Writer).<br><strong id=\"docs-internal-guid-5734118f-7fff-9e55-5c51-966fb5beb0fb\"><img src=\"https://lh7-rt.googleusercontent.com/docsz/AD_4nXfU2EOtCoI8GEyjbxbHyr3iK5hlheN22qOVaNMnR5g13DrVS20YvHTZ4dj9bX6DFfjkFSLFHa4Pl2tTTDirgpEXUNNmLiwXcFhxnOPPYFuJdnAQRwlVuDsS_Yp35bKvvcvxJlGM?key=7FK-riQykRaJ3zW0vqL_Yufp\" width=\"479\" height=\"81\"></strong></p>",
+    "options": [
+      "1-C, 2-A, 3-B",
+      "1-B, 2-C, 3-A",
+      "1-C, 2-B, 3-A",
+      "1-A, 2-B, 3-C"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p>5.(b) <strong>1-B, 2-C, 3-A</strong>. \"Aye Mere Watan Ke Logo\" is a patriotic song written in Hindi by Kavi Pradeep, composed by C. Ramchandra, and sung by singer Lata Mangeshkar. Jana Gana Mana is the national anthem of the Republic of India. It was originally composed as \"Bharoto Bhagyo Bidhata\" in Bengali by polymath Rabindranath Tagore on 11 December 1911. \"Vande Mataram\" is a Bengali poem by Bankim Chandra Chatterjee.</p>",
+    "question_index": 4
+  },
+  {
+    "question": "<p>6. Who is the only Indian woman who has been ranked world&rsquo;s no.1 for badminton?</p>",
+    "options": [
+      "Saina Nehwal",
+      "Rituparna Das",
+      "Jwala Gutta",
+      "P V Sindhu"
+    ],
+    "correct_option_id": 0,
+    "solution": "<p>6.(a) <strong>Saina Nehwal.</strong> Other Indian Badminton Players: Kidambi Srikanth, Prakash Padukone, Sai Praneeth, Pullela Gopichand, Parupalli Kashyap, Ashwini Ponnappa, Satwiksairaj Rankireddy, Chirag Shetty. Major tournaments: BWF World Championships, Thomas Cup, Uber Cup, Sudirman Cup</p>",
+    "question_index": 5
+  },
+  {
+    "question": "<p>7. Which folk music does NOT belong to Nagaland?</p>",
+    "options": [
+      "Nyioga",
+      "Heliamleu",
+      "Hereileu",
+      "Neuleu"
+    ],
+    "correct_option_id": 0,
+    "solution": "<p>7.(a) <strong>Nyioga.</strong> It is sung when a marriage ceremony is concluded and the bride\\'s family returns leaving the bride in her home in Arunachal Pradesh. Nagaland\\'s folk music is known for its enchanting melodies and lyrics that tell stories of love, nature, bravery, and cultural identity. Nagaland famous folk dance: Hereileu, Chang Lo, Tetseo Sisters, Tati, Theku, Asem, Kuki dance.</p>",
+    "question_index": 6
+  },
+  {
+    "question": "<p>8. \\'Chhau\\' is a popular dance of which of the following state?</p>",
+    "options": [
+      "Gujarat",
+      "Haryana",
+      "Jharkhand",
+      "Kerala"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p>8.(c) <strong>Jharkhand.</strong> Chhau is a semi-classical Indian dance with martial and folk traditions. It is found in three styles named after the location where they are performed, i.e., the Purulia Chhau of West Bengal, the Seraikella Chhau of Jharkhand and the Mayurbhanj Chhau of Odisha. The Cultural Ministry of India has included Chhau in the list of classical dances making a total of 9 classical dance forms.</p>",
+    "question_index": 7
+  },
+  {
+    "question": "<p>9. On what type of data can MS Excel functions operate?</p>",
+    "options": [
+      "External data sources only",
+      "Entire worksheets only",
+      "Range of cells or groups of cells",
+      "Individual cells only"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p>9.(c) <strong>Range of cells or groups of cells</strong>. MS Excel, a worksheet, also known as a Spreadsheet, is a table into which you enter data and data label. Worksheet used in Excel documents is a collection of cells organized in rows and columns. It is the working surface you interact with to enter data. Each worksheet contains 1048576 rows and 16384 columns and serves as a giant table that allows you to organize information.</p>",
+    "question_index": 8
+  },
+  {
+    "question": "<p>10. What will happen when you select the cell contents of a particular row in MS-Excel and then click the Delete button?</p>",
+    "options": [
+      "First five cell entries will be deleted",
+      "Only first three cells will be deleted",
+      "Entire row will be deleted",
+      "Entries in all the selected cells will be deleted"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p>10.(d) <strong>Entries in all the selected cells will be deleted</strong>. Microsoft Excel is a spreadsheet editor developed by Microsoft for Windows, macOS, Android, iOS and iPadOS. It features calculation or computation capabilities, graphing tools, pivot tables, and a macro programming language called Visual Basic for Applications (VBA). Excel forms part of the Microsoft 365 suite of software.</p>",
+    "question_index": 9
+  },
+  {
+    "question": "<p>11. When was the Bharat Nirman Programme launched by the Government of India?</p>",
+    "options": [
+      "2014",
+      "2005",
+      "2010",
+      "2000"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p>11.(b) <strong>2005.</strong> The Bharat Nirman program was a Union Government program launched to improve rural infrastructure. The program\\'s objectives included: Developing rural roads, Building rural housing, Improving rural telephony, Electrifying rural areas, and Providing rural water supply and irrigation.</p>",
+    "question_index": 10
+  },
+  {
+    "question": "<p>12. Which of the following is NOT a poverty alleviation programme in India?</p>",
+    "options": [
+      "Rashtriya Ucchatar Shiksha Abhiyan",
+      "Swarna Jayanti Shahari Rozgar Yojana",
+      "Prime Minister Rozgar Yojana",
+      "Integrated Rural Development Program"
+    ],
+    "correct_option_id": 0,
+    "solution": "<p>12.(a) <strong>Rashtriya Ucchatar Shiksha Abhiyan.</strong> It is a holistic scheme of development for higher education in India initiated in 2013 by the Ministry of Education. Swarna Jayanti Shahari Rozgar Yojana in India is a Centrally Sponsored Scheme which came into effect on 1 December 1997. The Prime Minister Rozgar Yojna (PMRY) scheme is to provide assistance to the educated unemployed persons.</p>",
+    "question_index": 11
+  },
+  {
+    "question": "<p>13. Which famous book was written by &lsquo;Haripala&rsquo;?</p>",
+    "options": [
+      "Gita Govinda",
+      "Sangeet Darpan",
+      "Sangeet Ratnakara",
+      "Sangeeta Sudhakara"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p>13.(d) <strong>Sangeeta Sudhakara</strong>. The term &lsquo;Carnatic&rsquo; and &lsquo;Hindustani&rsquo; to classify musical styles first appeared in it. The Gita Govinda is a work composed by the 12th-century Hindu poet, Jayadeva. Sangeet Darpan is a musical treatise on Indian classical music written by Damodar Pandit. The Sangita-Ratnakara (Ocean of Music and Dance) is one of the most important musicological texts from India.</p>",
+    "question_index": 12
+  },
+  {
+    "question": "<p>14. Which of the following is the festival of Kerala that heralds the harvest season, lasts for 10 days, and has snake boat races etc?</p>",
+    "options": [
+      "Vishu",
+      "Thiruvathira",
+      "Thrissur Pooram",
+      "Onam"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p>14.(d) <strong>Onam.</strong> Onam is the biggest festival in the Indian state of Kerala. Onam Festival falls during the Malayali month of Chingam (Aug - Sep) and marks the homecoming of legendary King Mahabali. Other Festivals of Kerala : Thrissur Pooram Festival, Attukal Pongala Festival, Navarathri Festival, Makaravilakku Festival, Kerala Village Fair, Aluva Sivarathri Festival, Vishu Festival.</p>",
+    "question_index": 13
+  },
+  {
+    "question": "<p>15. Where is Birsa Munda International Hockey Stadium located?</p>",
+    "options": [
+      "Ranchi",
+      "Rourkela",
+      "Bhubaneswar",
+      "Jamshedpur"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p>15.(b) <strong>Rourkela</strong> (India&rsquo;s largest hockey stadium). Birsa Munda was a tribal leader who led the Munda Rebellion against British rule and the exploitation of his people in Jharkhand. Stadiums in India named after famous Personalities: Indira Gandhi Stadium (New Delhi), Rajiv Gandhi International Cricket Stadium (Hyderabad), Narendra Modi Stadium (Ahmedabad), Lal Bahadur Shastri Stadium (Hyderabad), Arun Jaitley Stadium (New Delhi), Major Dhyan Chand Hockey Stadium (Lucknow).</p>",
+    "question_index": 14
+  }
+];
     </script>
-    
+
     <!-- Central JS Controller -->
     <script src="../js/mock-core.js"></script>
 </body>

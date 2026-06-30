@@ -3,43 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aether Mocks</title>
+    <title>Mocks Wallah</title>
     <!-- Fonts & Icons -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    
+
     <!-- Central Stylesheet -->
     <link rel="stylesheet" href="../css/mock-main.css">
-    
+
     <!-- Math Formula Rendering (KaTeX/MathJax) -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    
+
     <!-- Timer Config -->
-    <meta name="exam-duration" content="60">
+    <meta name="exam-duration" content="30">
 </head>
 <body>
     <!-- Welcome Screen -->
     <div class="welcome-screen" id="welcomeScreen">
         <div class="welcome-container">
             <div class="welcome-header" style="margin-bottom: 24px;">
-                <h1 style="font-size: 2rem; font-weight: 700; color: #0f172a; margin-bottom: 8px;"><i class="fas fa-graduation-cap" style="color: #3b82f6;"></i> Aether Mocks</h1>
-                <p style="color: #64748b;">Computer Based Test Portal</p>
+                <h1 style="font-size: 2rem; font-weight: 700; color: var(--text-main); margin-bottom: 8px;"><i class="fas fa-graduation-cap" style="color: var(--primary);"></i> Mocks Wallah</h1>
+                <p style="color: var(--text-muted);">Computer Based Test Portal</p>
             </div>
-            
+
             <div class="test-details" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-bottom: 32px; text-align: left;">
-                <div class="detail-item" style="padding: 12px; background: #f8fafc; border-radius: 8px; border: 1px solid #e2e8f0;">
-                    <div class="detail-label" style="font-size: 0.8rem; color: #64748b;">Total Questions</div>
-                    <div class="detail-value" style="font-size: 1.1rem; font-weight: 600; color: #0f172a;">10</div>
+                <div class="detail-item" style="padding: 12px; background: var(--bg-color); border-radius: 8px; border: 1px solid var(--border-color);">
+                    <div class="detail-label" style="font-size: 0.8rem; color: var(--text-muted);">Total Questions</div>
+                    <div class="detail-value" style="font-size: 1.1rem; font-weight: 600; color: var(--text-main);">15</div>
                 </div>
-                <div class="detail-item" style="padding: 12px; background: #f8fafc; border-radius: 8px; border: 1px solid #e2e8f0;">
-                    <div class="detail-label" style="font-size: 0.8rem; color: #64748b;">Duration</div>
-                    <div class="detail-value" style="font-size: 1.1rem; font-weight: 600; color: #0f172a;">60 mins</div>
+                <div class="detail-item" style="padding: 12px; background: var(--bg-color); border-radius: 8px; border: 1px solid var(--border-color);">
+                    <div class="detail-label" style="font-size: 0.8rem; color: var(--text-muted);">Duration</div>
+                    <div class="detail-value" style="font-size: 1.1rem; font-weight: 600; color: var(--text-main);">30 mins</div>
                 </div>
             </div>
-            
+
             <div class="welcome-actions">
                 <button class="btn btn-primary" id="startBtn" onclick="document.getElementById('welcomeScreen').style.display='none'; document.getElementById('examContainer').style.display='flex';" style="font-size: 1.1rem; padding: 12px 32px; width: 100%;">
                     <i class="fas fa-play" style="margin-right: 8px;"></i> Start Test
@@ -47,12 +47,12 @@
             </div>
         </div>
     </div>
-    
+
     <!-- Main Exam Interface -->
     <div class="exam-container" id="examContainer" style="display: none; height: 100vh; flex-direction: column;">
         <!-- Top Header -->
         <div class="exam-header">
-            <div class="exam-title">Aether Mocks</div>
+            <div class="exam-title">Mocks Wallah</div>
             <div class="header-actions" style="display: flex; align-items: center; gap: 12px;">
                 <button class="btn-icon" id="themeToggleBtn" title="Switch to Dark Mode"><i class="fas fa-moon"></i></button>
                 <button class="btn-icon" id="fullscreenToggleBtn" title="Toggle Fullscreen"><i class="fas fa-expand"></i></button>
@@ -62,14 +62,14 @@
                 </div>
             </div>
         </div>
-        
+
         <!-- Main Content -->
         <div class="mock-container">
             <!-- Question Area -->
             <div class="question-view">
                 <!-- Dynamically populated question container -->
                 <div id="questionContainer" style="flex: 1; display: flex; flex-direction: column; gap: 24px;"></div>
-                
+
                 <!-- Controls -->
                 <div class="nav-controls">
                     <button class="btn btn-secondary btn-prev"><i class="fas fa-chevron-left" style="margin-right: 8px;"></i> Previous</button>
@@ -79,40 +79,221 @@
                     <button class="btn btn-primary btn-next">Next <i class="fas fa-chevron-right" style="margin-left: 8px;"></i></button>
                 </div>
             </div>
-            
+
             <!-- Desktop Navigator Sidebar -->
             <div class="sidebar">
                 <div class="sidebar-section-title">Summary Status</div>
                 <div class="stats-grid">
                     <div class="stat-item">
-                        <div class="stat-count" id="stat-answered" style="color: #10b981;">0</div>
+                        <div class="stat-count" id="stat-answered" style="color: var(--success);">0</div>
                         <div class="stat-name">Answered</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-count" id="stat-flagged" style="color: #f59e0b;">0</div>
+                        <div class="stat-count" id="stat-flagged" style="color: var(--warning);">0</div>
                         <div class="stat-name">Flagged</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-count" id="stat-not-answered" style="color: #64748b;">0</div>
+                        <div class="stat-count" id="stat-not-answered" style="color: var(--text-muted);">0</div>
                         <div class="stat-name">Unanswered</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-count" id="stat-not-visited" style="color: #94a3b8;">0</div>
+                        <div class="stat-count" id="stat-not-visited" style="color: var(--text-muted);">0</div>
                         <div class="stat-name">Not Visited</div>
                     </div>
                 </div>
-                
+
                 <div class="sidebar-section-title" style="margin-top: 16px;">Question Navigator</div>
                 <div class="questions-grid"></div>
             </div>
         </div>
     </div>
-    
+
     <!-- Inject Question Data -->
     <script>
-        const questions = [];
+        const questions = [
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\">Which of the following is a festival and dance?</span></p>\n",
+    "options": [
+      "Baisakhi",
+      "Ugadi",
+      "Pongal",
+      "Bihu"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p>1.(d) <strong>Bihu</strong><span style=\"font-family: Cambria Math;\"><strong> </strong>(Assam). Festivals of Assam : Majuli, Dehing Patkai, Kaziranga Elephant, Ali Ai Ligang, Rongker &amp; Chomangkan, Raas Lila, Karam Puja, Baishagu. </span><strong><span style=\"font-family: Cambria Math;\">Other Festivals and their states</span><span style=\"font-family: Cambria Math;\"> :</span><span style=\"font-family: Cambria Math;\"> </span></strong><span style=\"font-family: Cambria Math;\">Baisakhi (Punjab), Pongal (Tamil Nadu), Ugadi (Telangana, Andhra Pradesh and</span><span style=\"font-family: Cambria Math;\"> Karnataka).</span></p>\n",
+    "question_index": 0
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\">Who became the first Vice-Chancellor of Jawaharlal Nehru University in 1969 ?</span></p>\n",
+    "options": [
+      "BD Nagchaudhuri",
+      "G Parthasarathi ",
+      "Y Nayudamma",
+      "KR Narayanan"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p>2.(b) <strong>G Parthasarathi. Jawaharlal Nehru University (JNU):</strong> <span style=\\\"font-family: Cambria Math;\\\">A public major research university located in New Delhi, India. It was established in 1969 and named after Jawaharlal Nehru, India\\'s first Prime Minister. Other Central Universities : Aligarh Muslim University (1875), Assam University, Banaras Hindu Univer</span><span style=\\\"font-family: Cambria Math;\\\">sity (1916), Central University of Gujarat (2009).</span><span style=\\\"font-family: Cambria Math;\\\"> <strong>University Grant Commission</strong> (UGC)</span><span style=\\\"font-family: Cambria Math;\\\"> : A statutory body, set up by the Department of Higher Education (Ministry of Education), Work - Coordination, determination and maintenance of standards of higher educat</span><span style=\\\"font-family: Cambria Math;\\\">ion in India. </span></p>\\n",
+    "question_index": 1
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\">Who was the first woman graduate of Calcutta University ?</span></p>\n",
+    "options": [
+      "Sarojini Naidu",
+      "Annie Besant",
+      "Kadambini Ganguly",
+      "Rajkumari Amritkaur"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p>3.(c) <strong>Kadambini Ganguly</strong><span style=\\\"font-family: Cambria Math;\\\"><strong> </strong>and Chandramukhi Basu were the first BA graduates in the British empire in India. S</span><span style=\\\"font-family: Cambria Math;\\\">he was the South Asia\\'s first female Surgeon. Sarojini Naidu - She was known as the Nightingale of India, First female governor of India (Uttar Pradesh). Rajkumari Amritkaur - The first Health Minister of India (1947). Annie Besant - Established the Indian</span><span style=\\\"font-family: Cambria Math;\\\"> Home Rule League and also became the president of India&rsquo;s National Congress (1917, calcutta session).</span></p>\\n",
+    "question_index": 2
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\"> The name of Ustad Vilayat Khan is associated with which of the following Indian musical instruments?</span></p>\n",
+    "options": [
+      "Santoor",
+      "Sitar",
+      "Bansuri",
+      "Tabla"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p>4.(b) <strong>Sitar</strong>.<strong><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">Famous Sitar Players</span></strong><span style=\"font-family: Cambria Math;\"> - Ravi Shankar, Imrat Khan, Annapurna Devi, Nishat Khan, Rais Khan. </span><strong><span style=\"font-family: Cambria Math;\">Famous Santo</span><span style=\"font-family: Cambria Math;\">or Player</span></strong><span style=\"font-family: Cambria Math;\"><strong> </strong>- Shivkumar Sharma, Rahul Sharma, Tarun Bhattacharya. </span><strong><span style=\"font-family: Cambria Math;\">Famous Bansuri Players</span></strong><span style=\"font-family: Cambria Math;\"> - Hariprasad Chaurasia, Ronu Majumdar, Pannalal Ghosh, Devendra Murdeshwar.<strong> </strong></span><strong><span style=\"font-family: Cambria Math;\">Famous Tabla Player</span></strong><span style=\"font-family: Cambria Math;\"> - Zakir Hussain, Swapan Chaudhuri, Anuradha Pal, Shankar Ghosh.</span></p>\n",
+    "question_index": 3
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\"> When did British Empire Games start?</span></p>\n",
+    "options": [
+      "1936",
+      "1938",
+      "1930",
+      "1934"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p>5.(c) <strong>1930</strong>. <span style=\\\"font-family: Cambria Math;\\\">British Empire Games - Commonwealth Games were previously called the \\'British Empire Game\\'. Commonwealth Games - Held every four years, First held in 1930 (Hamilton, Canada). Last country to join - Rwanda(2009)<strong>.</strong></span><strong><span style=\\\"font-family: Cambria Math;\\\">UK, Birmingham</span></strong><span style=\\\"font-family: Cambria Math;\\\"><strong> </strong>hosted the 2</span><span style=\\\"font-family: Cambria Math;\\\">022 Commonwealth Games. </span><span style=\\\"font-family: Cambria Math;\\\"><strong>Olympic Games</strong>:</span><span style=\\\"font-family: Cambria Math;\\\"> first Held in Athens, Greece(1896), held every four years. </span><strong><span style=\\\"font-family: Cambria Math;\\\">Paris</span></strong><span style=\\\"font-family: Cambria Math;\\\"><strong> </strong>is to host the 2024 Olympics.<strong> </strong></span><span style=\\\"font-family: Cambria Math;\\\"><strong>Asian Games (Asiad):</strong> </span><span style=\\\"font-family: Cambria Math;\\\"> First Asian Games held in New Delhi (1951)</span></p>\\n",
+    "question_index": 4
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\">Paika dance is performed in whi</span><span style=\"font-family: Cambria Math;\">ch of the following states ?</span></p>\n",
+    "options": [
+      "Goa",
+      "Kerala",
+      "Assam",
+      "Jharkhand"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p>6.(d) <strong>Jharkhand</strong>. <span style=\"font-family: Cambria Math;\">Paika is a Sadani Nagpuri martial folk dance of the Chotanagpur plateau region of Jharkhand, Chhattisgarh and Odisha. It is performed by the Munda tribe. Other dances of Jharkhand - Barao, Mundari, Jitia karam, Jenana jhumur, domkach.</span></p>\n",
+    "question_index": 5
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\">Modhera dance festival is performed in which of the following states ?</span></p>\n",
+    "options": [
+      "Maharashtra",
+      "Gujarat",
+      "Karnataka",
+      "Manipur"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p>7.(b) <strong>Gujarat</strong>. <span style=\"font-family: Cambria Math;\">The <strong>&lsquo;</strong></span><strong><span style=\"font-family: Cambria Math;\">Modhera Dance Festival</span></strong><span style=\"font-family: Cambria Math;\"><strong>&rsquo; </strong>is held every year during the third week of January. It takes place every year after Uttarayan, at the Modhera temple dedicated to the Sun.The Sun Temple of Modhera is a masterpiece of the Golden Age of the Solanki Empire. Organized by - Tourism Corporat</span><span style=\"font-family: Cambria Math;\">ion of Gujarat Limited. Other dances of Gujarat - Garba, Dandiya, Bhavai,Tippani, Hudo.</span></p>\n",
+    "question_index": 6
+  },
+  {
+    "question": "<p>8. <span style=\"font-family: Cambria Math;\">Pawl Kut is a thanksgiving festival of which Indian state?</span></p>\n",
+    "options": [
+      "Kerala",
+      "Gujarat",
+      "Mizoram",
+      "Himachal Pradesh."
+    ],
+    "correct_option_id": 2,
+    "solution": "<p>8.(c) <strong>Mizoram. Thanksgiving festivals </strong>- <span style=\"font-family: Cambria Math;\">Pawl kut (Straw harvest festival), Lyuva Khutla (Mara Tribes) in Mizoram, Uttarayan (Gujarat), </span><span style=\"font-family: Cambria Math;\">Lohri (Punjab),</span><span style=\"font-family: Cambria Math;\"> Onam (Kerala), Bhogali Bihu (Assam), Pongal (Tamil Nadu), Gudi Padwa (Maharashtra), Ugadi ( Andhra Pradesh, Telangana and Karnataka). </span></p>\n",
+    "question_index": 7
+  },
+  {
+    "question": "<p>9. <span style=\"font-family: Cambria Math;\">The folk dance of Chavittu Kali is associated with which of the following Indian states?</span></p>\n",
+    "options": [
+      "Andhra Pradesh",
+      "Uttar Pradesh",
+      "Kerala",
+      "Gujarat"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p>9.(c) <strong>Kerala</strong>. <span style=\"font-family: Cambria Math;\">Other</span><span style=\"font-family: Cambria Math;\"> folk dances : Ottam Thulal, Kaikottikali, Tappatikali, Kali Auttam, Mohiniattam. </span><strong><span style=\"font-family: Cambria Math;\">Andhra Pradesh</span></strong><span style=\"font-family: Cambria Math;\"><strong> </strong>- Ottam Thedal, Kummi, Siddhi, Bhamakalpam, Veeranatyam, Dappu, Tappeta Gullu, Lambadi, Dhimsa, Kolattam, Butta Bommalu.</span><span style=\"font-family: Cambria Math;\"> <strong>Uttar Pradesh</strong></span><span style=\"font-family: Cambria Math;\"><strong> -</strong> Nautanki, Raslila, Kaj</span><span style=\"font-family: Cambria Math;\">ri, Jhora, Chappeli, Jaita.</span><span style=\"font-family: Cambria Math;\"> <strong>Gujrat</strong></span><span style=\"font-family: Cambria Math;\"><strong> </strong>- Garba, Dandiya Ras, Bhavai, Tippani Juriun. </span></p>\n",
+    "question_index": 8
+  },
+  {
+    "question": "<p>10. <span style=\"font-family: Cambria Math;\">Pongal is a festival of which state?</span></p>\n",
+    "options": [
+      "West Bengal",
+      "Tamil Nadu",
+      "Bihar",
+      "Odisha"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">10</span><span style=\"font-family: Cambria Math;\">.(b) <strong>Tamil Nadu.</strong></span><strong><span style=\"font-family: Cambria Math;\"> </span></strong><span style=\"font-family: Cambria Math;\"><strong>Festivals of India </strong>-</span><span style=\"font-family: Cambria Math;\"> Jharkhand (Sarhul, Karma, Hal Punhya, Rohin), Tamil Nadu (Thaipoosam, Jallikattu festival, Na</span><span style=\"font-family: Cambria Math;\">tyanjali festival), Kerala (Onam, Nishagandhi festival, vaikathashtami festival), Bihar (Chhath Puja, Rajgir Dance festival, Madhushravani), Tripura (Kharchi Puja), Nagaland (Hornbill Festival, Moatsu festival).</span></p>\n",
+    "question_index": 9
+  },
+  {
+    "question": "<p>11.<span style=\"font-family: Cambria Math;\"> Who among the following personalities is/was NOT an Indian Ghazal singer ?</span></p>\n",
+    "options": [
+      "Begum Akhtar",
+      "Chitra Singh",
+      "Bhimsen Joshi",
+      "Jagjit Singh"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">11</span><span style=\"font-family: Cambria Math;\">.(c) <strong>Bhimsen Joshi</strong></span><span style=\"font-family: Cambria Math;\"> (Indian vocalist): Awards - Padma Shri (1972), Sangeet Natak Akademi Award (1976), Padma Bhushan (1985), Padma Vibhushan (1999), Bharat Ratna (2009).</span><span style=\"font-family: Cambria Math;\"><strong> Begum Akhtar</strong> </span><span style=\"font-family: Cambria Math;\">(Mallika-e-Ghazal)</span><span style=\"font-family: Cambria Math;\">:</span><span style=\"font-family: Cambria Math;\"> Awards - Padma Shri (1968), Sangeet Natak Akademi Award (1972), Padma Bhushan (1975). </span><strong><span style=\"font-family: Cambria Math;\">Jagjit Singh</span></strong><span style=\"font-family: Cambria Math;\"><strong> </strong>(The Ghazal King)</span><span style=\"font-family: Cambria Math;\">: </span><span style=\"font-family: Cambria Math;\">Awards - Padma Bhushan (2003), Sahitya Academy Award (1998).</span></p>\n",
+    "question_index": 10
+  },
+  {
+    "question": "<p>12. <span style=\"font-family: Cambria Math;\">Which of the following folk dance forms is performed by men in Haryana?</span></p>\n",
+    "options": [
+      "Khoria",
+      "Gidda",
+      "Ghoomar",
+      "Gugga"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">12</span><span style=\"font-family: Cambria Math;\">.(d) <strong>Gugga</strong>: </span><span style=\"font-family: Cambria Math;\">It is known by several names like Baggawala, Zahir Pir, and Guru Gugga. Gugga is worshipped</span><span style=\"font-family: Cambria Math;\"> all over Haryana and neighboring states like Punjab, Rajasthan, and Himachal Pradesh. </span><strong><span style=\"font-family: Cambria Math;\">Folk Dances of Haryana</span></strong><span style=\"font-family: Cambria Math;\">: Khoria, Daph, Loor, Phag.</span></p>\n",
+    "question_index": 11
+  },
+  {
+    "question": "<p>13. <span style=\"font-family: Cambria Math;\">Pushkar Mela is a popular cultura</span><span style=\"font-family: Cambria Math;\">l festival of which state?</span></p>\n",
+    "options": [
+      "Assam",
+      "Bihar",
+      "Rajasthan",
+      "Sikkim"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">13</span><span style=\"font-family: Cambria Math;\">.(c) <strong>Rajasthan. Pushkar Mela :</strong></span><span style=\"font-family: Cambria Math;\"><strong> </strong>It is held in the town of Pushkar in November at the time of Kartik Purnima. </span><span style=\"font-family: Cambria Math;\"><strong>Other Festivals</strong> - </span><span style=\"font-family: Cambria Math;\">Gangaur, Nagaur, Kumbhalgarh, Teej, Marwar Festival, Baneshwar Festival, Desert Festival. </span><strong><span style=\"font-family: Cambria Math;\">Bihar </span></strong><span style=\"font-family: Cambria Math;\">- Chhath Puja, Sonepur Fair, Rajgir Mahotsav, Madhushravani. </span><strong><span style=\"font-family: Cambria Math;\">As</span><span style=\"font-family: Cambria Math;\">sam </span></strong><span style=\"font-family: Cambria Math;\">- Bihu, Baishagu, Ambubachi Mela. </span><span style=\"font-family: Cambria Math;\"><strong>Sikkim </strong>- </span><span style=\"font-family: Cambria Math;\"> Sonam Lochar, Losar, Sakewa, Saga Dawa. </span></p>\n",
+    "question_index": 12
+  },
+  {
+    "question": "<p>14. <span style=\"font-family: Cambria Math;\">Which of the following awards was presented to Guru Bipin Singh, </span><span style=\"font-family: Cambria Math;\">a popular Manipuri dancer ?</span></p>\n",
+    "options": [
+      "Saraswati Samman",
+      "Kalamandal Puraskar",
+      "Sangeet Natak Akademi Award",
+      "Padma Shri"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p><span style=\\\"font-family: Cambria Math;\\\">14</span><span style=\\\"font-family: Cambria Math;\\\">.(c) <strong>Sangeet Natak Akademi Award (1966)</strong>. -&nbsp;</span><strong><span style=\\\"font-family: \\'Cambria Math\\';\\\">Other awards</span><span style=\\\"font-family: \\'Cambria Math\\';\\\">&nbsp;</span></strong><span style=\\\"font-family: Cambria Math;\\\">Title of Hanjaba by the Maharaja of Manipur, Kalidas Samman, Anamika Kala Sangam award, Shiromani Puraskar. </span><strong><span style=\\\"font-family: \\'Cambria Math\\';\\\">Some f</span></strong><span style=\\\"font-family: Cambria Math;\\\"><strong>amous Manipuri dancers</strong> : </span><span style=\\\"font-family: Cambria Math;\\\">Darshana Jhaveri, Yumlembam Gambhini Devi, Charu Mathur, Nirmala Mehta.</span></p>\\n",
+    "question_index": 13
+  },
+  {
+    "question": "<p>15. <span style=\"font-family: Cambria Math;\">Zakir Hussain is associated with which musical instrument ?</span></p>\n",
+    "options": [
+      "Santoor",
+      "Sitar",
+      "Tabla",
+      "Piano"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">15</span><span style=\"font-family: Cambria Math;\">.(c) <strong>Tabla </strong></span><span style=\"font-family: Cambria Math;\">(percussion instrument)</span><span style=\"font-family: Cambria Math;\">. <strong>Other Tabla Players :</strong> </span><span style=\"font-family: Cambria Math;\">Swapan Chaudhuri, Ahmed Jan Thirakwa, Anindo Chatterjee, Vijay Ghate, Shankar Ghosh</span><span style=\"font-family: Cambria Math;\">. <strong>Santoor </strong></span><span style=\"font-family: Cambria Math;\">(stringed instrument)</span><span style=\"font-family: Cambria Math;\">: </span><span style=\"font-family: Cambria Math;\">Pandit Shivkumar Sharma, Tarun Bhattacharya, Satish Vyas, Ulhas Bapat. </span><span style=\"font-family: Cambria Math;\">Sitar</span><span style=\"font-family: Cambria Math;\"> (stringed instrument)</span><span style=\"font-family: Cambria Math;\"> :</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">Ravi Shankar, Annapurna Devi, Nikhil Banerjee, Vilayat Khan, Anoushka Shankar.</span><span style=\"font-family: Cambria Math;\"> <strong>Piano</strong></span><span style=\"font-family: Cambria Math;\"><strong> </strong>(percussive chordophone instruments)- Anil Srinivasan. </span></p>\n",
+    "question_index": 14
+  }
+];
     </script>
-    
+
     <!-- Central JS Controller -->
     <script src="../js/mock-core.js"></script>
 </body>

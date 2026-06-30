@@ -3,43 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aether Mocks</title>
+    <title>Mocks Wallah</title>
     <!-- Fonts & Icons -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    
+
     <!-- Central Stylesheet -->
     <link rel="stylesheet" href="../css/mock-main.css">
-    
+
     <!-- Math Formula Rendering (KaTeX/MathJax) -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    
+
     <!-- Timer Config -->
-    <meta name="exam-duration" content="60">
+    <meta name="exam-duration" content="30">
 </head>
 <body>
     <!-- Welcome Screen -->
     <div class="welcome-screen" id="welcomeScreen">
         <div class="welcome-container">
             <div class="welcome-header" style="margin-bottom: 24px;">
-                <h1 style="font-size: 2rem; font-weight: 700; color: #0f172a; margin-bottom: 8px;"><i class="fas fa-graduation-cap" style="color: #3b82f6;"></i> Aether Mocks</h1>
-                <p style="color: #64748b;">Computer Based Test Portal</p>
+                <h1 style="font-size: 2rem; font-weight: 700; color: var(--text-main); margin-bottom: 8px;"><i class="fas fa-graduation-cap" style="color: var(--primary);"></i> Mocks Wallah</h1>
+                <p style="color: var(--text-muted);">Computer Based Test Portal</p>
             </div>
-            
+
             <div class="test-details" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-bottom: 32px; text-align: left;">
-                <div class="detail-item" style="padding: 12px; background: #f8fafc; border-radius: 8px; border: 1px solid #e2e8f0;">
-                    <div class="detail-label" style="font-size: 0.8rem; color: #64748b;">Total Questions</div>
-                    <div class="detail-value" style="font-size: 1.1rem; font-weight: 600; color: #0f172a;">10</div>
+                <div class="detail-item" style="padding: 12px; background: var(--bg-color); border-radius: 8px; border: 1px solid var(--border-color);">
+                    <div class="detail-label" style="font-size: 0.8rem; color: var(--text-muted);">Total Questions</div>
+                    <div class="detail-value" style="font-size: 1.1rem; font-weight: 600; color: var(--text-main);">15</div>
                 </div>
-                <div class="detail-item" style="padding: 12px; background: #f8fafc; border-radius: 8px; border: 1px solid #e2e8f0;">
-                    <div class="detail-label" style="font-size: 0.8rem; color: #64748b;">Duration</div>
-                    <div class="detail-value" style="font-size: 1.1rem; font-weight: 600; color: #0f172a;">60 mins</div>
+                <div class="detail-item" style="padding: 12px; background: var(--bg-color); border-radius: 8px; border: 1px solid var(--border-color);">
+                    <div class="detail-label" style="font-size: 0.8rem; color: var(--text-muted);">Duration</div>
+                    <div class="detail-value" style="font-size: 1.1rem; font-weight: 600; color: var(--text-main);">30 mins</div>
                 </div>
             </div>
-            
+
             <div class="welcome-actions">
                 <button class="btn btn-primary" id="startBtn" onclick="document.getElementById('welcomeScreen').style.display='none'; document.getElementById('examContainer').style.display='flex';" style="font-size: 1.1rem; padding: 12px 32px; width: 100%;">
                     <i class="fas fa-play" style="margin-right: 8px;"></i> Start Test
@@ -47,12 +47,12 @@
             </div>
         </div>
     </div>
-    
+
     <!-- Main Exam Interface -->
     <div class="exam-container" id="examContainer" style="display: none; height: 100vh; flex-direction: column;">
         <!-- Top Header -->
         <div class="exam-header">
-            <div class="exam-title">Aether Mocks</div>
+            <div class="exam-title">Mocks Wallah</div>
             <div class="header-actions" style="display: flex; align-items: center; gap: 12px;">
                 <button class="btn-icon" id="themeToggleBtn" title="Switch to Dark Mode"><i class="fas fa-moon"></i></button>
                 <button class="btn-icon" id="fullscreenToggleBtn" title="Toggle Fullscreen"><i class="fas fa-expand"></i></button>
@@ -62,14 +62,14 @@
                 </div>
             </div>
         </div>
-        
+
         <!-- Main Content -->
         <div class="mock-container">
             <!-- Question Area -->
             <div class="question-view">
                 <!-- Dynamically populated question container -->
                 <div id="questionContainer" style="flex: 1; display: flex; flex-direction: column; gap: 24px;"></div>
-                
+
                 <!-- Controls -->
                 <div class="nav-controls">
                     <button class="btn btn-secondary btn-prev"><i class="fas fa-chevron-left" style="margin-right: 8px;"></i> Previous</button>
@@ -79,40 +79,221 @@
                     <button class="btn btn-primary btn-next">Next <i class="fas fa-chevron-right" style="margin-left: 8px;"></i></button>
                 </div>
             </div>
-            
+
             <!-- Desktop Navigator Sidebar -->
             <div class="sidebar">
                 <div class="sidebar-section-title">Summary Status</div>
                 <div class="stats-grid">
                     <div class="stat-item">
-                        <div class="stat-count" id="stat-answered" style="color: #10b981;">0</div>
+                        <div class="stat-count" id="stat-answered" style="color: var(--success);">0</div>
                         <div class="stat-name">Answered</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-count" id="stat-flagged" style="color: #f59e0b;">0</div>
+                        <div class="stat-count" id="stat-flagged" style="color: var(--warning);">0</div>
                         <div class="stat-name">Flagged</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-count" id="stat-not-answered" style="color: #64748b;">0</div>
+                        <div class="stat-count" id="stat-not-answered" style="color: var(--text-muted);">0</div>
                         <div class="stat-name">Unanswered</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-count" id="stat-not-visited" style="color: #94a3b8;">0</div>
+                        <div class="stat-count" id="stat-not-visited" style="color: var(--text-muted);">0</div>
                         <div class="stat-name">Not Visited</div>
                     </div>
                 </div>
-                
+
                 <div class="sidebar-section-title" style="margin-top: 16px;">Question Navigator</div>
                 <div class="questions-grid"></div>
             </div>
         </div>
     </div>
-    
+
     <!-- Inject Question Data -->
     <script>
-        const questions = [];
+        const questions = [
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\"> In which month, Hiroshima Day is observed across the world?</span></p>\n",
+    "options": [
+      "October",
+      "August",
+      "January",
+      "July"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p>1.(b) <strong>August</strong>.<span style=\"font-family: Cambria Math;\"> Hiroshima Day is observed on </span><strong><span style=\"font-family: Cambria Math;\">6 August</span><span style=\"font-family: Cambria Math;\"> (</span><span style=\"font-family: Cambria Math;\">Little Boy</span></strong><span style=\"font-family: Cambria Math;\"><strong>)</strong> to commemorate the atomic bombing of Hiroshima Japan in the year 1945 and </span><strong><span style=\"font-family: Cambria Math;\">9 August (Fat Man</span></strong><span style=\"font-family: Cambria Math;\"><strong>)</strong> of Nagasaki, at the end of World War II <strong>(</strong></span><strong><span style=\"font-family: Cambria Math;\">1939 - 1945)</span></strong><span style=\"font-family: Cambria Math;\">. World War I - 1914 to 1918. The atomic bomb is based on the principle of </span><strong><span style=\"font-family: Cambria Math;\">nuclear fission</span><span style=\"font-family: Cambria Math;\">.</span></strong></p>\n",
+    "question_index": 0
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\"> ISRO successfully launched the communication satellite GSAT-24 from ________.</span></p>\n",
+    "options": [
+      "Moscow in Russia",
+      "Chicago in US",
+      "Berlin in Germany",
+      "Kourou in French Guiana"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p>2.<span style=\"font-family: Cambria Math;\">(d)<strong> Kourou in French Guiana.</strong> </span><span style=\"font-family: Cambria Math;\">GSAT-24 is a 24-Ku band communication satellite (23 June 2022) meant for meeting the DirectTo-Home (DTH) communication needs of the country, built by </span><span style=\"font-family: Cambria Math;\"><strong>ISRO</strong> </span><span style=\"font-family: Cambria Math;\">(15 August 1969) for NewSpace India Limited (NSIL). </span><span style=\"font-family: Cambria Math;\">INSAT</span><span style=\"font-family: Cambria Math;\"> <strong>(</strong></span><strong><span style=\"font-family: Cambria Math;\">Indian National Satellite System</span></strong><span style=\"font-family: Cambria Math;\"><strong>)</strong> and </span><strong><span style=\"font-family: Cambria Math;\">GSAT</span></strong><span style=\"font-family: Cambria Math;\"><strong> (</strong></span><strong><span style=\"font-family: Cambria Math;\">Geosynchronous Satellite System</span></strong><span style=\"font-family: Cambria Math;\"><strong>)</strong> are the two major Indian satellite systems. It is devoted to telecommunication services such as TV broadcasting, the Internet, weather forecasting and meteorology.</span></p>\n",
+    "question_index": 1
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\"> Bharatanatyam is a classical dance of ________ in southern India.</span></p>\n",
+    "options": [
+      "Tamil Nadu",
+      "Kerala",
+      "Karnataka",
+      "Andhra Pradesh"
+    ],
+    "correct_option_id": 0,
+    "solution": "<p>3.<span style=\"font-family: Cambria Math;\">(a) <strong>Tamil Nadu</strong>. </span><span style=\"font-family: Cambria Math;\">The dance traces its origins to the Natyashastra, an ancient treatise on theater written by the legendary priest Bharata.</span><span style=\"font-family: Cambria Math;\"> <strong>Indian Classical Dances</strong></span><span style=\"font-family: Cambria Math;\"> - Kathak (Northern India, mainly in UP), Kathakali (Kerala), Kuchipudi (Andhra Pradesh), Manipuri (Manipur), Mohiniyattam (Kerala), Odissi (Odisha), Sattriya (Assam).</span></p>\n",
+    "question_index": 2
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\">What is the official language of Bhutan, a neighbouring country of India?</span></p>\n",
+    "options": [
+      "Yuan",
+      "Dzongkha",
+      "Ngultrum",
+      "Kyat"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p>4.<span style=\"font-family: Cambria Math;\">(b) </span><span style=\"font-family: Cambria Math;\"><strong>Dzongkha</strong> (</span><span style=\"font-family: Cambria Math;\">Tibetan script</span><span style=\"font-family: Cambria Math;\">). <strong>Facts about Bhutan</strong> -</span><span style=\"font-family: Cambria Math;\"> Capital (Thimphu), Currency <strong>(</strong></span><strong><span style=\"font-family: Cambria Math;\">Ngultrum or BTN</span></strong><span style=\"font-family: Cambria Math;\"><strong>)</strong>, Borderline (699 km), Bordering states (Arunachal Pradesh, Assam, Sikkim, and West Bengal). </span><strong><span style=\"font-family: Cambria Math;\">China</span></strong><span style=\"font-family: Cambria Math;\"> - Capital (Beijing), Currency (Yuan), Official languages (Mandarin), Border (McMahon line), Borderline (3488 km), Bordering states ( Sikkim, Himachal Pradesh, Arunachal Pradesh &amp; Uttarakhand) and with Union Territory of Ladakh. </span><strong><span style=\"font-family: Cambria Math;\">Myanmar</span></strong><span style=\"font-family: Cambria Math;\"> - Capital (Naypyidaw), Currency <strong>(</strong></span><strong><span style=\"font-family: Cambria Math;\">Burmese Kyat</span></strong><span style=\"font-family: Cambria Math;\"><strong>)</strong>, Official languages (Burmese), Borderline (643 km), Bordering states (Arunachal Pradesh, Nagaland, Mizoram, and Manipur).</span></p>\n",
+    "question_index": 3
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\">The first woman to win the Dronacharya Award was weightlifting coach 2000 _______.</span></p>\n",
+    "options": [
+      "Sunita Sharma",
+      "Renu Kohli",
+      "Purnima Mahato",
+      "Hansa Sharma"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p>5.<span style=\"font-family: Cambria Math;\">(d) <strong>Hansa Sharma. Dronacharya Award</strong></span><span style=\"font-family: Cambria Math;\"> - Outstanding Coaches for their mentoring in Sports and Games, for coaches who help athletes achieve excellence over a period of four years. Awardees are decided by the Ministry of Youth Affairs and Sports <strong>(</strong></span><strong><span style=\"font-family: Cambria Math;\">MYAS</span></strong><span style=\"font-family: Cambria Math;\"><strong>).</strong> The Dronacharya award contains a medallion, a certificate, and a money prize of Rs 15 lakh (lifetime) and 10 Lakh (regular). </span><span style=\"font-family: Cambria Math;\"><strong>First awarded</strong> </span><span style=\"font-family: Cambria Math;\">(1985) - Bhalachandra Bhaskar Bhagwat (Wrestling), Om Prakash Bhardwaj (Boxing), O. M. Nambiar (Athletics).</span></p>\n",
+    "question_index": 4
+  },
+  {
+    "question": "<p><span style=\\\"font-family: Cambria Math;\\\">Who is the author of the book \\'Languages of Truth: Essays 2003-2020\\' ?</span></p>\\n",
+    "options": [
+      "Vikram Sampath",
+      "Salman Rushdie",
+      "Kabir Bedi",
+      "Meghan Markale"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p>6.(b)<strong><span style=\\\"font-family: Cambria Math;\\\"> </span><span style=\\\"font-family: Cambria Math;\\\">Salman Rushdie</span></strong><span style=\\\"font-family: Cambria Math;\\\">. He is an Indian-born British-American novelist. </span><span style=\\\"font-family: Cambria Math;\\\"><strong>Other Books</strong>: </span><span style=\\\"font-family: Cambria Math;\\\">&ldquo;Midnight\\'s Children&rdquo;, &ldquo;Quichotte&rdquo;, &ldquo;Victory City&rdquo; etc. </span><strong><span style=\\\"font-family: Cambria Math;\\\">Vikram Sampath</span></strong><span style=\\\"font-family: Cambria Math;\\\"> - &ldquo;Savarkar : A Contested Legacy, 1924-1966&rdquo;. </span><strong><span style=\\\"font-family: Cambria Math;\\\">Meghan Markale</span></strong><span style=\\\"font-family: Cambria Math;\\\"> - &ldquo;The Bench&rdquo;. </span><span style=\\\"font-family: Cambria Math;\\\"><strong>Kabir bedi</strong> - </span><span style=\\\"font-family: Cambria Math;\\\">&ldquo;Stories I Must Tell: The Emotional Life of an Actor&rdquo;. </span></p>\\n",
+    "question_index": 5
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\">Who among the following is famously called the Iron Lady of India? </span></p>\n",
+    "options": [
+      "Mary Kom",
+      "Deepika Padukone",
+      "Lata Mangeshkar",
+      "Indira Gandhi\\r\\n "
+    ],
+    "correct_option_id": 3,
+    "solution": "<p>7.(d) <strong>Indira Gandhi</strong><span style=\\\"font-family: Cambria Math;\\\"><strong>. </strong>She was the third prime minister of India from 1966 to 1977 and from 1980 until her assassination in 1984. She was India\\'s first and, to date, only female prime minister of India. </span><span style=\\\"font-family: Cambria Math;\\\"><strong>Awards</strong> </span><span style=\\\"font-family: Cambria Math;\\\">- Bharat Ratna (1971), and Bangladesh Freedom Honour (2011). </span><strong><span style=\\\"font-family: Cambria Math;\\\">Mary Kom</span></strong><span style=\\\"font-family: Cambria Math;\\\"><strong> </strong>- The first Indian woman boxer to win an olympic medal and a gold at Asian Games. </span></p>\\n",
+    "question_index": 6
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\">Who was the first Indian woman to be appointed Chief Justice of a state High Court?</span></p>\n",
+    "options": [
+      "Leila Seth",
+      "Anna Chandy",
+      "M. Fathima Beevi",
+      "Kiran Mazumdar-Shaw"
+    ],
+    "correct_option_id": 0,
+    "solution": "<p>8.<span style=\"font-family: Cambria Math;\">(a)</span><span style=\"font-family: Cambria Math;\"> </span><strong><span style=\"font-family: Cambria Math;\">Leila Seth</span></strong><span style=\"font-family: Cambria Math;\">. In 1991 she became the first female judge to be appointed as a Chief Justice of a state high court, Himachal Pradesh High court.</span><span style=\"font-family: Cambria Math;\"> <strong>Anna Chandy</strong></span><span style=\"font-family: Cambria Math;\"> was India&rsquo;s first female judge and the first woman in the country to become a High court judge. </span><strong><span style=\"font-family: Cambria Math;\">M Fathima Beevi</span></strong><span style=\"font-family: Cambria Math;\"><strong> </strong>was the first woman judge to the Supreme Court as well as the first Muslim woman judge there. </span><strong><span style=\"font-family: Cambria Math;\">Kiran Mazumdar-Shaw</span></strong><span style=\"font-family: Cambria Math;\"> is the founder of </span><span style=\"font-family: Cambria Math;\">Biocon Ltd.</span></p>\n",
+    "question_index": 7
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\">The most distinctive type of folk songs of Assam are ________.</span></p>\n",
+    "options": [
+      "Qawwali songs",
+      "Bihu songs",
+      "Teej songs",
+      "Bhuta songs"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p>9.(b) <strong><span style=\"font-family: Cambria Math;\">Bihu songs</span></strong><span style=\"font-family: Cambria Math;\"><strong>.</strong> It celebrates the life-sustaining character of the Brahmaputra.<strong> </strong></span><strong><span style=\"font-family: Cambria Math;\">Qawwali songs</span></strong><span style=\"font-family: Cambria Math;\"><strong> </strong>are traditional sufi islamic devotional music. </span><strong><span style=\"font-family: Cambria Math;\">Bhuta song</span></strong><span style=\"font-family: Cambria Math;\"> of Kerala is based on superstitions to send away evil ghosts and spirits. Teej festival is celebrated to welcome the arrival of monsoon. Many folk Teej songs also portray the longing of a woman to meet her lover.</span></p>\n",
+    "question_index": 8
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\">Which among the following is the monsoon mud festival of Goa? </span></p>\n",
+    "options": [
+      "Sarhul",
+      "Karma",
+      "chikal kalo",
+      "Ladainha"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p>10.<span style=\"font-family: Cambria Math;\">(c)<strong> Chikal Kalo</strong>. </span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">It is celebrated on the 12th day of the month of Ashadh that roughly falls in July. The Devaki-Krishna temple grounds of Marcel village in Goa are the venue for the celebration of the festival. </span><span style=\"font-family: Cambria Math;\"><strong>Sarhul</strong> </span><span style=\"font-family: Cambria Math;\"> is a spring festival in the Indian state of Jharkhand. </span><span style=\"font-family: Cambria Math;\"><strong>Karma</strong> </span><span style=\"font-family: Cambria Math;\">is a harvest festival celebrated mainly in eastern Indian states. </span><strong><span style=\"font-family: Cambria Math;\">Ladainha </span></strong><span style=\"font-family: Cambria Math;\">is a festival of Goa.</span></p>\n",
+    "question_index": 9
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\"> Which of the following pair of \"term - sports\" is NOT correct ?</span></p>\r\n<p><span style=\"font-family: Cambria Math;\">I. Penalty kick - Handball</span></p>\r\n<p><span style=\"font-family: Cambria Math;\">II. Greco Roman - Boxing</span></p>\n",
+    "options": [
+      "Neither I nor II",
+      "Both I and II",
+      "Only II",
+      "Only I"
+    ],
+    "correct_option_id": 0,
+    "solution": "<p>11.<span style=\"font-family: Cambria Math;\">(a) <strong>Neither I nor II</strong>. </span><span style=\"font-family: Cambria Math;\">Penalty kick is a term used in football, Greco Roman is a style of wrestling. Terms used in handball - Corner Throw, Free throw. Terms used in Boxing - Bout, Clinch. </span></p>\n",
+    "question_index": 10
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\"> Hawa Mahal is situated in which city?</span></p>\n",
+    "options": [
+      "Jaipur",
+      "Jodhpur",
+      "Udaipur",
+      "Alwar"
+    ],
+    "correct_option_id": 0,
+    "solution": "<p>12.(a)<strong> Jaipur</strong> <span style=\"font-family: Cambria Math;\">(Pink City) is a UNESCO World Heritage Site (from 2019).</span><span style=\"font-family: Cambria Math;\"> <strong>Hawa mahal</strong>:</span><span style=\"font-family: Cambria Math;\"> Built by Maharaja Sawai Pratap Singh (grandson of Maharaja Sawai Jai Singh II (founder of Jaipur)). It is a five-storey building that looks like a honeycomb of a beehive. The Hawa Mahal is dedicated to Lord Krishna. It is said that the shape of the building resembles the crown of Krishna. It exhibits a unique combination of Mughal and Rajput architectural styles. Some iconic monuments in Jaipur are: Govind Dev temple, City Palace, Jantar Mantar. </span></p>\n",
+    "question_index": 11
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\">Which of the following pairs of \"term-sports\" is correct?</span></p>\r\n<p><span style=\"font-family: Cambria Math;\">I. Offside - Football</span></p>\r\n<p><span style=\"font-family: Cambria Math;\">II. Par - Golf</span></p>\n",
+    "options": [
+      "Only II",
+      "Both I and II",
+      "Neither I nor II",
+      "Only I"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p>13.(b) <strong>Both I and II. </strong><span style=\"font-family: Cambria Math;\">Terms related with<strong> </strong></span><span style=\"font-family: Cambria Math;\"><strong>Golf</strong> </span><span style=\"font-family: Cambria Math;\">: Hole , Bogey , Put , Stymie , Caddie , Tee , Links , Putting the green. Some prominent golfers of India are: Aditi Ashok, Diksha Dagar, Jeev Milkha Singh, Anirban Lahiri, Shubhankar Sharma, Arjun Atwal, Shiv Kapur, Jyoti Randhawa, Udayan Mane, Gaganjeet Bhullar etc. </span><span style=\"font-family: Cambria Math;\">Terms related with </span><strong><span style=\"font-family: Cambria Math;\">Football</span></strong><span style=\"font-family: Cambria Math;\">: Attacker, Back Heel, Back Pass, Ball Carrier, Bending the Ball, Direct Free Kick, Dribble, Far Post. Some prominent golfers of India are: Sunil Chhetri, Lallianzuala Chhangte, Bipin Singh. </span></p>\n",
+    "question_index": 12
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\">Which Union Ministry implements the \"Saksham Anganwadi and Poshan 2.0\" scheme?</span></p>\n",
+    "options": [
+      "Ministry of Consumer Affairs, Food &amp; Public Distribution",
+      "Ministry of Health and Family welfare",
+      "Ministry of Women and Child Development",
+      "Ministry of Agriculture &amp; Farmers Welfare"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p>14.(c) <strong>Ministry of Women and Child Development</strong>:<span style=\"font-family: Cambria Math;\"> Smt. Smriti Zubin Irani (as of 4 May, 2023). </span><span style=\"font-family: Cambria Math;\"><strong>Ministry of Consumer Affairs, Food &amp; Public Distribution</strong>: </span><span style=\"font-family: Cambria Math;\">Piyush Goyal (as of 4 May, 2023). </span><span style=\"font-family: Cambria Math;\"><strong>Ministry of Health and Family welfare</strong>: </span><span style=\"font-family: Cambria Math;\">Mansukh L. Mandaviya (as of 4 May, 2023). </span><span style=\"font-family: Cambria Math;\"><strong>Ministry of Agriculture &amp; Farmers Welfare</strong>: </span><span style=\"font-family: Cambria Math;\"> Narendra Singh Tomar (as of 4 May, 2023).</span></p>\n",
+    "question_index": 13
+  },
+  {
+    "question": "<p><span style=\\\"font-family: Cambria Math;\\\">Which Union Ministry is related to the Prime Minister\\'s Employment Generation Programme (PMEGP)?</span></p>\\n",
+    "options": [
+      "Ministry of Micro, Small and Medium Enterprises",
+      "Ministry of Commerce and Industry",
+      "Ministry of Labour and Employment",
+      "Ministry of Corporate Affairs"
+    ],
+    "correct_option_id": 0,
+    "solution": "<p>15.(a) <strong>Ministry of Micro, Small and Medium Enterprises. About PMEGP:</strong> <span style=\"font-family: Cambria Math;\">Any entrepreneur who is above 18 is allowed to set up factories or units with the government aid upto 25 lakhs for manufacturing sector and &#8377; 10 lakhs for business/service sector for his/her new venture.</span></p>\n",
+    "question_index": 14
+  }
+];
     </script>
-    
+
     <!-- Central JS Controller -->
     <script src="../js/mock-core.js"></script>
 </body>

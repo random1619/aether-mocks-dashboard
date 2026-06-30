@@ -5,19 +5,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aether Mocks — Premium Mock Test Dashboard</title>
     <meta name="description" content="Browse, search and track your mock test preparation across all providers in one clean, unified dashboard.">
+    
+    <!-- Google Fonts: Outfit for clean headlines, Inter for body copy -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Icons: Lucide Icons CDN -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- Central Stylesheets -->
     <link rel="stylesheet" href="css/dashboard.css">
 </head>
 <body>
 
-    <!-- Fixed Top Navigation -->
-    <nav class="topnav" id="topnav">
+    <!-- Fixed Glassmorphic Navigation Header -->
+    <header class="topnav" id="topnav">
         <div class="topnav-left">
+            <button class="menu-toggle-btn" id="sidebar-toggle-btn" title="Toggle Sidebar" aria-label="Toggle filters sidebar">
+                <i data-lucide="menu"></i>
+            </button>
             <div class="nav-logo">
-                <i class="fa-solid fa-layer-group"></i>
+                <i data-lucide="graduation-cap"></i>
             </div>
             <div class="nav-brand">
                 <span class="nav-brand-name">Aether Mocks</span>
@@ -27,157 +36,238 @@
 
         <div class="topnav-center">
             <div class="global-search-wrap">
-                <i class="fa-solid fa-magnifying-glass"></i>
-                <input type="text" id="global-search" class="global-search" placeholder="Search across all 1,000+ mocks...">
-                <kbd class="search-kbd">⌘K</kbd>
+                <i data-lucide="search"></i>
+                <input type="text" id="global-search" class="global-search" placeholder="Search across all mock tests...">
+                <span class="search-kbd">/</span>
             </div>
         </div>
 
         <div class="topnav-right">
             <div class="view-toggle">
                 <button class="view-btn active" id="view-grid-btn" title="Grid View">
-                    <i class="fa-solid fa-grip-vertical"></i>
+                    <i data-lucide="layout-grid"></i>
                     <span>Grid</span>
                 </button>
                 <button class="view-btn" id="view-roadmap-btn" title="Roadmap View">
-                    <i class="fa-solid fa-route"></i>
+                    <i data-lucide="git-branch"></i>
                     <span>Roadmap</span>
                 </button>
             </div>
         </div>
-    </nav>
+    </header>
 
-    <!-- Stats Strip -->
-    <div class="stats-strip" id="stats-strip">
-        <div class="stat-item">
-            <div class="stat-icon stat-icon-blue">
-                <i class="fa-solid fa-file-lines"></i>
+    <!-- Interactive Hero Banner Panel -->
+    <section class="hero-banner">
+        <div class="hero-content">
+            <div class="hero-text">
+                <span class="hero-eyebrow">Preparation Hub</span>
+                <h1 class="hero-title">Elevate Your <span class="gradient-text">Exam Success</span></h1>
+                <p class="hero-subtitle">Organize, track progress, and take computer-based mocks in a consistent, distraction-free environment.</p>
             </div>
-            <div class="stat-body">
-                <div class="stat-number" id="stat-total">0</div>
-                <div class="stat-label">Total Tests</div>
-            </div>
-        </div>
-        <div class="stat-divider"></div>
-        <div class="stat-item">
-            <div class="stat-icon stat-icon-green">
-                <i class="fa-solid fa-circle-check"></i>
-            </div>
-            <div class="stat-body">
-                <div class="stat-number stat-number-green" id="stat-completed">0</div>
-                <div class="stat-label">Completed</div>
-            </div>
-        </div>
-        <div class="stat-divider"></div>
-        <div class="stat-item">
-            <div class="stat-icon stat-icon-amber">
-                <i class="fa-solid fa-hourglass-half"></i>
-            </div>
-            <div class="stat-body">
-                <div class="stat-number stat-number-amber" id="stat-remaining">0</div>
-                <div class="stat-label">Remaining</div>
-            </div>
-        </div>
-        <div class="stat-divider"></div>
-        <div class="stat-item stat-item-progress">
-            <div class="stat-icon stat-icon-violet">
-                <i class="fa-solid fa-chart-line"></i>
-            </div>
-            <div class="stat-body">
-                <div class="stat-progress-row">
-                    <div class="stat-number" id="stat-progress-txt">0%</div>
-                    <div class="stat-progress-track">
-                        <div class="stat-progress-fill" id="stat-progress-bar"></div>
+            
+            <div class="hero-stats">
+                <!-- Stat Card: Total -->
+                <div class="hero-stat-card">
+                    <div class="hero-stat-icon hero-stat-blue">
+                        <i data-lucide="book-open"></i>
+                    </div>
+                    <div class="hero-stat-info">
+                        <div class="hero-stat-value" id="hero-total">0</div>
+                        <div class="hero-stat-label">Total Mocks</div>
                     </div>
                 </div>
-                <div class="stat-label">Overall Progress</div>
+                
+                <!-- Stat Card: Completed -->
+                <div class="hero-stat-card">
+                    <div class="hero-stat-icon hero-stat-green">
+                        <i data-lucide="check-circle-2"></i>
+                    </div>
+                    <div class="hero-stat-info">
+                        <div class="hero-stat-value hero-stat-green-text" id="hero-completed">0</div>
+                        <div class="hero-stat-label">Completed</div>
+                    </div>
+                </div>
+                
+                <!-- Stat Card: Remaining -->
+                <div class="hero-stat-card">
+                    <div class="hero-stat-icon hero-stat-amber">
+                        <i data-lucide="clock"></i>
+                    </div>
+                    <div class="hero-stat-info">
+                        <div class="hero-stat-value hero-stat-amber-text" id="hero-remaining">0</div>
+                        <div class="hero-stat-label">Pending</div>
+                    </div>
+                </div>
+                
+                <!-- Stat Card: Progress -->
+                <div class="hero-stat-card hero-stat-progress-card">
+                    <div class="hero-stat-icon hero-stat-violet">
+                        <i data-lucide="pie-chart"></i>
+                    </div>
+                    <div class="hero-stat-info">
+                        <div class="hero-stat-progress-row">
+                            <span class="hero-stat-value" id="hero-progress-txt">0%</span>
+                            <div class="hero-progress-track">
+                                <div class="hero-progress-fill" id="hero-progress-bar"></div>
+                            </div>
+                        </div>
+                        <div class="hero-stat-label">Overall Progress</div>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
+    </section>
 
-    <!-- App Shell -->
+    <!-- Main Workspace Shell -->
     <div class="app-shell">
 
-        <!-- Left Sidebar -->
+        <!-- Filters Drawer / Sidebar -->
         <aside class="sidebar" id="sidebar">
             <div class="sidebar-header">
                 <div class="sidebar-header-title">
-                    <i class="fa-solid fa-sliders"></i>
+                    <i data-lucide="sliders"></i>
                     Filters
                 </div>
                 <div class="results-badge" id="results-count">0 mocks</div>
             </div>
 
             <div class="sidebar-body">
-                <!-- Provider Filter -->
+                <!-- Group: Provider -->
                 <div class="filter-group">
                     <div class="filter-group-label">
-                        <i class="fa-solid fa-building-columns"></i>
-                        Provider
+                        <i data-lucide="landmark"></i>
+                        Vendor Provider
                     </div>
                     <div class="pills-container" id="provider-filters"></div>
                 </div>
 
-                <!-- Subject Filter -->
+                <!-- Group: Subject -->
                 <div class="filter-group">
                     <div class="filter-group-label">
-                        <i class="fa-solid fa-graduation-cap"></i>
-                        Subject
+                        <i data-lucide="graduation-cap"></i>
+                        Subject Track
                     </div>
                     <div class="pills-container" id="subject-filters"></div>
                 </div>
 
-                <!-- Category Filter -->
+                <!-- Group: Category -->
                 <div class="filter-group">
                     <div class="filter-group-label">
-                        <i class="fa-solid fa-folder-open"></i>
-                        Category
+                        <i data-lucide="folder-open"></i>
+                        Mock Category
                     </div>
                     <div class="select-wrapper">
                         <select class="custom-select" id="category-filter">
                             <option value="all">All Categories</option>
                         </select>
-                        <i class="fa-solid fa-chevron-down select-arrow"></i>
+                        <i data-lucide="chevron-down" class="select-arrow"></i>
                     </div>
                 </div>
 
-                <!-- Status Filter -->
+                <!-- Group: Done Status -->
                 <div class="filter-group">
                     <div class="filter-group-label">
-                        <i class="fa-solid fa-circle-half-stroke"></i>
-                        Status
+                        <i data-lucide="activity"></i>
+                        Preparation Status
                     </div>
                     <div class="status-tabs" id="status-filters">
                         <button class="status-tab active" data-status="all">All</button>
                         <button class="status-tab" data-status="completed">
-                            <i class="fa-solid fa-check"></i> Done
+                            <i data-lucide="check"></i> Done
                         </button>
                         <button class="status-tab" data-status="pending">
-                            <i class="fa-regular fa-clock"></i> Pending
+                            <i data-lucide="hourglass"></i> Pending
                         </button>
                     </div>
                 </div>
 
-                <!-- Sort -->
+                <!-- Group: Sorting -->
                 <div class="filter-group">
                     <div class="filter-group-label">
-                        <i class="fa-solid fa-sort"></i>
-                        Sort By
+                        <i data-lucide="arrow-down-az"></i>
+                        Sort Preference
                     </div>
                     <div class="select-wrapper">
                         <select class="custom-select" id="sort-select">
-                            <option value="name-asc">Name A → Z</option>
-                            <option value="name-desc">Name Z → A</option>
-                            <option value="provider-asc">By Provider</option>
+                            <option value="name-asc">Alphabetical (A-Z)</option>
+                            <option value="name-desc">Alphabetical (Z-A)</option>
+                            <option value="provider-asc">Group By Provider</option>
                         </select>
-                        <i class="fa-solid fa-chevron-down select-arrow"></i>
+                        <i data-lucide="chevron-down" class="select-arrow"></i>
+                    </div>
+                </div>
+
+                <!-- Group: Engine Configurations -->
+                <div class="filter-group config-group">
+                    <div class="filter-group-label config-label">
+                        <i data-lucide="settings"></i>
+                        Test Options
+                    </div>
+                    <div class="config-row">
+                        <div class="config-info">
+                            <span class="config-name">Sectional Timer Limit</span>
+                            <p class="config-desc">Impose a strict 10-minute limit on quiz sections</p>
+                        </div>
+                        <label class="switch">
+                            <input type="checkbox" id="sectional-timer-toggle">
+                            <span class="slider round"></span>
+                        </label>
                     </div>
                 </div>
             </div>
         </aside>
 
-        <!-- Main Content -->
+        <!-- Main Card Workspace -->
         <main class="main-content">
+            <!-- Dedicated Provider Portals Quick Links -->
+            <div class="portals-launch-section">
+                <h2 class="portals-section-title">Dedicated Provider Portals</h2>
+                <div class="portals-grid">
+                    <a href="Oliveboard.html" class="portal-launch-card oliveboard">
+                        <div class="portal-icon"><i data-lucide="layout-list"></i></div>
+                        <div class="portal-info">
+                            <h3>Oliveboard Portal</h3>
+                            <p>CBT style layout with category sidebar</p>
+                        </div>
+                    </a>
+                    <a href="Pundits.html" class="portal-launch-card pundits">
+                        <div class="portal-icon"><i data-lucide="book-open"></i></div>
+                        <div class="portal-info">
+                            <h3>Pundits Planner</h3>
+                            <p>Structured Notion-style planner</p>
+                        </div>
+                    </a>
+                    <a href="The-Solver.html" class="portal-launch-card solver">
+                        <div class="portal-icon"><i data-lucide="zap"></i></div>
+                        <div class="portal-info">
+                            <h3>The Solver Drill</h3>
+                            <p>Dark performance speed training arena</p>
+                        </div>
+                    </a>
+                    <a href="English-Madhyam.html" class="portal-launch-card english-madhyam">
+                        <div class="portal-icon"><i data-lucide="languages"></i></div>
+                        <div class="portal-info">
+                            <h3>English Studio</h3>
+                            <p>Warm editorial typographic practice logs</p>
+                        </div>
+                    </a>
+                    <a href="360-Mocks.html" class="portal-launch-card mocks360">
+                        <div class="portal-icon"><i data-lucide="orbit"></i></div>
+                        <div class="portal-info">
+                            <h3>360 GK Arena</h3>
+                            <p>Gamified layout with neon cyber panels</p>
+                        </div>
+                    </a>
+                    <a href="Static-GK.html" class="portal-launch-card static-gk">
+                        <div class="portal-icon"><i data-lucide="database"></i></div>
+                        <div class="portal-info">
+                            <h3>GK Vault</h3>
+                            <p>Teal minimal list reference database</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
             <div class="content-toolbar">
                 <div class="toolbar-left">
                     <span class="results-text" id="results-text">Loading mocks...</span>
@@ -185,18 +275,23 @@
                 <div class="toolbar-right">
                     <div class="load-more-wrapper" id="load-more-wrapper" style="display:none;">
                         <button class="load-more-btn" id="load-more-btn">
-                            <i class="fa-solid fa-plus"></i> Load More
+                            <i data-lucide="plus"></i> Load More Mocks
                         </button>
                     </div>
                 </div>
             </div>
 
+            <!-- Dashboard Grid / Roadmap -->
             <div class="grid" id="grid">
-                <!-- Cards injected by JS -->
+                <!-- Dynamically populated by dashboard.js -->
             </div>
         </main>
     </div>
 
+    <!-- Background overlay for sidebar on mobile -->
+    <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+    <!-- Data & Interactive scripts -->
     <script src="mocks-data.js"></script>
     <script src="js/dashboard.js"></script>
 </body>

@@ -3,43 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aether Mocks</title>
+    <title>Mocks Wallah</title>
     <!-- Fonts & Icons -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    
+
     <!-- Central Stylesheet -->
     <link rel="stylesheet" href="../css/mock-main.css">
-    
+
     <!-- Math Formula Rendering (KaTeX/MathJax) -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    
+
     <!-- Timer Config -->
-    <meta name="exam-duration" content="60">
+    <meta name="exam-duration" content="38">
 </head>
 <body>
     <!-- Welcome Screen -->
     <div class="welcome-screen" id="welcomeScreen">
         <div class="welcome-container">
             <div class="welcome-header" style="margin-bottom: 24px;">
-                <h1 style="font-size: 2rem; font-weight: 700; color: #0f172a; margin-bottom: 8px;"><i class="fas fa-graduation-cap" style="color: #3b82f6;"></i> Aether Mocks</h1>
-                <p style="color: #64748b;">Computer Based Test Portal</p>
+                <h1 style="font-size: 2rem; font-weight: 700; color: var(--text-main); margin-bottom: 8px;"><i class="fas fa-graduation-cap" style="color: var(--primary);"></i> Mocks Wallah</h1>
+                <p style="color: var(--text-muted);">Computer Based Test Portal</p>
             </div>
-            
+
             <div class="test-details" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-bottom: 32px; text-align: left;">
-                <div class="detail-item" style="padding: 12px; background: #f8fafc; border-radius: 8px; border: 1px solid #e2e8f0;">
-                    <div class="detail-label" style="font-size: 0.8rem; color: #64748b;">Total Questions</div>
-                    <div class="detail-value" style="font-size: 1.1rem; font-weight: 600; color: #0f172a;">10</div>
+                <div class="detail-item" style="padding: 12px; background: var(--bg-color); border-radius: 8px; border: 1px solid var(--border-color);">
+                    <div class="detail-label" style="font-size: 0.8rem; color: var(--text-muted);">Total Questions</div>
+                    <div class="detail-value" style="font-size: 1.1rem; font-weight: 600; color: var(--text-main);">19</div>
                 </div>
-                <div class="detail-item" style="padding: 12px; background: #f8fafc; border-radius: 8px; border: 1px solid #e2e8f0;">
-                    <div class="detail-label" style="font-size: 0.8rem; color: #64748b;">Duration</div>
-                    <div class="detail-value" style="font-size: 1.1rem; font-weight: 600; color: #0f172a;">60 mins</div>
+                <div class="detail-item" style="padding: 12px; background: var(--bg-color); border-radius: 8px; border: 1px solid var(--border-color);">
+                    <div class="detail-label" style="font-size: 0.8rem; color: var(--text-muted);">Duration</div>
+                    <div class="detail-value" style="font-size: 1.1rem; font-weight: 600; color: var(--text-main);">38 mins</div>
                 </div>
             </div>
-            
+
             <div class="welcome-actions">
                 <button class="btn btn-primary" id="startBtn" onclick="document.getElementById('welcomeScreen').style.display='none'; document.getElementById('examContainer').style.display='flex';" style="font-size: 1.1rem; padding: 12px 32px; width: 100%;">
                     <i class="fas fa-play" style="margin-right: 8px;"></i> Start Test
@@ -47,12 +47,12 @@
             </div>
         </div>
     </div>
-    
+
     <!-- Main Exam Interface -->
     <div class="exam-container" id="examContainer" style="display: none; height: 100vh; flex-direction: column;">
         <!-- Top Header -->
         <div class="exam-header">
-            <div class="exam-title">Aether Mocks</div>
+            <div class="exam-title">Mocks Wallah</div>
             <div class="header-actions" style="display: flex; align-items: center; gap: 12px;">
                 <button class="btn-icon" id="themeToggleBtn" title="Switch to Dark Mode"><i class="fas fa-moon"></i></button>
                 <button class="btn-icon" id="fullscreenToggleBtn" title="Toggle Fullscreen"><i class="fas fa-expand"></i></button>
@@ -62,14 +62,14 @@
                 </div>
             </div>
         </div>
-        
+
         <!-- Main Content -->
         <div class="mock-container">
             <!-- Question Area -->
             <div class="question-view">
                 <!-- Dynamically populated question container -->
                 <div id="questionContainer" style="flex: 1; display: flex; flex-direction: column; gap: 24px;"></div>
-                
+
                 <!-- Controls -->
                 <div class="nav-controls">
                     <button class="btn btn-secondary btn-prev"><i class="fas fa-chevron-left" style="margin-right: 8px;"></i> Previous</button>
@@ -79,40 +79,269 @@
                     <button class="btn btn-primary btn-next">Next <i class="fas fa-chevron-right" style="margin-left: 8px;"></i></button>
                 </div>
             </div>
-            
+
             <!-- Desktop Navigator Sidebar -->
             <div class="sidebar">
                 <div class="sidebar-section-title">Summary Status</div>
                 <div class="stats-grid">
                     <div class="stat-item">
-                        <div class="stat-count" id="stat-answered" style="color: #10b981;">0</div>
+                        <div class="stat-count" id="stat-answered" style="color: var(--success);">0</div>
                         <div class="stat-name">Answered</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-count" id="stat-flagged" style="color: #f59e0b;">0</div>
+                        <div class="stat-count" id="stat-flagged" style="color: var(--warning);">0</div>
                         <div class="stat-name">Flagged</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-count" id="stat-not-answered" style="color: #64748b;">0</div>
+                        <div class="stat-count" id="stat-not-answered" style="color: var(--text-muted);">0</div>
                         <div class="stat-name">Unanswered</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-count" id="stat-not-visited" style="color: #94a3b8;">0</div>
+                        <div class="stat-count" id="stat-not-visited" style="color: var(--text-muted);">0</div>
                         <div class="stat-name">Not Visited</div>
                     </div>
                 </div>
-                
+
                 <div class="sidebar-section-title" style="margin-top: 16px;">Question Navigator</div>
                 <div class="questions-grid"></div>
             </div>
         </div>
     </div>
-    
+
     <!-- Inject Question Data -->
     <script>
-        const questions = [];
+        const questions = [
+  {
+    "question": "<p><span style=\"font-family: Times New Roman;\">In which discipline is the Bidhan Chandra Roy Award given&nbsp;</span></p>",
+    "options": [
+      "Law",
+      "Architecture",
+      "sports",
+      "medicine"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p>1.(d) <span style=\"font-family: Times New Roman;\">Bidhan Chandra Roy Award is given in the field of <strong>Medicine</strong>. </span><span style=\"font-family: Times New Roman;\">The Bidhan Chandra Roy Award was instituted in 1962 . Legal Era Awards given in the field of law. The Pritzker Prize award is given in the Architecture</span><span style=\"font-family: Times New Roman;\"> </span><span style=\"font-family: Times New Roman;\">field. Sports awards in India are Dhyan Chand Khel Ratna Award, Arjuna Award, Dronacharya Award etc</span></p>",
+    "question_index": 0
+  },
+  {
+    "question": "<p><span style=\"font-family: Times New Roman;\">Kelucharan Mahopatra was an exponent of which of the following categories of&nbsp;</span></p>",
+    "options": [
+      "Manipur",
+      "Bharatnatyam",
+      "Kuchipudi",
+      "Odissi"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p>2.(d) <strong><span style=\"font-family: Times New Roman;\">Kelucharan Mahopatra</span></strong><span style=\"font-family: Times New Roman;\"> was an exponent of Odissi dance. Famous</span><span style=\"font-family: Times New Roman;\"> <strong>odissi dancers</strong></span><span style=\"font-family: Times New Roman;\"> are </span><span style=\"font-family: Times New Roman;\">Sanjukta Panigrahi , Sonal Mansingh, Jhelum Paranjape, Mayadhar Raut, Gangadhar Pradhan, Leana Citaristi etc. Five Most Famous </span><strong><span style=\"font-family: Times New Roman;\">Bharatanatyam Dancers</span></strong><span style=\"font-family: Times New Roman;\"> Rukmini Devi, Padma Subrahmanyam ,Alarmel Valli, Yamini Krishnamurthy, Mallika Sarabhai. Famous</span><span style=\"font-family: Times New Roman;\"> <strong>Manipuri Dancers</strong></span><span style=\"font-family: Times New Roman;\"> -Yumlembam Gambhini Devi,Guru Bipin Sinha,Darshana Jhaveri, Nirmala Mehta. Famous </span><strong><span style=\"font-family: Times New Roman;\">Kuchipudi Dancers</span></strong><span style=\"font-family: Times New Roman;\">- Mallika Sarabhai, V. Satyanarayana Sarma, Deepa Sashindran, Vedantam Ramalinga Sastry.</span></p>\n<p><span style=\"font-family: Times New Roman;\"> </span></p>",
+    "question_index": 1
+  },
+  {
+    "question": "<p><span style=\"font-family: Times New Roman;\">who among the following is the author of the book &lsquo;Unaccustomed Earth&rsquo;</span></p>",
+    "options": [
+      "Arundhati Roy",
+      "Anita Nair",
+      "Jumpa Lahiri",
+      "Shobha de"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p>3.(c) <span style=\"font-family: Times New Roman;\">Books by </span><strong><span style=\"font-family: Times New Roman;\">Jhumpa Lahiri</span></strong><span style=\"font-family: Times New Roman;\"> are- Unaccustomed Earth, Interpreter of Maladies, The Namesake, The Lowland, In Other Words, Whereabouts, The Clothing of Books, Translating Myself and others.</span><span style=\"font-family: Times New Roman;\"> <strong>Arundhati Roy</strong></span><span style=\"font-family: Times New Roman;\">- The God of Small Things, Ministry of Utmost Happiness, The Doctor and the Saint, Azaadi, Walking with the Comrades </span><span style=\"font-family: Times New Roman;\">. <strong>Anita Nair</strong></span><span style=\"font-family: Times New Roman;\">- Ladies Coupe, Mistress, Lessons in Forgetting, The Lilac House .</span><span style=\"font-family: Times New Roman;\"> <strong>Shobha de</strong> </span><span style=\"font-family: Times New Roman;\">- Strange Obsession, Snapshots, Sisters, Sultry Days.</span></p>\n<p><span style=\"font-family: Times New Roman;\"> </span></p>",
+    "question_index": 2
+  },
+  {
+    "question": "<p>4. <span style=\"font-family: Baloo;\">______ is a mask dance popular in South Malabar.</span></p>",
+    "options": [
+      "Dhangar",
+      "Kummattikali",
+      "Parichakali",
+      "Zemmado"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p>4.(b) <strong><span style=\"font-family: Times New Roman;\">Kummattikali </span></strong><span style=\"font-family: Times New Roman;\">- a famous mask dance of </span><span style=\"font-family: Times New Roman;\"><strong>South Malabar</strong> </span><span style=\"font-family: Times New Roman;\">(Thrissur, Kerala)&nbsp;</span><strong><span style=\"font-family: Times New Roman;\">Dhangar </span></strong><span style=\"font-family: Times New Roman;\">- </span><span style=\"font-family: Times New Roman;\">The Dhangar dance is performed by the shepherd community of Goa during Navratri. </span><strong><span style=\"font-family: Times New Roman;\">Parichakali </span></strong><span style=\"font-family: Times New Roman;\">&ndash; Traditional Folk Dance Form of Lakshadweep. Other famous folk dance of south India are - Padayani or Paddeni (Kerala),</span><span style=\"font-family: Times New Roman;\">Kummi and Kolattam (Tamil Nadu), Kargam and Puli Vesham (Tamil Nadu),</span></p>\n<p><span style=\"font-family: Times New Roman;\"> </span></p>",
+    "question_index": 3
+  },
+  {
+    "question": "<p>5.<span style=\"font-family: Baloo;\"> What is the maximum permissible limit of turbidity in potable water as per the Bureau of Indian Standards (BIS)(IS -10500 : 2012)?</span></p>",
+    "options": [
+      "3 NTU",
+      "5 NTU",
+      "7 NTU",
+      "1 NTU"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p>5.(b) <span style=\"font-family: Times New Roman;\">The maximum permissible limit of turbidity in potable water as per the Bureau of Indian Standards (BIS)(IS -10500 : 2012) is </span><strong><span style=\"font-family: Times New Roman;\">5 NTU</span></strong><span style=\"font-family: Times New Roman;\"><strong> </strong>. </span><span style=\"font-family: Times New Roman;\">NTU stands for </span><strong><span style=\"font-family: Times New Roman;\">Nephelometric Turbidity unit</span></strong><span style=\"font-family: Times New Roman;\">, i.e. the unit used to measure the turbidity of a fluid or the presence of suspended particles in water.</span><span style=\"font-family: Times New Roman;\"> <strong>Turbidity</strong></span><span style=\"font-family: Times New Roman;\"><strong> </strong>is a measure of the cloudiness of water. It is used to indicate water quality and filtration effectiveness (such as whether disease-causing organisms are present) .On a standard silica scale, the permissible value of turbidity for drinking water is </span><strong><span style=\"font-family: Times New Roman;\">10 (ppm) .</span></strong><span style=\"font-family: Times New Roman;\"> </span></p>\n<p><span style=\"font-family: Times New Roman;\"> </span></p>",
+    "question_index": 4
+  },
+  {
+    "question": "<p>6. <span style=\"font-family: Baloo;\">Which of the following festivals is celebrated in Uttarakhand?</span></p>",
+    "options": [
+      "Vishu",
+      "Phool Dei",
+      "Dol Jatra",
+      "Nuakhai"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p>6.(b) <strong><span style=\\\"font-family: Times New Roman;\\\">Phool Dei</span></strong><span style=\\\"font-family: Times New Roman;\\\"> is a festival of Uttarakhand It takes place on the first day of the Chaitra season (March-April) and is also known as the harvest festival. </span><strong><span style=\\\"font-family: Times New Roman;\\\">Vishu</span></strong><span style=\\\"font-family: Times New Roman;\\\"><strong> </strong>-Vishu is a Hindu festival celebrated by the people of Kerala .</span><span style=\\\"font-family: Times New Roman;\\\"> \\'<strong>Dol Jatra</strong>\\'</span><span style=\\\"font-family: Times New Roman;\\\"> - also known as \\'Dol Utsav \\'is the festival of colours celebrated in West Bengal . </span><strong><span style=\\\"font-family: Times New Roman;\\\">Nuakhai</span></strong><span style=\\\"font-family: Times New Roman;\\\"><strong> </strong>- Nuakhai is an agricultural festival mainly observed by people of Western Odisha in India.</span></p>\\n<p><span style=\\\"font-family: Times New Roman;\\\"> </span></p>",
+    "question_index": 5
+  },
+  {
+    "question": "<p>7. <span style=\"font-family: Times New Roman;\">What is located inside the premises of Akhal Takht Sahib?</span></p>",
+    "options": [
+      "Golden Temple",
+      "Paonta Sahib",
+      "Patna Sahib",
+      "Gurudwara Bangla Sahib"
+    ],
+    "correct_option_id": 0,
+    "solution": "<p>7.(a) <span style=\"font-family: Times New Roman;\"><strong>Golden Temple</strong> </span><span style=\"font-family: Times New Roman;\">is located inside the premises of Akhal Takht Sahib. </span><span style=\"font-family: Times New Roman;\">Shri Guru Hargobind Singh laid the foundation stone of the </span><span style=\"font-family: Times New Roman;\"><strong>Akal Takht</strong> </span><span style=\"font-family: Times New Roman;\">building in 1605.</span><span style=\"font-family: Times New Roman;\"> <strong>Paonta Sahib</strong></span><span style=\"font-family: Times New Roman;\"> was founded by the Tenth Sikh guru, Guru Gobind Singh.</span><span style=\"font-family: Times New Roman;\"> </span><strong><span style=\"font-family: Times New Roman;\">Patna Sahib</span></strong><span style=\"font-family: Times New Roman;\"> </span><span style=\"font-family: Times New Roman;\">was built by Maharaja Ranjit Singh.</span><span style=\"font-family: Times New Roman;\"> </span><strong><span style=\"font-family: Times New Roman;\">Gurudwara Bangla Sahib</span></strong><span style=\"font-family: Times New Roman;\"> is </span><span style=\"font-family: Times New Roman;\">known for its association with the eighth Sikh Guru, Guru Har Krishan. </span></p>\n<p><span style=\"font-family: Times New Roman;\"> </span></p>",
+    "question_index": 6
+  },
+  {
+    "question": "<p>8. <span style=\"font-family: Baloo;\">In which of the following dances chairs on heads with lighted diyas are performed by women?</span></p>",
+    "options": [
+      "Dhangari Gaja Dance",
+      "Koli Dance",
+      "Tamasha Dance",
+      "Chari Dance"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p>8.(b) <strong><span style=\"font-family: Times New Roman;\">Koli Dance</span></strong><span style=\"font-family: Times New Roman;\"> dances chairs on heads with lighted diyas are performed by women. It is a popular folk dance of Maharashtra. </span><strong><span style=\"font-family: Times New Roman;\">Dhangari Gaja dance</span></strong><span style=\"font-family: Times New Roman;\">(Maharashtra) is performed to please their God for His blessings. </span><strong><span style=\"font-family: Times New Roman;\">Tamasha (Maharashtra)</span></strong><span style=\"font-family: Times New Roman;\">, as a theater form, is a style that can be called a mix of a regular play, a musical and dance.</span><strong><span style=\"font-family: Times New Roman;\">Chari </span></strong><span style=\"font-family: Times New Roman;\">dance describes the art of collecting water in a </span><span style=\"font-family: Times New Roman;\">chari</span><span style=\"font-family: Times New Roman;\"> or pot by the Rajasthani Women.</span><span style=\"font-family: Times New Roman;\"> </span></p>",
+    "question_index": 7
+  },
+  {
+    "question": "<p>9. <span style=\"font-family: Baloo;\">Under the National Urban Sanitation Policy, a city that scores points between 34 and 66 and needs considerable improvement is </span><span style=\"font-family: Baloo;\">colour</span><span style=\"font-family: Baloo;\">-coded ______.&nbsp;</span></p>",
+    "options": [
+      "green",
+      "black",
+      "blue",
+      "red"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p>9.(b) <strong><span style=\"font-family: Times New Roman;\">Black</span></strong><span style=\"font-family: Times New Roman;\">- Needing considerable improvement- &lt;34</span><span style=\"font-family: Times New Roman;\">66, </span><strong><span style=\"font-family: Times New Roman;\">Red</span></strong><span style=\"font-family: Times New Roman;\">- Cities required immediate remedial action- &lt;33, </span><span style=\"font-family: Times New Roman;\"><strong>Blue</strong> </span><span style=\"font-family: Times New Roman;\">- Recovering but still diseased - &lt;67</span><span style=\"font-family: Times New Roman;\">90, </span><strong><span style=\"font-family: Times New Roman;\">Green </span></strong><span style=\"font-family: Times New Roman;\">- Healthy and clean city &ndash; &lt;91</span><span style=\"font-family: Times New Roman;\"> 100.</span></p>\n<p><span style=\"font-family: Times New Roman;\"> </span></p>",
+    "question_index": 8
+  },
+  {
+    "question": "<p>10. <span style=\"font-family: Times New Roman;\">As per WHO (World Health Organization), which of the following is NOT an example of disinfection by-products formed at traditional drinking water treatment plants?&nbsp;</span></p>",
+    "options": [
+      "Titania",
+      "Bromate",
+      "Chlorate",
+      "Chlorite"
+    ],
+    "correct_option_id": 0,
+    "solution": "<p>10.(a) <span style=\"font-family: Times New Roman;\"><strong>Titanium dioxide</strong>,</span><span style=\"font-family: Times New Roman;\"> also called titania, (TiO</span><sub><span style=\"font-family: Times New Roman;\">2</span></sub><span style=\"font-family: Times New Roman;\">), a white, opaque, naturally occurring mineral existing in a number of crystalline forms, the most important of which are rutile and anatase. It is used in paints, coatings, papers, inks, toothpaste, face powder, and food colouring. </span></p>\n<p><span style=\"font-family: Times New Roman;\"> </span></p>",
+    "question_index": 9
+  },
+  {
+    "question": "<p>11. <span style=\"font-family: Baloo;\">Who among the following was the first Indian Governor </span><span style=\"font-family: Baloo;\">of Reserve</span><span style=\"font-family: Baloo;\"> Bank of India?&nbsp;</span></p>",
+    "options": [
+      "CD Deshmukh",
+      "HVR Lengar",
+      "PC Bhattacharya",
+      "LK Jha"
+    ],
+    "correct_option_id": 0,
+    "solution": "<p>11.(a) <span style=\"font-family: Times New Roman;\"><strong>CD Deshmukh</strong> </span><span style=\"font-family: Times New Roman;\">was the first Indian Governor of the Reserve Bank of India. As of may 2022 </span><strong><span style=\"font-family: Times New Roman;\">Shaktikanta Das</span></strong><span style=\"font-family: Times New Roman;\"> is the current (twenty-fifth) governor of the Reserve Bank of India . RBI was established on 1 April 1935. The headquarter of RBI is in Mumbai. </span><span style=\"font-family: Times New Roman;\">The Reserve Bank of India was set up on the basis of the recommendations of the &lsquo;</span><span style=\"font-family: Times New Roman;\"><strong>Hilton Young Commission</strong>&rsquo;. </span></p>\n<p><span style=\"font-family: Times New Roman;\"> </span></p>",
+    "question_index": 10
+  },
+  {
+    "question": "<p><span style=\"font-family: Times New Roman;\">Which of the following decades was proclaimed by the General Assembly of the United Nations as the International Decade for action on &lsquo;Water for life&rsquo;?</span></p>",
+    "options": [
+      "1994 - 2004",
+      "1972 - 1982",
+      "1983 - 1993",
+      "2005 - 2015"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p>12.(d) <strong><span style=\"font-family: Times New Roman;\">2005 - 2015</span></strong><span style=\"font-family: Times New Roman;\"><strong> </strong>:- International Decade for Action ,water for Life. The decade of</span><span style=\"font-family: Times New Roman;\"> <strong>1994-2004</strong> </span><span style=\"font-family: Times New Roman;\">:- Decade of the world&rsquo;s Indigenous People. The decade of </span><span style=\"font-family: Times New Roman;\"><strong>1983-1993</strong> </span><span style=\"font-family: Times New Roman;\">Second Decade to Combat Racism and Racial Discrimination. </span><strong><span style=\"font-family: Times New Roman;\">2021-2030</span></strong><span style=\"font-family: Times New Roman;\">:- United Nation Decade on Ecosystem Restoration</span><span style=\"font-family: Times New Roman;\">. <strong>2014 - 2024</strong></span><span style=\"font-family: Times New Roman;\"> :- United Nations Decade of sustainable Energy for all.</span></p>\n<p><span style=\"font-family: Times New Roman;\"> </span></p>",
+    "question_index": 11
+  },
+  {
+    "question": "<p><span style=\"font-family: Times New Roman;\">The Ghoom Monastery is located in:</span></p>",
+    "options": [
+      "Gangtok",
+      "Namch",
+      "Kalimpong",
+      "Darjeeling"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p>13.(d) <span style=\"font-family: Baloo;\">Ghoom Monastery: First Tibetan Monastery in Darjeeling (West Bengal). </span><span style=\"font-family: Baloo;\"> <strong>Famous Monasteries in India are</strong> </span><span style=\"font-family: Baloo;\">Hemis Monasteries ( Ladakh), Tabo Monasteries (Himachal Pradesh), Tsulglagkhang Monastery (Dharamshala), Thiksey Monastery (Ladakh), Tawang Monastery ( Arunachal Pradesh), Bylakuppe Monastery (Karnataka), Rumtek Monastery (Gangtok, Sikkkim) etc.</span><span style=\"font-family: Baloo;\"> </span></p>",
+    "question_index": 12
+  },
+  {
+    "question": "<p><span style=\"font-family: Times New Roman;\">A distinct &lsquo;Dhrupad style&rsquo; is associated with the ______ gharana.</span></p>",
+    "options": [
+      "Ajrada",
+      "Nathdwara",
+      "Jafferkhani",
+      "Bishnupur"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p>14.(d)<span style=\"font-family: Times New Roman;\"> </span><span style=\"font-family: Times New Roman;\">A distinct &lsquo;Dhrupad style&rsquo; is associated with the <strong>Bishnupur gharana</strong>. Tansen was a famous Dhrupad instrument player. It is the oldest known style of major vocal styles associated with Hindustani classical music, Haveli Sangeet of Pushtimarg Sampraday and also related to the South Indian Carnatic tradition.</span></p>\n<p><span style=\"font-family: Times New Roman;\"> </span></p>",
+    "question_index": 13
+  },
+  {
+    "question": "<p>15.<span style=\"font-family: Baloo;\"> What do you call the maximum sustainable size of a resident population in a given ecosystem?&nbsp;</span></p>",
+    "options": [
+      "Census",
+      "Crude Oil",
+      "Carrying capacity",
+      "Case rate"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p>15.(c) <strong><span style=\\\"font-family: Palanquin Dark;\\\">Carrying capacity</span></strong><span style=\\\"font-family: Palanquin Dark;\\\"> can be defined as a species\\' average population size in a particular habitat. Carrying capacity is the maximum number of a species an environment can support indefinitely. </span></p>\\n<p><span style=\\\"font-family: Palanquin Dark;\\\"> </span></p>",
+    "question_index": 14
+  },
+  {
+    "question": "<p>16. <span style=\"font-family: Palanquin Dark;\">Which of the following is the largest dome of India as of April 2021?&nbsp;</span></p>",
+    "options": [
+      "Alai Darwaza",
+      "Adhai Din ka Jhonpra",
+      "Gol Gumbaz",
+      "Data Darbar"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p>16.(c) <strong>Gol Gumbaz</strong><span style=\"font-family: Palanquin Dark;\"> is located at Bijapur, Karnataka is the largest dome of India. </span><span style=\"font-family: Palanquin Dark;\"> This mausoleum of Muhammed Adil Shah was constructed in 1656 by architect Yaqut of Dabul. The </span><span style=\"font-family: Palanquin Dark;\"><strong>Alai Darwaza</strong> </span><span style=\"font-family: Palanquin Dark;\">was built by Ala-ud-Din Khalji in 1311 located at Qutab Minar Complex, Delhi India. </span><span style=\"font-family: Palanquin Dark;\"><strong>Adhai Din ka Jhonpra</strong> </span><span style=\"font-family: Palanquin Dark;\">was built by </span><span style=\"font-family: Palanquin Dark;\">Qutb al-Din Aibak in 1199 CE located at Ajmer. </span><strong><span style=\"font-family: Palanquin Dark;\">Data Darbar</span></strong><span style=\"font-family: Palanquin Dark;\">, located in the city of Lahore, Punjab, Pakistan, is the largest Sufi shrine in South Asia. It was built to house the remains of Ali Hujwiri.</span></p>\n<p><span style=\"font-family: Palanquin Dark;\"> </span></p>",
+    "question_index": 15
+  },
+  {
+    "question": "<p>17. <span style=\"font-family: Palanquin Dark;\">&lsquo;Povadas&rsquo; is a popular folk dance from the state of ______.</span></p>",
+    "options": [
+      "Maharashtra",
+      "Gujrat",
+      "Rajasthan",
+      "Kerala"
+    ],
+    "correct_option_id": 0,
+    "solution": "<p>17.(a) <span style=\"font-family: Palanquin Dark;\">&lsquo;Povadas&rsquo; is a popular folk dance from the state of <strong>Maharashtra</strong>. </span><span style=\"font-family: Palanquin Dark;\">The main folk dances of Maharashtra are Lavani, Dhangarigaja, Lezim, Koli, Gondhal and Tamasha.</span></p>\n<p><span style=\"font-family: Palanquin Dark;\"> </span></p>",
+    "question_index": 16
+  },
+  {
+    "question": "<p>18. <span style=\"font-family: Palanquin Dark;\">Which of the following books was written by Jawaharlal Nehru?&nbsp;</span></p>",
+    "options": [
+      "A bunch of Old letters.",
+      "Riddles in Hinduism",
+      "Ranade, Gandhi and Jinnah",
+      "Waiting For A Visa : Autobiographical Notes"
+    ],
+    "correct_option_id": 0,
+    "solution": "<p>18.(a) <span style=\"font-family: Palanquin Dark;\"><strong>A bunch of Old letters</strong> was written by JawaharLal Nehru.( &lsquo;Riddles in Hinduism&rsquo;, &lsquo;Ranade, Gandhi and Jinnah&rsquo;, &lsquo;Waiting For A Visa : Autobiographical Notes&rsquo; ) written by</span><span style=\"font-family: Palanquin Dark;\"> <strong>B.R Ambedkar</strong></span><span style=\"font-family: Palanquin Dark;\">. More books written by </span><span style=\"font-family: Palanquin Dark;\"><strong>Jawaharlal Nehru</strong> </span><span style=\"font-family: Palanquin Dark;\">The Discovery of India, Letters from a Father to his Daughter, Glimpses of World History, The Unity of India Collected Writings 1937-1940, An Autobiography.</span></p>\n<p><span style=\"font-family: Palanquin Dark;\"> </span></p>",
+    "question_index": 17
+  },
+  {
+    "question": "<p>19.<span style=\"font-family: Palanquin Dark;\"> Realizing the importance of maintaining the cleanliness of the water bodies, the Government of India passed the Water (Prevention and Control of Pollution) Act, ________, to safeguard our water resources.&nbsp;</span></p>",
+    "options": [
+      "1974",
+      "1973",
+      "1971",
+      "1969"
+    ],
+    "correct_option_id": 0,
+    "solution": "<p>19.(a) <span style=\"font-family: Palanquin Dark;\">The six laws related to environmental protection and wildlife are: The Environment (Protection) Act, 1986, The Forest (Conservation) Act, 1980, The Wildlife Protection Act, 1972, </span><span style=\"font-family: Palanquin Dark;\"><strong>Water (Prevention and Control of Pollution) Act, 1974</strong>,</span><span style=\"font-family: Palanquin Dark;\"> Air (Prevention and Control of Pollution) Act, 1981 and The Indian Forest Act, 1927. Some more important Acts- The Ozone Depleting Substances (Regulation and Control) in 2000, The Noise Pollution (Regulation and Control) (Amendment) in 2002, The Biological Diversity Act in 2002. </span><span style=\"font-family: Palanquin Dark;\"> </span></p>",
+    "question_index": 18
+  }
+];
     </script>
-    
+
     <!-- Central JS Controller -->
     <script src="../js/mock-core.js"></script>
 </body>

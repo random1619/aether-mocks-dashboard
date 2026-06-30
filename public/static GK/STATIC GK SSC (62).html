@@ -3,43 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aether Mocks</title>
+    <title>Mocks Wallah</title>
     <!-- Fonts & Icons -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    
+
     <!-- Central Stylesheet -->
     <link rel="stylesheet" href="../css/mock-main.css">
-    
+
     <!-- Math Formula Rendering (KaTeX/MathJax) -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    
+
     <!-- Timer Config -->
-    <meta name="exam-duration" content="60">
+    <meta name="exam-duration" content="30">
 </head>
 <body>
     <!-- Welcome Screen -->
     <div class="welcome-screen" id="welcomeScreen">
         <div class="welcome-container">
             <div class="welcome-header" style="margin-bottom: 24px;">
-                <h1 style="font-size: 2rem; font-weight: 700; color: #0f172a; margin-bottom: 8px;"><i class="fas fa-graduation-cap" style="color: #3b82f6;"></i> Aether Mocks</h1>
-                <p style="color: #64748b;">Computer Based Test Portal</p>
+                <h1 style="font-size: 2rem; font-weight: 700; color: var(--text-main); margin-bottom: 8px;"><i class="fas fa-graduation-cap" style="color: var(--primary);"></i> Mocks Wallah</h1>
+                <p style="color: var(--text-muted);">Computer Based Test Portal</p>
             </div>
-            
+
             <div class="test-details" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-bottom: 32px; text-align: left;">
-                <div class="detail-item" style="padding: 12px; background: #f8fafc; border-radius: 8px; border: 1px solid #e2e8f0;">
-                    <div class="detail-label" style="font-size: 0.8rem; color: #64748b;">Total Questions</div>
-                    <div class="detail-value" style="font-size: 1.1rem; font-weight: 600; color: #0f172a;">10</div>
+                <div class="detail-item" style="padding: 12px; background: var(--bg-color); border-radius: 8px; border: 1px solid var(--border-color);">
+                    <div class="detail-label" style="font-size: 0.8rem; color: var(--text-muted);">Total Questions</div>
+                    <div class="detail-value" style="font-size: 1.1rem; font-weight: 600; color: var(--text-main);">15</div>
                 </div>
-                <div class="detail-item" style="padding: 12px; background: #f8fafc; border-radius: 8px; border: 1px solid #e2e8f0;">
-                    <div class="detail-label" style="font-size: 0.8rem; color: #64748b;">Duration</div>
-                    <div class="detail-value" style="font-size: 1.1rem; font-weight: 600; color: #0f172a;">60 mins</div>
+                <div class="detail-item" style="padding: 12px; background: var(--bg-color); border-radius: 8px; border: 1px solid var(--border-color);">
+                    <div class="detail-label" style="font-size: 0.8rem; color: var(--text-muted);">Duration</div>
+                    <div class="detail-value" style="font-size: 1.1rem; font-weight: 600; color: var(--text-main);">30 mins</div>
                 </div>
             </div>
-            
+
             <div class="welcome-actions">
                 <button class="btn btn-primary" id="startBtn" onclick="document.getElementById('welcomeScreen').style.display='none'; document.getElementById('examContainer').style.display='flex';" style="font-size: 1.1rem; padding: 12px 32px; width: 100%;">
                     <i class="fas fa-play" style="margin-right: 8px;"></i> Start Test
@@ -47,12 +47,12 @@
             </div>
         </div>
     </div>
-    
+
     <!-- Main Exam Interface -->
     <div class="exam-container" id="examContainer" style="display: none; height: 100vh; flex-direction: column;">
         <!-- Top Header -->
         <div class="exam-header">
-            <div class="exam-title">Aether Mocks</div>
+            <div class="exam-title">Mocks Wallah</div>
             <div class="header-actions" style="display: flex; align-items: center; gap: 12px;">
                 <button class="btn-icon" id="themeToggleBtn" title="Switch to Dark Mode"><i class="fas fa-moon"></i></button>
                 <button class="btn-icon" id="fullscreenToggleBtn" title="Toggle Fullscreen"><i class="fas fa-expand"></i></button>
@@ -62,14 +62,14 @@
                 </div>
             </div>
         </div>
-        
+
         <!-- Main Content -->
         <div class="mock-container">
             <!-- Question Area -->
             <div class="question-view">
                 <!-- Dynamically populated question container -->
                 <div id="questionContainer" style="flex: 1; display: flex; flex-direction: column; gap: 24px;"></div>
-                
+
                 <!-- Controls -->
                 <div class="nav-controls">
                     <button class="btn btn-secondary btn-prev"><i class="fas fa-chevron-left" style="margin-right: 8px;"></i> Previous</button>
@@ -79,40 +79,221 @@
                     <button class="btn btn-primary btn-next">Next <i class="fas fa-chevron-right" style="margin-left: 8px;"></i></button>
                 </div>
             </div>
-            
+
             <!-- Desktop Navigator Sidebar -->
             <div class="sidebar">
                 <div class="sidebar-section-title">Summary Status</div>
                 <div class="stats-grid">
                     <div class="stat-item">
-                        <div class="stat-count" id="stat-answered" style="color: #10b981;">0</div>
+                        <div class="stat-count" id="stat-answered" style="color: var(--success);">0</div>
                         <div class="stat-name">Answered</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-count" id="stat-flagged" style="color: #f59e0b;">0</div>
+                        <div class="stat-count" id="stat-flagged" style="color: var(--warning);">0</div>
                         <div class="stat-name">Flagged</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-count" id="stat-not-answered" style="color: #64748b;">0</div>
+                        <div class="stat-count" id="stat-not-answered" style="color: var(--text-muted);">0</div>
                         <div class="stat-name">Unanswered</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-count" id="stat-not-visited" style="color: #94a3b8;">0</div>
+                        <div class="stat-count" id="stat-not-visited" style="color: var(--text-muted);">0</div>
                         <div class="stat-name">Not Visited</div>
                     </div>
                 </div>
-                
+
                 <div class="sidebar-section-title" style="margin-top: 16px;">Question Navigator</div>
                 <div class="questions-grid"></div>
             </div>
         </div>
     </div>
-    
+
     <!-- Inject Question Data -->
     <script>
-        const questions = [];
+        const questions = [
+  {
+    "question": "<p>1.<span style=\"font-family: Cambria Math;\"> Where is the headquarters of the Spices Board of India located?</span></p>\n",
+    "options": [
+      "Bengaluru (Karnataka)",
+      "Kochi (Kerala)",
+      "Pune (Maharashtra)",
+      "Guntur (Andhra Pradesh)"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">1.(</span><span style=\"font-family: Cambria Math;\">b) <strong>Kochi (Kerala). Spices Board</strong></span><span style=\"font-family: Cambria Math;\"><strong> </strong>is a statutory body constituted since 1987 under the Spices Board Act, 1986 by merging the erstwhile Cardamom Board and Spices Export Promotion Council under the administrative control of the Department of Commerce. Kerala is known as the spice garden of India.</span></p>\n",
+    "question_index": 0
+  },
+  {
+    "question": "<p>2. <span style=\"font-family: Cambria Math;\">Who has written \"The History of British India\" in 1817?</span></p>\n",
+    "options": [
+      "James Mill",
+      "Romesh Chander Dutt",
+      "Dadabhai Naoroji",
+      "William Bentick"
+    ],
+    "correct_option_id": 0,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">2.(</span><span style=\"font-family: Cambria Math;\">a) <strong>James Mill.</strong> </span><span style=\"font-family: Cambria Math;\">He was the first writer to divide Indian history into three parts: Hindu, Muslim and British. The Book &ldquo;History of British India&rdquo; - Displays the history, character, religion, literature, arts and laws of India, influence of the Indian climate.</span><span style=\"font-family: Cambria Math;\"> <strong>Other writers and their books </strong>-</span><span style=\"font-family: Cambria Math;\"> Romesh Chander Dutt - &ldquo;The economic history of India&rdquo;. Dadabhai Naoroji through his book, &ldquo;Poverty and </span><span style=\"font-family: Cambria Math;\">Unbritish</span><span style=\"font-family: Cambria Math;\"> Rule in India&rdquo; made the earliest estimation (1901) of the poverty line. </span></p>\n",
+    "question_index": 1
+  },
+  {
+    "question": "<p>3.<span style=\"font-family: Cambria Math;\"> Identify the famous Indian music personality.</span></p>\r\n<p><span style=\"font-family: Cambria Math;\">In 2011, the Guinness Book of World Records officially acknowledged her as the most recorded artist in music history.</span></p>\n",
+    "options": [
+      "Asha Bhosle",
+      "Shreya Ghoshal",
+      "Usha Uthup",
+      "Alka Yagnik"
+    ],
+    "correct_option_id": 0,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">3.(</span><span style=\"font-family: Cambria Math;\">a)<strong> Asha Bhosle. </strong></span><span style=\"font-family: Cambria Math;\">She has recorded over 12000 songs in more than 20 Indian and foreign languages. The World Records Academy certified her as the \"Most Recorded Artist\" in the world in September 2009. </span><strong><span style=\"font-family: Cambria Math;\">Awards:</span></strong><span style=\"font-family: Cambria Math;\"><strong> </strong>Won seven Filmfare Best Female Playback Awards, nominated for the Grammy Award, Padma Vibhushan (2008), Dadasaheb Phalke Award (2000).</span></p>\n",
+    "question_index": 2
+  },
+  {
+    "question": "<p>4.<span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">Jagoi</span><span style=\"font-family: Cambria Math;\"> and </span><span style=\"font-family: Cambria Math;\">cholom</span><span style=\"font-family: Cambria Math;\"> are the two main divisions </span><span style=\"font-family: Cambria Math;\">in________dance</span><span style=\"font-family: Cambria Math;\">.</span></p>\n",
+    "options": [
+      "Kathakali",
+      "Manipuri",
+      "Bharatanatyam",
+      "Kathak"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">4.(</span><span style=\"font-family: Cambria Math;\">b) <strong>Manipuri</strong></span><strong><span style=\"font-family: Cambria Math;\">.</span><span style=\"font-family: Cambria Math;\"> Varieties of Manipuri forms of dance</span></strong><span style=\"font-family: Cambria Math;\"><strong>:</strong> Raas, </span><span style=\"font-family: Cambria Math;\">Sankirtan</span><span style=\"font-family: Cambria Math;\">, Dhola </span><span style=\"font-family: Cambria Math;\">Cholam</span><span style=\"font-family: Cambria Math;\">, </span><span style=\"font-family: Cambria Math;\">Kartal </span><span style=\"font-family: Cambria Math;\">Cholam</span><span style=\"font-family: Cambria Math;\">, </span><span style=\"font-family: Cambria Math;\">Pung</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">Cholam</span><span style=\"font-family: Cambria Math;\"> (Dancers playing </span><span style=\"font-family: Cambria Math;\">pung</span><span style=\"font-family: Cambria Math;\">/drum while dancing), and Thang ta (martial art form).</span></p>\n",
+    "question_index": 3
+  },
+  {
+    "question": "<p>5. <span style=\"font-family: Cambria Math;\">Pradhan Mantri Awas Yojana- Urban was launched by which Union Ministry?</span></p>\n",
+    "options": [
+      "Ministry of Finance",
+      "Ministry of Housing and Urban Affairs",
+      "Ministry of Human Resource Development",
+      "Ministry of Rural Development"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">5.(</span><span style=\"font-family: Cambria Math;\">b) <strong>Ministry of Housing and Urban Affairs</strong></span><span style=\"font-family: Cambria Math;\"><strong>.</strong> It was launched on 25th June 2015 and intends to provide housing for all in urban areas by the year 2022. It makes home loans affordable for the urban poor by providing a subsidy on the Interest Rate of a home loan during repayment by way of EMI (Equated Monthly Instalments).</span><span style=\"font-family: Cambria Math;\"> <strong>Pradhan Mantri Awas Yojana - Gramin (PMAY-G) </strong>-</span><span style=\"font-family: Cambria Math;\"> It was launched in June 2015 with the aim to provide &lsquo;Housing for All&rsquo; by 2022 in rural areas. It is a centrally sponsored scheme. </span><strong><span style=\"font-family: Cambria Math;\">Target</span></strong><span style=\"font-family: Cambria Math;\"> - To construct 2.95 crore pucca houses with basic amenities by March 2024.</span></p>\n",
+    "question_index": 4
+  },
+  {
+    "question": "<p>6. <span style=\"font-family: Cambria Math;\">Who among the following is the author of the book \"An Autobiography: Toward Freedom\"?</span></p>\n",
+    "options": [
+      "Lala Lajpat Rai",
+      "Jawaharlal Nehru",
+      "Indira Gandhi",
+      "Mahatma Gandhi"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">6.(</span><span style=\"font-family: Cambria Math;\">b) <strong>Jawaharlal Nehru.</strong></span><strong><span style=\"font-family: Cambria Math;\"> </span></strong><span style=\"font-family: Cambria Math;\"><strong>Other books by Jawaharlal Nehru</strong> </span><span style=\"font-family: Cambria Math;\">- &ldquo;The Discovery of India&rdquo;,&rdquo; Letters from a Father to his </span><span style=\"font-family: Cambria Math;\">Daughter</span><span style=\"font-family: Cambria Math;\">&rdquo;, &ldquo;Glimpses of World History&rdquo;. </span><strong><span style=\"font-family: Cambria Math;\">Other eminent personalities and their </span></strong><span style=\"font-family: Cambria Math;\"><strong>books</strong> </span><span style=\"font-family: Cambria Math;\"> -</span><span style=\"font-family: Cambria Math;\"> </span><strong><span style=\"font-family: Cambria Math;\">Mahatma Gandhi </span></strong><span style=\"font-family: Cambria Math;\">- &ldquo;My Experiments with Truth&rdquo;, &ldquo;The Power of Nonviolent Resistance&rdquo;, &ldquo;India of my Dreams&rdquo;. </span><strong><span style=\"font-family: Cambria Math;\">Lala Lajpat Rai</span></strong><span style=\"font-family: Cambria Math;\"><strong> </strong>- &ldquo;Unhappy India&rdquo;, &ldquo;Young India&rdquo;. </span><strong><span style=\"font-family: Cambria Math;\">Indira Gandhi</span></strong><span style=\"font-family: Cambria Math;\"><strong> </strong>- &ldquo;Eternal India&rdquo;, &ldquo;Peoples and problems&rdquo;. </span></p>\n",
+    "question_index": 5
+  },
+  {
+    "question": "<p>7.<span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">Sreejesh</span><span style=\"font-family: Cambria Math;\"> P.R who was awarded \"Major Dyan Chand Khel Ratna Award 2021\" is associated with which sports?</span></p>\n",
+    "options": [
+      "Football",
+      "Boxing",
+      "Wrestling",
+      "Hockey"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">7.(</span><span style=\"font-family: Cambria Math;\">d) <strong>Hockey.</strong></span><strong><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">Dhyan Chand Khel Ratna </span><span style=\"font-family: Cambria Math;\">Award</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">:</span><span style=\"font-family: Cambria Math;\"> </span></strong><span style=\"font-family: Cambria Math;\">Previously known as the Rajiv Gandhi Khel Ratna Award is the </span><strong><span style=\"font-family: Cambria Math;\">highest sporting </span><span style=\"font-family: Cambria Math;\">honour</span></strong><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">of India. It is awarded </span><strong><span style=\"font-family: Cambria Math;\">annually </span></strong><span style=\"font-family: Cambria Math;\">by the</span><span style=\"font-family: Cambria Math;\"> &ldquo;<strong>Ministry of Youth Affairs and Sports&rdquo;.</strong> </span><span style=\"font-family: Cambria Math;\">The award comprises a medallion, a certificate, and a cash prize of Rs. 25 </span><span style=\"font-family: Cambria Math;\">lakh</span><span style=\"font-family: Cambria Math;\">. Winner (2022) - Achanta Sharath Kamal (Table Tennis). </span><span style=\"font-family: Cambria Math;\"><strong>First recipient</strong> </span><span style=\"font-family: Cambria Math;\">(1991-92) - Viswanathan Anand (Chess).</span></p>\n",
+    "question_index": 6
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\">Dussehra</span><span style=\"font-family: Cambria Math;\"> festival is also known as________.</span></p>\n",
+    "options": [
+      "Sankranti",
+      "Vaikunthashtami",
+      "Vijayadashami",
+      "Janmasthami"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p><span style=\\\"font-family: Cambria Math;\\\">8.(</span><span style=\\\"font-family: Cambria Math;\\\">c) <strong>Vijayadashami</strong> (</span><span style=\\\"font-family: Cambria Math;\\\">Dashain) - A Hindu festival celebrated at the end of Sharad Navaratri every year. It is observed on the tenth day in the Hindu calendar month of </span><strong><span style=\\\"font-family: Cambria Math;\\\">Ashvin</span></strong><span style=\\\"font-family: Cambria Math;\\\"><strong> </strong>(September-October). It marks the end of Durga Puja. It marks the end of Ramlila and remembers </span><span style=\\\"font-family: Cambria Math;\\\">god</span><span style=\\\"font-family: Cambria Math;\\\"> Rama\\'s victory over Ravana. </span><strong><span style=\\\"font-family: Cambria Math;\\\">Ramlila</span></strong><span style=\\\"font-family: Cambria Math;\\\"> was added to UNESCO&rsquo;s list of Intangible Cultural Heritage in </span><strong><span style=\\\"font-family: Cambria Math;\\\">2008</span></strong><span style=\\\"font-family: Cambria Math;\\\"><strong>. </strong>Dashain is a festival celebrated in Nepal. It </span><span style=\\\"font-family: Cambria Math;\\\">symbolises</span><span style=\\\"font-family: Cambria Math;\\\"> the victory of good over evil.</span></p>\\n",
+    "question_index": 7
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\">In</span><span style=\"font-family: Cambria Math;\"> June 2022, Google Doodle </span><span style=\"font-family: Cambria Math;\">honoured</span><span style=\"font-family: Cambria Math;\"> Satyendra Nath Bose, he was an/a______________.</span></p>\n",
+    "options": [
+      "Indian Classical dancer",
+      "Indian Physicist",
+      "Indian Singer",
+      "Supreme Court Judge"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">9.(</span><span style=\"font-family: Cambria Math;\">b) <strong>Indian physicist.</strong></span><strong><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">Satyendra Nath Bose</span></strong><span style=\"font-family: Cambria Math;\"><strong> - </strong>He was known for his work on Planck&rsquo;s </span><span style=\"font-family: Cambria Math;\">Law and</span><span style=\"font-family: Cambria Math;\"> Light Quantum Hypothesis. The word &lsquo;</span><strong><span style=\"font-family: Cambria Math;\">boson </span></strong><span style=\"font-family: Cambria Math;\">(God particle)&rsquo; was named after him. He worked with Albert Einstein on a theory about the </span><span style=\"font-family: Cambria Math;\">gas-like properties of electromagnetic radiation. He was nominated for a Nobel prize. In 1954, He received the Padma Vibhushan award.</span></p>\n",
+    "question_index": 8
+  },
+  {
+    "question": "<p>10. <span style=\"font-family: Cambria Math;\">Lata Mangeshkar recorded her first playback song for </span><span style=\"font-family: Cambria Math;\">a_____________film</span><span style=\"font-family: Cambria Math;\">.</span></p>\n",
+    "options": [
+      "Bengali",
+      "Punjabi",
+      "Marathi",
+      "Tamil"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">10.(</span><span style=\"font-family: Cambria Math;\">c) <strong>Marathi.</strong></span><strong><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">Lata Mangeshkar</span></strong><span style=\"font-family: Cambria Math;\"> - She recorded her first </span><span style=\"font-family: Cambria Math;\">song&ldquo;</span><span style=\"font-family: Cambria Math;\">Naachu</span><span style=\"font-family: Cambria Math;\"> Ya Gade, </span><span style=\"font-family: Cambria Math;\">Khelu</span><span style=\"font-family: Cambria Math;\"> Saari Mani Haus </span><span style=\"font-family: Cambria Math;\">Bhaari</span><span style=\"font-family: Cambria Math;\">&rdquo; in 1942 at age of 13 for Marathi film Kiti Hasaal and recorded her last song &lsquo;</span><span style=\"font-family: Cambria Math;\">Saugandh</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">Mujhe</span><span style=\"font-family: Cambria Math;\"> Is </span><span style=\"font-family: Cambria Math;\">Mitti</span><span style=\"font-family: Cambria Math;\"> Ki&rsquo; in 2019.</span><span style=\"font-family: Cambria Math;\"> <strong>Award: </strong></span><span style=\"font-family: Cambria Math;\">-</span><span style=\"font-family: Cambria Math;\"> Dadasaheb</span><span style=\"font-family: Cambria Math;\"> Phalke Award (1989), Bharat Ratna (2001), Officer of the Legion of </span><span style=\"font-family: Cambria Math;\">Honour</span><span style=\"font-family: Cambria Math;\"> (Highest civilian award of France) in 2007. </span></p>\n",
+    "question_index": 9
+  },
+  {
+    "question": "<p>11.<span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">Jhijhiya</span><span style=\"font-family: Cambria Math;\"> is a famous folk dance of which of the following states?</span></p>\n",
+    "options": [
+      "Haryana",
+      "Bihar",
+      "Rajasthan",
+      "Uttar Pradesh"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">11.(</span><span style=\"font-family: Cambria Math;\">b) <strong>Bihar. </strong></span><strong><span style=\"font-family: Cambria Math;\">Jhijhiya</span></strong><span style=\"font-family: Cambria Math;\"><strong> Dance -</strong> </span><span style=\"font-family: Cambria Math;\">Performed at the time of Dussehra in </span><span style=\"font-family: Cambria Math;\">mithila</span><span style=\"font-family: Cambria Math;\"> region. Other folk dances of Bihar - </span><span style=\"font-family: Cambria Math;\">Bidesiya</span><span style=\"font-family: Cambria Math;\">, </span><span style=\"font-family: Cambria Math;\">Fagua</span><span style=\"font-family: Cambria Math;\"> (Holi), Kajari (</span><span style=\"font-family: Cambria Math;\">bhojpur</span><span style=\"font-family: Cambria Math;\">), </span><span style=\"font-family: Cambria Math;\">Domkach</span><span style=\"font-family: Cambria Math;\"> (Marriage ceremony). </span><strong><span style=\"font-family: Cambria Math;\">Haryana </span></strong><span style=\"font-family: Cambria Math;\"><strong>-</strong> </span><span style=\"font-family: Cambria Math;\">Phag</span><span style=\"font-family: Cambria Math;\">, </span><span style=\"font-family: Cambria Math;\">Saang</span><span style=\"font-family: Cambria Math;\">, </span><span style=\"font-family: Cambria Math;\">Chhathi</span><span style=\"font-family: Cambria Math;\"> (on birth), Loor, </span><span style=\"font-family: Cambria Math;\">Gugga, </span><span style=\"font-family: Cambria Math;\">Khoria</span><span style=\"font-family: Cambria Math;\">. </span><span style=\"font-family: Cambria Math;\"><strong>Rajasthan</strong> </span><span style=\"font-family: Cambria Math;\">- </span><span style=\"font-family: Cambria Math;\">Kalbelia</span><span style=\"font-family: Cambria Math;\">, </span><span style=\"font-family: Cambria Math;\">Ghoomar</span><span style=\"font-family: Cambria Math;\">, Chari, </span><span style=\"font-family: Cambria Math;\">Bhavai</span><span style=\"font-family: Cambria Math;\">, Chakri, Gawri, Terah Taali, </span><span style=\"font-family: Cambria Math;\">Kathputli</span><span style=\"font-family: Cambria Math;\">. </span><strong><span style=\"font-family: Cambria Math;\">Uttar </span><span style=\"font-family: Cambria Math;\">pradesh</span></strong><span style=\"font-family: Cambria Math;\"> - </span><span style=\"font-family: Cambria Math;\">Nautanki, </span><span style=\"font-family: Cambria Math;\">Raslila</span><span style=\"font-family: Cambria Math;\">, </span><span style=\"font-family: Cambria Math;\">Khyal</span><span style=\"font-family: Cambria Math;\">, </span><span style=\"font-family: Cambria Math;\">Charkula</span><span style=\"font-family: Cambria Math;\">.</span></p>\n",
+    "question_index": 10
+  },
+  {
+    "question": "<p>12<span style=\"font-family: Cambria Math;\">. \"Thomas Cup\" is related to which of the following sports?</span></p>\n",
+    "options": [
+      "Football",
+      "Cricket",
+      "Tennis",
+      "Badminton"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p><span style=\\\"font-family: Cambria Math;\\\">12.(</span><span style=\\\"font-family: Cambria Math;\\\">d) <strong>Badminton.</strong></span><strong><span style=\\\"font-family: Cambria Math;\\\"> </span><span style=\\\"font-family: Cambria Math;\\\">Thomas Cup</span></strong><span style=\\\"font-family: Cambria Math;\\\"> (World Men\\'s Team Championships) founded in 1949, Since 1982 - Biennial. India won 1st title in 2022. Most titles - Indonesia (14 titles). </span><strong><span style=\\\"font-family: Cambria Math;\\\">Uber cup</span></strong><span style=\\\"font-family: Cambria Math;\\\"> - World Women Team Championships. Other famous badminton leagues - Sudirman cup, BWF Super Series, Singapore open. </span><span style=\\\"font-family: Cambria Math;\\\"><strong>Tennis</strong> </span><span style=\\\"font-family: Cambria Math;\\\">- </span><span style=\\\"font-family: Cambria Math;\\\">Wimbledon</span><span style=\\\"font-family: Cambria Math;\\\">, Australian Open, French Open , US Open.</span></p>\\n",
+    "question_index": 11
+  },
+  {
+    "question": " <p>13.</span><span style=\\\"font-family:Cambria Math\\\"> \\'The Inheritance of Loss\\' book is written by________.</span></p>",
+    "options": [
+      "Kiran Desai",
+      "VS Naipaul",
+      "Ruskin Bond",
+      "Salman Rushdie"
+    ],
+    "correct_option_id": 0,
+    "solution": " <p><span style=\\\"font-family:Cambria Math\\\">13.(</span><span style=\\\"font-family:Cambria Math\\\">a) Kiran Desai - </span><span style=\\\"font-family:Cambria Math\\\">She</span><span style=\\\"font-family:Cambria Math\\\"> </span><span style=\\\"font-family:Cambria Math\\\">won the man booker prize (2006) for ‘The Inheritance of Loss’.  Her other books - ‘Emblems of Transformation’, ‘Hullabaloo in the Guava Orchard’, ‘India pack’. </span><span style=\\\"font-family:Cambria Math\\\">Salman Rushdie - ‘</span><span style=\\\"font-family:Cambria Math\\\">Midnight\\'s Children’, ‘The Satanic Verses’, ‘Haroun and the Sea of Stories’, ‘Imaginary Homelands’, ‘The Golden House’.</span><span style=\\\"font-family:Cambria Math\\\"> Ruskin Bond </span><span style=\\\"font-family:Cambria Math\\\">- ‘Blue Umbrella’, </span><span style=\\\"font-family:Cambria Math\\\">‘School Times’, ‘Delhi is not far’, ‘The Great Train Journey’, ‘A Flight of Pigeons’.</span><span style=\\\"font-family:Cambria Math\\\"> VS Naipaul - ‘</span><span style=\\\"font-family:Cambria Math\\\">A House for </span><span style=\\\"font-family:Cambria Math\\\">Mr</span><span style=\\\"font-family:Cambria Math\\\"> Biswas’, ‘A Bend in the River’, ‘Half a Life’.</span></p>",
+    "question_index": 12
+  },
+  {
+    "question": " <p>14.</span><span style=\"font-family:Cambria Math\"> </span><span style=\"font-family:Cambria Math\">Kalamandalam</span><span style=\"font-family:Cambria Math\"> </span><span style=\"font-family:Cambria Math\">Kalyanikutty</span><span style=\"font-family:Cambria Math\"> Amma was </span><span style=\"font-family:Cambria Math\">honoured</span><span style=\"font-family:Cambria Math\"> with Kalidasa Samman in 1997-1998. She was famous for which Indian classical dance form?</span></p>",
+    "options": [
+      "Mohiniyattam",
+      "Kuchipudi",
+      "Odissi",
+      "Kathak"
+    ],
+    "correct_option_id": 0,
+    "solution": " <p><span style=\"font-family:Cambria Math\">14.(</span><span style=\"font-family:Cambria Math\">a) </span><span style=\"font-family:Cambria Math\">Mohiniyattam</span><span style=\"font-family:Cambria Math\">. </span><span style=\"font-family:Cambria Math\">Other Personalities related to </span><span style=\"font-family:Cambria Math\">Mohiniattam</span><span style=\"font-family:Cambria Math\"> dance (</span><span style=\"font-family:Cambria Math\">kerala</span><span style=\"font-family:Cambria Math\">) </span><span style=\"font-family:Cambria Math\">form :</span><span style=\"font-family:Cambria Math\">- Sunanda Nair, Jayaprabha Menon, Pallavi Krishnan, Vijayalakshmi, Radha Dutta.</span><span style=\"font-family:Cambria Math\"> Kalidasa </span><span style=\"font-family:Cambria Math\">sammaan</span><span style=\"font-family:Cambria Math\"> Award</span><span style=\"font-family:Cambria Math\"> - Given by Madhya </span><span style=\"font-family:Cambria Math\">pradesh</span><span style=\"font-family:Cambria Math\"> Government since 1980 in the field of classical music, dance, theater and visual arts. First recipient - </span><span style=\"font-family:Cambria Math\">Semmangudi</span><span style=\"font-family:Cambria Math\"> Srinivasa and </span><span style=\"font-family:Cambria Math\">mallikaarjun</span><span style=\"font-family:Cambria Math\"> Mansur. </span></p>",
+    "question_index": 13
+  },
+  {
+    "question": " <p>15.</span><span style=\"font-family:Cambria Math\"> How many silver medals were won by India </span><span style=\"font-family:Cambria Math\">in  London</span><span style=\"font-family:Cambria Math\"> Olympics 2012?</span></p>",
+    "options": [
+      "Two",
+      "One",
+      "Three",
+      "Four"
+    ],
+    "correct_option_id": 0,
+    "solution": " <p><span style=\"font-family:Cambria Math\">15.(</span><span style=\"font-family:Cambria Math\">a) Two.</span><span style=\"font-family:Cambria Math\"> In 2012 India won six Olympic medals, including two silver and four bronze. </span><span style=\"font-family:Cambria Math\">Silver -</span><span style=\"font-family:Cambria Math\"> Sushil Kumar (wrestling) and Vijay Kumar (pistol shooting). Norman Pritchard was 1st Indian to win the Silver Medal in Paris 1900. </span><span style=\"font-family:Cambria Math\">Olympic Games Tokyo 2020 </span><span style=\"font-family:Cambria Math\">-  Neeraj</span><span style=\"font-family:Cambria Math\"> Chopra </span><span style=\"font-family:Cambria Math\">(Gold medal in men’s javelin throw)</span><span style=\"font-family:Cambria Math\">. Mirabai Chanu </span><span style=\"font-family:Cambria Math\">(Silver in the women’s 49kg), </span><span style=\"font-family:Cambria Math\">Bajrang Punia</span><span style=\"font-family:Cambria Math\"> - (Bronze medal in men’s 65 kg wrestling). </span></p>",
+    "question_index": 14
+  }
+];
     </script>
-    
+
     <!-- Central JS Controller -->
     <script src="../js/mock-core.js"></script>
 </body>

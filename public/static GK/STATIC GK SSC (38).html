@@ -3,43 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aether Mocks</title>
+    <title>Mocks Wallah</title>
     <!-- Fonts & Icons -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    
+
     <!-- Central Stylesheet -->
     <link rel="stylesheet" href="../css/mock-main.css">
-    
+
     <!-- Math Formula Rendering (KaTeX/MathJax) -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    
+
     <!-- Timer Config -->
-    <meta name="exam-duration" content="60">
+    <meta name="exam-duration" content="30">
 </head>
 <body>
     <!-- Welcome Screen -->
     <div class="welcome-screen" id="welcomeScreen">
         <div class="welcome-container">
             <div class="welcome-header" style="margin-bottom: 24px;">
-                <h1 style="font-size: 2rem; font-weight: 700; color: #0f172a; margin-bottom: 8px;"><i class="fas fa-graduation-cap" style="color: #3b82f6;"></i> Aether Mocks</h1>
-                <p style="color: #64748b;">Computer Based Test Portal</p>
+                <h1 style="font-size: 2rem; font-weight: 700; color: var(--text-main); margin-bottom: 8px;"><i class="fas fa-graduation-cap" style="color: var(--primary);"></i> Mocks Wallah</h1>
+                <p style="color: var(--text-muted);">Computer Based Test Portal</p>
             </div>
-            
+
             <div class="test-details" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-bottom: 32px; text-align: left;">
-                <div class="detail-item" style="padding: 12px; background: #f8fafc; border-radius: 8px; border: 1px solid #e2e8f0;">
-                    <div class="detail-label" style="font-size: 0.8rem; color: #64748b;">Total Questions</div>
-                    <div class="detail-value" style="font-size: 1.1rem; font-weight: 600; color: #0f172a;">10</div>
+                <div class="detail-item" style="padding: 12px; background: var(--bg-color); border-radius: 8px; border: 1px solid var(--border-color);">
+                    <div class="detail-label" style="font-size: 0.8rem; color: var(--text-muted);">Total Questions</div>
+                    <div class="detail-value" style="font-size: 1.1rem; font-weight: 600; color: var(--text-main);">15</div>
                 </div>
-                <div class="detail-item" style="padding: 12px; background: #f8fafc; border-radius: 8px; border: 1px solid #e2e8f0;">
-                    <div class="detail-label" style="font-size: 0.8rem; color: #64748b;">Duration</div>
-                    <div class="detail-value" style="font-size: 1.1rem; font-weight: 600; color: #0f172a;">60 mins</div>
+                <div class="detail-item" style="padding: 12px; background: var(--bg-color); border-radius: 8px; border: 1px solid var(--border-color);">
+                    <div class="detail-label" style="font-size: 0.8rem; color: var(--text-muted);">Duration</div>
+                    <div class="detail-value" style="font-size: 1.1rem; font-weight: 600; color: var(--text-main);">30 mins</div>
                 </div>
             </div>
-            
+
             <div class="welcome-actions">
                 <button class="btn btn-primary" id="startBtn" onclick="document.getElementById('welcomeScreen').style.display='none'; document.getElementById('examContainer').style.display='flex';" style="font-size: 1.1rem; padding: 12px 32px; width: 100%;">
                     <i class="fas fa-play" style="margin-right: 8px;"></i> Start Test
@@ -47,12 +47,12 @@
             </div>
         </div>
     </div>
-    
+
     <!-- Main Exam Interface -->
     <div class="exam-container" id="examContainer" style="display: none; height: 100vh; flex-direction: column;">
         <!-- Top Header -->
         <div class="exam-header">
-            <div class="exam-title">Aether Mocks</div>
+            <div class="exam-title">Mocks Wallah</div>
             <div class="header-actions" style="display: flex; align-items: center; gap: 12px;">
                 <button class="btn-icon" id="themeToggleBtn" title="Switch to Dark Mode"><i class="fas fa-moon"></i></button>
                 <button class="btn-icon" id="fullscreenToggleBtn" title="Toggle Fullscreen"><i class="fas fa-expand"></i></button>
@@ -62,14 +62,14 @@
                 </div>
             </div>
         </div>
-        
+
         <!-- Main Content -->
         <div class="mock-container">
             <!-- Question Area -->
             <div class="question-view">
                 <!-- Dynamically populated question container -->
                 <div id="questionContainer" style="flex: 1; display: flex; flex-direction: column; gap: 24px;"></div>
-                
+
                 <!-- Controls -->
                 <div class="nav-controls">
                     <button class="btn btn-secondary btn-prev"><i class="fas fa-chevron-left" style="margin-right: 8px;"></i> Previous</button>
@@ -79,40 +79,221 @@
                     <button class="btn btn-primary btn-next">Next <i class="fas fa-chevron-right" style="margin-left: 8px;"></i></button>
                 </div>
             </div>
-            
+
             <!-- Desktop Navigator Sidebar -->
             <div class="sidebar">
                 <div class="sidebar-section-title">Summary Status</div>
                 <div class="stats-grid">
                     <div class="stat-item">
-                        <div class="stat-count" id="stat-answered" style="color: #10b981;">0</div>
+                        <div class="stat-count" id="stat-answered" style="color: var(--success);">0</div>
                         <div class="stat-name">Answered</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-count" id="stat-flagged" style="color: #f59e0b;">0</div>
+                        <div class="stat-count" id="stat-flagged" style="color: var(--warning);">0</div>
                         <div class="stat-name">Flagged</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-count" id="stat-not-answered" style="color: #64748b;">0</div>
+                        <div class="stat-count" id="stat-not-answered" style="color: var(--text-muted);">0</div>
                         <div class="stat-name">Unanswered</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-count" id="stat-not-visited" style="color: #94a3b8;">0</div>
+                        <div class="stat-count" id="stat-not-visited" style="color: var(--text-muted);">0</div>
                         <div class="stat-name">Not Visited</div>
                     </div>
                 </div>
-                
+
                 <div class="sidebar-section-title" style="margin-top: 16px;">Question Navigator</div>
                 <div class="questions-grid"></div>
             </div>
         </div>
     </div>
-    
+
     <!-- Inject Question Data -->
     <script>
-        const questions = [];
+        const questions = [
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\">&lsquo;Imperfect&rsquo; is an autobiography of:</span></p>",
+    "options": [
+      "Rahul Dravid",
+      "Ravi Shastri",
+      "Milkha Singh",
+      "Sanjay Manjrekar"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">1.(</span><span style=\"font-family: Cambria Math;\">d) &lsquo;<strong>Imperfect</strong>&rsquo;</span><span style=\"font-family: Cambria Math;\"> - autobiography of </span><strong><span style=\"font-family: Cambria Math;\">Sanjay Manjrekar</span></strong><span style=\"font-family: Cambria Math;\"> - is </span><span style=\"font-family: Cambria Math;\">cricket commentator and former cricketer</span><span style=\"font-family: Cambria Math;\">. </span><strong><span style=\"font-family: Cambria Math;\">Milkha Singh</span></strong><span style=\"font-family: Cambria Math;\"> (</span><span style=\"font-family: Cambria Math;\">&lsquo;</span><span style=\"font-family: Cambria Math;\">The</span><span style=\"font-family: Cambria Math;\"> Race of My Life&rsquo;</span><span style=\"font-family: Cambria Math;\">). </span><strong><span style=\"font-family: Cambria Math;\">Ravi Shastri</span></strong><span style=\"font-family: Cambria Math;\"> (&lsquo;</span><span style=\"font-family: Cambria Math;\">Stargazing: The Players in My Life&rsquo;</span><span style=\"font-family: Cambria Math;\">). </span><strong><span style=\"font-family: Cambria Math;\">Rahul Dravid</span></strong><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">( &lsquo;The</span><span style=\"font-family: Cambria Math;\"> Nice Guy Who Finished First&rsquo;, &lsquo;</span><span style=\"font-family: Cambria Math;\">Timeless</span><span style=\"font-family: Cambria Math;\"> Steel&rsquo;</span><span style=\"font-family: Cambria Math;\">). </span></p>",
+    "question_index": 0
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\"> In Tennis which of the following scores is a complete set?</span></p>",
+    "options": [
+      "5-3",
+      "6-4",
+      "6-6",
+      "6-5"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">2.(</span><span style=\"font-family: Cambria Math;\">b) </span><span style=\"font-family: Cambria Math;\">A </span><strong><span style=\"font-family: Cambria Math;\">tennis </span></strong><span style=\"font-family: Cambria Math;\">match is composed of </span><strong><span style=\"font-family: Cambria Math;\">points, games, and sets.</span></strong><span style=\"font-family: Cambria Math;\"> Tennis is played in points: Four points win a game, six games win a set, and two or three sets win a match. </span><span style=\"font-family: Cambria Math;\"><strong>A set</strong> </span><span style=\"font-family: Cambria Math;\">consists of a number of games (</span><strong><span style=\"font-family: Cambria Math;\">a minimum of six</span></strong><span style=\"font-family: Cambria Math;\">). A set is</span><span style=\"font-family: Cambria Math;\"> won by the first side to win six games with a </span><span style=\"font-family: Cambria Math;\"><strong>margin of at least two games</strong> </span><span style=\"font-family: Cambria Math;\">over the other side (e.g. 6&ndash;3, 6-4 or 7&ndash;5). </span><span style=\"font-family: Cambria Math;\">Four Grand Slam tournaments of Tennis - the </span><strong><span style=\"font-family: Cambria Math;\">Australian Open, the French Open, Wimbledon, the US Open</span><span style=\"font-family: Cambria Math;\">.</span></strong></p>",
+    "question_index": 1
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\"> Where was the FIH Men&rsquo;s Indoor Hockey World Cup 2018 organized?</span></p>",
+    "options": [
+      "Berlin, Germany",
+      "Poznan, Poland",
+      "Vienna, Austria",
+      "Leipzig, Germany"
+    ],
+    "correct_option_id": 0,
+    "solution": "<p><span style=\\\"font-family: Cambria Math;\\\">3.(</span><span style=\\\"font-family: Cambria Math;\\\">a) </span><strong><span style=\\\"font-family: Cambria Math;\\\">2018 Men\\'s Indo</span></strong><span style=\\\"font-family: Cambria Math;\\\"><strong>or Hockey World Cup</strong> - </span><span style=\\\"font-family: Cambria Math;\\\">fifth edition from 7 to 11 February 2018 in </span><strong><span style=\\\"font-family: Cambria Math;\\\">Berlin, Germany</span></strong><span style=\\\"font-family: Cambria Math;\\\"><strong>. </strong>Austria defeated Germany in the final, Organized by the International Hockey Federation (FIH). First held in 2003 and it is held</span><span style=\\\"font-family: Cambria Math;\\\"> <strong>every four years</strong></span><span style=\\\"font-family: Cambria Math;\\\"><strong>.</strong> The </span><strong><span style=\\\"font-family: Cambria Math;\\\">6th </span></strong><span style=\\\"font-family: Cambria Math;\\\">edition will be in</span><span style=\\\"font-family: Cambria Math;\\\"> 2023 from 5 to 11 February 2023 in </span><strong><span style=\\\"font-family: Cambria Math;\\\">Pretoria, South Africa</span><span style=\\\"font-family: Cambria Math;\\\">.</span></strong></p>",
+    "question_index": 2
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\"> Which of the following UT/states have the highest density/km</span><sup><span style=\"font-family: Cambria Math;\">2</span></sup><span style=\"font-family: Cambria Math;\">, ac</span><span style=\"font-family: Cambria Math;\">cording to census 2011?</span></p>",
+    "options": [
+      "Pondicherry",
+      "Chandigarh",
+      "Uttar Pradesh",
+      "Bihar"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">4.(</span><span style=\"font-family: Cambria Math;\">d) </span><strong><span style=\"font-family: Cambria Math;\">According to census 2011</span></strong><span style=\"font-family: Cambria Math;\">, Population density - </span><strong><span style=\"font-family: Cambria Math;\">Among states</span></strong><span style=\"font-family: Cambria Math;\"> - Bihar (1106 persons/sq km - highest) and Arunachal pradesh (17 - least). </span><strong><span style=\"font-family: Cambria Math;\">Among UTs</span></strong><span style=\"font-family: Cambria Math;\"> - Delhi (11320 - highest) &amp; Dadra &amp; Nagar Haveli (700 - least). Population den</span><span style=\"font-family: Cambria Math;\">sity is a measurement of population per unit land area. Average population density of India was</span><span style=\"font-family: Cambria Math;\"> <strong>382 per sq km</strong></span><span style=\"font-family: Cambria Math;\"> in 2011.</span></p>",
+    "question_index": 3
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\"> Who among the foll</span><span style=\"font-family: Cambria Math;\">owing Indian classical musicians has an auditorium named after it in Tehran, Iran?</span></p>",
+    "options": [
+      "Ustad Bismillah Khan",
+      "Ustad Sultan Khan",
+      "Ustad Zakir Hussain",
+      "Ustad Vilayat Khan"
+    ],
+    "correct_option_id": 0,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">5.(</span><span style=\"font-family: Cambria Math;\">a) <strong>Ustad Bismillah Khan</strong></span><span style=\"font-family: Cambria Math;\"><strong> </strong>(</span><span style=\"font-family: Cambria Math;\">shehnai</span><span style=\"font-family: Cambria Math;\">) - </span><span style=\"font-family: Cambria Math;\">an auditorium in Teheran (Iran) has been named after him. Become the third classical musician of India after M. S. Subbalakshmi and Ravi Shankar to be awarded the<strong> </strong></span><strong><span style=\"font-family: Cambria Math;\">Bharat Ratna (2001).</span></strong><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">Other awards - Padma Vibhushan (1980), Padma Bhushan (1968), Padma Shri </span><span style=\"font-family: Cambria Math;\">(1961).</span><span style=\"font-family: Cambria Math;\"> </span><strong><span style=\"font-family: Cambria Math;\">Ustad Sultan Khan</span></strong><span style=\"font-family: Cambria Math;\"> (</span><span style=\"font-family: Cambria Math;\">sarangi</span><span style=\"font-family: Cambria Math;\">). </span><strong><span style=\"font-family: Cambria Math;\">Ustad Zakir Hussain</span></strong><span style=\"font-family: Cambria Math;\"> (</span><span style=\"font-family: Cambria Math;\">tabla</span><span style=\"font-family: Cambria Math;\">). </span><strong><span style=\"font-family: Cambria Math;\">Ustad Vilayat Khan</span></strong><span style=\"font-family: Cambria Math;\"> (</span><span style=\"font-family: Cambria Math;\">sitar</span><span style=\"font-family: Cambria Math;\">).</span></p>",
+    "question_index": 4
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\"> Jagoi an</span><span style=\"font-family: Cambria Math;\">d cholom are the two main divisions in which Classical dance?</span></p>",
+    "options": [
+      "Bharatanatyam",
+      "Odissi",
+      "Manipuri",
+      "Mohiniyattam"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">6.(</span><span style=\"font-family: Cambria Math;\">c) </span><span style=\"font-family: Cambria Math;\"><strong>Manipuri</strong>. </span><span style=\"font-family: Cambria Math;\">The </span><span style=\"font-family: Cambria Math;\"><strong>one</strong> </span><span style=\"font-family: Cambria Math;\">gentle and the </span><strong><span style=\"font-family: Cambria Math;\">other</span></strong><span style=\"font-family: Cambria Math;\"><strong> </strong>vigorous, corresponding to the lasya and tandava elements described in Sanskrit literature. (</span><strong><span style=\"font-family: Cambria Math;\">Styles in Manipuri dance</span></strong><span style=\"font-family: Cambria Math;\">: </span><span style=\"font-family: Cambria Math;\">Tal Rasak, Danda Rasak</span><span style=\"font-family: Cambria Math;\">,Mandal</span><span style=\"font-family: Cambria Math;\"> Rasak). </span><strong><span style=\"font-family: Cambria Math;\">Odissi</span></strong><span style=\"font-family: Cambria Math;\"><strong> </strong>and </span><strong><span style=\"font-family: Cambria Math;\">Bharatanatyam</span></strong><span style=\"font-family: Cambria Math;\"><strong> </strong>{Nritta (pure dance, solo)</span><span style=\"font-family: Cambria Math;\">, Nritya (dance with emotions, solo) and Natya (dramatic dance, group}.</span><span style=\"font-family: Cambria Math;\"> </span><strong><span style=\"font-family: Cambria Math;\">Mohiniyattam</span></strong><span style=\"font-family: Cambria Math;\"><strong> </strong>is a lasya subgenre of dance, performed in the Kaisiki vritti (graceful style).</span></p>",
+    "question_index": 5
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\"> Guru Kelucharan Mohapatra, who was awarded the Padma Vibhushan in 2000, was an </span><span style=\"font-family: Cambria Math;\">exponent</span><span style=\"font-family: Cambria Math;\"> of which of the following classical dances of India?</span></p>",
+    "options": [
+      "Kathakali",
+      "Odissi",
+      "Kathak",
+      "Mohiniyattam"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">7.(</span><span style=\"font-family: Cambria Math;\">b)</span><span style=\"font-family: Cambria Math;\"> <strong>Odissi. </strong></span><strong><span style=\"font-family: Cambria Math;\">Guru Kelucharan Mohpatra </span></strong><span style=\"font-family: Cambria Math;\">is the first person to receive the Padma Vibhushan from Odisha. </span><strong><span style=\"font-family: Cambria Math;\">Other exponents of Odissi dance:</span></strong><span style=\"font-family: Cambria Math;\"> Pankaj Charan Das, Deba Prasad Das and Raghunath Dutta, Sonal Mansingh, Sujata Mohapatra. </span><span style=\"font-family: Cambria Math;\"><strong>Awards and honours</strong>:</span><span style=\"font-family: Cambria Math;\"> Sangeet Natak A</span><span style=\"font-family: Cambria Math;\">kademi Award (1966), Padma Shri (1974), Padma Bhushan (1988), Sangeet Natak Akademi Fellowship (1991), Padma Vibhushan (2000), Kalidas Samman from Madhya Pradesh government (1988-89).</span></p>",
+    "question_index": 6
+  },
+  {
+    "question": " <p><span style=\"font-family:Cambria Math\">8. </span><span style=\"font-family:Cambria Math\">How much purse money was given to a recipient of the Akademi Award in 2019?</span></p>",
+    "options": [
+      "1 lakh",
+      "4 lakh",
+      "2 lakh",
+      "3 lakh"
+    ],
+    "correct_option_id": 0,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">8.(</span><span style=\"font-family: Cambria Math;\">a) <strong>1 Lakh and a copper Shield. Sahitya Akademi Award</strong>:</span><span style=\"font-family: Cambria Math;\"> {Established (</span><strong><span style=\"font-family: Cambria Math;\">1954</span></strong><span style=\"font-family: Cambria Math;\">), Given </span><span style=\"font-family: Cambria Math;\">in </span><span style=\"font-family: Cambria Math;\">22</span><span style=\"font-family: Cambria Math;\"> <strong>languages</strong></span><span style=\"font-family: Cambria Math;\">}. The award amount, which was Rs. 5,000 since inception, had been enhanced to Rs. 10,000 from 1983. The award is given </span><span style=\"font-family: Cambria Math;\"><strong>annually</strong> </span><span style=\"font-family: Cambria Math;\">by the Sahitya Akademi {(National Academy of Letters) established 1954}.</span></p>",
+    "question_index": 7
+  },
+  {
+    "question": "<p>9. <span style=\"font-family: Cambria Math;\">As per the Hindu calendar, Ugadi festival in southern states of India is celebrated in which of the following months?</span></p>",
+    "options": [
+      "Margashirsha",
+      "Vaishaka",
+      "Chaitra",
+      "Shravan"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">9.(</span><span style=\"font-family: Cambria Math;\">c)</span><span style=\"font-family: Cambria Math;\"> The festival of </span><strong><span style=\"font-family: Cambria Math;\">Ugadi</span></strong><span style=\"font-family: Cambria Math;\"><strong> </strong>is celebrated on the </span><span style=\"font-family: Cambria Math;\"><strong>first day of Chaitra</strong> </span><span style=\"font-family: Cambria Math;\">month according to the Hindu calendar. It is the New Year celebration for the people of Andhra Pradesh, Karnataka and Telangana states in India. </span><strong><span style=\"font-family: Cambria Math;\">New Year celebrations from different parts of the States:</span><span style=\"font-family: Cambria Math;\"> </span></strong><span style=\"font-family: Cambria Math;\"><strong>Baisakhi</strong> </span><span style=\"font-family: Cambria Math;\">(Punjab),<strong> </strong></span><span style=\"font-family: Cambria Math;\"><strong>Jude Sheetal</strong> </span><span style=\"font-family: Cambria Math;\">- (Bihar &amp; Jharkhand)</span><span style=\"font-family: Cambria Math;\">, </span><strong><span style=\"font-family: Cambria Math;\">Gudi Padwa</span></strong><span style=\"font-family: Cambria Math;\"> (Maharashtra), </span><strong><span style=\"font-family: Cambria Math;\">Vishu </span></strong><span style=\"font-family: Cambria Math;\"> (Kerala), </span><strong><span style=\"font-family: Cambria Math;\">Pohela Boishakh</span></strong><span style=\"font-family: Cambria Math;\"> (West Bengal),</span><span style=\"font-family: Cambria Math;\"> <strong>Bohag Bihu</strong></span><span style=\"font-family: Cambria Math;\"> (North Eastern States).</span></p>",
+    "question_index": 8
+  },
+  {
+    "question": "<p><span style=\\\"font-family: Cambria Math;\\\">10. Who among the following was the winner of the National Film Award in 2002 for his choreography in the Hindi movie \\'Lagaan\\'?</span></p>",
+    "options": [
+      "Ahmed Khan",
+      "Raju Khan",
+      "Dinesh Kumar",
+      "Shiamak Davar"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">10</span><span style=\"font-family: Cambria Math;\">.(b) <strong>Raju Khan. Lagaan:</strong> {</span><span style=\"font-family: Cambria Math;\">Director: </span><strong><span style=\"font-family: Cambria Math;\">Ashut</span><span style=\"font-family: Cambria Math;\">osh Gowariker,</span></strong><span style=\"font-family: Cambria Math;\"> Actor:</span><span style=\"font-family: Cambria Math;\"> <strong>Aamir Khan,</strong> </span><span style=\"font-family: Cambria Math;\">music director:</span><span style=\"font-family: Cambria Math;\"> <strong>A. R. Rahman</strong>}. <strong>Lagaan</strong></span><span style=\"font-family: Cambria Math;\"><strong> </strong>was nominated for the Best Foreign Language Film at the 74th Academy Awards, becoming the third Indian film to be nominated in the category after </span><span style=\"font-family: Cambria Math;\">Mother India</span><span style=\"font-family: Cambria Math;\"> (1957), and </span><strong><span style=\"font-family: Cambria Math;\">Salaam Bombay</span></strong><span style=\"font-family: Cambria Math;\"> (1988).</span></p>",
+    "question_index": 9
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\">11</span><span style=\"font-family: Cambria Math;\">. Which of the following is a famous folk dance of Odisha?</span></p>",
+    "options": [
+      "Birha",
+      "Ghoomar",
+      "Kalbelia",
+      "Rangabati"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">11</span><span style=\"font-family: Cambria Math;\">.(d) \"<strong>Rangabati</strong>\"</span><span style=\"font-family: Cambria Math;\"> dance is popular in </span><strong><span style=\"font-family: Cambria Math;\">Odisha</span></strong><span style=\"font-family: Cambria Math;\"><strong> </strong>and most parts of West Bengal, Bihar, Jharkhand, Andhra Pradesh, and Chhattisgarh. </span><span style=\"font-family: Cambria Math;\"><strong>Famous dances of Odisha</strong>: </span><span style=\"font-family: Cambria Math;\">Ghumura, Goti pua</span><span style=\"font-family: Cambria Math;\">, Baagha</span><span style=\"font-family: Cambria Math;\"> Naach</span><span style=\"font-family: Cambria Math;\">a, Dalkhai, Dhap, Karma Naach, Jhumair, Keisabadi, Chhau.</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\"><strong>Bihar </strong>:</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">Birha. </span><strong><span style=\"font-family: Cambria Math;\">Rajasthan</span></strong><span style=\"font-family: Cambria Math;\"><strong> </strong>:</span><span style=\"font-family: Cambria Math;\"> Kalbelia, Ghoomar.</span></p>",
+    "question_index": 10
+  },
+  {
+    "question": "<p><span style=\\\"font-family: Cambria Math;\\\">12</span><span style=\\\"font-family: Cambria Math;\\\">. Which Indian musician performed \\'Raga </span><span style=\\\"font-family: Cambria Math;\\\">For</span><span style=\\\"font-family: Cambria Math;\\\"> Peace\\' at the 2014 Nobel Peace Prize Concert in Oslo?</span></p>",
+    "options": [
+      "Bahadur Khan",
+      "Amjad Ali Khan",
+      "Buddhadev Das Gupta",
+      "Satyaki Banerjee"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">12</span><span style=\"font-family: Cambria Math;\">.(b) <strong>Amjad Ali Khan (sarod player). Awards and honours:</strong></span><span style=\"font-family: Cambria Math;\"><strong> </strong>Padma Shri (1975), Padma Bhushan (1991), Padma vibhushan (2001), Sangeet Natak Akademi Award (1989), Fukuoka Asian Culture Prize (20</span><span style=\"font-family: Cambria Math;\">04), Sangeet Natak Akademi Fellowship (2011), Banga-Vibhushan (2011), 21st Rajiv Gandhi National Sadbhavna Award (2013).</span><br><span style=\"font-family: Cambria Math;\"><strong>Bahadur Khan</strong> </span><span style=\"font-family: Cambria Math;\">(sarod player). </span><strong><span style=\"font-family: Cambria Math;\">Buddhadev Das Gupta</span></strong><span style=\"font-family: Cambria Math;\"> (sarod player). </span><strong><span style=\"font-family: Cambria Math;\">Satyaki banerjee </span></strong><span style=\"font-family: Cambria Math;\">(Sarod player).</span></p>",
+    "question_index": 11
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\">13</span><span style=\"font-family: Cambria Math;\">. Developing place of settlement is called___________</span></p>",
+    "options": [
+      "Home",
+      "Site",
+      "Plain",
+      "Shelter"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">13</span><span style=\"font-family: Cambria Math;\">.(b)<strong> site. Types of settlements: </strong></span><span style=\"font-family: Cambria Math;\">Compact or Nucleated settlements (develop along river valleys and in fertile plains) and Dispe</span><span style=\"font-family: Cambria Math;\">rsed Settlements (a place of worship or a market, binds </span><span style=\"font-family: Cambria Math;\">the settlement</span><span style=\"font-family: Cambria Math;\"> together). Rural settlement patterns (linear pattern, cross shaped pattern, star like pattern, T-shape pattern, circular pattern, double pattern). Urban settlements (town, city, conurb</span><span style=\"font-family: Cambria Math;\">ation, megalopolis, million </span><span style=\"font-family: Cambria Math;\">city</span><span style=\"font-family: Cambria Math;\">).</span></p>",
+    "question_index": 12
+  },
+  {
+    "question": "<p><span style=\\\"font-family: Cambria Math;\\\">14</span><span style=\\\"font-family: Cambria Math;\\\">.</span><span style=\\\"font-family: Cambria Math;\\\"> How many times has India hosted the ICC Men\\'s Cricket World Cup (One Day)?</span></p>",
+    "options": [
+      "2",
+      "1",
+      "4",
+      "3"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">14</span><span style=\"font-family: Cambria Math;\">.(d) <strong>3 times</strong> </span><span style=\"font-family: Cambria Math;\">(1987, 1996 and 2011). ICC Cricket World Cup (one day) </span><strong><span style=\"font-family: Cambria Math;\">2023</span></strong><span style=\"font-family: Cambria Math;\"><strong> </strong>{(October- November),</span><span style=\"font-family: Cambria Math;\"> 13th </span><span style=\"font-family: Cambria Math;\">edition, Host country: </span><span style=\"font-family: Cambria Math;\"><strong>India</strong>}. </span><span style=\"font-family: Cambria Math;\">previous</span><span style=\"font-family: Cambria Math;\"> edition in 2019 (host country: </span><strong><span style=\"font-family: Cambria Math;\">England and Wales,</span></strong><span style=\"font-family: Cambria Math;\"><strong> </strong>Winner: </span><span style=\"font-family: Cambria Math;\">England</span><span style=\"font-family: Cambria Math;\">).</span></p>",
+    "question_index": 13
+  },
+  {
+    "question": " <p>15</span><span style=\"font-family:Cambria Math\">. According to census 2011, the child sex ratio was ______ females per 1000 males.</span></p>",
+    "options": [
+      "919",
+      "909",
+      "929",
+      "939"
+    ],
+    "correct_option_id": 0,
+    "solution": " <p>15</span><span style=\"font-family:Cambria Math\">.(a) </span><span style=\"font-family:Cambria Math\">Important Facts of 2011 Census - Sex Ratio of India is 943. Highest se</span><span style=\"font-family:Cambria Math\">x Ratio: 1st - Kerala (1084), 2nd - Puducherry (1037) and Tamil Nadu - 996. </span><span style=\"font-family:Cambria Math\">Lowest Sex Ratio in states - Haryana (879) and in Union Territory - Daman and Diu (618).</span></p>",
+    "question_index": 14
+  }
+];
     </script>
-    
+
     <!-- Central JS Controller -->
     <script src="../js/mock-core.js"></script>
 </body>

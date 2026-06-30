@@ -3,43 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aether Mocks</title>
+    <title>Mocks Wallah</title>
     <!-- Fonts & Icons -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    
+
     <!-- Central Stylesheet -->
     <link rel="stylesheet" href="../css/mock-main.css">
-    
+
     <!-- Math Formula Rendering (KaTeX/MathJax) -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    
+
     <!-- Timer Config -->
-    <meta name="exam-duration" content="60">
+    <meta name="exam-duration" content="30">
 </head>
 <body>
     <!-- Welcome Screen -->
     <div class="welcome-screen" id="welcomeScreen">
         <div class="welcome-container">
             <div class="welcome-header" style="margin-bottom: 24px;">
-                <h1 style="font-size: 2rem; font-weight: 700; color: #0f172a; margin-bottom: 8px;"><i class="fas fa-graduation-cap" style="color: #3b82f6;"></i> Aether Mocks</h1>
-                <p style="color: #64748b;">Computer Based Test Portal</p>
+                <h1 style="font-size: 2rem; font-weight: 700; color: var(--text-main); margin-bottom: 8px;"><i class="fas fa-graduation-cap" style="color: var(--primary);"></i> Mocks Wallah</h1>
+                <p style="color: var(--text-muted);">Computer Based Test Portal</p>
             </div>
-            
+
             <div class="test-details" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-bottom: 32px; text-align: left;">
-                <div class="detail-item" style="padding: 12px; background: #f8fafc; border-radius: 8px; border: 1px solid #e2e8f0;">
-                    <div class="detail-label" style="font-size: 0.8rem; color: #64748b;">Total Questions</div>
-                    <div class="detail-value" style="font-size: 1.1rem; font-weight: 600; color: #0f172a;">10</div>
+                <div class="detail-item" style="padding: 12px; background: var(--bg-color); border-radius: 8px; border: 1px solid var(--border-color);">
+                    <div class="detail-label" style="font-size: 0.8rem; color: var(--text-muted);">Total Questions</div>
+                    <div class="detail-value" style="font-size: 1.1rem; font-weight: 600; color: var(--text-main);">15</div>
                 </div>
-                <div class="detail-item" style="padding: 12px; background: #f8fafc; border-radius: 8px; border: 1px solid #e2e8f0;">
-                    <div class="detail-label" style="font-size: 0.8rem; color: #64748b;">Duration</div>
-                    <div class="detail-value" style="font-size: 1.1rem; font-weight: 600; color: #0f172a;">60 mins</div>
+                <div class="detail-item" style="padding: 12px; background: var(--bg-color); border-radius: 8px; border: 1px solid var(--border-color);">
+                    <div class="detail-label" style="font-size: 0.8rem; color: var(--text-muted);">Duration</div>
+                    <div class="detail-value" style="font-size: 1.1rem; font-weight: 600; color: var(--text-main);">30 mins</div>
                 </div>
             </div>
-            
+
             <div class="welcome-actions">
                 <button class="btn btn-primary" id="startBtn" onclick="document.getElementById('welcomeScreen').style.display='none'; document.getElementById('examContainer').style.display='flex';" style="font-size: 1.1rem; padding: 12px 32px; width: 100%;">
                     <i class="fas fa-play" style="margin-right: 8px;"></i> Start Test
@@ -47,12 +47,12 @@
             </div>
         </div>
     </div>
-    
+
     <!-- Main Exam Interface -->
     <div class="exam-container" id="examContainer" style="display: none; height: 100vh; flex-direction: column;">
         <!-- Top Header -->
         <div class="exam-header">
-            <div class="exam-title">Aether Mocks</div>
+            <div class="exam-title">Mocks Wallah</div>
             <div class="header-actions" style="display: flex; align-items: center; gap: 12px;">
                 <button class="btn-icon" id="themeToggleBtn" title="Switch to Dark Mode"><i class="fas fa-moon"></i></button>
                 <button class="btn-icon" id="fullscreenToggleBtn" title="Toggle Fullscreen"><i class="fas fa-expand"></i></button>
@@ -62,14 +62,14 @@
                 </div>
             </div>
         </div>
-        
+
         <!-- Main Content -->
         <div class="mock-container">
             <!-- Question Area -->
             <div class="question-view">
                 <!-- Dynamically populated question container -->
                 <div id="questionContainer" style="flex: 1; display: flex; flex-direction: column; gap: 24px;"></div>
-                
+
                 <!-- Controls -->
                 <div class="nav-controls">
                     <button class="btn btn-secondary btn-prev"><i class="fas fa-chevron-left" style="margin-right: 8px;"></i> Previous</button>
@@ -79,40 +79,221 @@
                     <button class="btn btn-primary btn-next">Next <i class="fas fa-chevron-right" style="margin-left: 8px;"></i></button>
                 </div>
             </div>
-            
+
             <!-- Desktop Navigator Sidebar -->
             <div class="sidebar">
                 <div class="sidebar-section-title">Summary Status</div>
                 <div class="stats-grid">
                     <div class="stat-item">
-                        <div class="stat-count" id="stat-answered" style="color: #10b981;">0</div>
+                        <div class="stat-count" id="stat-answered" style="color: var(--success);">0</div>
                         <div class="stat-name">Answered</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-count" id="stat-flagged" style="color: #f59e0b;">0</div>
+                        <div class="stat-count" id="stat-flagged" style="color: var(--warning);">0</div>
                         <div class="stat-name">Flagged</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-count" id="stat-not-answered" style="color: #64748b;">0</div>
+                        <div class="stat-count" id="stat-not-answered" style="color: var(--text-muted);">0</div>
                         <div class="stat-name">Unanswered</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-count" id="stat-not-visited" style="color: #94a3b8;">0</div>
+                        <div class="stat-count" id="stat-not-visited" style="color: var(--text-muted);">0</div>
                         <div class="stat-name">Not Visited</div>
                     </div>
                 </div>
-                
+
                 <div class="sidebar-section-title" style="margin-top: 16px;">Question Navigator</div>
                 <div class="questions-grid"></div>
             </div>
         </div>
     </div>
-    
+
     <!-- Inject Question Data -->
     <script>
-        const questions = [];
+        const questions = [
+  {
+    "question": "<p>1. In 2002, Zakir Hussain became the youngest percussionist to be honoured with which award?</p>",
+    "options": [
+      "Sangeet Natak Akademi Award",
+      "Grammy Award",
+      "Padma Bhushan",
+      "National Heritage Fellowship"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p>1.(c) <strong>Padma Bhushan. </strong>Ustad Zakir Hussain is the eldest son of tabla player Alla Rakha. His Awards: Sangeet Natak Akademi Award (1991), Padma Shri (1988), Padma Vibhushan (2023). He won three Grammys at the 66th Annual Grammy Awards in 2024. Indian tabla players: Pandit Shankar Ghosh, Pandit Udhai Mazumdar, Nandan Mehta, Pandit Swapan Chaudhuri, Pandit Vijay Ghate.</p>",
+    "question_index": 0
+  },
+  {
+    "question": "<p>2. In which year did India make its Olympic debut in hockey?</p>",
+    "options": [
+      "1936",
+      "1932",
+      "1924",
+      "1928"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p>2.(d) <strong>1928.</strong> India made its Olympic debut in hockey in 1928 at the Amsterdam Olympics. The Indian men\\'s hockey team won their first Olympic gold medal in this tournament, beating the Netherlands. The team was led by captain Jaipal Singh and Dhyan Chand, who scored the most goals with 14. India\\'s hockey team is the most successful in Olympic history, winning eight gold medals in 1928, 1932, 1936, 1948, 1952, 1956, 1964, and 1980.</p>",
+    "question_index": 1
+  },
+  {
+    "question": "<p>3. Which is the National Mission for Financial Inclusion to ensure access to financial services, namely, a basic savings and deposits accounts, remittance, credit, insurance, pension in an affordable manner?</p>",
+    "options": [
+      "Deendayal Antyodaya Yojana",
+      "Deen Dayal Upadhyaya Grameen Kaushalya Yojana",
+      "Swarnjayanti Gram Swarozgar Yojana",
+      "Pradhan Mantri Jan Dhan Yojana"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p>3.(d) <strong>Pradhan Mantri Jan Dhan Yojana</strong> (<strong>PMJDY</strong>) is a National Mission for Financial Inclusion launched on August 28, 2014. Deendayal Antyodaya Yojana - National Rural Livelihoods Mission (DAY-NRLM): Aim to promote poverty reduction through building strong institutions for the poor, particularly women, and enabling these institutions to access a range of financial services and livelihoods. Deen Dayal Upadhyaya Grameen Kaushalya Yojana (2014): Aims at skill development and placement for rural youth. Swarnjayanti Gram Swarozgar Yojana (1999): A self-employment program for rural poor.</p>",
+    "question_index": 2
+  },
+  {
+    "question": "<p>4. In which of the following years was the Pro Kabaddi League established in India?</p>",
+    "options": [
+      "2015",
+      "2016",
+      "2013",
+      "2014"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p>4.(d) <strong>2014.</strong> Pro Kabaddi is a ground-breaking initiative by Mashal Sports Pvt. Ltd and Disney Star. The inaugural Pro Kabaddi season in 2014 saw eight teams participating in the league. By Season 5, the number of teams competing grew to 12. Pro Kabaddi League (PKL) Winners : Season 1 - Jaipur Pink Panthers, Season 9 - Jaipur Pink Panthers, Season 10 - Puneri Paltan.</p>",
+    "question_index": 3
+  },
+  {
+    "question": "<p>5. In which year was the Digital India mission launched?</p>",
+    "options": [
+      "2014",
+      "2016",
+      "2015",
+      "2017"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p>5.(c) <strong>2015. </strong>The Digital India programme was launched by Prime Minister Shri Narendra Modi. Aim : To transform India into a knowledge-based economy and a digitally empowered society by ensuring digital services, digital access, digital inclusion, digital empowerment and bridging the digital divide. Coordinated by : Ministry of Electronics and Information Technology.</p>",
+    "question_index": 4
+  },
+  {
+    "question": "<p>6. Who among the following players is related to table tennis?</p>",
+    "options": [
+      "Manish Narwal",
+      "Manika Batra",
+      "K Srikanth",
+      "Pankaj Advani"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p>6.(b) <strong>Manika Batra.</strong> She is a triple gold medalist at the South Asian Games, a double gold medalist at the Commonwealth Games, and a bronze medalist at the Asian Cup and Asian Games. Her Awards : Major Dhyan Chand Khel Ratna Award (2020), and Arjuna Award (2018). Other Prominent Table Tennis Players : Achanta Sharath Kamal, Sathiyan Gnanasekaran, Mouma Das, and Neha Aggarwal Sharma. Manish Narwal (Para Pistol Shooter), K Srikanth (badminton player), Pankaj Advani (billiards and snooker).</p>",
+    "question_index": 5
+  },
+  {
+    "question": "<p>7. Buddhadev Dasgupta is famous for playing which of the following musical instruments?</p>",
+    "options": [
+      "Sarod",
+      "Sarangi",
+      "Bansuri",
+      "Mridangam"
+    ],
+    "correct_option_id": 0,
+    "solution": "<p>7.(a) <strong>Sarod.</strong> It is a stringed instrument, used in Hindustani music on the Indian subcontinent. Buddhadev Das Gupta was an Indian classical musician. His Awards: Padma Bhushan (2012) and Sangeet Natak Akademi Award (1993). Notable exponents of the Sarod : Ustad Amjad Ali Khan, Bahadur Khan, and Allaudin Khan.</p>",
+    "question_index": 6
+  },
+  {
+    "question": "<p>8. Gangaur Festival, Pushkar Fair, Nagaur Fair and Urs Fair are the popular fairs and festivals of which state?</p>",
+    "options": [
+      "Rajasthan",
+      "Tripura",
+      "Punjab",
+      "Maharashtra"
+    ],
+    "correct_option_id": 0,
+    "solution": "<p>8.(a) <strong>Rajasthan.</strong> Other fairs and festivals in Rajasthan: Camel Festival, Mahaveerji Fair, Baneshwar Fair , Kolayat Fair, Marwar Festival, and Dhulandi Festival. Fairs and Festivals of India: Tripura - Poush Sankranti, Garia, and Kharchi. Punjab - Chhappar Mela, Lohri, Hola Mohalla, and Baisakhi. Maharashtra - Banganga Festival, and Pola Festival.</p>",
+    "question_index": 7
+  },
+  {
+    "question": "<p>9. Which of the following institutes was founded by Mrinalini Sarabhai who was a Bharatanatyam and Kathakali dancer?</p>",
+    "options": [
+      "Sri Thyagaraja College of Music and Dance",
+      "Nrityanjali Institute of Performing Arts",
+      "Darpana Academy of Performing Arts",
+      "Nalanda Nritya Kala Mahavidyalaya"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p>9.(c) <strong>Darpana Academy of Performing Arts.</strong> It is a school for performing arts in Ahmedabad, Gujarat, established by Mrinalini Sarabhai and Vikram Sarabhai in 1949. Mrinalini Sarabhai&rsquo;s Awards : Padma Bhushan (1992) and Padma Shri (1965).</p>",
+    "question_index": 8
+  },
+  {
+    "question": "<p>10. Khuallam is a famous dance of:</p>",
+    "options": [
+      "Bihar",
+      "Andhra Pradesh",
+      "Mizoram",
+      "Uttar Pradesh"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p>10.(c) <strong>Mizoram.</strong> Khuallam (Dance of the Guests) is a dance usually performed in the ceremony called \\'Khuangchawi\\'. Other Dances: Mizoram - Cheraw, Sarlamkai, Solakia, Chailam, Chawnglaizawn, Chheihlam, Tlanglam, Zangtalam. Bihar - Karma, Kajri, Jhumar, Jharni Dance, Jat Jatin. Andhra Pradesh - Dhimsa, Burrakatha. Uttar Pradesh - Charkula, Raslila, Kathak, Ramlila, Khyal, Nautanki.</p>",
+    "question_index": 9
+  },
+  {
+    "question": "<p>11. Thrissur Pooram is one of the famous temple festivals celebrated in _______.</p>",
+    "options": [
+      "Andhra Pradesh",
+      "Kerala",
+      "Karnataka",
+      "Tamil Nadu"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p>11.(b) <strong>Kerala. </strong>Thrissur Pooram is celebrated in the Malayalam month of Medam (April-May). Other festivals: Kerala - Onam, Vishu, Attukal Pongala. Andhra Pradesh - Ugadi, Lumbini Festival . Karnataka - Kambala, Pattadakal, Dussehra (nada habba or &lsquo;state festival&rsquo;), Ugadi. Tamil Nadu - Pongal, Natyanjali.</p>",
+    "question_index": 10
+  },
+  {
+    "question": "<p>12. Ustad Zia Mohiuddin Dagar was a ___________ player of profound depth, favouring sparse and slow realisations of ragas.</p>",
+    "options": [
+      "Sitar",
+      "Violin",
+      "Flute",
+      "Rudra veena"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p>12.(d) <strong>Rudra veena.</strong> Zia Mohiuddin Dagar received the Sangeet Natak Akademi Award in 1981. Other Maestro: Rudra veena - Ustad Ali Zaki Hader, Asad Ali Khan, Mohammed Khan Faridi. Sitar - Ustad Vilayat Khan, Pt Ravi Shankar, Nikhil Banerjee. Violin - V.V. Subrahmanyam, T. N. Krishnan, Tirukkodikaval Krishna Iyer. Flute - Hariprasad Chaurasia, Chetan Joshi, Ronu Mazumdar.</p>",
+    "question_index": 11
+  },
+  {
+    "question": "<p>13. In which year was Smart Cities Mission launched?</p>",
+    "options": [
+      "2015",
+      "2013",
+      "2019",
+      "2018"
+    ],
+    "correct_option_id": 0,
+    "solution": "<p>13.(a) <strong>2015. </strong>It is a Centrally Sponsored Scheme to enhance the quality of life in 100 selected cities by providing efficient services, robust infrastructure, and a sustainable environment. The Central Government has decided to extend the deadline for Smart Cities Mission till 31st March 2025.</p>",
+    "question_index": 12
+  },
+  {
+    "question": "<p>14. Which of the following nations won the seven times women&rsquo;s Asia Cup cricket Championship?</p>",
+    "options": [
+      "Pakistan",
+      "Bangladesh",
+      "India",
+      "Sri Lanka"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p>14.(c)<strong> India. </strong>The Women\\'s Asia Cup (Asian Women&rsquo;s Cricket Championships) is a women\\'s One Day International and Twenty20 International cricket tournament. It was established in 2004 and is a biennial tournament. The first Women\\'s Asia Cup was played in Sri Lanka in April 2004. Only two teams took part, India and Sri Lanka. India has won the tournament in the following years: 2004, 2005-06, 2006, 2008, 2012, 2016, and 2022.</p>",
+    "question_index": 13
+  },
+  {
+    "question": "<p>15. When and where did India win its first World Championships medal in Athletics?</p>",
+    "options": [
+      "2009, Germany",
+      "2005, Finland",
+      "2007, Japan",
+      "2003, France"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p>15.(d) <strong>2003, France.</strong> India won its first World Championships medal in Athletics when Anju Bobby George secured the bronze in the Women&rsquo;s long jump at the 2003 World Championships in Paris. This achievement marked her as the first Indian athlete to win a global athletics medal. World Athletics Championships 2023: India&rsquo;s Gold medal winner - Neeraj Chopra ( javelin throw , 88.17 m).</p>",
+    "question_index": 14
+  }
+];
     </script>
-    
+
     <!-- Central JS Controller -->
     <script src="../js/mock-core.js"></script>
 </body>

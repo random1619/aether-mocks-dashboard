@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Solver — Speed Drill Hub</title>
+<meta name="description" content="The Solver speed-drill mock practice hub for SSC exam preparation. Select a subject and start drilling.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --v:#8b5cf6;--v-d:#7c3aed;--v-l:#f5f3ff;--v-b:#ddd6fe;
+  --bg:#0f0a1a;--bg2:#17102a;--bg3:#1f1535;
+  --card:#1e1535;--card2:#271a45;
+  --border:rgba(139,92,246,.18);--border2:rgba(139,92,246,.35);
+  --text:#f1f0ff;--sub:#a89ec9;--muted:#6b5fa0;
+  --success:#34d399;--warning:#fbbf24;
+  --r:14px;
+}
+html{font-family:'Outfit',sans-serif;-webkit-font-smoothing:antialiased}
+body{background:var(--bg);color:var(--text);min-height:100vh}
+
+/* ── Top Nav ── */
+.topnav{
+  padding:1rem 2rem;
+  display:flex;align-items:center;justify-content:space-between;
+  border-bottom:1px solid var(--border);
+  background:rgba(15,10,26,.7);backdrop-filter:blur(16px);
+  position:sticky;top:0;z-index:100;
+}
+.brand{display:flex;align-items:center;gap:.75rem}
+.brand-icon{
+  width:40px;height:40px;border-radius:10px;
+  background:linear-gradient(135deg,var(--v),#a855f7);
+  display:flex;align-items:center;justify-content:center;font-size:1.15rem;font-weight:900;
+  box-shadow:0 0 20px rgba(139,92,246,.4);
+}
+.brand-name{font-size:1.05rem;font-weight:800;color:var(--text)}
+.brand-sub{font-size:.68rem;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.07em}
+.back-btn{
+  display:flex;align-items:center;gap:.4rem;font-size:.8rem;font-weight:600;
+  color:var(--sub);text-decoration:none;padding:7px 14px;
+  border-radius:8px;border:1px solid var(--border);transition:all .2s;
+}
+.back-btn:hover{border-color:var(--border2);color:var(--text)}
+
+/* ── Hero ── */
+.hero{
+  padding:3.5rem 2rem 2.5rem;text-align:center;
+  background:radial-gradient(ellipse at 50% 0%,rgba(139,92,246,.2) 0%,transparent 65%);
+}
+.hero-eyebrow{
+  display:inline-block;font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;
+  color:var(--v);background:rgba(139,92,246,.12);border:1px solid rgba(139,92,246,.25);
+  padding:4px 14px;border-radius:20px;margin-bottom:1rem;
+}
+.hero-h1{
+  font-size:3rem;font-weight:900;color:var(--text);line-height:1.1;margin-bottom:.75rem;
+}
+.hero-h1 .accent{
+  background:linear-gradient(135deg,#a78bfa,#7c3aed);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.hero-sub{font-size:1rem;color:var(--sub);margin-bottom:2rem;line-height:1.6}
+.hero-stats{display:flex;align-items:center;justify-content:center;gap:2rem;flex-wrap:wrap}
+.hs{text-align:center}
+.hs-val{font-size:2.2rem;font-weight:900;color:var(--text)}
+.hs-val.v{color:var(--v)}
+.hs-val.g{color:var(--success)}
+.hs-label{font-size:.7rem;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+.hs-divider{width:1px;height:40px;background:var(--border)}
+
+/* ── Subject Grid ── */
+.subj-section{padding:2rem;max-width:1100px;margin:0 auto}
+.subj-grid{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:1rem;
+  margin-bottom:2rem;
+}
+.subj-tile{
+  background:var(--card);border:1.5px solid var(--border);border-radius:var(--r);
+  padding:1.5rem 1.25rem;text-align:center;cursor:pointer;transition:all .22s;
+  position:relative;overflow:hidden;
+}
+.subj-tile::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,transparent,rgba(139,92,246,.06));
+  opacity:0;transition:opacity .22s;
+}
+.subj-tile:hover,.subj-tile.active{border-color:var(--v);box-shadow:0 0 20px rgba(139,92,246,.2);transform:translateY(-3px)}
+.subj-tile:hover::before,.subj-tile.active::before{opacity:1}
+.subj-tile.active{background:var(--card2)}
+.tile-icon{font-size:2rem;margin-bottom:.75rem;display:block}
+.tile-name{font-size:.92rem;font-weight:700;color:var(--text);margin-bottom:.25rem}
+.tile-count{font-size:.72rem;font-weight:600;color:var(--muted)}
+.tile-done{font-size:.7rem;color:var(--success);margin-top:.15rem}
+
+/* ── Search + Sort strip ── */
+.drill-controls{
+  display:flex;align-items:center;gap:.75rem;margin-bottom:1.25rem;flex-wrap:wrap;
+}
+.search-wrap{flex:1;min-width:180px;max-width:380px;position:relative;display:flex;align-items:center}
+.search-wrap svg{position:absolute;left:.75rem;color:var(--muted);width:15px;height:15px}
+.search-input{
+  width:100%;height:42px;padding:0 1rem 0 2.5rem;
+  background:var(--card);border:1px solid var(--border);border-radius:10px;
+  font-family:inherit;font-size:.85rem;color:var(--text);outline:none;
+  transition:border-color .2s;
+}
+.search-input::placeholder{color:var(--muted)}
+.search-input:focus{border-color:var(--v)}
+.sort-sel{
+  height:42px;padding:0 2rem 0 .75rem;font-family:inherit;font-size:.82rem;
+  background:var(--card);border:1px solid var(--border);border-radius:10px;
+  color:var(--sub);outline:none;cursor:pointer;appearance:none;-webkit-appearance:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%236b5fa0' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right .6rem center;
+}
+.results-txt{font-size:.82rem;color:var(--sub);margin-left:auto}
+.results-txt strong{color:var(--text)}
+
+/* ── Mock List ── */
+.drill-list{display:flex;flex-direction:column;gap:.5rem}
+.drill-item{
+  display:flex;align-items:center;gap:1rem;
+  background:var(--card);border:1px solid var(--border);border-radius:10px;
+  padding:.85rem 1.1rem;transition:all .18s;
+  animation:fadeIn .25s ease both;
+}
+@keyframes fadeIn{from{opacity:0;transform:translateX(-8px)}to{opacity:1;transform:none}}
+.drill-item:hover{border-color:var(--v);background:var(--card2)}
+.di-num{
+  font-size:.72rem;font-weight:700;color:var(--muted);
+  min-width:28px;text-align:right;flex-shrink:0;
+}
+.di-body{flex:1;min-width:0}
+.di-name{
+  font-size:.9rem;font-weight:600;color:var(--text);
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+.di-meta{display:flex;align-items:center;gap:.4rem;margin-top:.2rem}
+.di-chip{
+  font-size:.68rem;font-weight:600;padding:2px 7px;border-radius:5px;
+  background:rgba(139,92,246,.12);color:#a78bfa;border:1px solid rgba(139,92,246,.2);
+}
+.di-actions{display:flex;align-items:center;gap:.5rem;flex-shrink:0}
+.done-btn{
+  width:32px;height:32px;border-radius:8px;border:1.5px solid var(--border);
+  background:transparent;color:var(--muted);cursor:pointer;
+  display:flex;align-items:center;justify-content:center;transition:all .18s;
+}
+.done-btn:hover{border-color:var(--success);color:var(--success)}
+.done-btn.done{background:var(--success);border-color:var(--success);color:var(--bg)}
+.go-btn{
+  display:inline-flex;align-items:center;gap:.35rem;
+  padding:7px 16px;font-family:inherit;font-size:.8rem;font-weight:700;
+  background:var(--v);color:#fff;border:none;border-radius:8px;cursor:pointer;
+  text-decoration:none;transition:all .18s;white-space:nowrap;
+}
+.go-btn:hover{background:var(--v-d);box-shadow:0 0 16px rgba(139,92,246,.4);transform:translateY(-1px)}
+
+/* load more */
+.lm-wrap{display:flex;justify-content:center;padding:1.5rem 0}
+.lm-btn{
+  padding:10px 28px;font-family:inherit;font-size:.85rem;font-weight:700;
+  background:var(--card);border:1px solid var(--border);border-radius:10px;
+  color:var(--v);cursor:pointer;transition:all .2s;
+}
+.lm-btn:hover{border-color:var(--v);background:var(--card2)}
+
+/* empty */
+.empty{text-align:center;padding:4rem 2rem;background:var(--card);border:1px solid var(--border);border-radius:var(--r)}
+.empty-icon{font-size:2.5rem;opacity:.4;margin-bottom:1rem}
+.empty-t{font-size:1.1rem;font-weight:700;color:var(--text)}
+.empty-s{font-size:.88rem;color:var(--sub);margin-top:.3rem}
+
+:focus-visible{outline:2px solid var(--v);outline-offset:2px}
+
+@media(max-width:700px){
+  .hero{padding:2rem 1.25rem 1.5rem}
+  .hero-h1{font-size:2rem}
+  .topnav{padding:.75rem 1.25rem}
+  .subj-section{padding:1.25rem}
+  .subj-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition-duration:0s!important}}
+</style>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="topnav">
+  <div class="brand">
+    <div class="brand-icon">S</div>
+    <div>
+      <div class="brand-name">The Solver</div>
+      <div class="brand-sub">Speed Drill Hub</div>
+    </div>
+  </div>
+  <a class="back-btn" href="index.html">
+    <svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+      <polyline points="15 18 9 12 15 6"/>
+    </svg>
+    All Providers
+  </a>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="hero-eyebrow">Speed Drill Practice</div>
+  <h1 class="hero-h1">Train Fast.<br><span class="accent">Score Higher.</span></h1>
+  <p class="hero-sub">Pick a subject. Start drilling. Build speed for exam day.</p>
+  <div class="hero-stats">
+    <div class="hs"><div class="hs-val v" id="hsTotal">—</div><div class="hs-label">Mocks</div></div>
+    <div class="hs-divider"></div>
+    <div class="hs"><div class="hs-val g" id="hsDone">—</div><div class="hs-label">Done</div></div>
+    <div class="hs-divider"></div>
+    <div class="hs"><div class="hs-val" id="hsPct">0%</div><div class="hs-label">Progress</div></div>
+  </div>
+</section>
+
+<!-- Subject tiles + list -->
+<div class="subj-section">
+  <div class="subj-grid" id="subjGrid"></div>
+
+  <div class="drill-controls">
+    <div class="search-wrap">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+      </svg>
+      <input type="text" class="search-input" id="searchInput" placeholder="Search mocks…" autocomplete="off">
+    </div>
+    <select class="sort-sel" id="sortSel">
+      <option value="name-asc">A → Z</option>
+      <option value="name-desc">Z → A</option>
+    </select>
+    <span class="results-txt" id="resultsTxt">Loading…</span>
+  </div>
+
+  <div class="drill-list" id="drillList"></div>
+  <div class="lm-wrap" id="lmWrap" style="display:none">
+    <button class="lm-btn" id="lmBtn">Load more drills</button>
+  </div>
+</div>
+
+<script src="mocks-data.js"></script>
+<script src="js/provider-page.js"></script>
+<script>
+const SUBJ_ICONS = {
+  'English':'📖', 'Full Mock':'🏆', 'Quant':'🔢',
+  'Reasoning':'🧠', 'General Studies':'🌍', 'General':'📚'
+};
+
+const page = new ProviderPage({
+  providerKey: 'The Solver',
+  limit: 50,
+  onUpdate({ mocks, total, hasMore, stats, append }) {
+    document.getElementById('hsTotal').textContent = stats.total;
+    document.getElementById('hsDone').textContent  = stats.done;
+    document.getElementById('hsPct').textContent   = stats.pct + '%';
+    document.getElementById('resultsTxt').innerHTML = `<strong>${total}</strong> drills`;
+    document.getElementById('lmWrap').style.display = hasMore ? 'flex' : 'none';
+
+    const list = document.getElementById('drillList');
+    if (!append) list.innerHTML = '';
+    if (mocks.length === 0 && !append) {
+      list.innerHTML = `<div class="empty">
+        <div class="empty-icon">🎯</div>
+        <div class="empty-t">No drills found</div>
+        <div class="empty-s">Select a different subject or clear the search.</div>
+      </div>`;
+      return;
+    }
+    const startNum = append ? list.children.length : 0;
+    mocks.forEach((m, i) => {
+      const done = page.isDone(m.path);
+      const div = document.createElement('div');
+      div.className = 'drill-item';
+      div.style.animationDelay = (i % 20 * 0.015) + 's';
+      div.innerHTML = `
+        <span class="di-num">${startNum + i + 1}</span>
+        <div class="di-body">
+          <div class="di-name" title="${htmlEnc(m.name)}">${htmlEnc(m.name)}</div>
+          <div class="di-meta">
+            <span class="di-chip">${htmlEnc(m.subject)}</span>
+            <span class="di-chip">${htmlEnc(m.category)}</span>
+          </div>
+        </div>
+        <div class="di-actions">
+          <button class="done-btn ${done?'done':''}" data-path="${htmlEnc(m.path)}" title="Done">
+            <svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+              <polyline points="20 6 9 17 4 12"/>
+            </svg>
+          </button>
+          <a class="go-btn" href="${htmlEnc(m.path)}" target="_blank">
+            <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+              <polygon points="5 3 19 12 5 21 5 3"/>
+            </svg>
+            Drill
+          </a>
+        </div>`;
+      list.appendChild(div);
+    });
+  }
+});
+
+// Subject tiles
+(function buildSubjGrid() {
+  const grid = document.getElementById('subjGrid');
+  // All tile
+  const allTile = document.createElement('div');
+  allTile.className = 'subj-tile active';
+  allTile.dataset.s = 'all';
+  const allCount = page._all.length;
+  const allDone = page._all.filter(m => page.isDone(m.path)).length;
+  allTile.innerHTML = `<span class="tile-icon">⚡</span><div class="tile-name">All Subjects</div><div class="tile-count">${allCount} mocks</div><div class="tile-done">${allDone} done</div>`;
+  grid.appendChild(allTile);
+
+  page.subjects.forEach(s => {
+    const cnt  = page._all.filter(m => m.subject === s).length;
+    const done = page._all.filter(m => m.subject === s && page.isDone(m.path)).length;
+    const tile = document.createElement('div');
+    tile.className = 'subj-tile';
+    tile.dataset.s = s;
+    tile.innerHTML = `<span class="tile-icon">${SUBJ_ICONS[s]||'📋'}</span><div class="tile-name">${htmlEnc(s)}</div><div class="tile-count">${cnt} mocks</div><div class="tile-done">${done} done</div>`;
+    grid.appendChild(tile);
+  });
+
+  grid.addEventListener('click', e => {
+    const tile = e.target.closest('.subj-tile');
+    if (!tile) return;
+    grid.querySelectorAll('.subj-tile').forEach(t => t.classList.remove('active'));
+    tile.classList.add('active');
+    page.subject(tile.dataset.s);
+  });
+})();
+
+document.getElementById('searchInput').addEventListener('input', e => page.search(e.target.value));
+document.getElementById('sortSel').addEventListener('change', e => page.sort(e.target.value));
+document.getElementById('lmBtn').addEventListener('click', () => page.more());
+document.getElementById('drillList').addEventListener('click', e => {
+  const btn = e.target.closest('.done-btn');
+  if (!btn) return;
+  btn.classList.toggle('done', page.toggle(btn.dataset.path));
+});
+
+page.refresh();
+</script>
+</body>
+</html>

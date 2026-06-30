@@ -3,43 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aether Mocks</title>
+    <title>Mocks Wallah</title>
     <!-- Fonts & Icons -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    
+
     <!-- Central Stylesheet -->
     <link rel="stylesheet" href="../css/mock-main.css">
-    
+
     <!-- Math Formula Rendering (KaTeX/MathJax) -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    
+
     <!-- Timer Config -->
-    <meta name="exam-duration" content="60">
+    <meta name="exam-duration" content="30">
 </head>
 <body>
     <!-- Welcome Screen -->
     <div class="welcome-screen" id="welcomeScreen">
         <div class="welcome-container">
             <div class="welcome-header" style="margin-bottom: 24px;">
-                <h1 style="font-size: 2rem; font-weight: 700; color: #0f172a; margin-bottom: 8px;"><i class="fas fa-graduation-cap" style="color: #3b82f6;"></i> Aether Mocks</h1>
-                <p style="color: #64748b;">Computer Based Test Portal</p>
+                <h1 style="font-size: 2rem; font-weight: 700; color: var(--text-main); margin-bottom: 8px;"><i class="fas fa-graduation-cap" style="color: var(--primary);"></i> Mocks Wallah</h1>
+                <p style="color: var(--text-muted);">Computer Based Test Portal</p>
             </div>
-            
+
             <div class="test-details" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-bottom: 32px; text-align: left;">
-                <div class="detail-item" style="padding: 12px; background: #f8fafc; border-radius: 8px; border: 1px solid #e2e8f0;">
-                    <div class="detail-label" style="font-size: 0.8rem; color: #64748b;">Total Questions</div>
-                    <div class="detail-value" style="font-size: 1.1rem; font-weight: 600; color: #0f172a;">10</div>
+                <div class="detail-item" style="padding: 12px; background: var(--bg-color); border-radius: 8px; border: 1px solid var(--border-color);">
+                    <div class="detail-label" style="font-size: 0.8rem; color: var(--text-muted);">Total Questions</div>
+                    <div class="detail-value" style="font-size: 1.1rem; font-weight: 600; color: var(--text-main);">15</div>
                 </div>
-                <div class="detail-item" style="padding: 12px; background: #f8fafc; border-radius: 8px; border: 1px solid #e2e8f0;">
-                    <div class="detail-label" style="font-size: 0.8rem; color: #64748b;">Duration</div>
-                    <div class="detail-value" style="font-size: 1.1rem; font-weight: 600; color: #0f172a;">60 mins</div>
+                <div class="detail-item" style="padding: 12px; background: var(--bg-color); border-radius: 8px; border: 1px solid var(--border-color);">
+                    <div class="detail-label" style="font-size: 0.8rem; color: var(--text-muted);">Duration</div>
+                    <div class="detail-value" style="font-size: 1.1rem; font-weight: 600; color: var(--text-main);">30 mins</div>
                 </div>
             </div>
-            
+
             <div class="welcome-actions">
                 <button class="btn btn-primary" id="startBtn" onclick="document.getElementById('welcomeScreen').style.display='none'; document.getElementById('examContainer').style.display='flex';" style="font-size: 1.1rem; padding: 12px 32px; width: 100%;">
                     <i class="fas fa-play" style="margin-right: 8px;"></i> Start Test
@@ -47,12 +47,12 @@
             </div>
         </div>
     </div>
-    
+
     <!-- Main Exam Interface -->
     <div class="exam-container" id="examContainer" style="display: none; height: 100vh; flex-direction: column;">
         <!-- Top Header -->
         <div class="exam-header">
-            <div class="exam-title">Aether Mocks</div>
+            <div class="exam-title">Mocks Wallah</div>
             <div class="header-actions" style="display: flex; align-items: center; gap: 12px;">
                 <button class="btn-icon" id="themeToggleBtn" title="Switch to Dark Mode"><i class="fas fa-moon"></i></button>
                 <button class="btn-icon" id="fullscreenToggleBtn" title="Toggle Fullscreen"><i class="fas fa-expand"></i></button>
@@ -62,14 +62,14 @@
                 </div>
             </div>
         </div>
-        
+
         <!-- Main Content -->
         <div class="mock-container">
             <!-- Question Area -->
             <div class="question-view">
                 <!-- Dynamically populated question container -->
                 <div id="questionContainer" style="flex: 1; display: flex; flex-direction: column; gap: 24px;"></div>
-                
+
                 <!-- Controls -->
                 <div class="nav-controls">
                     <button class="btn btn-secondary btn-prev"><i class="fas fa-chevron-left" style="margin-right: 8px;"></i> Previous</button>
@@ -79,40 +79,221 @@
                     <button class="btn btn-primary btn-next">Next <i class="fas fa-chevron-right" style="margin-left: 8px;"></i></button>
                 </div>
             </div>
-            
+
             <!-- Desktop Navigator Sidebar -->
             <div class="sidebar">
                 <div class="sidebar-section-title">Summary Status</div>
                 <div class="stats-grid">
                     <div class="stat-item">
-                        <div class="stat-count" id="stat-answered" style="color: #10b981;">0</div>
+                        <div class="stat-count" id="stat-answered" style="color: var(--success);">0</div>
                         <div class="stat-name">Answered</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-count" id="stat-flagged" style="color: #f59e0b;">0</div>
+                        <div class="stat-count" id="stat-flagged" style="color: var(--warning);">0</div>
                         <div class="stat-name">Flagged</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-count" id="stat-not-answered" style="color: #64748b;">0</div>
+                        <div class="stat-count" id="stat-not-answered" style="color: var(--text-muted);">0</div>
                         <div class="stat-name">Unanswered</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-count" id="stat-not-visited" style="color: #94a3b8;">0</div>
+                        <div class="stat-count" id="stat-not-visited" style="color: var(--text-muted);">0</div>
                         <div class="stat-name">Not Visited</div>
                     </div>
                 </div>
-                
+
                 <div class="sidebar-section-title" style="margin-top: 16px;">Question Navigator</div>
                 <div class="questions-grid"></div>
             </div>
         </div>
     </div>
-    
+
     <!-- Inject Question Data -->
     <script>
-        const questions = [];
+        const questions = [
+  {
+    "question": "<p>1. <span style=\"font-family: Cambria Math;\">What are the events in power </span><span style=\"font-family: Cambria Math;\">lifting ?</span></p>\n",
+    "options": [
+      "Squats, bench press and dead lift",
+      "Squats, lat pull down and curl",
+      "Curls, bench press and squat",
+      "Curls, over arm lift and dead lift"
+    ],
+    "correct_option_id": 0,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">1.(</span><span style=\"font-family: Cambria Math;\">a) <strong>Squats, bench press and deadlift.</strong> </span><span style=\"font-family: Cambria Math;\">Other events related to Sports: Swimming - Freestyle, Butterfly, </span><span style=\"font-family: Cambria Math;\">Backstroke</span><span style=\"font-family: Cambria Math;\">. Athletics - Relay</span><span style=\"font-family: Cambria Math;\">, Hurdles</span><span style=\"font-family: Cambria Math;\">, Shot Put, High Jump. Cycling - Sprint, Time trial, Track race, Point race.</span></p>\r\n<p><span style=\"font-family: Cambria Math;\">Shooting - Rapidfire Pistol, Standard rifle, Free pistol, Air rifle, Range, Bull&rsquo;s eye.Weight Lifting - Jerk, Snatch.</span></p>\n",
+    "question_index": 0
+  },
+  {
+    "question": "<p>2. <span style=\"font-family: Cambria Math;\">Mopin is an agricultural festival celebrated in the state of _________</span><span style=\"font-family: Cambria Math;\">_ .</span></p>\n",
+    "options": [
+      "Bihar",
+      "Arunachal Pradesh",
+      "West Bengal",
+      "Himachal Pradesh"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">2.(</span><span style=\"font-family: Cambria Math;\">b) <strong>Arunachal Pradesh. </strong></span><span style=\"font-family: Cambria Math;\"><strong>Mopin</strong> :</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">Festival of the Galo tribe celebrated in April month. </span><span style=\"font-family: Cambria Math;\"><strong>Agricultural Festivals in India</strong> : </span><span style=\"font-family: Cambria Math;\">Pongal (Tamil Nadu), Baisakhi (Punjab and Haryana), </span><span style=\"font-family: Cambria Math;\">Wangala, Ka Pomblang Nongkrem ( Meghalaya), Nuakhai (Orissa), Gudi Padwa (Maharashtra), Onam (Kerala), Ugadi ( Andhra Pradesh and Karnataka) etc. </span><span style=\"font-family: Cambria Math;\"> </span></p>\n",
+    "question_index": 1
+  },
+  {
+    "question": "<p>3. <span style=\"font-family: Cambria Math;\">Nati is the folk dance of which of the following </span><span style=\"font-family: Cambria Math;\">Indian </span><span style=\"font-family: Cambria Math;\">states ?</span></p>\n",
+    "options": [
+      "Jharkhand",
+      "Arunachal Pradesh",
+      "Gujarat",
+      "Himachal Pradesh"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">3.(</span><span style=\"font-family: Cambria Math;\">d) <strong>Himachal Pradesh. Nati </strong></span><span style=\"font-family: Cambria Math;\"><strong>dance</strong> :</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">It is performed by a group of people with accompanying musicians. Both men and women participate in the dance. The Kullu district administration set a Guinness World Record for the largest Nati dance on 26 October </span><span style=\"font-family: Cambria Math;\">2015 With 9,892 dancers. </span><span style=\"font-family: Cambria Math;\"><strong>Classical dances </strong>:</span><span style=\"font-family: Cambria Math;\"> Bharatanatyam (Tamil Nadu), Kathak (Uttar Pradesh), Kathakali ( Kerala), Kuchipudi (Andhra Pradesh), Manipuri (Manipur), Mohiniyattam (Kerala), Odissi (Odisha), Sattriya (Assam).</span></p>\n",
+    "question_index": 2
+  },
+  {
+    "question": "<p>4. <span style=\"font-family: Cambria Math;\">Rabindra Sangeet is associated with:</span></p>\n",
+    "options": [
+      "Rabi",
+      "Ravindra Jain",
+      "Rabindranath Tagore",
+      "Ravi Shankar"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">4.(</span><span style=\"font-family: Cambria Math;\">c) <strong>Rabindranath Tagore.</strong> <strong>Rabindra Sangeet</strong></span><span style=\"font-family: Cambria Math;\"> is a set of folk songs sung during festivals and rituals in West Bengal. </span><strong><span style=\"font-family: Cambria Math;\">Other Folk songs in West </span></strong><span style=\"font-family: Cambria Math;\"><strong>Benga</strong>l :</span><span style=\"font-family: Cambria Math;\"> Bhatiali, baul. </span><span style=\"font-family: Cambria Math;\"><strong>Rabindranath Tagore&rsquo;s Achievements </strong></span><span style=\"font-family: Cambria Math;\">- Nobel Prize for Literature (1913) for his poetry collection Gitanjali, </span><strong><span style=\"font-family: Cambria Math;\">&lsquo;Amar Sonar Bangla&rsquo;</span></strong><span style=\"font-family: Cambria Math;\"><strong>,</strong> th</span><span style=\"font-family: Cambria Math;\">e national anthem of Bangladesh was composed by Rabindranath Tagore in 1905, Awarded Knighthood for Services to Literature by King George V in 1915 but returned the title in 1919 to protest against the Jallianwala Bagh massacre. </span><span style=\"font-family: Cambria Math;\"> </span></p>\n",
+    "question_index": 3
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\"> Padma Shri awardee of 2022, Nalini-Kamalini Asthana belongs to which of the following art genres?</span></p>\n",
+    "options": [
+      "Painting",
+      "Sculpture",
+      "Kathak dance",
+      "Architecture"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">5.(</span><span style=\"font-family: Cambria Math;\">c) <strong>Kathak dance</strong>. </span><span style=\"font-family: Cambria Math;\">Nalini Asthana and Kamalini Asthana are sisters from Agra in Uttar Pradesh known for their great performances of the Benaras Gharana</span><span style=\"font-family: Cambria Math;\">. <strong>Awards:</strong> </span><span style=\"font-family: Cambria Math;\">Padma Shri (2022).<strong> </strong></span><strong><span style=\"font-family: Cambria Math;\">Exponents in Kathak:</span></strong><span style=\"font-family: Cambria Math;\"> Pandit Birju Maharaj, Shovna Narayan, Shambhu Maharaj, Lachhu Maharaj. </span><span style=\"font-family: Cambria Math;\"> </span></p>\n",
+    "question_index": 4
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\"> Pandit Birju Maharaj is associated with which form of dance?</span></p>\n",
+    "options": [
+      "Kathak",
+      "Chhau",
+      "Kuchipudi",
+      "Kathakali"
+    ],
+    "correct_option_id": 0,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">6.(</span><span style=\"font-family: Cambria Math;\">a) <strong>Kathak.</strong> <strong>Birju </strong></span><span style=\"font-family: Cambria Math;\"><strong>Maharaj</strong> </span><span style=\"font-family: Cambria Math;\">was</span><span style=\"font-family: Cambria Math;\"> a prominent figure in the Lucknow &ldquo;Kalka-Bindadin&rdquo; Gharana of Kathak dance in India. </span><strong><span style=\"font-family: Cambria Math;\">Awards</span></strong><span style=\"font-family: Cambria Math;\"><strong>:-</strong> Sangeet Natak Akademi Award (1964), Padma Vibhushan (1986), Kalidas Samman (1987), Lata Mangeshkar Puraskar (2002), and Na</span><span style=\"font-family: Cambria Math;\">tional Film Award (2012) for Best Choreography for Unnai Kaanaathu. </span><span style=\"font-family: Cambria Math;\"><strong>Exponents</strong> </span><span style=\"font-family: Cambria Math;\">(Kathak): Shambhu Maharaj, Birju Maharaj, Sitara Devi, Sunder Prasad, Lacchu Maharaj.</span><span style=\"font-family: Cambria Math;\"> </span></p>\n",
+    "question_index": 5
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\">Since 2004, which of the following states in India is the permanent venue of International Film Festival of India?</span></p>\n",
+    "options": [
+      "Gujarat",
+      "New Delhi",
+      "Goa",
+      "Maharashtra"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">7.(</span><span style=\"font-family: Cambria Math;\">c) <strong>Goa. International Film Festival of India</strong></span><span style=\"font-family: Cambria Math;\"><strong>, </strong>founded in 1952. The first IFFI was held in 1952 in Bombay, and it has been held in Goa since 2004. The festival is held annually with the aim of providing a common platform for cinemas across the world to project excellence of film art. Some most notab</span><span style=\"font-family: Cambria Math;\">le films that have won the<strong> </strong></span><strong><span style=\"font-family: Cambria Math;\">Golden Peacock Award at IFFI </span></strong><span style=\"font-family: Cambria Math;\"><strong>-</strong> Aakrosh (1981), Karunam (2000), Moner Manush (2010), Anhe Ghore Da Daan (2012).</span></p>\n",
+    "question_index": 6
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\"> Tulip Festival is famous in which </span><span style=\"font-family: Cambria Math;\">city ?</span></p>\n",
+    "options": [
+      "Agra",
+      "Allahabad",
+      "Ludhiana",
+      "Srinagar"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">8.(</span><span style=\"font-family: Cambria Math;\">d)<strong> Srinagar.</strong></span><strong><span style=\"font-family: Cambria Math;\"> </span></strong><span style=\"font-family: Cambria Math;\"><strong>Tulip Festival</strong> </span><span style=\"font-family: Cambria Math;\">in Kashmir is celebrated annually to display the vast range of flowers at the Indira Gandhi Memorial Tulip Garden in Srinagar. It is organized during the onset of spring season in Kashmir valley.</span><span style=\"font-family: Cambria Math;\"> <strong>Other Flower Festivals in India:</strong> </span><span style=\"font-family: Cambria Math;\">Rose Festival (Chandigarh)</span><span style=\"font-family: Cambria Math;\">, Ooty Flower Show (Tamil Nadu), International Flower Festival (Gangtok, Sikkim), Lalbagh Flower Show (Bangalore), Dasara Flower Show (Mysore)</span><span style=\"font-family: Cambria Math;\">, Cherry</span><span style=\"font-family: Cambria Math;\"> Blossom Festival (Shillong, Meghalaya).</span></p>\n",
+    "question_index": 7
+  },
+  {
+    "question": "<p><span style=\\\"font-family: Cambria Math;\\\">Who among the following is the first Indian female football player to play in Union</span><span style=\\\"font-family: Cambria Math;\\\"> of European Football Association (UEFA)\\'s women\\'s </span><span style=\\\"font-family: Cambria Math;\\\">champions</span><span style=\\\"font-family: Cambria Math;\\\"> league?</span></p>\\n",
+    "options": [
+      "Shanti Mallick",
+      "Bala Devi",
+      "Manisha Kalyan",
+      "Oinam Bembem Devi"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p><span style=\\\"font-family: Cambria Math;\\\">9.(</span><span style=\\\"font-family: Cambria Math;\\\">c) <strong>Manisha Kalyan</strong></span><span style=\\\"font-family: Cambria Math;\\\">. She won the 2020&ndash;21 AIFF Women\\'s Emerging Footballer of the Year and the 2022&ndash;23 AIFF Women\\'s Player of the Year awards. </span><strong><span style=\\\"font-family: Cambria Math;\\\">UEFA Women\\'s Champions League (previously, UEFA Women\\'s </span><span style=\\\"font-family: Cambria Math;\\\">Cup (</span></strong><span style=\\\"font-family: Cambria Math;\\\"><strong>2001&ndash;2009))</strong></span><span style=\\\"font-family: Cambria Math;\\\">&nbsp;- It is a European women\\'s association football competition</span><span style=\\\"font-family: Cambria Math;\\\">. Founded - 2001. It was first played in 2001&ndash;02. </span><span style=\\\"font-family: Cambria Math;\\\"><strong>Shanti Mallick</strong> -</span><span style=\\\"font-family: Cambria Math;\\\"> The first female footballer in India to have been awarded the Arjuna award (1983). Oinam Bembem Devi - Padma Shri (2020), Arjuna Award (2017).</span></p>\\n",
+    "question_index": 8
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\">10</span><span style=\"font-family: Cambria Math;\">. </span><span style=\"font-family: Cambria Math;\">The National Rural Employment Guarantee Act, now known as Mahatma Gandhi National Rural Empl</span><span style=\"font-family: Cambria Math;\">oyment Guarantee Act, was first enacted in the year_____.</span></p>\n",
+    "options": [
+      "2000",
+      "2005",
+      "2009",
+      "2014"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">10</span><span style=\"font-family: Cambria Math;\">.(b) <strong>2005.</strong> </span><span style=\"font-family: Cambria Math;\">Launched by the Ministry of Rural development. The primary objective of the scheme is to guarantee 100 days of employment in every financial year to adult members of any rural household willing to do public work-related unskilled manual work. Wages must be</span><span style=\"font-family: Cambria Math;\"> paid under the Minimum Wages Act, 1948. The act was first proposed in 1991 by <strong>former </strong></span><span style=\"font-family: Cambria Math;\"><strong>Prime</strong> Minister <strong>P.V. Narasimha Rao.</strong> </span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\"> </span></p>\n",
+    "question_index": 9
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\">11</span><span style=\"font-family: Cambria Math;\">.</span><span style=\"font-family: Cambria Math;\"> Ustad Asad Ali Khan played which of the following instruments?</span></p>\n",
+    "options": [
+      "Rudra Veena",
+      "Algoza",
+      "Sitar",
+      "Ravanahatha"
+    ],
+    "correct_option_id": 0,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">11</span><span style=\"font-family: Cambria Math;\">.(a) <strong>Rudra Veena</strong></span><span style=\"font-family: Cambria Math;\"> (plucked string instrument). </span><strong><span style=\"font-family: Cambria Math;\">Asad Ali Khan </span></strong><span style=\"font-family: Cambria Math;\">(Awards)</span><span style=\"font-family: Cambria Math;\">: </span><span style=\"font-family: Cambria Math;\">Padma Bhushan (2008), Sangeet Natak Akademi Award (1977). </span><span style=\"font-family: Cambria Math;\"><strong>Instrument and Artist</strong>: </span><span style=\"font-family: Cambria Math;\">Sitar (stringed instrument) - Ravi Shankar</span><span style=\"font-family: Cambria Math;\">, Nikhil</span><span style=\"font-family: Cambria Math;\"> Banerjee, Anoushka Shankar, Vilayat Khan. </span><span style=\"font-family: Cambria Math;\"><strong>Alghoza</strong> </span><span style=\"font-family: Cambria Math;\">(paired woodwind instrument) - Misri Khan Jamali, Taga Ram Bheel. </span><span style=\"font-family: Cambria Math;\"><strong>Rudra Veena</strong> </span><span style=\"font-family: Cambria Math;\">- Asit Kumar Banerjee, Bahauddin Dagar, Jyoti Hegde, Suvir Misra. </span><strong><span style=\"font-family: Cambria Math;\">Ravanahath</span><span style=\"font-family: Cambria Math;\">a </span></strong><span style=\"font-family: Cambria Math;\">( an</span><span style=\"font-family: Cambria Math;\"> ancient bowed, stringed instrument) - Dinesh Subasinghe. </span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\"> </span></p>\n",
+    "question_index": 10
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\">12</span><span style=\"font-family: Cambria Math;\">. </span><span style=\"font-family: Cambria Math;\">The length of the playing surface for Table Tennis is _________. </span></p>\n",
+    "options": [
+      "2.74 m",
+      "3.74 m",
+      "4.74 m",
+      "5.74 m"
+    ],
+    "correct_option_id": 0,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">12</span><span style=\"font-family: Cambria Math;\">.(a)<strong> 2.74 m.</strong> </span><span style=\"font-family: Cambria Math;\">Dimension - Upper Surface - 274 cm long, 152.5 cm wide, Height from the floor - 76 cm. Table Tennis Terminology - Twiddle, Strike, Stroke, Sweet Spot, Volley, Umpire, Rally, Playing Surfa</span><span style=\"font-family: Cambria Math;\">ce, Looper, Flick or Flip.</span></p>\n",
+    "question_index": 11
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\">13</span><span style=\"font-family: Cambria Math;\">. </span><span style=\"font-family: Cambria Math;\">Jayalakshmi Eshwar won the Sangeet Natak Akademi Award 2021 for her contribution to which Indian classical dance </span><span style=\"font-family: Cambria Math;\">form ?</span></p>\n",
+    "options": [
+      "Bharatanatyam",
+      "Kathakali",
+      "Kathak",
+      "Odissi"
+    ],
+    "correct_option_id": 0,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">13</span><span style=\"font-family: Cambria Math;\">.(a) <strong>Bharatanatyam</strong> </span><span style=\"font-family: Cambria Math;\">(Tamil Nadu). Famous Dancers - Bala Saraswati, Rukmini Devi </span><span style=\"font-family: Cambria Math;\">Arundale, Yamini Krishnamurthy, Padma Subrahmanyam, Mallika Sarabhai, Alarmel Valli. Famous Kathakali Dancer - Kalamandalam Gopi, Kalamandalam Krishna Prasad, Kottakal </span><span style=\"font-family: Cambria Math;\">Sivaraman, Kalamandalam Ramankutty Nair. Famous Kathak dancers - Pandit Birju Maharaj, L</span><span style=\"font-family: Cambria Math;\">achu Maharaj, Kumari Kamala. Famous Odissi Dancer - Aadya Kaktikar, Shreelina Ghosh, Sonal Mansingh.</span></p>\n",
+    "question_index": 12
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\">14</span><span style=\"font-family: Cambria Math;\">. </span><span style=\"font-family: Cambria Math;\">Gaan-Ngai is a five-day festival primarily celebrated in which part of </span><span style=\"font-family: Cambria Math;\">India ?</span></p>\n",
+    "options": [
+      "Northern",
+      "North-Eastern",
+      "Western",
+      "Southern"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">14</span><span style=\"font-family: Cambria Math;\">.(b) <strong>North-Eastern</strong>.</span><span style=\"font-family: Cambria Math;\"> The Gaan Ngai festival is celebrated after the harvest. Observed By - The Zeliangrong people. States where it is mainly </span><span style=\"font-family: Cambria Math;\">Celebrated</span><span style=\"font-family: Cambria Math;\"> - Assam, Manipur, Nagaland. </span><span style=\"font-family: Cambria Math;\"><strong>Other North-Eastern Festivals</strong> -</span><span style=\"font-family: Cambria Math;\"> Bihu (Assam), Moatsu Mong (Nagaland), Ambubachi Mela (Assam), Losar Festival (Arunachal Pradesh).</span><span style=\"font-family: Cambria Math;\"> <strong>Harvest Festivals in </strong></span><span style=\"font-family: Cambria Math;\"><strong>India </strong>:</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">Makar Sakranti - Haryana, Delhi. Lohri - Punjab, Haryana. Onam - Kerala. Pongal - Tamil Nadu. Utt</span><span style=\"font-family: Cambria Math;\">arayan - Gujarat. Poush Sankranti - West Bengal.</span></p>\n",
+    "question_index": 13
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\">15</span><span style=\"font-family: Cambria Math;\">. </span><span style=\"font-family: Cambria Math;\">Padayani is a folk dance from which </span><span style=\"font-family: Cambria Math;\">state ?</span></p>\n",
+    "options": [
+      "Kerala",
+      "Karnataka",
+      "Andhra Pradesh",
+      "Tamil Nadu"
+    ],
+    "correct_option_id": 0,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">15</span><span style=\"font-family: Cambria Math;\">.(a) <strong>Kerala.</strong></span><span style=\"font-family: Cambria Math;\"> Padayani (Padeni) - A ceremonial dance involving masks, it is an ancient ritual performed in Bhagavati temples. The dance is performed in honor of Bhadrakaali. Community - Ganaka. Instrument Used - Thappu (Indian frame drum played with the han</span><span style=\"font-family: Cambria Math;\">ds) and Chenda play.<em> </em></span><span style=\"font-family: Cambria Math;\"><strong>Other Traditional Dances of Kerala</strong> </span><span style=\"font-family: Cambria Math;\">- Kathakali, Mohiniyattam, Thirvathirakali, Kolkali, Ottamthullal, chakyar Koothu, Oppana.</span></p>\n",
+    "question_index": 14
+  }
+];
     </script>
-    
+
     <!-- Central JS Controller -->
     <script src="../js/mock-core.js"></script>
 </body>

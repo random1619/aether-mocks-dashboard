@@ -3,43 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aether Mocks</title>
+    <title>Mocks Wallah</title>
     <!-- Fonts & Icons -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    
+
     <!-- Central Stylesheet -->
     <link rel="stylesheet" href="../css/mock-main.css">
-    
+
     <!-- Math Formula Rendering (KaTeX/MathJax) -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    
+
     <!-- Timer Config -->
-    <meta name="exam-duration" content="60">
+    <meta name="exam-duration" content="30">
 </head>
 <body>
     <!-- Welcome Screen -->
     <div class="welcome-screen" id="welcomeScreen">
         <div class="welcome-container">
             <div class="welcome-header" style="margin-bottom: 24px;">
-                <h1 style="font-size: 2rem; font-weight: 700; color: #0f172a; margin-bottom: 8px;"><i class="fas fa-graduation-cap" style="color: #3b82f6;"></i> Aether Mocks</h1>
-                <p style="color: #64748b;">Computer Based Test Portal</p>
+                <h1 style="font-size: 2rem; font-weight: 700; color: var(--text-main); margin-bottom: 8px;"><i class="fas fa-graduation-cap" style="color: var(--primary);"></i> Mocks Wallah</h1>
+                <p style="color: var(--text-muted);">Computer Based Test Portal</p>
             </div>
-            
+
             <div class="test-details" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-bottom: 32px; text-align: left;">
-                <div class="detail-item" style="padding: 12px; background: #f8fafc; border-radius: 8px; border: 1px solid #e2e8f0;">
-                    <div class="detail-label" style="font-size: 0.8rem; color: #64748b;">Total Questions</div>
-                    <div class="detail-value" style="font-size: 1.1rem; font-weight: 600; color: #0f172a;">10</div>
+                <div class="detail-item" style="padding: 12px; background: var(--bg-color); border-radius: 8px; border: 1px solid var(--border-color);">
+                    <div class="detail-label" style="font-size: 0.8rem; color: var(--text-muted);">Total Questions</div>
+                    <div class="detail-value" style="font-size: 1.1rem; font-weight: 600; color: var(--text-main);">15</div>
                 </div>
-                <div class="detail-item" style="padding: 12px; background: #f8fafc; border-radius: 8px; border: 1px solid #e2e8f0;">
-                    <div class="detail-label" style="font-size: 0.8rem; color: #64748b;">Duration</div>
-                    <div class="detail-value" style="font-size: 1.1rem; font-weight: 600; color: #0f172a;">60 mins</div>
+                <div class="detail-item" style="padding: 12px; background: var(--bg-color); border-radius: 8px; border: 1px solid var(--border-color);">
+                    <div class="detail-label" style="font-size: 0.8rem; color: var(--text-muted);">Duration</div>
+                    <div class="detail-value" style="font-size: 1.1rem; font-weight: 600; color: var(--text-main);">30 mins</div>
                 </div>
             </div>
-            
+
             <div class="welcome-actions">
                 <button class="btn btn-primary" id="startBtn" onclick="document.getElementById('welcomeScreen').style.display='none'; document.getElementById('examContainer').style.display='flex';" style="font-size: 1.1rem; padding: 12px 32px; width: 100%;">
                     <i class="fas fa-play" style="margin-right: 8px;"></i> Start Test
@@ -47,12 +47,12 @@
             </div>
         </div>
     </div>
-    
+
     <!-- Main Exam Interface -->
     <div class="exam-container" id="examContainer" style="display: none; height: 100vh; flex-direction: column;">
         <!-- Top Header -->
         <div class="exam-header">
-            <div class="exam-title">Aether Mocks</div>
+            <div class="exam-title">Mocks Wallah</div>
             <div class="header-actions" style="display: flex; align-items: center; gap: 12px;">
                 <button class="btn-icon" id="themeToggleBtn" title="Switch to Dark Mode"><i class="fas fa-moon"></i></button>
                 <button class="btn-icon" id="fullscreenToggleBtn" title="Toggle Fullscreen"><i class="fas fa-expand"></i></button>
@@ -62,14 +62,14 @@
                 </div>
             </div>
         </div>
-        
+
         <!-- Main Content -->
         <div class="mock-container">
             <!-- Question Area -->
             <div class="question-view">
                 <!-- Dynamically populated question container -->
                 <div id="questionContainer" style="flex: 1; display: flex; flex-direction: column; gap: 24px;"></div>
-                
+
                 <!-- Controls -->
                 <div class="nav-controls">
                     <button class="btn btn-secondary btn-prev"><i class="fas fa-chevron-left" style="margin-right: 8px;"></i> Previous</button>
@@ -79,40 +79,221 @@
                     <button class="btn btn-primary btn-next">Next <i class="fas fa-chevron-right" style="margin-left: 8px;"></i></button>
                 </div>
             </div>
-            
+
             <!-- Desktop Navigator Sidebar -->
             <div class="sidebar">
                 <div class="sidebar-section-title">Summary Status</div>
                 <div class="stats-grid">
                     <div class="stat-item">
-                        <div class="stat-count" id="stat-answered" style="color: #10b981;">0</div>
+                        <div class="stat-count" id="stat-answered" style="color: var(--success);">0</div>
                         <div class="stat-name">Answered</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-count" id="stat-flagged" style="color: #f59e0b;">0</div>
+                        <div class="stat-count" id="stat-flagged" style="color: var(--warning);">0</div>
                         <div class="stat-name">Flagged</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-count" id="stat-not-answered" style="color: #64748b;">0</div>
+                        <div class="stat-count" id="stat-not-answered" style="color: var(--text-muted);">0</div>
                         <div class="stat-name">Unanswered</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-count" id="stat-not-visited" style="color: #94a3b8;">0</div>
+                        <div class="stat-count" id="stat-not-visited" style="color: var(--text-muted);">0</div>
                         <div class="stat-name">Not Visited</div>
                     </div>
                 </div>
-                
+
                 <div class="sidebar-section-title" style="margin-top: 16px;">Question Navigator</div>
                 <div class="questions-grid"></div>
             </div>
         </div>
     </div>
-    
+
     <!-- Inject Question Data -->
     <script>
-        const questions = [];
+        const questions = [
+  {
+    "question": "<p>1. Match the following personalities with their associated musical instrument:<br>A) S. Balachander<br>B) Anushka Shankar<br>C) Kishan Maharaj<br>1 Tabla<br>2 Veena<br>3 Sitar</p>",
+    "options": [
+      "A-1, B-3, С-2",
+      "A-2, B-1, C-3",
+      "A-1, B-2, C-3",
+      "A-2, B-3, C-1"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p>1.(d) <strong>A-2, B-3, C-1. </strong>Musical instruments and their exponents: Tabla - Zakir Hussain, Ahmed Jan Thirakwa, Swapan Chaudhuri, Anindo Chatterjee, Alla Rakha. Veena - Rajhesh Vaidhya, Jayanthi Kumaresh, Veena E. Gayathri, Nageswara Rao. Sitar - Ravi Shankar, Anoushka Shankar, Vilayat Khan, Shahid Parvez, Nikhil Banerjee.</p>",
+    "question_index": 0
+  },
+  {
+    "question": "<p>2. Which of the following pair of sports persons-sports associated with is correct ?<br>I. Smriti Mandhana - Hockey<br>II. Jyothi Yarraji - Cricket</p>",
+    "options": [
+      "Only I",
+      "Only II",
+      "Neither I nor II",
+      "Both I and II"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p>2.(c) <strong>Neither I nor II. </strong>Smriti Mandhana won the Arjuna Award for Cricket in 2018. Jyothi Yarraji (Athletics) won a silver medal in the 2022 Asian Games, and Gold medal in 2024 Asian Indoor Athletics Championships.</p>",
+    "question_index": 1
+  },
+  {
+    "question": "<p>3. Which iconic Indian classical vocalist, often known as the \"Mewati Maestro,\" is celebrated for his mastery of khayal singing and his innovative approach to ragas ?</p>",
+    "options": [
+      "Pandit Jasraj",
+      "Hariprasad Chaurasia",
+      "Zakir Hussain",
+      "Bismillah Khan"
+    ],
+    "correct_option_id": 0,
+    "solution": "<p>3.(a) <strong>Pandit Jasraj. </strong>His Awards: Sangeet Natak Akademi Award (1987) , Padma Bhushan (1990), Padma Vibhushan (2000), Swathi Sangeetha Puraskaram (2008). Other Maestro - Hariprasad Chaurasia (flute player), Zakir Hussain (tabla player), Bismillah Khan (Shehnai player).</p>",
+    "question_index": 2
+  },
+  {
+    "question": "<p>4. The \"Thrissur Pooram\" is a famous temple festival celebrated in which Indian state, known for its elaborate processions and fireworks displays ?</p>",
+    "options": [
+      "Tamil Nadu",
+      "Orissa",
+      "Kerala",
+      "Karnataka"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p>4.(c) <strong>Kerala.</strong> Thrissur Pooram festival is held in the months of April - May in Vaddakumnathan Temple in the town of Thrissur. Popular Festivals in Kerala: Onam, Boat Festival, Attukal Pongala, Vishu, Makaravilakku at Sabarimala temple, Theyyam.</p>",
+    "question_index": 3
+  },
+  {
+    "question": "<p>5. Name the famous hockey player after which there is a stadium built in New Delhi.</p>",
+    "options": [
+      "Dhanraj Pillay",
+      "Sardar Singh",
+      "Major Dhyan Chand",
+      "Balbir Singh"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p>5.(c) <strong>Major Dhyan Chand. </strong>The Major Dhyan Chand National Stadium was designed by Anthony S. DeMillo. It dates back to 1933 and was built as a gift for Delhi by the Maharaja of Bhavnagar. The \"Major Dhyan Chand Khel Ratna Award&rdquo; (previously known as the Rajiv Gandhi Khel Ratna Award) is named in his honor.</p>",
+    "question_index": 4
+  },
+  {
+    "question": "<p>6. Giddha dance is mainly related to:</p>",
+    "options": [
+      "Punjab",
+      "Bihar",
+      "Gujarat",
+      "West Bengal"
+    ],
+    "correct_option_id": 0,
+    "solution": "<p>6.(a)<strong> Punjab. </strong>Giddha is performed by women. Famous Folk Dances of Punjab: Bhangra, Kikli, Jaago, Jhumar, Sammi, Gatka, Jindua, Malwai Giddha. State and their Folk dance: Bihar - Karma, Jharni; Gujarat - Dandiya Raas, Garba, Bhavai; West Bengal - Brita, Tusu, Baul.</p>",
+    "question_index": 5
+  },
+  {
+    "question": "<p>7. Which dance form from Karnataka involves large drums hung around the necks of men and is known for its religious and battle fervour ?</p>",
+    "options": [
+      "Ghodemodni",
+      "Kummi",
+      "Dandiya",
+      "Dollu Kunitha"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p>7.(d) <strong>Dollu Kunitha. </strong>It is associated with the worship of Sree Beeralingeshwara (Lord Shiva), originated in the rituals of the Kuruba Gowda community of North Karnataka. Other folk dances: Kamsale Nrutya (Karnataka), Ghodemodni (Goa), Kummi (Kerala, Tamil Nadu), Dandiya (Gujarat).</p>",
+    "question_index": 6
+  },
+  {
+    "question": "<p>8. Which of the following sports is played by Mouma Das ?</p>",
+    "options": [
+      "Table Tennis",
+      "Hockey",
+      "Cricket",
+      "Badminton"
+    ],
+    "correct_option_id": 0,
+    "solution": "<p>8.(a) <strong>Table Tennis. </strong>Mouma Das became only the second table tennis player after Achanta Sharath Kamal (2019) to win the Padma Shri (2021). Her Awards : Arjuna Award (2013). Other table tennis players: Manika Batra, Sathiyan Gnanasekaran, Manav Thakkar.</p>",
+    "question_index": 7
+  },
+  {
+    "question": "<p>9. Sangeet Natak Academy Awards were earlier known as _______.</p>",
+    "options": [
+      "Residential Awards",
+      "Prestigious Awards",
+      "Presidential Awards",
+      "Cultural Awards"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p>9.(c) <strong>Presidential Awards. </strong>The awards for Hindustani and Carnatic music were instituted as early as 1951, even before the establishment of the Sangeet Natak Akademi, and were originally known as Presidential Awards. After the Akademy was formed, these awards became the Sangeet Natak Akademi Awards, with the responsibility for their investiture transferred to the Akademi. The Presidential Awards for 1952 and 1953 were later included in the list of Sangeet Natak Akademi Awards.</p>",
+    "question_index": 8
+  },
+  {
+    "question": "<p>10. Heptathlon for women includes ______ events.</p>",
+    "options": [
+      "11",
+      "7",
+      "5",
+      "10"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p>10.(b) <strong>7. </strong>The &ldquo;combined events&rdquo; includes the decathlon for men and the heptathlon for women. Heptathlon (Women): Consists of 7 events - 100 m hurdles, high jump, shot put, 200 m, long jump, javelin throw, and 800 m. Decathlon (Men): Consists of 10 events - 100 m, shot put, high jump, long jump, 400 m, 110 m hurdles, discus throw, pole vault, javelin throw, and 1500 m.</p>",
+    "question_index": 9
+  },
+  {
+    "question": "<p>11. Gangaur festival is historically native to which of the following states\"</p>",
+    "options": [
+      "Himachal Pradesh",
+      "Uttar Pradesh",
+      "Madhya Pradesh",
+      "Rajasthan"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p>11.(d) <strong>Rajasthan. </strong>The Gangaur festival is celebrated in the Hindu month of Chaitra, which is March and April. <br>Other festivals of Rajasthan: Teej Festival, Desert Festival, Nagaur Fair, Marwar Festival, Camel Festival, Mewar Festival, Elephant Festival.</p>",
+    "question_index": 10
+  },
+  {
+    "question": "<p>12. PR Sreejesh is a_______</p>",
+    "options": [
+      "hockey player",
+      "football player",
+      "cricket player",
+      "badminton player"
+    ],
+    "correct_option_id": 0,
+    "solution": "<p>12.(a) <strong>Hockey player.</strong> He has represented India in four consecutive Olympic Games: 2012, 2016, 2020, and 2024. He made his debut as a goalkeeper at the 2006 South Asian Games in Sri Lanka. Other Indian hockey players: Jarmanpreet Singh, Amit Rohidas, Harmanpreet Singh, Sumit Walmiki, Shamsher Singh, Manpreet Singh, Vivek Sagar Prasad, Abhishek Nain, Sukhjeet Singh, Lalit Kumar Upadhyay, Mandeep Singh.</p>",
+    "question_index": 11
+  },
+  {
+    "question": "<p>13. Which instrument was played by Ustad Asad Ali Khan ?</p>",
+    "options": [
+      "Sarod",
+      "Santoor",
+      "Sitar",
+      "Rudra Veena"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p>13.(d) <strong>Rudra Veena. </strong>Ustad Asad Ali Khan was an expert in the Khandar school of Dhrupad (Hindustani Classical Music). Awards : Padma Bhushan (2008). Other Rudra-veena players : Bnade Ali Khan, Abid Hussain Khan, Rajab Ali Khan, Krishna Rao Kollapure, Wazir Khan, Zia Mohiuddin Dagar, Bahauddin Dagar.</p>",
+    "question_index": 12
+  },
+  {
+    "question": "<p>14. Kuchipudi originated in a village named Kuchipudi in the Indian state of _____.</p>",
+    "options": [
+      "Kerala",
+      "Tamil Nadu",
+      "Andhra Pradesh",
+      "Uttar Pradesh"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p>14.(c) <strong>Andhra Pradesh. </strong>Kuchipudi is an Indian classical dance originated from Kuchipudi village in the Krishna district in Andhra Pradesh. Other classical dances and respective states: Bharatnatyam (Tamil Nadu), Kathak (Uttar Pradesh), Kathakali (Kerala), Kuchipudi (Andhra Pradesh), Mohiniyattam (Kerala), Odissi (Odisha), Sattriya (Assam); Manipuri (Manipur).</p>",
+    "question_index": 13
+  },
+  {
+    "question": "<p>15. A famous play, &lsquo;Abhijnana Shakuntalam\\' was written by which of the following personalities ?</p>",
+    "options": [
+      "Kalhana",
+      "Asvaghosa",
+      "Kalidasa",
+      "Vishakhadatta"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p>15.(c) <strong>Kalidasa:</strong> He wrote &lsquo;Abhijnana Shakuntalam\\' in Sanskrit language. Other famous plays written by Kalidasa : &lsquo;Meghaduta&rsquo;, &lsquo;Raghuvamsa&rsquo;, &lsquo;Malavikagnimitram&rsquo;, &lsquo;Vikramorvasiyam&rsquo;, &lsquo;Kumarasambhava&rsquo;, &lsquo;Ritusamhara&rsquo;. Personalities and their Plays : Kalhana - &lsquo;Rajatarangini&rsquo;. Asvaghosa - &lsquo;Buddhacharitra&rsquo;. Vishakhadatta - &lsquo;MudraRakshasa&rsquo; and &lsquo;Devichandraguptam&rsquo;.</p>",
+    "question_index": 14
+  }
+];
     </script>
-    
+
     <!-- Central JS Controller -->
     <script src="../js/mock-core.js"></script>
 </body>

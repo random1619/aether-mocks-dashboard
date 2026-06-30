@@ -3,43 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aether Mocks</title>
+    <title>Mocks Wallah</title>
     <!-- Fonts & Icons -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    
+
     <!-- Central Stylesheet -->
     <link rel="stylesheet" href="../css/mock-main.css">
-    
+
     <!-- Math Formula Rendering (KaTeX/MathJax) -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    
+
     <!-- Timer Config -->
-    <meta name="exam-duration" content="60">
+    <meta name="exam-duration" content="28">
 </head>
 <body>
     <!-- Welcome Screen -->
     <div class="welcome-screen" id="welcomeScreen">
         <div class="welcome-container">
             <div class="welcome-header" style="margin-bottom: 24px;">
-                <h1 style="font-size: 2rem; font-weight: 700; color: #0f172a; margin-bottom: 8px;"><i class="fas fa-graduation-cap" style="color: #3b82f6;"></i> Aether Mocks</h1>
-                <p style="color: #64748b;">Computer Based Test Portal</p>
+                <h1 style="font-size: 2rem; font-weight: 700; color: var(--text-main); margin-bottom: 8px;"><i class="fas fa-graduation-cap" style="color: var(--primary);"></i> Mocks Wallah</h1>
+                <p style="color: var(--text-muted);">Computer Based Test Portal</p>
             </div>
-            
+
             <div class="test-details" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-bottom: 32px; text-align: left;">
-                <div class="detail-item" style="padding: 12px; background: #f8fafc; border-radius: 8px; border: 1px solid #e2e8f0;">
-                    <div class="detail-label" style="font-size: 0.8rem; color: #64748b;">Total Questions</div>
-                    <div class="detail-value" style="font-size: 1.1rem; font-weight: 600; color: #0f172a;">10</div>
+                <div class="detail-item" style="padding: 12px; background: var(--bg-color); border-radius: 8px; border: 1px solid var(--border-color);">
+                    <div class="detail-label" style="font-size: 0.8rem; color: var(--text-muted);">Total Questions</div>
+                    <div class="detail-value" style="font-size: 1.1rem; font-weight: 600; color: var(--text-main);">14</div>
                 </div>
-                <div class="detail-item" style="padding: 12px; background: #f8fafc; border-radius: 8px; border: 1px solid #e2e8f0;">
-                    <div class="detail-label" style="font-size: 0.8rem; color: #64748b;">Duration</div>
-                    <div class="detail-value" style="font-size: 1.1rem; font-weight: 600; color: #0f172a;">60 mins</div>
+                <div class="detail-item" style="padding: 12px; background: var(--bg-color); border-radius: 8px; border: 1px solid var(--border-color);">
+                    <div class="detail-label" style="font-size: 0.8rem; color: var(--text-muted);">Duration</div>
+                    <div class="detail-value" style="font-size: 1.1rem; font-weight: 600; color: var(--text-main);">28 mins</div>
                 </div>
             </div>
-            
+
             <div class="welcome-actions">
                 <button class="btn btn-primary" id="startBtn" onclick="document.getElementById('welcomeScreen').style.display='none'; document.getElementById('examContainer').style.display='flex';" style="font-size: 1.1rem; padding: 12px 32px; width: 100%;">
                     <i class="fas fa-play" style="margin-right: 8px;"></i> Start Test
@@ -47,12 +47,12 @@
             </div>
         </div>
     </div>
-    
+
     <!-- Main Exam Interface -->
     <div class="exam-container" id="examContainer" style="display: none; height: 100vh; flex-direction: column;">
         <!-- Top Header -->
         <div class="exam-header">
-            <div class="exam-title">Aether Mocks</div>
+            <div class="exam-title">Mocks Wallah</div>
             <div class="header-actions" style="display: flex; align-items: center; gap: 12px;">
                 <button class="btn-icon" id="themeToggleBtn" title="Switch to Dark Mode"><i class="fas fa-moon"></i></button>
                 <button class="btn-icon" id="fullscreenToggleBtn" title="Toggle Fullscreen"><i class="fas fa-expand"></i></button>
@@ -62,14 +62,14 @@
                 </div>
             </div>
         </div>
-        
+
         <!-- Main Content -->
         <div class="mock-container">
             <!-- Question Area -->
             <div class="question-view">
                 <!-- Dynamically populated question container -->
                 <div id="questionContainer" style="flex: 1; display: flex; flex-direction: column; gap: 24px;"></div>
-                
+
                 <!-- Controls -->
                 <div class="nav-controls">
                     <button class="btn btn-secondary btn-prev"><i class="fas fa-chevron-left" style="margin-right: 8px;"></i> Previous</button>
@@ -79,40 +79,209 @@
                     <button class="btn btn-primary btn-next">Next <i class="fas fa-chevron-right" style="margin-left: 8px;"></i></button>
                 </div>
             </div>
-            
+
             <!-- Desktop Navigator Sidebar -->
             <div class="sidebar">
                 <div class="sidebar-section-title">Summary Status</div>
                 <div class="stats-grid">
                     <div class="stat-item">
-                        <div class="stat-count" id="stat-answered" style="color: #10b981;">0</div>
+                        <div class="stat-count" id="stat-answered" style="color: var(--success);">0</div>
                         <div class="stat-name">Answered</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-count" id="stat-flagged" style="color: #f59e0b;">0</div>
+                        <div class="stat-count" id="stat-flagged" style="color: var(--warning);">0</div>
                         <div class="stat-name">Flagged</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-count" id="stat-not-answered" style="color: #64748b;">0</div>
+                        <div class="stat-count" id="stat-not-answered" style="color: var(--text-muted);">0</div>
                         <div class="stat-name">Unanswered</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-count" id="stat-not-visited" style="color: #94a3b8;">0</div>
+                        <div class="stat-count" id="stat-not-visited" style="color: var(--text-muted);">0</div>
                         <div class="stat-name">Not Visited</div>
                     </div>
                 </div>
-                
+
                 <div class="sidebar-section-title" style="margin-top: 16px;">Question Navigator</div>
                 <div class="questions-grid"></div>
             </div>
         </div>
     </div>
-    
+
     <!-- Inject Question Data -->
     <script>
-        const questions = [];
+        const questions = [
+  {
+    "question": "<p>1.<span style=\\\"font-family: Roboto;\\\"> Asia\\'s largest wholesale spice market is located in _____.</span></p>",
+    "options": [
+      "Kolkata",
+      "Bengaluru",
+      "Ahmedabad",
+      "Delhi"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p>1.(d)<span style=\"font-family: Roboto;\"> Khari Baoli is a street in Delhi, India known for its wholesale grocery and Asia&rsquo;s largest wholesale spice market selling all kinds of species, nuts, herbs and food products like rice and tea. </span></p>",
+    "question_index": 0
+  },
+  {
+    "question": "<p>2.<span style=\"font-family: Roboto;\"> Freedom Fighter Sucheta Kriplani, became the first woman chief minister of which state?</span></p>",
+    "options": [
+      "Rajasthan",
+      "Andhra Pradesh",
+      "Gujarat",
+      "Uttar Pradesh"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p>2.<span style=\\\"font-family: Roboto;\\\">(d) </span><span style=\\\"font-family: Roboto;\\\">Sucheta Kripalani, was an Indian freedom fighter and politician. She was India\\'s first woman Chief Minister, serving as the head of the Uttar Pradesh </span><span style=\\\"font-family: Roboto;\\\">government from 1963 to 1967..</span></p>",
+    "question_index": 1
+  },
+  {
+    "question": "<p>3.<span style=\"font-family: Roboto;\"> Who was the first Governor of Madhya Pradesh ?</span></p>",
+    "options": [
+      "BD Sharma",
+      "Dr. Sitaramayya",
+      "GP Singh",
+      "NN Wanchu"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p>3.<span style=\"font-family: Roboto;\">(b)</span><span style=\"font-family: Roboto;\"> Sitaramayya was the First Governor of Madhya Pradesh in India from 1952 to 1957 . He is also the founder of the Andhra bank. </span></p>",
+    "question_index": 2
+  },
+  {
+    "question": "<p>4.<span style=\"font-family: Roboto;\"> Name the first female amputee to climb Mount Everest.</span></p>",
+    "options": [
+      "Arunima Sinha",
+      "Poorna Malavath",
+      "Anshu Jamsenpa",
+      "Premlata Agarwal"
+    ],
+    "correct_option_id": 0,
+    "solution": "<p>4.<span style=\\\"font-family: Roboto;\\\">(a)</span><span style=\\\"font-family: Roboto;\\\"> </span><span style=\\\"font-family: Roboto;\\\">India\\'s Arunima Sinha is the world\\'s first female amputee to climb Mount Everest in 2013. She is also the first female amputee to climb Mount Vinson, the highest peak of Antarctica.</span></p>",
+    "question_index": 3
+  },
+  {
+    "question": "<p>5.<span style=\\\"font-family: Roboto;\\\"> Who is the first General of the Indian Army, whose retirement day is celebrated as the \\'Armed Forces Veterans Day\\' every year?</span></p>",
+    "options": [
+      "General Maharaj Rajendra Sinhji",
+      "General S.M. Srinagesh",
+      "General K.S. Thimayya",
+      "General K.M. Cariappa"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p>5.<span style=\"font-family: Roboto;\">(d)</span><span style=\"font-family: Roboto;\"> Armed Forces Veterans Day is observed each year on 14th January as a mark of respect and recognition of the services rendered by Field Marshal KM Cariappa OBE - the first Indian Commander - in - Chief of the Indian Armed Forces who retired on 14 Jan 1953.</span></p>",
+    "question_index": 4
+  },
+  {
+    "question": "<p>6.<span style=\\\"font-family: Roboto;\\\"> On which lake is the world\\'s only floating post office situated?</span></p>",
+    "options": [
+      "Wular Lake",
+      "Dal Lake",
+      "Chilika Lake",
+      "Loktak Lake"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p>6.(b) <span style=\"font-family: Roboto;\">The floating post office is located in the beautiful city of Srinagar in Kashmir, amidst picturesque snow-clad mountains on a huge houseboat in Dal Lake.&nbsp;</span></p>",
+    "question_index": 5
+  },
+  {
+    "question": "<p>7.<span style=\"font-family: Roboto;\"> Who was the first Indian to receive the International Shooting Federation (ISSF) Blue Cross?</span></p>",
+    "options": [
+      "Ronjan Sodhi",
+      "Vijay Kumar",
+      "Abhinav Bindra",
+      "Gagan Narang"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p>7.<span style=\\\"font-family: Roboto;\\\">(c)</span><span style=\\\"font-family: Roboto;\\\"> On 30 November 2018, Bindra became the first Indian to receive the prestigious Blue Cross, the ISSF\\'s highest honour. Abhinav Bindra won the gold medal in men&rsquo;s 10m air rifle at the Beijing Olympics 2008.</span></p>",
+    "question_index": 6
+  },
+  {
+    "question": "<p>8. <span style=\"font-family: Roboto;\">The major component of modern Olympic gold medals is ______.</span></p>",
+    "options": [
+      "Bronze",
+      "Gold",
+      "Silver",
+      "Copper"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p>8.(c) <span style=\"font-family: Roboto;\">Olympic Gold medals are required to be made from at least 92.5% silver, and must contain a minimum of 6 grams of gold. All olympics medals must be at least 60 mm in diameter and 3mm thick. It is the responsibility of the Olympic host to mint the medal proper.</span></p>",
+    "question_index": 7
+  },
+  {
+    "question": "<p>9.<span style=\"font-family: Roboto;\"> Only one Indian batsman has scored a triple century in test cricket other than Virender Sehwag. Name this batsman.</span></p>",
+    "options": [
+      "Ajinkya Rahane",
+      "Rohit Sharma",
+      "Shikhar Dhawan",
+      "Karun Nair"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p>9.(d) <span style=\"font-family: Roboto;\">Karun Nair is the only Indian cricketer other than Virendra Sehwag to score triple hundred in the test match. He scored 303 runs against England.</span></p>",
+    "question_index": 8
+  },
+  {
+    "question": "<p>10.<span style=\"font-family: Roboto;\"> To which of the following Indian states does Mardani Khel, one of the famous martial art forms in India belong?</span></p>",
+    "options": [
+      "Maharashtra",
+      "Uttar Pradesh",
+      "Rajasthan",
+      "Madhya Pradesh"
+    ],
+    "correct_option_id": 0,
+    "solution": "<p>10.<span style=\"font-family: Roboto;\">(a)</span><span style=\"font-family: Roboto;\"> </span><strong><span style=\"font-family: Roboto;\">Mardani khel</span></strong><span style=\"font-family: Roboto;\"> is an armed Indian martial art from Maharashtra. It is particularly known for its use of the uniquely Indian patta (sword) and vita (corded lance).</span></p>",
+    "question_index": 9
+  },
+  {
+    "question": "<p>11. <span style=\"font-family: Roboto;\">With which sport is Archana Kamath associated?</span></p>",
+    "options": [
+      "Table Tennis",
+      "Badminton",
+      "Squash",
+      "Lawn Tennis"
+    ],
+    "correct_option_id": 0,
+    "solution": "<p>11.(a) <span style=\"font-family: Roboto;\">Archana Kamath was introduced to the sport of Table Tennis when she was 9. </span></p>",
+    "question_index": 10
+  },
+  {
+    "question": "<p>12.<span style=\"font-family: Roboto;\">On which date is National Sports Day observed in India?</span></p>",
+    "options": [
+      "4th May",
+      "5th July",
+      "29th August",
+      "17th September"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p>12.<span style=\"font-family: Roboto;\">(</span><span style=\"font-family: Roboto;\">c)</span><span style=\"font-family: Roboto;\"> The National Sports Day in India is celebrated on 29th August every year, on the birth anniversary of the legendary hockey Olympian, Dhyan Chand Singh. The National Sports Day which is also known as the Rashtriya Khel Divas was first inducted into the long list of celebratory days in 2012.</span></p>",
+    "question_index": 11
+  },
+  {
+    "question": "<p>13.<span style=\"font-family: Roboto;\"> Which of the following is not written by Salman Rushdie?</span></p>",
+    "options": [
+      "Shame",
+      "The Satanic Verses",
+      "An Area of Darkness",
+      "Midnight\\'s Children"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p>13.(c) <span style=\"font-family: Roboto;\">An area of Darkness is a book by V.S. Naipaul whereas Salman Rushdie&rsquo;s books include Shame, The Satanic Verses, Midnight Children, Quichotte, Harun and Sea of stories, The Golden House, etc.</span></p>",
+    "question_index": 12
+  },
+  {
+    "question": "<p>14. <span style=\\\"font-family: Roboto;\\\">Who is the author of the book \\'Hazaar Chaurasi Ki Maa\\'?</span></p>",
+    "options": [
+      "Krishna Sobti",
+      "Rita Kothari",
+      "Sugathakumari",
+      "Mahasweta Devi"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p>14.(d) <span style=\"font-family: Roboto;\">Books by Mahasweta Devi- &lsquo;Imaginary Maps&rsquo;, &lsquo;Hazaar Chaurasi ki Maa,&rsquo; &lsquo;Breast Stories&rsquo;, &lsquo;Chotti Munda and His Arrow&rsquo;, &lsquo;Five Plays&rsquo;, etc.</span></p>",
+    "question_index": 13
+  }
+];
     </script>
-    
+
     <!-- Central JS Controller -->
     <script src="../js/mock-core.js"></script>
 </body>

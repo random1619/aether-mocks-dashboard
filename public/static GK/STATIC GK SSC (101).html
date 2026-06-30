@@ -3,43 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aether Mocks</title>
+    <title>Mocks Wallah</title>
     <!-- Fonts & Icons -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    
+
     <!-- Central Stylesheet -->
     <link rel="stylesheet" href="../css/mock-main.css">
-    
+
     <!-- Math Formula Rendering (KaTeX/MathJax) -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    
+
     <!-- Timer Config -->
-    <meta name="exam-duration" content="60">
+    <meta name="exam-duration" content="30">
 </head>
 <body>
     <!-- Welcome Screen -->
     <div class="welcome-screen" id="welcomeScreen">
         <div class="welcome-container">
             <div class="welcome-header" style="margin-bottom: 24px;">
-                <h1 style="font-size: 2rem; font-weight: 700; color: #0f172a; margin-bottom: 8px;"><i class="fas fa-graduation-cap" style="color: #3b82f6;"></i> Aether Mocks</h1>
-                <p style="color: #64748b;">Computer Based Test Portal</p>
+                <h1 style="font-size: 2rem; font-weight: 700; color: var(--text-main); margin-bottom: 8px;"><i class="fas fa-graduation-cap" style="color: var(--primary);"></i> Mocks Wallah</h1>
+                <p style="color: var(--text-muted);">Computer Based Test Portal</p>
             </div>
-            
+
             <div class="test-details" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-bottom: 32px; text-align: left;">
-                <div class="detail-item" style="padding: 12px; background: #f8fafc; border-radius: 8px; border: 1px solid #e2e8f0;">
-                    <div class="detail-label" style="font-size: 0.8rem; color: #64748b;">Total Questions</div>
-                    <div class="detail-value" style="font-size: 1.1rem; font-weight: 600; color: #0f172a;">10</div>
+                <div class="detail-item" style="padding: 12px; background: var(--bg-color); border-radius: 8px; border: 1px solid var(--border-color);">
+                    <div class="detail-label" style="font-size: 0.8rem; color: var(--text-muted);">Total Questions</div>
+                    <div class="detail-value" style="font-size: 1.1rem; font-weight: 600; color: var(--text-main);">15</div>
                 </div>
-                <div class="detail-item" style="padding: 12px; background: #f8fafc; border-radius: 8px; border: 1px solid #e2e8f0;">
-                    <div class="detail-label" style="font-size: 0.8rem; color: #64748b;">Duration</div>
-                    <div class="detail-value" style="font-size: 1.1rem; font-weight: 600; color: #0f172a;">60 mins</div>
+                <div class="detail-item" style="padding: 12px; background: var(--bg-color); border-radius: 8px; border: 1px solid var(--border-color);">
+                    <div class="detail-label" style="font-size: 0.8rem; color: var(--text-muted);">Duration</div>
+                    <div class="detail-value" style="font-size: 1.1rem; font-weight: 600; color: var(--text-main);">30 mins</div>
                 </div>
             </div>
-            
+
             <div class="welcome-actions">
                 <button class="btn btn-primary" id="startBtn" onclick="document.getElementById('welcomeScreen').style.display='none'; document.getElementById('examContainer').style.display='flex';" style="font-size: 1.1rem; padding: 12px 32px; width: 100%;">
                     <i class="fas fa-play" style="margin-right: 8px;"></i> Start Test
@@ -47,12 +47,12 @@
             </div>
         </div>
     </div>
-    
+
     <!-- Main Exam Interface -->
     <div class="exam-container" id="examContainer" style="display: none; height: 100vh; flex-direction: column;">
         <!-- Top Header -->
         <div class="exam-header">
-            <div class="exam-title">Aether Mocks</div>
+            <div class="exam-title">Mocks Wallah</div>
             <div class="header-actions" style="display: flex; align-items: center; gap: 12px;">
                 <button class="btn-icon" id="themeToggleBtn" title="Switch to Dark Mode"><i class="fas fa-moon"></i></button>
                 <button class="btn-icon" id="fullscreenToggleBtn" title="Toggle Fullscreen"><i class="fas fa-expand"></i></button>
@@ -62,14 +62,14 @@
                 </div>
             </div>
         </div>
-        
+
         <!-- Main Content -->
         <div class="mock-container">
             <!-- Question Area -->
             <div class="question-view">
                 <!-- Dynamically populated question container -->
                 <div id="questionContainer" style="flex: 1; display: flex; flex-direction: column; gap: 24px;"></div>
-                
+
                 <!-- Controls -->
                 <div class="nav-controls">
                     <button class="btn btn-secondary btn-prev"><i class="fas fa-chevron-left" style="margin-right: 8px;"></i> Previous</button>
@@ -79,40 +79,221 @@
                     <button class="btn btn-primary btn-next">Next <i class="fas fa-chevron-right" style="margin-left: 8px;"></i></button>
                 </div>
             </div>
-            
+
             <!-- Desktop Navigator Sidebar -->
             <div class="sidebar">
                 <div class="sidebar-section-title">Summary Status</div>
                 <div class="stats-grid">
                     <div class="stat-item">
-                        <div class="stat-count" id="stat-answered" style="color: #10b981;">0</div>
+                        <div class="stat-count" id="stat-answered" style="color: var(--success);">0</div>
                         <div class="stat-name">Answered</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-count" id="stat-flagged" style="color: #f59e0b;">0</div>
+                        <div class="stat-count" id="stat-flagged" style="color: var(--warning);">0</div>
                         <div class="stat-name">Flagged</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-count" id="stat-not-answered" style="color: #64748b;">0</div>
+                        <div class="stat-count" id="stat-not-answered" style="color: var(--text-muted);">0</div>
                         <div class="stat-name">Unanswered</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-count" id="stat-not-visited" style="color: #94a3b8;">0</div>
+                        <div class="stat-count" id="stat-not-visited" style="color: var(--text-muted);">0</div>
                         <div class="stat-name">Not Visited</div>
                     </div>
                 </div>
-                
+
                 <div class="sidebar-section-title" style="margin-top: 16px;">Question Navigator</div>
                 <div class="questions-grid"></div>
             </div>
         </div>
     </div>
-    
+
     <!-- Inject Question Data -->
     <script>
-        const questions = [];
+        const questions = [
+  {
+    "question": " <p><span style=\"font-family:Cambria Math\">1</span><span style=\"font-family:Cambria Math\">.</span><span style=\"font-family:Cambria Math\"> Which of the following festivals is celebrated when the annual harvest takes place in Assam?</span></p>",
+    "options": [
+      "Lohri",
+      "Pongal",
+      "Magh Bihu",
+      "Makaravilakku"
+    ],
+    "correct_option_id": 2,
+    "solution": " <p><span style=\"font-family:Cambria Math\">1</span><span style=\"font-family:Cambria Math\">.(c) </span><span style=\"font-family:Cambria Math\">Magh Bihu  Assam, Lohri  Punjab, Pongal is one of the most important festivals celebrated by Tamil people in Tamil Nadu, Karnataka, Andhra Pradesh, Telangana and Puducherry in India. Makaravilakku is an annual festival held on Makara Sankranti in Kerala, India at the shrine of Sabarimala.</span></p>",
+    "question_index": 0
+  },
+  {
+    "question": " <p><span style=\"font-family:Cambria Math\">2</span><span style=\"font-family:Cambria Math\">.</span><span style=\"font-family:Cambria Math\"> As per Census </span><span style=\"font-family:Cambria Math\">2011</span><span style=\"font-family:Cambria Math\">, what is the Total Fertility Rate (an approximate range) in India?</span></p>",
+    "options": [
+      "3.1 - 3.9",
+      "2.1 - 2.9",
+      "5.1 - 5.9",
+      "4.1 - 4.9"
+    ],
+    "correct_option_id": 1,
+    "solution": " <p><span style=\"font-family:Cambria Math\">2</span><span style=\"font-family:Cambria Math\">.(b) </span><span style=\"font-family:Cambria Math\">The Total Fertility Rate (TFR) for India as per the census </span><span style=\"font-family:Cambria Math\">2011 </span><span style=\"font-family:Cambria Math\">was </span><span style=\"font-family:Cambria Math\">2.4 </span><span style=\"font-family:Cambria Math\">per woman. The total fertility rate of India stands at </span><span style=\"font-family:Cambria Math\">2 </span><span style=\"font-family:Cambria Math\">as of </span><span style=\"font-family:Cambria Math\">2021</span><span style=\"font-family:Cambria Math\">. In rural areas of India, the Fertility rate is </span><span style=\"font-family:Cambria Math\">2.1 </span><span style=\"font-family:Cambria Math\">& in Urban areas of India, it</span><span style=\"font-family:Cambria Math\">’</span><span style=\"font-family:Cambria Math\">s </span><span style=\"font-family:Cambria Math\">1.6</span><span style=\"font-family:Cambria Math\">. Among the bigger States, it varies from </span><span style=\"font-family:Cambria Math\">1.8 </span><span style=\"font-family:Cambria Math\">in Tamil Nadu and West Bengal to </span><span style=\"font-family:Cambria Math\">3 </span><span style=\"font-family:Cambria Math\">in Bihar.</span></p>",
+    "question_index": 1
+  },
+  {
+    "question": " <p><span style=\"font-family:Cambria Math\">3</span><span style=\"font-family:Cambria Math\">.</span><span style=\"font-family:Cambria Math\"> Who among the following is a famous Sitar player?</span></p>",
+    "options": [
+      "Ustad Rehman Khan",
+      "Kishan Maharaj",
+      "Ali Ahmad Hussain",
+      "Anoushka Shankar"
+    ],
+    "correct_option_id": 3,
+    "solution": " <p><span style=\"font-family:Cambria Math\">3</span><span style=\"font-family:Cambria Math\">.(d) </span><span style=\"font-family:Cambria Math\">Anouska Shankar (Daughter of Ravi Shankar)  Sitar Player. Ustad Rehman Khan  Pakhwaj Player. Kishan Maharaj  Tabla Player. Ali Ahmad Hussain  Shehnai Player.</span></p>",
+    "question_index": 2
+  },
+  {
+    "question": " <p><span style=\"font-family:Cambria Math\">4</span><span style=\"font-family:Cambria Math\">.</span><span style=\"font-family:Cambria Math\"> Mohiniyattam is a classical dance form of which Indian state?</span></p>",
+    "options": [
+      "Andhra Pradesh",
+      "Kerala",
+      "Tamil Nadu",
+      "Assam"
+    ],
+    "correct_option_id": 1,
+    "solution": " <p><span style=\"font-family:Cambria Math\">4</span><span style=\"font-family:Cambria Math\">.(b) </span><span style=\"font-family:Cambria Math\">Mohiniyattam, Kathakali  Kerala, Kuchipudi  Andhra Pradesh, Bharatnatyam   Tamil Nadu, Sattriye  Assam.</span></p>",
+    "question_index": 3
+  },
+  {
+    "question": " <p><span style=\"font-family:Cambria Math\">5</span><span style=\"font-family:Cambria Math\">. </span><span style=\"font-family:Cambria Math\">Which state of India has set up District Investment Promotion Agencies (DIPA)?</span></p>",
+    "options": [
+      "Karnataka",
+      "Haryana",
+      "Odisha",
+      "West Bengal"
+    ],
+    "correct_option_id": 2,
+    "solution": " <p><span style=\"font-family:Cambria Math\">5</span><span style=\"font-family:Cambria Math\">.(c) </span><span style=\"font-family:Cambria Math\">Odisha Government has set up District Investment Promotion Agencies (DIPA) to promote and facilitate investment across the State. </span></p>",
+    "question_index": 4
+  },
+  {
+    "question": " <p><span style=\"font-family:Cambria Math\">6</span><span style=\"font-family:Cambria Math\">. </span><span style=\"font-family:Cambria Math\">Which of the following dances is popularly known as the Gotipua Dance?</span></p>",
+    "options": [
+      "Garba",
+      "Bandha Nritya",
+      "Bhangra",
+      "Lavani"
+    ],
+    "correct_option_id": 1,
+    "solution": " <p><span style=\"font-family:Cambria Math\">6</span><span style=\"font-family:Cambria Math\">.(b) </span><span style=\"font-family:Cambria Math\">Bandha Nritya is popularly known as Gotipua Dance (Odisha). Garba  Gujarat, Bhangra   Punjab, Lavani  Maharashtra. </span></p>",
+    "question_index": 5
+  },
+  {
+    "question": " <p><span style=\"font-family:Cambria Math\">7</span><span style=\"font-family:Cambria Math\">. </span><span style=\"font-family:Cambria Math\">Who is the first Indian woman to win the Grammy Award?</span></p>",
+    "options": [
+      "Sunidhi Chauhan",
+      "Lata Mangeshkar",
+      "Asha Bhosle",
+      "Tanvi Shah"
+    ],
+    "correct_option_id": 3,
+    "solution": " <p><span style=\"font-family:Cambria Math\">7</span><span style=\"font-family:Cambria Math\">.(d) </span><span style=\"font-family:Cambria Math\">Tanvi Shah became the first woman to win the Grammy award for her work in Jai Ho in Slumdog Millionaire.</span></p>",
+    "question_index": 6
+  },
+  {
+    "question": " <p><span style=\"font-family:Cambria Math\">8</span><span style=\"font-family:Cambria Math\">. </span><span style=\"font-family:Cambria Math\">Which of the following teams won the first edition of ISL (Indian Super League)?</span></p>",
+    "options": [
+      "Bengaluru FC",
+      "Chennaiyin FC",
+      "Atletico de Kolkata",
+      "Kerala Blasters FC"
+    ],
+    "correct_option_id": 2,
+    "solution": " <p><span style=\"font-family:Cambria Math\">8</span><span style=\"font-family:Cambria Math\">.(c) </span><span style=\"font-family:Cambria Math\">Atletico  de Kolkata won the first edition of Indian Super League in  </span><span style=\"font-family:Cambria Math\">2013</span><span style=\"font-family:Cambria Math\">. Hyderabad FC won the </span><span style=\"font-family:Cambria Math\">2022 </span><span style=\"font-family:Cambria Math\">ISL title. </span></p>",
+    "question_index": 7
+  },
+  {
+    "question": " <p><span style=\"font-family:Cambria Math\">9</span><span style=\"font-family:Cambria Math\">. </span><span style=\"font-family:Cambria Math\">In which state of India is the Nongkrem dance festival celebrated?</span></p>",
+    "options": [
+      "Bihar",
+      "Madhya Pradesh",
+      "Kerala",
+      "Meghalaya"
+    ],
+    "correct_option_id": 3,
+    "solution": " <p><span style=\"font-family:Cambria Math\">9</span><span style=\"font-family:Cambria Math\">.(d) Nongkrem Dance Festival </span><span style=\"font-family:Cambria Math\">celebrated in Meghalaya.</span><span style=\"font-family:Cambria Math\"> Festivals in Meghalaya </span><span style=\"font-family:Cambria Math\"> Shad Suk Mynsiem, Behdienkhlam Festival, Shad Sukra, Wangala Festival, Strawberry Festival etc. </span></p>",
+    "question_index": 8
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\">10</span><span style=\"font-family: Cambria Math;\">. </span><span style=\"font-family: Cambria Math;\">Who among the following is referred to as </span><span style=\"font-family: Cambria Math;\">&lsquo;</span><span style=\"font-family: Cambria Math;\">Prince of Bhangra</span><span style=\"font-family: Cambria Math;\">&rsquo;</span><span style=\"font-family: Cambria Math;\">, due to his Bhangra music?&nbsp;</span></p>\n",
+    "options": [
+      "Diljit Dosanjh",
+      "Sukhbir Singh",
+      "Arijit Singh",
+      "Shaan"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">10</span><span style=\"font-family: Cambria Math;\">.(b) Sukhbir Singh</span><span style=\"font-family: Cambria Math;\"> (Indian singer) is often referred to as the \"Prince of Bhangra\". He was nominated and won the </span><span style=\"font-family: Cambria Math;\">1996 </span><span style=\"font-family: Cambria Math;\">Channel V Awards in three categories: Best Debut Album, Best Male Vocalist and Best Music Video (for \"Punjabi Munde\") for his first album </span><span style=\"font-family: Cambria Math;\">&lsquo;</span><span style=\"font-family: Cambria Math;\">New Style</span><span style=\"font-family: Cambria Math;\">&rsquo;</span><span style=\"font-family: Cambria Math;\">. Bhangra is a type of traditional folk dance of Punjab, originating in the Sialkot area of Punjab.</span></p>\n",
+    "question_index": 9
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\">11</span><span style=\"font-family: Cambria Math;\">. </span><span style=\"font-family: Cambria Math;\">&lsquo;</span><span style=\"font-family: Cambria Math;\">The Race of My Life : An Autobiography</span><span style=\"font-family: Cambria Math;\">&rsquo; </span><span style=\"font-family: Cambria Math;\">is the autobiography of which of the </span><span style=\"font-family: Cambria Math;\">following persons?</span></p>\n",
+    "options": [
+      "Dutee Chand",
+      "Tintu Luka",
+      "PT Usha",
+      "Milkha Singh"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">11</span><span style=\"font-family: Cambria Math;\">.(d)</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&ldquo;</span><span style=\"font-family: Cambria Math;\">Race of my Life: An Autobiography</span><span style=\"font-family: Cambria Math;\">&rdquo; </span><span style=\"font-family: Cambria Math;\">Milkha Singh, </span><span style=\"font-family: Cambria Math;\">&ldquo;</span><span style=\"font-family: Cambria Math;\">Golden girl</span><span style=\"font-family: Cambria Math;\">&rdquo; </span><span style=\"font-family: Cambria Math;\">PT Usha. </span></p>\n",
+    "question_index": 10
+  },
+  {
+    "question": "<p><span style=\\\"font-family: Cambria Math;\\\">12</span><span style=\\\"font-family: Cambria Math;\\\">.</span><span style=\\\"font-family: Cambria Math;\\\"> Which Bharatanatyam dancer became the second youngest dancer to be honoured </span><span style=\\\"font-family: Cambria Math;\\\">with the \\'Padma Shri\\' award in </span><span style=\\\"font-family: Cambria Math;\\\">1991</span><span style=\\\"font-family: Cambria Math;\\\">?</span></p>\\n",
+    "options": [
+      "Hema Malini",
+      "Narthaki Nataraj",
+      "Saroj Khan",
+      "Alarmel Valli"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">12</span><span style=\"font-family: Cambria Math;\">.(d)</span><span style=\"font-family: Cambria Math;\"> Alarmel Valli became the second youngest dancer to be honoured with the </span><span style=\"font-family: Cambria Math;\">&lsquo;</span><span style=\"font-family: Cambria Math;\">Padma Shri </span><span style=\"font-family: Cambria Math;\">&lsquo; </span><span style=\"font-family: Cambria Math;\">Award in </span><span style=\"font-family: Cambria Math;\">1991</span><span style=\"font-family: Cambria Math;\">. Awards </span><span style=\"font-family: Cambria Math;\">2002</span><span style=\"font-family: Cambria Math;\">: Sangeet Natak Akademi Award, New Delhi, </span><span style=\"font-family: Cambria Math;\">2004</span><span style=\"font-family: Cambria Math;\">: Padma Bhushan from the Government of India, </span><span style=\"font-family: Cambria Math;\">2004</span><span style=\"font-family: Cambria Math;\">: Chevalier of Arts and Letters award from the Government of France, </span><span style=\"font-family: Cambria Math;\">2012</span><span style=\"font-family: Cambria Math;\">: Naatya Padmam from Brahma Gana Sabha, Chennai etc.</span></p>\n",
+    "question_index": 11
+  },
+  {
+    "question": " <p><span style=\"font-family:Cambria Math\">13</span><span style=\"font-family:Cambria Math\">.</span><span style=\"font-family:Cambria Math\"> In which state of India is the Wangala festival celebrated?</span></p>",
+    "options": [
+      "Meghalaya",
+      "Kerala",
+      "Goa",
+      "Jharkhand"
+    ],
+    "correct_option_id": 0,
+    "solution": " <p><span style=\"font-family:Cambria Math\">13</span><span style=\"font-family:Cambria Math\">.(a) </span><span style=\"font-family:Cambria Math\">Wangala Festival of Meghalaya is a most popular festival among the Garos of Meghalaya, India. Wangala Festival is a harvest festival held in honour of Saljong, the Sun-god of fertility.</span></p>",
+    "question_index": 12
+  },
+  {
+    "question": "<p><span style=\\\"font-family: Cambria Math;\\\">14</span><span style=\\\"font-family: Cambria Math;\\\">. </span><span style=\\\"font-family: Cambria Math;\\\">\\'The White Tiger provides\\' a darkly humorous perspective of India</span><span style=\\\"font-family: Cambria Math;\\\">&rsquo;</span><span style=\\\"font-family: Cambria Math;\\\">s class struggle in a </span><span style=\\\"font-family: Cambria Math;\\\">globalised world. It is written by __________.</span></p>\\n",
+    "options": [
+      "Shashi Tharoor",
+      "Amitav Ghosh",
+      "Aravind Adiga",
+      "Vikram Seth"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">14</span><span style=\"font-family: Cambria Math;\">.(c)</span><span style=\"font-family: Cambria Math;\"> Aravind Adiga Books </span><span style=\"font-family: Cambria Math;\">&lsquo;</span><span style=\"font-family: Cambria Math;\">The White Tiger</span><span style=\"font-family: Cambria Math;\">&rsquo;</span><span style=\"font-family: Cambria Math;\">, </span><span style=\"font-family: Cambria Math;\">&lsquo;</span><span style=\"font-family: Cambria Math;\">Amnesty</span><span style=\"font-family: Cambria Math;\">&rsquo;</span><span style=\"font-family: Cambria Math;\">, </span><span style=\"font-family: Cambria Math;\">&lsquo;</span><span style=\"font-family: Cambria Math;\">Selection Day</span><span style=\"font-family: Cambria Math;\">&rsquo;</span><span style=\"font-family: Cambria Math;\">, </span><span style=\"font-family: Cambria Math;\">&lsquo;</span><span style=\"font-family: Cambria Math;\">Last Man Tower</span><span style=\"font-family: Cambria Math;\">&rsquo;</span><span style=\"font-family: Cambria Math;\">, </span><span style=\"font-family: Cambria Math;\">&lsquo;</span><span style=\"font-family: Cambria Math;\">Between the Assassinations</span><span style=\"font-family: Cambria Math;\">&rsquo;</span><span style=\"font-family: Cambria Math;\">, </span><span style=\"font-family: Cambria Math;\">&lsquo;</span><span style=\"font-family: Cambria Math;\">Milkman</span><span style=\"font-family: Cambria Math;\">&rsquo;</span><span style=\"font-family: Cambria Math;\">, </span><span style=\"font-family: Cambria Math;\">&lsquo;</span><span style=\"font-family: Cambria Math;\">Girl Woman Other</span><span style=\"font-family: Cambria Math;\">&rsquo;</span><span style=\"font-family: Cambria Math;\">. </span></p>\n",
+    "question_index": 13
+  },
+  {
+    "question": " <p><span style=\"font-family:Cambria Math\">15</span><span style=\"font-family:Cambria Math\">.</span><span style=\"font-family:Cambria Math\"> In basketball, a free-throw is worth how many points?</span></p>",
+    "options": [
+      "1",
+      "2",
+      "3",
+      "4"
+    ],
+    "correct_option_id": 0,
+    "solution": " <p><span style=\"font-family:Cambria Math\">15</span><span style=\"font-family:Cambria Math\">.(a) </span><span style=\"font-family:Cambria Math\">In Basketball free throws are worth one point. A traditional basketball team has </span><span style=\"font-family:Cambria Math\">12 </span><span style=\"font-family:Cambria Math\">players, with five basketball players on the court at any given time. </span></p>",
+    "question_index": 14
+  }
+];
     </script>
-    
+
     <!-- Central JS Controller -->
     <script src="../js/mock-core.js"></script>
 </body>

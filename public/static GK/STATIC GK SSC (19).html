@@ -3,43 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aether Mocks</title>
+    <title>Mocks Wallah</title>
     <!-- Fonts & Icons -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    
+
     <!-- Central Stylesheet -->
     <link rel="stylesheet" href="../css/mock-main.css">
-    
+
     <!-- Math Formula Rendering (KaTeX/MathJax) -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    
+
     <!-- Timer Config -->
-    <meta name="exam-duration" content="60">
+    <meta name="exam-duration" content="30">
 </head>
 <body>
     <!-- Welcome Screen -->
     <div class="welcome-screen" id="welcomeScreen">
         <div class="welcome-container">
             <div class="welcome-header" style="margin-bottom: 24px;">
-                <h1 style="font-size: 2rem; font-weight: 700; color: #0f172a; margin-bottom: 8px;"><i class="fas fa-graduation-cap" style="color: #3b82f6;"></i> Aether Mocks</h1>
-                <p style="color: #64748b;">Computer Based Test Portal</p>
+                <h1 style="font-size: 2rem; font-weight: 700; color: var(--text-main); margin-bottom: 8px;"><i class="fas fa-graduation-cap" style="color: var(--primary);"></i> Mocks Wallah</h1>
+                <p style="color: var(--text-muted);">Computer Based Test Portal</p>
             </div>
-            
+
             <div class="test-details" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-bottom: 32px; text-align: left;">
-                <div class="detail-item" style="padding: 12px; background: #f8fafc; border-radius: 8px; border: 1px solid #e2e8f0;">
-                    <div class="detail-label" style="font-size: 0.8rem; color: #64748b;">Total Questions</div>
-                    <div class="detail-value" style="font-size: 1.1rem; font-weight: 600; color: #0f172a;">10</div>
+                <div class="detail-item" style="padding: 12px; background: var(--bg-color); border-radius: 8px; border: 1px solid var(--border-color);">
+                    <div class="detail-label" style="font-size: 0.8rem; color: var(--text-muted);">Total Questions</div>
+                    <div class="detail-value" style="font-size: 1.1rem; font-weight: 600; color: var(--text-main);">15</div>
                 </div>
-                <div class="detail-item" style="padding: 12px; background: #f8fafc; border-radius: 8px; border: 1px solid #e2e8f0;">
-                    <div class="detail-label" style="font-size: 0.8rem; color: #64748b;">Duration</div>
-                    <div class="detail-value" style="font-size: 1.1rem; font-weight: 600; color: #0f172a;">60 mins</div>
+                <div class="detail-item" style="padding: 12px; background: var(--bg-color); border-radius: 8px; border: 1px solid var(--border-color);">
+                    <div class="detail-label" style="font-size: 0.8rem; color: var(--text-muted);">Duration</div>
+                    <div class="detail-value" style="font-size: 1.1rem; font-weight: 600; color: var(--text-main);">30 mins</div>
                 </div>
             </div>
-            
+
             <div class="welcome-actions">
                 <button class="btn btn-primary" id="startBtn" onclick="document.getElementById('welcomeScreen').style.display='none'; document.getElementById('examContainer').style.display='flex';" style="font-size: 1.1rem; padding: 12px 32px; width: 100%;">
                     <i class="fas fa-play" style="margin-right: 8px;"></i> Start Test
@@ -47,12 +47,12 @@
             </div>
         </div>
     </div>
-    
+
     <!-- Main Exam Interface -->
     <div class="exam-container" id="examContainer" style="display: none; height: 100vh; flex-direction: column;">
         <!-- Top Header -->
         <div class="exam-header">
-            <div class="exam-title">Aether Mocks</div>
+            <div class="exam-title">Mocks Wallah</div>
             <div class="header-actions" style="display: flex; align-items: center; gap: 12px;">
                 <button class="btn-icon" id="themeToggleBtn" title="Switch to Dark Mode"><i class="fas fa-moon"></i></button>
                 <button class="btn-icon" id="fullscreenToggleBtn" title="Toggle Fullscreen"><i class="fas fa-expand"></i></button>
@@ -62,14 +62,14 @@
                 </div>
             </div>
         </div>
-        
+
         <!-- Main Content -->
         <div class="mock-container">
             <!-- Question Area -->
             <div class="question-view">
                 <!-- Dynamically populated question container -->
                 <div id="questionContainer" style="flex: 1; display: flex; flex-direction: column; gap: 24px;"></div>
-                
+
                 <!-- Controls -->
                 <div class="nav-controls">
                     <button class="btn btn-secondary btn-prev"><i class="fas fa-chevron-left" style="margin-right: 8px;"></i> Previous</button>
@@ -79,40 +79,221 @@
                     <button class="btn btn-primary btn-next">Next <i class="fas fa-chevron-right" style="margin-left: 8px;"></i></button>
                 </div>
             </div>
-            
+
             <!-- Desktop Navigator Sidebar -->
             <div class="sidebar">
                 <div class="sidebar-section-title">Summary Status</div>
                 <div class="stats-grid">
                     <div class="stat-item">
-                        <div class="stat-count" id="stat-answered" style="color: #10b981;">0</div>
+                        <div class="stat-count" id="stat-answered" style="color: var(--success);">0</div>
                         <div class="stat-name">Answered</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-count" id="stat-flagged" style="color: #f59e0b;">0</div>
+                        <div class="stat-count" id="stat-flagged" style="color: var(--warning);">0</div>
                         <div class="stat-name">Flagged</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-count" id="stat-not-answered" style="color: #64748b;">0</div>
+                        <div class="stat-count" id="stat-not-answered" style="color: var(--text-muted);">0</div>
                         <div class="stat-name">Unanswered</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-count" id="stat-not-visited" style="color: #94a3b8;">0</div>
+                        <div class="stat-count" id="stat-not-visited" style="color: var(--text-muted);">0</div>
                         <div class="stat-name">Not Visited</div>
                     </div>
                 </div>
-                
+
                 <div class="sidebar-section-title" style="margin-top: 16px;">Question Navigator</div>
                 <div class="questions-grid"></div>
             </div>
         </div>
     </div>
-    
+
     <!-- Inject Question Data -->
     <script>
-        const questions = [];
+        const questions = [
+  {
+    "question": "<p>1. Hockey India, under the Ministry of___________,is the governing body responsible for planning and implementing all activities related to men\\'s and women\\'s hockey in India</p>",
+    "options": [
+      "Games",
+      "Education",
+      "Youth Affairs and Sports",
+      "Child Development"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p>1.(c) <strong>Youth Affairs and Sports.</strong> Hockey India was recognized as the National Sports Federation by the Ministry of Youth Affairs &amp; Sports, Government of India, in 2014, as the sole body responsible for promoting hockey in India. Its headquarters is located in New Delhi.</p>",
+    "question_index": 0
+  },
+  {
+    "question": "<p>2. Which city hosted the 2018 Asian games?</p>",
+    "options": [
+      "Bangkok",
+      "Tokyo",
+      "Jakarta and Palembang",
+      "Hangzhou"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p>2.(c) <strong>Jakarta and Palembang</strong> (Indonesia). Host cities &amp; countries of the Asian Games: 1951 (First edition) - New Delhi (India), 1954 - Manila (Philippines), 1966 - Bangkok (Thailand), 1982 - New Delhi, 2002 - Busan (South Korea), 2022 - Hangzhou (China), 2026 - Aichi and Nagoya (Japan), 2030 - Doha (Qatar).</p>",
+    "question_index": 1
+  },
+  {
+    "question": "<p>3.__________is a storytelling classical dance form from Andhra Pradesh.</p>",
+    "options": [
+      "Kathak",
+      "Sattriya",
+      "Manipuri",
+      "Kuchipudi"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p>3.(d) <strong>Kuchipudi </strong>is a classical Indian dance form that originated in the village of Kuchipudi, located in Andhra Pradesh. Classical Dances of India with States: Bharatanatyam - Tamil Nadu, Kathak - Uttar Pradesh, Odissi - Odisha, Kathakali &amp; Mohiniyattam - Kerala, Sattriya - Assam, and Manipuri - Manipur.</p>",
+    "question_index": 2
+  },
+  {
+    "question": "<p>4. Which of the following dancers of India won the Sangeet Natak Akademi Award for Folk and Tribal dance in the year 2018?</p>",
+    "options": [
+      "Arjun Singh Dhurwey",
+      "Gopika Varma",
+      "Dr. Aruna Mohanty",
+      "Tapan Kumar Pattanayak"
+    ],
+    "correct_option_id": 0,
+    "solution": "<p>4.(a) <strong>Arjun Singh Dhurwey</strong> is famous for popularising Baiga folk songs and dance. The Baiga Pardhauni dance is the main dance of the Baiga tribe. In this form of dance, the performers wear the masks of peacocks, elephants, horses, etc. He received the Tulsi Samman Award from the Madhya Pradesh government and the Padma Shri in 2022.</p>",
+    "question_index": 3
+  },
+  {
+    "question": "<p>5. In which year did India host the second Asian Games?</p>",
+    "options": [
+      "1978",
+      "1980",
+      "1999",
+      "1982"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p>5.(d) <strong>1982.</strong> The Asian Games are organized by the Olympic Council of Asia (OCA) every four years. India hosted the first Asian Games in 1951. Thailand has hosted the most Asian Games, in 1966, 1970, 1978, and 1998. The 20th Asian Games (2026) will be held in Nagoya, Japan.</p>",
+    "question_index": 4
+  },
+  {
+    "question": "<p>6.Free throw is the sport term of_______.</p>",
+    "options": [
+      "Football",
+      "Cricket",
+      "Badminton",
+      "Basketball"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p>6.(d) <strong>Basketball.</strong> Sports and Terminologies: Basketball - Slam Dunk, Alley-oop, Bank Shot, Double Dribble, Hook Shot. Football - Corner Kick, Goalkeeper, Offside, Penalty Kick, Counterattack. Cricket - LBW, Hit Wicket, Googly, Dead Ball, Bouncer. Badminton - Alley, Baseline, Centerline, Drive, Drop Shot, Net Shot, Wood Shot, Push Shot, etc.</p>",
+    "question_index": 5
+  },
+  {
+    "question": "The couple who won Padma Bhushan in 2009 for Bharatanatyam are__________.",
+    "options": [
+      "Krishna Ella and Suchitra Ella",
+      "K.V. Sampath Kumar and Vidushi K.S. Jayalakshmi",
+      "Vannadil Pudiyaveettil Dhananjayan and Shanta Dhananjayan",
+      "Mahaboob Subhani and Kaleeshabi Mahboob"
+    ],
+    "correct_option_id": 2,
+    "solution": "7.(c) Some famous Bharatanatyam exponents include T. Balasaraswati, Kumari Kamala, Sucheta Bhide Chapekar, Yamini Krishnamurthy, Saroja Vaidyanathan, Alarmel Valli, Geeta Chandran, and Mallika Sarabhai.",
+    "question_index": 6
+  },
+  {
+    "question": "<p>8. On which Indian musician\\'s life was the documentary film \\\"Bansuri Guru\\\" based on?</p>",
+    "options": [
+      "T.H. Vinayakram",
+      "Pandit Ravi Shankar",
+      "Hari Prasad Chaurasia",
+      "Pandit Shivkumar Sharma"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p>8.(c) <strong>Hari Prasad Chaurasia</strong>, an Indian flutist associated with the Maihar Senia Gharana, has received several prestigious awards, including the Sangeet Natak Akademi Award (1983), the Padma Bhushan (1992), and the Padma Vibhushan (2000). Other famous flutists include Ronu Majumdar, Devendra Murdeshwar, Raghunath Seth, Pt. Rajendra Prasanna, and Chetan Joshi.</p>",
+    "question_index": 7
+  },
+  {
+    "question": "<p>9. Which of the following terms is NOT related with cricket? <br>I. Runs<br>II. Dribbling</p>",
+    "options": [
+      "Both I and II",
+      "Neither I nor II",
+      "Only I",
+      "Only II"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p>9.(d) <strong>Only II.</strong> Cricket is a bat-and-ball game played between two teams of eleven players on a field at the center of which is a 22-yard pitch with a wicket at each end, each comprising two bails balanced on three stumps. Cricket Terms - Bouncer, Boundary, Chinaman, Dead ball, Economy rate, and leg before wicket (LBW).</p>",
+    "question_index": 8
+  },
+  {
+    "question": "<p>10. Which of the following state is associated with Kathak?</p>",
+    "options": [
+      "Uttar Pradesh",
+      "Kerala",
+      "Andhra Pradesh",
+      "Bihar"
+    ],
+    "correct_option_id": 0,
+    "solution": "<p>10.(a) <strong>Uttar Pradesh.</strong> The Sangeet Natak Academy recognizes eight classical dances: Bharatanatyam (Tamil Nadu), Kuchipudi (Andhra Pradesh), Odissi (Odisha), Kathakali and Mohiniyattam (Kerala), Sattriya (Assam), Manipuri (Manipur), Kathak (Uttar Pradesh). Additionally, the Indian Ministry of Culture includes Chhau in its list, recognising nine total styles.</p>",
+    "question_index": 9
+  },
+  {
+    "question": "<p>11.Which one is the Traditional Celebrations of Kerala ?</p>",
+    "options": [
+      "Nag Panchami",
+      "Hornbill Festival",
+      "Baisakhi",
+      "Onam"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p>11.(d) <strong>Onam </strong>is a harvest festival celebrated in the months of August-September. Other festivals of Kerala include Thrissur Pooram, the Boat Festival, Attukal Pongala, Vishu, Makaravilakku, and the Theyyam Festival.</p>",
+    "question_index": 10
+  },
+  {
+    "question": "<p>12. Who among the following addressed the World Parliament of Religions at Chicago in 1893?</p>",
+    "options": [
+      "Swami Vivekananda",
+      "Ishwarchandra Vidyasagar",
+      "Swami Dayanand Saraswati",
+      "Raja Rammohun Roy"
+    ],
+    "correct_option_id": 0,
+    "solution": "<p>12.(a) <strong>Swami Vivekananda</strong> (Narendranath Datta). He was born on 12th January 1863 in Calcutta. In 1893, upon the request of Maharaja Ajit Singh of the Khetri State, he took the name &lsquo;Vivekananda&rsquo;. He was the chief disciple of the Ramakrishna Paramhansa and established the Ramakrishna Mission in 1897. In 1899, he established the Belur Math, which became his permanent abode. He died at Belur Math in 1902.</p>",
+    "question_index": 11
+  },
+  {
+    "question": "<p>13. Which of the following sports is played by Indian player Sandeep Kumar ?</p>",
+    "options": [
+      "Archery",
+      "Boxing",
+      "Wrestling",
+      "Cricket"
+    ],
+    "correct_option_id": 0,
+    "solution": "<p>13.(a) <strong>Archery.</strong> Famous Indian archers: Pravin Jadhav, Atanu Das, Tarundeep Rai, Bombayla Devi Laishram, Dola Banerjee, Deepika Kumari, Jayanta Talukdar, etc.</p>",
+    "question_index": 12
+  },
+  {
+    "question": "<p>14. _____________, originating from Kerala in Southern India, derives its name from Mohini, a mythological enchantress.</p>",
+    "options": [
+      "Manipuri Dance",
+      "Bihu Dance",
+      "Mohiniyattam",
+      "Bharatanatyam"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p>14.(c) <strong>Mohiniattam </strong>is characterized by its graceful and flowing movements, and is often performed to tell stories from Hindu mythology. Famous exponents : Kalamandalam Kalyanikutty Amma, Thankamony, Krishna Panicker and Mukundraja, Sunanda Nair, Smitha Rajan, etc. Bharatanatyam, a classical dance from Tamil Nadu, highlights emotion, music, rhythm, and intricate movements. It often tells stories from Hindu mythology through expressive hand gestures and footwork.</p>",
+    "question_index": 13
+  },
+  {
+    "question": "<p>15. Which of the following festivals is celebrated by the Khamtis tribe of Arunachal Pradesh</p>",
+    "options": [
+      "Mopin",
+      "Sangken",
+      "Reh",
+      "Tam ladu"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p>15.(b) <strong>Sangken</strong> is a socio-religious festival celebrated by the Khamti and Singpho tribes, who follow the Theravada Buddhist sect. It marks the advent of spring and is observed annually in April (Naun-Haa) according to the Khamti calendar. Mopin is an agricultural festival widely celebrated by the Galo tribes of Arunachal Pradesh, while Reh is widely observed by the Idu tribes of the same region.</p>",
+    "question_index": 14
+  }
+];
     </script>
-    
+
     <!-- Central JS Controller -->
     <script src="../js/mock-core.js"></script>
 </body>

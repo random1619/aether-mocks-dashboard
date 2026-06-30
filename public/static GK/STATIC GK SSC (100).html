@@ -3,43 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aether Mocks</title>
+    <title>Mocks Wallah</title>
     <!-- Fonts & Icons -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    
+
     <!-- Central Stylesheet -->
     <link rel="stylesheet" href="../css/mock-main.css">
-    
+
     <!-- Math Formula Rendering (KaTeX/MathJax) -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    
+
     <!-- Timer Config -->
-    <meta name="exam-duration" content="60">
+    <meta name="exam-duration" content="40">
 </head>
 <body>
     <!-- Welcome Screen -->
     <div class="welcome-screen" id="welcomeScreen">
         <div class="welcome-container">
             <div class="welcome-header" style="margin-bottom: 24px;">
-                <h1 style="font-size: 2rem; font-weight: 700; color: #0f172a; margin-bottom: 8px;"><i class="fas fa-graduation-cap" style="color: #3b82f6;"></i> Aether Mocks</h1>
-                <p style="color: #64748b;">Computer Based Test Portal</p>
+                <h1 style="font-size: 2rem; font-weight: 700; color: var(--text-main); margin-bottom: 8px;"><i class="fas fa-graduation-cap" style="color: var(--primary);"></i> Mocks Wallah</h1>
+                <p style="color: var(--text-muted);">Computer Based Test Portal</p>
             </div>
-            
+
             <div class="test-details" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-bottom: 32px; text-align: left;">
-                <div class="detail-item" style="padding: 12px; background: #f8fafc; border-radius: 8px; border: 1px solid #e2e8f0;">
-                    <div class="detail-label" style="font-size: 0.8rem; color: #64748b;">Total Questions</div>
-                    <div class="detail-value" style="font-size: 1.1rem; font-weight: 600; color: #0f172a;">10</div>
+                <div class="detail-item" style="padding: 12px; background: var(--bg-color); border-radius: 8px; border: 1px solid var(--border-color);">
+                    <div class="detail-label" style="font-size: 0.8rem; color: var(--text-muted);">Total Questions</div>
+                    <div class="detail-value" style="font-size: 1.1rem; font-weight: 600; color: var(--text-main);">20</div>
                 </div>
-                <div class="detail-item" style="padding: 12px; background: #f8fafc; border-radius: 8px; border: 1px solid #e2e8f0;">
-                    <div class="detail-label" style="font-size: 0.8rem; color: #64748b;">Duration</div>
-                    <div class="detail-value" style="font-size: 1.1rem; font-weight: 600; color: #0f172a;">60 mins</div>
+                <div class="detail-item" style="padding: 12px; background: var(--bg-color); border-radius: 8px; border: 1px solid var(--border-color);">
+                    <div class="detail-label" style="font-size: 0.8rem; color: var(--text-muted);">Duration</div>
+                    <div class="detail-value" style="font-size: 1.1rem; font-weight: 600; color: var(--text-main);">40 mins</div>
                 </div>
             </div>
-            
+
             <div class="welcome-actions">
                 <button class="btn btn-primary" id="startBtn" onclick="document.getElementById('welcomeScreen').style.display='none'; document.getElementById('examContainer').style.display='flex';" style="font-size: 1.1rem; padding: 12px 32px; width: 100%;">
                     <i class="fas fa-play" style="margin-right: 8px;"></i> Start Test
@@ -47,12 +47,12 @@
             </div>
         </div>
     </div>
-    
+
     <!-- Main Exam Interface -->
     <div class="exam-container" id="examContainer" style="display: none; height: 100vh; flex-direction: column;">
         <!-- Top Header -->
         <div class="exam-header">
-            <div class="exam-title">Aether Mocks</div>
+            <div class="exam-title">Mocks Wallah</div>
             <div class="header-actions" style="display: flex; align-items: center; gap: 12px;">
                 <button class="btn-icon" id="themeToggleBtn" title="Switch to Dark Mode"><i class="fas fa-moon"></i></button>
                 <button class="btn-icon" id="fullscreenToggleBtn" title="Toggle Fullscreen"><i class="fas fa-expand"></i></button>
@@ -62,14 +62,14 @@
                 </div>
             </div>
         </div>
-        
+
         <!-- Main Content -->
         <div class="mock-container">
             <!-- Question Area -->
             <div class="question-view">
                 <!-- Dynamically populated question container -->
                 <div id="questionContainer" style="flex: 1; display: flex; flex-direction: column; gap: 24px;"></div>
-                
+
                 <!-- Controls -->
                 <div class="nav-controls">
                     <button class="btn btn-secondary btn-prev"><i class="fas fa-chevron-left" style="margin-right: 8px;"></i> Previous</button>
@@ -79,40 +79,281 @@
                     <button class="btn btn-primary btn-next">Next <i class="fas fa-chevron-right" style="margin-left: 8px;"></i></button>
                 </div>
             </div>
-            
+
             <!-- Desktop Navigator Sidebar -->
             <div class="sidebar">
                 <div class="sidebar-section-title">Summary Status</div>
                 <div class="stats-grid">
                     <div class="stat-item">
-                        <div class="stat-count" id="stat-answered" style="color: #10b981;">0</div>
+                        <div class="stat-count" id="stat-answered" style="color: var(--success);">0</div>
                         <div class="stat-name">Answered</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-count" id="stat-flagged" style="color: #f59e0b;">0</div>
+                        <div class="stat-count" id="stat-flagged" style="color: var(--warning);">0</div>
                         <div class="stat-name">Flagged</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-count" id="stat-not-answered" style="color: #64748b;">0</div>
+                        <div class="stat-count" id="stat-not-answered" style="color: var(--text-muted);">0</div>
                         <div class="stat-name">Unanswered</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-count" id="stat-not-visited" style="color: #94a3b8;">0</div>
+                        <div class="stat-count" id="stat-not-visited" style="color: var(--text-muted);">0</div>
                         <div class="stat-name">Not Visited</div>
                     </div>
                 </div>
-                
+
                 <div class="sidebar-section-title" style="margin-top: 16px;">Question Navigator</div>
                 <div class="questions-grid"></div>
             </div>
         </div>
     </div>
-    
+
     <!-- Inject Question Data -->
     <script>
-        const questions = [];
+        const questions = [
+  {
+    "question": "<p><span style=\\\"font-family: Cambria Math;\\\">1</span><span style=\\\"font-family: Cambria Math;\\\">.</span><span style=\\\"font-family: Cambria Math;\\\"> Who among the following is the author of the book \\'Sea of Poppies\\'?&nbsp;</span></p>",
+    "options": [
+      "Amitav Ghosh",
+      "Salman Rushdie",
+      "Rohinton Mistry",
+      "Vikram Chandra"
+    ],
+    "correct_option_id": 0,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">1</span><span style=\"font-family: Cambria Math;\">.(a) </span><span style=\"font-family: Cambria Math;\">Amitav Ghosh is the author of the book Sea of Poppies. He </span><span style=\"font-family: Cambria Math;\">was shortlisted for the Man Booker Prize in </span><span style=\"font-family: Cambria Math;\">2008</span><span style=\"font-family: Cambria Math;\">. Sea of Poppies is the first volume of the Ibis trilogy (comprising Sea of Poppies, River of Smoke, and Flood of Fire). Other famous books by Amitav Ghosh are River of Palace, The Glass Palace, and The Shadow Lines.</span></p>",
+    "question_index": 0
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\">2</span><span style=\"font-family: Cambria Math;\">. </span><span style=\"font-family: Cambria Math;\">Who among the following wrote the non-fiction </span><span style=\"font-family: Cambria Math;\">&lsquo;</span><span style=\"font-family: Cambria Math;\">The Paradoxical Prime Minister: Narendra Modi and His India</span><span style=\"font-family: Cambria Math;\">&rsquo;</span><span style=\"font-family: Cambria Math;\">?&nbsp;</span></p>",
+    "options": [
+      "Shashi Tharoor",
+      "Arundhati Roy",
+      "Salman Rushdie",
+      "Chetan Bhagat"
+    ],
+    "correct_option_id": 0,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">2</span><span style=\"font-family: Cambria Math;\">.(a) </span><span style=\"font-family: Cambria Math;\">&lsquo;</span><span style=\"font-family: Cambria Math;\">The Paradoxical Prime Minister: Narendra Modi and His India</span><span style=\"font-family: Cambria Math;\">&rsquo; </span><span style=\"font-family: Cambria Math;\">is a </span><span style=\"font-family: Cambria Math;\">2018 </span><span style=\"font-family: Cambria Math;\">non-fiction book written by a senior leader of the Indian national congress, Shashi Tharoor, about the Prime minister of India, Narendra Modi. </span></p>",
+    "question_index": 1
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\">3</span><span style=\"font-family: Cambria Math;\">. </span><span style=\"font-family: Cambria Math;\">Who among the following authored </span><span style=\"font-family: Cambria Math;\">&lsquo;</span><span style=\"font-family: Cambria Math;\">Poverty and Un-British Rule in India</span><span style=\"font-family: Cambria Math;\">&rsquo;</span><span style=\"font-family: Cambria Math;\">?&nbsp;</span></p>",
+    "options": [
+      "Jawaharlal Nehru",
+      "Mahatma Gandhi",
+      "Rabindranath Tagore",
+      "Dadabhai Naoroji"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">3</span><span style=\"font-family: Cambria Math;\">.(d)</span><span style=\"font-family: Cambria Math;\"> Dadabhai Naoroji authored </span><span style=\"font-family: Cambria Math;\">&lsquo;</span><span style=\"font-family: Cambria Math;\">Poverty and Un-British Rule in India</span><span style=\"font-family: Cambria Math;\">&rsquo;</span><span style=\"font-family: Cambria Math;\">. He was a Parsi scholar and has authored great books such as </span><span style=\"font-family: Cambria Math;\">&lsquo;</span><span style=\"font-family: Cambria Math;\">Poverty of India</span><span style=\"font-family: Cambria Math;\">&rsquo;</span><span style=\"font-family: Cambria Math;\">, </span><span style=\"font-family: Cambria Math;\">&lsquo;</span><span style=\"font-family: Cambria Math;\">The wants and means of India</span><span style=\"font-family: Cambria Math;\">&rsquo; </span><span style=\"font-family: Cambria Math;\">and many others.</span></p>",
+    "question_index": 2
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\">4</span><span style=\"font-family: Cambria Math;\">. </span><span style=\"font-family: Cambria Math;\">How is Dhanpat Rai Srivastava better known?&nbsp;</span></p>",
+    "options": [
+      "Agyeya",
+      "Dinkar",
+      "Nirala",
+      "Premchand"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">4</span><span style=\"font-family: Cambria Math;\">.(d) </span><span style=\"font-family: Cambria Math;\">Dhanpat Rai Srivastava is better known as Premchand. Premchand was an Indian writer known for his modern Hindustani literature. Some of his works include Godaan, Karambhoomi, Gaban, Mansarovar, Idgah.</span></p>",
+    "question_index": 3
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\">5</span><span style=\"font-family: Cambria Math;\">.</span><span style=\"font-family: Cambria Math;\"> Siddhendra Yogi, a doyen of the ______ dance form, was lauded as Adi Guru.&nbsp;</span></p>",
+    "options": [
+      "Bharatanatyam",
+      "Kuchipudi",
+      "Kathakali",
+      "Kathak"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p><span style=\\\"font-family: Cambria Math;\\\">5</span><span style=\\\"font-family: Cambria Math;\\\">.(b)</span><span style=\\\"font-family: Cambria Math;\\\"> Siddhendra Yogi is a doyen of the Kuchipudi dance form. He is the author of \\'Bhama Kalapam\\', the jewel of Kuchipudi and he is the one who brought a distinctive style to Kuchipudi. Kuchipudi is one of the eight major Indian classical dances and originated in the state of Andhra Pradesh.</span></p>",
+    "question_index": 4
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\">6</span><span style=\"font-family: Cambria Math;\">.</span><span style=\"font-family: Cambria Math;\"> When is National Girl Child Day observed annually in India?&nbsp;</span></p>",
+    "options": [
+      "5 June",
+      "9 September",
+      "12 May",
+      "24 January"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">6</span><span style=\"font-family: Cambria Math;\">.(d) </span><span style=\"font-family: Cambria Math;\">On </span><span style=\"font-family: Cambria Math;\">24 </span><span style=\"font-family: Cambria Math;\">January is the National Girl Child Day observed annually in India. It was started by the Ministry of Women and Child Development and the Government of India in </span><span style=\"font-family: Cambria Math;\">2008</span><span style=\"font-family: Cambria Math;\">. The purpose of the celebration is to spread awareness among people about all the inequalities faced by girls in Indian society.</span></p>",
+    "question_index": 5
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\">7</span><span style=\"font-family: Cambria Math;\">. </span><span style=\"font-family: Cambria Math;\">When is the Hindi Diwas observed annually?&nbsp;</span></p>",
+    "options": [
+      "14 March",
+      "6 April",
+      "14 September",
+      "2 October"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">7</span><span style=\"font-family: Cambria Math;\">.(c) </span><span style=\"font-family: Cambria Math;\">The Hindi Diwas is observed annually on </span><span style=\"font-family: Cambria Math;\">14 </span><span style=\"font-family: Cambria Math;\">September and aims to raise awareness about the language and also commemorate the event when Hindi was adopted as one of the official languages of India.</span></p>",
+    "question_index": 6
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\">8</span><span style=\"font-family: Cambria Math;\">. </span><span style=\"font-family: Cambria Math;\">When is the statehood day of Tripura observed?&nbsp;</span></p>",
+    "options": [
+      "21 January",
+      "12 March",
+      "21 February",
+      "3 October"
+    ],
+    "correct_option_id": 0,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">8</span><span style=\"font-family: Cambria Math;\">.(a) </span><span style=\"font-family: Cambria Math;\">Tripura was conferred statehood on </span><span style=\"font-family: Cambria Math;\">21 </span><span style=\"font-family: Cambria Math;\">January. January </span><span style=\"font-family: Cambria Math;\">21</span><span style=\"font-family: Cambria Math;\">, </span><span style=\"font-family: Cambria Math;\">2021 </span><span style=\"font-family: Cambria Math;\">marked the </span><span style=\"font-family: Cambria Math;\">49</span><span style=\"font-family: Cambria Math;\">th statehood day of northeastern states Manipur, Tripura, and Meghalaya.</span></p>",
+    "question_index": 7
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\">9</span><span style=\"font-family: Cambria Math;\">. </span><span style=\"font-family: Cambria Math;\">On which of the following days is National Disaster Response Force Raising Day celebrated annually?&nbsp;</span></p>",
+    "options": [
+      "21 September&nbsp;",
+      "23 October",
+      "19 January&nbsp;",
+      "6 March"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">9</span><span style=\"font-family: Cambria Math;\">.(c) </span><span style=\"font-family: Cambria Math;\">National Disaster Response Force came into existence on January </span><span style=\"font-family: Cambria Math;\">19</span><span style=\"font-family: Cambria Math;\">, </span><span style=\"font-family: Cambria Math;\">2006</span><span style=\"font-family: Cambria Math;\">. NDRF celebrates its raising day annually on </span><span style=\"font-family: Cambria Math;\">19 </span><span style=\"font-family: Cambria Math;\">January. This year it celebrated its </span><span style=\"font-family: Cambria Math;\">16</span><span style=\"font-family: Cambria Math;\">th anniversary.</span></p>",
+    "question_index": 8
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\">10</span><span style=\"font-family: Cambria Math;\">. </span><span style=\"font-family: Cambria Math;\">When is the National Voters Day observed by the Election Commission of India?&nbsp;</span></p>",
+    "options": [
+      "6 May&nbsp;",
+      "26 June",
+      "15 August&nbsp;",
+      "25 January"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">10</span><span style=\"font-family: Cambria Math;\">.(d)</span><span style=\"font-family: Cambria Math;\"> National Voters Day is observed on </span><span style=\"font-family: Cambria Math;\">25 </span><span style=\"font-family: Cambria Math;\">January by the Election Commission of India. The objective of this day is to encourage young voters to take part in the political process. It was started on </span><span style=\"font-family: Cambria Math;\">26 </span><span style=\"font-family: Cambria Math;\">January </span><span style=\"font-family: Cambria Math;\">2011 </span><span style=\"font-family: Cambria Math;\">to mark the Election Commission</span><span style=\"font-family: Cambria Math;\">&rsquo;</span><span style=\"font-family: Cambria Math;\">s foundation.</span></p>",
+    "question_index": 9
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\">11</span><span style=\"font-family: Cambria Math;\">.</span><span style=\"font-family: Cambria Math;\"> The birth anniversary of ______ was observed as </span><span style=\"font-family: Cambria Math;\">&lsquo;</span><span style=\"font-family: Cambria Math;\">Rashtriya Ekta Diwas</span><span style=\"font-family: Cambria Math;\">&rsquo; </span><span style=\"font-family: Cambria Math;\">(National Unity Day) on </span><span style=\"font-family: Cambria Math;\">31</span><span style=\"font-family: Cambria Math;\">st October </span><span style=\"font-family: Cambria Math;\">2020</span><span style=\"font-family: Cambria Math;\">.&nbsp;</span></p>",
+    "options": [
+      "Jawaharlal Nehru",
+      "Rajendra Prasad",
+      "Sardar Vallabhbhai Patel",
+      "Indira Gandhi"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">11</span><span style=\"font-family: Cambria Math;\">.(c)</span><span style=\"font-family: Cambria Math;\"> The birth anniversary of Sardar Vallabhbhai Patel was observed as </span><span style=\"font-family: Cambria Math;\">&lsquo;</span><span style=\"font-family: Cambria Math;\">Rashtriya Ekta Diwas (National Unity Day) on </span><span style=\"font-family: Cambria Math;\">31</span><span style=\"font-family: Cambria Math;\">st October </span><span style=\"font-family: Cambria Math;\">2020</span><span style=\"font-family: Cambria Math;\">. It was introduced in </span><span style=\"font-family: Cambria Math;\">2014 </span><span style=\"font-family: Cambria Math;\">by the government of India. Sardar Patel was an Indian Politician from Gujarat and served as the First Deputy Prime Minister and first home minister of India from </span><span style=\"font-family: Cambria Math;\">1947 </span><span style=\"font-family: Cambria Math;\">to </span><span style=\"font-family: Cambria Math;\">1950</span><span style=\"font-family: Cambria Math;\">. He played a leading role in the country</span><span style=\"font-family: Cambria Math;\">&rsquo;</span><span style=\"font-family: Cambria Math;\">s struggle for independence</span><span style=\"font-family: Cambria Math;\">.</span></p>",
+    "question_index": 10
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\">12</span><span style=\"font-family: Cambria Math;\">.</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&lsquo;</span><span style=\"font-family: Cambria Math;\">Margomkali</span><span style=\"font-family: Cambria Math;\">&rsquo;</span><span style=\"font-family: Cambria Math;\">, a ritual folk art form, is from the state of ______.&nbsp;</span></p>",
+    "options": [
+      "Assam",
+      "Kerala",
+      "Nagaland",
+      "Punjab"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">12</span><span style=\"font-family: Cambria Math;\">.(b)</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">&lsquo;</span><span style=\"font-family: Cambria Math;\">Margomkali</span><span style=\"font-family: Cambria Math;\">&rsquo;</span><span style=\"font-family: Cambria Math;\">, a ritual folk art form of Kerala. It is a dance form </span><span style=\"font-family: Cambria Math;\">of the Syrian Christians of Kottayam and Thrissur districts in which dancers sing and dance around a lighted wick lamp (</span><span style=\"font-family: Cambria Math;\">Nilavilakku</span><span style=\"font-family: Cambria Math;\">).</span></p>",
+    "question_index": 11
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\">13</span><span style=\"font-family: Cambria Math;\">. </span><span style=\"font-family: Cambria Math;\">The language </span><span style=\"font-family: Cambria Math;\">&lsquo;</span><span style=\"font-family: Cambria Math;\">Idu Mishmi</span><span style=\"font-family: Cambria Math;\">&rsquo; </span><span style=\"font-family: Cambria Math;\">is spoken in the state of ______.&nbsp;</span></p>",
+    "options": [
+      "Kerala",
+      "Punjab",
+      "Arunachal Pradesh",
+      "Madhya Pradesh"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">13</span><span style=\"font-family: Cambria Math;\">.(c) </span><span style=\"font-family: Cambria Math;\">The language Idu Mishmi is spoken by the Mishmi people of Arunachal Pradesh.</span></p>",
+    "question_index": 12
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\">14</span><span style=\"font-family: Cambria Math;\">. </span><span style=\"font-family: Cambria Math;\">Virupaksha Temple is situated in which of the following districts of Karnataka?&nbsp;</span></p>",
+    "options": [
+      "Chikkaballapur",
+      "Bidar",
+      "Ballari",
+      "Bagalkot"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">14</span><span style=\"font-family: Cambria Math;\">.(c)</span><span style=\"font-family: Cambria Math;\"> Virupaksha Temple is situated in the Ballari district of Karnataka. It is part of the Group of Monuments at Hampi, designated as a UNESCO World Heritage Site. The temple is dedicated to Lord Virupaksha, a form of Shiva.</span></p>",
+    "question_index": 13
+  },
+  {
+    "question": "<p><span style=\\\"font-family: Cambria Math;\\\">15</span><span style=\\\"font-family: Cambria Math;\\\">.</span><span style=\\\"font-family: Cambria Math;\\\"> \\'Panche\\' is a traditional sarong worn by the men in the state of ______.&nbsp;</span></p>",
+    "options": [
+      "Kerala",
+      "Karnataka",
+      "Assam",
+      "Sikkim"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">15</span><span style=\"font-family: Cambria Math;\">.(b)</span><span style=\"font-family: Cambria Math;\"> Panche is a traditional sarong worn by the men in the state of Karnataka. Another name of Panche is </span><span style=\"font-family: Cambria Math;\">&lsquo;</span><span style=\"font-family: Cambria Math;\">Dhoti</span><span style=\"font-family: Cambria Math;\">&rsquo;</span><span style=\"font-family: Cambria Math;\">. This unstitched cloth is wrapped around the legs and knotted around the waist.</span></p>",
+    "question_index": 14
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\">16</span><span style=\"font-family: Cambria Math;\">. </span><span style=\"font-family: Cambria Math;\">Which of the following cities is closest to the location of Pushkar Fair?&nbsp;</span></p>",
+    "options": [
+      "Ahmedabad",
+      "Ajmer",
+      "Prayagraj",
+      "Amravati"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">16</span><span style=\"font-family: Cambria Math;\">.(b) </span><span style=\"font-family: Cambria Math;\">Ajmer is closest to the location of Pushkar Fair. Pushkar Fair is held every year in Pushkar city in Ajmer district of Rajasthan. It is a pilgrimage site for Hindus and Sikhs.</span></p>",
+    "question_index": 15
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\">17</span><span style=\"font-family: Cambria Math;\">. </span><span style=\"font-family: Cambria Math;\">In which present-day state will you find the Megudi temple?&nbsp;</span></p>",
+    "options": [
+      "Tamil Nadu",
+      "Odisha",
+      "Karnataka",
+      "Kerala"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">17</span><span style=\"font-family: Cambria Math;\">.(c)</span><span style=\"font-family: Cambria Math;\"> The Megudi temple is present in Karnataka. Megudii Jain temple is a monument in Aihole, constructed in </span><span style=\"font-family: Cambria Math;\">634 </span><span style=\"font-family: Cambria Math;\">AD in Dravidian style of architecture.</span></p>",
+    "question_index": 16
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\">18</span><span style=\"font-family: Cambria Math;\">. </span><span style=\"font-family: Cambria Math;\">Where is the headquarters of the International Hockey Federation (FIH) located?&nbsp;</span></p>",
+    "options": [
+      "Australia",
+      "Nepal",
+      "Switzerland",
+      "Bhutan"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">18</span><span style=\"font-family: Cambria Math;\">.(c)</span><span style=\"font-family: Cambria Math;\"> The headquarters of the International Hockey Federation (FIH) is located in Switzerland. FIH </span><span style=\"font-family: Cambria Math;\">is the international governing body of </span><span style=\"font-family: Cambria Math;\">field hockey</span><span style=\"font-family: Cambria Math;\"> and </span><span style=\"font-family: Cambria Math;\">indoor field hockey</span><span style=\"font-family: Cambria Math;\">. </span></p>",
+    "question_index": 17
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\">19</span><span style=\"font-family: Cambria Math;\">. </span><span style=\"font-family: Cambria Math;\">In which of the following states is the headquarters of IDBI (Industrial Development Bank of India) located?&nbsp;</span></p>",
+    "options": [
+      "Haryana",
+      "Maharashtra",
+      "Karnataka",
+      "West Bengal"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">19</span><span style=\"font-family: Cambria Math;\">.(b)</span><span style=\"font-family: Cambria Math;\"> The headquarters of IDBI are located in Maharashtra. It was established in </span><span style=\"font-family: Cambria Math;\">1964 </span><span style=\"font-family: Cambria Math;\">by an act to provide credit and other financial facilities for the development of the fledgling Indian industry.</span><span style=\"font-family: Cambria Math;\"> </span></p>",
+    "question_index": 18
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\">20</span><span style=\"font-family: Cambria Math;\">.</span><span style=\"font-family: Cambria Math;\"> Where is the headquarters of the Badminton World Federation located?&nbsp;</span></p>",
+    "options": [
+      "Malaysia",
+      "Japan",
+      "Singapore",
+      "Switzerland"
+    ],
+    "correct_option_id": 0,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">20</span><span style=\"font-family: Cambria Math;\">.(a) </span><span style=\"font-family: Cambria Math;\">The headquarters of the Badminton World Federation is located in Malaysia. </span><span style=\"font-family: Cambria Math;\">It was founded in </span><span style=\"font-family: Cambria Math;\">1934 </span><span style=\"font-family: Cambria Math;\">as the International Badminton Federation with nine member nations (Canada, Denmark, England, France, Ireland, Netherlands, New Zealand, Scotland and Wales).</span></p>",
+    "question_index": 19
+  }
+];
     </script>
-    
+
     <!-- Central JS Controller -->
     <script src="../js/mock-core.js"></script>
 </body>

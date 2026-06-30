@@ -3,43 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aether Mocks</title>
+    <title>Mocks Wallah</title>
     <!-- Fonts & Icons -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    
+
     <!-- Central Stylesheet -->
     <link rel="stylesheet" href="../css/mock-main.css">
-    
+
     <!-- Math Formula Rendering (KaTeX/MathJax) -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    
+
     <!-- Timer Config -->
-    <meta name="exam-duration" content="60">
+    <meta name="exam-duration" content="30">
 </head>
 <body>
     <!-- Welcome Screen -->
     <div class="welcome-screen" id="welcomeScreen">
         <div class="welcome-container">
             <div class="welcome-header" style="margin-bottom: 24px;">
-                <h1 style="font-size: 2rem; font-weight: 700; color: #0f172a; margin-bottom: 8px;"><i class="fas fa-graduation-cap" style="color: #3b82f6;"></i> Aether Mocks</h1>
-                <p style="color: #64748b;">Computer Based Test Portal</p>
+                <h1 style="font-size: 2rem; font-weight: 700; color: var(--text-main); margin-bottom: 8px;"><i class="fas fa-graduation-cap" style="color: var(--primary);"></i> Mocks Wallah</h1>
+                <p style="color: var(--text-muted);">Computer Based Test Portal</p>
             </div>
-            
+
             <div class="test-details" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-bottom: 32px; text-align: left;">
-                <div class="detail-item" style="padding: 12px; background: #f8fafc; border-radius: 8px; border: 1px solid #e2e8f0;">
-                    <div class="detail-label" style="font-size: 0.8rem; color: #64748b;">Total Questions</div>
-                    <div class="detail-value" style="font-size: 1.1rem; font-weight: 600; color: #0f172a;">10</div>
+                <div class="detail-item" style="padding: 12px; background: var(--bg-color); border-radius: 8px; border: 1px solid var(--border-color);">
+                    <div class="detail-label" style="font-size: 0.8rem; color: var(--text-muted);">Total Questions</div>
+                    <div class="detail-value" style="font-size: 1.1rem; font-weight: 600; color: var(--text-main);">15</div>
                 </div>
-                <div class="detail-item" style="padding: 12px; background: #f8fafc; border-radius: 8px; border: 1px solid #e2e8f0;">
-                    <div class="detail-label" style="font-size: 0.8rem; color: #64748b;">Duration</div>
-                    <div class="detail-value" style="font-size: 1.1rem; font-weight: 600; color: #0f172a;">60 mins</div>
+                <div class="detail-item" style="padding: 12px; background: var(--bg-color); border-radius: 8px; border: 1px solid var(--border-color);">
+                    <div class="detail-label" style="font-size: 0.8rem; color: var(--text-muted);">Duration</div>
+                    <div class="detail-value" style="font-size: 1.1rem; font-weight: 600; color: var(--text-main);">30 mins</div>
                 </div>
             </div>
-            
+
             <div class="welcome-actions">
                 <button class="btn btn-primary" id="startBtn" onclick="document.getElementById('welcomeScreen').style.display='none'; document.getElementById('examContainer').style.display='flex';" style="font-size: 1.1rem; padding: 12px 32px; width: 100%;">
                     <i class="fas fa-play" style="margin-right: 8px;"></i> Start Test
@@ -47,12 +47,12 @@
             </div>
         </div>
     </div>
-    
+
     <!-- Main Exam Interface -->
     <div class="exam-container" id="examContainer" style="display: none; height: 100vh; flex-direction: column;">
         <!-- Top Header -->
         <div class="exam-header">
-            <div class="exam-title">Aether Mocks</div>
+            <div class="exam-title">Mocks Wallah</div>
             <div class="header-actions" style="display: flex; align-items: center; gap: 12px;">
                 <button class="btn-icon" id="themeToggleBtn" title="Switch to Dark Mode"><i class="fas fa-moon"></i></button>
                 <button class="btn-icon" id="fullscreenToggleBtn" title="Toggle Fullscreen"><i class="fas fa-expand"></i></button>
@@ -62,14 +62,14 @@
                 </div>
             </div>
         </div>
-        
+
         <!-- Main Content -->
         <div class="mock-container">
             <!-- Question Area -->
             <div class="question-view">
                 <!-- Dynamically populated question container -->
                 <div id="questionContainer" style="flex: 1; display: flex; flex-direction: column; gap: 24px;"></div>
-                
+
                 <!-- Controls -->
                 <div class="nav-controls">
                     <button class="btn btn-secondary btn-prev"><i class="fas fa-chevron-left" style="margin-right: 8px;"></i> Previous</button>
@@ -79,40 +79,221 @@
                     <button class="btn btn-primary btn-next">Next <i class="fas fa-chevron-right" style="margin-left: 8px;"></i></button>
                 </div>
             </div>
-            
+
             <!-- Desktop Navigator Sidebar -->
             <div class="sidebar">
                 <div class="sidebar-section-title">Summary Status</div>
                 <div class="stats-grid">
                     <div class="stat-item">
-                        <div class="stat-count" id="stat-answered" style="color: #10b981;">0</div>
+                        <div class="stat-count" id="stat-answered" style="color: var(--success);">0</div>
                         <div class="stat-name">Answered</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-count" id="stat-flagged" style="color: #f59e0b;">0</div>
+                        <div class="stat-count" id="stat-flagged" style="color: var(--warning);">0</div>
                         <div class="stat-name">Flagged</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-count" id="stat-not-answered" style="color: #64748b;">0</div>
+                        <div class="stat-count" id="stat-not-answered" style="color: var(--text-muted);">0</div>
                         <div class="stat-name">Unanswered</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-count" id="stat-not-visited" style="color: #94a3b8;">0</div>
+                        <div class="stat-count" id="stat-not-visited" style="color: var(--text-muted);">0</div>
                         <div class="stat-name">Not Visited</div>
                     </div>
                 </div>
-                
+
                 <div class="sidebar-section-title" style="margin-top: 16px;">Question Navigator</div>
                 <div class="questions-grid"></div>
             </div>
         </div>
     </div>
-    
+
     <!-- Inject Question Data -->
     <script>
-        const questions = [];
+        const questions = [
+  {
+    "question": "<p>1. <span style=\"font-family: Cambria Math;\">Which Indian boxer won a bronze medal in the middleweight division in boxing at the </span><span style=\"font-family: Cambria Math;\">2008 Beijing Olympics?</span></p>\n",
+    "options": [
+      "Vijender Singh",
+      "Mary Kom",
+      "Akhil Kumar",
+      "Jitender Kumar"
+    ],
+    "correct_option_id": 0,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">1.(</span><span style=\"font-family: Cambria Math;\">a) </span><span style=\"font-family: Cambria Math;\">Vijender</span><span style=\"font-family: Cambria Math;\"> Singh </span><span style=\"font-family: Cambria Math;\">Beniwal</span><span style=\"font-family: Cambria Math;\"> is a boxer who wo</span><span style=\"font-family: Cambria Math;\">n a bronze medal at the 2008 Beijing Olympics, becoming the first Indian boxer to win an Olympic medal. He was awarded the Padma Shri in 2010. </span><span style=\"font-family: Cambria Math;\">2021 Olympics:</span><span style=\"font-family: Cambria Math;\"> Gold medal (Neeraj Chopra), Silver medal (</span><span style=\"font-family: Cambria Math;\">Mirabai</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">Chanu</span><span style=\"font-family: Cambria Math;\">, Ravi Kumar Dahiya), and Bronze medal (PV </span><span style=\"font-family: Cambria Math;\">Sindhu, </span><span style=\"font-family: Cambria Math;\">Lovlina</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">Borgohain</span><span style=\"font-family: Cambria Math;\">, Bajrang </span><span style=\"font-family: Cambria Math;\">Punia</span><span style=\"font-family: Cambria Math;\">, and Men&rsquo;s hockey team). </span></p>\n",
+    "question_index": 0
+  },
+  {
+    "question": " <p>2. </span><span style=\"font-family:Cambria Math\">Rural Employment Generation </span><span style=\"font-family:Cambria Math\">Programme</span><span style=\"font-family:Cambria Math\"> (REGP) was launched in _____.</span></p>",
+    "options": [
+      "1995",
+      "1990",
+      "1999",
+      "1992"
+    ],
+    "correct_option_id": 0,
+    "solution": " <p><span style=\"font-family:Cambria Math\">2.(</span><span style=\"font-family:Cambria Math\">a) </span><span style=\"font-family:Cambria Math\">The Khadi & Village Industries Commission (KVIC) launched the Rural Employment Generation </span><span style=\"font-family:Cambria Math\">Programme</span><span style=\"font-family:Cambria Math\"> (REGP) on 1st April </span><span style=\"font-family:Cambria Math\">1995</span><span style=\"font-family:Cambria Math\"> for the generation of two million jobs under the KVI sector in the rural areas of the country.</span></p>",
+    "question_index": 1
+  },
+  {
+    "question": " <p>3. </span><span style=\"font-family:Cambria Math\">Yamini Krishnamurthy is known for which classical dance form</span><span style=\"font-family:Cambria Math\">?</span></p>",
+    "options": [
+      "Bharatanatyam and Kuchipudi",
+      "Manipuri and Odissi",
+      "Mohiniyattam and Manipuri",
+      "Kuchipudi and Mohiniyattam"
+    ],
+    "correct_option_id": 0,
+    "solution": " <p><span style=\"font-family:Cambria Math\">3.(</span><span style=\"font-family:Cambria Math\">a) </span><span style=\"font-family:Cambria Math\">Mungara</span><span style=\"font-family:Cambria Math\"> </span><span style=\"font-family:Cambria Math\">Yamini Krishnamurthy</span><span style=\"font-family:Cambria Math\"> is an Indian dancer of Bharatanatyam and </span><span style=\"font-family:Cambria Math\">Kuchipudi</span><span style=\"font-family:Cambria Math\"> styles of dancing. She was awarded the Padma Shree (1968), Padma Bhushan (2001), and Padma Vibhushan (2016)</span><span style=\"font-family:Cambria Math\">. </span></p>",
+    "question_index": 2
+  },
+  {
+    "question": " <p>4. </span><span style=\"font-family:Cambria Math\">Who among the following is/was NOT a </span><span style=\"font-family:Cambria Math\">tabla</span><span style=\"font-family:Cambria Math\"> player?</span></p>",
+    "options": [
+      "Kishan Maharaj",
+      "Zakir Hussain",
+      "Allah Rakha",
+      "Sheikh Chinna Moula"
+    ],
+    "correct_option_id": 3,
+    "solution": " <p><span style=\"font-family:Cambria Math\">4.(</span><span style=\"font-family:Cambria Math\">d) </span><span style=\"font-family:Cambria Math\">Famous </span><span style=\"font-family:Cambria Math\">Nadhaswaram</span><span style=\"font-family:Cambria Math\"> players include Sheikh </span><span style=\"font-family:Cambria Math\">Chinna</span><span style=\"font-family:Cambria Math\"> </span><span style=\"font-family:Cambria Math\">Moula</span><span style=\"font-family:Cambria Math\">, </span><span style=\"font-family:Cambria Math\">Neeruswamy</span><span style=\"font-family:Cambria Math\"> Pillai, </span><span style=\"font-family:Cambria Math\">Rajaratanam</span><span style=\"font-family:Cambria Math\"> Pillai, etc. Famous </span><span style=\"font-family:Cambria Math\">Tabla</span><span style=\"font-family:Cambria Math\"> Players in India are </span><span style=\"font-family:Cambria Math\">Alla</span><span style=\"font-family:Cambria Math\"> </span><span style=\"font-family:Cambria Math\">Rakha</span><span style=\"font-family:Cambria Math\"> Khan, </span><span style=\"font-family:Cambria Math\">Kishan</span><span style=\"font-family:Cambria Math\"> Maharaj, Nikhil Ghosh, Zakir Hussain, etc. </span></p>",
+    "question_index": 3
+  },
+  {
+    "question": " <p>5.</span><span style=\"font-family:Cambria Math\"> Bharatanatyam is a classical dance form of which Indian state?</span></p>",
+    "options": [
+      "Kerala",
+      "Tamil Nadu",
+      "Assam",
+      "Manipur"
+    ],
+    "correct_option_id": 1,
+    "solution": " <p><span style=\"font-family:Cambria Math\">5.(</span><span style=\"font-family:Cambria Math\">b) 8 classical dances of India: </span><span style=\"font-family:Cambria Math\">Bharatnatyam</span><span style=\"font-family:Cambria Math\"> (Tamil Nadu), Kathak (Uttar Pradesh), </span><span style=\"font-family:Cambria Math\">Kuchipudi</span><span style=\"font-family:Cambria Math\"> (Andhra Pradesh), </span><span style=\"font-family:Cambria Math\">Odissi</span><span style=\"font-family:Cambria Math\"> (Odisha), Kathakali (Kerala), </span><span style=\"font-family:Cambria Math\">Sattriya</span><span style=\"font-family:Cambria Math\"> (Assam), Manipuri (Manipur), and </span><span style=\"font-family:Cambria Math\">Mohiniyattam</span><span style=\"font-family:Cambria Math\"> (Kerala). </span></p>",
+    "question_index": 4
+  },
+  {
+    "question": " <p>6. </span><span style=\"font-family:Cambria Math\">In which state of India is Saga </span><span style=\"font-family:Cambria Math\">Dawa</span><span style=\"font-family:Cambria Math\"> or the Triple Blessed Festival celebrated?</span></p>",
+    "options": [
+      "Karnataka",
+      "Andhra Pradesh",
+      "Uttar Pradesh",
+      "Sikkim"
+    ],
+    "correct_option_id": 3,
+    "solution": " <p><span style=\"font-family:Cambria Math\">6.(</span><span style=\"font-family:Cambria Math\">d) </span><span style=\"font-family:Cambria Math\">Famous Festivals In </span><span style=\"font-family:Cambria Math\">Sikkim:</span><span style=\"font-family:Cambria Math\"> </span><span style=\"font-family:Cambria Math\">Losoong</span><span style=\"font-family:Cambria Math\"> Festival, Losar Festival, </span><span style=\"font-family:Cambria Math\">Bhumchu</span><span style=\"font-family:Cambria Math\"> Festival, </span><span style=\"font-family:Cambria Math\">Saga </span><span style=\"font-family:Cambria Math\">Dawa</span><span style=\"font-family:Cambria Math\">,</span><span style=\"font-family:Cambria Math\"> </span><span style=\"font-family:Cambria Math\">Lhabab</span><span style=\"font-family:Cambria Math\"> </span><span style=\"font-family:Cambria Math\">Duchen</span><span style=\"font-family:Cambria Math\"> Festival, </span><span style=\"font-family:Cambria Math\">Hee</span><span style=\"font-family:Cambria Math\"> </span><span style=\"font-family:Cambria Math\">Bermiok</span><span style=\"font-family:Cambria Math\"> Festival, </span><span style=\"font-family:Cambria Math\">Tendong</span><span style=\"font-family:Cambria Math\"> </span><span style=\"font-family:Cambria Math\">Lho</span><span style=\"font-family:Cambria Math\"> Rum </span><span style=\"font-family:Cambria Math\">Faat</span><span style=\"font-family:Cambria Math\">, International Flower Festival, Mangan Music Festival, Annual Sikkim Paragliding Festival, etc. </span></p>",
+    "question_index": 5
+  },
+  {
+    "question": " <p>7. </span><span style=\"font-family:Cambria Math\">As per the Census 2011, what was the literacy rate of Kerala? (Provide an approximate range.)</span></p>",
+    "options": [
+      "91-95%",
+      "80-85%",
+      "96-100%",
+      "86-90%"
+    ],
+    "correct_option_id": 0,
+    "solution": " <p><span style=\"font-family:Cambria Math\">7.(</span><span style=\"font-family:Cambria Math\">a) According to the 2011 census, </span><span style=\"font-family:Cambria Math\">The overall literacy rate in India is 74% (Males- 82.14%; Females- 65.46%), Lowest Literacy rate (Bihar- 63.82%), and Highest literacy rate (Kerala; 94%). </span></p>",
+    "question_index": 6
+  },
+  {
+    "question": "<p>8.<span style=\"font-family: Cambria Math;\"> In which state of India is the </span><span style=\"font-family: Cambria Math;\">Natyanjali</span><span style=\"font-family: Cambria Math;\"> festival celebrated?</span></p>\n",
+    "options": [
+      "Goa",
+      "Tamil Nadu",
+      "Uttar Pradesh",
+      "Rajasthan"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">8.(</span><span style=\"font-family: Cambria Math;\">b) </span><span style=\"font-family: Cambria Math;\">Famous festivals of </span><span style=\"font-family: Cambria Math;\">Tamilnadu</span><span style=\"font-family: Cambria Math;\">:</span><span style=\"font-family: Cambria Math;\"> Pongal, </span><span style=\"font-family: Cambria Math;\">Puthandu</span><span style=\"font-family: Cambria Math;\"> (Tamil New year falls in mid-April),&nbsp; </span><span style=\"font-family: Cambria Math;\">Natyanjali</span><span style=\"font-family: Cambria Math;\"> Dance Festival, Thaipusam, </span><span style=\"font-family: Cambria Math;\">Mahamaham</span><span style=\"font-family: Cambria Math;\"> Festival, </span><span style=\"font-family: Cambria Math;\">Thiruvaiyaru</span><span style=\"font-family: Cambria Math;\"> Festival, </span><span style=\"font-family: Cambria Math;\">Karthigai</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">Deepam</span><span style=\"font-family: Cambria Math;\">, Vinayaka </span><span style=\"font-family: Cambria Math;\">Chathurthi</span><span style=\"font-family: Cambria Math;\">, </span><span style=\"font-family: Cambria Math;\">Panguni</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">Uthiram</span><span style=\"font-family: Cambria Math;\">, </span><span style=\"font-family: Cambria Math;\">Chitri</span><span style=\"font-family: Cambria Math;\"> Rai Festival, etc. </span></p>\n",
+    "question_index": 7
+  },
+  {
+    "question": "<p>9.<span style=\"font-family: Cambria Math;\"> The number of females per 1000 males in the population is called the ___________.</span></p>\n",
+    "options": [
+      "birth rate",
+      "sex ratio",
+      "death rate",
+      "literacy rate"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">9.(</span><span style=\"font-family: Cambria Math;\">b) Sex ratio.</span><span style=\"font-family: Cambria Math;\"> According to 2011, the s</span><span style=\"font-family: Cambria Math;\">tate that has the highest sex ratio is Kerala (1084), and the state that has the lowest sex ratio is Haryana (879).</span><span style=\"font-family: Cambria Math;\"> Birth Rate</span><span style=\"font-family: Cambria Math;\"> (or crude birth rate) The number of live births per 1,000 population in a given year.</span><span style=\"font-family: Cambria Math;\"> Death Rate</span><span style=\"font-family: Cambria Math;\"> (or crude death rate) The number </span><span style=\"font-family: Cambria Math;\">of deaths per 1,000 population in a given year. The </span><span style=\"font-family: Cambria Math;\">literacy rate</span><span style=\"font-family: Cambria Math;\"> is defined by the percentage of the population of a given age group that can read and write.</span></p>\n",
+    "question_index": 8
+  },
+  {
+    "question": "<p>10. <span style=\"font-family: Cambria Math;\">Who is the author of the book &lsquo;Gone Girl&rsquo;?</span></p>\n",
+    "options": [
+      "Damon Galgut",
+      "Gillian Flynn",
+      "Yann Martel",
+      "Anna Burns"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p><span style=\\\"font-family: Cambria Math;\\\">10.(</span><span style=\\\"font-family: Cambria Math;\\\">b) Gillian Flynn\\'s famous books- </span><span style=\\\"font-family: Cambria Math;\\\">&lsquo;Sharp Objects&rsquo;, &lsquo;Dark Places&rsquo;, &lsquo;Gone Girl&rsquo;, &lsquo;The Grownup&rsquo;, &lsquo;The</span><span style=\\\"font-family: Cambria Math;\\\"> Mystery Writers of America Cookbook&rsquo;, etc. </span><span style=\\\"font-family: Cambria Math;\\\">Damon </span><span style=\\\"font-family: Cambria Math;\\\">Galgut</span><span style=\\\"font-family: Cambria Math;\\\">- &lsquo;The Promise&rsquo;, &lsquo;The Good Doctor&rsquo;, &lsquo;In a Strange Room&rsquo;, &lsquo;Arctic Summer&rsquo;, &lsquo;The Quarry&rsquo;, etc. </span><span style=\\\"font-family: Cambria Math;\\\">Yann Martel</span><span style=\\\"font-family: Cambria Math;\\\">- &lsquo;Life of Pi&rsquo;,&nbsp; </span><span style=\\\"font-family: Cambria Math;\\\">&lsquo;The High Mountains of Portugal Beatrice and Virgil&rsquo;, &lsquo;Self&rsquo;, etc. </span><span style=\\\"font-family: Cambria Math;\\\">Anna Burns-</span><span style=\\\"font-family: Cambria Math;\\\"> </span><span style=\\\"font-family: Cambria Math;\\\">&lsquo;Milkman&rsquo;, &lsquo;No Bones&rsquo;, &lsquo;Little Construction&rsquo;, etc. </span></p>\\n",
+    "question_index": 9
+  },
+  {
+    "question": " <p>11.</span><span style=\"font-family:Cambria Math\"> Name the album for which Pandit Ravi Shankar won the Grammy award in 1967.</span></p>",
+    "options": [
+      "Three Ragas",
+      "West Meets East",
+      "Concert for Bangladesh",
+      "Full circle"
+    ],
+    "correct_option_id": 1,
+    "solution": " <p><span style=\"font-family:Cambria Math\">11.(</span><span style=\"font-family:Cambria Math\">b) Pandit Ravi Shankar </span><span style=\"font-family:Cambria Math\">was an Indian sitarist and composer. He won </span><span style=\"font-family:Cambria Math\">Five Grammy Awards:</span><span style=\"font-family:Cambria Math\"> 1967 (West Meets East), 1973 (The Concert for Bangladesh), 2002 (F</span><span style=\"font-family:Cambria Math\">ull Circle: Carnegie Hall 2000), 2013 (The Living Room Sessions), and the Lifetime Achievement Award received at the 55th Annual Grammy Awards (2013). </span></p>",
+    "question_index": 10
+  },
+  {
+    "question": " <p>12.</span><span style=\"font-family:Cambria Math\"> </span><span style=\"font-family:Cambria Math\">Sattriya</span><span style=\"font-family:Cambria Math\"> is a classical dance form of which Indian </span><span style=\"font-family:Cambria Math\">state?</span></p>",
+    "options": [
+      "Manipur",
+      "Karnataka",
+      "Assam",
+      "Kerala"
+    ],
+    "correct_option_id": 2,
+    "solution": " <p><span style=\\\"font-family:Cambria Math\\\">12.(</span><span style=\\\"font-family:Cambria Math\\\">c) </span><span style=\\\"font-family:Cambria Math\\\">Dances of </span><span style=\\\"font-family:Cambria Math\\\">Assam:</span><span style=\\\"font-family:Cambria Math\\\"> Bihu Dance, </span><span style=\\\"font-family:Cambria Math\\\">Jumur</span><span style=\\\"font-family:Cambria Math\\\"> </span><span style=\\\"font-family:Cambria Math\\\">Nach</span><span style=\\\"font-family:Cambria Math\\\">, Ali Ai </span><span style=\\\"font-family:Cambria Math\\\">Ligang</span><span style=\\\"font-family:Cambria Math\\\"> dance, </span><span style=\\\"font-family:Cambria Math\\\">Deodhani</span><span style=\\\"font-family:Cambria Math\\\">, </span><span style=\\\"font-family:Cambria Math\\\">Barpeta\\'s</span><span style=\\\"font-family:Cambria Math\\\"> </span><span style=\\\"font-family:Cambria Math\\\">Bhortal</span><span style=\\\"font-family:Cambria Math\\\"> </span><span style=\\\"font-family:Cambria Math\\\">Nritya</span><span style=\\\"font-family:Cambria Math\\\">, </span><span style=\\\"font-family:Cambria Math\\\">Dhuliya</span><span style=\\\"font-family:Cambria Math\\\"> and </span><span style=\\\"font-family:Cambria Math\\\">Bhawariya</span><span style=\\\"font-family:Cambria Math\\\">, Bodo\\'s </span><span style=\\\"font-family:Cambria Math\\\">Bagurumba</span><span style=\\\"font-family:Cambria Math\\\">, </span><span style=\\\"font-family:Cambria Math\\\">Khamba</span><span style=\\\"font-family:Cambria Math\\\"> Lim,</span></p> <p><span style=\\\"font-family:Cambria Math\\\">Oja</span><span style=\\\"font-family:Cambria Math\\\">-Pali Dance, </span><span style=\\\"font-family:Cambria Math\\\">Satriya</span><span style=\\\"font-family:Cambria Math\\\"> </span><span style=\\\"font-family:Cambria Math\\\">Dance</span><span style=\\\"font-family:Cambria Math\\\">  etc.</span><span style=\\\"font-family:Cambria Math\\\"> </span></p>",
+    "question_index": 11
+  },
+  {
+    "question": " <p>13.</span><span style=\"font-family:Cambria Math\"> Who among the following Indian dancers was the first woman in Indian history to be</span></p> <p><span style=\"font-family:Cambria Math\">nominated as a member of the Rajya Sabha?</span></p>",
+    "options": [
+      "Rukmini Devi Arundale",
+      "Madhuri Dixit",
+      "Mallika Sarabhai",
+      "Saroj Khan"
+    ],
+    "correct_option_id": 0,
+    "solution": " <p><span style=\"font-family:Cambria Math\">13.(</span><span style=\"font-family:Cambria Math\">a) Rukmini Devi </span><span style=\"font-family:Cambria Math\">Arundale</span><span style=\"font-family:Cambria Math\">.</span><span style=\"font-family:Cambria Math\"> She was an Indian theosophist, dancer, and choreographer of the Indian classical dance form of Bharatanatyam, and an activi</span><span style=\"font-family:Cambria Math\">st for animal welfare. She was </span><span style=\"font-family:Cambria Math\">awarded</span><span style=\"font-family:Cambria Math\"> the Padma Bhushan (1956) Sangeet </span><span style=\"font-family:Cambria Math\">Natak</span><span style=\"font-family:Cambria Math\"> </span><span style=\"font-family:Cambria Math\">Akademi</span><span style=\"font-family:Cambria Math\"> Award (1957), and Sangeet </span><span style=\"font-family:Cambria Math\">Natak</span><span style=\"font-family:Cambria Math\"> </span><span style=\"font-family:Cambria Math\">Akademi</span><span style=\"font-family:Cambria Math\"> Fellowship (1967). </span></p>",
+    "question_index": 12
+  },
+  {
+    "question": "<p>14.<span style=\"font-family: Cambria Math;\"> <span style=\"font-weight: 400;\">As per Census 2011, which of the following states of India has the highest population?</span></span></p>\n",
+    "options": [
+      "Uttar Pradesh ",
+      "Tamil Nadu ",
+      "Bihar ",
+      "Chhattisgarh"
+    ],
+    "correct_option_id": 0,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">14.(</span><span style=\"font-family: Cambria Math;\">a) <strong>According to 2011 Census, </strong><span style=\"font-weight: 400;\">top 10 populated states are Uttar Pradesh (maximum), Maharashtra, Bihar, West Bengal, Andhra Pradesh, Madhya Pradesh, Tamil Nadu, Rajasthan, Karnataka, and Gujarat. </span></span></p>\n",
+    "question_index": 13
+  },
+  {
+    "question": "<p>15.<span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">Bonalu</span><span style=\"font-family: Cambria Math;\"> is a Hindu festival celebrated to worship Goddess </span><span style=\"font-family: Cambria Math;\">Mahakali</span><span style=\"font-family: Cambria Math;\"> in which of the </span><span style=\"font-family: Cambria Math;\">following states?</span></p>\n",
+    "options": [
+      "Telangana",
+      "Assam",
+      "Kerala",
+      "Madhya Pradesh"
+    ],
+    "correct_option_id": 0,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">15.(</span><span style=\"font-family: Cambria Math;\">a) Famous festivals of Telangana: </span><span style=\"font-family: Cambria Math;\">Bathukamma, </span><span style=\"font-family: Cambria Math;\">Bonalu</span><span style=\"font-family: Cambria Math;\">, </span><span style=\"font-family: Cambria Math;\">Ugadi</span><span style=\"font-family: Cambria Math;\">, </span><span style=\"font-family: Cambria Math;\">Peerla</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">Panduga</span><span style=\"font-family: Cambria Math;\">, </span><span style=\"font-family: Cambria Math;\">Medaram</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">Jatara</span><span style=\"font-family: Cambria Math;\">, </span><span style=\"font-family: Cambria Math;\">Peddagattu</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">Jatara</span><span style=\"font-family: Cambria Math;\">, </span><span style=\"font-family: Cambria Math;\">Edupayala</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">Jatara</span><span style=\"font-family: Cambria Math;\">, </span><span style=\"font-family: Cambria Math;\">Kurumurthy</span><span style=\"font-family: Cambria Math;\"> Swamy </span><span style=\"font-family: Cambria Math;\">Jatara</span><span style=\"font-family: Cambria Math;\">, </span><span style=\"font-family: Cambria Math;\">Komuravelli</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">Mallanna</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">Jatara</span><span style=\"font-family: Cambria Math;\">, </span><span style=\"font-family: Cambria Math;\">Chittaramma</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">Jatara</span><span style=\"font-family: Cambria Math;\">, </span><span style=\"font-family: Cambria Math;\">Sadar</span><span style=\"font-family: Cambria Math;\">, </span><span style=\"font-family: Cambria Math;\">Numaish</span><span style=\"font-family: Cambria Math;\">, etc. </span></p>\n",
+    "question_index": 14
+  }
+];
     </script>
-    
+
     <!-- Central JS Controller -->
     <script src="../js/mock-core.js"></script>
 </body>

@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Oliveboard Mocks — CBT Portal</title>
+<meta name="description" content="Browse all Oliveboard mock tests for SSC CGL, CHSL, and RBE exams in one unified portal.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --green:#10b981;--green-d:#059669;--green-l:#ecfdf5;--green-border:#a7f3d0;
+  --bg:#f8fafc;--surface:#ffffff;--border:#e2e8f0;--border2:#cbd5e1;
+  --text:#0f172a;--sub:#475569;--muted:#94a3b8;--white:#fff;
+  --shadow-sm:0 1px 3px rgba(15,23,42,.06);
+  --shadow-md:0 4px 12px rgba(15,23,42,.08);
+  --r:8px;--sidebar:260px;--header:56px;
+}
+html{font-family:'Inter',-apple-system,sans-serif;font-size:15px;-webkit-font-smoothing:antialiased}
+body{background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden}
+
+/* ── Top Header Bar ── */
+.topbar{
+  position:fixed;top:0;left:0;right:0;height:var(--header);
+  background:var(--surface);border-bottom:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 1.25rem;gap:1rem;z-index:200;
+  box-shadow:var(--shadow-sm);
+}
+.topbar-brand{display:flex;align-items:center;gap:.625rem;flex-shrink:0}
+.topbar-logo{
+  width:32px;height:32px;border-radius:8px;
+  background:linear-gradient(135deg,#10b981,#059669);
+  display:flex;align-items:center;justify-content:center;color:#fff;font-size:.95rem;font-weight:700
+}
+.topbar-name{font-size:.9rem;font-weight:700;color:var(--text)}
+.topbar-tag{font-size:.7rem;color:var(--muted);font-weight:500}
+.topbar-search{
+  flex:1;max-width:500px;
+  position:relative;display:flex;align-items:center;
+}
+.topbar-search svg{position:absolute;left:.75rem;color:var(--muted);width:15px;height:15px;flex-shrink:0}
+.search-input{
+  width:100%;height:36px;padding:0 1rem 0 2.25rem;
+  background:var(--bg);border:1px solid var(--border);border-radius:var(--r);
+  font-family:inherit;font-size:.82rem;color:var(--text);outline:none;
+  transition:border-color .2s,box-shadow .2s;
+}
+.search-input::placeholder{color:var(--muted)}
+.search-input:focus{border-color:var(--green);box-shadow:0 0 0 3px rgba(16,185,129,.12)}
+.topbar-right{display:flex;align-items:center;gap:.75rem;flex-shrink:0}
+.back-link{
+  display:flex;align-items:center;gap:.35rem;font-size:.78rem;font-weight:600;
+  color:var(--sub);text-decoration:none;padding:5px 10px;border-radius:6px;
+  border:1px solid var(--border);transition:all .18s;
+}
+.back-link:hover{background:var(--bg);color:var(--text);border-color:var(--border2)}
+.sort-select{
+  height:32px;padding:0 1.75rem 0 .6rem;font-family:inherit;font-size:.78rem;
+  border:1px solid var(--border);border-radius:6px;background:var(--surface);
+  color:var(--sub);outline:none;cursor:pointer;appearance:none;-webkit-appearance:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right .5rem center;
+}
+
+/* ── Layout Shell ── */
+.shell{
+  display:flex;
+  margin-top:var(--header);
+  min-height:calc(100vh - var(--header));
+}
+
+/* ── Left Sidebar ── */
+.sidebar{
+  width:var(--sidebar);flex-shrink:0;
+  background:var(--surface);border-right:1px solid var(--border);
+  position:sticky;top:var(--header);height:calc(100vh - var(--header));
+  overflow-y:auto;display:flex;flex-direction:column;
+}
+.sidebar::-webkit-scrollbar{width:4px}
+.sidebar::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px}
+.sidebar-head{
+  padding:1.1rem 1.1rem .7rem;
+  border-bottom:1px solid var(--border);position:sticky;top:0;background:var(--surface);
+}
+.sidebar-head-title{font-size:.72rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+.cat-list{padding:.5rem .6rem;flex:1}
+.cat-btn{
+  display:flex;align-items:center;justify-content:space-between;width:100%;
+  padding:.45rem .625rem;border:none;background:transparent;cursor:pointer;
+  border-radius:6px;text-align:left;transition:background .15s;
+  font-family:inherit;font-size:.8rem;font-weight:500;color:var(--sub);gap:.5rem;
+}
+.cat-btn:hover{background:var(--bg)}
+.cat-btn.active{background:var(--green-l);color:var(--green-d);font-weight:600}
+.cat-btn .cat-name{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.cat-count{
+  font-size:.7rem;font-weight:600;background:var(--bg);color:var(--muted);
+  padding:1px 6px;border-radius:20px;border:1px solid var(--border);flex-shrink:0;
+}
+.cat-btn.active .cat-count{background:var(--green-border);color:var(--green-d);border-color:var(--green-border)}
+
+/* Subject filter strip */
+.subj-strip{
+  padding:.7rem 1.1rem;border-bottom:1px solid var(--border);
+  display:flex;flex-direction:column;gap:.5rem;
+}
+.subj-strip-label{font-size:.68rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+.subj-pills{display:flex;flex-wrap:wrap;gap:.3rem}
+.subj-pill{
+  padding:3px 9px;font-size:.72rem;font-weight:600;border-radius:20px;
+  border:1px solid var(--border);background:var(--surface);color:var(--sub);
+  cursor:pointer;transition:all .15s;white-space:nowrap;
+}
+.subj-pill:hover{border-color:var(--border2);color:var(--text)}
+.subj-pill.active{background:var(--green);border-color:var(--green);color:#fff}
+
+/* Stats panel in sidebar */
+.sidebar-stats{
+  padding:.9rem 1.1rem;border-top:1px solid var(--border);margin-top:auto;
+  background:var(--bg);
+}
+.sidebar-stats-title{font-size:.68rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:.6rem}
+.stat-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:.4rem}
+.stat-label{font-size:.78rem;color:var(--sub)}
+.stat-val{font-size:.85rem;font-weight:700;color:var(--text)}
+.stat-val.green{color:var(--green-d)}
+.progress-wrap{margin-top:.5rem}
+.prog-bar{height:5px;background:var(--border);border-radius:3px;overflow:hidden}
+.prog-fill{height:100%;background:var(--green);border-radius:3px;width:0%;transition:width .6s}
+.prog-text{font-size:.7rem;color:var(--muted);margin-top:.3rem}
+
+/* ── Main Content ── */
+.main{flex:1;min-width:0;padding:1.5rem}
+.content-bar{
+  display:flex;align-items:center;justify-content:space-between;gap:1rem;
+  margin-bottom:1.1rem;flex-wrap:wrap;
+}
+.results-label{font-size:.82rem;color:var(--sub)}
+.results-label strong{color:var(--text);font-weight:700}
+
+/* ── List Cards ── */
+.list{display:flex;flex-direction:column;gap:.5rem}
+.list-item{
+  display:flex;align-items:center;gap:1rem;
+  background:var(--surface);border:1px solid var(--border);border-radius:var(--r);
+  padding:.75rem 1rem;transition:all .2s;cursor:default;
+  animation:fadeUp .25s ease both;
+}
+@keyframes fadeUp{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.list-item:hover{border-color:var(--green-border);box-shadow:var(--shadow-sm)}
+.item-num{
+  font-size:.72rem;font-weight:700;color:var(--muted);min-width:28px;text-align:right;flex-shrink:0;
+}
+.item-body{flex:1;min-width:0;display:flex;flex-direction:column;gap:.25rem}
+.item-name{
+  font-size:.88rem;font-weight:600;color:var(--text);
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+.item-meta{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap}
+.meta-chip{
+  display:inline-flex;align-items:center;gap:.2rem;
+  font-size:.68rem;font-weight:600;color:var(--sub);
+  background:var(--bg);border:1px solid var(--border);padding:2px 7px;border-radius:5px;
+}
+.meta-chip.green{background:var(--green-l);border-color:var(--green-border);color:var(--green-d)}
+.item-actions{display:flex;align-items:center;gap:.5rem;flex-shrink:0}
+.done-btn{
+  width:30px;height:30px;border-radius:7px;border:1.5px solid var(--border);
+  background:var(--surface);color:var(--muted);cursor:pointer;
+  display:flex;align-items:center;justify-content:center;transition:all .18s;flex-shrink:0;
+}
+.done-btn:hover{border-color:var(--green);color:var(--green)}
+.done-btn.done{background:var(--green);border-color:var(--green);color:#fff}
+.start-btn{
+  display:inline-flex;align-items:center;gap:.35rem;white-space:nowrap;
+  padding:6px 14px;font-family:inherit;font-size:.78rem;font-weight:700;
+  background:var(--green);color:#fff;border:none;border-radius:7px;cursor:pointer;
+  text-decoration:none;transition:all .18s;
+}
+.start-btn:hover{background:var(--green-d);transform:translateY(-1px)}
+
+/* load more */
+.load-more-wrap{display:flex;justify-content:center;margin-top:1.25rem}
+.load-more-btn{
+  padding:8px 22px;font-family:inherit;font-size:.82rem;font-weight:600;
+  background:var(--surface);border:1px solid var(--border);border-radius:var(--r);
+  color:var(--green-d);cursor:pointer;transition:all .18s;
+}
+.load-more-btn:hover{background:var(--green-l);border-color:var(--green-border)}
+
+/* empty state */
+.empty-state{
+  text-align:center;padding:4rem 2rem;background:var(--surface);
+  border:1px solid var(--border);border-radius:var(--r);
+}
+.empty-icon{font-size:2.5rem;margin-bottom:1rem;opacity:.4}
+.empty-title{font-size:1.05rem;font-weight:700;color:var(--text);margin-bottom:.35rem}
+.empty-sub{font-size:.85rem;color:var(--sub)}
+
+/* mobile toggle */
+.sidebar-toggle{
+  display:none;align-items:center;justify-content:center;
+  width:32px;height:32px;border-radius:7px;border:1px solid var(--border);
+  background:var(--surface);cursor:pointer;color:var(--sub);
+}
+
+:focus-visible{outline:2px solid var(--green);outline-offset:2px;border-radius:4px}
+
+@media(max-width:900px){
+  .sidebar{
+    position:fixed;top:var(--header);left:0;bottom:0;
+    transform:translateX(-100%);transition:transform .25s;z-index:150;
+    box-shadow:var(--shadow-md);
+  }
+  .sidebar.open{transform:translateX(0)}
+  .sidebar-overlay{
+    display:none;position:fixed;inset:0;top:var(--header);
+    background:rgba(15,23,42,.35);z-index:140;
+  }
+  .sidebar-overlay.show{display:block}
+  .sidebar-toggle{display:flex}
+  .main{padding:1rem}
+}
+@media(max-width:540px){
+  .topbar-search{max-width:100%}
+  .sort-select{display:none}
+}
+@media(prefers-reduced-motion:reduce){
+  *{animation:none!important;transition-duration:0s!important}
+}
+</style>
+</head>
+<body>
+
+<!-- Top Header -->
+<header class="topbar">
+  <div class="topbar-brand">
+    <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle sidebar">
+      <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
+      </svg>
+    </button>
+    <div class="topbar-logo">O</div>
+    <div>
+      <div class="topbar-name">Oliveboard</div>
+      <div class="topbar-tag">CBT Mock Portal</div>
+    </div>
+  </div>
+  <div class="topbar-search">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+    </svg>
+    <input type="text" class="search-input" id="searchInput" placeholder="Search mocks…" autocomplete="off">
+  </div>
+  <div class="topbar-right">
+    <select class="sort-select" id="sortSelect">
+      <option value="name-asc">A → Z</option>
+      <option value="name-desc">Z → A</option>
+    </select>
+    <a href="index.html" class="back-link">
+      <svg width="13" height="13" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <polyline points="15 18 9 12 15 6"/>
+      </svg>
+      All Providers
+    </a>
+  </div>
+</header>
+
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+<div class="shell">
+
+  <!-- Sidebar -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-head">
+      <div class="sidebar-head-title">Mock Category</div>
+    </div>
+
+    <div class="subj-strip">
+      <div class="subj-strip-label">Subject</div>
+      <div class="subj-pills" id="subjPills"></div>
+    </div>
+
+    <div class="cat-list" id="catList"></div>
+
+    <div class="sidebar-stats">
+      <div class="sidebar-stats-title">My Progress</div>
+      <div class="stat-row"><span class="stat-label">Total</span><span class="stat-val" id="statTotal">—</span></div>
+      <div class="stat-row"><span class="stat-label">Completed</span><span class="stat-val green" id="statDone">—</span></div>
+      <div class="stat-row"><span class="stat-label">Pending</span><span class="stat-val" id="statPending">—</span></div>
+      <div class="progress-wrap">
+        <div class="prog-bar"><div class="prog-fill" id="progFill"></div></div>
+        <div class="prog-text" id="progText">0% done</div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="main">
+    <div class="content-bar">
+      <span class="results-label" id="resultsLabel">Loading…</span>
+    </div>
+    <div class="list" id="listContainer"></div>
+    <div class="load-more-wrap" id="loadMoreWrap" style="display:none">
+      <button class="load-more-btn" id="loadMoreBtn">Load more mocks</button>
+    </div>
+  </main>
+</div>
+
+<script src="mocks-data.js"></script>
+<script src="js/provider-page.js"></script>
+<script>
+const page = new ProviderPage({
+  providerKey: 'Oliveboard',
+  limit: 80,
+  onUpdate({ mocks, total, hasMore, stats, append }) {
+    // Stats
+    document.getElementById('statTotal').textContent   = stats.total.toLocaleString();
+    document.getElementById('statDone').textContent    = stats.done.toLocaleString();
+    document.getElementById('statPending').textContent = stats.pending.toLocaleString();
+    document.getElementById('progFill').style.width    = stats.pct + '%';
+    document.getElementById('progText').textContent    = stats.pct + '% done';
+    document.getElementById('resultsLabel').innerHTML  = `Found <strong>${total.toLocaleString()}</strong> mocks`;
+    document.getElementById('loadMoreWrap').style.display = hasMore ? 'flex' : 'none';
+
+    const list = document.getElementById('listContainer');
+    if (!append) list.innerHTML = '';
+    if (mocks.length === 0 && !append) {
+      list.innerHTML = `<div class="empty-state">
+        <div class="empty-icon">🔍</div>
+        <div class="empty-title">No mocks found</div>
+        <div class="empty-sub">Try adjusting your filters or search term.</div>
+      </div>`;
+      return;
+    }
+    const startIdx = append ? list.children.length : 0;
+    mocks.forEach((m, i) => {
+      if (append && i < list.children.length) return;
+      const done = page.isDone(m.path);
+      const div = document.createElement('div');
+      div.className = 'list-item';
+      div.style.animationDelay = (i % 30 * 0.015) + 's';
+      div.innerHTML = `
+        <span class="item-num">${(startIdx + i + 1)}</span>
+        <div class="item-body">
+          <div class="item-name" title="${htmlEnc(m.name)}">${htmlEnc(m.name)}</div>
+          <div class="item-meta">
+            <span class="meta-chip green">${htmlEnc(m.subject)}</span>
+            <span class="meta-chip">${htmlEnc(m.category)}</span>
+          </div>
+        </div>
+        <div class="item-actions">
+          <button class="done-btn ${done ? 'done' : ''}" data-path="${htmlEnc(m.path)}" title="Mark done">
+            <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+              <polyline points="20 6 9 17 4 12"/>
+            </svg>
+          </button>
+          <a class="start-btn" href="${htmlEnc(m.path)}" target="_blank">
+            Start
+            <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+              <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
+            </svg>
+          </a>
+        </div>`;
+      list.appendChild(div);
+    });
+  }
+});
+
+// Build category sidebar
+(function buildSidebar() {
+  const catList = document.getElementById('catList');
+  const allBtn = document.createElement('button');
+  allBtn.className = 'cat-btn active';
+  allBtn.dataset.cat = 'all';
+  allBtn.innerHTML = `<span class="cat-name">All Categories</span><span class="cat-count">${page._all.length}</span>`;
+  catList.appendChild(allBtn);
+
+  page.categories.forEach(cat => {
+    const count = page._all.filter(m => m.category === cat).length;
+    const btn = document.createElement('button');
+    btn.className = 'cat-btn';
+    btn.dataset.cat = cat;
+    const name = cat.replace(/\.html$/i, '');
+    btn.innerHTML = `<span class="cat-name" title="${htmlEnc(name)}">${htmlEnc(name)}</span><span class="cat-count">${count}</span>`;
+    catList.appendChild(btn);
+  });
+
+  catList.addEventListener('click', e => {
+    const btn = e.target.closest('.cat-btn');
+    if (!btn) return;
+    catList.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    page.category(btn.dataset.cat);
+  });
+})();
+
+// Build subject pills
+(function buildSubjPills() {
+  const wrap = document.getElementById('subjPills');
+  const allPill = document.createElement('button');
+  allPill.className = 'subj-pill active';
+  allPill.dataset.subj = 'all';
+  allPill.textContent = 'All';
+  wrap.appendChild(allPill);
+  page.subjects.forEach(s => {
+    const pill = document.createElement('button');
+    pill.className = 'subj-pill';
+    pill.dataset.subj = s;
+    pill.textContent = s;
+    wrap.appendChild(pill);
+  });
+  wrap.addEventListener('click', e => {
+    const pill = e.target.closest('.subj-pill');
+    if (!pill) return;
+    wrap.querySelectorAll('.subj-pill').forEach(p => p.classList.remove('active'));
+    pill.classList.add('active');
+    page.subject(pill.dataset.subj);
+  });
+})();
+
+// Search
+document.getElementById('searchInput').addEventListener('input', e => page.search(e.target.value));
+// Sort
+document.getElementById('sortSelect').addEventListener('change', e => page.sort(e.target.value));
+// Load more
+document.getElementById('loadMoreBtn').addEventListener('click', () => page.more());
+// Completion toggle (delegated)
+document.getElementById('listContainer').addEventListener('click', e => {
+  const btn = e.target.closest('.done-btn');
+  if (!btn || !btn.dataset.path) return;
+  const done = page.toggle(btn.dataset.path);
+  btn.classList.toggle('done', done);
+});
+// Mobile sidebar
+document.getElementById('sidebarToggle').addEventListener('click', () => {
+  document.getElementById('sidebar').classList.toggle('open');
+  document.getElementById('sidebarOverlay').classList.toggle('show');
+});
+document.getElementById('sidebarOverlay').addEventListener('click', () => {
+  document.getElementById('sidebar').classList.remove('open');
+  document.getElementById('sidebarOverlay').classList.remove('show');
+});
+
+// Boot
+page.refresh();
+</script>
+</body>
+</html>

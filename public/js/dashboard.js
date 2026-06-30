@@ -1,3 +1,15 @@
+// ─── CSS.escape Polyfill ─────────────────────────────────────────────────────
+if (typeof CSS === 'undefined' || !CSS.escape) {
+    CSS = CSS || {};
+    CSS.escape = function(str) {
+        return String(str).replace(/([!"#$%&'()*+,.\/:;<=>?@[\\\]^`{|}~])/g, '\\$1');
+    };
+}
+
+function encodeHtmlAttr(str) {
+    return String(str).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/'/g, '&#39;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+}
+
 // ─── Color Theme Definitions ───────────────────────────────────────────────
 const themeColors = {
     blue:    { main: '#3b82f6', bg: '#eff6ff', text: '#1d4ed8', border: '#bfdbfe' },
@@ -44,24 +56,30 @@ let state = {
 
 // ─── DOM References ────────────────────────────────────────────────────────
 const DOM = {
-    search:       document.getElementById('global-search'),
-    providers:    document.getElementById('provider-filters'),
-    subjects:     document.getElementById('subject-filters'),
-    category:     document.getElementById('category-filter'),
-    status:       document.getElementById('status-filters'),
-    sort:         document.getElementById('sort-select'),
-    grid:         document.getElementById('grid'),
-    count:        document.getElementById('results-count'),
-    resultsText:  document.getElementById('results-text'),
-    loadMoreBtn:  document.getElementById('load-more-btn'),
-    loadMoreWrap: document.getElementById('load-more-wrapper'),
-    statTotal:    document.getElementById('stat-total'),
-    statCompleted:document.getElementById('stat-completed'),
-    statRemaining:document.getElementById('stat-remaining'),
-    statProgTxt:  document.getElementById('stat-progress-txt'),
-    statProgBar:  document.getElementById('stat-progress-bar'),
-    viewGrid:     document.getElementById('view-grid-btn'),
-    viewRoadmap:  document.getElementById('view-roadmap-btn')
+    search:          document.getElementById('global-search'),
+    providers:       document.getElementById('provider-filters'),
+    subjects:        document.getElementById('subject-filters'),
+    category:        document.getElementById('category-filter'),
+    status:          document.getElementById('status-filters'),
+    sort:            document.getElementById('sort-select'),
+    timerToggle:     document.getElementById('sectional-timer-toggle'),
+    grid:            document.getElementById('grid'),
+    count:           document.getElementById('results-count'),
+    resultsText:     document.getElementById('results-text'),
+    loadMoreBtn:     document.getElementById('load-more-btn'),
+    loadMoreWrap:    document.getElementById('load-more-wrapper'),
+    statTotal:       document.getElementById('hero-total'),
+    statCompleted:   document.getElementById('hero-completed'),
+    statRemaining:   document.getElementById('hero-remaining'),
+    statProgTxt:     document.getElementById('hero-progress-txt'),
+    statProgBar:     document.getElementById('hero-progress-bar'),
+    viewGrid:        document.getElementById('view-grid-btn'),
+    viewRoadmap:     document.getElementById('view-roadmap-btn'),
+    
+    // Responsive Mobile Elements
+    sidebarToggle:   document.getElementById('sidebar-toggle-btn'),
+    sidebarOverlay:  document.getElementById('sidebar-overlay'),
+    sidebar:         document.getElementById('sidebar')
 };
 
 // ─── Color Assignment ──────────────────────────────────────────────────────
@@ -116,6 +134,14 @@ function initFilters() {
     bindEvents();
 }
 
+// ─── Mobile Sidebar Helpers ────────────────────────────────────────────────
+function closeMobileSidebar() {
+    if (DOM.sidebar && DOM.sidebar.classList.contains('active')) {
+        DOM.sidebar.classList.remove('active');
+        DOM.sidebarOverlay.classList.remove('active');
+    }
+}
+
 // ─── Event Binding ─────────────────────────────────────────────────────────
 function bindEvents() {
     DOM.search.addEventListener('input', e => {
@@ -130,6 +156,7 @@ function bindEvents() {
         btn.classList.add('active');
         state.provider = btn.dataset.val;
         resetAndRender();
+        closeMobileSidebar();
     });
 
     DOM.subjects.addEventListener('click', e => {
@@ -139,17 +166,30 @@ function bindEvents() {
         btn.classList.add('active');
         state.subject = btn.dataset.val;
         resetAndRender();
+        closeMobileSidebar();
     });
 
     DOM.category.addEventListener('change', e => {
         state.category = e.target.value;
         resetAndRender();
+        closeMobileSidebar();
     });
 
     DOM.sort.addEventListener('change', e => {
         state.sort = e.target.value;
         resetAndRender();
+        closeMobileSidebar();
     });
+
+    if (DOM.timerToggle) {
+        const savedTimer = localStorage.getItem('sectionalTimerOverride') || 'default';
+        DOM.timerToggle.checked = (savedTimer === '10');
+        
+        DOM.timerToggle.addEventListener('change', e => {
+            const val = e.target.checked ? '10' : 'default';
+            localStorage.setItem('sectionalTimerOverride', val);
+        });
+    }
 
     DOM.status.addEventListener('click', e => {
         const btn = e.target.closest('.status-tab');
@@ -158,6 +198,7 @@ function bindEvents() {
         btn.classList.add('active');
         state.status = btn.dataset.status;
         resetAndRender();
+        closeMobileSidebar();
     });
 
     DOM.loadMoreBtn.addEventListener('click', () => {
@@ -178,6 +219,45 @@ function bindEvents() {
         state.viewMode = 'roadmap';
         resetAndRender();
     });
+
+    // Mobile Sidebar Drawer bindings
+    if (DOM.sidebarToggle) {
+        DOM.sidebarToggle.addEventListener('click', () => {
+            DOM.sidebar.classList.toggle('active');
+            DOM.sidebarOverlay.classList.toggle('active');
+            if (typeof lucide !== 'undefined') {
+                lucide.createIcons();
+            }
+        });
+    }
+
+    if (DOM.sidebarOverlay) {
+        DOM.sidebarOverlay.addEventListener('click', () => {
+            closeMobileSidebar();
+        });
+    }
+
+    // Keyboard Shortcuts (Pressing '/' or 'Cmd+K' / 'Ctrl+K' focuses Search bar)
+    document.addEventListener('keydown', e => {
+        const active = document.activeElement;
+        const isInput = active && (active.tagName === 'INPUT' || active.tagName === 'TEXTAREA' || active.isContentEditable);
+        
+        if (!isInput) {
+            if (e.key === '/' || ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k')) {
+                e.preventDefault();
+                DOM.search.focus();
+                DOM.search.select();
+            }
+        }
+    });
+
+    // Event delegation for completion toggle buttons
+    DOM.grid.addEventListener('click', e => {
+        const btn = e.target.closest('.toggle-btn, .completion-btn');
+        if (btn && btn.dataset.path) {
+            toggleComplete(btn.dataset.path);
+        }
+    });
 }
 
 // ─── Toggle Completion ─────────────────────────────────────────────────────
@@ -190,16 +270,24 @@ function toggleComplete(path) {
     localStorage.setItem('completedMocks', JSON.stringify(state.completed));
     updateStats();
 
-    const btns = document.querySelectorAll(`[data-path="${CSS.escape(path)}"]`);
-    btns.forEach(btn => {
-        if (state.completed[path]) {
-            btn.classList.add('completed');
-            btn.innerHTML = '<i class="fa-solid fa-check"></i>';
-        } else {
-            btn.classList.remove('completed');
-            btn.innerHTML = '<i class="fa-regular fa-square"></i>';
+    const grid = document.getElementById('grid');
+    if (grid) {
+        const btns = grid.querySelectorAll('.toggle-btn, .completion-btn');
+        btns.forEach(btn => {
+            if (btn.dataset.path === path) {
+                if (state.completed[path]) {
+                    btn.classList.add('completed');
+                    btn.innerHTML = '<i data-lucide="check"></i>';
+                } else {
+                    btn.classList.remove('completed');
+                    btn.innerHTML = '<i data-lucide="square"></i>';
+                }
+            }
+        });
+        if (typeof lucide !== 'undefined') {
+            lucide.createIcons();
         }
-    });
+    }
 
     if (state.status !== 'all' || state.viewMode === 'roadmap') {
         resetAndRender();
@@ -210,7 +298,16 @@ window.toggleComplete = toggleComplete;
 
 window.toggleTrack = function(trackId) {
     const el = document.getElementById(trackId);
-    if (el) el.classList.toggle('collapsed');
+    if (el) {
+        const trackBody = el.querySelector('.track-body');
+        const toggleBtn = el.querySelector('.roadmap-track-toggle');
+        if (trackBody) {
+            trackBody.classList.toggle('collapsed');
+            if (toggleBtn) {
+                toggleBtn.classList.toggle('expanded');
+            }
+        }
+    }
 };
 
 // ─── Mock Track Classification ─────────────────────────────────────────────
@@ -219,29 +316,29 @@ function getMockTrack(mock) {
     const name = mock.name.toLowerCase();
     const subj = mock.subject.toLowerCase();
 
-    if (cat.includes('chapter') || cat.includes('pyq') ||
-        name.includes('chapter') || name.includes('topic') || name.includes('wise')) {
+    if (cat === 'chapter wise pyqs' || cat.includes('chapter') || cat.includes('pyq') ||
+        name.includes('chapter') || name.includes('topic wise')) {
         return 'Chapter-wise Mocks';
     }
-    if (mock.subject === 'Full Mock' || cat.includes('full') || name.includes('full') ||
-        cat.includes('pre') || name.includes('pre') || cat.includes('tier') ||
+    if (subj === 'full mock' || cat.includes('full') || name.includes('full') ||
+        cat.includes('pre') || name.includes(' pre ') || cat.includes('tier') ||
         name.includes('tier') || name.includes('cgl 2026 pre')) {
         return 'Full Mocks';
     }
-    if (subj === 'quant' || cat.includes('quant') || name.includes('quant') ||
-        cat.includes('math') || name.includes('math') || name.includes('calc')) {
+    if (subj.startsWith('quant') || cat.includes('quant') || name.includes('quant') ||
+        cat.includes('math') || name.includes('math') || /\bcalc\b/.test(name)) {
         return 'Quant Mocks';
     }
-    if (subj === 'english' || cat.includes('english') || name.includes('english') ||
+    if (subj.startsWith('english') || cat.includes('english') || name.includes('english') ||
         name.includes('vocab') || name.includes('grammar')) {
         return 'English Mocks';
     }
-    if (subj === 'reasoning' || cat.includes('reasoning') || name.includes('reasoning') ||
+    if (subj.startsWith('reasoning') || cat.includes('reasoning') || name.includes('reasoning') ||
         name.includes('analog') || name.includes('speed')) {
         return 'Reasoning Mocks';
     }
     if (subj === 'general studies' || subj === 'gs' || cat.includes('gs') ||
-        name.includes('gs') || cat.includes('gk') || name.includes('gk') ||
+        name.includes(' gs ') || cat.includes('gk') || name.includes(' gk ') ||
         cat.includes('current affairs') || name.includes('current affairs') ||
         cat.includes('history') || cat.includes('geography') ||
         cat.includes('polity') || cat.includes('science')) {
@@ -252,7 +349,8 @@ function getMockTrack(mock) {
 
 function extractChapterName(name) {
     let clean = name.replace(/^Paid\s+/i, '');
-    let parts = clean.split(/PART|Part|part/i);
+    clean = clean.replace(/\s*[-–]?\s*\(?(?:SSC\s+\w+(?:\s+\w+)?(?:\s+\d{4})?|CGL\s+202[0-6]|PRE\s+\d{4}|CHSL|CPO|Selection Post(?:\s+\d{4})?)\)?\s*$/i, '');
+    let parts = clean.split(/\b(?:PART|Part|part)\b/i);
     let chap = parts[0].trim().replace(/[\s\-_]+$/, '').trim();
     return chap || 'General Topic';
 }
@@ -287,6 +385,9 @@ function renderRoadmap(filtered) {
 
     if (sorted.length === 0) {
         DOM.grid.innerHTML = buildEmptyState('No tracks found', "We couldn't find any mock tests matching your filters.");
+        if (typeof lucide !== 'undefined') {
+            lucide.createIcons();
+        }
         return;
     }
 
@@ -302,16 +403,16 @@ function renderRoadmap(filtered) {
         if (trackName === 'Chapter-wise Mocks') {
             if (!state.chapterSubject) {
                 const availableSubjects = [...new Set(mocks.map(m => m.subject))].sort();
-                const icons = { 'Quant': 'fa-calculator', 'Reasoning': 'fa-brain', 'English': 'fa-book', 'General Studies': 'fa-globe', 'General': 'fa-graduation-cap' };
+                const icons = { 'Quant': 'calculator', 'Reasoning': 'brain', 'English': 'book', 'General Studies': 'globe', 'General': 'graduation-cap' };
                 const cards = availableSubjects.map(subj => {
                     const cnt  = mocks.filter(m => m.subject === subj).length;
                     const comp = mocks.filter(m => m.subject === subj && state.completed[m.path]).length;
-                    const icon  = icons[subj] || 'fa-graduation-cap';
+                    const icon  = icons[subj] || 'graduation-cap';
                     const color = subjectColors[subj] || themeColors.blue;
                     return `
                         <div class="subject-card" onclick="window.setChapterSubject('${subj}')">
                             <div class="subject-card-icon" style="background:${color.bg};color:${color.main}">
-                                <i class="fa-solid ${icon}"></i>
+                                <i data-lucide="${icon}"></i>
                             </div>
                             <div class="subject-card-title">${subj}</div>
                             <div class="subject-card-count">${comp}/${cnt} Done</div>
@@ -338,7 +439,7 @@ function renderRoadmap(filtered) {
                     return `
                         <div class="chapter-section">
                             <div class="chapter-title">
-                                <i class="fa-solid fa-book-open"></i> ${chapName} &nbsp;<span style="color:var(--text-muted);font-weight:500;font-size:0.8rem;">(${cMocks.length} Mocks)</span>
+                                <i data-lucide="book-open"></i> ${chapName} &nbsp;<span style="color:var(--text-muted);font-weight:500;font-size:0.8rem;">(${cMocks.length} Mocks)</span>
                             </div>
                             <div style="position:relative;display:flex;flex-direction:column;">
                                 <div class="roadmap-timeline"></div>
@@ -350,7 +451,7 @@ function renderRoadmap(filtered) {
                 trackContent = `
                     <div class="chapter-roadmap-header">
                         <button class="back-btn" onclick="window.setChapterSubject(null)">
-                            <i class="fa-solid fa-arrow-left"></i> Back to Subjects
+                            <i data-lucide="arrow-left"></i> Back to Subjects
                         </button>
                         <div class="active-subject-badge">
                             Subject: <strong>${state.chapterSubject}</strong>
@@ -367,32 +468,32 @@ function renderRoadmap(filtered) {
                 </div>`;
         }
 
-        container.insertAdjacentHTML('beforeend', `
-            <div class="roadmap-track collapsed" id="${id}">
-                <div class="roadmap-track-header" onclick="window.toggleTrack('${id}')">
-                    <div class="roadmap-track-info">
-                        <div class="roadmap-track-title">
-                            <i class="fa-solid fa-route"></i> ${trackName}
-                        </div>
-                        <div class="roadmap-track-meta">
-                            <span><strong>${mocks.length}</strong> Mocks</span>
-                            <span>•</span>
-                            <span><strong>${done}</strong> Completed</span>
-                            <span>•</span>
-                            <div class="roadmap-progress-container">
-                                <div class="roadmap-progress-bar">
-                                    <div class="roadmap-progress-fill" style="width:${pct}%"></div>
-                                </div>
-                                <span>${pct}%</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="roadmap-track-toggle"><i class="fa-solid fa-chevron-down"></i></div>
+        const div = document.createElement('div');
+        div.className = 'track-section';
+        div.id = id;
+        div.innerHTML = `
+            <div class="track-header" onclick="window.toggleTrack('${id}')">
+                <div class="track-header-title">
+                    <i data-lucide="git-branch"></i> ${trackName}
                 </div>
-                <div class="roadmap-track-content">${trackContent}</div>
+                <div class="track-header-meta">
+                    <div class="track-progress">
+                        <div class="track-progress-fill">
+                            <div class="track-progress-fill-inner" style="width:${pct}%"></div>
+                        </div>
+                        <span class="track-progress-text">${done}/${mocks.length} (${pct}%)</span>
+                    </div>
+                    <div class="roadmap-track-toggle"><i data-lucide="chevron-down"></i></div>
+                </div>
             </div>
-        `);
+            <div class="track-body collapsed">${trackContent}</div>
+        `;
+        container.appendChild(div);
     });
+
+    if (typeof lucide !== 'undefined') {
+        lucide.createIcons();
+    }
 }
 
 function buildRoadmapStep(mock, idx, firstUncompletedIdx) {
@@ -403,35 +504,34 @@ function buildRoadmapStep(mock, idx, firstUncompletedIdx) {
 
     let stepClass = 'pending';
     let nodeContent = idx + 1;
-    if (isComp)        { stepClass = 'completed'; nodeContent = '<i class="fa-solid fa-check"></i>'; }
-    else if (isActive) { stepClass = 'active';    nodeContent = '<i class="fa-solid fa-play"></i>'; }
+    if (isComp)        { stepClass = 'completed'; nodeContent = '<i data-lucide="check"></i>'; }
+    else if (isActive) { stepClass = 'active';    nodeContent = '<i data-lucide="play"></i>'; }
 
     const nodeStyle = isActive ? `border-color:${pColor.main};background:${pColor.main};color:white;` : '';
 
     return `
-        <div class="roadmap-step ${stepClass}" data-card-path="${mock.path}">
-            <div class="roadmap-node-container">
-                <div class="roadmap-node" style="${nodeStyle}">${nodeContent}</div>
-            </div>
-            <div class="roadmap-card">
-                <div class="roadmap-info">
-                    <div class="roadmap-name">${mock.name}</div>
-                    <div class="roadmap-meta">
-                        <span class="roadmap-badge" style="border-color:${pColor.border};background:${pColor.bg};color:${pColor.text}">${mock.provider}</span>
-                        <span class="roadmap-badge" style="border-color:${sColor.border};background:${sColor.bg};color:${sColor.text}">${mock.subject}</span>
-                        <span class="category-meta"><i class="fa-regular fa-folder-open"></i> ${mock.category}</span>
+        <div class="roadmap-step ${stepClass}" data-card-path="${encodeHtmlAttr(mock.path)}">
+            <div class="step-indicator" style="${nodeStyle}">${nodeContent}</div>
+            <div class="step-content">
+                <div class="step-header">
+                    <div class="step-name" title="${encodeHtmlAttr(mock.name)}">${mock.name}</div>
+                    <div class="step-meta">
+                        <span class="provider-badge" style="border-color:${pColor.border};background:${pColor.bg};color:${pColor.text}">
+                            <div class="provider-dot" style="background:${pColor.main}"></div>${mock.provider}
+                        </span>
+                        <span class="subject-badge" style="border-color:${sColor.border};background:${sColor.bg};color:${sColor.text}">${mock.subject}</span>
+                        <span><i data-lucide="folder-open"></i> ${mock.category}</span>
                     </div>
                 </div>
-                <div style="display:flex;gap:0.625rem;align-items:center;flex-shrink:0;">
-                    <button class="toggle-btn ${isComp ? 'completed' : ''}"
-                            data-path="${mock.path}"
-                            onclick="window.toggleComplete('${mock.path.replace(/'/g, "\\'")}')"
+                <div class="step-action">
+                    <button class="completion-btn ${isComp ? 'completed' : ''}"
+                            data-path="${encodeHtmlAttr(mock.path)}"
                             title="Toggle Completion">
-                        ${isComp ? '<i class="fa-solid fa-check"></i>' : '<i class="fa-regular fa-square"></i>'}
+                        ${isComp ? '<i data-lucide="check"></i>' : '<i data-lucide="square"></i>'}
                     </button>
-                    <a href="${mock.path}" target="_blank" class="launch-btn"
+                    <a href="${encodeHtmlAttr(mock.path)}" target="_blank" class="launch-btn"
                        style="background:linear-gradient(135deg,${pColor.main},${sColor.main})">
-                        <i class="fa-solid fa-play"></i> Launch
+                        <i data-lucide="play"></i> Launch
                     </a>
                 </div>
             </div>
@@ -455,10 +555,10 @@ function updateStats() {
 // ─── Empty State Helper ────────────────────────────────────────────────────
 function buildEmptyState(title, message) {
     return `
-        <div class="empty-state" style="grid-column:1/-1;">
-            <div class="empty-state-icon"><i class="fa-solid fa-ghost"></i></div>
-            <h3>${title}</h3>
-            <p>${message}</p>
+        <div class="empty-state">
+            <i data-lucide="frown"></i>
+            <div class="empty-state-title">${title}</div>
+            <div class="empty-state-desc">${message}</div>
         </div>`;
 }
 
@@ -521,6 +621,9 @@ function render(append = false) {
             'No mocks found',
             "No mock tests match your current filters. Try adjusting your search criteria."
         );
+        if (typeof lucide !== 'undefined') {
+            lucide.createIcons();
+        }
         return;
     }
 
@@ -560,26 +663,25 @@ function render(append = false) {
                         ${mock.subject}
                     </span>
                 </div>
-                <h3 class="card-title" title="${mock.name}">${mock.name}</h3>
+                <h3 class="card-title" title="${encodeHtmlAttr(mock.name)}">${mock.name}</h3>
                 <div class="card-meta-row">
                     <span class="card-meta-chip">
-                        <i class="fa-regular fa-folder-open"></i> ${mock.category}
+                        <i data-lucide="folder-open"></i> ${mock.category}
                     </span>
                     <span class="card-meta-chip">
-                        <i class="fa-solid fa-route"></i> ${track}
+                        <i data-lucide="git-branch"></i> ${track}
                     </span>
                 </div>
             </div>
             <div class="card-footer">
                 <button class="completion-btn ${isComp ? 'completed' : ''}"
-                        data-path="${mock.path}"
-                        onclick="window.toggleComplete('${mock.path.replace(/'/g, "\\'")}')"
+                        data-path="${encodeHtmlAttr(mock.path)}"
                         title="Toggle Completion">
-                    ${isComp ? '<i class="fa-solid fa-check"></i>' : '<i class="fa-regular fa-square"></i>'}
+                    ${isComp ? '<i data-lucide="check"></i>' : '<i data-lucide="square"></i>'}
                 </button>
-                <a href="${mock.path}" target="_blank" class="launch-btn"
+                <a href="${encodeHtmlAttr(mock.path)}" target="_blank" class="launch-btn"
                    style="background:linear-gradient(135deg,${pColor.main},${sColor.main})">
-                    <i class="fa-solid fa-arrow-right"></i> Start Test
+                    <i data-lucide="arrow-right"></i> Start Test
                 </a>
             </div>`;
 
@@ -587,6 +689,10 @@ function render(append = false) {
     });
 
     DOM.grid.appendChild(frag);
+
+    if (typeof lucide !== 'undefined') {
+        lucide.createIcons();
+    }
 }
 
 // ─── Boot ──────────────────────────────────────────────────────────────────
@@ -599,4 +705,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initFilters();
     updateStats();
     render();
+    if (typeof lucide !== 'undefined') {
+        lucide.createIcons();
+    }
 });

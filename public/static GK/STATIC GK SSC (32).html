@@ -3,43 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aether Mocks</title>
+    <title>Mocks Wallah</title>
     <!-- Fonts & Icons -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    
+
     <!-- Central Stylesheet -->
     <link rel="stylesheet" href="../css/mock-main.css">
-    
+
     <!-- Math Formula Rendering (KaTeX/MathJax) -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    
+
     <!-- Timer Config -->
-    <meta name="exam-duration" content="60">
+    <meta name="exam-duration" content="30">
 </head>
 <body>
     <!-- Welcome Screen -->
     <div class="welcome-screen" id="welcomeScreen">
         <div class="welcome-container">
             <div class="welcome-header" style="margin-bottom: 24px;">
-                <h1 style="font-size: 2rem; font-weight: 700; color: #0f172a; margin-bottom: 8px;"><i class="fas fa-graduation-cap" style="color: #3b82f6;"></i> Aether Mocks</h1>
-                <p style="color: #64748b;">Computer Based Test Portal</p>
+                <h1 style="font-size: 2rem; font-weight: 700; color: var(--text-main); margin-bottom: 8px;"><i class="fas fa-graduation-cap" style="color: var(--primary);"></i> Mocks Wallah</h1>
+                <p style="color: var(--text-muted);">Computer Based Test Portal</p>
             </div>
-            
+
             <div class="test-details" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-bottom: 32px; text-align: left;">
-                <div class="detail-item" style="padding: 12px; background: #f8fafc; border-radius: 8px; border: 1px solid #e2e8f0;">
-                    <div class="detail-label" style="font-size: 0.8rem; color: #64748b;">Total Questions</div>
-                    <div class="detail-value" style="font-size: 1.1rem; font-weight: 600; color: #0f172a;">10</div>
+                <div class="detail-item" style="padding: 12px; background: var(--bg-color); border-radius: 8px; border: 1px solid var(--border-color);">
+                    <div class="detail-label" style="font-size: 0.8rem; color: var(--text-muted);">Total Questions</div>
+                    <div class="detail-value" style="font-size: 1.1rem; font-weight: 600; color: var(--text-main);">15</div>
                 </div>
-                <div class="detail-item" style="padding: 12px; background: #f8fafc; border-radius: 8px; border: 1px solid #e2e8f0;">
-                    <div class="detail-label" style="font-size: 0.8rem; color: #64748b;">Duration</div>
-                    <div class="detail-value" style="font-size: 1.1rem; font-weight: 600; color: #0f172a;">60 mins</div>
+                <div class="detail-item" style="padding: 12px; background: var(--bg-color); border-radius: 8px; border: 1px solid var(--border-color);">
+                    <div class="detail-label" style="font-size: 0.8rem; color: var(--text-muted);">Duration</div>
+                    <div class="detail-value" style="font-size: 1.1rem; font-weight: 600; color: var(--text-main);">30 mins</div>
                 </div>
             </div>
-            
+
             <div class="welcome-actions">
                 <button class="btn btn-primary" id="startBtn" onclick="document.getElementById('welcomeScreen').style.display='none'; document.getElementById('examContainer').style.display='flex';" style="font-size: 1.1rem; padding: 12px 32px; width: 100%;">
                     <i class="fas fa-play" style="margin-right: 8px;"></i> Start Test
@@ -47,12 +47,12 @@
             </div>
         </div>
     </div>
-    
+
     <!-- Main Exam Interface -->
     <div class="exam-container" id="examContainer" style="display: none; height: 100vh; flex-direction: column;">
         <!-- Top Header -->
         <div class="exam-header">
-            <div class="exam-title">Aether Mocks</div>
+            <div class="exam-title">Mocks Wallah</div>
             <div class="header-actions" style="display: flex; align-items: center; gap: 12px;">
                 <button class="btn-icon" id="themeToggleBtn" title="Switch to Dark Mode"><i class="fas fa-moon"></i></button>
                 <button class="btn-icon" id="fullscreenToggleBtn" title="Toggle Fullscreen"><i class="fas fa-expand"></i></button>
@@ -62,14 +62,14 @@
                 </div>
             </div>
         </div>
-        
+
         <!-- Main Content -->
         <div class="mock-container">
             <!-- Question Area -->
             <div class="question-view">
                 <!-- Dynamically populated question container -->
                 <div id="questionContainer" style="flex: 1; display: flex; flex-direction: column; gap: 24px;"></div>
-                
+
                 <!-- Controls -->
                 <div class="nav-controls">
                     <button class="btn btn-secondary btn-prev"><i class="fas fa-chevron-left" style="margin-right: 8px;"></i> Previous</button>
@@ -79,40 +79,221 @@
                     <button class="btn btn-primary btn-next">Next <i class="fas fa-chevron-right" style="margin-left: 8px;"></i></button>
                 </div>
             </div>
-            
+
             <!-- Desktop Navigator Sidebar -->
             <div class="sidebar">
                 <div class="sidebar-section-title">Summary Status</div>
                 <div class="stats-grid">
                     <div class="stat-item">
-                        <div class="stat-count" id="stat-answered" style="color: #10b981;">0</div>
+                        <div class="stat-count" id="stat-answered" style="color: var(--success);">0</div>
                         <div class="stat-name">Answered</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-count" id="stat-flagged" style="color: #f59e0b;">0</div>
+                        <div class="stat-count" id="stat-flagged" style="color: var(--warning);">0</div>
                         <div class="stat-name">Flagged</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-count" id="stat-not-answered" style="color: #64748b;">0</div>
+                        <div class="stat-count" id="stat-not-answered" style="color: var(--text-muted);">0</div>
                         <div class="stat-name">Unanswered</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-count" id="stat-not-visited" style="color: #94a3b8;">0</div>
+                        <div class="stat-count" id="stat-not-visited" style="color: var(--text-muted);">0</div>
                         <div class="stat-name">Not Visited</div>
                     </div>
                 </div>
-                
+
                 <div class="sidebar-section-title" style="margin-top: 16px;">Question Navigator</div>
                 <div class="questions-grid"></div>
             </div>
         </div>
     </div>
-    
+
     <!-- Inject Question Data -->
     <script>
-        const questions = [];
+        const questions = [
+  {
+    "question": "<p>1. When was the first commonwealth games held ?</p>",
+    "options": [
+      "1945",
+      "1935",
+      "1930",
+      "1926"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p>1.(c) <strong>1930</strong>. The Commonwealth Games began in Hamilton, Canada as the inaugural hosts. Commonwealth Games year and host country : 1934 - England, 1962 - Australia, 1990 - New Zealand, 2010 - India, 2022 - England, 2026 - Australia.</p>",
+    "question_index": 0
+  },
+  {
+    "question": "<p>2. Pt. Bhimsen Joshi has received highest civilian award Bharat Ratna in which of the following year ?</p>",
+    "options": [
+      "2002",
+      "2004",
+      "2006",
+      "2009"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p>2.(d) <strong>2009</strong>. Pt. Bhimsen Joshi is one of the prominent Hindustani Classical Vocalists of India. He belongs to the Kirana gharana. His Awards: Padma Vibhushan (1999), Padma Bhushan (1985), and Sangeet Natak Akademi Award (1976). Bharat Ratna award winners 2024- Karpoori Thakur, Lal Krishna Advani, P V Narasimha Rao, Chaudhary Charan Singh, M S Swaminathan.</p>",
+    "question_index": 1
+  },
+  {
+    "question": "<p>3. In long jump, the take-off has to be made from a _____ cm wide board one meter away from a pit.</p>",
+    "options": [
+      "15",
+      "24",
+      "12",
+      "20"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p>3.(d) <strong>20</strong>. Long jump rules and technique: In official events, the runway measures 40m in length; Long jumpers are allowed to wear spikes if they prefer but the sole of their shoe cannot be more than 13mm thick. Long jump world record: Men\\'s long jump - Mike Powell (USA), 8.95m in 1991 and Women\\'s long jump - Galina Chistyakova (Russia), 7.52m in 1988.</p>",
+    "question_index": 2
+  },
+  {
+    "question": "<p>4. Who among the following people was popular as the \"Nightingale of India\" ?</p>",
+    "options": [
+      "Indira Gandhi",
+      "Sarojini Naidu",
+      "Margaret Thatcher",
+      "Beryl Markham"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p>4.(b) <strong>Sarojini Naidu</strong> was famously known as Bharat Kokila (The Nightingale of India). She was the first Indian woman president of the Indian National Congress (INC) in 1925. Her notable works include The Golden Threshold (1905), The Bird of Time (1912), and The Village Song (1912).</p>",
+    "question_index": 3
+  },
+  {
+    "question": "<p>5. Which game uses the Elo rating system to assess the skill levels of its players ?</p>",
+    "options": [
+      "Chess",
+      "Basketball",
+      "Tennis",
+      "Badminton"
+    ],
+    "correct_option_id": 0,
+    "solution": "<p>5.(a) <strong>Chess</strong>. The Elo rating system was created by Arpad Elo. Some chess terms include checkmate, cramped, gambit, grandmaster, mate, and stalemate.</p>",
+    "question_index": 4
+  },
+  {
+    "question": "<p>6. Which of the following countries is NOT a member of SAARC ?</p>",
+    "options": [
+      "Nepal",
+      "China",
+      "Bangladesh",
+      "Bhutan"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p>6.(b) <strong>China</strong>. The South Asian Association for Regional Cooperation (SAARC) was established in Dhaka in 1985. Its headquarters is located in Kathmandu, Nepal. SAARC comprises eight member states: Bangladesh, Bhutan, India, Maldives, Nepal, Pakistan, Sri Lanka, and Afghanistan (new member). There are currently nine observers to SAARC: Australia, China, the European Union, Iran, Japan, the Republic of Korea, Mauritius, Myanmar, and the United States of America.</p>",
+    "question_index": 5
+  },
+  {
+    "question": "<p>7. The________ Dance Festival is organized by the Kerala Tourism Development Corporation. It is celebrated twice a year, once in the month of October-November and then in the month of March-April in Kanakunnu palace compound, in the city of Trivandrum or Thiruvananthapuram, Kerala.</p>",
+    "options": [
+      "Mamallapuram Utsav",
+      "Hampi Dance Utsav",
+      "Nishagandhi Festival",
+      "Natyanjali Utsav"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p>7.(c) <strong>Nishagandhi Festival </strong>is a seven-day event that attracts artists from across the nation, showcasing performances in Mohiniyattam, Kathak, Kuchipudi, Bharatanatyam, Manipuri, and more. Other famous festivals of Kerala include Onam, Attukal Pongala, Vishu, Thrissur Pooram, Theyyam Festival, Boat Race Festival, Makaravilakku, and Adoor Gajamela.</p>",
+    "question_index": 6
+  },
+  {
+    "question": "<p>8. The aim of the MISTHI Scheme is to protect and revive ______ ecosystem on the Indian coast while enhancing the socio-economic status of nearby communities</p>",
+    "options": [
+      "coniferous",
+      "every",
+      "deciduous",
+      "mangrove"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p>8.(d) <strong>mangrove</strong>. Union Budget 2023-24 announced &lsquo;Mangrove Initiative for Shoreline Habitats &amp; Tangible Incomes (MISHTI)&rsquo; to promote and conserve mangroves as a unique, natural ecosystem having very high biological productivity and carbon sequestration potential, besides working as a bio shield. It was launched in 2023. Mangrove Alliance for Climate (MAC): It was launched by the UAE and Indonesia on the sidelines of the UN climate summit COP27, being held in Sharm El Sheikh in Egypt.</p>",
+    "question_index": 7
+  },
+  {
+    "question": "<p>9. Which of the following pair regarding event and its type is correct ?<br>I. Javelin - Jumping<br>II. high jump - Throwing</p>",
+    "options": [
+      "Only I",
+      "Both I and II",
+      "Only II",
+      "Neither I nor II"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p>9.(d)<strong> Neither I nor II.</strong> Javelin Throw, Discus Throw, Shot Put, and Hammer Throw are types of Throwing game. High Jump, Long Jump, Triple Jump (Hop-step-jump), Pole Vault are types of Jumping game.</p>",
+    "question_index": 8
+  },
+  {
+    "question": "<p>10. Which classical dancer was one of the youngest recipient of Padma Bhushan (1992) for her contributions to the field of classical dancing ?</p>",
+    "options": [
+      "Rukmini Devi Arundale",
+      "Alarmel Valli",
+      "Sonal Mansingh",
+      "Mallika Sarabhai"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p>10.(c) <strong>Sonal Mansingh</strong> is a renowned Indian classical dancer and Guru, celebrated for her mastery in Bharatanatyam and Odissi dance styles. Her exceptional contributions to Indian classical dance have earned her significant recognition, including the prestigious Padma Bhushan in 1992 and the Padma Vibhushan in 2003.</p>",
+    "question_index": 9
+  },
+  {
+    "question": "<p>11. Which sport is played by the Indian sportsperson Ankita Das ?</p>",
+    "options": [
+      "Badminton",
+      "Volleyball",
+      "Table Tennis",
+      "Squash"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p>11.(c) <strong>Table Tennis. </strong>Other notable Indian table tennis players include Manika Batra, Sathiyan Gnanasekaran, Sharath Kamal, Kamlesh Mehta, Neha Aggarwal, Anthony Amalraj, Harmeet Desai, Manav Thakkar, and Mouma Das.</p>",
+    "question_index": 10
+  },
+  {
+    "question": "<p>12. To which of the following states does the dance form Chhau belong ?</p>",
+    "options": [
+      "Tamil Nadu",
+      "West Bengal",
+      "Maharashtra",
+      "Uttarakhand"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p>12.(b) <strong>West Bengal.</strong> Chhau is a semi-classical Indian dance form with three subtypes: Purulia Chhau (West Bengal), Mayurbhanj Chhau (Odisha), and Seraikella Chhau (Jharkhand). According to India&rsquo;s Ministry of Culture, Chhau is recognized as one of the classical dance forms of India.</p>",
+    "question_index": 11
+  },
+  {
+    "question": "<p>13. Who is known as the father of green revolution in India ?</p>",
+    "options": [
+      "M.S Swaminathan",
+      "Sam Pitroda",
+      "Verghese Kurien",
+      "Durgesh Patel"
+    ],
+    "correct_option_id": 0,
+    "solution": "<p>13.(a)<strong> M.S Swaminathan</strong> made a significant contribution to increasing the productivity of Indian agriculture, helping to achieve food security. He has been honored with the Padma Shri (1967), Padma Bhushan (1972), Padma Vibhushan (1989), and the Bharat Ratna (posthumously in 2024). Norman Borlaug is considered the father of the Green Revolution in the World.</p>",
+    "question_index": 12
+  },
+  {
+    "question": "<p>14. Krishna Rao Shankar Pandit, Raja Bhaiya Poonchwale are associated with which Gharana?</p>",
+    "options": [
+      "Gwalior Gharana",
+      "Agra Gharana",
+      "Jaipur Atrauli Gharana",
+      "Lucknow Gharana"
+    ],
+    "correct_option_id": 0,
+    "solution": "<p>14.(a) <strong>Gwalior Gharana. </strong>It belongs to the Khayal style of Hindustani classical music. It was founded by Ustad Nathan Pir Baksh and Ustad Nathu Khan. Gwalior, in Madhya Pradesh, the birthplace of the famed Indian classical singer Tansen, has been declared a &lsquo;Creative City of Music&rsquo; by the United Nations Educational, Scientific and Cultural Organization (UNESCO).</p>",
+    "question_index": 13
+  },
+  {
+    "question": "<p>15. In classical dance, which of the following rasas represents \"anger\"?</p>",
+    "options": [
+      "Shanta",
+      "Hasya",
+      "Raudra",
+      "Veer"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p>15.(c) <strong>Raudra</strong>. In Indian classical dance, there are traditionally considered to be nine main emotions or sentiments, known as the \"Navrasas\" or \"Nine Rasas\". These nine rasas are: Shringara (Romantic), Hasya (Comedic), Karuna (Pathetic), Raudra (Angry), Veera (Heroic), Bhayanaka (Fearful), Vibhatsa (Disgustful), Adbhuta (Wonderous), Shanta (Peaceful).</p>",
+    "question_index": 14
+  }
+];
     </script>
-    
+
     <!-- Central JS Controller -->
     <script src="../js/mock-core.js"></script>
 </body>

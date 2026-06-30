@@ -3,43 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aether Mocks</title>
+    <title>Mocks Wallah</title>
     <!-- Fonts & Icons -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    
+
     <!-- Central Stylesheet -->
     <link rel="stylesheet" href="../css/mock-main.css">
-    
+
     <!-- Math Formula Rendering (KaTeX/MathJax) -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    
+
     <!-- Timer Config -->
-    <meta name="exam-duration" content="60">
+    <meta name="exam-duration" content="30">
 </head>
 <body>
     <!-- Welcome Screen -->
     <div class="welcome-screen" id="welcomeScreen">
         <div class="welcome-container">
             <div class="welcome-header" style="margin-bottom: 24px;">
-                <h1 style="font-size: 2rem; font-weight: 700; color: #0f172a; margin-bottom: 8px;"><i class="fas fa-graduation-cap" style="color: #3b82f6;"></i> Aether Mocks</h1>
-                <p style="color: #64748b;">Computer Based Test Portal</p>
+                <h1 style="font-size: 2rem; font-weight: 700; color: var(--text-main); margin-bottom: 8px;"><i class="fas fa-graduation-cap" style="color: var(--primary);"></i> Mocks Wallah</h1>
+                <p style="color: var(--text-muted);">Computer Based Test Portal</p>
             </div>
-            
+
             <div class="test-details" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-bottom: 32px; text-align: left;">
-                <div class="detail-item" style="padding: 12px; background: #f8fafc; border-radius: 8px; border: 1px solid #e2e8f0;">
-                    <div class="detail-label" style="font-size: 0.8rem; color: #64748b;">Total Questions</div>
-                    <div class="detail-value" style="font-size: 1.1rem; font-weight: 600; color: #0f172a;">10</div>
+                <div class="detail-item" style="padding: 12px; background: var(--bg-color); border-radius: 8px; border: 1px solid var(--border-color);">
+                    <div class="detail-label" style="font-size: 0.8rem; color: var(--text-muted);">Total Questions</div>
+                    <div class="detail-value" style="font-size: 1.1rem; font-weight: 600; color: var(--text-main);">15</div>
                 </div>
-                <div class="detail-item" style="padding: 12px; background: #f8fafc; border-radius: 8px; border: 1px solid #e2e8f0;">
-                    <div class="detail-label" style="font-size: 0.8rem; color: #64748b;">Duration</div>
-                    <div class="detail-value" style="font-size: 1.1rem; font-weight: 600; color: #0f172a;">60 mins</div>
+                <div class="detail-item" style="padding: 12px; background: var(--bg-color); border-radius: 8px; border: 1px solid var(--border-color);">
+                    <div class="detail-label" style="font-size: 0.8rem; color: var(--text-muted);">Duration</div>
+                    <div class="detail-value" style="font-size: 1.1rem; font-weight: 600; color: var(--text-main);">30 mins</div>
                 </div>
             </div>
-            
+
             <div class="welcome-actions">
                 <button class="btn btn-primary" id="startBtn" onclick="document.getElementById('welcomeScreen').style.display='none'; document.getElementById('examContainer').style.display='flex';" style="font-size: 1.1rem; padding: 12px 32px; width: 100%;">
                     <i class="fas fa-play" style="margin-right: 8px;"></i> Start Test
@@ -47,12 +47,12 @@
             </div>
         </div>
     </div>
-    
+
     <!-- Main Exam Interface -->
     <div class="exam-container" id="examContainer" style="display: none; height: 100vh; flex-direction: column;">
         <!-- Top Header -->
         <div class="exam-header">
-            <div class="exam-title">Aether Mocks</div>
+            <div class="exam-title">Mocks Wallah</div>
             <div class="header-actions" style="display: flex; align-items: center; gap: 12px;">
                 <button class="btn-icon" id="themeToggleBtn" title="Switch to Dark Mode"><i class="fas fa-moon"></i></button>
                 <button class="btn-icon" id="fullscreenToggleBtn" title="Toggle Fullscreen"><i class="fas fa-expand"></i></button>
@@ -62,14 +62,14 @@
                 </div>
             </div>
         </div>
-        
+
         <!-- Main Content -->
         <div class="mock-container">
             <!-- Question Area -->
             <div class="question-view">
                 <!-- Dynamically populated question container -->
                 <div id="questionContainer" style="flex: 1; display: flex; flex-direction: column; gap: 24px;"></div>
-                
+
                 <!-- Controls -->
                 <div class="nav-controls">
                     <button class="btn btn-secondary btn-prev"><i class="fas fa-chevron-left" style="margin-right: 8px;"></i> Previous</button>
@@ -79,40 +79,221 @@
                     <button class="btn btn-primary btn-next">Next <i class="fas fa-chevron-right" style="margin-left: 8px;"></i></button>
                 </div>
             </div>
-            
+
             <!-- Desktop Navigator Sidebar -->
             <div class="sidebar">
                 <div class="sidebar-section-title">Summary Status</div>
                 <div class="stats-grid">
                     <div class="stat-item">
-                        <div class="stat-count" id="stat-answered" style="color: #10b981;">0</div>
+                        <div class="stat-count" id="stat-answered" style="color: var(--success);">0</div>
                         <div class="stat-name">Answered</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-count" id="stat-flagged" style="color: #f59e0b;">0</div>
+                        <div class="stat-count" id="stat-flagged" style="color: var(--warning);">0</div>
                         <div class="stat-name">Flagged</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-count" id="stat-not-answered" style="color: #64748b;">0</div>
+                        <div class="stat-count" id="stat-not-answered" style="color: var(--text-muted);">0</div>
                         <div class="stat-name">Unanswered</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-count" id="stat-not-visited" style="color: #94a3b8;">0</div>
+                        <div class="stat-count" id="stat-not-visited" style="color: var(--text-muted);">0</div>
                         <div class="stat-name">Not Visited</div>
                     </div>
                 </div>
-                
+
                 <div class="sidebar-section-title" style="margin-top: 16px;">Question Navigator</div>
                 <div class="questions-grid"></div>
             </div>
         </div>
     </div>
-    
+
     <!-- Inject Question Data -->
     <script>
-        const questions = [];
+        const questions = [
+  {
+    "question": "<p>1. The term &lsquo;banana kick&rsquo; is associated with which sport?</p>",
+    "options": [
+      "Ice Hockey",
+      "Football",
+      "Boxing",
+      "Hockey"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p>1.(b) <strong>Football.</strong> The duration of the match is 90 minutes divided into two equal halves of 45 minutes each with an interval of 10 - 15 minutes. Other important terminology : Football - Back Heel, Bicycle Kick, Corner Kick, Foul. Boxing - Bout, Clinch, Knock Out. Hockey - Bender, Celly, Grinder.</p>",
+    "question_index": 0
+  },
+  {
+    "question": "<p>2. Which of the following is an example of application software?</p>",
+    "options": [
+      "A word processor",
+      "A programming language",
+      "A web browser",
+      "An operating system"
+    ],
+    "correct_option_id": 0,
+    "solution": "<p>2.(a) <strong>A word processor.</strong> Application software is a kind of software that performs specific functions for the end user by interacting directly with it. Web browsers like Firefox, and Google Chrome, as well as Microsoft Word and Excel, are examples of application software that is used on a personal computer or laptop.</p>",
+    "question_index": 1
+  },
+  {
+    "question": "<p>3. What is the name of the festival that ends the Holy Ramzan month?</p>",
+    "options": [
+      "Muharram",
+      "Eid-UL-Zuha",
+      "Eid- UL-Fitr",
+      "Bakrid"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p>3.(c) <strong>Eid-UL-Fitr:</strong> It is a day of celebration, feasting, and charity, and is typically observed on the first day of the Islamic month of Shawwal. Muharram is the first month of the Islamic calendar and is a period of mourning for Muslims, particularly Shia Muslims, who commemorate the martyrdom of Imam Hussein. Eid-UL-Zuha, also known as Bakrid, is a different Islamic festival that is celebrated on the 10th day of the Islamic month of Dhu al-Hijjah and involves the sacrifice of animals.</p>",
+    "question_index": 2
+  },
+  {
+    "question": "<p>4. Who was the first Indian woman wrestler to win a medal at the Olympics?</p>",
+    "options": [
+      "Babita Phogat",
+      "Sakshi Malik",
+      "Alka Tomar",
+      "Geeta Phogat"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p>4.(b) <strong>Sakshi Malik.</strong> She won the bronze medal in the 58 kg category at the 2016 Rio Olympics. In 2010, Geeta Phogat became the first female Indian wrestler to win gold at the Commonwealth Games.</p>",
+    "question_index": 3
+  },
+  {
+    "question": "<p>5. The moderate margin of a page in MS Word can be applied to the page from which of&nbsp;the following?</p>",
+    "options": [
+      "View Tab",
+      "Page Layout Tab",
+      "Review tab",
+      "Design Tab"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p>5.(b) <strong>Page Layout Tab :</strong> This is where you adjust the layout settings of your page, including margins, orientation, and size. View Tab : Used to change the view of the document (e.g., print layout, web layout). Review Tab : Used for reviewing and editing the document (e.g., tracking changes, adding comments). Design Tab : Used to customize the design elements of the document (e.g, themes, colors, fonts).</p>",
+    "question_index": 4
+  },
+  {
+    "question": "<p>6. Chhannulal Mishra is related to which Musical Lineage?</p>",
+    "options": [
+      "Delhi Musical Family",
+      "Jaipur Musical Family",
+      "Kirana Musical Family",
+      "Agara Musical Family"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p>6.(c) <strong>Kirana Musical Family. </strong>It was founded by Abdul Karim Khan. Khayal gayaki and Dhrupad-Dhamar are combined to create the gayaki of the Agra Gharana. Chhannulal Mishra was awarded the Padma Bhushan in 2010, Padma Vibhushan in 2020.</p>",
+    "question_index": 5
+  },
+  {
+    "question": "Who wrote the book ‘Gulamgiri’?",
+    "options": [
+      "Swami Shraddhanand",
+      "Dwarkanath Tagore",
+      "BR Ambedkar",
+      "Jyotiba Phule"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p>7.(d) <strong>Jyotiba Phule.</strong> He was one of the earliest leaders of the non-Brahmin movement born in Maharashtra. He founded the Satyashodhak Samaj in 1873. Famous Books and Authors : Swami Shraddhanand - &ldquo;Hindu-Sangathan - Savior of the Dying Race&rdquo;. BR Ambedkar - &ldquo;The Annihilation of Caste&rdquo;, &ldquo;Thoughts on Pakistan&rdquo;, etc.</p>",
+    "question_index": 6
+  },
+  {
+    "question": "<p>8. Norman Ernest Borlaug was awarded the _____ in 1970 for his contributions to the&nbsp;green revolution.</p>",
+    "options": [
+      "Nobel Prize in Physics",
+      "Nobel Peace Prize",
+      "Nobel Prize in Chemistry",
+      "Nobel Prize in Physiology"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p>8.(b) <strong>Nobel Peace Prize.</strong> Norman Borlaug was a renowned American agronomist and humanitarian, often referred to as the Father of the Green Revolution. Norman E Borlaug Award : recognizes exceptional scientists under 40 and someone who works in the field of food and nutrition security and hunger eradication. It is given in the honor of Norman Borlaug.</p>",
+    "question_index": 7
+  },
+  {
+    "question": "<p>9. &lsquo;Chang dance&rsquo; is popular in the state of:</p>",
+    "options": [
+      "Goa",
+      "Bihar",
+      "Rajasthan",
+      "Tripura"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p>9.(c) <strong>Rajasthan.</strong> The Chang dance, also known as Dhamal or Dhuff dance, is performed during the Hindu festival of Holi to celebrate the triumph of good over evil. It is popularly referred to as the Holi dance due to its association with the festival. Folk Dances in India: Rajasthan - Ghumar, Jhuma, Kalbeliya. Bihar - Jata-Jatin, Bidesia. Tripura- Hojagiri.</p>",
+    "question_index": 8
+  },
+  {
+    "question": "<p>10. In India, the musical instrument &ldquo;Flute&rdquo; is also known as _____________.</p>",
+    "options": [
+      "Tabla",
+      "Manjira",
+      "Bansuri",
+      "Veena"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p>10.(c) <strong>Bansuri.</strong> It is a traditional woodwind instrument, typically made from bamboo. Tabla is a percussion instrument, consisting of a pair of drums. Manjira is a pair of small cymbals used in Indian music and worship. Veena is a stringed instrument.</p>",
+    "question_index": 9
+  },
+  {
+    "question": "<p>11. Which country hosted the first FIFA World Cup?</p>",
+    "options": [
+      "Brazil",
+      "France",
+      "Uruguay",
+      "Italy"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p>11.(c) <strong>Uruguay.</strong> The FIFA World Cup was first organized in 1930 under FIFA President Jules Rimet, with 13 invited teams. Uruguay became the first champion. The 22nd FIFA World Cup was held in 2022 in Qatar, where Argentina defeated France after a 3-3 draw and a 4-2 penalty shootout. Lionel Messi, the Argentine captain, won the Golden Ball award as the best player of the tournament.</p>",
+    "question_index": 10
+  },
+  {
+    "question": "<p>12. In Microsoft Excel, which chart type is best suited for comparing proportions or percentages of a whole?</p>",
+    "options": [
+      "Line Chart",
+      "Bar Chart",
+      "Scatter Chart",
+      "Pie Chart"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p>12.(d) <strong>Pie Chart:</strong> A circular chart divided into sectors, each representing a proportion or percentage of the whole. Line Chart : Best for showing trends over time or continuous data. Bar Chart : Suitable for comparing categorical data across different groups. Scatter Chart : Used to visualize relationships between two continuous variables.</p>",
+    "question_index": 11
+  },
+  {
+    "question": "<p>13. Hemis festival is associated with which of the following religions?</p>",
+    "options": [
+      "Jainism",
+      "Hinduism",
+      "Sikhism",
+      "Buddhism"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p>13.(d) <strong>Buddhism.</strong> The Hemis Festival is a traditional religious festival celebrated in Ladakh. This festival is dedicated to Lord Padmasambhava, also known as Guru Rinpoche, who is considered the founder of Tibetan Buddhism in Tibet. Other Buddhist festivals : Vesak, Parinirvana Day, Magha Puja, Losar, Asalha Puja, Buddh Purnima.</p>",
+    "question_index": 12
+  },
+  {
+    "question": "<p>14. Which of the following is the official language of Tripura?</p>",
+    "options": [
+      "Mizo",
+      "Kokborak",
+      "Khasi",
+      "Garo"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p>14.(b) <strong>Kokborak.</strong> Kokborak is a Tibeto-Burman language spoken by the Tripuri people of the Indian state of Tripura and neighboring areas of Bangladesh. The official languages of Tripura are Bengali, English and Kokborok. Tripura : Capital - Agartala. State Animal - Phayre\\'s langur. State bird - Green imperial pigeon. State tree - Agar. State flower - Nageshwar.</p>",
+    "question_index": 13
+  },
+  {
+    "question": "<p>15. Where is the Save button in Microsoft Word?</p>",
+    "options": [
+      "Top right corner of a Word window",
+      "Top left corner of a Word window",
+      "Bottom left corner of a Word window",
+      "Bottom right corner of a Word window"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p>15.(b) <strong>Top left corner of a Word window.</strong> Microsoft Word is a word processor program developed by Microsoft. It was first released on October 25, 1983, under the name Multi-Tool Word for Xenix systems. Other names : Multi-Tool Word. Developer : Microsoft. Written in : C++ (back-end). Predecessor : Multi-Tool Word or WordPad.</p>",
+    "question_index": 14
+  }
+];
     </script>
-    
+
     <!-- Central JS Controller -->
     <script src="../js/mock-core.js"></script>
 </body>

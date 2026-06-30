@@ -3,43 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aether Mocks</title>
+    <title>Mocks Wallah</title>
     <!-- Fonts & Icons -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    
+
     <!-- Central Stylesheet -->
     <link rel="stylesheet" href="../css/mock-main.css">
-    
+
     <!-- Math Formula Rendering (KaTeX/MathJax) -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    
+
     <!-- Timer Config -->
-    <meta name="exam-duration" content="60">
+    <meta name="exam-duration" content="30">
 </head>
 <body>
     <!-- Welcome Screen -->
     <div class="welcome-screen" id="welcomeScreen">
         <div class="welcome-container">
             <div class="welcome-header" style="margin-bottom: 24px;">
-                <h1 style="font-size: 2rem; font-weight: 700; color: #0f172a; margin-bottom: 8px;"><i class="fas fa-graduation-cap" style="color: #3b82f6;"></i> Aether Mocks</h1>
-                <p style="color: #64748b;">Computer Based Test Portal</p>
+                <h1 style="font-size: 2rem; font-weight: 700; color: var(--text-main); margin-bottom: 8px;"><i class="fas fa-graduation-cap" style="color: var(--primary);"></i> Mocks Wallah</h1>
+                <p style="color: var(--text-muted);">Computer Based Test Portal</p>
             </div>
-            
+
             <div class="test-details" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-bottom: 32px; text-align: left;">
-                <div class="detail-item" style="padding: 12px; background: #f8fafc; border-radius: 8px; border: 1px solid #e2e8f0;">
-                    <div class="detail-label" style="font-size: 0.8rem; color: #64748b;">Total Questions</div>
-                    <div class="detail-value" style="font-size: 1.1rem; font-weight: 600; color: #0f172a;">10</div>
+                <div class="detail-item" style="padding: 12px; background: var(--bg-color); border-radius: 8px; border: 1px solid var(--border-color);">
+                    <div class="detail-label" style="font-size: 0.8rem; color: var(--text-muted);">Total Questions</div>
+                    <div class="detail-value" style="font-size: 1.1rem; font-weight: 600; color: var(--text-main);">15</div>
                 </div>
-                <div class="detail-item" style="padding: 12px; background: #f8fafc; border-radius: 8px; border: 1px solid #e2e8f0;">
-                    <div class="detail-label" style="font-size: 0.8rem; color: #64748b;">Duration</div>
-                    <div class="detail-value" style="font-size: 1.1rem; font-weight: 600; color: #0f172a;">60 mins</div>
+                <div class="detail-item" style="padding: 12px; background: var(--bg-color); border-radius: 8px; border: 1px solid var(--border-color);">
+                    <div class="detail-label" style="font-size: 0.8rem; color: var(--text-muted);">Duration</div>
+                    <div class="detail-value" style="font-size: 1.1rem; font-weight: 600; color: var(--text-main);">30 mins</div>
                 </div>
             </div>
-            
+
             <div class="welcome-actions">
                 <button class="btn btn-primary" id="startBtn" onclick="document.getElementById('welcomeScreen').style.display='none'; document.getElementById('examContainer').style.display='flex';" style="font-size: 1.1rem; padding: 12px 32px; width: 100%;">
                     <i class="fas fa-play" style="margin-right: 8px;"></i> Start Test
@@ -47,12 +47,12 @@
             </div>
         </div>
     </div>
-    
+
     <!-- Main Exam Interface -->
     <div class="exam-container" id="examContainer" style="display: none; height: 100vh; flex-direction: column;">
         <!-- Top Header -->
         <div class="exam-header">
-            <div class="exam-title">Aether Mocks</div>
+            <div class="exam-title">Mocks Wallah</div>
             <div class="header-actions" style="display: flex; align-items: center; gap: 12px;">
                 <button class="btn-icon" id="themeToggleBtn" title="Switch to Dark Mode"><i class="fas fa-moon"></i></button>
                 <button class="btn-icon" id="fullscreenToggleBtn" title="Toggle Fullscreen"><i class="fas fa-expand"></i></button>
@@ -62,14 +62,14 @@
                 </div>
             </div>
         </div>
-        
+
         <!-- Main Content -->
         <div class="mock-container">
             <!-- Question Area -->
             <div class="question-view">
                 <!-- Dynamically populated question container -->
                 <div id="questionContainer" style="flex: 1; display: flex; flex-direction: column; gap: 24px;"></div>
-                
+
                 <!-- Controls -->
                 <div class="nav-controls">
                     <button class="btn btn-secondary btn-prev"><i class="fas fa-chevron-left" style="margin-right: 8px;"></i> Previous</button>
@@ -79,40 +79,221 @@
                     <button class="btn btn-primary btn-next">Next <i class="fas fa-chevron-right" style="margin-left: 8px;"></i></button>
                 </div>
             </div>
-            
+
             <!-- Desktop Navigator Sidebar -->
             <div class="sidebar">
                 <div class="sidebar-section-title">Summary Status</div>
                 <div class="stats-grid">
                     <div class="stat-item">
-                        <div class="stat-count" id="stat-answered" style="color: #10b981;">0</div>
+                        <div class="stat-count" id="stat-answered" style="color: var(--success);">0</div>
                         <div class="stat-name">Answered</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-count" id="stat-flagged" style="color: #f59e0b;">0</div>
+                        <div class="stat-count" id="stat-flagged" style="color: var(--warning);">0</div>
                         <div class="stat-name">Flagged</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-count" id="stat-not-answered" style="color: #64748b;">0</div>
+                        <div class="stat-count" id="stat-not-answered" style="color: var(--text-muted);">0</div>
                         <div class="stat-name">Unanswered</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-count" id="stat-not-visited" style="color: #94a3b8;">0</div>
+                        <div class="stat-count" id="stat-not-visited" style="color: var(--text-muted);">0</div>
                         <div class="stat-name">Not Visited</div>
                     </div>
                 </div>
-                
+
                 <div class="sidebar-section-title" style="margin-top: 16px;">Question Navigator</div>
                 <div class="questions-grid"></div>
             </div>
         </div>
     </div>
-    
+
     <!-- Inject Question Data -->
     <script>
-        const questions = [];
+        const questions = [
+  {
+    "question": "<p><span style=\\\"font-family: Cambria Math;\\\">Rahul Srivatshav P became India\\'s 74th Chess Grandmaster with Elo rating of</span></p>\\n",
+    "options": [
+      "2400",
+      "2500",
+      "2000",
+      "2200"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p><span style=\\\"font-family: Cambria Math;\\\">1</span><span style=\\\"font-family: Cambria Math;\\\">.(b) <strong>2500</strong></span><span style=\\\"font-family: Cambria Math;\\\">. </span><span style=\\\"font-family: Cambria Math;\\\">Elo Rating -</span><span style=\\\"font-family: Cambria Math;\\\"> A widely used rating algorithm used to rank players in many competitive games such as chess. Players with higher ELO ratings have a higher probability of winning a game than a player with lower ELO ratings. After eac</span><span style=\\\"font-family: Cambria Math;\\\">h game, the ELO rating of players is updated. Grandmaster (GM) is a title awarded by the world chess organization FIDE. Viswanathan Anand was India\\'s first Chess Grandmaster (1988). The International Chess Federation <strong>(</strong></span><strong><span style=\\\"font-family: Cambria Math;\\\">FIDE</span></strong><span style=\\\"font-family: Cambria Math;\\\"><strong>)</strong>: Formation - 20 July 1924, Headq</span><span style=\\\"font-family: Cambria Math;\\\">uarters - Lausanne (Switzerland). </span></p>\\n",
+    "question_index": 0
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\"> The first World Deaf T20 Cricket Championship will be organised by__________.</span></p>\n",
+    "options": [
+      "West Indies",
+      "Australia",
+      "England",
+      "India"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p>2.(d) <strong>India</strong><span style=\"font-family: Cambria Math;\"><strong> </strong>(Thiruvananthapuram, Kerala). All India Sports Council of the Deaf (AISCD) : National Apex Body for Deaf Sports, Head Office - New Delhi. International Committee of Sports for the Deaf (ICSD) : Founded - 1924, Headquarters - Lausanne, Switzerland. </span></p>\n",
+    "question_index": 1
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\"> Indian Council of Historical Research is a captive body of______ Government of India.</span></p>\n",
+    "options": [
+      "Ministry of Science and Technology",
+      "Ministry of Tribal Affairs",
+      "Ministry of Education",
+      "Ministry of Culture"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p>3.(c) <strong>Ministry of Education.</strong> <span style=\"font-family: Cambria Math;\">The Indian Council of Historical Research (ICHR): The body has provided financial assistance to historians and scholars through fellowships, grants, and symposia. Founded - 27 March 1972, Headquarters - New Delhi. Regional centers: Pune (Maharashtra), Beng</span><span style=\"font-family: Cambria Math;\">aluru (Karnataka), and Guwahati (Assam). It publishes two journals: the Indian Historical Review (bi-annually) and Itihas (in Hindi). </span></p>\n",
+    "question_index": 2
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\"> Which of the following folk dances is primarily associated with Rajasthan</span></p>\n",
+    "options": [
+      "Tapu",
+      "Gair",
+      "Dhimsa",
+      "Bihu"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p>4.(b) <strong>Gair</strong><span style=\"font-family: Cambria Math;\"><strong> </strong>- It is mainly performed by the Bhil community on the occasion of Holi and Janmastami. Other folk dances of Rajasthan- Ghoomar, Kalbelia, Kachchhi Ghodi dance, Bhavai, Kathputli, Chari Dance, Tertali. </span><strong><span style=\"font-family: Cambria Math;\">Folk dances and state</span></strong><span style=\"font-family: Cambria Math;\">: Tapu - Arunachal Pradesh, Dhims</span><span style=\"font-family: Cambria Math;\">a - Andhra Pradesh, Bihu - Assam, Panthi - Chhattisgarh, Jhumair - Jharkhand, Mataki - Madhya Pradesh, Chhau - Odisha, Baul dance - West Bengal, Dhamal - Gurgaon area (Haryana). </span></p>\n",
+    "question_index": 3
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\">Which of the following ethnic groups is the largest in Myanmar?</span></p>\n",
+    "options": [
+      "Karen",
+      "Bamar",
+      "Rohingya",
+      "Shan "
+    ],
+    "correct_option_id": 1,
+    "solution": "<p>5.(b) <strong>Bamar. Myanmar ethnic groups </strong><span style=\"font-family: Cambria Math;\"><strong>-</strong> Karen, Shan, Mon, Chin, Kachin, Rohingya, Rakhine.</span><span style=\"font-family: Cambria Math;\"> </span><strong><span style=\"font-family: Cambria Math;\">Other largest Ethnic Groups :</span></strong><span style=\"font-family: Cambria Math;\"> Punjabis - Pakistan, Pashtuns - Afghanistan, Yamato - Japan, Inuit - Greenland, Khalkh - Mongolia, Bantu - Central, East and Southern Africa, Malays - Malaysia, European - Europe, Han - China.</span></p>\n",
+    "question_index": 4
+  },
+  {
+    "question": "<p><span style=\\\"font-family: Cambria Math;\\\">The traditional singing of \\'Nat\\' is associated with ________________Dance.</span></p>\\n",
+    "options": [
+      "Kathak",
+      "Manipuri",
+      "Odissi",
+      "Chhau"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p>6.(b) <strong>Manipuri</strong>.<span style=\"font-family: Cambria Math;\"> Nat is the Manipuri classical style of singing, Pung or the Manipuri classical drum is the musical instrument used. Exponents - Guru Bipin Singh (father of Manipuri dance), Darshana Jhaveri. </span><strong><span style=\"font-family: Cambria Math;\">Manipuri Dance Styles</span></strong><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">- Raas, Nata-Sankirtan, Pung Cholam (Dancers play the pung or drum while dancing), Dhola Cholam, Kartal Cholam, Thang ta (martial art form). Kathak (Uttar Pradesh). Odissi (Odisha). Chhau (West Bengal, Odisha, Jharkhand).</span></p>\n",
+    "question_index": 5
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\">R. Muthukannammal was awarded Padma Shri 2022 for which of the following dance forms?</span></p>\n",
+    "options": [
+      "Sadir",
+      "Sattriya",
+      "Kathakali",
+      "Mohiniyattam"
+    ],
+    "correct_option_id": 0,
+    "solution": "<p>7.(a) <strong>Sadir</strong>.<span style=\"font-family: Cambria Math;\"> Bharatanatyam (Tamil Nadu) was earlier known as Sadir or Dasi Attam. </span><span style=\"font-family: Cambria Math;\"><strong>Exponents </strong>-</span><span style=\"font-family: Cambria Math;\"> Shobhana Pillai, Sonal Mansingh, Malavika Sarukkai, Eshwar Jayalakshmi, Pratibha Prahlad, Kanaka Srinivasan. </span><strong><span style=\"font-family: Cambria Math;\">Sattriya </span></strong><span style=\"font-family: Cambria Math;\">(Assam) - Guru Jatin Goswami, Sharodi Saikia, Manik Barb</span><span style=\"font-family: Cambria Math;\">ayan. </span><strong><span style=\"font-family: Cambria Math;\">Kathakali </span></strong><span style=\"font-family: Cambria Math;\">(Kerala) - Kunchu Kurup, Kalamandalam Gopi, Kalamandalam Krishna Prasad. </span><strong><span style=\"font-family: Cambria Math;\">Mohiniyattam</span></strong><span style=\"font-family: Cambria Math;\"><strong> </strong>(Kerala) - Thankamani Kutty, Sunanda Nair, Pallavi Krishnan, Jayaprabha Menon.</span></p>\n",
+    "question_index": 6
+  },
+  {
+    "question": "<p><span style=\\\"font-family: Cambria Math;\\\">The term \\'leg bye\\' is associated with____________ .</span></p>\\n",
+    "options": [
+      "Cricket",
+      "Hockey",
+      "Badminton",
+      "Football"
+    ],
+    "correct_option_id": 0,
+    "solution": "<p>8.(a) <strong>Cricket</strong>. <strong>Other Terms</strong> - <span style=\"font-family: Cambria Math;\">Ball Tampering, Beamer, Belter, Bunsen, Bye, Chucker, Duck, Duckworth Lewis. </span><span style=\"font-family: Cambria Math;\"><strong>Hockey</strong> -</span><span style=\"font-family: Cambria Math;\"> Bully, Center pass, Da</span><span style=\"font-family: Cambria Math;\">ngerous Play, Dribble, Half volley, Flick, Penalty Corner, Scoop. </span><span style=\"font-family: Cambria Math;\"><strong>Badminton </strong>-</span><span style=\"font-family: Cambria Math;\"> Back Alley, Backcourt, Baseline, Bird or birdie, Carry, Center Line, Clear, Court, Drive, Drop, Fault, Flick, Forecourt, Hairpin Net Shot, Half Court Shot, Kill.</span><span style=\"font-family: Cambria Math;\"> <strong>Football </strong>- </span><span style=\"font-family: Cambria Math;\">Back </span><span style=\"font-family: Cambria Math;\">Heel, Back Pass, Center Spot, Dribble, Futsal, Nearpost, Toe Poke.</span></p>\n",
+    "question_index": 7
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\"> Which of the following legends of Indian Music is awarded with Bharat Ratna?</span></p>\n",
+    "options": [
+      "Lata Mangeshkar",
+      "Usha Uthup",
+      "Asha Bhosle",
+      "Kishore Kumar"
+    ],
+    "correct_option_id": 0,
+    "solution": "<p>9.(a)<strong> Lata Mangeshkar</strong> <span style=\"font-family: Cambria Math;\">(Nightingale of India).</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">She lent her voice to over 5,000 songs in over a thousand Hindi and 36 regional films. She became the first Indian to perform at the Royal Albert Hall (London) in 1974.</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\"><strong>Other Awards </strong>-</span><span style=\"font-family: Cambria Math;\"> Bharat Ratna (2001), Padma Vibhushan (1999), Padma Bhushan (1969), Dadas</span><span style=\"font-family: Cambria Math;\">aheb Phalke Award (1989), Legion of Honour (France highest civilian award) 2009. </span></p>\n",
+    "question_index": 8
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\"> Nongkrem festival of Meghalaya is celebrated </span><span style=\"font-family: Cambria Math;\">by which of the following tribes?</span></p>\n",
+    "options": [
+      "Galo tribe",
+      "Tutsa tribe",
+      "Aptani tribe",
+      "Khasi tribe"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">10</span><span style=\"font-family: Cambria Math;\">.(d)<strong> Khasi tribe. Nongkrem festival </strong></span><span style=\"font-family: Cambria Math;\">(five day long) is celebrated during Autumn at Smit (cultural center).</span><span style=\"font-family: Cambria Math;\"> <strong>Other Festivals</strong> </span><span style=\"font-family: Cambria Math;\">(tribe)</span><span style=\"font-family: Cambria Math;\"> : </span><span style=\"font-family: Cambria Math;\">Meghalaya - Shad Suk Mynsiem (Khasi), Behdienkhlam (Jaintia), Chad Sukra </span><span style=\"font-family: Cambria Math;\">(Jaintia), Wangala (Garo). Arunachal Pradesh - Mopin Festival (Galo tribe), Pongtu (Tutsa tribe), Dree festival (Apatani tribe).</span></p>\n",
+    "question_index": 9
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\"> Kumbh Mela and Sangam are fam</span><span style=\"font-family: Cambria Math;\">ous in which state?</span></p>\n",
+    "options": [
+      "Meghalaya",
+      "Uttar Pradesh",
+      "Manipur",
+      "Sikkim"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p><span style=\\\"font-family: Cambria Math;\\\">11</span><span style=\\\"font-family: Cambria Math;\\\">.(b) <strong>Uttar Pradesh.</strong></span><span style=\\\"font-family: Cambria Math;\\\"><strong> </strong>This fair starts on the day of Makar Sankranti. This fair is held every 12 years, with the location of the observance rotating among four pilgrimage sites on the four sacred rivers: Ganga at Haridwar, Triveni Sangam at Prayagraj, the Godavari at Nashik, a</span><span style=\\\"font-family: Cambria Math;\\\">nd Shipra at Ujjain. Ardha (half) Kumbh Mela is held at only two places, Haridwar and Allahabad, every sixth year and a Maha Kumbh is held after every 144 years. It is the 13th intangible cultural heritage from India to be listed on UNESCO\\'s list. </span></p>\\n",
+    "question_index": 10
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\">The &lsquo;Karma&rsquo; tribal dance form is associated </span><span style=\"font-family: Cambria Math;\">with which of the following states?</span></p>\n",
+    "options": [
+      "Chhattisgarh",
+      "Goa",
+      "Kerala",
+      "Karnataka"
+    ],
+    "correct_option_id": 0,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">12</span><span style=\"font-family: Cambria Math;\">.(a) <strong>Chhattisgarh</strong></span><span style=\"font-family: Cambria Math;\">. Karma dance is performed during the autumnal festival of Karma Puja. The tribal group presents this folk dance in front of the Karam tree that symbolizes the KaramDevta. Other folk dances from: Chhattisgarh - Raut Nacha, Panthi, Pandavan</span><span style=\"font-family: Cambria Math;\">i, Saila, Suwa, Gendi, Cherchera. Goa - Ghode Modni, Dhangar Dance. Kerala - Theyyam, Kolkali, Ottamthullal. Karnataka - Yakshagana and Dollu Kunitha. </span></p>\n",
+    "question_index": 11
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\">Who among the following is a figure in Indian music?</span></p>\n",
+    "options": [
+      "Vyjayanthi mala",
+      "Asha Bhosle",
+      "Amrita Pritam",
+      "Asha Parekh"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">13</span><span style=\"font-family: Cambria Math;\">.(b) <strong>Asha Bhosle</strong>: <strong>Awards </strong>- </span><span style=\"font-family: Cambria Math;\">Filmfare Lifetime Achievement Award (2001), Dadasaheb phalke award (2000), Padma Vibhushan (2008), Banga Bhusan (2018). </span><strong><span style=\"font-family: Cambria Math;\">Asha Parekh</span></strong><span style=\"font-family: Cambria Math;\"> (Indian actress, film director, and producer). Vyjayanthimala - Former Ind</span><span style=\"font-family: Cambria Math;\">ian actress, dancer and parliamentarian. Amrita Pritam - Novelist, poet and parliamentarian. </span></p>\n",
+    "question_index": 12
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\"> Hema Malini, a popular dancer and actress, received the ______ in 2000.</span></p>\n",
+    "options": [
+      "Padma Shri",
+      "Kabir Samman",
+      "Padma Vibhushan",
+      "Kalidas Samman"
+    ],
+    "correct_option_id": 0,
+    "solution": "<p><span style=\\\"font-family: Cambria Math;\\\">14</span><span style=\\\"font-family: Cambria Math;\\\">.(a) <strong>Padma Shri.</strong></span><span style=\\\"font-family: Cambria Math;\\\"> Hema Malini - She is an Indian Actress and Politician. \\'Sapno Ka Saudagar\\' was her debut film. She won Filmfare Award for Best Actress for her film &lsquo;Seeta Aur Geeta&rsquo; (1972). Bharat Ratna&ndash; First Highest Civillian Award, Padma Vibhushan&ndash; Second Highest Civ</span><span style=\\\"font-family: Cambria Math;\\\">illian Award, Padma Bhushan&ndash; Third Highest Civillian Award,</span></p>\\r\\n<p><span style=\\\"font-family: Cambria Math;\\\">Padma Shri&ndash; Fourth Highest Civillian Award. All nominations are decided by the Padma Awards Committee (headed by the Cabinet Secretary), which is constituted by the Prime Minister every year. It i</span><span style=\\\"font-family: Cambria Math;\\\">s given by the President of india. </span></p>\\n",
+    "question_index": 13
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\"> In which year were the first Olympic Games held?</span></p>\n",
+    "options": [
+      "1900",
+      "1984",
+      "1896",
+      "1898"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">15</span><span style=\"font-family: Cambria Math;\">.(c) <strong>1896 (Athens, Greece)</strong>. </span><span style=\"font-family: Cambria Math;\">Baron Pierre de Coubertin is known as the father of the modern Olympics. The Olympic flag has a white background, with five interlaced rings in the centre: blue, yellow, black, green, and red. </span><strong><span style=\"font-family: Cambria Math;\">International Olympic Committee:</span></strong><span style=\"font-family: Cambria Math;\"><strong> </strong>Founded - 1894, Headquarters -</span><span style=\"font-family: Cambria Math;\"> Lausanne (Switzerland).</span></p>\n",
+    "question_index": 14
+  }
+];
     </script>
-    
+
     <!-- Central JS Controller -->
     <script src="../js/mock-core.js"></script>
 </body>

@@ -3,43 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aether Mocks</title>
+    <title>Mocks Wallah</title>
     <!-- Fonts & Icons -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    
+
     <!-- Central Stylesheet -->
     <link rel="stylesheet" href="../css/mock-main.css">
-    
+
     <!-- Math Formula Rendering (KaTeX/MathJax) -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    
+
     <!-- Timer Config -->
-    <meta name="exam-duration" content="60">
+    <meta name="exam-duration" content="30">
 </head>
 <body>
     <!-- Welcome Screen -->
     <div class="welcome-screen" id="welcomeScreen">
         <div class="welcome-container">
             <div class="welcome-header" style="margin-bottom: 24px;">
-                <h1 style="font-size: 2rem; font-weight: 700; color: #0f172a; margin-bottom: 8px;"><i class="fas fa-graduation-cap" style="color: #3b82f6;"></i> Aether Mocks</h1>
-                <p style="color: #64748b;">Computer Based Test Portal</p>
+                <h1 style="font-size: 2rem; font-weight: 700; color: var(--text-main); margin-bottom: 8px;"><i class="fas fa-graduation-cap" style="color: var(--primary);"></i> Mocks Wallah</h1>
+                <p style="color: var(--text-muted);">Computer Based Test Portal</p>
             </div>
-            
+
             <div class="test-details" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-bottom: 32px; text-align: left;">
-                <div class="detail-item" style="padding: 12px; background: #f8fafc; border-radius: 8px; border: 1px solid #e2e8f0;">
-                    <div class="detail-label" style="font-size: 0.8rem; color: #64748b;">Total Questions</div>
-                    <div class="detail-value" style="font-size: 1.1rem; font-weight: 600; color: #0f172a;">10</div>
+                <div class="detail-item" style="padding: 12px; background: var(--bg-color); border-radius: 8px; border: 1px solid var(--border-color);">
+                    <div class="detail-label" style="font-size: 0.8rem; color: var(--text-muted);">Total Questions</div>
+                    <div class="detail-value" style="font-size: 1.1rem; font-weight: 600; color: var(--text-main);">15</div>
                 </div>
-                <div class="detail-item" style="padding: 12px; background: #f8fafc; border-radius: 8px; border: 1px solid #e2e8f0;">
-                    <div class="detail-label" style="font-size: 0.8rem; color: #64748b;">Duration</div>
-                    <div class="detail-value" style="font-size: 1.1rem; font-weight: 600; color: #0f172a;">60 mins</div>
+                <div class="detail-item" style="padding: 12px; background: var(--bg-color); border-radius: 8px; border: 1px solid var(--border-color);">
+                    <div class="detail-label" style="font-size: 0.8rem; color: var(--text-muted);">Duration</div>
+                    <div class="detail-value" style="font-size: 1.1rem; font-weight: 600; color: var(--text-main);">30 mins</div>
                 </div>
             </div>
-            
+
             <div class="welcome-actions">
                 <button class="btn btn-primary" id="startBtn" onclick="document.getElementById('welcomeScreen').style.display='none'; document.getElementById('examContainer').style.display='flex';" style="font-size: 1.1rem; padding: 12px 32px; width: 100%;">
                     <i class="fas fa-play" style="margin-right: 8px;"></i> Start Test
@@ -47,12 +47,12 @@
             </div>
         </div>
     </div>
-    
+
     <!-- Main Exam Interface -->
     <div class="exam-container" id="examContainer" style="display: none; height: 100vh; flex-direction: column;">
         <!-- Top Header -->
         <div class="exam-header">
-            <div class="exam-title">Aether Mocks</div>
+            <div class="exam-title">Mocks Wallah</div>
             <div class="header-actions" style="display: flex; align-items: center; gap: 12px;">
                 <button class="btn-icon" id="themeToggleBtn" title="Switch to Dark Mode"><i class="fas fa-moon"></i></button>
                 <button class="btn-icon" id="fullscreenToggleBtn" title="Toggle Fullscreen"><i class="fas fa-expand"></i></button>
@@ -62,14 +62,14 @@
                 </div>
             </div>
         </div>
-        
+
         <!-- Main Content -->
         <div class="mock-container">
             <!-- Question Area -->
             <div class="question-view">
                 <!-- Dynamically populated question container -->
                 <div id="questionContainer" style="flex: 1; display: flex; flex-direction: column; gap: 24px;"></div>
-                
+
                 <!-- Controls -->
                 <div class="nav-controls">
                     <button class="btn btn-secondary btn-prev"><i class="fas fa-chevron-left" style="margin-right: 8px;"></i> Previous</button>
@@ -79,40 +79,221 @@
                     <button class="btn btn-primary btn-next">Next <i class="fas fa-chevron-right" style="margin-left: 8px;"></i></button>
                 </div>
             </div>
-            
+
             <!-- Desktop Navigator Sidebar -->
             <div class="sidebar">
                 <div class="sidebar-section-title">Summary Status</div>
                 <div class="stats-grid">
                     <div class="stat-item">
-                        <div class="stat-count" id="stat-answered" style="color: #10b981;">0</div>
+                        <div class="stat-count" id="stat-answered" style="color: var(--success);">0</div>
                         <div class="stat-name">Answered</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-count" id="stat-flagged" style="color: #f59e0b;">0</div>
+                        <div class="stat-count" id="stat-flagged" style="color: var(--warning);">0</div>
                         <div class="stat-name">Flagged</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-count" id="stat-not-answered" style="color: #64748b;">0</div>
+                        <div class="stat-count" id="stat-not-answered" style="color: var(--text-muted);">0</div>
                         <div class="stat-name">Unanswered</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-count" id="stat-not-visited" style="color: #94a3b8;">0</div>
+                        <div class="stat-count" id="stat-not-visited" style="color: var(--text-muted);">0</div>
                         <div class="stat-name">Not Visited</div>
                     </div>
                 </div>
-                
+
                 <div class="sidebar-section-title" style="margin-top: 16px;">Question Navigator</div>
                 <div class="questions-grid"></div>
             </div>
         </div>
     </div>
-    
+
     <!-- Inject Question Data -->
     <script>
-        const questions = [];
+        const questions = [
+  {
+    "question": "<p>1. In which year was the National Institute of Kathak Dance established?</p>",
+    "options": [
+      "1964",
+      "1961",
+      "1954",
+      "1969"
+    ],
+    "correct_option_id": 0,
+    "solution": "<p>1.(a) <strong>1964</strong>. National Institute of Kathak Dance is also known as Kathak Kendra. It is a unit of the Sangeet Natak Akademy. Other renowned Dance Institutes : Jawaharlal Nehru Manipur Dance Academy (Manipur), Nalanda Nritya Kala Mahavidyalaya (Mumbai), Ballet Repertoire Academy of India (Mumbai), Sri Thyagaraja College of Music and Dance (Hyderabad), and Nrityanjali Institute of Performing Arts (Mumbai).</p>",
+    "question_index": 0
+  },
+  {
+    "question": "<p>2. When was the Indian Hockey Federation established?</p>",
+    "options": [
+      "1925",
+      "1955",
+      "1945",
+      "1935"
+    ],
+    "correct_option_id": 0,
+    "solution": "<p>2.(a) <strong>1925</strong>. Indian Hockey Federation was the administrative body of field hockey in India. Headquarters - New Delhi. The International Hockey Federation was established in Paris in 1924, initiated by Paul Leautey.</p>",
+    "question_index": 1
+  },
+  {
+    "question": "<p>3. &lsquo;Sangken&rsquo; is a festival celebrated in Arunachal Pradesh by people of which of the following religions?</p>",
+    "options": [
+      "Islam",
+      "Buddhism",
+      "Jainism",
+      "Hinduism"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p>3.(b) <strong>Buddhism</strong>. Sangken (festival of water) is an annual three-day long festival. The Khampti and Singpho tribes of the Lohit district in Arunachal Pradesh celebrate it. It is celebrated by the Theravada Buddhist Communities. It is celebrated as Songkran in other Southeast Asian countries. Songkran is the Thai New Year&rsquo;s national holiday. More Buddhists festivals include Buddha Purnima, Hemis Festival, Losar Festival, Lumbini Festival, Parinirvana Day, Rumtek Chaam Festival and Mani Rimdu Festival.</p>",
+    "question_index": 2
+  },
+  {
+    "question": "<p>4. MG Music Awards is presented annually by which of the following states?</p>",
+    "options": [
+      "Mizoram",
+      "Nagaland",
+      "Manipur",
+      "Chhattisgarh"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p>4.(b) <strong>Nagaland</strong>. The MG Music Awards is an annual music awards ceremony organized by the Musicians Guild Nagaland. The first edition of the awards was held online on June 21, 2021, due to the COVID-19 pandemic. The second edition was held offline at the RCEMPA Hall in Jotsoma, Nagaland in 2022.</p>",
+    "question_index": 3
+  },
+  {
+    "question": "<p>5. In which of the following years did India NOT host the ICC Cricket World Cup Tournament?</p>",
+    "options": [
+      "2011",
+      "1996",
+      "1983",
+      "1987"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p>5.(c) <strong>1983</strong>. The Cricket World Cup, officially known as the ICC Men\\'s Cricket World Cup, is the international championship of One Day International (ODI) cricket. Organized by the International Cricket Council (ICC), the tournament is held every four years. Host Countries of the ICC Cricket World Cup: 1983 - England and Wales; 1987 - India and Pakistan; 1996 - India, Pakistan and Sri Lanka; 2011 - India, Sri Lanka and Bangladesh; 2023 - India; 2027 - Namibia, South Africa and Zimbabwe; 2031 - Bangladesh and India.</p>",
+    "question_index": 4
+  },
+  {
+    "question": "<p>6. In which year was the PM Ayushman Bharat Health Infrastructure Mission launched?</p>",
+    "options": [
+      "2020",
+      "2022",
+      "2021",
+      "2023"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p>6.(c) <strong>2021</strong>. Prime Minister Shri Narendra Modi inaugurated the PM Ayushman Bharat Health Infrastructure Mission, which aims to be one of the largest initiatives in India focused on improving healthcare infrastructure. Related Schemes and Their Launch Years : National Rural Health Mission (2005), Ayushman Bharat (2018), and National Digital Health Mission (2020).</p>",
+    "question_index": 5
+  },
+  {
+    "question": "<p>7. Bharatanatyam dance style is associated with which of the following states?</p>",
+    "options": [
+      "Karnataka",
+      "Tamil Nadu",
+      "Bihar",
+      "Manipur"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p>7.(b) <strong>Tamil Nadu.</strong> Bharatanatyam is a classical dance form that originated from the art of dancers dedicated to temples and was previously known as Sadir or Dasi Attam. Bharatanatyam is unique because it is an Ekaharya dance, meaning one dancer portrays multiple roles in a single performance. Other classical dance styles : Kathak - Uttar Pradesh, Odissi - Odisha, Kathakali and Mohiniyattam - Kerala, Manipuri - Manipur and Sattriya - Assam.</p>",
+    "question_index": 6
+  },
+  {
+    "question": "<p>8. On which of the following dates does India celebrate its Constitution Day?</p>",
+    "options": [
+      "26th January",
+      "26th November",
+      "15th August",
+      "2nd October"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p>8.(b) <strong>26th November.</strong> The Constitution of India was adopted on 26 November 1949, that is why Constitution Day is celebrated on 26 November. 15th August : Independence Day (commemorating India&rsquo;s independence from British rule in 1947). 2nd October : Gandhi Jayanti (the birthday of Mahatma Gandhi, celebrated as a national holiday and also observed as International Day of Non-Violence). 26th January : Republic Day (the Constitution of India came into force on 26 January 1950).</p>",
+    "question_index": 7
+  },
+  {
+    "question": "<p>9. Consider the following statements and choose the correct statement(s) from the following:<br>1. The UDAN scheme has completed five years since its implementation in 2017.<br>2. It is the flagship scheme of the Ministry of Science and Technology.<br>3. The Airports Authority of India is the implementing agency of this scheme.</p>",
+    "options": [
+      "Only statement 3",
+      "Only statement 2",
+      "Only statements 2 and 3",
+      "Only statements 1 and 3"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p>9.(d) <strong>Only statements 1 and 3.</strong> The UDAN (Ude Desh ka Aam Nagrik) scheme is an initiative by the Indian government aimed at enhancing connectivity to remote and regional areas while making air travel more affordable. The scheme was introduced in 2016 as part of the National Civil Aviation Policy. First Flight : The first flight under the UDAN scheme, from Shimla to Delhi, was flagged off by Prime Minister Narendra Modi in 2017. Nodal Ministry: Ministry of Civil Aviation.</p>",
+    "question_index": 8
+  },
+  {
+    "question": "<p>10. Which Indian marathon event is considered the largest marathon in Asia?</p>",
+    "options": [
+      "Kaveri Trail Marathon",
+      "Pinkathon",
+      "Delhi Half Marathon",
+      "Mumbai Marathon"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p>10.(d) <strong>Mumbai Marathon.</strong> The TATA Mumbai Marathon (TMM) is recognized as the largest marathon in Asia and the continent\\'s biggest mass participation sporting event. Since its inception in 2004, the marathon unites people from diverse backgrounds through the joy of running. It showcases the city\\'s spirit in supporting various charities, providing a platform for runners to raise awareness and funds for causes they care about.</p>",
+    "question_index": 9
+  },
+  {
+    "question": "<p>11. Shab-e-Barat is celebrated by which religious group?</p>",
+    "options": [
+      "Muslim",
+      "Buddhist",
+      "Jain",
+      "Parsi"
+    ],
+    "correct_option_id": 0,
+    "solution": "<p>11.(a) <strong>Muslim</strong>. Shab-e-Barat, also known as Mid-Sha\\'ban, is observed on the 15th night of Sha\\'ban in the Islamic calendar. Festivals celebrated by : Muslim - Eid al-Fitr, Eid al-Adha etc; Buddhist - Buddha Purnima, Vesak etc; Jain - Mahavir Jayanti, Paryushana etc; Parsi - Navroz, Jamshedi Navroz etc.</p>",
+    "question_index": 10
+  },
+  {
+    "question": "<p>12. Who has written the book &lsquo;Fearless Governance&rsquo;, published in January 2021, describing her stint as Governor?</p>",
+    "options": [
+      "Draupadi Murmu",
+      "Baby Rani Maurya",
+      "Kiran Bedi",
+      "Anandi ben Patel"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p>.12.(c) <strong>Kiran Bedi. </strong>She is the first woman in India to join the officer ranks of the Indian Police Service (IPS) in 1972. Her other books: &lsquo;It\\'s always possible&rsquo;, &lsquo;Himmat Hai&rsquo;, &lsquo;Dare to Do! For the New Generation&rsquo;.</p>",
+    "question_index": 11
+  },
+  {
+    "question": "<p>13. Gangu bai Hangal and Prabha Atre were exponents of the ___________ Gharana.</p>",
+    "options": [
+      "Rampur",
+      "Jaipur",
+      "Kirana",
+      "Mewati"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p>13.(c) <strong>Kirana</strong>. Gangu Bai Hangal was an Indian singer of the khayal genre of Hindustani classical music from Karnataka. She received the Padma Shri in 1962, the Padma Bhushan in 1971, and the Padma Vibhushan in 2002. Prabha Atre is another renowned Indian classical vocalist. She received the Padma Shri in 1990, the Padma Bhushan in 2002, and the Padma Vibhushan in 2022 and Sangeet Natak Academy Award in 1991. Abdul Karim Khan was the founder of the Kirana Gharana. Some exponents: Abdul Wahid Khan, Ashique Ali Khan, Roshan Ara Begum.</p>",
+    "question_index": 12
+  },
+  {
+    "question": "<p>14. Which of the following Table Tennis World Championship events was held in India?</p>",
+    "options": [
+      "19th World Championships, 1952",
+      "17th World Championships, 1950",
+      "20th World Championships, 1953",
+      "18th World Championships, 1951"
+    ],
+    "correct_option_id": 0,
+    "solution": "<p>14.(a) <strong>19th World Championships, 1952</strong> were held in Mumbai. India has also hosted the 1987 World Table Tennis Championships in New Delhi. The World Table Tennis Championships are table tennis competitions sanctioned by the International Table Tennis Federation (ITTF). The first event was held in 1926 in London, England. The 56th edition took place in 2024 in Busan, South Korea, and the 58th edition will be held in 2025 in Doha, Qatar.</p>",
+    "question_index": 13
+  },
+  {
+    "question": "<p>15. Which of the following cups/trophies is NOT related to the Indian domestic cricket?</p>",
+    "options": [
+      "Duleep Trophy",
+      "Durand Cup",
+      "Deodhar Trophy",
+      "Ranji Trophy"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p>15.(b) <strong>Durand Cup</strong> is an annual domestic football competition in India which was first held in 1888 in Shimla, Himachal Pradesh. Domestic cricket competitions in India : The Vijay Hazare Trophy, The Irani Trophy and The NKP Salve Challenger Trophy.</p>",
+    "question_index": 14
+  }
+];
     </script>
-    
+
     <!-- Central JS Controller -->
     <script src="../js/mock-core.js"></script>
 </body>

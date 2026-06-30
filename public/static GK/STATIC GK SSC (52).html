@@ -3,43 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aether Mocks</title>
+    <title>Mocks Wallah</title>
     <!-- Fonts & Icons -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    
+
     <!-- Central Stylesheet -->
     <link rel="stylesheet" href="../css/mock-main.css">
-    
+
     <!-- Math Formula Rendering (KaTeX/MathJax) -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    
+
     <!-- Timer Config -->
-    <meta name="exam-duration" content="60">
+    <meta name="exam-duration" content="30">
 </head>
 <body>
     <!-- Welcome Screen -->
     <div class="welcome-screen" id="welcomeScreen">
         <div class="welcome-container">
             <div class="welcome-header" style="margin-bottom: 24px;">
-                <h1 style="font-size: 2rem; font-weight: 700; color: #0f172a; margin-bottom: 8px;"><i class="fas fa-graduation-cap" style="color: #3b82f6;"></i> Aether Mocks</h1>
-                <p style="color: #64748b;">Computer Based Test Portal</p>
+                <h1 style="font-size: 2rem; font-weight: 700; color: var(--text-main); margin-bottom: 8px;"><i class="fas fa-graduation-cap" style="color: var(--primary);"></i> Mocks Wallah</h1>
+                <p style="color: var(--text-muted);">Computer Based Test Portal</p>
             </div>
-            
+
             <div class="test-details" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-bottom: 32px; text-align: left;">
-                <div class="detail-item" style="padding: 12px; background: #f8fafc; border-radius: 8px; border: 1px solid #e2e8f0;">
-                    <div class="detail-label" style="font-size: 0.8rem; color: #64748b;">Total Questions</div>
-                    <div class="detail-value" style="font-size: 1.1rem; font-weight: 600; color: #0f172a;">10</div>
+                <div class="detail-item" style="padding: 12px; background: var(--bg-color); border-radius: 8px; border: 1px solid var(--border-color);">
+                    <div class="detail-label" style="font-size: 0.8rem; color: var(--text-muted);">Total Questions</div>
+                    <div class="detail-value" style="font-size: 1.1rem; font-weight: 600; color: var(--text-main);">15</div>
                 </div>
-                <div class="detail-item" style="padding: 12px; background: #f8fafc; border-radius: 8px; border: 1px solid #e2e8f0;">
-                    <div class="detail-label" style="font-size: 0.8rem; color: #64748b;">Duration</div>
-                    <div class="detail-value" style="font-size: 1.1rem; font-weight: 600; color: #0f172a;">60 mins</div>
+                <div class="detail-item" style="padding: 12px; background: var(--bg-color); border-radius: 8px; border: 1px solid var(--border-color);">
+                    <div class="detail-label" style="font-size: 0.8rem; color: var(--text-muted);">Duration</div>
+                    <div class="detail-value" style="font-size: 1.1rem; font-weight: 600; color: var(--text-main);">30 mins</div>
                 </div>
             </div>
-            
+
             <div class="welcome-actions">
                 <button class="btn btn-primary" id="startBtn" onclick="document.getElementById('welcomeScreen').style.display='none'; document.getElementById('examContainer').style.display='flex';" style="font-size: 1.1rem; padding: 12px 32px; width: 100%;">
                     <i class="fas fa-play" style="margin-right: 8px;"></i> Start Test
@@ -47,12 +47,12 @@
             </div>
         </div>
     </div>
-    
+
     <!-- Main Exam Interface -->
     <div class="exam-container" id="examContainer" style="display: none; height: 100vh; flex-direction: column;">
         <!-- Top Header -->
         <div class="exam-header">
-            <div class="exam-title">Aether Mocks</div>
+            <div class="exam-title">Mocks Wallah</div>
             <div class="header-actions" style="display: flex; align-items: center; gap: 12px;">
                 <button class="btn-icon" id="themeToggleBtn" title="Switch to Dark Mode"><i class="fas fa-moon"></i></button>
                 <button class="btn-icon" id="fullscreenToggleBtn" title="Toggle Fullscreen"><i class="fas fa-expand"></i></button>
@@ -62,14 +62,14 @@
                 </div>
             </div>
         </div>
-        
+
         <!-- Main Content -->
         <div class="mock-container">
             <!-- Question Area -->
             <div class="question-view">
                 <!-- Dynamically populated question container -->
                 <div id="questionContainer" style="flex: 1; display: flex; flex-direction: column; gap: 24px;"></div>
-                
+
                 <!-- Controls -->
                 <div class="nav-controls">
                     <button class="btn btn-secondary btn-prev"><i class="fas fa-chevron-left" style="margin-right: 8px;"></i> Previous</button>
@@ -79,40 +79,221 @@
                     <button class="btn btn-primary btn-next">Next <i class="fas fa-chevron-right" style="margin-left: 8px;"></i></button>
                 </div>
             </div>
-            
+
             <!-- Desktop Navigator Sidebar -->
             <div class="sidebar">
                 <div class="sidebar-section-title">Summary Status</div>
                 <div class="stats-grid">
                     <div class="stat-item">
-                        <div class="stat-count" id="stat-answered" style="color: #10b981;">0</div>
+                        <div class="stat-count" id="stat-answered" style="color: var(--success);">0</div>
                         <div class="stat-name">Answered</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-count" id="stat-flagged" style="color: #f59e0b;">0</div>
+                        <div class="stat-count" id="stat-flagged" style="color: var(--warning);">0</div>
                         <div class="stat-name">Flagged</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-count" id="stat-not-answered" style="color: #64748b;">0</div>
+                        <div class="stat-count" id="stat-not-answered" style="color: var(--text-muted);">0</div>
                         <div class="stat-name">Unanswered</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-count" id="stat-not-visited" style="color: #94a3b8;">0</div>
+                        <div class="stat-count" id="stat-not-visited" style="color: var(--text-muted);">0</div>
                         <div class="stat-name">Not Visited</div>
                     </div>
                 </div>
-                
+
                 <div class="sidebar-section-title" style="margin-top: 16px;">Question Navigator</div>
                 <div class="questions-grid"></div>
             </div>
         </div>
     </div>
-    
+
     <!-- Inject Question Data -->
     <script>
-        const questions = [];
+        const questions = [
+  {
+    "question": "<p>1. <span style=\"font-family: Cambria Math;\">Pandit Shivkumar Sharma is remembered for his mastery in playing _________ .</span></p>\n",
+    "options": [
+      "Tabla",
+      "Sarod",
+      "Sitar",
+      "Santoor\\r\\n "
+    ],
+    "correct_option_id": 3,
+    "solution": "<p><strong>1.(d) Santoor</strong><span style=\"font-family: Cambria Math;\"> (a stringed percussion instrument)</span><span style=\"font-family: Cambria Math;\">.<strong> Pandit Shivkumar Sharma</strong></span><span style=\"font-family: Cambria Math;\"><strong> -</strong> Awards - Padma Shri (1991), Padma Vibhushan (2001), Sangeet Natak Akademi Award (1986), Global Indian Music Academy Awards (2010). Other Santoor Players -</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">Tarun Bhattacharya, Rijram Desad, Rahul Sharma, Abhay Sopori. </span></p>\n",
+    "question_index": 0
+  },
+  {
+    "question": "<p>2. <span style=\"font-family: Cambria Math;\">Mundari dance is associated with the tribal community of which Indian state?</span></p>\n",
+    "options": [
+      "Mizoram",
+      "Karnataka",
+      "Arunachal Pradesh",
+      "Jharkhand"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p><strong>2.(d)</strong> <strong>Jharkhand</strong>. <span style=\"font-family: Cambria Math;\">Mundari dance - Community - Munda Tribe. Time - During Harvest Season accompanied by musical Instrument Madal, Nagara and Bansi. Other Tribe Dances: </span><span style=\"font-family: Cambria Math;\">Santhali Dance - Santhal (West Bengal, Jharkhand). Bamboo Dance - Mizoram. Kalbelia Dance - Kalbelia Commu</span><span style=\"font-family: Cambria Math;\">nity (Rajasthan). Bhagoria Dance - Bhils (Madhya Pradesh). Dhimsa Dance - Porja Tribe (Andhra Pradesh).</span></p>\r\n<p><span style=\"font-family: Cambria Math;\"> </span></p>\n",
+    "question_index": 1
+  },
+  {
+    "question": "<p>3. <span style=\"font-family: Cambria Math;\">What is the width of the court for double matches in Lawn Tennis?</span></p>\n",
+    "options": [
+      "38 feet",
+      "36 feet",
+      "34 feet",
+      "32 feet"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p><strong>3.(b) 36 feet</strong>.<span style=\"font-family: Cambria Math;\"> Lawn Tennis Terms - Ace, Advantage, Deuce, Backspin, Deep, Double Bagel, Groundstroke, Approach Shot. Double Matchcourt Size - Length (78 feet). Single match Court Size - Length (78 Feet), Width (27 feet)</span><span style=\"font-family: Cambria Math;\">. </span></p>\n",
+    "question_index": 2
+  },
+  {
+    "question": "<p>4. <span style=\"font-family: Cambria Math;\">Match the following statements:</span></p>\r\n<p><span style=\"font-family: Cambria Math;\"><img src=\"https://ssccglpinnacle.com/images/mceu_91563378011698653206506.png\"></span></p>\n",
+    "options": [
+      "a-iv, b-iii, c-i, d-ii",
+      "a-iii, b-i, c- iv, d-ii",
+      "a-iv, b- ii, c- i, d-iii",
+      "a-iv, b-i, c-ii, d-iii"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p><strong>4.(d) a-iv, b-i, c-ii, d-iii.</strong><span style=\"font-family: Cambria Math;\"> Champakkulam boat race. Held in the Pampa River in the month of June or July. It is the oldest snake boat race in Kerala state. Somnath fair - Celebrated on the day of the full moon of Kartik Purnima. God - Month - November-December. Surajkund fair </span><span style=\"font-family: Cambria Math;\">- In</span><span style=\"font-family: Cambria Math;\">itiate - 1987. God - Surya. It is held during the first half of the month of February. Baneshwar fair - It is held in the month of January or February.</span></p>\n",
+    "question_index": 3
+  },
+  {
+    "question": "<p>5. <span style=\"font-family: Cambria Math;\">In 1956, which of the following awards did Rukmini Devi Arundale, an eminent Bharatanatyam dancer, receive?</span></p>\n",
+    "options": [
+      "Jnanpith Award",
+      "Saraswati Samman",
+      "Kabir Puraskar",
+      "Padma Bhushan"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p><strong>5.(d) Padma Bhushan</strong> <span style=\"font-family: Cambria Math;\">(1956).<strong> </strong></span><span style=\"font-family: Cambria Math;\"><strong>Rukmini Devi Arundale</strong> </span><span style=\"font-family: Cambria Math;\">- Awards - Sangeet Natak Akademi Award (1957), Desikothama (1972), Prani Mitra (1968), Kalidas Samman (1984). Bharatanatyam dancers in India - Padma Subrahmanyam, Sonal Mansingh, Mallika Sarabhai, Yamini Krishnamurthy.</span></p>\n",
+    "question_index": 4
+  },
+  {
+    "question": "<p>6.<span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">Bastar Dussehra i</span><span style=\"font-family: Cambria Math;\">s celebrated in which of the following states?</span></p>\n",
+    "options": [
+      "Uttar Pradesh",
+      "Haryana",
+      "Chhattisgarh ",
+      "Jharkhand "
+    ],
+    "correct_option_id": 2,
+    "solution": "<p><strong>6.(c) Chattisgarh. Bastar Dussehra</strong><span style=\"font-family: Cambria Math;\"> (75 days long) started in the 13th Century during the reign of the 4th King of Bastar, King Purshottam Dev.</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">Deity - Goddess Danteshwari Devi. Other Festivals of Chhattisgarh</span><span style=\"font-family: Cambria Math;\"> -</span><span style=\"font-family: Cambria Math;\"> Rajim Kumbh Mela, Chakradhar Samaroh, Po</span><span style=\"font-family: Cambria Math;\">la, Madai, Hareli, Bhoramdeo Mahotsav, Goncha, Karma.</span></p>\n",
+    "question_index": 5
+  },
+  {
+    "question": "<p>7. <span style=\"font-family: Cambria Math;\">What is the distance between the goal line and the penalty spot in football?</span></p>\n",
+    "options": [
+      "11 yards",
+      "12 yards",
+      "10 yards ",
+      "9 yards "
+    ],
+    "correct_option_id": 1,
+    "solution": "<p><strong>7.(b) 12 yards. Football Rules and Regulations:</strong><span style=\"font-family: Cambria Math;\"><strong> </strong>Duration - Playing time of each half is 45 minutes. Yellow card means the player is only cautioned and given a warning, Red card</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">means dismissal from the game for that particular player, Ground measurement - 105 m x 68 m. </span><span style=\"font-family: Cambria Math;\"><strong>Famous tournaments:</strong> </span><span style=\"font-family: Cambria Math;\">European Championship (UEFA), The Copa America (CONMEBOL), African Cup of Nations (CAF), The Asian Cup (AFC), The CONCACAF Gold Cup, The OFC Nations Cup (OFC).</span></p>\n",
+    "question_index": 6
+  },
+  {
+    "question": "<p>8. <span style=\"font-family: Cambria Math;\">Who among the following is not a professional Indian Classical Dancer?</span></p>\n",
+    "options": [
+      "Mallika Sarabahi",
+      "Vasundhara Doraswamy",
+      "Shreya Ghoshal ",
+      "Shovana Narayanan "
+    ],
+    "correct_option_id": 2,
+    "solution": "<p><strong>8.(c)<span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">Shreya Ghoshal </span></strong><span style=\"font-family: Cambria Math;\">(A singer)</span><span style=\"font-family: Cambria Math;\">.</span><span style=\"font-family: Cambria Math;\"> </span><strong><span style=\"font-family: Cambria Math;\">Indian Classical Dance: </span></strong><span style=\"font-family: Cambria Math;\">Bharatnatyam (Tamil Nadu), Kathak (</span><span style=\"font-family: Cambria Math;\">North India), Kathakali (Kerala), Kuchipudi (Andhra Pradesh), Mohiniyattam (Kerala), Odissi (Odisha), Sattriya (Assam), Manipuri (Manipur). </span><span style=\"font-family: Cambria Math;\"><strong>Bharatanatyam dancers:</strong> </span><span style=\"font-family: Cambria Math;\">Rukmini Devi Arundale, Alarmel Valli, Yamini Krishnamurthy, Mallika Sarabhai, T. Bala Saraswati, Vasundhara Doraswamy. </span><span style=\"font-family: Cambria Math;\"><strong>Kathak dancers </strong>-</span><span style=\"font-family: Cambria Math;\"> Birju Maharaj, Shovana Narayan, Saswati Sen, Sitara Devi, Urmila Nagar. </span></p>\n",
+    "question_index": 7
+  },
+  {
+    "question": "<p>9. <span style=\"font-family: Cambria Math;\">In which of the following years was the first radio show broadcast in India?</span></p>\n",
+    "options": [
+      "1923",
+      "1936",
+      "1911",
+      "1927"
+    ],
+    "correct_option_id": 0,
+    "solution": "<p><strong>9.(a) 1923. </strong><span style=\"font-family: Cambria Math;\">The Radio Club of Bombay made the first-ever broadcast in the country in June 1923. Broadcasting in India actually be</span><span style=\"font-family: Cambria Math;\">gan about 13 years before AIR came into existence. The Indian Broadcasting Company (IBC) came into being on 23 July 1927. </span><strong><span style=\"font-family: Cambria Math;\">All India Radio: </span></strong><span style=\"font-family: Cambria Math;\">Founded - 1936, Headquarters - Akashvani Bhavan building in New Delhi. </span><span style=\"font-family: Cambria Math;\"><strong>Prasar Bharti:</strong> </span><span style=\"font-family: Cambria Math;\">Founded - 23 November 1997, Hea</span><span style=\"font-family: Cambria Math;\">dquarters - New Delhi. </span></p>\n",
+    "question_index": 8
+  },
+  {
+    "question": "<p>10. <span style=\"font-family: Cambria Math;\">Ustad Akbar Ali Khan is remembered for his contribution to which of the following musical instruments?</span></p>\n",
+    "options": [
+      "Tabla",
+      "Santoor",
+      "Sitar ",
+      "Sarod "
+    ],
+    "correct_option_id": 3,
+    "solution": "<p><strong>10.(d) Sarod</strong>. <span style=\"font-family: Cambria Math;\">Akbar Ali Khan</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">(Maihar gharana). Awards- Padma Bhushan (1967), Padma Vibhushan (1989). </span><span style=\"font-family: Cambria Math;\"><strong>Famous Players</strong> </span><span style=\"font-family: Cambria Math;\">(Sarod): Amjad Ali Khan, Buddhadev Das Gupta, Tejendra Majumdar, Allauddin Khan. </span><span style=\"font-family: Cambria Math;\"><strong>Sitar Players:</strong> </span><span style=\"font-family: Cambria Math;\">Pt Ravi Shankar, Shahid Parvez Khan, Budhaditya Mukherjee, Anushka Shanka</span><span style=\"font-family: Cambria Math;\">r. </span><span style=\"font-family: Cambria Math;\"><strong>Tabla Players:</strong> </span><span style=\"font-family: Cambria Math;\">Allah Rakha Khan, Zakir Hussain, Ustad Sabir Khan, Pandit Kishan Maharaj. </span><span style=\"font-family: Cambria Math;\"><strong>Santoor Players:</strong> </span><span style=\"font-family: Cambria Math;\">Pandit Shivkumar Sharma, Rahul Sharma, Tamana parviz, Tarun Bhattacharya.</span></p>\n",
+    "question_index": 9
+  },
+  {
+    "question": "<p>11. <span style=\"font-family: Cambria Math;\">RK Bijapure played which of the following musical instruments?</span></p>\n",
+    "options": [
+      "Harmonium",
+      "Tabla",
+      "Ravanahatha",
+      "Sitar"
+    ],
+    "correct_option_id": 0,
+    "solution": "<p><strong>11.(a) Harmonium</strong>. <span style=\"font-family: Cambria Math;\">R K Bijapure</span><span style=\"font-family: Cambria Math;\"> (<strong>1985 </strong>- </span><span style=\"font-family: Cambria Math;\">\"Karnataka Kala Tilak\" by Sangeet Nritya Academy).</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">Musical instruments and their ex</span><span style=\"font-family: Cambria Math;\">ponents</span><span style=\"font-family: Cambria Math;\"> :</span><span style=\"font-family: Cambria Math;\"> </span><strong><span style=\"font-family: Cambria Math;\">Harmonium </span></strong><span style=\"font-family: Cambria Math;\">- Purushottam Walawalkar, Appa Jalgaonkar. </span><strong><span style=\"font-family: Cambria Math;\">Tabla </span></strong><span style=\"font-family: Cambria Math;\">- Zakir Hussain, Allah Rakha, Kishan Maharaj, Pt Jnan Prakash Ghosh. </span><span style=\"font-family: Cambria Math;\">Ravanahatha </span><span style=\"font-family: Cambria Math;\">- Dinesh Subasinghe. </span><strong><span style=\"font-family: Cambria Math;\">Sitar </span></strong><span style=\"font-family: Cambria Math;\">- Vilayat Khan, Ravi Shankar, Shahid Parvez Khan, Anushka Shankar, Nikhil Baner</span><span style=\"font-family: Cambria Math;\">jee. </span><strong><span style=\"font-family: Cambria Math;\">Sarangi </span></strong><span style=\"font-family: Cambria Math;\">- Abdul Latif Khan, Binda Khan, Sultan Khan, Ram Narayan.</span></p>\r\n<p><span style=\"font-family: Cambria Math;\"> </span></p>\n",
+    "question_index": 10
+  },
+  {
+    "question": "<p>12. <span style=\"font-family: Cambria Math;\">Which of the following dance forms is performed by the Adi tribe of Arunachal Pradesh? </span></p>\n",
+    "options": [
+      "Tapu",
+      "Karma",
+      "Sangphao",
+      "Kaksar"
+    ],
+    "correct_option_id": 0,
+    "solution": "<p><strong>12.(a) Tapu</strong>.<span style=\"font-family: Cambria Math;\"> Indian folk and tribal dances</span><span style=\"font-family: Cambria Math;\"> : <strong>Arunachal Pradesh</strong></span><span style=\"font-family: Cambria Math;\"><strong> </strong>- Buiya, Chalo, Wancho, Pasi Kongki Ponung, Popir, Bardo Chham, etc</span><span style=\"font-family: Cambria Math;\">. <strong>Assam </strong>-</span><span style=\"font-family: Cambria Math;\"> Bihu, Bichhua, Bagurumba, Khel Gopal, </span><span style=\"font-family: Cambria Math;\">Tabal Chongli, Jhumura Hobjanai etc. </span><strong><span style=\"font-family: Cambria Math;\">Nagaland</span></strong><span style=\"font-family: Cambria Math;\"><strong> </strong>- Chong, Nuralim, Temangnetin, Rangma, Zeliang, etc. </span><span style=\"font-family: Cambria Math;\"> <strong>Mizoram</strong></span><span style=\"font-family: Cambria Math;\"><strong> </strong>- Cheraw Dance (Bamboo dance), Khuallam, Chailam, Zangtalam, Khanatm, etc. </span><span style=\"font-family: Cambria Math;\"><strong>Manipur </strong>- </span><span style=\"font-family: Cambria Math;\">Thang Ta, Lai Haraoba, Pung Cholom, Nupa Dance, etc. </span><span style=\"font-family: Cambria Math;\"><strong>Tripura </strong>- </span><span style=\"font-family: Cambria Math;\">Hojagiri. </span><span style=\"font-family: Cambria Math;\"><strong>Meghalaya </strong>- </span><span style=\"font-family: Cambria Math;\">Laho, Shad Suk Mynsiem, Nongkrem. </span></p>\n",
+    "question_index": 11
+  },
+  {
+    "question": "<p>13. <span style=\"font-family: Cambria Math;\">The term &lsquo;tackle point&rsquo; is associated with ________.</span></p>\n",
+    "options": [
+      "Football",
+      "Baseball",
+      "Hockey",
+      "Kabaddi"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p><strong>13.(d) Kabaddi. Terminology in Sports : Kabaddi -</strong> <span style=\"font-family: Cambria Math;\"> All-out, Ankle hold, Bonus line, Frog Jump, Lona etc. </span><span style=\"font-family: Cambria Math;\"><strong>Football </strong>- </span><span style=\"font-family: Cambria Math;\">Penalty Kick, Goal, Hattrick, Move, Dribble, Left Out, Off Side, Stopper, Defender etc. </span><span style=\"font-family: Cambria Math;\"><strong>Baseball </strong>- </span><span style=\"font-family: Cambria Math;\">Throw, Strike, Put Out, Perfect Game</span><span style=\"font-family: Cambria Math;\">, Base Runner, Homerun, Pinch Hitter etc. </span><span style=\"font-family: Cambria Math;\"><strong>Hockey </strong>- </span><span style=\"font-family: Cambria Math;\"> Advancing, Bully, Dangerous Play, Flick, Penalty Stroke etc. </span></p>\n",
+    "question_index": 12
+  },
+  {
+    "question": "<p>14. <span style=\"font-family: Cambria Math;\">&lsquo;Which of the following statements are correct:</span></p>\r\n<p><span style=\"font-family: Cambria Math;\">a) The Sarhul festival is celebrated in Jharkhand.</span></p>\r\n<p><span style=\"font-family: Cambria Math;\">b) Sal tree flowers are collected and offered to God during the Sarhul festival.</span></p>\r\n<p><span style=\"font-family: Cambria Math;\">c) The flowers of the sal tree symbolize the fertility of Earth. </span></p>\n",
+    "options": [
+      "Only a and c",
+      "Only a and b",
+      "All a, b and c",
+      "Only a and c"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p><strong>14.(c) All a, b and c. Sarhul Festival </strong><span style=\\\"font-family: Cambria Math;\\\">means worship of the Sal tree. It is the tribal New Year festival and is celebrated by the Munda, Oraon, Ho, etc tribes of Jharkhand. It falls o</span><span style=\\\"font-family: Cambria Math;\\\">n the third day of the moon or the fortnight of \\'Chaitra\\'. </span><span style=\\\"font-family: Cambria Math;\\\"><strong>Festivals of Jharkhand</strong> : </span><span style=\\\"font-family: Cambria Math;\\\">Karam or Karma</span><span style=\\\"font-family: Cambria Math;\\\">, </span><span style=\\\"font-family: Cambria Math;\\\">Jawa, Tusu Parab or Makar, Hal Punhya, Bhagta Parab, Rohini, Bandana, Jani-Shikaar etc. </span></p>\\n",
+    "question_index": 13
+  },
+  {
+    "question": "<p>15. <span style=\"font-family: Cambria Math;\">Which actress-cum dancer was honoured with the Padma Bhushan award in 2011?</span></p>\n",
+    "options": [
+      "Hema Malini",
+      "Waheeda Rehman",
+      "Meena Kumari",
+      "Rekha"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p><strong>15.(b) Waheeda Rehman. Other Awards :</strong> <span style=\\\"font-family: Cambria Math;\\\">Filmfare Award for Best Actress (1969), Filmfare Lifetime Achi</span><span style=\\\"font-family: Cambria Math;\\\">evement Award (1995), Madhya Pradesh government\\'s National Kishore Kumar Samman (2020)<strong>. </strong></span><span style=\\\"font-family: Cambria Math;\\\"><strong>M. S.</strong> <strong>Subbulakshmi :</strong> </span><span style=\\\"font-family: Cambria Math;\\\">First musician to receive the Padma Bhushan Award (1954).</span><span style=\\\"font-family: Cambria Math;\\\"> </span><span style=\\\"font-family: Cambria Math;\\\"> </span></p>\\n",
+    "question_index": 14
+  }
+];
     </script>
-    
+
     <!-- Central JS Controller -->
     <script src="../js/mock-core.js"></script>
 </body>

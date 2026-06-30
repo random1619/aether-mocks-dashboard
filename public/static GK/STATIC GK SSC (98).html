@@ -3,43 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aether Mocks</title>
+    <title>Mocks Wallah</title>
     <!-- Fonts & Icons -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    
+
     <!-- Central Stylesheet -->
     <link rel="stylesheet" href="../css/mock-main.css">
-    
+
     <!-- Math Formula Rendering (KaTeX/MathJax) -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    
+
     <!-- Timer Config -->
-    <meta name="exam-duration" content="60">
+    <meta name="exam-duration" content="30">
 </head>
 <body>
     <!-- Welcome Screen -->
     <div class="welcome-screen" id="welcomeScreen">
         <div class="welcome-container">
             <div class="welcome-header" style="margin-bottom: 24px;">
-                <h1 style="font-size: 2rem; font-weight: 700; color: #0f172a; margin-bottom: 8px;"><i class="fas fa-graduation-cap" style="color: #3b82f6;"></i> Aether Mocks</h1>
-                <p style="color: #64748b;">Computer Based Test Portal</p>
+                <h1 style="font-size: 2rem; font-weight: 700; color: var(--text-main); margin-bottom: 8px;"><i class="fas fa-graduation-cap" style="color: var(--primary);"></i> Mocks Wallah</h1>
+                <p style="color: var(--text-muted);">Computer Based Test Portal</p>
             </div>
-            
+
             <div class="test-details" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-bottom: 32px; text-align: left;">
-                <div class="detail-item" style="padding: 12px; background: #f8fafc; border-radius: 8px; border: 1px solid #e2e8f0;">
-                    <div class="detail-label" style="font-size: 0.8rem; color: #64748b;">Total Questions</div>
-                    <div class="detail-value" style="font-size: 1.1rem; font-weight: 600; color: #0f172a;">10</div>
+                <div class="detail-item" style="padding: 12px; background: var(--bg-color); border-radius: 8px; border: 1px solid var(--border-color);">
+                    <div class="detail-label" style="font-size: 0.8rem; color: var(--text-muted);">Total Questions</div>
+                    <div class="detail-value" style="font-size: 1.1rem; font-weight: 600; color: var(--text-main);">15</div>
                 </div>
-                <div class="detail-item" style="padding: 12px; background: #f8fafc; border-radius: 8px; border: 1px solid #e2e8f0;">
-                    <div class="detail-label" style="font-size: 0.8rem; color: #64748b;">Duration</div>
-                    <div class="detail-value" style="font-size: 1.1rem; font-weight: 600; color: #0f172a;">60 mins</div>
+                <div class="detail-item" style="padding: 12px; background: var(--bg-color); border-radius: 8px; border: 1px solid var(--border-color);">
+                    <div class="detail-label" style="font-size: 0.8rem; color: var(--text-muted);">Duration</div>
+                    <div class="detail-value" style="font-size: 1.1rem; font-weight: 600; color: var(--text-main);">30 mins</div>
                 </div>
             </div>
-            
+
             <div class="welcome-actions">
                 <button class="btn btn-primary" id="startBtn" onclick="document.getElementById('welcomeScreen').style.display='none'; document.getElementById('examContainer').style.display='flex';" style="font-size: 1.1rem; padding: 12px 32px; width: 100%;">
                     <i class="fas fa-play" style="margin-right: 8px;"></i> Start Test
@@ -47,12 +47,12 @@
             </div>
         </div>
     </div>
-    
+
     <!-- Main Exam Interface -->
     <div class="exam-container" id="examContainer" style="display: none; height: 100vh; flex-direction: column;">
         <!-- Top Header -->
         <div class="exam-header">
-            <div class="exam-title">Aether Mocks</div>
+            <div class="exam-title">Mocks Wallah</div>
             <div class="header-actions" style="display: flex; align-items: center; gap: 12px;">
                 <button class="btn-icon" id="themeToggleBtn" title="Switch to Dark Mode"><i class="fas fa-moon"></i></button>
                 <button class="btn-icon" id="fullscreenToggleBtn" title="Toggle Fullscreen"><i class="fas fa-expand"></i></button>
@@ -62,14 +62,14 @@
                 </div>
             </div>
         </div>
-        
+
         <!-- Main Content -->
         <div class="mock-container">
             <!-- Question Area -->
             <div class="question-view">
                 <!-- Dynamically populated question container -->
                 <div id="questionContainer" style="flex: 1; display: flex; flex-direction: column; gap: 24px;"></div>
-                
+
                 <!-- Controls -->
                 <div class="nav-controls">
                     <button class="btn btn-secondary btn-prev"><i class="fas fa-chevron-left" style="margin-right: 8px;"></i> Previous</button>
@@ -79,40 +79,221 @@
                     <button class="btn btn-primary btn-next">Next <i class="fas fa-chevron-right" style="margin-left: 8px;"></i></button>
                 </div>
             </div>
-            
+
             <!-- Desktop Navigator Sidebar -->
             <div class="sidebar">
                 <div class="sidebar-section-title">Summary Status</div>
                 <div class="stats-grid">
                     <div class="stat-item">
-                        <div class="stat-count" id="stat-answered" style="color: #10b981;">0</div>
+                        <div class="stat-count" id="stat-answered" style="color: var(--success);">0</div>
                         <div class="stat-name">Answered</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-count" id="stat-flagged" style="color: #f59e0b;">0</div>
+                        <div class="stat-count" id="stat-flagged" style="color: var(--warning);">0</div>
                         <div class="stat-name">Flagged</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-count" id="stat-not-answered" style="color: #64748b;">0</div>
+                        <div class="stat-count" id="stat-not-answered" style="color: var(--text-muted);">0</div>
                         <div class="stat-name">Unanswered</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-count" id="stat-not-visited" style="color: #94a3b8;">0</div>
+                        <div class="stat-count" id="stat-not-visited" style="color: var(--text-muted);">0</div>
                         <div class="stat-name">Not Visited</div>
                     </div>
                 </div>
-                
+
                 <div class="sidebar-section-title" style="margin-top: 16px;">Question Navigator</div>
                 <div class="questions-grid"></div>
             </div>
         </div>
     </div>
-    
+
     <!-- Inject Question Data -->
     <script>
-        const questions = [];
+        const questions = [
+  {
+    "question": "<p>1. In MS Word, which option allows you to align text in a way that it appears vertically at&nbsp;the bottom of a cell or text box?</p>",
+    "options": [
+      "Center Alignment",
+      "Justify Alignment",
+      "Bottom Alignment",
+      "Distributed Alignment"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p>1.(c) <strong>Bottom Alignment.</strong> This option ensures that the text is positioned at the bottom edge, leaving space above it. Center Alignment: Centers text horizontally in the cell or text box. Justify Alignment: Aligns text evenly along both the left and right margins. Distributed Alignment: Distributes text evenly across the width, with equal spacing between characters and words.</p>",
+    "question_index": 0
+  },
+  {
+    "question": "<p>2. What is the circumference of the International Football Association Board (IFAB)&nbsp;approved football?</p>",
+    "options": [
+      "68 - 70 cms",
+      "80 - 82 cms",
+      "78 - 80 cms",
+      "70 - 72 cms"
+    ],
+    "correct_option_id": 0,
+    "solution": "<p>2.(a) <strong>68 - 70 cms.</strong> The football must meet the following criteria as per the FIFA laws : The ball shall be spherical in shape. It should be made of leather or any other suitable material approved by the governing body. Ball circumference shall be 68 to 70 cm which is equal to 27 to 28 inches. The weight of the ball shall be between 410 to 450g which is equal to 14 to 16 oz at the start of the match. Air pressure should be equal to 0.6&ndash;1.1 atmosphere (600&ndash;1,100 g/cm2) at sea level.</p>",
+    "question_index": 1
+  },
+  {
+    "question": "<p>3. Mewar festival is celebrated during the _______ festival at Udaipur.</p>",
+    "options": [
+      "Gangaur",
+      "Teej",
+      "Dussehra",
+      "Holi"
+    ],
+    "correct_option_id": 0,
+    "solution": "<p>3.(a) <strong>Gangaur -</strong> A festival devoted to Goddess Parvati. It is celebrated in March. Festivals of Rajasthan : Camel Festival (Bikaner), Kumbhalgarh Festival, Desert Festival (Jaisalmer), Kajli Teej (Bundi), Abhaneri (Dausa), Ranakpur (Pali), Matsya Festival (Alwar) and Bundi Festival (Bundi).</p>",
+    "question_index": 2
+  },
+  {
+    "question": "<p>4. In which country is the &lsquo;Kachin Manaw Festival&rsquo; celebrated ?</p>",
+    "options": [
+      "Myanmar",
+      "Maldives",
+      "Sri Lanka",
+      "Nepal"
+    ],
+    "correct_option_id": 0,
+    "solution": "<p>4.(a) <strong>Myanmar.</strong> In the Kachin Manaw Festival, the Kachins perform the Manaw dance - a dance that was part of the Nat (spirit worship) many years ago. Famous festivals of Myanmar : Thingyan, Ananda Pagoda Festival, Kyaukse elephant dance festival.</p>",
+    "question_index": 3
+  },
+  {
+    "question": "<p>5. Of the football clubs listed below, which is the oldest in India ?</p>",
+    "options": [
+      "Bombay FC",
+      "FC Kochin",
+      "Madras FC",
+      "Calcutta FC"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p>5.(d) <strong>Calcutta FC.</strong> It was established in 1872. The oldest club that is currently active is the Mohun Bagan AC, which was established in 1889. The Indian Football Association (IFA) was established in Calcutta in 1893. The All India Football Federation (AIFF) was formed in 1937. Famous Football Clubs In India : Mumbai City FC, Bengaluru FC, Kerala Blasters FC, Jamshedpur FC, etc.</p>",
+    "question_index": 4
+  },
+  {
+    "question": "<p>6. Which technology is associated with providing high-speed wireless data transmission&nbsp;for mobile devices ?</p>",
+    "options": [
+      "GPS",
+      "Wi-Max",
+      "GPRS",
+      "LTE"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p>6.(d) <strong>LTE </strong>stands for Long Term Evolution. The full form of GPS is the Global Positioning System and it is a satellite navigation system used to identify the ground position of an object. GPRS is General Packet Radio Service. It is a non-voice high-speed packet switching system developed for GSM networks. WiMAX stands for Worldwide Interoperability for Microwave Access.</p>",
+    "question_index": 5
+  },
+  {
+    "question": "<p>7. Folk songs in _________ are called Raganis.</p>",
+    "options": [
+      "Haryana",
+      "Uttar Pradesh",
+      "Bihar",
+      "Madhya Pradesh"
+    ],
+    "correct_option_id": 0,
+    "solution": "<p>7.(a) <strong>Haryana. </strong>Raganis are performed by multiple singers and dancers and are sung in the local dialect. State and their Folk songs : Haryana - Gharwa Gayan, Jhoolana, Patka, and Rasia. Uttar Pradesh - khayal, ghazals, Swang, Naqal. Bihar - Sohar, Bidesia, Chhath Geet, Kajri. Madhya Pradesh - Nirguni Bhajans, Fag songs, Pandavani.</p>",
+    "question_index": 6
+  },
+  {
+    "question": "<p>8. Mayadhar Raut is an exponent of the Indian classical dance form __________.</p>",
+    "options": [
+      "Kathak",
+      "Bharatnatyam",
+      "Odissi",
+      "Kuchipudi"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p>8.(c) <strong>Odissi.</strong> Mayadhar Raut Awards: Sangeet Natak Academy (1985) and Padma Shri (2010). Other exponents : Odissi - Sonal Mansingh, Jhelum Paranjape. Bharatnatyam - Meenakshi Sundaram Pillai, Balasarswati, Yamini Krishnamurti. Kuchipudi - Yamini Reddy, Raja-Radha Reddy, Vaijayanti Kashi. Kathak - Birju Maharaj, Gopi Krishna, Sitara Devi.</p>",
+    "question_index": 7
+  },
+  {
+    "question": "<p>9. Who wrote the Indian patriotic song, &lsquo;Sare Jahan se acchha, Hindustan hamara&rsquo;?</p>",
+    "options": [
+      "Mahatma Gandhi",
+      "Ishwar Chandra Vidyasagar",
+      "Rabindranath Tagore",
+      "Mohammad Iqbal"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p>9.(d) <strong>Mohammad Iqbal.</strong> His first book, Asrar-I Khud&iacute; (The Secrets of the Self), was published in 1915. He was knighted by King George V who gave him the title of &ldquo;Sir&rdquo; in 1922. Other Indian patriotic songs and their writers: Mahatma Gandhi - Vaishnav jan to. Rabindranath Tagore - Jana-gana-mana. Bankim Chandra Chatterjee - Vande Mataram. Kavi Pradeep - Ae Mere Watan Ke Logon. Gulshan Kumar Mehta - Mere Desh Ki Dharti.</p>",
+    "question_index": 8
+  },
+  {
+    "question": "<p>10. Symmetric encryption is also known as:</p>",
+    "options": [
+      "public-key encryption",
+      "hybrid encryption",
+      "conventional encryption",
+      "asymmetric encryption"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p>10.(c) <strong>conventional encryption.</strong> Public key encryption, also known as public key cryptography. The Hybrid Encryption primitive combines the efficiency of symmetric encryption with the convenience of public key (asymmetric) cryptography. Asymmetric encryption is a security technique that uses two different keys to encrypt and decrypt data.</p>",
+    "question_index": 9
+  },
+  {
+    "question": "<p>11. Which of the following is NOT a domestic cricket tournament organised by the Board&nbsp;of Control for Cricket in India (BCCI) in India ?</p>",
+    "options": [
+      "Vizzy Trophy",
+      "ZR Irani Cup",
+      "Super Fours",
+      "Ranji Trophy"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p>11.(c) <strong>Super Fours.</strong> Domestic Cricket Tournaments organised by the Board of Control for Cricket in India (BCCI) : Duleep Trophy, Vijay Hazare Trophy, Deodhar Trophy, Syed Mushtaq Ali Trophy, NKP Salve Challenger Trophy. BCCI : Headquarters - Mumbai, Founded - December 1928.</p>",
+    "question_index": 10
+  },
+  {
+    "question": "<p>12. Which kind of computer security requires verifying the genuineness of the individuals or organisations that want to access a system ?</p>",
+    "options": [
+      "Authentication",
+      "Non-repudiation",
+      "Availability",
+      "Confidentiality"
+    ],
+    "correct_option_id": 0,
+    "solution": "<p>12.(a) <strong>Authentication.</strong> Computer security (Cybersecurity), is the protection of computer systems and information from harm, theft, and unauthorized use. Some examples of computer security: Firewalls, Strong passwords, Anti-virus and anti-malware software, Endpoint security, Controlling access, Regular updates, Monitoring for intrusion, Raising awareness.</p>",
+    "question_index": 11
+  },
+  {
+    "question": "<p>13. _________ is a significant festival of the Parsi people who practice Zoroastrianism as it marks the birth anniversary of Zoroaster.</p>",
+    "options": [
+      "Khordad Sal",
+      "Gahambars",
+      "Pateti",
+      "Jamshed-e-Navroz"
+    ],
+    "correct_option_id": 0,
+    "solution": "<p>13.(a) <strong>Khordad Sal.</strong> The Gahambars were established as a means of celebrating the six primordial elements of creation: sky, water, earth, plants, animals, and humans. Papeti (Navroz or Parsi New Year) is a festival celebrated by the Parsi community. It marks the start of the Iranian calendar and is an auspicious occasion for the Zoroastrian community. Jamshed-e-Navroz is a festival celebrated by the Parsis, a Zoroastrian community, to commemorate the coronation of King Jamshed.</p>",
+    "question_index": 12
+  },
+  {
+    "question": "<p>14. By which ministry of Government of India was the Deendayal Antyodaya Yojana started?</p>",
+    "options": [
+      "Ministry of Corporate affairs",
+      "Ministry of Rural Development",
+      "Ministry of Home affairs",
+      "Ministry of Labour and Employment"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p>14.(b) <strong>Ministry of Rural Development.</strong> Deen Dayal Antyodaya Yojana - National Rural Livelihoods Mission (DAY - NRLM) was launched as &lsquo;Aajeevika - National Rural Livelihoods Mission (NRLM)\\' in the year 2011. It was renamed as DAY-NRLM in 2015. It aims at creating effective and efficient institutional platforms to enable the rural poor to increase their household income by means of sustainable livelihood enhancements and better access to financial services.</p>",
+    "question_index": 13
+  },
+  {
+    "question": "<p>15. As per Olympic rules, in the third game, badminton players change ends when a side scores _____ points.</p>",
+    "options": [
+      "15",
+      "11",
+      "12",
+      "13"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p>15.(b) <strong>11.</strong> The International Olympic Committee is the guardian of the Olympic Games and the leader of the Olympic Movement. A truly global organisation. Badminton had its debut as an official event at the 1992 Summer Olympics and has been contested in eight Olympiads. Saina Nehwal became India\\'s first female world no. 1 in April 2015 and the first Indian to win an Olympic badminton medal.</p>",
+    "question_index": 14
+  }
+];
     </script>
-    
+
     <!-- Central JS Controller -->
     <script src="../js/mock-core.js"></script>
 </body>

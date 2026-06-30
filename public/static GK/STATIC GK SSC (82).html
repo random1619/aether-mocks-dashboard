@@ -3,43 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aether Mocks</title>
+    <title>Mocks Wallah</title>
     <!-- Fonts & Icons -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    
+
     <!-- Central Stylesheet -->
     <link rel="stylesheet" href="../css/mock-main.css">
-    
+
     <!-- Math Formula Rendering (KaTeX/MathJax) -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    
+
     <!-- Timer Config -->
-    <meta name="exam-duration" content="60">
+    <meta name="exam-duration" content="30">
 </head>
 <body>
     <!-- Welcome Screen -->
     <div class="welcome-screen" id="welcomeScreen">
         <div class="welcome-container">
             <div class="welcome-header" style="margin-bottom: 24px;">
-                <h1 style="font-size: 2rem; font-weight: 700; color: #0f172a; margin-bottom: 8px;"><i class="fas fa-graduation-cap" style="color: #3b82f6;"></i> Aether Mocks</h1>
-                <p style="color: #64748b;">Computer Based Test Portal</p>
+                <h1 style="font-size: 2rem; font-weight: 700; color: var(--text-main); margin-bottom: 8px;"><i class="fas fa-graduation-cap" style="color: var(--primary);"></i> Mocks Wallah</h1>
+                <p style="color: var(--text-muted);">Computer Based Test Portal</p>
             </div>
-            
+
             <div class="test-details" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-bottom: 32px; text-align: left;">
-                <div class="detail-item" style="padding: 12px; background: #f8fafc; border-radius: 8px; border: 1px solid #e2e8f0;">
-                    <div class="detail-label" style="font-size: 0.8rem; color: #64748b;">Total Questions</div>
-                    <div class="detail-value" style="font-size: 1.1rem; font-weight: 600; color: #0f172a;">10</div>
+                <div class="detail-item" style="padding: 12px; background: var(--bg-color); border-radius: 8px; border: 1px solid var(--border-color);">
+                    <div class="detail-label" style="font-size: 0.8rem; color: var(--text-muted);">Total Questions</div>
+                    <div class="detail-value" style="font-size: 1.1rem; font-weight: 600; color: var(--text-main);">15</div>
                 </div>
-                <div class="detail-item" style="padding: 12px; background: #f8fafc; border-radius: 8px; border: 1px solid #e2e8f0;">
-                    <div class="detail-label" style="font-size: 0.8rem; color: #64748b;">Duration</div>
-                    <div class="detail-value" style="font-size: 1.1rem; font-weight: 600; color: #0f172a;">60 mins</div>
+                <div class="detail-item" style="padding: 12px; background: var(--bg-color); border-radius: 8px; border: 1px solid var(--border-color);">
+                    <div class="detail-label" style="font-size: 0.8rem; color: var(--text-muted);">Duration</div>
+                    <div class="detail-value" style="font-size: 1.1rem; font-weight: 600; color: var(--text-main);">30 mins</div>
                 </div>
             </div>
-            
+
             <div class="welcome-actions">
                 <button class="btn btn-primary" id="startBtn" onclick="document.getElementById('welcomeScreen').style.display='none'; document.getElementById('examContainer').style.display='flex';" style="font-size: 1.1rem; padding: 12px 32px; width: 100%;">
                     <i class="fas fa-play" style="margin-right: 8px;"></i> Start Test
@@ -47,12 +47,12 @@
             </div>
         </div>
     </div>
-    
+
     <!-- Main Exam Interface -->
     <div class="exam-container" id="examContainer" style="display: none; height: 100vh; flex-direction: column;">
         <!-- Top Header -->
         <div class="exam-header">
-            <div class="exam-title">Aether Mocks</div>
+            <div class="exam-title">Mocks Wallah</div>
             <div class="header-actions" style="display: flex; align-items: center; gap: 12px;">
                 <button class="btn-icon" id="themeToggleBtn" title="Switch to Dark Mode"><i class="fas fa-moon"></i></button>
                 <button class="btn-icon" id="fullscreenToggleBtn" title="Toggle Fullscreen"><i class="fas fa-expand"></i></button>
@@ -62,14 +62,14 @@
                 </div>
             </div>
         </div>
-        
+
         <!-- Main Content -->
         <div class="mock-container">
             <!-- Question Area -->
             <div class="question-view">
                 <!-- Dynamically populated question container -->
                 <div id="questionContainer" style="flex: 1; display: flex; flex-direction: column; gap: 24px;"></div>
-                
+
                 <!-- Controls -->
                 <div class="nav-controls">
                     <button class="btn btn-secondary btn-prev"><i class="fas fa-chevron-left" style="margin-right: 8px;"></i> Previous</button>
@@ -79,40 +79,221 @@
                     <button class="btn btn-primary btn-next">Next <i class="fas fa-chevron-right" style="margin-left: 8px;"></i></button>
                 </div>
             </div>
-            
+
             <!-- Desktop Navigator Sidebar -->
             <div class="sidebar">
                 <div class="sidebar-section-title">Summary Status</div>
                 <div class="stats-grid">
                     <div class="stat-item">
-                        <div class="stat-count" id="stat-answered" style="color: #10b981;">0</div>
+                        <div class="stat-count" id="stat-answered" style="color: var(--success);">0</div>
                         <div class="stat-name">Answered</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-count" id="stat-flagged" style="color: #f59e0b;">0</div>
+                        <div class="stat-count" id="stat-flagged" style="color: var(--warning);">0</div>
                         <div class="stat-name">Flagged</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-count" id="stat-not-answered" style="color: #64748b;">0</div>
+                        <div class="stat-count" id="stat-not-answered" style="color: var(--text-muted);">0</div>
                         <div class="stat-name">Unanswered</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-count" id="stat-not-visited" style="color: #94a3b8;">0</div>
+                        <div class="stat-count" id="stat-not-visited" style="color: var(--text-muted);">0</div>
                         <div class="stat-name">Not Visited</div>
                     </div>
                 </div>
-                
+
                 <div class="sidebar-section-title" style="margin-top: 16px;">Question Navigator</div>
                 <div class="questions-grid"></div>
             </div>
         </div>
     </div>
-    
+
     <!-- Inject Question Data -->
     <script>
-        const questions = [];
+        const questions = [
+  {
+    "question": "<p>1. <span style=\"font-family: Cambria Math;\">Which of the following festivals is mainly associated with Manipur?</span></p>\n",
+    "options": [
+      "Yaoshang",
+      "Hareli",
+      "Baisakhi",
+      "Wangala"
+    ],
+    "correct_option_id": 0,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">1.(</span><span style=\"font-family: Cambria Math;\">a) <strong>Youshang</strong></span><span style=\"font-family: Cambria Math;\"><strong> </strong>- A five-day event celebrated on the full moon day of the month of Lamda (February-March). It is indigenous tradition of the Meitei people. </span><span style=\"font-family: Cambria Math;\"><strong>Manipur Festivals</strong></span><span style=\"font-family: Cambria Math;\">: Lai Haraoba, Kang Fest</span><span style=\"font-family: Cambria Math;\">ival, Heirku Hindongba, Chavang Kut, Sangai, Ningol Chakouba, Chumpha, Lui Ngai Ni.</span></p>\n",
+    "question_index": 0
+  },
+  {
+    "question": "<p>2. <span style=\"font-family: Cambria Math;\">Pandavani Folk singer_______ is a Padma Bhushan Awardee of 2003.</span></p>\n",
+    "options": [
+      "Sulakshana Pandit",
+      "Teejan Bai",
+      "Mamta Chandrekar",
+      "Ila Arun"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">2.(</span><span style=\"font-family: Cambria Math;\">b) <strong>Teejan Bai</strong> </span><span style=\"font-family: Cambria Math;\">(Chhattisgarh)</span><span style=\"font-family: Cambria Math;\">. </span><span style=\"font-family: Cambria Math;\">She has been awarded Padma Vibhushan (2019)</span><span style=\"font-family: Cambria Math;\">, Padma</span><span style=\"font-family: Cambria Math;\"> Shri (1988), Sangeet Natak Academy award (1995). </span><span style=\"font-family: Cambria Math;\"><strong>Pandavani</strong>: </span><span style=\"font-family: Cambria Math;\">Folk singing style that involves the narration of tales from the Mahabharata. </span><strong><span style=\"font-family: Cambria Math;\">Proponents associated with Pandavani</span></strong><span style=\"font-family: Cambria Math;\"><strong>:</strong> Punaram Nishad, Chetan Dewan</span><span style=\"font-family: Cambria Math;\">gan, and Jhaduram Dewangan, Ritu Verma, etc. </span></p>\r\n<p><span style=\"font-family: Cambria Math;\"> </span></p>\n",
+    "question_index": 1
+  },
+  {
+    "question": "<p>3. <span style=\"font-family: Cambria Math;\">With reference to Manipuri classical dance, which of the following statements is correct?</span></p>\r\n<p><span style=\"font-family: Cambria Math;\">a) Lai Haraoba is the earliest form of Manipuri dance.</span></p>\r\n<p><span style=\"font-family: Cambria Math;\">b) Ras, S</span><span style=\"font-family: Cambria Math;\">ankirtana and Thang-Ta are the most popular forms of this dance.</span></p>\r\n<p><span style=\"font-family: Cambria Math;\">c) Manipuri dance has its origin in the Jain traditional dance form. </span></p>\n",
+    "options": [
+      "a, b, c",
+      "Both a and c",
+      "Both a and b",
+      "Both b and c"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">3.(</span><span style=\"font-family: Cambria Math;\">c) <strong>Both a and b. Manipuri Dance:</strong></span><span style=\"font-family: Cambria Math;\"> Classical dance forms of India and noted for themes based on Vaishnavism and spectacular execution of &lsquo;Ras Lila&rsquo; (dance dramas based on love between Radha and Krishna). </span><span style=\"font-family: Cambria Math;\"><strong>Guru Bipin</strong> <strong>Singh</strong>: </span><span style=\"font-family: Cambria Math;\">Regarded as the \"Father of the Manipuri Dance&rdquo;. </span><span style=\"font-family: Cambria Math;\"><strong>Famous dancers</strong></span><span style=\"font-family: Cambria Math;\"><strong> </strong>- Nirmala Mehta, Charu Mathur, Darshana Jhaveri, Devyani Chalia. </span></p>\n",
+    "question_index": 2
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\">Consider the following statements in context to Dollu Kunitha dance. Select the correct statements.</span></p>\r\n<p><span style=\"font-family: Cambria Math;\">a) It is a popular dance of Karnataka.</span></p>\r\n<p><span style=\"font-family: Cambria Math;\">b) Drums are adorned with colourful clothes.</span></p>\r\n<p><span style=\"font-family: Cambria Math;\">c) Religious and battle fervor songs are sung.</span></p>\n",
+    "options": [
+      "Only a",
+      "a, b, c",
+      "Only a, b",
+      "Only b, c"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">4.(</span><span style=\"font-family: Cambria Math;\">b) </span><span style=\"font-family: Cambria Math;\">Dollu Kunith&acirc; is an integral part of various temple festivals, cultural events and celebrations. Karaga festival procession, Mysuru Dasara</span><span style=\"font-family: Cambria Math;\">, Jambu</span><span style=\"font-family: Cambria Math;\"> Savari, Bengaluru Habba, various temple car festivals often include Dollu Kunith&acirc; performances. </span><span style=\"font-family: Cambria Math;\"> </span><strong><span style=\"font-family: Cambria Math;\">Dances of Ka</span></strong><span style=\"font-family: Cambria Math;\"><strong>rnataka </strong>- </span><span style=\"font-family: Cambria Math;\">Bhoota or Kola, Balakat.</span><span style=\"font-family: Cambria Math;\"> </span><strong><span style=\"font-family: Cambria Math;\">Festival of Karnataka </span></strong><span style=\"font-family: Cambria Math;\">- Hampi, Kambala, Negilu, Hagga, Vairamudi, Huthri.</span></p>\n",
+    "question_index": 3
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\"> Who among the following was a popular music director in India?</span></p>\n",
+    "options": [
+      "Birju Maharaj",
+      "Bappi Lahiri",
+      "Kaifi Azmi",
+      "Anjaan"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">5.(</span><span style=\"font-family: Cambria Math;\">b) <strong>Bappi</strong> <strong>Lahiri</strong>. </span><span style=\"font-family: Cambria Math;\"><strong>2017 </strong>- </span><span style=\"font-family: Cambria Math;\">Banga Bhushan Civilian Honour by Government of West Bengal.</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\"><strong>Birju Maharaj</strong></span><span style=\"font-family: Cambria Math;\"><strong> </strong>(Lucknow &ldquo;Kalka-Bindadin&rdquo; Gharana, Kathak Dancer). </span><strong><span style=\"font-family: Cambria Math;\">Awards</span><span style=\"font-family: Cambria Math;\"> </span></strong><span style=\"font-family: Cambria Math;\">- Sangeet</span><span style=\"font-family: Cambria Math;\"> Natak Akademi Award (1964), Padma Vibhushan (1986), Kalidas Samma</span><span style=\"font-family: Cambria Math;\">n (1987). </span><span style=\"font-family: Cambria Math;\"><strong>Kaifi Azmi</strong></span><span style=\"font-family: Cambria Math;\"> (Urdu Poet, Lyricist, songwriter).</span><span style=\"font-family: Cambria Math;\"> <strong>Anjaan</strong></span><span style=\"font-family: Cambria Math;\"><strong> </strong>(Lalji Pandey) was </span><span style=\"font-family: Cambria Math;\">an</span><span style=\"font-family: Cambria Math;\"> lyricist known for his work in Hindi language films.</span></p>\n",
+    "question_index": 4
+  },
+  {
+    "question": "<p><span style=\\\"font-family: Cambria Math;\\\">Th</span><span style=\\\"font-family: Cambria Math;\\\">e appeal \\'How\\'s that?\\' is associated with_______.</span></p>\\n",
+    "options": [
+      "Badminton",
+      "Volleyball",
+      "Hockey",
+      "Cricket"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">6.(</span><span style=\"font-family: Cambria Math;\">d) <strong>Cricket. Other terms:</strong> </span><span style=\"font-family: Cambria Math;\">Maiden Over, Follow-on, Ashes, Catch, Bowled, Stump Out, Run Out, L.B.W., Googley, Yorker, Runner. </span><span style=\"font-family: Cambria Math;\"><strong>Trophies associated with Cricket</strong>:</span><span style=\"font-family: Cambria Math;\"> Moin Ud Dowla Gold Cup, C.K. Naidu Trophy, Deodhar, Duleep, Rani Jhansi, </span><span style=\"font-family: Cambria Math;\">Ranji</span><span style=\"font-family: Cambria Math;\">. </span><strong><span style=\"font-family: Cambria Math;\">Terminolog</span></strong><span style=\"font-family: Cambria Math;\"><strong>ies</strong>: <strong>Hockey </strong></span><span style=\"font-family: Cambria Math;\">- Bully Sudden death, Short corner, Hat trick, Goal, Penalty Corner, Penalty Stroke, pushing.</span><span style=\"font-family: Cambria Math;\"> </span><strong><span style=\"font-family: Cambria Math;\">Badminton</span><span style=\"font-family: Cambria Math;\"> </span></strong><span style=\"font-family: Cambria Math;\">-</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">ForeHand, Smash, Hit, Drop, Net, Double Fault, Shuttlecock, Service Court, Back Hand.</span><span style=\"font-family: Cambria Math;\"> </span><strong><span style=\"font-family: Cambria Math;\">Volleyball</span><span style=\"font-family: Cambria Math;\"> </span></strong><span style=\"font-family: Cambria Math;\">-</span><span style=\"font-family: Cambria Math;\"> Smash, Penetration, Deuce, Libero, Boos</span><span style=\"font-family: Cambria Math;\">ter, Spikers</span><span style=\"font-family: Cambria Math;\">.</span></p>\n",
+    "question_index": 5
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\">7</span><span style=\"font-family: Cambria Math;\">.</span><span style=\"font-family: Cambria Math;\"> Indian festival Dussehra is a famous celebration that takes place at which of the following?</span></p>\n",
+    "options": [
+      "Mysore Palace",
+      "Nizam Palace",
+      "Mayurbhanj Palace",
+      "Jaipur Palace"
+    ],
+    "correct_option_id": 0,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">7.(</span><span style=\"font-family: Cambria Math;\">a) <strong>Mysore Palace </strong></span><span style=\"font-family: Cambria Math;\">(Karnataka). Established - 1912, Started construction in 1897. It was the residence of Wodeyars rulers who ruled Mysore for seven centuries. Nizam Palace (Kolkata) - It was constructed in 1933. </span><span style=\"font-family: Cambria Math;\"><strong>Mayurbhanj Palace </strong></span><span style=\"font-family: Cambria Math;\">- The first phase of construction began in 1</span><span style=\"font-family: Cambria Math;\">804 by King Rajeshwari Sumitra Devi Bhanjdeo and was later fully developed by Maharaja Krishnachandra Bhanjdeo, Sriramchandra Bhanjdeo and Maharaja Pratap Chandra. </span><span style=\"font-family: Cambria Math;\"><strong>Jaipur Palace </strong>- </span><span style=\"font-family: Cambria Math;\">Construction started in 1729 and completed in 1732 during the reign of Jai S</span><span style=\"font-family: Cambria Math;\">ingh II.</span></p>\n",
+    "question_index": 6
+  },
+  {
+    "question": "<p>8. <span style=\"font-family: Cambria Math;\">In Cricket, if the umpire extends both hands horizontally it means_________.</span></p>\n",
+    "options": [
+      "dead ball",
+      "no ball",
+      "run out",
+      "wide ball"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p><span style=\\\"font-family: Cambria Math;\\\">8.(</span><span style=\\\"font-family: Cambria Math;\\\">d) <strong>Wide ball</strong>.</span><span style=\\\"font-family: Cambria Math;\\\"> Umpire Signal: If a batsman is out, the umpire signals him by raising his hand and index finger. If a batsman is </span><span style=\\\"font-family: Cambria Math;\\\">&ldquo;NOT OUT&rdquo; the umpire signals by shaking his hands or clearly saying \\\"not out\\\". When a batsman hits a ball beyond the boundary line, the umpire indicates a six by raising both hands above their head. </span><span style=\\\"font-family: Cambria Math;\\\">The umpire signal&rsquo;s leg bye by touching the raised knee.</span><span style=\\\"font-family: Cambria Math;\\\"> </span><span style=\\\"font-family: Cambria Math;\\\">A \\'no ball\\' is called if a bowler has overstepped the popping crease. This is signalled by an arm raised at shoulder height.</span></p>\\n",
+    "question_index": 7
+  },
+  {
+    "question": "<p>9.<span style=\\\"font-family: Cambria Math;\\\"> Which Indian state is renowned for the traditional canal irrigation method known as \\'Kulh\\'?</span></p>\\n",
+    "options": [
+      "Himachal Pradesh",
+      "Odisha",
+      "Andhra Pradesh",
+      "Uttar Pradesh"
+    ],
+    "correct_option_id": 0,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">9.(</span><span style=\"font-family: Cambria Math;\">a) <strong>Himachal Pradesh</strong>.</span><span style=\"font-family: Cambria Math;\"> Kuhls are shallow surface channels diverting water from naturally flowing streams or springs, to cultivated fields, and mainly used for flood irrigation. Water Harvesting Structures found in other </span><span style=\"font-family: Cambria Math;\">sta</span><span style=\"font-family: Cambria Math;\">tes :</span><span style=\"font-family: Cambria Math;\"> Kerala and Karnataka (Kattas, Surangams), Maharashtra (Bandharas and Tals), Tamil Nadu (Eris), Uttar Pradesh and Madhya Pradesh (Bundhis).</span></p>\n",
+    "question_index": 8
+  },
+  {
+    "question": "<p>10<span style=\"font-family: Cambria Math;\">.</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">Pola festival is associated with which of the following states.</span></p>\n",
+    "options": [
+      "Maharashtra",
+      "Mizoram",
+      "Nagaland",
+      "Karnataka"
+    ],
+    "correct_option_id": 0,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">10</span><span style=\"font-family: Cambria Math;\">.(a) <strong>Maharashtra</strong>.</span><span style=\"font-family: Cambria Math;\"> Pola is a festival of the state of Maharashtra and Chhattisgarh which is celebrated by the farmers by the worship of the bull. Important Festival and their state: Lohri, Baisakhi (Punjab). Gangaur, Teej, Bundi (Rajasthan). </span><span style=\"font-family: Cambria Math;\">Losar, Saga Dawa (Sikkim).</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">Ponga</span><span style=\"font-family: Cambria Math;\">l, Thaipusam, Natyanjali Festival (Tamil Nadu).</span><span style=\"font-family: Cambria Math;\"> Chhath Puja, Bihula (Bihar). Baisakhi (Haryana). Onam</span><span style=\"font-family: Cambria Math;\">,Vishu</span><span style=\"font-family: Cambria Math;\"> (Kerala). Ganesh Utsav, Gudi Padva (Maharashtra). Durga Puja (West Bengal).</span></p>\n",
+    "question_index": 9
+  },
+  {
+    "question": "<p>11<span style=\"font-family: Cambria Math;\">. </span><span style=\"font-family: Cambria Math;\">Padma Bhushan awardee of 2004 and classical dancer Alarmel Valli is known for performing which dance form?</span></p>\n",
+    "options": [
+      "Odissi",
+      "Bharatanatyam",
+      "Chhau",
+      "Kuchipudi"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">11</span><span style=\"font-family: Cambria Math;\">.(b) <strong>Bharatnatyam</strong></span><span style=\"font-family: Cambria Math;\"><strong> </strong>is a major form of Indian classical dance th</span><span style=\"font-family: Cambria Math;\">at originated in Tamil Nadu. Alarmel Valli was the second youngest dancer to be conferred the Padma Shri (1991), after Vyjayanthimala. Some of the famous classical dancers </span><span style=\"font-family: Cambria Math;\">are :</span><span style=\"font-family: Cambria Math;\"> <strong>Bharatanatyam</strong></span><span style=\"font-family: Cambria Math;\"> - Rukmini Devi Arundale, Padma Subrahmanyam, Vyjayanthimala.</span><span style=\"font-family: Cambria Math;\"> <strong>Kat</strong></span><strong><span style=\"font-family: Cambria Math;\">hak</span></strong><span style=\"font-family: Cambria Math;\"><strong> </strong>- Birju Maharaj, Nahid Siddiqui, Lacchu Maharaj, Gopi Krishna, Saswati Sen, Manjari Chaturvedi. </span><strong><span style=\"font-family: Cambria Math;\">Kathakali </span></strong><span style=\"font-family: Cambria Math;\">- Kalamandalam Krishnan Nair.</span><span style=\"font-family: Cambria Math;\"> </span><strong><span style=\"font-family: Cambria Math;\">Odissi</span></strong><span style=\"font-family: Cambria Math;\"><strong> </strong>- Kelucharan Mohapatra, Madhavi Mudgal, Sharmila Mukherjee.</span></p>\n",
+    "question_index": 10
+  },
+  {
+    "question": "<p>12<span style=\"font-family: Cambria Math;\">.</span><span style=\"font-family: Cambria Math;\"> According to Census of India 2011, which district in India has th</span><span style=\"font-family: Cambria Math;\">e lowest literacy rate?</span></p>\n",
+    "options": [
+      "Chowki",
+      "Alirajpur",
+      "Bemetara",
+      "Siwan"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">12</span><span style=\"font-family: Cambria Math;\">.(b) <strong>Alirajpur</strong>. </span><span style=\"font-family: Cambria Math;\">According to the Census 2011, Male Literacy of Alirajpur is 42.02% while female literacy stands at 31.10%. Serchhip (Mizoram) was the most literate district in India as per Census 2011. The national literacy rate in the country is 74.04%. The literacy rate</span><span style=\"font-family: Cambria Math;\"> among males is 82.14%. The literacy rate among females is 65.46%. Kerala retained the top with a 94% literacy rate. Bihar ranks last in the overall ranking with a 61.80% literacy rate.</span></p>\n",
+    "question_index": 11
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\">13</span><span style=\"font-family: Cambria Math;\">.</span><span style=\"font-family: Cambria Math;\"> The Birsa Munda International Hockey Stadium, the largest hockey stadium in the country, is situated in:</span></p>\n",
+    "options": [
+      "Bhubaneswar, Odisha  ",
+      "Jharsuguda, Odisha",
+      "Cuttack, Odisha  ",
+      "Rourkela, Odisha"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">13</span><span style=\"font-family: Cambria Math;\">.(d) <strong>Rourkela</strong>, <strong>Odisha</strong>. </span><span style=\"font-family: Cambria Math;\">Birsa Munda International Hockey Stadium was inaugurated on January 5, 2023. </span><span style=\"font-family: Cambria Math;\">Officially recognised by Guinness Book of World Records as the world&rsquo;s largest fully seated hockey stadium.</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">Seating capacity - 20,011 spectators.</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\"><strong>Other H</strong></span><span style=\"font-family: Cambria Math;\"><strong>ockey Stadiums</strong>: </span><span style=\"font-family: Cambria Math;\">Chandigarh Hockey Stadium (Chandigarh), Major Dhyan Chand Stadium (Delhi), Mohali International Hockey Stadium (Punjab). </span></p>\n",
+    "question_index": 12
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\">14</span><span style=\"font-family: Cambria Math;\">. </span><span style=\"font-family: Cambria Math;\">Laho is the dance form of which state?</span></p>\n",
+    "options": [
+      "Manipur",
+      "Sikkim",
+      "Meghalaya",
+      "Kerala"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">14</span><span style=\"font-family: Cambria Math;\">.(c) <strong>Meghalaya</strong>. <strong>Laho </strong></span><span style=\"font-family: Cambria Math;\"><strong>Dance </strong>:</span><span style=\"font-family: Cambria Math;\"> Performed during the Behdienkhlam festival by the Jaintia tribe. Other dances of </span><span style=\"font-family: Cambria Math;\">Meghalaya :</span><span style=\"font-family: Cambria Math;\"> N&#1086;ngkrem, Shad Suk Mynsiem, Wangala and D&#1086;rsegata. </span><span style=\"font-family: Cambria Math;\"><strong>Dances of other </strong></span><span style=\"font-family: Cambria Math;\">states </span><span style=\"font-family: Cambria Math;\">:</span><span style=\"font-family: Cambria Math;\"> Manipur - Pung Cholom, Lai Haraoba, Thang Ta, Nupa pala. </span><span style=\"font-family: Cambria Math;\">S</span><span style=\"font-family: Cambria Math;\">ikkim - Yak cham, Mask dance, Lu Khangthamo and Singhi chham.</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">Kerala - Kathakali, Mohiniyattam, Thirvathirakali, Kolkali, Koodiyattam and Theyyam.</span></p>\n",
+    "question_index": 13
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\">15</span><span style=\"font-family: Cambria Math;\">. </span><span style=\"font-family: Cambria Math;\">The musical instrument Sarod is associated with:</span></p>\n",
+    "options": [
+      "Zakir Hussain",
+      "Allahrakha",
+      "Amjad Ali Khan",
+      "Khayyam"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">15</span><span style=\"font-family: Cambria Math;\">.(c) <strong>Amjad Ali Khan</strong>. </span><span style=\"font-family: Cambria Math;\">Awards :</span><span style=\"font-family: Cambria Math;\"> Sangeet Natak Academy Award (1989), Padma Shri (1975), Padma Bhushan (1991) and Padma Vibhushan (2001). Other Sarod </span><span style=\"font-family: Cambria Math;\">players :</span><span style=\"font-family: Cambria Math;\"> Ali Akbar khan, Allauddin khan, Bahadur khan, Abhishek Lahiri and Rajeev Taranath. Z</span><span style=\"font-family: Cambria Math;\">akir Hussain (Tabla), Ustad Alla Rakha Khan (Tabla).</span></p>\n",
+    "question_index": 14
+  }
+];
     </script>
-    
+
     <!-- Central JS Controller -->
     <script src="../js/mock-core.js"></script>
 </body>

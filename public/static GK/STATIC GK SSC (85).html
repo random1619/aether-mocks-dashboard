@@ -3,43 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aether Mocks</title>
+    <title>Mocks Wallah</title>
     <!-- Fonts & Icons -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    
+
     <!-- Central Stylesheet -->
     <link rel="stylesheet" href="../css/mock-main.css">
-    
+
     <!-- Math Formula Rendering (KaTeX/MathJax) -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    
+
     <!-- Timer Config -->
-    <meta name="exam-duration" content="60">
+    <meta name="exam-duration" content="30">
 </head>
 <body>
     <!-- Welcome Screen -->
     <div class="welcome-screen" id="welcomeScreen">
         <div class="welcome-container">
             <div class="welcome-header" style="margin-bottom: 24px;">
-                <h1 style="font-size: 2rem; font-weight: 700; color: #0f172a; margin-bottom: 8px;"><i class="fas fa-graduation-cap" style="color: #3b82f6;"></i> Aether Mocks</h1>
-                <p style="color: #64748b;">Computer Based Test Portal</p>
+                <h1 style="font-size: 2rem; font-weight: 700; color: var(--text-main); margin-bottom: 8px;"><i class="fas fa-graduation-cap" style="color: var(--primary);"></i> Mocks Wallah</h1>
+                <p style="color: var(--text-muted);">Computer Based Test Portal</p>
             </div>
-            
+
             <div class="test-details" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-bottom: 32px; text-align: left;">
-                <div class="detail-item" style="padding: 12px; background: #f8fafc; border-radius: 8px; border: 1px solid #e2e8f0;">
-                    <div class="detail-label" style="font-size: 0.8rem; color: #64748b;">Total Questions</div>
-                    <div class="detail-value" style="font-size: 1.1rem; font-weight: 600; color: #0f172a;">10</div>
+                <div class="detail-item" style="padding: 12px; background: var(--bg-color); border-radius: 8px; border: 1px solid var(--border-color);">
+                    <div class="detail-label" style="font-size: 0.8rem; color: var(--text-muted);">Total Questions</div>
+                    <div class="detail-value" style="font-size: 1.1rem; font-weight: 600; color: var(--text-main);">15</div>
                 </div>
-                <div class="detail-item" style="padding: 12px; background: #f8fafc; border-radius: 8px; border: 1px solid #e2e8f0;">
-                    <div class="detail-label" style="font-size: 0.8rem; color: #64748b;">Duration</div>
-                    <div class="detail-value" style="font-size: 1.1rem; font-weight: 600; color: #0f172a;">60 mins</div>
+                <div class="detail-item" style="padding: 12px; background: var(--bg-color); border-radius: 8px; border: 1px solid var(--border-color);">
+                    <div class="detail-label" style="font-size: 0.8rem; color: var(--text-muted);">Duration</div>
+                    <div class="detail-value" style="font-size: 1.1rem; font-weight: 600; color: var(--text-main);">30 mins</div>
                 </div>
             </div>
-            
+
             <div class="welcome-actions">
                 <button class="btn btn-primary" id="startBtn" onclick="document.getElementById('welcomeScreen').style.display='none'; document.getElementById('examContainer').style.display='flex';" style="font-size: 1.1rem; padding: 12px 32px; width: 100%;">
                     <i class="fas fa-play" style="margin-right: 8px;"></i> Start Test
@@ -47,12 +47,12 @@
             </div>
         </div>
     </div>
-    
+
     <!-- Main Exam Interface -->
     <div class="exam-container" id="examContainer" style="display: none; height: 100vh; flex-direction: column;">
         <!-- Top Header -->
         <div class="exam-header">
-            <div class="exam-title">Aether Mocks</div>
+            <div class="exam-title">Mocks Wallah</div>
             <div class="header-actions" style="display: flex; align-items: center; gap: 12px;">
                 <button class="btn-icon" id="themeToggleBtn" title="Switch to Dark Mode"><i class="fas fa-moon"></i></button>
                 <button class="btn-icon" id="fullscreenToggleBtn" title="Toggle Fullscreen"><i class="fas fa-expand"></i></button>
@@ -62,14 +62,14 @@
                 </div>
             </div>
         </div>
-        
+
         <!-- Main Content -->
         <div class="mock-container">
             <!-- Question Area -->
             <div class="question-view">
                 <!-- Dynamically populated question container -->
                 <div id="questionContainer" style="flex: 1; display: flex; flex-direction: column; gap: 24px;"></div>
-                
+
                 <!-- Controls -->
                 <div class="nav-controls">
                     <button class="btn btn-secondary btn-prev"><i class="fas fa-chevron-left" style="margin-right: 8px;"></i> Previous</button>
@@ -79,40 +79,221 @@
                     <button class="btn btn-primary btn-next">Next <i class="fas fa-chevron-right" style="margin-left: 8px;"></i></button>
                 </div>
             </div>
-            
+
             <!-- Desktop Navigator Sidebar -->
             <div class="sidebar">
                 <div class="sidebar-section-title">Summary Status</div>
                 <div class="stats-grid">
                     <div class="stat-item">
-                        <div class="stat-count" id="stat-answered" style="color: #10b981;">0</div>
+                        <div class="stat-count" id="stat-answered" style="color: var(--success);">0</div>
                         <div class="stat-name">Answered</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-count" id="stat-flagged" style="color: #f59e0b;">0</div>
+                        <div class="stat-count" id="stat-flagged" style="color: var(--warning);">0</div>
                         <div class="stat-name">Flagged</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-count" id="stat-not-answered" style="color: #64748b;">0</div>
+                        <div class="stat-count" id="stat-not-answered" style="color: var(--text-muted);">0</div>
                         <div class="stat-name">Unanswered</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-count" id="stat-not-visited" style="color: #94a3b8;">0</div>
+                        <div class="stat-count" id="stat-not-visited" style="color: var(--text-muted);">0</div>
                         <div class="stat-name">Not Visited</div>
                     </div>
                 </div>
-                
+
                 <div class="sidebar-section-title" style="margin-top: 16px;">Question Navigator</div>
                 <div class="questions-grid"></div>
             </div>
         </div>
     </div>
-    
+
     <!-- Inject Question Data -->
     <script>
-        const questions = [];
+        const questions = [
+  {
+    "question": "<p>1. Which Indian musician is the first singer to get the highest civilian honour, the Bharat Ratna ?</p>",
+    "options": [
+      "Zakir Hussain",
+      "A.R. Rahman",
+      "M.S. Subbulakshmi",
+      "R.D. Burman"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p>1.(c) <strong>M.S. Subbulakshmi.</strong> Her awards: Bharat Ratna (1998), Padma Vibhushan (1975), Padma Bhushan (1954), Sangeet Natak Akademi Award for Carnatic Music - Vocal (1956). Bharat Ratna Award was instituted in 1954.</p>",
+    "question_index": 0
+  },
+  {
+    "question": "<p>2. Which Indian dancer won the Sangeet Natak Akademi Award for Odissi Dance in 2018 ?</p>",
+    "options": [
+      "Dr. Aruna Mohanty",
+      "Akham Lakshmi Devi",
+      "Surupa Sen",
+      "Elam Endira Devi"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p>2.(c) <strong>Surupa Sen. </strong>Sangeet Natak Akademi Award: Aruna Mohanty (2010, Odissi Dancer), Akham Lakshmi Devi (2018, Manipuri Dancer). Elam Endira Devi {Padma Shri (2014), Manipuri Dancer}. Sangeet Natak Akademi Award was established in 1952.</p>",
+    "question_index": 1
+  },
+  {
+    "question": "<p>3. Pandit Birju Maharaj was an Indian dancer, composer, singer, and exponent of the _____ \"Kalka-Bindadin\" Gharana of Kathak dance in India.</p>",
+    "options": [
+      "Lucknow",
+      "Hyderabad",
+      "Agra",
+      "Gwalior"
+    ],
+    "correct_option_id": 0,
+    "solution": "<p>3.(a) <strong>Lucknow. </strong>Pandit Birju Maharaj (Awards): Padma Vibhushan (1986), Sangeet Natak Akademi Award (1964), Kalidas Samman (1987). Famous Kathak personalities: Janaki Prasad (Benaras Gharana), Ishwari Prasad (Lucknow Gharana), Shambhu Maharaj (Lucknow Gharana), Raja Chakradhar Singh (Raigarh Gharana).</p>",
+    "question_index": 2
+  },
+  {
+    "question": "The IAAF World Championships in Athletics became a fully professional competition from ______.",
+    "options": [
+      "1997",
+      "1995",
+      "1993",
+      "1991"
+    ],
+    "correct_option_id": 0,
+    "solution": "<p>4.(a) <strong>1997.</strong> World Athletics was formerly known as the International Amateur Athletic Federation and International Association of Athletics Federations (IAAF). It is the international governing body for the sport of athletics, covering track and field, cross country running, road running, race walking, mountain running, and ultra running. Formation - 1912. Headquarters - Monaco. President (as of July 2024) - Sebastian Coe.</p>",
+    "question_index": 3
+  },
+  {
+    "question": "<p>5. Barash is similar to the hindu festival Diwali, which is celebrated by which of the following tribes ?</p>",
+    "options": [
+      "Varli and Kokna",
+      "Santhal",
+      "Munda",
+      "Gond and Bhil"
+    ],
+    "correct_option_id": 0,
+    "solution": "<p>5.(a) <strong>Varli and Kokna</strong> (Western India). India Tribal Festivals: Madai Festival (Gond tribe), Nagaji Festival (Bhil tribe), Bhagoriya festival (Bhil and Bhilala tribes), Karma festival (Oraon, Munda tribe).</p>",
+    "question_index": 4
+  },
+  {
+    "question": "<p>6. The Rangaswami Cup is associated with sports _______.</p>",
+    "options": [
+      "Football",
+      "Hockey",
+      "Tennis",
+      "Badminton"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p>6.(b)<strong> Hockey. </strong>The Rangaswami Cup was first held in 1928 as an Inter-Provincial Tournament to select players for the national team for the Olympics. Other Hockey Trophies and Cups - Agha Khan Cup, Dhyan Chand Trophy, Azlan Shah Cup, Indira Gandhi Gold Cup.</p>",
+    "question_index": 5
+  },
+  {
+    "question": "Which of the following statements is correct regarding badminton?<br />I. At the beginning of the game of badminton and when the score is even, the server serves from the left service court.<br />II. Server and receiver always stand in opposite service courts but on the same side.",
+    "options": [
+      "Only I",
+      "Both I and II",
+      "Only II",
+      "Neither I nor II"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p>7.(d) <strong>Neither I nor II.</strong> In badminton singles, the server always serves from the right service court when his/her score is even and in case of odd, he/she serves from the left service court. This rule ensures that both players get an equal chance to serve from both sides of the court. Badminton Tournaments: Sudirman Cup, Thomas Cup, Uber Cup, All England Open Badminton Championships, BWF World Championships.</p>",
+    "question_index": 6
+  },
+  {
+    "question": "<p>8. The Nehru Trophy competition near Alappuzha, held on the second Saturday of August every year, is the most competitive and popular of the _____category.</p>",
+    "options": [
+      "badminton",
+      "basketball",
+      "boat races",
+      "horse races"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p>8.(c) <strong>boat races. </strong>The Nehru Trophy Boat Race takes place at Punnamada Lake, near Alappuzha. Other boat races in Kerala: Champakkulam Boat Race, Payippad Boat Race, Aranmula Boat Race, Kottapuram Boat Race, etc.</p>",
+    "question_index": 7
+  },
+  {
+    "question": "<p>9. The Sangeet Natak Akademi is India\\'s national academy for music, dance and drama. It was created by a resolution of the (then) ______, Government of India, in 1952 with Dr P.V. Rajamannar as its first Chairman.</p>",
+    "options": [
+      "Ministry of Transportation",
+      "Ministry of Art",
+      "Ministry of Education",
+      "Ministry of dances"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p>9.(c) <strong>Ministry of Education.</strong> The Sangeet Natak Akademi was created by a resolution of the Ministry of Education on 31 May 1952 and was officially notified in the Gazette of India in June 1952. The Akademi was inaugurated by the first President of India, Dr. Rajendra Prasad, on 28 January 1953. During its inauguration, Maulana Abul Kalam Azad was serving as the Union Minister for Education. At present, it comes under the Ministry of Culture.</p>",
+    "question_index": 8
+  },
+  {
+    "question": "In which of the following states of India is the festival Bonalu celebrated ?",
+    "options": [
+      "West Bengal",
+      "Tamil Nadu",
+      "Assam",
+      "Telangana"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p>10.(d)<strong> Telangana. </strong>Bonalu is a Hindu festival dedicated to the worship of Goddess Mahakali. It is celebrated annually in Hyderabad, Secunderabad, and other parts of Telangana. Other festivals of Telangana : Peerla Panduga, Sammakka Saarakka Jaathara, and Bathukamma.</p>",
+    "question_index": 9
+  },
+  {
+    "question": "Name the Indo-Persian Dance form from Uttar Pradesh.",
+    "options": [
+      "Kathak",
+      "Garba",
+      "Chhau",
+      "Kathakali"
+    ],
+    "correct_option_id": 0,
+    "solution": "<p>11.(a) <strong>Kathak. </strong>Some important dances and their related states: Garba (Gujarat), Chhau (Jharkhand, West Bengal and Odisha, Kathakali (Kerala), Bharatnatyam (Tamil Nadu), Kuchipudi (Andhra Pradesh), Mohiniyattam (Kerala), Sattriya (Assam).</p>",
+    "question_index": 10
+  },
+  {
+    "question": "Pannalal Ghosh is famous for which musical instrument ?",
+    "options": [
+      "Shehnai",
+      "Tabla",
+      "Ghatam",
+      "Flute"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p>12.(d) <strong>Flute. </strong>Other Flute players in India: Hariprasad Chaurasia, Ronu Majumdar, Rajendra Prasanna, Pravin Godkhindi. Shehnai players: Bismillah Khan, Ali Ahmed Hussain Khan. Tabla players: Zakir Hussain, Kishan Maharaj, Alla Rakha. Ghatam player: Thetakudi Harihara Vinayakram.</p>",
+    "question_index": 11
+  },
+  {
+    "question": "<p>13. Who has been appointed as the second Chief of Defence Staff (CDS) in India ?</p>",
+    "options": [
+      "Admiral R Hari Kumar",
+      "General Manoj Pande",
+      "General Manoj Mukund Naravane",
+      "Lt. General Anil Chauhan"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p>13.(d)<strong> Lt. General Anil Chauhan. </strong>The post of Chief of Defence Staff (CDS) was created in 2019 on the recommendations of a defense expert committee headed by Lt. General D.B. Shekatkar. General Bipin Rawat was the first CDS of India.</p>",
+    "question_index": 12
+  },
+  {
+    "question": "<p>14. Which of the following terms is NOT related with cricket ?<br>I. Eagle<br>II. Basket</p>",
+    "options": [
+      "Neither I nor II",
+      "Only I",
+      "Only II",
+      "Both I and II"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p>14.(d) <strong>Both I and II. </strong>The term Eagle is related to Golf sports. The term \"basket\" is related to Basketball. Terminologies related to Cricket: Wicket, Bouncer, Batsman, Bowler, Century, All Out, All-rounder, Bye, Catch, etc.</p>",
+    "question_index": 13
+  },
+  {
+    "question": "<p>15. Which sport is played by the Indian sportsperson Leander Paes ?</p>",
+    "options": [
+      "Badminton",
+      "Table Tennis",
+      "Cricket",
+      "Lawn Tennis"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p>15.(d) <strong>Lawn Tennis. </strong>Leander Paes was the first Indian who had won a Singles Bronze medal at the Atlanta Olympic Games in 1996. Awards: Rajiv Gandhi Khel Ratna award (1996&ndash;97), Arjuna Award (1990), Padma Shri award (2001). Other Indian Tennis players: Sania Mirza, Rohan Bopanna, Mahesh Bhupathi, and Ramanathan Krishnan (First Asian player to win the Wimbledon boys singles title in 1954).</p>",
+    "question_index": 14
+  }
+];
     </script>
-    
+
     <!-- Central JS Controller -->
     <script src="../js/mock-core.js"></script>
 </body>

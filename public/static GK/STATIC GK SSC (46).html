@@ -3,43 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aether Mocks</title>
+    <title>Mocks Wallah</title>
     <!-- Fonts & Icons -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    
+
     <!-- Central Stylesheet -->
     <link rel="stylesheet" href="../css/mock-main.css">
-    
+
     <!-- Math Formula Rendering (KaTeX/MathJax) -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    
+
     <!-- Timer Config -->
-    <meta name="exam-duration" content="60">
+    <meta name="exam-duration" content="30">
 </head>
 <body>
     <!-- Welcome Screen -->
     <div class="welcome-screen" id="welcomeScreen">
         <div class="welcome-container">
             <div class="welcome-header" style="margin-bottom: 24px;">
-                <h1 style="font-size: 2rem; font-weight: 700; color: #0f172a; margin-bottom: 8px;"><i class="fas fa-graduation-cap" style="color: #3b82f6;"></i> Aether Mocks</h1>
-                <p style="color: #64748b;">Computer Based Test Portal</p>
+                <h1 style="font-size: 2rem; font-weight: 700; color: var(--text-main); margin-bottom: 8px;"><i class="fas fa-graduation-cap" style="color: var(--primary);"></i> Mocks Wallah</h1>
+                <p style="color: var(--text-muted);">Computer Based Test Portal</p>
             </div>
-            
+
             <div class="test-details" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-bottom: 32px; text-align: left;">
-                <div class="detail-item" style="padding: 12px; background: #f8fafc; border-radius: 8px; border: 1px solid #e2e8f0;">
-                    <div class="detail-label" style="font-size: 0.8rem; color: #64748b;">Total Questions</div>
-                    <div class="detail-value" style="font-size: 1.1rem; font-weight: 600; color: #0f172a;">10</div>
+                <div class="detail-item" style="padding: 12px; background: var(--bg-color); border-radius: 8px; border: 1px solid var(--border-color);">
+                    <div class="detail-label" style="font-size: 0.8rem; color: var(--text-muted);">Total Questions</div>
+                    <div class="detail-value" style="font-size: 1.1rem; font-weight: 600; color: var(--text-main);">15</div>
                 </div>
-                <div class="detail-item" style="padding: 12px; background: #f8fafc; border-radius: 8px; border: 1px solid #e2e8f0;">
-                    <div class="detail-label" style="font-size: 0.8rem; color: #64748b;">Duration</div>
-                    <div class="detail-value" style="font-size: 1.1rem; font-weight: 600; color: #0f172a;">60 mins</div>
+                <div class="detail-item" style="padding: 12px; background: var(--bg-color); border-radius: 8px; border: 1px solid var(--border-color);">
+                    <div class="detail-label" style="font-size: 0.8rem; color: var(--text-muted);">Duration</div>
+                    <div class="detail-value" style="font-size: 1.1rem; font-weight: 600; color: var(--text-main);">30 mins</div>
                 </div>
             </div>
-            
+
             <div class="welcome-actions">
                 <button class="btn btn-primary" id="startBtn" onclick="document.getElementById('welcomeScreen').style.display='none'; document.getElementById('examContainer').style.display='flex';" style="font-size: 1.1rem; padding: 12px 32px; width: 100%;">
                     <i class="fas fa-play" style="margin-right: 8px;"></i> Start Test
@@ -47,12 +47,12 @@
             </div>
         </div>
     </div>
-    
+
     <!-- Main Exam Interface -->
     <div class="exam-container" id="examContainer" style="display: none; height: 100vh; flex-direction: column;">
         <!-- Top Header -->
         <div class="exam-header">
-            <div class="exam-title">Aether Mocks</div>
+            <div class="exam-title">Mocks Wallah</div>
             <div class="header-actions" style="display: flex; align-items: center; gap: 12px;">
                 <button class="btn-icon" id="themeToggleBtn" title="Switch to Dark Mode"><i class="fas fa-moon"></i></button>
                 <button class="btn-icon" id="fullscreenToggleBtn" title="Toggle Fullscreen"><i class="fas fa-expand"></i></button>
@@ -62,14 +62,14 @@
                 </div>
             </div>
         </div>
-        
+
         <!-- Main Content -->
         <div class="mock-container">
             <!-- Question Area -->
             <div class="question-view">
                 <!-- Dynamically populated question container -->
                 <div id="questionContainer" style="flex: 1; display: flex; flex-direction: column; gap: 24px;"></div>
-                
+
                 <!-- Controls -->
                 <div class="nav-controls">
                     <button class="btn btn-secondary btn-prev"><i class="fas fa-chevron-left" style="margin-right: 8px;"></i> Previous</button>
@@ -79,40 +79,221 @@
                     <button class="btn btn-primary btn-next">Next <i class="fas fa-chevron-right" style="margin-left: 8px;"></i></button>
                 </div>
             </div>
-            
+
             <!-- Desktop Navigator Sidebar -->
             <div class="sidebar">
                 <div class="sidebar-section-title">Summary Status</div>
                 <div class="stats-grid">
                     <div class="stat-item">
-                        <div class="stat-count" id="stat-answered" style="color: #10b981;">0</div>
+                        <div class="stat-count" id="stat-answered" style="color: var(--success);">0</div>
                         <div class="stat-name">Answered</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-count" id="stat-flagged" style="color: #f59e0b;">0</div>
+                        <div class="stat-count" id="stat-flagged" style="color: var(--warning);">0</div>
                         <div class="stat-name">Flagged</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-count" id="stat-not-answered" style="color: #64748b;">0</div>
+                        <div class="stat-count" id="stat-not-answered" style="color: var(--text-muted);">0</div>
                         <div class="stat-name">Unanswered</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-count" id="stat-not-visited" style="color: #94a3b8;">0</div>
+                        <div class="stat-count" id="stat-not-visited" style="color: var(--text-muted);">0</div>
                         <div class="stat-name">Not Visited</div>
                     </div>
                 </div>
-                
+
                 <div class="sidebar-section-title" style="margin-top: 16px;">Question Navigator</div>
                 <div class="questions-grid"></div>
             </div>
         </div>
     </div>
-    
+
     <!-- Inject Question Data -->
     <script>
-        const questions = [];
+        const questions = [
+  {
+    "question": "<p>1.<span style=\"font-family: Cambria Math;\"> ___________ describe the idea of evolution in his book, \"The origin of species\".</span></p>\n",
+    "options": [
+      "Edward Jenner",
+      "Charles Darwin",
+      "Robert Brown",
+      "Aristotle"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p>1. (b) <strong>Charles Darwin. Famous books by Charles Darwin</strong>:<span style=\"font-family: Cambria Math;\"> &ldquo;On The Origin of Species&rdquo;, &ldquo;The Autobiography of Charles Darwin</span><span style=\"font-family: Cambria Math;\">&rdquo; ,</span><span style=\"font-family: Cambria Math;\"> &ldquo;The Descent of Man, and Selection in Relation to Sex&rdquo;, &ldquo;The Expression of the Emotions in Man and Animals&rdquo;, , &ldquo;Insectivorous Plants&rdquo;, &ldquo;On Natural Selection&rdquo;, &ldquo;The Voyage of the Beagle&rdquo;.</span><span style=\"font-family: Cambria Math;\"> <strong>Edward Jenner</strong> </span><span style=\"font-family: Cambria Math;\">(discoverer of a vaccine for smallpox),</span><span style=\"font-family: Cambria Math;\"> <strong>Robert Brown</strong> </span><span style=\"font-family: Cambria Math;\">(discovery of the nucleus of the cell)</span><span style=\"font-family: Cambria Math;\">, <strong>Aristotle</strong> </span><span style=\"font-family: Cambria Math;\">(Father of Biology).</span></p>\n",
+    "question_index": 0
+  },
+  {
+    "question": "<p>2. <span style=\"font-family: Cambria Math;\">&lsquo;Ace against Odds&rsquo; is an autobiographical book by _______.</span></p>\n",
+    "options": [
+      "V.V Giri",
+      "Mary Kom",
+      "Sania Mirza",
+      "Sachin Tendulkar"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">2.(</span><span style=\"font-family: Cambria Math;\">c) <strong>Sania Mirza</strong></span><span style=\"font-family: Cambria Math;\"> (Tennis Player). </span><strong><span style=\"font-family: Cambria Math;\">Awards</span></strong><span style=\"font-family: Cambria Math;\"><strong> </strong>- Major Dhyan Chand Khel Ratna (2015); Padma Bhushan (2016).</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">Autobiographies of some famous personalities</span><span style=\"font-family: Cambria Math;\">:</span><span style=\"font-family: Cambria Math;\"> &ldquo;Unbreakable&rdquo;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">- MC </span><span style=\"font-family: Cambria Math;\">Marykom</span><span style=\"font-family: Cambria Math;\">.</span><span style=\"font-family: Cambria Math;\"> &ldquo;</span><span style=\"font-family: Cambria Math;\">Playing It My Way&rdquo; - Sachin Tendulkar. &ldquo;The Test of My Life&rdquo; - Yuvraj Singh. &ldquo;A Shot at History&rdquo; - Abhinav Bindra. &ldquo;Believe &ndash; What Life and Cricket Taught Me&rdquo; - Suresh Raina. &ldquo;281 and Beyond&rdquo; - VVS Laxman. &ldquo;Goal&rdquo; - Major Dhyan Chand. </span></p>\n",
+    "question_index": 1
+  },
+  {
+    "question": "<p>3. <span style=\"font-family: Cambria Math;\">Who among the following was the first Indian musician to receive the Grammy </span><span style=\"font-family: Cambria Math;\">LifeTime</span><span style=\"font-family: Cambria Math;\"> Achievement Award? </span></p>\n",
+    "options": [
+      "Nucleya ",
+      "Pandit Ravi Shankar",
+      "Hariprasad Chaurasia",
+      "Ustad Zakir Hussain"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p><span style=\\\"font-family: Cambria Math;\\\">3.(</span><span style=\\\"font-family: Cambria Math;\\\">b) <strong>Pandit Ravi Shankar</strong> </span><span style=\\\"font-family: Cambria Math;\\\">(Bharat Ratna in 1999)</span><span style=\\\"font-family: Cambria Math;\\\">. </span><span style=\\\"font-family: Cambria Math;\\\"> He</span><span style=\\\"font-family: Cambria Math;\\\"> </span><span style=\\\"font-family: Cambria Math;\\\">won Best Chamber Music Performance for \\'West Meets East\\' in 1967.</span><span style=\\\"font-family: Cambria Math;\\\"> </span><span style=\\\"font-family: Cambria Math;\\\">The </span><strong><span style=\\\"font-family: Cambria Math;\\\">Grammy Awards </span></strong><span style=\\\"font-family: Cambria Math;\\\">are presented annually by the Recording Academy of the </span><strong><span style=\\\"font-family: Cambria Math;\\\">United States</span></strong><span style=\\\"font-family: Cambria Math;\\\"><strong>.</strong> The first Grammy Awards ceremony - May 4, 1959.</span><span style=\\\"font-family: Cambria Math;\\\"> <strong>Other Indian Grammy winners</strong> -</span><span style=\\\"font-family: Cambria Math;\\\"> Zubin Mehta (1981, Best Classical Performance), T. H. </span><span style=\\\"font-family: Cambria Math;\\\">Vinayakram</span><span style=\\\"font-family: Cambria Math;\\\"> and Zakir Hussain (1991, Best World Music Album), Vishwa Mohan Bhatt (1993, Best World Music Album). </span></p>\\n",
+    "question_index": 2
+  },
+  {
+    "question": "<p>4. <span style=\"font-family: Cambria Math;\">The Medical Termination of Pregnancy (MTP) Amendment Act, 2021 increases the upper limit for termination from 20 to ______ weeks for certain categories of women. </span></p>\n",
+    "options": [
+      "22",
+      "28",
+      "26",
+      "24"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p><span style=\\\"font-family: Cambria Math;\\\">4.(</span><span style=\\\"font-family: Cambria Math;\\\">d) <strong>24. The Medical Termination of Pregnancy (Amendment) Bill, 2021</strong></span><span style=\\\"font-family: Cambria Math;\\\"> seeks to expand women\\'s access to safe and legal abortion services on medical, eugenic, humanitarian or social grounds. The amendments include substitution of certain sub-sections in the existing Medical Termination of Pregnancy Act, 1971 with a view to enhance the upper gestational limit and strengthen wider access for termination of pregnancy under certain conditions, inclusion of certain new sections under certain sections is included.</span></p>\\n",
+    "question_index": 3
+  },
+  {
+    "question": "<p>5. <span style=\"font-family: Cambria Math;\">Renowned Rajasthani folk dancer </span><span style=\"font-family: Cambria Math;\">Gulabo</span><span style=\"font-family: Cambria Math;\"> Sapera is recognized for ______ dance.</span></p>\n",
+    "options": [
+      "Bihu",
+      "Garba",
+      "Jhumar",
+      "Kalbeliya "
+    ],
+    "correct_option_id": 3,
+    "solution": "<p><span style=\\\"font-family: Cambria Math;\\\">5.(</span><span style=\\\"font-family: Cambria Math;\\\">d) </span><strong><span style=\\\"font-family: Cambria Math;\\\">Kalbelia</span><span style=\\\"font-family: Cambria Math;\\\"> dance</span></strong><span style=\\\"font-family: Cambria Math;\\\"> ( \\'Sapera Dance\\' or \\'Snake Charmer Dance\\'). It was added to UNESCO\\'s representative list of the Intangible Cultural Heritage of Humanity in 2010. </span><strong><span style=\\\"font-family: Cambria Math;\\\">Gulabo</span><span style=\\\"font-family: Cambria Math;\\\"> </span></strong><span style=\\\"font-family: Cambria Math;\\\">was awarded the Padma Shri in 2016 for his efforts to popularize Sapera dance tradition. </span><span style=\\\"font-family: Cambria Math;\\\"><strong>Other dances of Rajasthan</strong> - </span><span style=\\\"font-family: Cambria Math;\\\">Ghoomar</span><span style=\\\"font-family: Cambria Math;\\\">, </span><span style=\\\"font-family: Cambria Math;\\\">Bhavai</span><span style=\\\"font-family: Cambria Math;\\\">, Kachhi</span><span style=\\\"font-family: Cambria Math;\\\"> </span><span style=\\\"font-family: Cambria Math;\\\">Ghodi</span><span style=\\\"font-family: Cambria Math;\\\">, Gair, Chari, Terah Taal. </span><strong><span style=\\\"font-family: Cambria Math;\\\">Other dances and related artists</span></strong><span style=\\\"font-family: Cambria Math;\\\"><strong>:</strong> Bihu - </span><span style=\\\"font-family: Cambria Math;\\\">Prashana</span><span style=\\\"font-family: Cambria Math;\\\"> Gogoi. Garba - Kairavi (the queen of Garba). </span></p>\\n",
+    "question_index": 4
+  },
+  {
+    "question": "<p>6. <span style=\"font-family: Cambria Math;\">Which God is worshipped during the festival of Chhath Puja? </span></p>\n",
+    "options": [
+      "Surya",
+      "Agni",
+      "Indra",
+      "Vishnu"
+    ],
+    "correct_option_id": 0,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">6.(</span><span style=\"font-family: Cambria Math;\">a) </span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\"><strong>Surya</strong>.</span><span style=\"font-family: Cambria Math;\"> Chhath is derived from the Sanskrit word </span><span style=\"font-family: Cambria Math;\">Shashthi</span><span style=\"font-family: Cambria Math;\">, which means the sixth. It is celebrated in the month of Kartik to thank the Sun god for bestowing the bounties of life on Earth. </span><span style=\"font-family: Cambria Math;\"><strong>Other festivals of Bihar</strong> -</span><span style=\"font-family: Cambria Math;\"> Buddha Jayanti, </span><span style=\"font-family: Cambria Math;\">Sonepur</span><span style=\"font-family: Cambria Math;\"> Cattle Fair, </span><span style=\"font-family: Cambria Math;\">Rajgir</span><span style=\"font-family: Cambria Math;\"> Mahotsav, Sama-</span><span style=\"font-family: Cambria Math;\">Chakeva</span><span style=\"font-family: Cambria Math;\">, </span><span style=\"font-family: Cambria Math;\">Bihula</span><span style=\"font-family: Cambria Math;\">, </span><span style=\"font-family: Cambria Math;\">Madhushravani</span><span style=\"font-family: Cambria Math;\">, </span><span style=\"font-family: Cambria Math;\">Pitrapaksha</span><span style=\"font-family: Cambria Math;\"> Mela, </span><span style=\"font-family: Cambria Math;\">Malmas</span><span style=\"font-family: Cambria Math;\"> Mela. </span></p>\n",
+    "question_index": 5
+  },
+  {
+    "question": "<p>7. <span style=\"font-family: Cambria Math;\">Which famous Indian dancer is associated with the </span><span style=\"font-family: Cambria Math;\">Pandavani</span><span style=\"font-family: Cambria Math;\"> dance form?</span></p>\n",
+    "options": [
+      "Vyjayanthimala ",
+      "Pandit Briju Maharaj ",
+      "Vempati Chinna Satyam",
+      "Teejan Bai "
+    ],
+    "correct_option_id": 3,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">7.(</span><span style=\"font-family: Cambria Math;\">d) </span><strong><span style=\"font-family: Cambria Math;\">Teejan</span></strong><span style=\"font-family: Cambria Math;\"><strong> Bai</strong>. </span><span style=\"font-family: Cambria Math;\">She Awarded Padma Vibhushan in 2019, Padma Bhushan in 2003. </span><span style=\"font-family: Cambria Math;\">Pandavani</span><span style=\"font-family: Cambria Math;\"> is a style of singing in which narration of tales from the Mahabharata is performed. It is performed in Chhattisgarh. </span><span style=\"font-family: Cambria Math;\">Famous <strong>exponents of </strong></span><strong><span style=\"font-family: Cambria Math;\">pandavani</span></strong><span style=\"font-family: Cambria Math;\"><strong> </strong>- </span><span style=\"font-family: Cambria Math;\">Jhaduram</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">Devangan</span><span style=\"font-family: Cambria Math;\">, </span><span style=\"font-family: Cambria Math;\">Punaram</span><span style=\"font-family: Cambria Math;\"> Nishad, Ritu Verma, Chetan </span><span style=\"font-family: Cambria Math;\">Dewangan</span><span style=\"font-family: Cambria Math;\">, </span><span style=\"font-family: Cambria Math;\">Shantibai</span><span style=\"font-family: Cambria Math;\"> Chelak and Usha Barle.</span><span style=\"font-family: Cambria Math;\"> <strong>Other artists and art forms</strong></span><span style=\"font-family: Cambria Math;\">: Pandit Birju Maharaj (kathak), </span><span style=\"font-family: Cambria Math;\">Vyjayanthimala</span><span style=\"font-family: Cambria Math;\"> (Bharatanatyam), Vempati Chinna Satyam (Kuchipudi).</span></p>\n",
+    "question_index": 6
+  },
+  {
+    "question": "<p>8. <span style=\"font-family: Cambria Math;\">The famous </span><span style=\"font-family: Cambria Math;\">Dhamek</span><span style=\"font-family: Cambria Math;\"> Stupa is located in which of the following states?</span></p>\n",
+    "options": [
+      "Andhra Pradesh",
+      "Uttar Pradesh",
+      "Madhya Pradesh",
+      "Himachal Pradesh"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">8.(</span><span style=\"font-family: Cambria Math;\">b) <strong>Uttar Pradesh. </strong></span><strong><span style=\"font-family: Cambria Math;\">Dhamek</span><span style=\"font-family: Cambria Math;\"> Stupa</span></strong><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">- </span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">It</span><span style=\"font-family: Cambria Math;\"> is located at Sarnath, in Varanasi. It was built in 249 B.C. by Ashoka the Great. It was made to commemorate the event of Lord Buddha giving the first sermon to his first five disciples.</span><span style=\"font-family: Cambria Math;\"> <strong>Other stupas</strong>: </span><span style=\"font-family: Cambria Math;\">Swayambhunath</span><span style=\"font-family: Cambria Math;\"> Stupa - Kathmandu (Nepal), </span><span style=\"font-family: Cambria Math;\">Bharhut</span><span style=\"font-family: Cambria Math;\"> Stupa - Satna District (Madhya Pradesh), </span><span style=\"font-family: Cambria Math;\">Kesariya</span><span style=\"font-family: Cambria Math;\"> Stupa - </span><span style=\"font-family: Cambria Math;\">Champaran</span><span style=\"font-family: Cambria Math;\"> District (Bihar), Sanchi Stupa </span><span style=\"font-family: Cambria Math;\">- </span><span style=\"font-family: Cambria Math;\">Raisen</span><span style=\"font-family: Cambria Math;\"> District (Madhya Pradesh), </span><span style=\"font-family: Cambria Math;\">Chaukhandi</span><span style=\"font-family: Cambria Math;\"> Stupa - Varanasi (Uttar Pradesh).</span></p>\n",
+    "question_index": 7
+  },
+  {
+    "question": "<p>9. <span style=\"font-family: Cambria Math;\">Meri Policy Mere </span><span style=\"font-family: Cambria Math;\">Haath</span><span style=\"font-family: Cambria Math;\"> scheme was launched by ______ Ministry of India in 2022.</span></p>\n",
+    "options": [
+      "Human Resource Development",
+      "Social Justice &amp; Empowerment",
+      "Housing and Urban Affairs",
+      "Agriculture and Farmers Welfare"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p><span style=\\\"font-family: Cambria Math;\\\">9.(</span><span style=\\\"font-family: Cambria Math;\\\">d) <strong>Agriculture and Farmers Welfare</strong>. </span><span style=\\\"font-family: Cambria Math;\\\">Chhattisgarh Agriculture Minister Ravindra Choubey launched \\'Meri Policy Mere </span><span style=\\\"font-family: Cambria Math;\\\">Haath</span><span style=\\\"font-family: Cambria Math;\\\">\\' on September 1, </span><span style=\\\"font-family: Cambria Math;\\\">2022 in</span><span style=\\\"font-family: Cambria Math;\\\"> Raipur. </span><strong><span style=\\\"font-family: Cambria Math;\\\">Significance</span></strong><span style=\\\"font-family: Cambria Math;\\\">: The campaign empowers the farmers through crop insurance awareness and by bringing the insurance policy to their doorsteps. </span><strong><span style=\\\"font-family: Cambria Math;\\\">Other famous schemes</span></strong><span style=\\\"font-family: Cambria Math;\\\"> (Chhattisgarh): Rajiv Gandhi Kisan </span><span style=\\\"font-family: Cambria Math;\\\">Nyay</span><span style=\\\"font-family: Cambria Math;\\\"> Yojana, Godhan </span><span style=\\\"font-family: Cambria Math;\\\">Nyay</span><span style=\\\"font-family: Cambria Math;\\\"> Yojana, Chhattisgarh Saur Sujala Yojana, Chhattisgarh Half Bijli Bill Yojana, Chhattisgarh Saraswati Cycle Yojana.</span></p>\\n",
+    "question_index": 8
+  },
+  {
+    "question": "<p>10. <span style=\"font-family: Cambria Math;\">The </span><span style=\"font-family: Cambria Math;\">Rampurva</span><span style=\"font-family: Cambria Math;\"> bull that was part of a Mauryan pillar found in </span><span style=\"font-family: Cambria Math;\">Rampurwa</span><span style=\"font-family: Cambria Math;\">, Bihar is now placed at _______.</span></p>\n",
+    "options": [
+      "Pradhan Mantri Bhavan",
+      "Sansad",
+      "Rajpath",
+      "Rashtrapati Bhawan "
+    ],
+    "correct_option_id": 3,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">10.(</span><span style=\"font-family: Cambria Math;\">d) </span><strong><span style=\"font-family: Cambria Math;\">Rashtrapati</span></strong><span style=\"font-family: Cambria Math;\"><strong> Bhawan</strong>. </span><span style=\"font-family: Cambria Math;\">The Pillars of Ashoka are the most famous examples of Mauryan art. The </span><span style=\"font-family: Cambria Math;\">Rashtrapati</span><span style=\"font-family: Cambria Math;\"> Bhavan houses the imposing 3rd century BC Ashoka pillar of sandstone known as the</span><span style=\"font-family: Cambria Math;\"> </span><strong><span style=\"font-family: Cambria Math;\">Rampurva</span><span style=\"font-family: Cambria Math;\"> bull</span></strong><span style=\"font-family: Cambria Math;\">. It got its name from the place of its discovery, </span><span style=\"font-family: Cambria Math;\">Rampurwa</span><span style=\"font-family: Cambria Math;\"> in Bihar. The </span><span style=\"font-family: Cambria Math;\">Rampurva</span><span style=\"font-family: Cambria Math;\"> bull is installed on a plinth between the central pillars at the forecourt entrance of</span><span style=\"font-family: Cambria Math;\"> </span><strong><span style=\"font-family: Cambria Math;\">Rashtrapati</span></strong><span style=\"font-family: Cambria Math;\"><strong> Bhavan</strong>.</span></p>\n",
+    "question_index": 9
+  },
+  {
+    "question": "<p>11. <span style=\"font-family: Cambria Math;\">Which of these is the title of the first novel of Anand Neelakantan?</span></p>\n",
+    "options": [
+      "Asura: Tale of the Vanquished",
+      "Satya Ke Prayog",
+      "The Immortals of Meluha ",
+      "Kadambari"
+    ],
+    "correct_option_id": 0,
+    "solution": "<p><span style=\\\"font-family: Cambria Math;\\\">11.(</span><span style=\\\"font-family: Cambria Math;\\\">a) <strong>Asura: Tale of the Vanquished</strong>.</span><span style=\\\"font-family: Cambria Math;\\\"> Anand Neelakantan&rsquo;s Notable works</span><span style=\\\"font-family: Cambria Math;\\\"> - &lsquo;&rsquo;</span><span style=\\\"font-family: Cambria Math;\\\">Ajaya: Roll of the Dice&rsquo;&rsquo;, &lsquo;&rsquo;Ajaya: Rise of Kali&rsquo;&rsquo;, &lsquo;&rsquo;The Rise of Sivagami&rsquo;&rsquo;, &lsquo;&rsquo;Penn </span><span style=\\\"font-family: Cambria Math;\\\">Ramayanam</span><span style=\\\"font-family: Cambria Math;\\\">&rsquo;&rsquo;, &lsquo;&rsquo;Valmiki\\'s Women&rsquo;&rsquo;. </span><span style=\\\"font-family: Cambria Math;\\\"><strong>Mahatma Gandhi</strong> </span><span style=\\\"font-family: Cambria Math;\\\">- </span><span style=\\\"font-family: Cambria Math;\\\">&rsquo;</span><span style=\\\"font-family: Cambria Math;\\\">&rsquo;Satya </span><span style=\\\"font-family: Cambria Math;\\\">ke</span><span style=\\\"font-family: Cambria Math;\\\"> Prayog&rsquo;&rsquo;. </span><span style=\\\"font-family: Cambria Math;\\\"><strong>Amish Tripathi </strong>-</span><span style=\\\"font-family: Cambria Math;\\\"> &lsquo;&rsquo;The Immortals of </span><span style=\\\"font-family: Cambria Math;\\\">Meluha</span><span style=\\\"font-family: Cambria Math;\\\">&rsquo;</span><span style=\\\"font-family: Cambria Math;\\\">&rsquo;</span><span style=\\\"font-family: Cambria Math;\\\">. </span><strong><span style=\\\"font-family: Cambria Math;\\\">Banabhatta</span></strong><span style=\\\"font-family: Cambria Math;\\\"><strong> </strong>- </span><span style=\\\"font-family: Cambria Math;\\\">&ldquo;Kadambari&rdquo;. </span></p>\\n",
+    "question_index": 10
+  },
+  {
+    "question": "<p>12.<span style=\"font-family: Cambria Math;\"> Which among the following Buddhist Universities is located in Bihar, India?</span></p>\n",
+    "options": [
+      "Vallabhi University",
+      "Somapuri University ",
+      "Nalanda University",
+      "Nabadwip University"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">12.(</span><span style=\"font-family: Cambria Math;\">c) <strong>Nalanda University</strong> </span><span style=\"font-family: Cambria Math;\">(The world&rsquo;s first residential University)</span><span style=\"font-family: Cambria Math;\"> -</span><span style=\"font-family: Cambria Math;\"> Built by </span><strong><span style=\"font-family: Cambria Math;\">Kumaragupta</span></strong><span style=\"font-family: Cambria Math;\"><strong> </strong>(Gupta dynasty). </span><strong><span style=\"font-family: Cambria Math;\">Prominent Rulers</span></strong><span style=\"font-family: Cambria Math;\"> - Harshavardhana of </span><span style=\"font-family: Cambria Math;\">Kannauj</span><span style=\"font-family: Cambria Math;\">, Pala Rulers, and many scholars patronized Nalanda. </span><span style=\"font-family: Cambria Math;\"><strong>Muhammad Bakhtiyar Khilji</strong> </span><span style=\"font-family: Cambria Math;\">- Destroyed Nalanda University, with an intent to evade the roots of knowledge, Buddhism, and Ayurveda. He set fire to the library of Nalanda. It was featured in the UNESCO World Heritage List on January 9, 2009.</span></p>\n",
+    "question_index": 11
+  },
+  {
+    "question": "<p>13. <span style=\"font-family: Cambria Math;\">Raja Parba festival of Odisha is the living cultural heritage and agricultural way of life. It is held for three days in the month of ________.</span></p>\n",
+    "options": [
+      "July",
+      "June",
+      "September",
+      "August"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">13.(</span><span style=\"font-family: Cambria Math;\">b) <strong>June. Raja Parba</strong></span><span style=\"font-family: Cambria Math;\"> -</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">Dedicated to Mother Earth (Bhuma Devi) and womanhood at large. The festival marks the arrival of the</span><span style=\"font-family: Cambria Math;\"> <strong>monsoon season</strong> </span><span style=\"font-family: Cambria Math;\">or solar month of Mithuna. </span><span style=\"font-family: Cambria Math;\">Pahili</span><span style=\"font-family: Cambria Math;\"> Raja (the first day of the festival), Mithuna Sankranti (second day), Bhu </span><span style=\"font-family: Cambria Math;\">daha</span><span style=\"font-family: Cambria Math;\"> or Basi Raja (Third day).</span><span style=\"font-family: Cambria Math;\"> <strong>Other festivals of Odisha</strong> </span><span style=\"font-family: Cambria Math;\">- Kalinga Mahotsav, Konark Dance Festival, </span><span style=\"font-family: Cambria Math;\">Mahabisuva</span><span style=\"font-family: Cambria Math;\"> Sankranti, Magha </span><span style=\"font-family: Cambria Math;\">Saptmi</span><span style=\"font-family: Cambria Math;\">.</span></p>\n",
+    "question_index": 12
+  },
+  {
+    "question": "<p>14. <span style=\\\"font-family: Cambria Math;\\\">Who among the following is famous for playing the musical instrument \\'Sarod\\\"?</span></p>\\n",
+    "options": [
+      "Amjad Ali Khan",
+      "Bismillah Khan",
+      "Zakir Hussain",
+      "Ravi Shankar"
+    ],
+    "correct_option_id": 0,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">14.(</span><span style=\"font-family: Cambria Math;\">a) <strong>Amjad Ali Khan (Sarod Samrat)</strong></span><strong><span style=\"font-family: Cambria Math;\">. </span></strong><span style=\"font-family: Cambria Math;\"><strong>Awards</strong> </span><span style=\"font-family: Cambria Math;\">- </span><span style=\"font-family: Cambria Math;\"> Padma</span><span style=\"font-family: Cambria Math;\"> Vibhushan (2001), Padma Bhushan (1991), Sangeet Natak </span><span style=\"font-family: Cambria Math;\">Akademi</span><span style=\"font-family: Cambria Math;\"> Award (1989). Other Sarod Players - Satyaki Banerjee, </span><span style=\"font-family: Cambria Math;\">Jotin</span><span style=\"font-family: Cambria Math;\"> Bhattacharya, Ali Akbar Khan, Amaan Ali Khan, Abhisek Lahiri, Kalyan Mukherjee. Bismillah Khan - Shehnai, Ravi Shankar - Sitar Player, Zakir Hussain - </span><span style=\"font-family: Cambria Math;\">Tabla</span><span style=\"font-family: Cambria Math;\"> Player.</span></p>\n",
+    "question_index": 13
+  },
+  {
+    "question": "<p>15.<span style=\"font-family: Cambria Math;\"> Identify the famous Indian classical dancer. She is a Guru of both Bharatanatyam and Odissi dancing styles. She received the Sangeet Natak </span><span style=\"font-family: Cambria Math;\">Akademi</span><span style=\"font-family: Cambria Math;\"> Award in 1987.</span></p>\n",
+    "options": [
+      "Shovana Narayana ",
+      "Sonal Mansingh",
+      "Padma Subrahmanyam",
+      "Mrinalini Sarabhai"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">15.(</span><span style=\"font-family: Cambria Math;\">b) <strong>Sonal Mansingh: Awards</strong> - </span><span style=\"font-family: Cambria Math;\">Padma Bhushan (1992), Padma Vibhushan in 2003, Lifetime Achievement Award (2019). </span><strong><span style=\"font-family: Cambria Math;\">Shovana</span></strong><span style=\"font-family: Cambria Math;\"><strong> Narayan</strong> </span><span style=\"font-family: Cambria Math;\">(Kathak dancer): </span><strong><span style=\"font-family: Cambria Math;\">Awards</span></strong><span style=\"font-family: Cambria Math;\"><strong> </strong>- Padma Shri (1992), Sangeet Natak </span><span style=\"font-family: Cambria Math;\">Akademi</span><span style=\"font-family: Cambria Math;\"> Award (1999&ndash;2000). </span><span style=\"font-family: Cambria Math;\"><strong>Padma Subrahmanyam</strong> (</span><span style=\"font-family: Cambria Math;\">Bharata Natyam dancer): </span><strong><span style=\"font-family: Cambria Math;\">Awards</span></strong><span style=\"font-family: Cambria Math;\"><strong> </strong>- Sangeet Natak </span><span style=\"font-family: Cambria Math;\">Akademi</span><span style=\"font-family: Cambria Math;\"> Award (1983), Padma Bhushan (2003), Padma Shri (1981). </span><span style=\"font-family: Cambria Math;\"><strong>Mrinalini Sarabhai</strong> </span><span style=\"font-family: Cambria Math;\">(Bharatanatyam):</span><span style=\"font-family: Cambria Math;\"> <strong>Awards</strong></span><strong><span style=\"font-family: Cambria Math;\"> </span></strong><span style=\"font-family: Cambria Math;\">- Padma</span><span style=\"font-family: Cambria Math;\"> Bhushan</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">(1992), Padma Shri (1965).</span></p>\n",
+    "question_index": 14
+  }
+];
     </script>
-    
+
     <!-- Central JS Controller -->
     <script src="../js/mock-core.js"></script>
 </body>

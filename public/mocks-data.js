@@ -1,6 +1,181 @@
 // Generated Mock Data
 const MOCK_DATA = [
   {
+    "path": "360 Mocks/Advance Ancient History 360 Pro Level M (Hindi).html",
+    "name": "Advance Ancient History 360 Pro Level M (Hindi)",
+    "provider": "360 Mocks",
+    "category": "Advance Ancient History 360 Pro Level M (Hindi).html",
+    "subject": "General Studies"
+  },
+  {
+    "path": "360 Mocks/Advance Biology 360 Pro Level Mock I (Hindi).html",
+    "name": "Advance Biology 360 Pro Level Mock I (Hindi)",
+    "provider": "360 Mocks",
+    "category": "Advance Biology 360 Pro Level Mock I (Hindi).html",
+    "subject": "General"
+  },
+  {
+    "path": "360 Mocks/Advance Economics 360 Pro Level Mock (Hindi).html",
+    "name": "Advance Economics 360 Pro Level Mock (Hindi)",
+    "provider": "360 Mocks",
+    "category": "Advance Economics 360 Pro Level Mock (Hindi).html",
+    "subject": "General"
+  },
+  {
+    "path": "360 Mocks/Advance Indian Geography 360 Pro Level (Hindi).html",
+    "name": "Advance Indian Geography 360 Pro Level (Hindi)",
+    "provider": "360 Mocks",
+    "category": "Advance Indian Geography 360 Pro Level (Hindi).html",
+    "subject": "General Studies"
+  },
+  {
+    "path": "360 Mocks/Advance Medieval History 360 Pro Level (Hindi).html",
+    "name": "Advance Medieval History 360 Pro Level (Hindi)",
+    "provider": "360 Mocks",
+    "category": "Advance Medieval History 360 Pro Level (Hindi).html",
+    "subject": "General Studies"
+  },
+  {
+    "path": "360 Mocks/Advance Modern History 360 Pro Level M (Hindi).html",
+    "name": "Advance Modern History 360 Pro Level M (Hindi)",
+    "provider": "360 Mocks",
+    "category": "Advance Modern History 360 Pro Level M (Hindi).html",
+    "subject": "General Studies"
+  },
+  {
+    "path": "360 Mocks/Advance Physical Geography 360 Pro Leve (Hindi).html",
+    "name": "Advance Physical Geography 360 Pro Leve (Hindi)",
+    "provider": "360 Mocks",
+    "category": "Advance Physical Geography 360 Pro Leve (Hindi).html",
+    "subject": "General Studies"
+  },
+  {
+    "path": "360 Mocks/Advance Polity 360 Pro Level Mock 01 (Hindi).html",
+    "name": "Advance Polity 360 Pro Level Mock 01 (Hindi)",
+    "provider": "360 Mocks",
+    "category": "Advance Polity 360 Pro Level Mock 01 (Hindi).html",
+    "subject": "General Studies"
+  },
+  {
+    "path": "360 Mocks/Advance Polity 360 Pro Level Mock 02 (Hindi).html",
+    "name": "Advance Polity 360 Pro Level Mock 02 (Hindi)",
+    "provider": "360 Mocks",
+    "category": "Advance Polity 360 Pro Level Mock 02 (Hindi).html",
+    "subject": "General Studies"
+  },
+  {
+    "path": "360 Mocks/Advance Polity 360 Pro Level Mock 03 (Hindi).html",
+    "name": "Advance Polity 360 Pro Level Mock 03 (Hindi)",
+    "provider": "360 Mocks",
+    "category": "Advance Polity 360 Pro Level Mock 03 (Hindi).html",
+    "subject": "General Studies"
+  },
+  {
+    "path": "360 Mocks/Advance Polity 360 Pro Level Mock 04 (Hindi).html",
+    "name": "Advance Polity 360 Pro Level Mock 04 (Hindi)",
+    "provider": "360 Mocks",
+    "category": "Advance Polity 360 Pro Level Mock 04 (Hindi).html",
+    "subject": "General Studies"
+  },
+  {
+    "path": "360 Mocks/All Important Articles of India Constitu (Hindi).html",
+    "name": "All Important Articles of India Constitu (Hindi)",
+    "provider": "360 Mocks",
+    "category": "All Important Articles of India Constitu (Hindi).html",
+    "subject": "General"
+  },
+  {
+    "path": "360 Mocks/All Important Articles of Indian Constit (Hindi).html",
+    "name": "All Important Articles of Indian Constit (Hindi)",
+    "provider": "360 Mocks",
+    "category": "All Important Articles of Indian Constit (Hindi).html",
+    "subject": "General"
+  },
+  {
+    "path": "360 Mocks/Drainage System 360 Mock (Hindi).html",
+    "name": "Drainage System 360 Mock (Hindi)",
+    "provider": "360 Mocks",
+    "category": "Drainage System 360 Mock (Hindi).html",
+    "subject": "General"
+  },
+  {
+    "path": "360 Mocks/Five Year Plans 360 Mock (Hindi).html",
+    "name": "Five Year Plans 360 Mock (Hindi)",
+    "provider": "360 Mocks",
+    "category": "Five Year Plans 360 Mock (Hindi).html",
+    "subject": "General"
+  },
+  {
+    "path": "360 Mocks/Historical Background of Indian Constitu (Hindi).html",
+    "name": "Historical Background of Indian Constitu (Hindi)",
+    "provider": "360 Mocks",
+    "category": "Historical Background of Indian Constitu (Hindi).html",
+    "subject": "General"
+  },
+  {
+    "path": "360 Mocks/New Criminal Law 360 Mock (Hindi).html",
+    "name": "New Criminal Law 360 Mock (Hindi)",
+    "provider": "360 Mocks",
+    "category": "New Criminal Law 360 Mock (Hindi).html",
+    "subject": "General"
+  },
+  {
+    "path": "360 Mocks/Padma Awards Mock 2026 Mock (Hindi).html",
+    "name": "Padma Awards Mock 2026 Mock (Hindi)",
+    "provider": "360 Mocks",
+    "category": "Padma Awards Mock 2026 Mock (Hindi).html",
+    "subject": "General"
+  },
+  {
+    "path": "360 Mocks/Parliament of India 360 Mock (Hindi).html",
+    "name": "Parliament of India 360 Mock (Hindi)",
+    "provider": "360 Mocks",
+    "category": "Parliament of India 360 Mock (Hindi).html",
+    "subject": "General"
+  },
+  {
+    "path": "360 Mocks/Population Settlements (Hindi).html",
+    "name": "Population Settlements (Hindi)",
+    "provider": "360 Mocks",
+    "category": "Population Settlements (Hindi).html",
+    "subject": "General"
+  },
+  {
+    "path": "360 Mocks/The Delhi Sultanate (Hindi).html",
+    "name": "The Delhi Sultanate (Hindi)",
+    "provider": "360 Mocks",
+    "category": "The Delhi Sultanate (Hindi).html",
+    "subject": "General"
+  },
+  {
+    "path": "360 Mocks/The Indian Judicial System 360 Mock (Hindi).html",
+    "name": "The Indian Judicial System 360 Mock (Hindi)",
+    "provider": "360 Mocks",
+    "category": "The Indian Judicial System 360 Mock (Hindi).html",
+    "subject": "General"
+  },
+  {
+    "path": "360 Mocks/The Mughal Empire Mughal Administration (Hindi).html",
+    "name": "The Mughal Empire Mughal Administration (Hindi)",
+    "provider": "360 Mocks",
+    "category": "The Mughal Empire Mughal Administration (Hindi).html",
+    "subject": "Quant"
+  },
+  {
+    "path": "360 Mocks/Union Budget Mock 2026 (Hindi).html",
+    "name": "Union Budget Mock 2026 (Hindi)",
+    "provider": "360 Mocks",
+    "category": "Union Budget Mock 2026 (Hindi).html",
+    "subject": "General"
+  },
+  {
+    "path": "360 Mocks/World Geography 360 (Hindi).html",
+    "name": "World Geography 360 (Hindi)",
+    "provider": "360 Mocks",
+    "category": "World Geography 360 (Hindi).html",
+    "subject": "General Studies"
+  },
+  {
     "path": "English Madhyam/CGL 2026 Pre/@the_solvers_SSC CGL PRE Mock Test 05_9855.html",
     "name": "SSC CGL PRE Mock Test 05",
     "provider": "English Madhyam",
@@ -7545,5 +7720,782 @@ const MOCK_DATA = [
     "provider": "The Solver",
     "category": "Reasoning Speed",
     "subject": "Reasoning"
+  },
+  {
+    "path": "static GK/STATIC GK SSC (1).html",
+    "name": "STATIC GK SSC (1)",
+    "provider": "static GK",
+    "category": "STATIC GK SSC (1).html",
+    "subject": "General Studies"
+  },
+  {
+    "path": "static GK/STATIC GK SSC (10).html",
+    "name": "STATIC GK SSC (10)",
+    "provider": "static GK",
+    "category": "STATIC GK SSC (10).html",
+    "subject": "General Studies"
+  },
+  {
+    "path": "static GK/STATIC GK SSC (100).html",
+    "name": "STATIC GK SSC (100)",
+    "provider": "static GK",
+    "category": "STATIC GK SSC (100).html",
+    "subject": "General Studies"
+  },
+  {
+    "path": "static GK/STATIC GK SSC (101).html",
+    "name": "STATIC GK SSC (101)",
+    "provider": "static GK",
+    "category": "STATIC GK SSC (101).html",
+    "subject": "General Studies"
+  },
+  {
+    "path": "static GK/STATIC GK SSC (102).html",
+    "name": "STATIC GK SSC (102)",
+    "provider": "static GK",
+    "category": "STATIC GK SSC (102).html",
+    "subject": "General Studies"
+  },
+  {
+    "path": "static GK/STATIC GK SSC (103).html",
+    "name": "STATIC GK SSC (103)",
+    "provider": "static GK",
+    "category": "STATIC GK SSC (103).html",
+    "subject": "General Studies"
+  },
+  {
+    "path": "static GK/STATIC GK SSC (104).html",
+    "name": "STATIC GK SSC (104)",
+    "provider": "static GK",
+    "category": "STATIC GK SSC (104).html",
+    "subject": "General Studies"
+  },
+  {
+    "path": "static GK/STATIC GK SSC (105).html",
+    "name": "STATIC GK SSC (105)",
+    "provider": "static GK",
+    "category": "STATIC GK SSC (105).html",
+    "subject": "General Studies"
+  },
+  {
+    "path": "static GK/STATIC GK SSC (106).html",
+    "name": "STATIC GK SSC (106)",
+    "provider": "static GK",
+    "category": "STATIC GK SSC (106).html",
+    "subject": "General Studies"
+  },
+  {
+    "path": "static GK/STATIC GK SSC (107).html",
+    "name": "STATIC GK SSC (107)",
+    "provider": "static GK",
+    "category": "STATIC GK SSC (107).html",
+    "subject": "General Studies"
+  },
+  {
+    "path": "static GK/STATIC GK SSC (108).html",
+    "name": "STATIC GK SSC (108)",
+    "provider": "static GK",
+    "category": "STATIC GK SSC (108).html",
+    "subject": "General Studies"
+  },
+  {
+    "path": "static GK/STATIC GK SSC (109).html",
+    "name": "STATIC GK SSC (109)",
+    "provider": "static GK",
+    "category": "STATIC GK SSC (109).html",
+    "subject": "General Studies"
+  },
+  {
+    "path": "static GK/STATIC GK SSC (11).html",
+    "name": "STATIC GK SSC (11)",
+    "provider": "static GK",
+    "category": "STATIC GK SSC (11).html",
+    "subject": "General Studies"
+  },
+  {
+    "path": "static GK/STATIC GK SSC (110).html",
+    "name": "STATIC GK SSC (110)",
+    "provider": "static GK",
+    "category": "STATIC GK SSC (110).html",
+    "subject": "General Studies"
+  },
+  {
+    "path": "static GK/STATIC GK SSC (111).html",
+    "name": "STATIC GK SSC (111)",
+    "provider": "static GK",
+    "category": "STATIC GK SSC (111).html",
+    "subject": "General Studies"
+  },
+  {
+    "path": "static GK/STATIC GK SSC (12).html",
+    "name": "STATIC GK SSC (12)",
+    "provider": "static GK",
+    "category": "STATIC GK SSC (12).html",
+    "subject": "General Studies"
+  },
+  {
+    "path": "static GK/STATIC GK SSC (13).html",
+    "name": "STATIC GK SSC (13)",
+    "provider": "static GK",
+    "category": "STATIC GK SSC (13).html",
+    "subject": "General Studies"
+  },
+  {
+    "path": "static GK/STATIC GK SSC (14).html",
+    "name": "STATIC GK SSC (14)",
+    "provider": "static GK",
+    "category": "STATIC GK SSC (14).html",
+    "subject": "General Studies"
+  },
+  {
+    "path": "static GK/STATIC GK SSC (15).html",
+    "name": "STATIC GK SSC (15)",
+    "provider": "static GK",
+    "category": "STATIC GK SSC (15).html",
+    "subject": "General Studies"
+  },
+  {
+    "path": "static GK/STATIC GK SSC (16).html",
+    "name": "STATIC GK SSC (16)",
+    "provider": "static GK",
+    "category": "STATIC GK SSC (16).html",
+    "subject": "General Studies"
+  },
+  {
+    "path": "static GK/STATIC GK SSC (17).html",
+    "name": "STATIC GK SSC (17)",
+    "provider": "static GK",
+    "category": "STATIC GK SSC (17).html",
+    "subject": "General Studies"
+  },
+  {
+    "path": "static GK/STATIC GK SSC (18).html",
+    "name": "STATIC GK SSC (18)",
+    "provider": "static GK",
+    "category": "STATIC GK SSC (18).html",
+    "subject": "General Studies"
+  },
+  {
+    "path": "static GK/STATIC GK SSC (19).html",
+    "name": "STATIC GK SSC (19)",
+    "provider": "static GK",
+    "category": "STATIC GK SSC (19).html",
+    "subject": "General Studies"
+  },
+  {
+    "path": "static GK/STATIC GK SSC (2).html",
+    "name": "STATIC GK SSC (2)",
+    "provider": "static GK",
+    "category": "STATIC GK SSC (2).html",
+    "subject": "General Studies"
+  },
+  {
+    "path": "static GK/STATIC GK SSC (20).html",
+    "name": "STATIC GK SSC (20)",
+    "provider": "static GK",
+    "category": "STATIC GK SSC (20).html",
+    "subject": "General Studies"
+  },
+  {
+    "path": "static GK/STATIC GK SSC (21).html",
+    "name": "STATIC GK SSC (21)",
+    "provider": "static GK",
+    "category": "STATIC GK SSC (21).html",
+    "subject": "General Studies"
+  },
+  {
+    "path": "static GK/STATIC GK SSC (22).html",
+    "name": "STATIC GK SSC (22)",
+    "provider": "static GK",
+    "category": "STATIC GK SSC (22).html",
+    "subject": "General Studies"
+  },
+  {
+    "path": "static GK/STATIC GK SSC (23).html",
+    "name": "STATIC GK SSC (23)",
+    "provider": "static GK",
+    "category": "STATIC GK SSC (23).html",
+    "subject": "General Studies"
+  },
+  {
+    "path": "static GK/STATIC GK SSC (24).html",
+    "name": "STATIC GK SSC (24)",
+    "provider": "static GK",
+    "category": "STATIC GK SSC (24).html",
+    "subject": "General Studies"
+  },
+  {
+    "path": "static GK/STATIC GK SSC (25).html",
+    "name": "STATIC GK SSC (25)",
+    "provider": "static GK",
+    "category": "STATIC GK SSC (25).html",
+    "subject": "General Studies"
+  },
+  {
+    "path": "static GK/STATIC GK SSC (26).html",
+    "name": "STATIC GK SSC (26)",
+    "provider": "static GK",
+    "category": "STATIC GK SSC (26).html",
+    "subject": "General Studies"
+  },
+  {
+    "path": "static GK/STATIC GK SSC (27).html",
+    "name": "STATIC GK SSC (27)",
+    "provider": "static GK",
+    "category": "STATIC GK SSC (27).html",
+    "subject": "General Studies"
+  },
+  {
+    "path": "static GK/STATIC GK SSC (28).html",
+    "name": "STATIC GK SSC (28)",
+    "provider": "static GK",
+    "category": "STATIC GK SSC (28).html",
+    "subject": "General Studies"
+  },
+  {
+    "path": "static GK/STATIC GK SSC (29).html",
+    "name": "STATIC GK SSC (29)",
+    "provider": "static GK",
+    "category": "STATIC GK SSC (29).html",
+    "subject": "General Studies"
+  },
+  {
+    "path": "static GK/STATIC GK SSC (3).html",
+    "name": "STATIC GK SSC (3)",
+    "provider": "static GK",
+    "category": "STATIC GK SSC (3).html",
+    "subject": "General Studies"
+  },
+  {
+    "path": "static GK/STATIC GK SSC (30).html",
+    "name": "STATIC GK SSC (30)",
+    "provider": "static GK",
+    "category": "STATIC GK SSC (30).html",
+    "subject": "General Studies"
+  },
+  {
+    "path": "static GK/STATIC GK SSC (31).html",
+    "name": "STATIC GK SSC (31)",
+    "provider": "static GK",
+    "category": "STATIC GK SSC (31).html",
+    "subject": "General Studies"
+  },
+  {
+    "path": "static GK/STATIC GK SSC (32).html",
+    "name": "STATIC GK SSC (32)",
+    "provider": "static GK",
+    "category": "STATIC GK SSC (32).html",
+    "subject": "General Studies"
+  },
+  {
+    "path": "static GK/STATIC GK SSC (33).html",
+    "name": "STATIC GK SSC (33)",
+    "provider": "static GK",
+    "category": "STATIC GK SSC (33).html",
+    "subject": "General Studies"
+  },
+  {
+    "path": "static GK/STATIC GK SSC (34).html",
+    "name": "STATIC GK SSC (34)",
+    "provider": "static GK",
+    "category": "STATIC GK SSC (34).html",
+    "subject": "General Studies"
+  },
+  {
+    "path": "static GK/STATIC GK SSC (35).html",
+    "name": "STATIC GK SSC (35)",
+    "provider": "static GK",
+    "category": "STATIC GK SSC (35).html",
+    "subject": "General Studies"
+  },
+  {
+    "path": "static GK/STATIC GK SSC (36).html",
+    "name": "STATIC GK SSC (36)",
+    "provider": "static GK",
+    "category": "STATIC GK SSC (36).html",
+    "subject": "General Studies"
+  },
+  {
+    "path": "static GK/STATIC GK SSC (37).html",
+    "name": "STATIC GK SSC (37)",
+    "provider": "static GK",
+    "category": "STATIC GK SSC (37).html",
+    "subject": "General Studies"
+  },
+  {
+    "path": "static GK/STATIC GK SSC (38).html",
+    "name": "STATIC GK SSC (38)",
+    "provider": "static GK",
+    "category": "STATIC GK SSC (38).html",
+    "subject": "General Studies"
+  },
+  {
+    "path": "static GK/STATIC GK SSC (39).html",
+    "name": "STATIC GK SSC (39)",
+    "provider": "static GK",
+    "category": "STATIC GK SSC (39).html",
+    "subject": "General Studies"
+  },
+  {
+    "path": "static GK/STATIC GK SSC (4).html",
+    "name": "STATIC GK SSC (4)",
+    "provider": "static GK",
+    "category": "STATIC GK SSC (4).html",
+    "subject": "General Studies"
+  },
+  {
+    "path": "static GK/STATIC GK SSC (40).html",
+    "name": "STATIC GK SSC (40)",
+    "provider": "static GK",
+    "category": "STATIC GK SSC (40).html",
+    "subject": "General Studies"
+  },
+  {
+    "path": "static GK/STATIC GK SSC (41).html",
+    "name": "STATIC GK SSC (41)",
+    "provider": "static GK",
+    "category": "STATIC GK SSC (41).html",
+    "subject": "General Studies"
+  },
+  {
+    "path": "static GK/STATIC GK SSC (42).html",
+    "name": "STATIC GK SSC (42)",
+    "provider": "static GK",
+    "category": "STATIC GK SSC (42).html",
+    "subject": "General Studies"
+  },
+  {
+    "path": "static GK/STATIC GK SSC (43).html",
+    "name": "STATIC GK SSC (43)",
+    "provider": "static GK",
+    "category": "STATIC GK SSC (43).html",
+    "subject": "General Studies"
+  },
+  {
+    "path": "static GK/STATIC GK SSC (44).html",
+    "name": "STATIC GK SSC (44)",
+    "provider": "static GK",
+    "category": "STATIC GK SSC (44).html",
+    "subject": "General Studies"
+  },
+  {
+    "path": "static GK/STATIC GK SSC (45).html",
+    "name": "STATIC GK SSC (45)",
+    "provider": "static GK",
+    "category": "STATIC GK SSC (45).html",
+    "subject": "General Studies"
+  },
+  {
+    "path": "static GK/STATIC GK SSC (46).html",
+    "name": "STATIC GK SSC (46)",
+    "provider": "static GK",
+    "category": "STATIC GK SSC (46).html",
+    "subject": "General Studies"
+  },
+  {
+    "path": "static GK/STATIC GK SSC (47).html",
+    "name": "STATIC GK SSC (47)",
+    "provider": "static GK",
+    "category": "STATIC GK SSC (47).html",
+    "subject": "General Studies"
+  },
+  {
+    "path": "static GK/STATIC GK SSC (48).html",
+    "name": "STATIC GK SSC (48)",
+    "provider": "static GK",
+    "category": "STATIC GK SSC (48).html",
+    "subject": "General Studies"
+  },
+  {
+    "path": "static GK/STATIC GK SSC (49).html",
+    "name": "STATIC GK SSC (49)",
+    "provider": "static GK",
+    "category": "STATIC GK SSC (49).html",
+    "subject": "General Studies"
+  },
+  {
+    "path": "static GK/STATIC GK SSC (5).html",
+    "name": "STATIC GK SSC (5)",
+    "provider": "static GK",
+    "category": "STATIC GK SSC (5).html",
+    "subject": "General Studies"
+  },
+  {
+    "path": "static GK/STATIC GK SSC (50).html",
+    "name": "STATIC GK SSC (50)",
+    "provider": "static GK",
+    "category": "STATIC GK SSC (50).html",
+    "subject": "General Studies"
+  },
+  {
+    "path": "static GK/STATIC GK SSC (51).html",
+    "name": "STATIC GK SSC (51)",
+    "provider": "static GK",
+    "category": "STATIC GK SSC (51).html",
+    "subject": "General Studies"
+  },
+  {
+    "path": "static GK/STATIC GK SSC (52).html",
+    "name": "STATIC GK SSC (52)",
+    "provider": "static GK",
+    "category": "STATIC GK SSC (52).html",
+    "subject": "General Studies"
+  },
+  {
+    "path": "static GK/STATIC GK SSC (53).html",
+    "name": "STATIC GK SSC (53)",
+    "provider": "static GK",
+    "category": "STATIC GK SSC (53).html",
+    "subject": "General Studies"
+  },
+  {
+    "path": "static GK/STATIC GK SSC (54).html",
+    "name": "STATIC GK SSC (54)",
+    "provider": "static GK",
+    "category": "STATIC GK SSC (54).html",
+    "subject": "General Studies"
+  },
+  {
+    "path": "static GK/STATIC GK SSC (55).html",
+    "name": "STATIC GK SSC (55)",
+    "provider": "static GK",
+    "category": "STATIC GK SSC (55).html",
+    "subject": "General Studies"
+  },
+  {
+    "path": "static GK/STATIC GK SSC (56).html",
+    "name": "STATIC GK SSC (56)",
+    "provider": "static GK",
+    "category": "STATIC GK SSC (56).html",
+    "subject": "General Studies"
+  },
+  {
+    "path": "static GK/STATIC GK SSC (57).html",
+    "name": "STATIC GK SSC (57)",
+    "provider": "static GK",
+    "category": "STATIC GK SSC (57).html",
+    "subject": "General Studies"
+  },
+  {
+    "path": "static GK/STATIC GK SSC (58).html",
+    "name": "STATIC GK SSC (58)",
+    "provider": "static GK",
+    "category": "STATIC GK SSC (58).html",
+    "subject": "General Studies"
+  },
+  {
+    "path": "static GK/STATIC GK SSC (59).html",
+    "name": "STATIC GK SSC (59)",
+    "provider": "static GK",
+    "category": "STATIC GK SSC (59).html",
+    "subject": "General Studies"
+  },
+  {
+    "path": "static GK/STATIC GK SSC (6).html",
+    "name": "STATIC GK SSC (6)",
+    "provider": "static GK",
+    "category": "STATIC GK SSC (6).html",
+    "subject": "General Studies"
+  },
+  {
+    "path": "static GK/STATIC GK SSC (60).html",
+    "name": "STATIC GK SSC (60)",
+    "provider": "static GK",
+    "category": "STATIC GK SSC (60).html",
+    "subject": "General Studies"
+  },
+  {
+    "path": "static GK/STATIC GK SSC (61).html",
+    "name": "STATIC GK SSC (61)",
+    "provider": "static GK",
+    "category": "STATIC GK SSC (61).html",
+    "subject": "General Studies"
+  },
+  {
+    "path": "static GK/STATIC GK SSC (62).html",
+    "name": "STATIC GK SSC (62)",
+    "provider": "static GK",
+    "category": "STATIC GK SSC (62).html",
+    "subject": "General Studies"
+  },
+  {
+    "path": "static GK/STATIC GK SSC (63).html",
+    "name": "STATIC GK SSC (63)",
+    "provider": "static GK",
+    "category": "STATIC GK SSC (63).html",
+    "subject": "General Studies"
+  },
+  {
+    "path": "static GK/STATIC GK SSC (64).html",
+    "name": "STATIC GK SSC (64)",
+    "provider": "static GK",
+    "category": "STATIC GK SSC (64).html",
+    "subject": "General Studies"
+  },
+  {
+    "path": "static GK/STATIC GK SSC (65).html",
+    "name": "STATIC GK SSC (65)",
+    "provider": "static GK",
+    "category": "STATIC GK SSC (65).html",
+    "subject": "General Studies"
+  },
+  {
+    "path": "static GK/STATIC GK SSC (66).html",
+    "name": "STATIC GK SSC (66)",
+    "provider": "static GK",
+    "category": "STATIC GK SSC (66).html",
+    "subject": "General Studies"
+  },
+  {
+    "path": "static GK/STATIC GK SSC (67).html",
+    "name": "STATIC GK SSC (67)",
+    "provider": "static GK",
+    "category": "STATIC GK SSC (67).html",
+    "subject": "General Studies"
+  },
+  {
+    "path": "static GK/STATIC GK SSC (68).html",
+    "name": "STATIC GK SSC (68)",
+    "provider": "static GK",
+    "category": "STATIC GK SSC (68).html",
+    "subject": "General Studies"
+  },
+  {
+    "path": "static GK/STATIC GK SSC (69).html",
+    "name": "STATIC GK SSC (69)",
+    "provider": "static GK",
+    "category": "STATIC GK SSC (69).html",
+    "subject": "General Studies"
+  },
+  {
+    "path": "static GK/STATIC GK SSC (7).html",
+    "name": "STATIC GK SSC (7)",
+    "provider": "static GK",
+    "category": "STATIC GK SSC (7).html",
+    "subject": "General Studies"
+  },
+  {
+    "path": "static GK/STATIC GK SSC (70).html",
+    "name": "STATIC GK SSC (70)",
+    "provider": "static GK",
+    "category": "STATIC GK SSC (70).html",
+    "subject": "General Studies"
+  },
+  {
+    "path": "static GK/STATIC GK SSC (71).html",
+    "name": "STATIC GK SSC (71)",
+    "provider": "static GK",
+    "category": "STATIC GK SSC (71).html",
+    "subject": "General Studies"
+  },
+  {
+    "path": "static GK/STATIC GK SSC (72).html",
+    "name": "STATIC GK SSC (72)",
+    "provider": "static GK",
+    "category": "STATIC GK SSC (72).html",
+    "subject": "General Studies"
+  },
+  {
+    "path": "static GK/STATIC GK SSC (73).html",
+    "name": "STATIC GK SSC (73)",
+    "provider": "static GK",
+    "category": "STATIC GK SSC (73).html",
+    "subject": "General Studies"
+  },
+  {
+    "path": "static GK/STATIC GK SSC (74).html",
+    "name": "STATIC GK SSC (74)",
+    "provider": "static GK",
+    "category": "STATIC GK SSC (74).html",
+    "subject": "General Studies"
+  },
+  {
+    "path": "static GK/STATIC GK SSC (75).html",
+    "name": "STATIC GK SSC (75)",
+    "provider": "static GK",
+    "category": "STATIC GK SSC (75).html",
+    "subject": "General Studies"
+  },
+  {
+    "path": "static GK/STATIC GK SSC (76).html",
+    "name": "STATIC GK SSC (76)",
+    "provider": "static GK",
+    "category": "STATIC GK SSC (76).html",
+    "subject": "General Studies"
+  },
+  {
+    "path": "static GK/STATIC GK SSC (77).html",
+    "name": "STATIC GK SSC (77)",
+    "provider": "static GK",
+    "category": "STATIC GK SSC (77).html",
+    "subject": "General Studies"
+  },
+  {
+    "path": "static GK/STATIC GK SSC (78).html",
+    "name": "STATIC GK SSC (78)",
+    "provider": "static GK",
+    "category": "STATIC GK SSC (78).html",
+    "subject": "General Studies"
+  },
+  {
+    "path": "static GK/STATIC GK SSC (79).html",
+    "name": "STATIC GK SSC (79)",
+    "provider": "static GK",
+    "category": "STATIC GK SSC (79).html",
+    "subject": "General Studies"
+  },
+  {
+    "path": "static GK/STATIC GK SSC (8).html",
+    "name": "STATIC GK SSC (8)",
+    "provider": "static GK",
+    "category": "STATIC GK SSC (8).html",
+    "subject": "General Studies"
+  },
+  {
+    "path": "static GK/STATIC GK SSC (80).html",
+    "name": "STATIC GK SSC (80)",
+    "provider": "static GK",
+    "category": "STATIC GK SSC (80).html",
+    "subject": "General Studies"
+  },
+  {
+    "path": "static GK/STATIC GK SSC (81).html",
+    "name": "STATIC GK SSC (81)",
+    "provider": "static GK",
+    "category": "STATIC GK SSC (81).html",
+    "subject": "General Studies"
+  },
+  {
+    "path": "static GK/STATIC GK SSC (82).html",
+    "name": "STATIC GK SSC (82)",
+    "provider": "static GK",
+    "category": "STATIC GK SSC (82).html",
+    "subject": "General Studies"
+  },
+  {
+    "path": "static GK/STATIC GK SSC (83).html",
+    "name": "STATIC GK SSC (83)",
+    "provider": "static GK",
+    "category": "STATIC GK SSC (83).html",
+    "subject": "General Studies"
+  },
+  {
+    "path": "static GK/STATIC GK SSC (84).html",
+    "name": "STATIC GK SSC (84)",
+    "provider": "static GK",
+    "category": "STATIC GK SSC (84).html",
+    "subject": "General Studies"
+  },
+  {
+    "path": "static GK/STATIC GK SSC (85).html",
+    "name": "STATIC GK SSC (85)",
+    "provider": "static GK",
+    "category": "STATIC GK SSC (85).html",
+    "subject": "General Studies"
+  },
+  {
+    "path": "static GK/STATIC GK SSC (86).html",
+    "name": "STATIC GK SSC (86)",
+    "provider": "static GK",
+    "category": "STATIC GK SSC (86).html",
+    "subject": "General Studies"
+  },
+  {
+    "path": "static GK/STATIC GK SSC (87).html",
+    "name": "STATIC GK SSC (87)",
+    "provider": "static GK",
+    "category": "STATIC GK SSC (87).html",
+    "subject": "General Studies"
+  },
+  {
+    "path": "static GK/STATIC GK SSC (88).html",
+    "name": "STATIC GK SSC (88)",
+    "provider": "static GK",
+    "category": "STATIC GK SSC (88).html",
+    "subject": "General Studies"
+  },
+  {
+    "path": "static GK/STATIC GK SSC (89).html",
+    "name": "STATIC GK SSC (89)",
+    "provider": "static GK",
+    "category": "STATIC GK SSC (89).html",
+    "subject": "General Studies"
+  },
+  {
+    "path": "static GK/STATIC GK SSC (9).html",
+    "name": "STATIC GK SSC (9)",
+    "provider": "static GK",
+    "category": "STATIC GK SSC (9).html",
+    "subject": "General Studies"
+  },
+  {
+    "path": "static GK/STATIC GK SSC (90).html",
+    "name": "STATIC GK SSC (90)",
+    "provider": "static GK",
+    "category": "STATIC GK SSC (90).html",
+    "subject": "General Studies"
+  },
+  {
+    "path": "static GK/STATIC GK SSC (91).html",
+    "name": "STATIC GK SSC (91)",
+    "provider": "static GK",
+    "category": "STATIC GK SSC (91).html",
+    "subject": "General Studies"
+  },
+  {
+    "path": "static GK/STATIC GK SSC (92).html",
+    "name": "STATIC GK SSC (92)",
+    "provider": "static GK",
+    "category": "STATIC GK SSC (92).html",
+    "subject": "General Studies"
+  },
+  {
+    "path": "static GK/STATIC GK SSC (93).html",
+    "name": "STATIC GK SSC (93)",
+    "provider": "static GK",
+    "category": "STATIC GK SSC (93).html",
+    "subject": "General Studies"
+  },
+  {
+    "path": "static GK/STATIC GK SSC (94).html",
+    "name": "STATIC GK SSC (94)",
+    "provider": "static GK",
+    "category": "STATIC GK SSC (94).html",
+    "subject": "General Studies"
+  },
+  {
+    "path": "static GK/STATIC GK SSC (95).html",
+    "name": "STATIC GK SSC (95)",
+    "provider": "static GK",
+    "category": "STATIC GK SSC (95).html",
+    "subject": "General Studies"
+  },
+  {
+    "path": "static GK/STATIC GK SSC (96).html",
+    "name": "STATIC GK SSC (96)",
+    "provider": "static GK",
+    "category": "STATIC GK SSC (96).html",
+    "subject": "General Studies"
+  },
+  {
+    "path": "static GK/STATIC GK SSC (97).html",
+    "name": "STATIC GK SSC (97)",
+    "provider": "static GK",
+    "category": "STATIC GK SSC (97).html",
+    "subject": "General Studies"
+  },
+  {
+    "path": "static GK/STATIC GK SSC (98).html",
+    "name": "STATIC GK SSC (98)",
+    "provider": "static GK",
+    "category": "STATIC GK SSC (98).html",
+    "subject": "General Studies"
+  },
+  {
+    "path": "static GK/STATIC GK SSC (99).html",
+    "name": "STATIC GK SSC (99)",
+    "provider": "static GK",
+    "category": "STATIC GK SSC (99).html",
+    "subject": "General Studies"
   }
 ];

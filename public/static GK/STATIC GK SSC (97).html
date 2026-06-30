@@ -3,43 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aether Mocks</title>
+    <title>Mocks Wallah</title>
     <!-- Fonts & Icons -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    
+
     <!-- Central Stylesheet -->
     <link rel="stylesheet" href="../css/mock-main.css">
-    
+
     <!-- Math Formula Rendering (KaTeX/MathJax) -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    
+
     <!-- Timer Config -->
-    <meta name="exam-duration" content="60">
+    <meta name="exam-duration" content="30">
 </head>
 <body>
     <!-- Welcome Screen -->
     <div class="welcome-screen" id="welcomeScreen">
         <div class="welcome-container">
             <div class="welcome-header" style="margin-bottom: 24px;">
-                <h1 style="font-size: 2rem; font-weight: 700; color: #0f172a; margin-bottom: 8px;"><i class="fas fa-graduation-cap" style="color: #3b82f6;"></i> Aether Mocks</h1>
-                <p style="color: #64748b;">Computer Based Test Portal</p>
+                <h1 style="font-size: 2rem; font-weight: 700; color: var(--text-main); margin-bottom: 8px;"><i class="fas fa-graduation-cap" style="color: var(--primary);"></i> Mocks Wallah</h1>
+                <p style="color: var(--text-muted);">Computer Based Test Portal</p>
             </div>
-            
+
             <div class="test-details" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-bottom: 32px; text-align: left;">
-                <div class="detail-item" style="padding: 12px; background: #f8fafc; border-radius: 8px; border: 1px solid #e2e8f0;">
-                    <div class="detail-label" style="font-size: 0.8rem; color: #64748b;">Total Questions</div>
-                    <div class="detail-value" style="font-size: 1.1rem; font-weight: 600; color: #0f172a;">10</div>
+                <div class="detail-item" style="padding: 12px; background: var(--bg-color); border-radius: 8px; border: 1px solid var(--border-color);">
+                    <div class="detail-label" style="font-size: 0.8rem; color: var(--text-muted);">Total Questions</div>
+                    <div class="detail-value" style="font-size: 1.1rem; font-weight: 600; color: var(--text-main);">15</div>
                 </div>
-                <div class="detail-item" style="padding: 12px; background: #f8fafc; border-radius: 8px; border: 1px solid #e2e8f0;">
-                    <div class="detail-label" style="font-size: 0.8rem; color: #64748b;">Duration</div>
-                    <div class="detail-value" style="font-size: 1.1rem; font-weight: 600; color: #0f172a;">60 mins</div>
+                <div class="detail-item" style="padding: 12px; background: var(--bg-color); border-radius: 8px; border: 1px solid var(--border-color);">
+                    <div class="detail-label" style="font-size: 0.8rem; color: var(--text-muted);">Duration</div>
+                    <div class="detail-value" style="font-size: 1.1rem; font-weight: 600; color: var(--text-main);">30 mins</div>
                 </div>
             </div>
-            
+
             <div class="welcome-actions">
                 <button class="btn btn-primary" id="startBtn" onclick="document.getElementById('welcomeScreen').style.display='none'; document.getElementById('examContainer').style.display='flex';" style="font-size: 1.1rem; padding: 12px 32px; width: 100%;">
                     <i class="fas fa-play" style="margin-right: 8px;"></i> Start Test
@@ -47,12 +47,12 @@
             </div>
         </div>
     </div>
-    
+
     <!-- Main Exam Interface -->
     <div class="exam-container" id="examContainer" style="display: none; height: 100vh; flex-direction: column;">
         <!-- Top Header -->
         <div class="exam-header">
-            <div class="exam-title">Aether Mocks</div>
+            <div class="exam-title">Mocks Wallah</div>
             <div class="header-actions" style="display: flex; align-items: center; gap: 12px;">
                 <button class="btn-icon" id="themeToggleBtn" title="Switch to Dark Mode"><i class="fas fa-moon"></i></button>
                 <button class="btn-icon" id="fullscreenToggleBtn" title="Toggle Fullscreen"><i class="fas fa-expand"></i></button>
@@ -62,14 +62,14 @@
                 </div>
             </div>
         </div>
-        
+
         <!-- Main Content -->
         <div class="mock-container">
             <!-- Question Area -->
             <div class="question-view">
                 <!-- Dynamically populated question container -->
                 <div id="questionContainer" style="flex: 1; display: flex; flex-direction: column; gap: 24px;"></div>
-                
+
                 <!-- Controls -->
                 <div class="nav-controls">
                     <button class="btn btn-secondary btn-prev"><i class="fas fa-chevron-left" style="margin-right: 8px;"></i> Previous</button>
@@ -79,40 +79,221 @@
                     <button class="btn btn-primary btn-next">Next <i class="fas fa-chevron-right" style="margin-left: 8px;"></i></button>
                 </div>
             </div>
-            
+
             <!-- Desktop Navigator Sidebar -->
             <div class="sidebar">
                 <div class="sidebar-section-title">Summary Status</div>
                 <div class="stats-grid">
                     <div class="stat-item">
-                        <div class="stat-count" id="stat-answered" style="color: #10b981;">0</div>
+                        <div class="stat-count" id="stat-answered" style="color: var(--success);">0</div>
                         <div class="stat-name">Answered</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-count" id="stat-flagged" style="color: #f59e0b;">0</div>
+                        <div class="stat-count" id="stat-flagged" style="color: var(--warning);">0</div>
                         <div class="stat-name">Flagged</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-count" id="stat-not-answered" style="color: #64748b;">0</div>
+                        <div class="stat-count" id="stat-not-answered" style="color: var(--text-muted);">0</div>
                         <div class="stat-name">Unanswered</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-count" id="stat-not-visited" style="color: #94a3b8;">0</div>
+                        <div class="stat-count" id="stat-not-visited" style="color: var(--text-muted);">0</div>
                         <div class="stat-name">Not Visited</div>
                     </div>
                 </div>
-                
+
                 <div class="sidebar-section-title" style="margin-top: 16px;">Question Navigator</div>
                 <div class="questions-grid"></div>
             </div>
         </div>
     </div>
-    
+
     <!-- Inject Question Data -->
     <script>
-        const questions = [];
+        const questions = [
+  {
+    "question": " <p>1.</span><span style=\"font-family:Cambria Math\"> Mahavir Jayanti is celebrated in the month of __________.</span></p>",
+    "options": [
+      "May",
+      "April",
+      "September",
+      "December"
+    ],
+    "correct_option_id": 1,
+    "solution": " <p><span style=\"font-family:Cambria Math\">1.(</span><span style=\"font-family:Cambria Math\">b) Mahavir Jayanti </span><span style=\"font-family:Cambria Math\">occurs either in March or April is one of the most important religious festivals in Jainism. This day marks the birth of Vardhamana Mahavira, who was the 24th and the last Tirthankara and who succeeded the 23rd Tirthankara, Parshvanatha.</span></p>",
+    "question_index": 0
+  },
+  {
+    "question": " <p>2.</span><span style=\"font-family:Cambria Math\"> Which of the fol</span><span style=\"font-family:Cambria Math\">lowing is an Indian martial art that originated in modern-day Kerala?</span></p>",
+    "options": [
+      "Kalaripayattu",
+      "Muay Thai",
+      "Karate",
+      "Gatka"
+    ],
+    "correct_option_id": 0,
+    "solution": " <p><span style=\"font-family:Cambria Math\">2.(</span><span style=\"font-family:Cambria Math\">a) </span><span style=\"font-family:Cambria Math\">Various martial art forms in</span><span style=\"font-family:Cambria Math\"> Kerala</span><span style=\"font-family:Cambria Math\"> are Kalaripayattu, Paricha Kali, Velakanni, Valeru, Kunderu and Njaninmelkali. Muay Thai (Thailand), Karate (Japan), Gatka (Punjab). </span></p>",
+    "question_index": 1
+  },
+  {
+    "question": "<p>3.<span style=\"font-family: Cambria Math;\"> ______ was established in 1948 with 23 countries as a global trade organization to </span><span style=\"font-family: Cambria Math;\">administer</span><span style=\"font-family: Cambria Math;\"> all m</span><span style=\"font-family: Cambria Math;\">ultilateral trade agreements.</span></p>\n",
+    "options": [
+      "World Trade Organization",
+      "International Reciprocal Trade Association",
+      "General Agreement on Tariffs and Trade",
+      "World Chamber of Commerce"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">3.(</span><span style=\"font-family: Cambria Math;\">c) General Agree</span><span style=\"font-family: Cambria Math;\">ment of Tariffs and Trade</span><span style=\"font-family: Cambria Math;\"> came into effect on January 1, 1948. Its purpose was to liberalize trade by reducing tariffs and reducing quotas among member countries. It was replaced by World Trade Organisation in 1995. </span></p>\n",
+    "question_index": 2
+  },
+  {
+    "question": " <p>4. </span><span style=\"font-family:Cambria Math\">With which of the following sports is Aditi Ashok is associated?</span></p>",
+    "options": [
+      "Tennis",
+      "Shooting",
+      "Chess",
+      "Golf"
+    ],
+    "correct_option_id": 3,
+    "solution": " <p><span style=\"font-family:Cambria Math\">4.(</span><span style=\"font-family:Cambria Math\">d) Aditi Ashok</span><span style=\"font-family:Cambria Math\"> is an Indian professional golfer from Bangalore. Other famous Indian </span><span style=\"font-family:Cambria Math\">Golfers</span><span style=\"font-family:Cambria Math\"> include Anirban Lahiri, Jyoti Randhawa, Shubhankar Sharma, Jeev Milkha Singh, and Sharmila Nicollet.</span></p>",
+    "question_index": 3
+  },
+  {
+    "question": " <p>5. </span><span style=\"font-family:Cambria Math\">_________ is a popular game in Assam and resembles kabaddi played with a ball.</span></p>",
+    "options": [
+      "Field Hockey",
+      "Kho-Kho",
+      "Cricket",
+      "Dhopkhel"
+    ],
+    "correct_option_id": 3,
+    "solution": " <p><span style=\"font-family:Cambria Math\">5.(</span><span style=\"font-family:Cambria Math\">d) </span><span style=\"font-family:Cambria Math\">Traditional games of </span><span style=\"font-family:Cambria Math\">Assam</span><span style=\"font-family:Cambria Math\"> include Dhopkhel (Kabaddi),  Dor (Running), Tarual Khel (Fencing), Kaar Khel (Archery), Rosi Tona (Rope Pulling), Hatur (Swimming), etc.</span></p>",
+    "question_index": 4
+  },
+  {
+    "question": "<p>6. <span style=\"font-family: Cambria Math;\">Which author wrote the famous novel, &lsquo;The White Tiger&rsquo;?</span></p>\n",
+    "options": [
+      "Vikram Seth",
+      "Jhumpa Lahiri",
+      "Arundhati Roy",
+      "Aravind Adiga"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p>6.(d) <span style=\"font-family: Cambria Math;\">Famous Books by Arvind Adiga include</span><span style=\"font-family: Cambria Math;\"> &lsquo;The White Tiger&rsquo;,</span><span style=\"font-family: Cambria Math;\"> &lsquo;Amnesty&rsquo;, &lsquo;Selection Day&rsquo;, &lsquo;Last Man in Tower&rsquo;, &lsquo;Between The Assassinations&rsquo;, etc.</span><span style=\"font-family: Cambria Math;\"> Vikram Seth</span><span style=\"font-family: Cambria Math;\"> (</span><span style=\"font-family: Cambria Math;\">&lsquo;A</span><span style=\"font-family: Cambria Math;\"> Suitable Boy&rsquo;, </span><span style=\"font-family: Cambria Math;\">&lsquo;The Golden Gate&rsquo;, &lsquo;</span><span style=\"font-family: Cambria Math;\">An</span><span style=\"font-family: Cambria Math;\"> Equal Music&rsquo;, etc.)</span></p>\n",
+    "question_index": 5
+  },
+  {
+    "question": " <p>7. </span><span style=\"font-family:Cambria Math\">Onam is an annual Hindu festival with origins in the state of ______ in India.</span></p>",
+    "options": [
+      "Jharkhand",
+      "Manipur",
+      "Kerala",
+      "Mizoram"
+    ],
+    "correct_option_id": 2,
+    "solution": " <p><span style=\"font-family:Cambria Math\">7.(</span><span style=\"font-family:Cambria Math\">c) </span><span style=\"font-family:Cambria Math\">Famous </span><span style=\"font-family:Cambria Math\">festivals of Kerala</span><span style=\"font-family:Cambria Math\"> include Onam, Vishu, Thrissur Pooram, Thiruvathira, Theyyam, A</span><span style=\"font-family:Cambria Math\">ttukal Pongala, Makaravilakku festival, Arattu at Trivandrum, Ambalapuzha Arattu, Aranmula Uthrattathi, Adoor Gajamela, etc. </span></p>",
+    "question_index": 6
+  },
+  {
+    "question": " <p>8. </span><span style=\"font-family:Cambria Math\">Who among the following Indian singers received the ‘Bharat Ratna’ in 2001?</span></p>",
+    "options": [
+      "Asha Bhosle",
+      "Ali Akbar Khan",
+      "Shreya Ghoshal",
+      "Lata Mangeshkar"
+    ],
+    "correct_option_id": 3,
+    "solution": " <p><span style=\"font-family:Cambria Math\">8.(</span><span style=\"font-family:Cambria Math\">d) Lata Mangeshkar </span><span style=\"font-family:Cambria Math\">was awarded many prestigious awards such as Padma Bhushan (1969), Dadasaheb Phalke Award (1989), Maharashtra Bhushan (1997), Padma Vibhushan (1999), Bharat Ratna (2001), and Officer of the National Order of the Legion of Honour (2006)</span></p>",
+    "question_index": 7
+  },
+  {
+    "question": " <p>9. </span><span style=\"font-family:Cambria Math\">Which of the following air</span><span style=\"font-family:Cambria Math\">ports is located in Amritsar?</span></p>",
+    "options": [
+      "Thiruvananthapuram International Airport",
+      "Dr Babasaheb Ambedkar International Airport",
+      "Sri Guru Ram Das Ji International Airport",
+      "Indira Gandhi International Airport"
+    ],
+    "correct_option_id": 2,
+    "solution": " <p><span style=\"font-family:Cambria Math\">9.(</span><span style=\"font-family:Cambria Math\">c) Sri Guru Ram Dass</span><span style=\"font-family:Cambria Math\"> Jee International Airport</span><span style=\"font-family:Cambria Math\"> (Amritsar; Opened: 1930). Guru Ram Dass jee was the fourth </span><span style=\"font-family:Cambria Math\">sikh</span><span style=\"font-family:Cambria Math\"> Guru and founder of Amritsar city. </span><span style=\"font-family:Cambria Math\">Thiruvananthapuram International Airport (Kerala); Indira Gandhi International Airport (New Delhi); Dr. Babasaheb Ambedkar Interna</span><span style=\"font-family:Cambria Math\">tional Airport (Maharashtra).</span><span style=\"font-family:Cambria Math\"> </span></p>",
+    "question_index": 8
+  },
+  {
+    "question": "<p>10<span style=\"font-family: Cambria Math;\">. </span><span style=\"font-family: Cambria Math;\">Who among the following was the first to bring the concept of modern dance to </span><span style=\"font-family: Cambria Math;\">India </span><span style=\"font-family: Cambria Math;\">with</span><span style=\"font-family: Cambria Math;\"> his novel approach and works?</span></p>\n",
+    "options": [
+      "Guru Bipin Singh",
+      "Padma Subrahmanyam",
+      "Kelucharan Mohapatra",
+      "Uday Shankar"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p>10<span style=\"font-family: Cambria Math;\">.(d) Uday Shankar. </span><span style=\"font-family: Cambria Math;\">He was a pioneer of modern dance in India. He was awarded </span><span style=\"font-family: Cambria Math;\">Sangeet Natak Akademi Fellowship (1962), and Padma Vibhushan (1971). </span></p>\n",
+    "question_index": 9
+  },
+  {
+    "question": " <p>11</span><span style=\"font-family:Cambria Math\">.</span><span style=\"font-family:Cambria Math\"> ‘Loor’ is a folk dance of which state of India?</span></p>",
+    "options": [
+      "Haryana",
+      "Manipur",
+      "Karnataka",
+      "Kerala"
+    ],
+    "correct_option_id": 0,
+    "solution": " <p>11.(a) Famous folk dances of Haryana include </span><span style=\"font-family:Cambria Math\">Loor Dance, Saang Dance, Chhati Dance, Khoria Dance, Dhamal Dance, Ghoomar Dance, Jhumar Dance, Duf Dance, Rasleela Dance, Gugga Dance, Manjira Dance, Been Bansuri Dance, Gangaur Puja Dance, Khera Dance, etc. </span></p>",
+    "question_index": 10
+  },
+  {
+    "question": "<p>12<span style=\"font-family: Cambria Math;\">.</span><span style=\"font-family: Cambria Math;\"> In which of the following grounds did Yuvr</span><span style=\"font-family: Cambria Math;\">aj Singh hit 6 sixes in an over of a T20 </span><span style=\"font-family: Cambria Math;\">International match?</span></p>\n",
+    "options": [
+      "Wanderers Stadium",
+      "Kingsmead Stadium",
+      "Mabhida Stadium",
+      "Newlands Cricket Ground"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p>12<span style=\\\"font-family: Cambria Math;\\\">.(b) Yuvraj Singh </span><span style=\\\"font-family: Cambria Math;\\\">hit 6 sixes in Stuart Broad\\'s over in the 21st match of the first T20 world cup between India and England at </span><span style=\\\"font-family: Cambria Math;\\\">Kingsmead Cricket Ground</span><span style=\\\"font-family: Cambria Math;\\\"> in Durban, South Africa. </span></p>\\n",
+    "question_index": 11
+  },
+  {
+    "question": " <p>13</span><span style=\"font-family:Cambria Math\">.</span><span style=\"font-family:Cambria Math\"> ‘The Diary of a Young Girl’ is an autobiography of:</span></p>",
+    "options": [
+      "Anne Frank",
+      "Agatha Christie",
+      "Michelle Obama",
+      "Jessica Simpson"
+    ],
+    "correct_option_id": 0,
+    "solution": " <p>13</span><span style=\"font-family:Cambria Math\">.(a) </span><span style=\"font-family:Cambria Math\">‘The Diary of a Young Girl’ is an autobiography of Anne Frank.  Agatha Christie: ‘An Autobiography’</span><span style=\"font-family:Cambria Math\">;  Jessica</span><span style=\"font-family:Cambria Math\"> Simpson: ‘Open Book’. </span></p>",
+    "question_index": 12
+  },
+  {
+    "question": " <p>14</span><span style=\"font-family:Cambria Math\">.</span><span style=\"font-family:Cambria Math\"> Kamala Narayan is known for which classical dance form?</span></p>",
+    "options": [
+      "Bharatanatyam",
+      "Kathakali",
+      "Odissi",
+      "Kathak"
+    ],
+    "correct_option_id": 0,
+    "solution": " <p>14</span><span style=\"font-family:Cambria Math\">.(a) </span><span style=\"font-family:Cambria Math\">Famous </span><span style=\"font-family:Cambria Math\">Bharatnatyam Dancers</span><span style=\"font-family:Cambria Math\"> in India are Kamal Narayan, Bala Saraswati, C. V. Chandrasekhar, Leela Samson, Mrinalini Sarabhai, Padma Subramanyam, Rukmini Devi, Sanyukta Panigrahi, Sonal Mansingh, Yamini Krishnamurti, etc. </span></p>",
+    "question_index": 13
+  },
+  {
+    "question": " <p>15</span><span style=\"font-family:Cambria Math\">.</span><span style=\"font-family:Cambria Math\"> Kardang Monastery which is a Buddhist Pilgrimage is </span><span style=\"font-family:Cambria Math\">situated in which state of India?</span></p>",
+    "options": [
+      "Jharkhand",
+      "Goa",
+      "Himachal Pradesh",
+      "Kerala"
+    ],
+    "correct_option_id": 2,
+    "solution": " <p>15</span><span style=\"font-family:Cambria Math\">.(c) Kardang monastery</span><span style=\"font-family:Cambria Math\"> is situated in Lahaul (Himachal Pradesh) and is situated on the left bank of River Bhaga. It was renovated in 1912 CE by Lama Norbu Rinpoche. </span></p>",
+    "question_index": 14
+  }
+];
     </script>
-    
+
     <!-- Central JS Controller -->
     <script src="../js/mock-core.js"></script>
 </body>

@@ -3,43 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aether Mocks</title>
+    <title>Mocks Wallah</title>
     <!-- Fonts & Icons -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    
+
     <!-- Central Stylesheet -->
     <link rel="stylesheet" href="../css/mock-main.css">
-    
+
     <!-- Math Formula Rendering (KaTeX/MathJax) -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    
+
     <!-- Timer Config -->
-    <meta name="exam-duration" content="60">
+    <meta name="exam-duration" content="30">
 </head>
 <body>
     <!-- Welcome Screen -->
     <div class="welcome-screen" id="welcomeScreen">
         <div class="welcome-container">
             <div class="welcome-header" style="margin-bottom: 24px;">
-                <h1 style="font-size: 2rem; font-weight: 700; color: #0f172a; margin-bottom: 8px;"><i class="fas fa-graduation-cap" style="color: #3b82f6;"></i> Aether Mocks</h1>
-                <p style="color: #64748b;">Computer Based Test Portal</p>
+                <h1 style="font-size: 2rem; font-weight: 700; color: var(--text-main); margin-bottom: 8px;"><i class="fas fa-graduation-cap" style="color: var(--primary);"></i> Mocks Wallah</h1>
+                <p style="color: var(--text-muted);">Computer Based Test Portal</p>
             </div>
-            
+
             <div class="test-details" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-bottom: 32px; text-align: left;">
-                <div class="detail-item" style="padding: 12px; background: #f8fafc; border-radius: 8px; border: 1px solid #e2e8f0;">
-                    <div class="detail-label" style="font-size: 0.8rem; color: #64748b;">Total Questions</div>
-                    <div class="detail-value" style="font-size: 1.1rem; font-weight: 600; color: #0f172a;">10</div>
+                <div class="detail-item" style="padding: 12px; background: var(--bg-color); border-radius: 8px; border: 1px solid var(--border-color);">
+                    <div class="detail-label" style="font-size: 0.8rem; color: var(--text-muted);">Total Questions</div>
+                    <div class="detail-value" style="font-size: 1.1rem; font-weight: 600; color: var(--text-main);">15</div>
                 </div>
-                <div class="detail-item" style="padding: 12px; background: #f8fafc; border-radius: 8px; border: 1px solid #e2e8f0;">
-                    <div class="detail-label" style="font-size: 0.8rem; color: #64748b;">Duration</div>
-                    <div class="detail-value" style="font-size: 1.1rem; font-weight: 600; color: #0f172a;">60 mins</div>
+                <div class="detail-item" style="padding: 12px; background: var(--bg-color); border-radius: 8px; border: 1px solid var(--border-color);">
+                    <div class="detail-label" style="font-size: 0.8rem; color: var(--text-muted);">Duration</div>
+                    <div class="detail-value" style="font-size: 1.1rem; font-weight: 600; color: var(--text-main);">30 mins</div>
                 </div>
             </div>
-            
+
             <div class="welcome-actions">
                 <button class="btn btn-primary" id="startBtn" onclick="document.getElementById('welcomeScreen').style.display='none'; document.getElementById('examContainer').style.display='flex';" style="font-size: 1.1rem; padding: 12px 32px; width: 100%;">
                     <i class="fas fa-play" style="margin-right: 8px;"></i> Start Test
@@ -47,12 +47,12 @@
             </div>
         </div>
     </div>
-    
+
     <!-- Main Exam Interface -->
     <div class="exam-container" id="examContainer" style="display: none; height: 100vh; flex-direction: column;">
         <!-- Top Header -->
         <div class="exam-header">
-            <div class="exam-title">Aether Mocks</div>
+            <div class="exam-title">Mocks Wallah</div>
             <div class="header-actions" style="display: flex; align-items: center; gap: 12px;">
                 <button class="btn-icon" id="themeToggleBtn" title="Switch to Dark Mode"><i class="fas fa-moon"></i></button>
                 <button class="btn-icon" id="fullscreenToggleBtn" title="Toggle Fullscreen"><i class="fas fa-expand"></i></button>
@@ -62,14 +62,14 @@
                 </div>
             </div>
         </div>
-        
+
         <!-- Main Content -->
         <div class="mock-container">
             <!-- Question Area -->
             <div class="question-view">
                 <!-- Dynamically populated question container -->
                 <div id="questionContainer" style="flex: 1; display: flex; flex-direction: column; gap: 24px;"></div>
-                
+
                 <!-- Controls -->
                 <div class="nav-controls">
                     <button class="btn btn-secondary btn-prev"><i class="fas fa-chevron-left" style="margin-right: 8px;"></i> Previous</button>
@@ -79,40 +79,221 @@
                     <button class="btn btn-primary btn-next">Next <i class="fas fa-chevron-right" style="margin-left: 8px;"></i></button>
                 </div>
             </div>
-            
+
             <!-- Desktop Navigator Sidebar -->
             <div class="sidebar">
                 <div class="sidebar-section-title">Summary Status</div>
                 <div class="stats-grid">
                     <div class="stat-item">
-                        <div class="stat-count" id="stat-answered" style="color: #10b981;">0</div>
+                        <div class="stat-count" id="stat-answered" style="color: var(--success);">0</div>
                         <div class="stat-name">Answered</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-count" id="stat-flagged" style="color: #f59e0b;">0</div>
+                        <div class="stat-count" id="stat-flagged" style="color: var(--warning);">0</div>
                         <div class="stat-name">Flagged</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-count" id="stat-not-answered" style="color: #64748b;">0</div>
+                        <div class="stat-count" id="stat-not-answered" style="color: var(--text-muted);">0</div>
                         <div class="stat-name">Unanswered</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-count" id="stat-not-visited" style="color: #94a3b8;">0</div>
+                        <div class="stat-count" id="stat-not-visited" style="color: var(--text-muted);">0</div>
                         <div class="stat-name">Not Visited</div>
                     </div>
                 </div>
-                
+
                 <div class="sidebar-section-title" style="margin-top: 16px;">Question Navigator</div>
                 <div class="questions-grid"></div>
             </div>
         </div>
     </div>
-    
+
     <!-- Inject Question Data -->
     <script>
-        const questions = [];
+        const questions = [
+  {
+    "question": "<p>1. 77th Independence Day was celebrated in which of the years ?</p>",
+    "options": [
+      "2023",
+      "2021",
+      "2022",
+      "2020"
+    ],
+    "correct_option_id": 0,
+    "solution": "<p>1.(a)<strong> 2023.</strong> 77th Independence Day address on giant strides India has taken in the Electronics and IT Sector. Theme - Nation First, Always First. &lsquo;Har Ghar Tiranga&rsquo; is a campaign under the aegis of Azadi Ka Amrit Mahotsav to encourage people to bring the Tiranga home and to hoist it to mark the 75th year of India&rsquo;s independence.</p>",
+    "question_index": 0
+  },
+  {
+    "question": "<p>2. Which artists have won the Sangeet Natak Akademi Award for contribution to Chhau dance of Seraikella ?</p>",
+    "options": [
+      "Tapan Kumar Pattanayak",
+      "Diwan Sing Bajeli",
+      "Narendra Sing Negi",
+      "Jatin Goswami"
+    ],
+    "correct_option_id": 0,
+    "solution": "<p>2.(a) <strong>Tapan Kumar Pattanayak. </strong>Sangeet Natak Akademi Award is the highest Indian recognition given to people in the field of performing arts. Chhau is a semi classical Indian dance with martial and folk traditions. It is found in three styles i.e., the Purulia Chhau (West Bengal), the Seraikella Chhau (Jharkhand) and the Mayurbhanj Chhau (Odisha).</p>",
+    "question_index": 1
+  },
+  {
+    "question": "<p>3. When a shuttle is fired high into the air, the player has time to make a powerful overhead shot (overhand shot) directly on the opposing court\\'s command. It is known as ______.</p>",
+    "options": [
+      "Long service",
+      "Rally",
+      "Short service",
+      "Smash"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p>3.(d) <strong>Smash </strong>is a shot that is hit above the hitter\\'s head with a serve-like motion in tennis. Some terms used in tennis: Ace, Backhand, Volley, Forehand, Advantage, Fault, Break point, Doubles, Drop shot. Grand Slam: Australian Open: Started in 1905, French Open: Started in 1891, Wimbledon: Started in 1877, US Open: Started in 1881.</p>",
+    "question_index": 2
+  },
+  {
+    "question": "<p>4. Who of the following singer popularized the Sambalpuri folk song \\'Rangabati Rangabati\\' ?</p>",
+    "options": [
+      "Sunidhi Chauhan",
+      "Krishna Patel",
+      "Jonita Gandhi",
+      "Vani Jairam"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p>4.(b) <strong>Krishna Patel. </strong>Mitrabhanu Gauntia wrote the Sambalpuri song, which was performed by Jitendra Haripal (Padma Shri, 2017) and Krishna Patel and was produced by Prabhudatta Pradhan. In the middle of the 1970s, the song was initially recorded for All India Radio. Other folk songs - Ghumura Geet, Danda Nacha Geet, Changu Badya, and Dalkahi Geet.</p>",
+    "question_index": 3
+  },
+  {
+    "question": "<p>5. Pool swimming at the Olympic Games takes place inside a ______ meter-long swimming pool divided into eight lanes.</p>",
+    "options": [
+      "75",
+      "50",
+      "100",
+      "25"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p>5.(b) <strong>50. </strong>The modern Olympic Games are the world\\'s leading international sporting events. Games: Summer, Winter, Youth. Regional games: Asian, African, European, Pacific, Pan-American. Paris Olympic 2024: Location - Paris (France), Motto - &ldquo;Games Wide Open&rdquo;, Opened by - President Emmanuel Macron.</p>",
+    "question_index": 4
+  },
+  {
+    "question": "<p>6. Tapan Kumar Pattanayak won the Sangeet Natak Akademi Award in which dance form ?</p>",
+    "options": [
+      "Chhau",
+      "Sattriya",
+      "Odissi",
+      "Kuchipudi"
+    ],
+    "correct_option_id": 0,
+    "solution": "<p>6.(a)<strong> Chhau. </strong>Tapan Kumar Pattanayak won the Sangeet Natak Akademi (established in 1953) Award in 2018. <br>Chhau is a dance form that combines martial arts, tribal, and folk traditions. Three styles of Chhau : Purulia Chhau (West Bengal), Seraikella Chhau (Jharkhand), and Mayurbhanj Chhau (Odisha). In 2010, UNESCO added Chhau to its Representative List of the Intangible Cultural Heritage of Humanity.</p>",
+    "question_index": 5
+  },
+  {
+    "question": "<p>7. Which of the following festival has \\'Jalli Kattu\\' as a feature ?</p>",
+    "options": [
+      "Onam",
+      "Vishu",
+      "Bihu",
+      "Pongal"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p>7.(d) <strong>Pongal. </strong>It is a harvest festival celebrated by the Tamil community. Jallikattu is a traditional sport of Tamil Nadu that is celebrated on the third day of Pongal &ndash; Mattu Pongal Day. Other festivals of Tamil Nadu: Karthigai Deepam, Vinayaka Chathurthi, Puthandu.</p>",
+    "question_index": 6
+  },
+  {
+    "question": "<p>8. How many players are there on a standard ice hockey (when there is no overtime or penalties) team during a game ?</p>",
+    "options": [
+      "Seven",
+      "Six",
+      "Four",
+      "Five"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p>8.(b) <strong>Six.</strong> Ice Hockey in India is monitored by the Indian Ice Hockey Association. The India national ice hockey team has been competing at the international level since 2009. Team Games and number of players: Baseball - 9, Basketball - 5, Cricket - 11, Football (Soccer) - 11, Hockey - 11, Kabaddi - 7, Kho Kho - 9, Lacrosse - 10.</p>",
+    "question_index": 7
+  },
+  {
+    "question": "<p>9. Which sport features the \"Breaststroke\" as a technique ?</p>",
+    "options": [
+      "Horse riding",
+      "Pool",
+      "Swimming",
+      "Shooting"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p>9.(c) <strong>Swimming.</strong> It has been an Olympic sport since the first modern Olympic Games in 1896. Breaststroke is done with the chest forward and facing towards the bottom of the pool, and not rotating the torso. Other types of swimming strokes: freestyle, backstroke, and butterfly.</p>",
+    "question_index": 8
+  },
+  {
+    "question": "<p>10. To which of the following states does the folk dance Khoria belong ?</p>",
+    "options": [
+      "Maharashtra",
+      "Haryana",
+      "Assam",
+      "West Bengal"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p>10.(b) <strong>Haryana. </strong>The Khoria dance is performed exclusively by women at weddings and festivals. States and their folk dances: Haryana - Phaag, Saang, Chhathi, Dhamal, Gugga. Assam - Bihu, Bagurumba, Bhortal. Maharashtra - Lavani, Gondhal, Koli, Tamasha. West Bengal - Baul dance, Fakir, Brita.</p>",
+    "question_index": 9
+  },
+  {
+    "question": "<p>11. Which of the following sports is played by Siddharth Suchde ?</p>",
+    "options": [
+      "Football",
+      "Badminton",
+      "Tennis",
+      "Squash"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p>11.(d) <strong>Squash.</strong> It is played by two players for singles matches or four players for doubles matches. Other Players: Squash - Saurav Ghosal, Dipika Pallikal, Anahat Singh. Football - Sunil Chhetri, Gurpreet Singh Sandhu. Badminton - Pullela Gopichand, Saina Nehwal, PV Sindhu. Tennis - Sania Mirza, Rohan Bopanna.</p>",
+    "question_index": 10
+  },
+  {
+    "question": "<p>12. Which of the following is the capital of the People\\'s Republic of China ?</p>",
+    "options": [
+      "Guangzhou",
+      "Beijing",
+      "Hangzhou",
+      "Shanghai"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p>12.(b)<strong> Beijing. </strong>Countries and Their Capitals: Afghanistan - Kabul, Argentina - Buenos Aires, Australia - Canberra, Austria - Vienna, Belgium - Brussels, Brazil - Brasilia, Denmark - Copenhagen, Finland - Helsinki, Iran - Tehran.</p>",
+    "question_index": 11
+  },
+  {
+    "question": "Kapil Dev lifted the 1983 World Cup (then known as the Prudential Cup \\'83) in the______ stadium ",
+    "options": [
+      "Lord\\'s",
+      "Eden Gardens",
+      "Holkar",
+      "Green Park"
+    ],
+    "correct_option_id": 0,
+    "solution": "<p>13.(a) <strong>Lord\\'s, </strong>England. The final of the 1983 Cricket World Cup was played between India and the West Indies. Men\\'s Cricket World Cup Finals: 1975 (Winner: West Indies) - Lord\\'s, England.1992 (Pakistan) - MCG, Melbourne. 2011 (India) - Wankhede Stadium, Mumbai. 2023 (Australia) - Narendra Modi Stadium, Ahmedabad.</p>",
+    "question_index": 12
+  },
+  {
+    "question": "<p>14. Pushkar Camel fair is associated with which of the following states ?</p>",
+    "options": [
+      "Rajasthan",
+      "Maharashtra",
+      "Gujarat",
+      "Punjab"
+    ],
+    "correct_option_id": 0,
+    "solution": "<p>14.(a) <strong>Rajasthan. </strong>The Pushkar Fair (Pushkar Camel Fair) or Pushkar Mela, is an annual weeklong camel and livestock fair held in the town of Pushkar between the months of October and November. Famous Fairs in Indian States: Rajasthan - Desert Festivals, Baneshwar fair. Bihar - Sonepur Fair. Assam - Ambubachi Mela. and Haryana - Surajkund Mela.</p>",
+    "question_index": 13
+  },
+  {
+    "question": "<p>15. Which instrument is played by Amjad Ali Khan ?</p>",
+    "options": [
+      "Sarod",
+      "Sitar",
+      "Santoor",
+      "Guitar"
+    ],
+    "correct_option_id": 0,
+    "solution": "<p>15.(a) <strong>Sarod.</strong> He was honored with the Padma Vibhushan in 2001, the Padma Bhushan in 1991, and the Padma Shri in 1975. Musical instruments and their exponents: Sarod - Allauddin Khan, Sharan Rani Backliwal, and Zarin S. Sharma; Sitar - Ustad Vilayat Khan, Pt. Ravi Shankar, and Shahid Parvez Khan; Santoor - Bhajan Sopori, Pt. Shiv Kumar Sharma, and Pt. Tarun Bhattacharya; Guitar - Braj Bhushan Kabra.</p>",
+    "question_index": 14
+  }
+];
     </script>
-    
+
     <!-- Central JS Controller -->
     <script src="../js/mock-core.js"></script>
 </body>

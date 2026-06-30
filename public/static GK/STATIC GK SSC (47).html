@@ -3,43 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aether Mocks</title>
+    <title>Mocks Wallah</title>
     <!-- Fonts & Icons -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    
+
     <!-- Central Stylesheet -->
     <link rel="stylesheet" href="../css/mock-main.css">
-    
+
     <!-- Math Formula Rendering (KaTeX/MathJax) -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    
+
     <!-- Timer Config -->
-    <meta name="exam-duration" content="60">
+    <meta name="exam-duration" content="30">
 </head>
 <body>
     <!-- Welcome Screen -->
     <div class="welcome-screen" id="welcomeScreen">
         <div class="welcome-container">
             <div class="welcome-header" style="margin-bottom: 24px;">
-                <h1 style="font-size: 2rem; font-weight: 700; color: #0f172a; margin-bottom: 8px;"><i class="fas fa-graduation-cap" style="color: #3b82f6;"></i> Aether Mocks</h1>
-                <p style="color: #64748b;">Computer Based Test Portal</p>
+                <h1 style="font-size: 2rem; font-weight: 700; color: var(--text-main); margin-bottom: 8px;"><i class="fas fa-graduation-cap" style="color: var(--primary);"></i> Mocks Wallah</h1>
+                <p style="color: var(--text-muted);">Computer Based Test Portal</p>
             </div>
-            
+
             <div class="test-details" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-bottom: 32px; text-align: left;">
-                <div class="detail-item" style="padding: 12px; background: #f8fafc; border-radius: 8px; border: 1px solid #e2e8f0;">
-                    <div class="detail-label" style="font-size: 0.8rem; color: #64748b;">Total Questions</div>
-                    <div class="detail-value" style="font-size: 1.1rem; font-weight: 600; color: #0f172a;">10</div>
+                <div class="detail-item" style="padding: 12px; background: var(--bg-color); border-radius: 8px; border: 1px solid var(--border-color);">
+                    <div class="detail-label" style="font-size: 0.8rem; color: var(--text-muted);">Total Questions</div>
+                    <div class="detail-value" style="font-size: 1.1rem; font-weight: 600; color: var(--text-main);">15</div>
                 </div>
-                <div class="detail-item" style="padding: 12px; background: #f8fafc; border-radius: 8px; border: 1px solid #e2e8f0;">
-                    <div class="detail-label" style="font-size: 0.8rem; color: #64748b;">Duration</div>
-                    <div class="detail-value" style="font-size: 1.1rem; font-weight: 600; color: #0f172a;">60 mins</div>
+                <div class="detail-item" style="padding: 12px; background: var(--bg-color); border-radius: 8px; border: 1px solid var(--border-color);">
+                    <div class="detail-label" style="font-size: 0.8rem; color: var(--text-muted);">Duration</div>
+                    <div class="detail-value" style="font-size: 1.1rem; font-weight: 600; color: var(--text-main);">30 mins</div>
                 </div>
             </div>
-            
+
             <div class="welcome-actions">
                 <button class="btn btn-primary" id="startBtn" onclick="document.getElementById('welcomeScreen').style.display='none'; document.getElementById('examContainer').style.display='flex';" style="font-size: 1.1rem; padding: 12px 32px; width: 100%;">
                     <i class="fas fa-play" style="margin-right: 8px;"></i> Start Test
@@ -47,12 +47,12 @@
             </div>
         </div>
     </div>
-    
+
     <!-- Main Exam Interface -->
     <div class="exam-container" id="examContainer" style="display: none; height: 100vh; flex-direction: column;">
         <!-- Top Header -->
         <div class="exam-header">
-            <div class="exam-title">Aether Mocks</div>
+            <div class="exam-title">Mocks Wallah</div>
             <div class="header-actions" style="display: flex; align-items: center; gap: 12px;">
                 <button class="btn-icon" id="themeToggleBtn" title="Switch to Dark Mode"><i class="fas fa-moon"></i></button>
                 <button class="btn-icon" id="fullscreenToggleBtn" title="Toggle Fullscreen"><i class="fas fa-expand"></i></button>
@@ -62,14 +62,14 @@
                 </div>
             </div>
         </div>
-        
+
         <!-- Main Content -->
         <div class="mock-container">
             <!-- Question Area -->
             <div class="question-view">
                 <!-- Dynamically populated question container -->
                 <div id="questionContainer" style="flex: 1; display: flex; flex-direction: column; gap: 24px;"></div>
-                
+
                 <!-- Controls -->
                 <div class="nav-controls">
                     <button class="btn btn-secondary btn-prev"><i class="fas fa-chevron-left" style="margin-right: 8px;"></i> Previous</button>
@@ -79,40 +79,221 @@
                     <button class="btn btn-primary btn-next">Next <i class="fas fa-chevron-right" style="margin-left: 8px;"></i></button>
                 </div>
             </div>
-            
+
             <!-- Desktop Navigator Sidebar -->
             <div class="sidebar">
                 <div class="sidebar-section-title">Summary Status</div>
                 <div class="stats-grid">
                     <div class="stat-item">
-                        <div class="stat-count" id="stat-answered" style="color: #10b981;">0</div>
+                        <div class="stat-count" id="stat-answered" style="color: var(--success);">0</div>
                         <div class="stat-name">Answered</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-count" id="stat-flagged" style="color: #f59e0b;">0</div>
+                        <div class="stat-count" id="stat-flagged" style="color: var(--warning);">0</div>
                         <div class="stat-name">Flagged</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-count" id="stat-not-answered" style="color: #64748b;">0</div>
+                        <div class="stat-count" id="stat-not-answered" style="color: var(--text-muted);">0</div>
                         <div class="stat-name">Unanswered</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-count" id="stat-not-visited" style="color: #94a3b8;">0</div>
+                        <div class="stat-count" id="stat-not-visited" style="color: var(--text-muted);">0</div>
                         <div class="stat-name">Not Visited</div>
                     </div>
                 </div>
-                
+
                 <div class="sidebar-section-title" style="margin-top: 16px;">Question Navigator</div>
                 <div class="questions-grid"></div>
             </div>
         </div>
     </div>
-    
+
     <!-- Inject Question Data -->
     <script>
-        const questions = [];
+        const questions = [
+  {
+    "question": "<p>1. <span style=\"font-family: Cambria Math;\">Bharatnatyam and Kuchipudi dancer Yamini Krishnamurthy was awarded which of the following awards in 2016</span></p>",
+    "options": [
+      "Padma Bhushan",
+      "Padma Shri",
+      "Tagore Puraskar",
+      "Padma Vibhushan"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">1.<strong>(</strong></span><span style=\"font-family: Cambria Math;\"><strong>d)</strong> <strong>Padma </strong></span><strong><span style=\"font-family: Cambria Math;\">VIbhushan</span><span style=\"font-family: Cambria Math;\">,</span></strong><span style=\"font-family: Cambria Math;\"> Padma Shri (1968), Padma Bhushan (2001), \"</span><span style=\"font-family: Cambria Math;\">Natya</span><span style=\"font-family: Cambria Math;\"> Shastra\" award by Shambhavi School of Dance (2014). </span><strong><span style=\"font-family: Cambria Math;\">Book </span></strong><span style=\"font-family: Cambria Math;\">-A Passion for Dance: My Autobiography.</span></p>",
+    "question_index": 0
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\">Rani </span><span style=\"font-family: Cambria Math;\">Karnaa</span><span style=\"font-family: Cambria Math;\"> Nayak, who was awarded the Padma Shri in 2014, was a _______ dancer.</span></p>",
+    "options": [
+      "Odissi",
+      "Mohiniyattam",
+      "Kathak",
+      "Kathakali"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p><span style=\\\"font-family: Cambria Math;\\\">2.<strong>(</strong></span><span style=\\\"font-family: Cambria Math;\\\"><strong>c) Kathak. Awards and </strong></span><span style=\\\"font-family: Cambria Math;\\\"><strong>Honors </strong>:</span><span style=\\\"font-family: Cambria Math;\\\"> </span><span style=\\\"font-family: Cambria Math;\\\">Vice-President\\'s Gold Medal - Shankar\\'s Weekly (1954), Sangeet Natak </span><span style=\\\"font-family: Cambria Math;\\\">Akademi</span><span style=\\\"font-family: Cambria Math;\\\"> Award (1996), Order of the Queen of Laos (1964), Sangeet Varidhi - </span><span style=\\\"font-family: Cambria Math;\\\">Bharatiya</span><span style=\\\"font-family: Cambria Math;\\\"> Kala Kendra, New Delhi (1977). </span><span style=\\\"font-family: Cambria Math;\\\">Samskritiki</span><span style=\\\"font-family: Cambria Math;\\\"> </span><span style=\\\"font-family: Cambria Math;\\\">Shreyaskar</span><span style=\\\"font-family: Cambria Math;\\\"> Kolkata is a dance academy founded in 1995, by Rani </span><span style=\\\"font-family: Cambria Math;\\\">Karnaa</span><span style=\\\"font-family: Cambria Math;\\\">.</span></p>",
+    "question_index": 1
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\">Black Card given to a badminton player during the game </span><span style=\"font-family: Cambria Math;\">indicates :</span></p>",
+    "options": [
+      "suspension",
+      "fault",
+      "warning",
+      "disqualification"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">3.<strong>(</strong></span><strong><span style=\"font-family: Cambria Math;\">d) Disqualification. Terminology </span></strong><span style=\"font-family: Cambria Math;\"><strong>of Badminton</strong> - Backcourt, Birdie, Carry, Center position, Clear, Cross-court, Double hit, </span><span style=\"font-family: Cambria Math;\">Drop</span><span style=\"font-family: Cambria Math;\"> shot, Drive, Fault, Flick, Forecourt, Kill, Let, Mid-court, Push shot, Rally, Shuttlecock, Smash etc. </span></p>",
+    "question_index": 2
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\">4</span><span style=\"font-family: Cambria Math;\">. Sunanda Nair is famous for performing which of the following dance </span><span style=\"font-family: Cambria Math;\">forms ?</span></p>",
+    "options": [
+      "Kathak",
+      "Odissi",
+      "Yakshagana",
+      "Mohiniyattam"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p><span style=\\\"font-family: Cambria Math;\\\">4.<strong>(</strong></span><span style=\\\"font-family: Cambria Math;\\\"><strong>d)</strong> </span><strong><span style=\\\"font-family: Cambria Math;\\\">Mohiniyattam</span></strong><span style=\\\"font-family: Cambria Math;\\\"> </span><span style=\\\"font-family: Cambria Math;\\\">(classical dance of Kerala). Sunanda Nair </span><span style=\\\"font-family: Cambria Math;\\\"><strong>Awards and Honors</strong> </span><span style=\\\"font-family: Cambria Math;\\\">- Global Mannam award\\', (New York </span><strong><span style=\\\"font-family: Cambria Math;\\\">2020</span></strong><span style=\\\"font-family: Cambria Math;\\\">), </span><span style=\\\"font-family: Cambria Math;\\\">Nrithya</span><span style=\\\"font-family: Cambria Math;\\\"> Seva Mani award (</span><strong><span style=\\\"font-family: Cambria Math;\\\">2020</span></strong><span style=\\\"font-family: Cambria Math;\\\">), Nalanda Kanaka Nartana </span><span style=\\\"font-family: Cambria Math;\\\">Puraskaar</span><span style=\\\"font-family: Cambria Math;\\\">\\' (</span><strong><span style=\\\"font-family: Cambria Math;\\\">2017</span></strong><span style=\\\"font-family: Cambria Math;\\\">), &lsquo;</span><span style=\\\"font-family: Cambria Math;\\\">Kalarathnam</span><span style=\\\"font-family: Cambria Math;\\\">&rsquo; from Kerala </span><span style=\\\"font-family: Cambria Math;\\\">Kalamandalam</span><span style=\\\"font-family: Cambria Math;\\\"> (</span><strong><span style=\\\"font-family: Cambria Math;\\\">2016</span></strong><span style=\\\"font-family: Cambria Math;\\\">), Kalashree from the Kerala Sangeetha Natak </span><span style=\\\"font-family: Cambria Math;\\\">Akademi</span><span style=\\\"font-family: Cambria Math;\\\"> (</span><strong><span style=\\\"font-family: Cambria Math;\\\">2011</span></strong><span style=\\\"font-family: Cambria Math;\\\">), \\'Global Excellence Award\\' (</span><strong><span style=\\\"font-family: Cambria Math;\\\">2011</span></strong><span style=\\\"font-family: Cambria Math;\\\">), </span><span style=\\\"font-family: Cambria Math;\\\">Kalasagar</span><span style=\\\"font-family: Cambria Math;\\\"> (</span><strong><span style=\\\"font-family: Cambria Math;\\\">2010</span></strong><span style=\\\"font-family: Cambria Math;\\\">), Best Ethnic Classical Arts Award, (New Orleans, </span><span style=\\\"font-family: Cambria Math;\\\">2003)</span><span style=\\\"font-family: Cambria Math;\\\">, \\'Anantha </span><span style=\\\"font-family: Cambria Math;\\\">Margaseersha</span><span style=\\\"font-family: Cambria Math;\\\"> </span><span style=\\\"font-family: Cambria Math;\\\">Natya</span><span style=\\\"font-family: Cambria Math;\\\"> </span><span style=\\\"font-family: Cambria Math;\\\">Puraskaram</span><span style=\\\"font-family: Cambria Math;\\\">\\' </span><span style=\\\"font-family: Cambria Math;\\\">( </span><strong><span style=\\\"font-family: Cambria Math;\\\">2018</span></strong><span style=\\\"font-family: Cambria Math;\\\">) etc. </span></p>",
+    "question_index": 3
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\"> How many times did India </span><span style=\"font-family: Cambria Math;\">organise</span><span style=\"font-family: Cambria Math;\"> the Commonwealth Games?</span></p>",
+    "options": [
+      "Once",
+      "Twice",
+      "Thrice",
+      "Never"
+    ],
+    "correct_option_id": 0,
+    "solution": "<p><span style=\\\"font-family: Cambria Math;\\\">5.<strong>(</strong></span><span style=\\\"font-family: Cambria Math;\\\"><strong>a) Once (2010).</strong></span><span style=\\\"font-family: Cambria Math;\\\"> In the Commonwealth Games (2010),</span><span style=\\\"font-family: Cambria Math;\\\"> </span><span style=\\\"font-family: Cambria Math;\\\">India won 101 medals - 39 gold medals, 26 silvers and 36 bronze to finish second on the </span><span style=\\\"font-family: Cambria Math;\\\">medals</span><span style=\\\"font-family: Cambria Math;\\\"> leaderboard. </span><strong><span style=\\\"font-family: Cambria Math;\\\">1</span><span style=\\\"font-family: Cambria Math;\\\">st</span><span style=\\\"font-family: Cambria Math;\\\"> </span><span style=\\\"font-family: Cambria Math;\\\">Commonwealth games (</span><span style=\\\"font-family: Cambria Math;\\\">1930</span></strong><span style=\\\"font-family: Cambria Math;\\\"><strong>)</strong> were held in </span><strong><span style=\\\"font-family: Cambria Math;\\\">Hamilton, </span><span style=\\\"font-family: Cambria Math;\\\">Canada</span></strong><span style=\\\"font-family: Cambria Math;\\\"><strong>.</strong>Commonwealth</span><span style=\\\"font-family: Cambria Math;\\\"> Games to be held in <strong>Victoria (Australia) in 2026.</strong> Legendary sprinter </span><strong><span style=\\\"font-family: Cambria Math;\\\">Milkha Singh</span></strong><span style=\\\"font-family: Cambria Math;\\\"><strong> </strong>became the first Indian to win a </span><strong><span style=\\\"font-family: Cambria Math;\\\">gold medal</span></strong><span style=\\\"font-family: Cambria Math;\\\"> at the Commonwealth Games (1st place in men\\'s </span><span style=\\\"font-family: Cambria Math;\\\">440 yard</span><span style=\\\"font-family: Cambria Math;\\\"> event at Cardiff Commonwealth Games 1958.). </span></p>",
+    "question_index": 4
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\">A</span><span style=\"font-family: Cambria Math;\"> Hindu festival celebrated by the Tamil community that falls in the Tamil Solar Month is called? </span></p>",
+    "options": [
+      "Karaga",
+      "Bihu",
+      "Onam",
+      "Thaipusam"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">6.<strong>(</strong></span><strong><span style=\"font-family: Cambria Math;\">d) Thaipusam.</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">Other Festivals</span></strong><span style=\"font-family: Cambria Math;\"><strong> </strong>celebrated in </span><strong><span style=\"font-family: Cambria Math;\">Tamilnadu</span></strong><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">:</span><span style=\"font-family: Cambria Math;\"> Pongal, </span><span style=\"font-family: Cambria Math;\">Thiruvaiyaru</span><span style=\"font-family: Cambria Math;\"> Festival, </span><span style=\"font-family: Cambria Math;\">Natyanjali</span><span style=\"font-family: Cambria Math;\"> Dance Festival, </span><span style=\"font-family: Cambria Math;\">Mahamaham</span><span style=\"font-family: Cambria Math;\">, Karthigai </span><span style=\"font-family: Cambria Math;\">Deepam</span><span style=\"font-family: Cambria Math;\"> etc. </span><strong><span style=\"font-family: Cambria Math;\">Karaga</span></strong><span style=\"font-family: Cambria Math;\"><strong> </strong>is a folk dance of Karnataka originated as a ritual dedicated to Draupadi as known in these parts as </span><strong><span style=\"font-family: Cambria Math;\">Droupadmma</span><span style=\"font-family: Cambria Math;\">.</span><span style=\"font-family: Cambria Math;\"> Onam</span></strong><span style=\"font-family: Cambria Math;\"> is </span><span style=\"font-family: Cambria Math;\">a </span><span style=\"font-family: Cambria Math;\"> <strong>harvest</strong></span><strong><span style=\"font-family: Cambria Math;\"> festival</span></strong><span style=\"font-family: Cambria Math;\"><strong> </strong>celebrated in Kerala. </span><strong><span style=\"font-family: Cambria Math;\">Bihu </span></strong><span style=\"font-family: Cambria Math;\"><strong>(Assam)</strong>.</span></p>",
+    "question_index": 5
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\">Sundaram</span><span style=\"font-family: Cambria Math;\"> Balachander has been the main player of which of the following musical instruments?</span></p>\n",
+    "options": [
+      "Mridangam",
+      "Bansuri",
+      "Veena",
+      "Santoor"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">7.<strong>(</strong></span><span style=\"font-family: Cambria Math;\"><strong>c)</strong> <strong>Veena. Awards to S </strong></span><strong><span style=\"font-family: Cambria Math;\">Balachander :</span></strong><span style=\"font-family: Cambria Math;\"><strong>-</strong> </span><span style=\"font-family: Cambria Math;\">Padma Bhushan (1982), Sangeetha Kala </span><span style=\"font-family: Cambria Math;\">Shikhamani</span><span style=\"font-family: Cambria Math;\"> (1982). </span><strong><span style=\"font-family: Cambria Math;\">Famous Artists of </span><span style=\"font-family: Cambria Math;\">Veena</span></strong><span style=\"font-family: Cambria Math;\"><strong> </strong>:</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">Rajhesh</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">Vaidhya</span><span style=\"font-family: Cambria Math;\">, Jayanthi Kumaresh, Nageswara Rao, E. Gayathri etc. <strong>King </strong></span><span style=\"font-family: Cambria Math;\"><strong>Samudragupta</strong> </span><span style=\"font-family: Cambria Math;\">was also a great Veena Player. </span></p>\n",
+    "question_index": 6
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\">In football, when the ball strikes the frame of the goal or the referee and remains within the goal and touch lines, it is:</span></p>",
+    "options": [
+      "foul",
+      "still in play",
+      "a misconduct",
+      "out of play"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">8.<strong>(</strong></span><span style=\"font-family: Cambria Math;\"><strong>b) still in play.</strong> </span><span style=\"font-family: Cambria Math;\">Other terms related to </span><span style=\"font-family: Cambria Math;\">Football :</span><span style=\"font-family: Cambria Math;\"> Back of the net, Ball-to-hand, Bicycle kick, Box-to-box player, Chip shot, Clean sheet, Hoof, Dummy run etc. </span></p>",
+    "question_index": 7
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\">The</span><span style=\"font-family: Cambria Math;\"> Indian Institute of remote sensing was established at:</span></p>",
+    "options": [
+      "Khadakwasla",
+      "Shimla",
+      "Dehradun",
+      "Kochi"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">9.<strong>(</strong></span><span style=\"font-family: Cambria Math;\"><strong>c) Dehradun.</strong> </span><span style=\"font-family: Cambria Math;\">Aryabhatta</span><span style=\"font-family: Cambria Math;\"> Research Institute of Observational Sciences <strong>(</strong></span><strong><span style=\"font-family: Cambria Math;\">ARIES</span></strong><span style=\"font-family: Cambria Math;\"><strong>)</strong> in Nainital, Uttarakhand. National Remote Sensing Centre <strong>(</strong></span><strong><span style=\"font-family: Cambria Math;\">NRSC</span></strong><span style=\"font-family: Cambria Math;\"><strong>)</strong> in Hyderabad. Space Applications Centre <strong>(</strong></span><strong><span style=\"font-family: Cambria Math;\">SAC</span></strong><span style=\"font-family: Cambria Math;\"><strong>)</strong> in Ahmedabad, Gujarat. Satish Dhawan Space Centre SHAR </span><strong><span style=\"font-family: Cambria Math;\">(SHAR or </span><span style=\"font-family: Cambria Math;\">SriHarikota</span><span style=\"font-family: Cambria Math;\"> Range</span></strong><span style=\"font-family: Cambria Math;\"><strong>) </strong>in Nellore district, Andhra Pradesh. </span></p>",
+    "question_index": 8
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\">What</span><span style=\"font-family: Cambria Math;\"> is the difference in the number of years between the summer and winter Olympic </span><span style=\"font-family: Cambria Math;\">events?</span></p>",
+    "options": [
+      "1",
+      "2",
+      "4",
+      "3"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">10.<strong>(</strong></span><strong><span style=\"font-family: Cambria Math;\">b) 2 years.</span></strong><span style=\"font-family: Cambria Math;\"> The Olympic Games are normally held every four years.</span><span style=\"font-family: Cambria Math;\"> <strong>First </strong></span><span style=\"font-family: Cambria Math;\"><strong>summer Olympic games:</strong> 6 April 1896 {Greece (Athens)}. Summer Olympic games 2020: Tokyo. </span><strong><span style=\"font-family: Cambria Math;\">First </span></strong><span style=\"font-family: Cambria Math;\"><strong>winter Olympic games: </strong>1924 (France). Winter Olympic Games 2022: </span><strong><span style=\"font-family: Cambria Math;\">Beijing</span></strong><span style=\"font-family: Cambria Math;\"><strong> (China).</strong> The FIFA world cup and Cricket world cup are held every four years.</span></p>",
+    "question_index": 9
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\">Who among the following was the first Indian female musician to </span><span style=\"font-family: Cambria Math;\">win the Grammy award?</span></p>",
+    "options": [
+      "Neeti Mohan",
+      "Tanvi Shah",
+      "Shweta Pandit",
+      "Shalmali Kholgade"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">11.<strong>(</strong></span><strong><span style=\"font-family: Cambria Math;\">b)</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">Tanvi Shah</span></strong><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">shared the Grammy Award for Best Song Written for Visual Media with AR Rahman and Gulzar at the 52nd Grammy Awards for the song <strong>&lsquo;</strong></span><strong><span style=\"font-family: Cambria Math;\">Jai Ho</span></strong><span style=\"font-family: Cambria Math;\"><strong>&rsquo;</strong> (Slumdog Millionaire) for writing Spanish lyrics for the song.</span><span style=\"font-family: Cambria Math;\"> <strong>Others Awards</strong></span><span style=\"font-family: Cambria Math;\"><strong>:</strong> BMI award in 2009, World soundtrack award (2009).</span></p>",
+    "question_index": 10
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\">According to census 2011, number of literates in India is ______ million.</span></p>",
+    "options": [
+      "767.5",
+      "765.5",
+      "769.5",
+      "763.5"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">12.<strong>(</strong></span><strong><span style=\"font-family: Cambria Math;\">d)</span></strong><span style=\"font-family: Cambria Math;\"> The number of literates in India is </span><strong><span style=\"font-family: Cambria Math;\">763.5 million</span></strong><span style=\"font-family: Cambria Math;\"> in Census 2011 {Male: 82.14% and Female: 65.46%}.</span><span style=\"font-family: Cambria Math;\"> <strong>Kerala</strong></span><span style=\"font-family: Cambria Math;\"> has the highest literacy rate {94%: Male - 96.11% and female - 92.07%}. Lowest literacy rate: </span><strong><span style=\"font-family: Cambria Math;\">Bihar</span></strong><span style=\"font-family: Cambria Math;\"><strong> </strong>{69.83%: Male - 70.32% and female - 53.57%}.</span></p>",
+    "question_index": 11
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\">Who</span><span style=\"font-family: Cambria Math;\"> among the following was the first recipient of the State annual award </span><span style=\"font-family: Cambria Math;\">Nishagandhi</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">Puraskaram</span><span style=\"font-family: Cambria Math;\"> from the Government of Kerala in 2013? </span></p>",
+    "options": [
+      "Madhavi Mudgal",
+      "Shobana C Pillai",
+      "Uday Shankar",
+      "Mrinalini Sarabhai"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p>13(d) <strong><span style=\"font-family: Cambria Math;\">Mrinalini Sarabhai</span></strong><span style=\"font-family: Cambria Math;\"> (Bharatanatyam) was the founder and director of Darpana Academy of Performing Arts in Ahmedabad. </span><strong><span style=\"font-family: Cambria Math;\">Awards and </span><span style=\"font-family: Cambria Math;\">honours</span><span style=\"font-family: Cambria Math;\">:</span></strong><span style=\"font-family: Cambria Math;\"> Padma Bhushan (1992</span><span style=\"font-family: Cambria Math;\">), Padma</span><span style=\"font-family: Cambria Math;\"> Shri (1965), Sangeet Natak </span><span style=\"font-family: Cambria Math;\">Akademi</span><span style=\"font-family: Cambria Math;\"> Fellowship (1994), </span><span style=\"font-family: Cambria Math;\">Dhirubhai</span><span style=\"font-family: Cambria Math;\"> Thakar Savyasachi Saraswat Award (2014). She was the first Indian to receive the medal and Diploma of the French association Archives </span><span style=\"font-family: Cambria Math;\">Internationales</span><span style=\"font-family: Cambria Math;\"> de la Danse.</span></p>",
+    "question_index": 12
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\">Which of the following dance forms did NOT originate in South India?</span></p>",
+    "options": [
+      "Kathakali",
+      "Kuchipudi",
+      "Sattriya",
+      "Bharatanatyam"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">14.<strong>(</strong></span><strong><span style=\"font-family: Cambria Math;\">c)</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">Sattriya</span><span style=\"font-family: Cambria Math;\"> </span></strong><span style=\"font-family: Cambria Math;\"><strong>dance (Assam).</strong> Kathakali (Kerala</span><span style=\"font-family: Cambria Math;\">) ,</span><span style=\"font-family: Cambria Math;\"> Kuchipudi (Andhra Pradesh). Bharatanatyam (Tamil Nadu). </span><strong><span style=\"font-family: Cambria Math;\">More famous dance forms of South </span><span style=\"font-family: Cambria Math;\">India</span></strong><span style=\"font-family: Cambria Math;\"><strong> </strong>:</span><span style=\"font-family: Cambria Math;\">- </span><span style=\"font-family: Cambria Math;\">Kummi</span><span style=\"font-family: Cambria Math;\"> (Tamil Nadu), </span><span style=\"font-family: Cambria Math;\">Padayani</span><span style=\"font-family: Cambria Math;\"> (Kerala), </span><span style=\"font-family: Cambria Math;\">Kolannalu</span><span style=\"font-family: Cambria Math;\"> (Andhra Pradesh), </span><span style=\"font-family: Cambria Math;\">Mayilattam</span><span style=\"font-family: Cambria Math;\"> (Tamil Nadu), </span><span style=\"font-family: Cambria Math;\">Veerageese</span><span style=\"font-family: Cambria Math;\"> (Karnataka), </span><span style=\"font-family: Cambria Math;\">Theyyam</span><span style=\"font-family: Cambria Math;\"> (Kerala), Perini </span><span style=\"font-family: Cambria Math;\">Thandavam</span><span style=\"font-family: Cambria Math;\"> (Telangana), Garadi (Tamil Nadu), </span><span style=\"font-family: Cambria Math;\">Thapetta</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">Gullu</span><span style=\"font-family: Cambria Math;\"> (Andhra Pradesh), </span><span style=\"font-family: Cambria Math;\">Oppana</span><span style=\"font-family: Cambria Math;\"> (Kerala).</span></p>",
+    "question_index": 13
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\">Who among the following won a Padma Vibhushan award in year 1971?</span></p>",
+    "options": [
+      "Rajeev Narayan",
+      "S Swaminathan",
+      "Devjani Chaliha",
+      "Uday Shankar"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">15.<strong>(</strong></span><strong><span style=\"font-family: Cambria Math;\">d) Uday Shankar</span><span style=\"font-family: Cambria Math;\"> (</span><span style=\"font-family: Cambria Math;\">fusion style)</span></strong><span style=\"font-family: Cambria Math;\"><strong> </strong>was the father of modern dance in India. </span><span style=\"font-family: Cambria Math;\">He created the dance form </span><strong><span style=\"font-family: Cambria Math;\">(Hi-dance)</span><span style=\"font-family: Cambria Math;\">. </span><span style=\"font-family: Cambria Math;\">Awards and </span><span style=\"font-family: Cambria Math;\">honours</span><span style=\"font-family: Cambria Math;\">:</span></strong><span style=\"font-family: Cambria Math;\"> Sangeet Natak </span><span style=\"font-family: Cambria Math;\">Akademi</span><span style=\"font-family: Cambria Math;\"> award (1960), Sangeet Natak </span><span style=\"font-family: Cambria Math;\">Akademi</span><span style=\"font-family: Cambria Math;\"> Fellowship (1962), Padma Vibhushan (1971), </span><span style=\"font-family: Cambria Math;\">Desikottama</span><span style=\"font-family: Cambria Math;\">, Visva-Bharati University (1975).</span></p>",
+    "question_index": 14
+  }
+];
     </script>
-    
+
     <!-- Central JS Controller -->
     <script src="../js/mock-core.js"></script>
 </body>

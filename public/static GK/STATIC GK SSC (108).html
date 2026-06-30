@@ -3,43 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aether Mocks</title>
+    <title>Mocks Wallah</title>
     <!-- Fonts & Icons -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    
+
     <!-- Central Stylesheet -->
     <link rel="stylesheet" href="../css/mock-main.css">
-    
+
     <!-- Math Formula Rendering (KaTeX/MathJax) -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    
+
     <!-- Timer Config -->
-    <meta name="exam-duration" content="60">
+    <meta name="exam-duration" content="30">
 </head>
 <body>
     <!-- Welcome Screen -->
     <div class="welcome-screen" id="welcomeScreen">
         <div class="welcome-container">
             <div class="welcome-header" style="margin-bottom: 24px;">
-                <h1 style="font-size: 2rem; font-weight: 700; color: #0f172a; margin-bottom: 8px;"><i class="fas fa-graduation-cap" style="color: #3b82f6;"></i> Aether Mocks</h1>
-                <p style="color: #64748b;">Computer Based Test Portal</p>
+                <h1 style="font-size: 2rem; font-weight: 700; color: var(--text-main); margin-bottom: 8px;"><i class="fas fa-graduation-cap" style="color: var(--primary);"></i> Mocks Wallah</h1>
+                <p style="color: var(--text-muted);">Computer Based Test Portal</p>
             </div>
-            
+
             <div class="test-details" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-bottom: 32px; text-align: left;">
-                <div class="detail-item" style="padding: 12px; background: #f8fafc; border-radius: 8px; border: 1px solid #e2e8f0;">
-                    <div class="detail-label" style="font-size: 0.8rem; color: #64748b;">Total Questions</div>
-                    <div class="detail-value" style="font-size: 1.1rem; font-weight: 600; color: #0f172a;">10</div>
+                <div class="detail-item" style="padding: 12px; background: var(--bg-color); border-radius: 8px; border: 1px solid var(--border-color);">
+                    <div class="detail-label" style="font-size: 0.8rem; color: var(--text-muted);">Total Questions</div>
+                    <div class="detail-value" style="font-size: 1.1rem; font-weight: 600; color: var(--text-main);">15</div>
                 </div>
-                <div class="detail-item" style="padding: 12px; background: #f8fafc; border-radius: 8px; border: 1px solid #e2e8f0;">
-                    <div class="detail-label" style="font-size: 0.8rem; color: #64748b;">Duration</div>
-                    <div class="detail-value" style="font-size: 1.1rem; font-weight: 600; color: #0f172a;">60 mins</div>
+                <div class="detail-item" style="padding: 12px; background: var(--bg-color); border-radius: 8px; border: 1px solid var(--border-color);">
+                    <div class="detail-label" style="font-size: 0.8rem; color: var(--text-muted);">Duration</div>
+                    <div class="detail-value" style="font-size: 1.1rem; font-weight: 600; color: var(--text-main);">30 mins</div>
                 </div>
             </div>
-            
+
             <div class="welcome-actions">
                 <button class="btn btn-primary" id="startBtn" onclick="document.getElementById('welcomeScreen').style.display='none'; document.getElementById('examContainer').style.display='flex';" style="font-size: 1.1rem; padding: 12px 32px; width: 100%;">
                     <i class="fas fa-play" style="margin-right: 8px;"></i> Start Test
@@ -47,12 +47,12 @@
             </div>
         </div>
     </div>
-    
+
     <!-- Main Exam Interface -->
     <div class="exam-container" id="examContainer" style="display: none; height: 100vh; flex-direction: column;">
         <!-- Top Header -->
         <div class="exam-header">
-            <div class="exam-title">Aether Mocks</div>
+            <div class="exam-title">Mocks Wallah</div>
             <div class="header-actions" style="display: flex; align-items: center; gap: 12px;">
                 <button class="btn-icon" id="themeToggleBtn" title="Switch to Dark Mode"><i class="fas fa-moon"></i></button>
                 <button class="btn-icon" id="fullscreenToggleBtn" title="Toggle Fullscreen"><i class="fas fa-expand"></i></button>
@@ -62,14 +62,14 @@
                 </div>
             </div>
         </div>
-        
+
         <!-- Main Content -->
         <div class="mock-container">
             <!-- Question Area -->
             <div class="question-view">
                 <!-- Dynamically populated question container -->
                 <div id="questionContainer" style="flex: 1; display: flex; flex-direction: column; gap: 24px;"></div>
-                
+
                 <!-- Controls -->
                 <div class="nav-controls">
                     <button class="btn btn-secondary btn-prev"><i class="fas fa-chevron-left" style="margin-right: 8px;"></i> Previous</button>
@@ -79,40 +79,221 @@
                     <button class="btn btn-primary btn-next">Next <i class="fas fa-chevron-right" style="margin-left: 8px;"></i></button>
                 </div>
             </div>
-            
+
             <!-- Desktop Navigator Sidebar -->
             <div class="sidebar">
                 <div class="sidebar-section-title">Summary Status</div>
                 <div class="stats-grid">
                     <div class="stat-item">
-                        <div class="stat-count" id="stat-answered" style="color: #10b981;">0</div>
+                        <div class="stat-count" id="stat-answered" style="color: var(--success);">0</div>
                         <div class="stat-name">Answered</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-count" id="stat-flagged" style="color: #f59e0b;">0</div>
+                        <div class="stat-count" id="stat-flagged" style="color: var(--warning);">0</div>
                         <div class="stat-name">Flagged</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-count" id="stat-not-answered" style="color: #64748b;">0</div>
+                        <div class="stat-count" id="stat-not-answered" style="color: var(--text-muted);">0</div>
                         <div class="stat-name">Unanswered</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-count" id="stat-not-visited" style="color: #94a3b8;">0</div>
+                        <div class="stat-count" id="stat-not-visited" style="color: var(--text-muted);">0</div>
                         <div class="stat-name">Not Visited</div>
                     </div>
                 </div>
-                
+
                 <div class="sidebar-section-title" style="margin-top: 16px;">Question Navigator</div>
                 <div class="questions-grid"></div>
             </div>
         </div>
     </div>
-    
+
     <!-- Inject Question Data -->
     <script>
-        const questions = [];
+        const questions = [
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\">1</span><span style=\"font-family: Cambria Math;\">. Urmila Satyanarayanan is an exponent of which Indian classical dance form?</span></p>\n",
+    "options": [
+      "Bharatanatyam",
+      "Kathak",
+      "Manipuri",
+      "Sattriya"
+    ],
+    "correct_option_id": 0,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">1.(</span><span style=\"font-family: Cambria Math;\">a) <strong>Bharatanatyam</strong>. </span><span style=\"font-family: Cambria Math;\">Urmila Satyanarayanan (Tamil nadu). Awards: Kalaimamani award (1997), Nritya Choodaman (2001). </span><strong><span style=\"font-family: Cambria Math;\">Other dancers:</span></strong><span style=\"font-family: Cambria Math;\"> Bharatanatyam - Rukmini Devi Arundale, Padma Subrahmanyam, Mallika Sarabhai, Yamini </span><span style=\"font-family: Cambria Math;\">Krishnamurthy. </span><span style=\"font-family: Cambria Math;\">Kathak - Birju Maharaj, Shovana Narayan, Sitara Devi.</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">Manipuri - Guru Bipin Singh, Darshana Jhaveri Nayana, Ranjana, Suverna.</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">Sattriya - Krishnakshi Kashyap, Gorima Hazarika.</span></p>\n",
+    "question_index": 0
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\">Whom</span><span style=\"font-family: Cambria Math;\"> among the following players is associated with Javelin throw?</span></p>\n",
+    "options": [
+      "Neeraj Chopra",
+      "Pankaj Advani",
+      "Saurabh Chaudhary",
+      "Manika Batra"
+    ],
+    "correct_option_id": 0,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">2.(</span><span style=\"font-family: Cambria Math;\">a) <strong>Neeraj Chopra.</strong> </span><span style=\"font-family: Cambria Math;\">Awards: Padma Shri (2022), Major Dhyan Chand Khel Ratna Award (2021). </span><span style=\"font-family: Cambria Math;\">Gold medal - Tokyo Olympic (2020), Commonwealth Games (2018), Asian Games (2018)</span><span style=\"font-family: Cambria Math;\">.</span><span style=\"font-family: Cambria Math;\"> <strong>Pankaj Advani </strong></span><span style=\"font-family: Cambria Math;\">(Billiards and Snooker player): Award - Padma Bhushan (2018), Padma Shri (2009).</span><span style=\"font-family: Cambria Math;\"> <strong>Saurabh C</strong></span><strong><span style=\"font-family: Cambria Math;\">haudhary</span></strong><span style=\"font-family: Cambria Math;\"> (shooter) - He won the gold medal at the 2018 Asian Games. </span><span style=\"font-family: Cambria Math;\">Manika Batra (table tennis): Arjuna Award (2018).</span></p>\n",
+    "question_index": 1
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\">Which of the following sitar players was awarded the Bharat Ratna in the year 1999?</span></p>\n",
+    "options": [
+      "Pandit Bhimsen Joshi",
+      "Pandit Ravishankar",
+      "Hariprasad Chourasia ",
+      "Bhupen Hazarika\\r\\n "
+    ],
+    "correct_option_id": 1,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">3.(</span><span style=\"font-family: Cambria Math;\">b) <strong>Pandit Ravishankar (sitar player).</strong></span><span style=\"font-family: Cambria Math;\"> Awards: Padma Vibhushan (1981)</span><span style=\"font-family: Cambria Math;\">,Padma</span><span style=\"font-family: Cambria Math;\"> Bhushan (1967), Sangeet Natak Akademi Award (1962), Kalidas Samman (1987-1988). Pandit Bhimsen Joshi (Indian vocalist): Award - Bharat Ratna (2009), Padma Vibhushan (1999). </span><span style=\"font-family: Cambria Math;\">Hariprasad Chourasia (</span><span style=\"font-family: Cambria Math;\">flute player</span><span style=\"font-family: Cambria Math;\">): Award - Padma Vibhushan (2000), Padma Bhushan (1992). Bhupen Hazarika (</span><span style=\"font-family: Cambria Math;\">singer</span><span style=\"font-family: Cambria Math;\">): Award - Bharat Ratna (2019) (posthumously), Padma Vibhushan (2012) (posthumously).</span></p>\n",
+    "question_index": 2
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\">4</span><span style=\"font-family: Cambria Math;\">. The first Paralympic games were held in which year?</span></p>\n",
+    "options": [
+      "1962",
+      "1960",
+      "1964",
+      "1961"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">4.(</span><span style=\"font-family: Cambria Math;\">b) <strong>1960</strong>. </span><span style=\"font-family: Cambria Math;\">The first Paralympic Games - Rome (Italy).</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">First winter Paralympics Games - Sweden (1976). First Olympic Games </span><span style=\"font-family: Cambria Math;\">- Athens</span><span style=\"font-family: Cambria Math;\"> (1896). The first Winter Olympics - Chamonix (French), 1924. Venue of Olympic </span><span style=\"font-family: Cambria Math;\">Games: 2024 - Paris, 2028 - Los Angeles. International Olympic Committee: Headquarters - Lausanne (Switzerland), Foundation </span><span style=\"font-family: Cambria Math;\">- 23</span><span style=\"font-family: Cambria Math;\"> June 1894.</span></p>\n",
+    "question_index": 3
+  },
+  {
+    "question": "<p>5.<span style=\"font-family: Cambria Math;\"> Thomas Cup is </span><span style=\"font-family: Cambria Math;\">a/an________</span><span style=\"font-family: Cambria Math;\">.</span></p>\n",
+    "options": [
+      "annual event",
+      "biennial event",
+      "quarterly event",
+      "triennial event"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">5.(</span><span style=\"font-family: Cambria Math;\">b) <strong>Biennial event. Thomas Cup -</strong> </span><span style=\"font-family: Cambria Math;\">The first tournament was held in 1948 - 49 and won by Malaya. India&rsquo;s men&rsquo;s badminton team won the Thomas Cup title for the first time ever in 2022 by defeating Indonesia. </span><span style=\"font-family: Cambria Math;\">Uber Cup - </span><span style=\"font-family: Cambria Math;\">First held in 1956&ndash;1957 and contested at three year intervals, it has bee</span><span style=\"font-family: Cambria Math;\">n contested every two years since 1984. </span></p>\n",
+    "question_index": 4
+  },
+  {
+    "question": "<p>6. <span style=\\\"font-family: Cambria Math;\\\">\\'Penalty Corner\\' is related to which of the following sports?</span></p>\\n",
+    "options": [
+      "Chess",
+      "Tennis ",
+      "Badminton",
+      "Hockey"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">6.(</span><span style=\"font-family: Cambria Math;\">d) <strong>Hockey</strong>. </span><span style=\"font-family: Cambria Math;\">Terms related to </span><strong><span style=\"font-family: Cambria Math;\">Hockey</span></strong><span style=\"font-family: Cambria Math;\"><strong> </strong>- Cross, Dangerous Play, Defense (Defender), Drive, Flagrant Foul, Flick, Goal-line, Long Hit, Penalty Stroke, Raised Ball, Scoop, Striker, Tackle, </span><span style=\"font-family: Cambria Math;\">Undercutting</span><span style=\"font-family: Cambria Math;\">. </span><strong><span style=\"font-family: Cambria Math;\">Chess</span></strong><span style=\"font-family: Cambria Math;\"><strong> </strong>- Grandmaster, Back-rank, checkmate. </span><strong><span style=\"font-family: Cambria Math;\">Tennis</span></strong><span style=\"font-family: Cambria Math;\"><strong> </strong>- Alley, Backhand, Double Fault, Lob, Stanc</span><span style=\"font-family: Cambria Math;\">e, Topspin.</span><span style=\"font-family: Cambria Math;\"> </span><strong><span style=\"font-family: Cambria Math;\">Badminton </span></strong><span style=\"font-family: Cambria Math;\">- Hairpin Net Shot, Rally, Flick.</span></p>\n",
+    "question_index": 5
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\">Select the correct statement about the achievements of Sruti Bandyopadhyay, an eminent Manipuri dancer.</span></p>\n",
+    "options": [
+      "She received Padma Shri for the year 2020.",
+      "She received the Sangeet Natak Akademi Award for the year 2020.",
+      "She received Kalidas Samman for the year 2020.",
+      "She received Padma Vibhushan for the year 2020."
+    ],
+    "correct_option_id": 1,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">7.(</span><span style=\"font-family: Cambria Math;\">b)</span><span style=\"font-family: Cambria Math;\"> Other Dance forms and their dancers : </span><strong><span style=\"font-family: Cambria Math;\">Manipuri</span></strong><span style=\"font-family: Cambria Math;\"><strong> </strong>- Nayana, Suverna, Ranjana, and Darshana, Guru Bipin Singh. </span><strong><span style=\"font-family: Cambria Math;\">Odissi</span></strong><span style=\"font-family: Cambria Math;\"><strong> </strong>- Guru Pankaj Charan Das, Sonal Mansingh, Kelucharan Mohapatra, Geeta Maha</span><span style=\"font-family: Cambria Math;\">lik, Dr. Minati Mishra, Madhavi Mudgal. </span><strong><span style=\"font-family: Cambria Math;\">Sattriya</span></strong><span style=\"font-family: Cambria Math;\"><strong> </strong>- Ghanakanta Bora, Jatin Goswami, Srimanta Sankardev.</span></p>\n",
+    "question_index": 6
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\">Which of the given personalities is NOT associated with Carnatic Music?</span></p>\n",
+    "options": [
+      "Kalyani Varadarajan",
+      "MS Subbulakshmi",
+      "Vishnu Narayan Bhatkhande",
+      "Subramania Bharathiyar"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">8.(</span><span style=\"font-family: Cambria Math;\">c) <strong>Vishnu Narayan Bhatkhande</strong></span><span style=\"font-family: Cambria Math;\"> - He was related to Hindustani classical music. Other personalities related to Carnatic music - Purandaradasa (Father of Carnatic music), Kanaka Dasa, Muthu Thandavar, Tyagaraja, Muthuswami Dikshitar, Syama Sastri, Arun</span><span style=\"font-family: Cambria Math;\">a Sairam, Semmangudi Srinivasa Iyer, </span><span style=\"font-family: Cambria Math;\">Lalgudi</span><span style=\"font-family: Cambria Math;\"> Jayaraman.</span></p>\n",
+    "question_index": 7
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\">Which of the following dances is performed by the Santhal tribe of Jharkhand?</span></p>\n",
+    "options": [
+      "Jhika Dasain",
+      "Kolkali",
+      "Ghumar",
+      "Koli"
+    ],
+    "correct_option_id": 0,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">9.(</span><span style=\"font-family: Cambria Math;\">a) <strong>Jhika Dashain</strong>. </span><span style=\"font-family: Cambria Math;\">It is performed a few days before Dussehra.</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">States and their Folk dances</span><span style=\"font-family: Cambria Math;\"> - </span><span style=\"font-family: Cambria Math;\"><strong>Jharkhand </strong>:</span><span style=\"font-family: Cambria Math;\"> Alkap, Karm</span><span style=\"font-family: Cambria Math;\">a Munda, Agni, Jhumar, Janani Jhumar, Mardana Jhumar, Paika, Phagua. </span><strong><span style=\"font-family: Cambria Math;\">Bihar </span></strong><span style=\"font-family: Cambria Math;\">:</span><span style=\"font-family: Cambria Math;\"> Jata-Jatin, Bakho-Bakhain, Panwariya. </span><strong><span style=\"font-family: Cambria Math;\">Chhattisgarh</span></strong><span style=\"font-family: Cambria Math;\"><strong> </strong>:</span><span style=\"font-family: Cambria Math;\"> Gaur Maria, Panthi, Raut Nacha, Pandwani.</span></p>\n",
+    "question_index": 8
+  },
+  {
+    "question": "<p><span style=\\\"font-family: Cambria Math;\\\">10</span><span style=\\\"font-family: Cambria Math;\\\">. </span><span style=\\\"font-family: Cambria Math;\\\">Who among the following is the author of the book \\'The Bud</span><span style=\\\"font-family: Cambria Math;\\\">dha and his Dhamma\\', which appeared in 1957 after the death of its author?</span></p>\\n",
+    "options": [
+      "Subhas Chandra Bose",
+      "BR Ambedkar",
+      "Mahatma Gandhi",
+      "Motilal Nehru"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p>10<span style=\"font-family: Cambria Math;\">.(b) <strong>BR Ambedkar. Other Books</strong> -</span><span style=\"font-family: Cambria Math;\"> &ldquo;Castes in India&rdquo; (1916), &ldquo;The Problem of the Rupee&rdquo; (1923), &ldquo;Bahishkrit Bharat&rdquo; (1927), &ldquo;The Annihilation of Caste&rdquo; (1936), &ldquo;Federation Versus Freedom&rdquo; (1939), &ldquo;Thoughts on Pakistan&rdquo; (1940), &ldquo;Ranade, Gandhi and Jinnah&rdquo; (1943), &ldquo;Mr. Gandhi and Emancipa</span><span style=\"font-family: Cambria Math;\">tion of Untouchables&rdquo; (1943), &ldquo;Pakistan Or Partition Of India&rdquo; (1945), &ldquo;Who were the Shudras&rdquo; (1948), &ldquo;The Untouchables&rdquo; (1948), &ldquo;Buddha Or Karl Marx&rdquo; (1956). </span></p>\n",
+    "question_index": 9
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\">11</span><span style=\"font-family: Cambria Math;\">.</span><span style=\"font-family: Cambria Math;\"> Nag Panchami is celebrated in which month of Hindu </span><span style=\"font-family: Cambria Math;\">Calendar</span><span style=\"font-family: Cambria Math;\">?</span></p>\n",
+    "options": [
+      "Shravan",
+      "Kartik",
+      "Sharad",
+      "Asadh"
+    ],
+    "correct_option_id": 0,
+    "solution": "<p>11<span style=\"font-family: Cambria Math;\">.(a) <strong>Shravan</strong>. </span><span style=\"font-family: Cambria Math;\">Other festivals in Shravan month - Raksha Bandhan, Hariyali Teej, Narali Purnima.</span><span style=\"font-family: Cambria Math;\"> <strong>Kartik </strong></span><span style=\"font-family: Cambria Math;\">Month festival - Karwa Chauth, Rama Ekadashi, Dhanteras, Lakshmi Puja (Deewali), Bhaiya Dooj, Chhath Puja. </span><strong><span style=\"font-family: Cambria Math;\">Ashad</span></strong><span style=\"font-family: Cambria Math;\"><strong> </strong>- Jagannath Rathyatra, Guru Purnima, Yogini Ekadashi.</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\"><strong>Sharad Purnima</strong> </span><span style=\"font-family: Cambria Math;\">is the harvest festival that is celebrated during the holy month of Ashwin</span><span style=\"font-family: Cambria Math;\"> in the Hindu lunar calendar.</span></p>\n",
+    "question_index": 10
+  },
+  {
+    "question": "<p>12<span style=\"font-family: Cambria Math;\">.</span><span style=\"font-family: Cambria Math;\"> Banganga festival takes place annually at which of the following places in </span><span style=\"font-family: Cambria Math;\">Maharashtra ?</span><span style=\"font-family: Cambria Math;\"> </span></p>\n",
+    "options": [
+      "Pune",
+      "Nashik",
+      "Mumbai",
+      "Nagpur"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p>12<span style=\"font-family: Cambria Math;\">.(c) <strong>Mumbai</strong>. </span><span style=\"font-family: Cambria Math;\">Banganga </span><span style=\"font-family: Cambria Math;\">festival :</span><span style=\"font-family: Cambria Math;\"> A two-day music festival (tribu</span><span style=\"font-family: Cambria Math;\">te to Lord Rama) celebrated annually in the month of January in Malabar Hills, Mumbai. Conducted jointly by </span><span style=\"font-family: Cambria Math;\">- MTDC</span><span style=\"font-family: Cambria Math;\"> (Maharashtra Tourism Development Corporation) and Indian Heritage Society Mumbai. Banganga tank </span><span style=\"font-family: Cambria Math;\">- A</span><span style=\"font-family: Cambria Math;\"> holy tank located in the complex of Wal</span><span style=\"font-family: Cambria Math;\">keshwar temple in Malabar hills. Famous festivals of Maharashtra </span><span style=\"font-family: Cambria Math;\">: </span><span style=\"font-family: Cambria Math;\">Ganesh Chaturthi,</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">Gudi Padwa, Chaitra Gauri, Ram Navami, Kojagiri Purnima, Khandoba Festival, Ellora Festival.</span></p>\n",
+    "question_index": 11
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\">13</span><span style=\"font-family: Cambria Math;\">.</span><span style=\"font-family: Cambria Math;\"> Who was the first Odissi dancer from Odisha to receive Padm</span><span style=\"font-family: Cambria Math;\">a Vibhushan?</span></p>\n",
+    "options": [
+      "Sonal Mansingh",
+      "Sanjukta Panigrahi",
+      "Kelucharan Mohapatra",
+      "Madhvi Mudgal"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p>13<span style=\"font-family: Cambria Math;\">.(c) <strong>Kelucharan Mohapatra.</strong> </span><span style=\"font-family: Cambria Math;\">Awards :</span><span style=\"font-family: Cambria Math;\"> Padma Vibhushan (2000), Padma Bhushan (1988), Padma Shri (1974), Sangeet Natak Akademi Award for Dance (1966). Sonal Mansingh (Odissi and Bharatanatyam Dancer</span><span style=\"font-family: Cambria Math;\">) :</span><span style=\"font-family: Cambria Math;\"> Awards - (Youngest reci</span><span style=\"font-family: Cambria Math;\">pient) Padma Vibhushan (2003), Padma Bhushan (1992). Sanjukta Panigrahi (foremost exponent of Odissi</span><span style=\"font-family: Cambria Math;\">) :</span><span style=\"font-family: Cambria Math;\"> Awards - Padma Shri (1975). Madhvi </span><span style=\"font-family: Cambria Math;\">Mudgal :</span><span style=\"font-family: Cambria Math;\"> Padma Shri (1990).</span></p>\n",
+    "question_index": 12
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\">14</span><span style=\"font-family: Cambria Math;\">.</span><span style=\"font-family: Cambria Math;\"> In which state is the Maski inscription located at present?</span></p>\n",
+    "options": [
+      "Tamil Nadu",
+      "Andhra Pradesh",
+      "Madhya Pradesh",
+      "Karnataka"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p><span style=\\\"font-family: Cambria Math;\\\">14</span><span style=\\\"font-family: Cambria Math;\\\">.(d) <strong>Karnataka</strong>. </span><span style=\\\"font-family: Cambria Math;\\\">Maski </span><span style=\\\"font-family: Cambria Math;\\\">inscription :</span><span style=\\\"font-family: Cambria Math;\\\"> Ashoka\\'s minor rock edict. It is situated on the banks of the Muski River, a tributary of the Tungabhadra River. The inscription is written in the Brahmi s</span><span style=\\\"font-family: Cambria Math;\\\">cript. The edict was the first of Emperor Ashoka to include the name Ashoka and not by his usual Title &lsquo;Devanampiya Piyadasi&rsquo;. </span><span style=\\\"font-family: Cambria Math;\\\">Discovered by - C. Beadon in 1915.</span></p>\\n",
+    "question_index": 13
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\">15</span><span style=\"font-family: Cambria Math;\">. </span><span style=\"font-family: Cambria Math;\">Asad Ali Khan is best known for his mastery over which of the given musical instruments?</span></p>\n",
+    "options": [
+      "Surbahar",
+      "Violin",
+      "Tabla",
+      "Rudra Veena"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">15</span><span style=\"font-family: Cambria Math;\">.(d) <strong>Rudra Veena.</strong> </span><span style=\"font-family: Cambria Math;\">Asad Ali </span><span style=\"font-family: Cambria Math;\">Khan :</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">He was an Indian musician who played this stringed instrument. Khan performed in the Dhrupad style and was described by The Hindu as the best living Rudra Veena player in India. </span><span style=\"font-family: Cambria Math;\">Awards :</span><span style=\"font-family: Cambria Math;\"> Padma Bhushan (2008). </span><span style=\"font-family: Cambria Math;\">Sangeet Natak Akademi Award for Hindustani Musi</span><span style=\"font-family: Cambria Math;\">c (1977).</span><span style=\"font-family: Cambria Math;\"> </span></p>\n",
+    "question_index": 14
+  }
+];
     </script>
-    
+
     <!-- Central JS Controller -->
     <script src="../js/mock-core.js"></script>
 </body>

@@ -3,43 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aether Mocks</title>
+    <title>Mocks Wallah</title>
     <!-- Fonts & Icons -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    
+
     <!-- Central Stylesheet -->
     <link rel="stylesheet" href="../css/mock-main.css">
-    
+
     <!-- Math Formula Rendering (KaTeX/MathJax) -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    
+
     <!-- Timer Config -->
-    <meta name="exam-duration" content="60">
+    <meta name="exam-duration" content="30">
 </head>
 <body>
     <!-- Welcome Screen -->
     <div class="welcome-screen" id="welcomeScreen">
         <div class="welcome-container">
             <div class="welcome-header" style="margin-bottom: 24px;">
-                <h1 style="font-size: 2rem; font-weight: 700; color: #0f172a; margin-bottom: 8px;"><i class="fas fa-graduation-cap" style="color: #3b82f6;"></i> Aether Mocks</h1>
-                <p style="color: #64748b;">Computer Based Test Portal</p>
+                <h1 style="font-size: 2rem; font-weight: 700; color: var(--text-main); margin-bottom: 8px;"><i class="fas fa-graduation-cap" style="color: var(--primary);"></i> Mocks Wallah</h1>
+                <p style="color: var(--text-muted);">Computer Based Test Portal</p>
             </div>
-            
+
             <div class="test-details" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-bottom: 32px; text-align: left;">
-                <div class="detail-item" style="padding: 12px; background: #f8fafc; border-radius: 8px; border: 1px solid #e2e8f0;">
-                    <div class="detail-label" style="font-size: 0.8rem; color: #64748b;">Total Questions</div>
-                    <div class="detail-value" style="font-size: 1.1rem; font-weight: 600; color: #0f172a;">10</div>
+                <div class="detail-item" style="padding: 12px; background: var(--bg-color); border-radius: 8px; border: 1px solid var(--border-color);">
+                    <div class="detail-label" style="font-size: 0.8rem; color: var(--text-muted);">Total Questions</div>
+                    <div class="detail-value" style="font-size: 1.1rem; font-weight: 600; color: var(--text-main);">15</div>
                 </div>
-                <div class="detail-item" style="padding: 12px; background: #f8fafc; border-radius: 8px; border: 1px solid #e2e8f0;">
-                    <div class="detail-label" style="font-size: 0.8rem; color: #64748b;">Duration</div>
-                    <div class="detail-value" style="font-size: 1.1rem; font-weight: 600; color: #0f172a;">60 mins</div>
+                <div class="detail-item" style="padding: 12px; background: var(--bg-color); border-radius: 8px; border: 1px solid var(--border-color);">
+                    <div class="detail-label" style="font-size: 0.8rem; color: var(--text-muted);">Duration</div>
+                    <div class="detail-value" style="font-size: 1.1rem; font-weight: 600; color: var(--text-main);">30 mins</div>
                 </div>
             </div>
-            
+
             <div class="welcome-actions">
                 <button class="btn btn-primary" id="startBtn" onclick="document.getElementById('welcomeScreen').style.display='none'; document.getElementById('examContainer').style.display='flex';" style="font-size: 1.1rem; padding: 12px 32px; width: 100%;">
                     <i class="fas fa-play" style="margin-right: 8px;"></i> Start Test
@@ -47,12 +47,12 @@
             </div>
         </div>
     </div>
-    
+
     <!-- Main Exam Interface -->
     <div class="exam-container" id="examContainer" style="display: none; height: 100vh; flex-direction: column;">
         <!-- Top Header -->
         <div class="exam-header">
-            <div class="exam-title">Aether Mocks</div>
+            <div class="exam-title">Mocks Wallah</div>
             <div class="header-actions" style="display: flex; align-items: center; gap: 12px;">
                 <button class="btn-icon" id="themeToggleBtn" title="Switch to Dark Mode"><i class="fas fa-moon"></i></button>
                 <button class="btn-icon" id="fullscreenToggleBtn" title="Toggle Fullscreen"><i class="fas fa-expand"></i></button>
@@ -62,14 +62,14 @@
                 </div>
             </div>
         </div>
-        
+
         <!-- Main Content -->
         <div class="mock-container">
             <!-- Question Area -->
             <div class="question-view">
                 <!-- Dynamically populated question container -->
                 <div id="questionContainer" style="flex: 1; display: flex; flex-direction: column; gap: 24px;"></div>
-                
+
                 <!-- Controls -->
                 <div class="nav-controls">
                     <button class="btn btn-secondary btn-prev"><i class="fas fa-chevron-left" style="margin-right: 8px;"></i> Previous</button>
@@ -79,40 +79,221 @@
                     <button class="btn btn-primary btn-next">Next <i class="fas fa-chevron-right" style="margin-left: 8px;"></i></button>
                 </div>
             </div>
-            
+
             <!-- Desktop Navigator Sidebar -->
             <div class="sidebar">
                 <div class="sidebar-section-title">Summary Status</div>
                 <div class="stats-grid">
                     <div class="stat-item">
-                        <div class="stat-count" id="stat-answered" style="color: #10b981;">0</div>
+                        <div class="stat-count" id="stat-answered" style="color: var(--success);">0</div>
                         <div class="stat-name">Answered</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-count" id="stat-flagged" style="color: #f59e0b;">0</div>
+                        <div class="stat-count" id="stat-flagged" style="color: var(--warning);">0</div>
                         <div class="stat-name">Flagged</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-count" id="stat-not-answered" style="color: #64748b;">0</div>
+                        <div class="stat-count" id="stat-not-answered" style="color: var(--text-muted);">0</div>
                         <div class="stat-name">Unanswered</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-count" id="stat-not-visited" style="color: #94a3b8;">0</div>
+                        <div class="stat-count" id="stat-not-visited" style="color: var(--text-muted);">0</div>
                         <div class="stat-name">Not Visited</div>
                     </div>
                 </div>
-                
+
                 <div class="sidebar-section-title" style="margin-top: 16px;">Question Navigator</div>
                 <div class="questions-grid"></div>
             </div>
         </div>
     </div>
-    
+
     <!-- Inject Question Data -->
     <script>
-        const questions = [];
+        const questions = [
+  {
+    "question": "<p>1.<span style=\"font-family: Cambria Math;\"> Pt </span><span style=\"font-family: Cambria Math;\">Hariprasad</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">Chaurasia</span><span style=\"font-family: Cambria Math;\"> is a well-known:</span></p>\n",
+    "options": [
+      "tabla-player",
+      "sitarist",
+      "vocalist",
+      "flutalist"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">1.(</span><span style=\"font-family: Cambria Math;\">d) Famous </span><span style=\"font-family: Cambria Math;\">Flutalist</span><span style=\"font-family: Cambria Math;\"> in India &rarr;&nbsp;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">Hariprasad</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">Chaurasia</span><span style=\"font-family: Cambria Math;\">, Devendra </span><span style=\"font-family: Cambria Math;\">Murdeshwar</span><span style=\"font-family: Cambria Math;\">, </span><span style=\"font-family: Cambria Math;\">Mayavaram</span><span style=\"font-family: Cambria Math;\"> Saraswathi </span><span style=\"font-family: Cambria Math;\">Ammal</span><span style=\"font-family: Cambria Math;\">, K. </span><span style=\"font-family: Cambria Math;\">Bhaskaran</span><span style=\"font-family: Cambria Math;\">, </span><span style=\"font-family: Cambria Math;\">Sikkil</span><span style=\"font-family: Cambria Math;\"> Mala Chandrasekar, </span><span style=\"font-family: Cambria Math;\">Debopriya</span><span style=\"font-family: Cambria Math;\"> Chatterjee, Rakesh </span><span style=\"font-family: Cambria Math;\">Chaurasia</span><span style=\"font-family: Cambria Math;\">.</span><span style=\"font-family: Cambria Math;\">Milind Date.</span></p>\n",
+    "question_index": 0
+  },
+  {
+    "question": " <p>2.</span><span style=\"font-family:Cambria Math\"> Since which year did the IPL start?</span></p>",
+    "options": [
+      "2010",
+      "2007",
+      "2008",
+      "2009"
+    ],
+    "correct_option_id": 2,
+    "solution": " <p><span style=\"font-family:Cambria Math\">2.(</span><span style=\"font-family:Cambria Math\">c) </span><span style=\"font-family:Cambria Math\">Indian Premier League (IPL) was started in 2008. Gujarat Titans won IPL 2022 under the captaincy of Hardik Pandya. Mumbai Indians (MI) is the most successful IPL team, having won the IPL tournament five times.</span></p>",
+    "question_index": 1
+  },
+  {
+    "question": " <p>3.</span><span style=\"font-family:Cambria Math\"> Which of the following is NOT a polar animal?</span></p>",
+    "options": [
+      "Ringed seals",
+      "Musk oxen",
+      "Lemur",
+      "Walrus"
+    ],
+    "correct_option_id": 2,
+    "solution": " <p><span style=\"font-family:Cambria Math\">3.(</span><span style=\"font-family:Cambria Math\">c) </span><span style=\"font-family:Cambria Math\">Lemurs are a type of prosimian, which means they are primates that evolved before monkeys and apes.</span><span style=\"font-family:Cambria Math\"> Polar Animals</span><span style=\"font-family:Cambria Math\"> </span><span style=\"font-family:Cambria Math\"> Polar Bear, Arctic Fox, Antarctic Minke Whale, Brown Bear, Pacific </span><span style=\"font-family:Cambria Math\">Salmon,  Orca</span><span style=\"font-family:Cambria Math\">, Snowy Owl, Leopard Seal, Arctic Wolf,Penguin, Walrus, Narw</span><span style=\"font-family:Cambria Math\">hal</span><span style=\"font-family:Cambria Math\">, Arctic Hare, Beluga Whale, Puffin, Reindeer, Musk Oxen. </span></p>",
+    "question_index": 2
+  },
+  {
+    "question": "<p>4.<span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">Kuchipudi</span><span style=\"font-family: Cambria Math;\"> is a classical dance form of which Indian state?</span></p>\n",
+    "options": [
+      "Kerala",
+      "Karnataka",
+      "Tamil Nadu",
+      "Andhra Pradesh"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">4.(</span><span style=\"font-family: Cambria Math;\">d) </span><span style=\"font-family: Cambria Math;\">Kuchipudi &rarr;</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\"> Andhra Pradesh, Bharatnatyam &rarr;&nbsp;</span><span style=\"font-family: Cambria Math;\"> Tamil Nadu. Kathakali, Moniyattam &rarr; </span><span style=\"font-family: Cambria Math;\">Kerala, Yakshagana &rarr;</span><span style=\"font-family: Cambria Math;\">&nbsp;</span><span style=\"font-family: Cambria Math;\">Karnataka. </span></p>\n",
+    "question_index": 3
+  },
+  {
+    "question": " <p>5.</span><span style=\"font-family:Cambria Math\"> Who is the author of ‘Anna Karenina’?</span></p>",
+    "options": [
+      "Gabriel Garcia Marquez",
+      "EM Forster",
+      "George Eliot",
+      "Leo Tolstoy"
+    ],
+    "correct_option_id": 3,
+    "solution": " <p><span style=\"font-family:Cambria Math\">5.(</span><span style=\"font-family:Cambria Math\">d) Books By Leo Tolstoy </span><span style=\"font-family:Cambria Math\">  ‘</span><span style=\"font-family:Cambria Math\">Anna K</span><span style=\"font-family:Cambria Math\">arenina’ (1887)</span><span style=\"font-family:Cambria Math\">, ‘War and Peace’ (1869), ‘The Kreutzer Sonata’ (1889), ‘The Death of Ivan Ilyich’ (1886), ‘Sevastopol Sketches’ (1855), ‘Resurrection’ (1899), ‘The Cossacks’ (1863), ‘A Confession’ (1882), ‘The Kingdom of God Is Within You’ (1894), ‘What I </span><span style=\"font-family:Cambria Math\">Believe’ (1885). </span></p>",
+    "question_index": 4
+  },
+  {
+    "question": " <p>6. </span><span style=\"font-family:Cambria Math\">Pradhan Mantri Kaushal Vikas Yojana was introduced in 2015 under the _____________.</span></p>",
+    "options": [
+      "Ministry of Rural development",
+      "Ministry of Housing and Urban Affairs",
+      "Ministry of Finance",
+      "Ministry of Skill Development and Entrepreneurship"
+    ],
+    "correct_option_id": 3,
+    "solution": " <p><span style=\"font-family:Cambria Math\">6.(</span><span style=\"font-family:Cambria Math\">d) </span><span style=\"font-family:Cambria Math\">Pradhan Mantri </span><span style=\"font-family:Cambria Math\">Kausal</span><span style=\"font-family:Cambria Math\"> Vikas Yojana was introduced in 2015 under the Ministry of Skill Development and  Entrepreneurship. 15th July is celebrated as World Youth Skills Day. </span></p>",
+    "question_index": 5
+  },
+  {
+    "question": "<p>7. <span style=\"font-family: Cambria Math;\">Who among the following was a famous Indian choreographer?</span></p>\n",
+    "options": [
+      "Kajol",
+      "Saroj Khan",
+      "Shreya Ghoshal",
+      "Madhuri Dixit"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">7.(</span><span style=\"font-family: Cambria Math;\">b) </span><span style=\"font-family: Cambria Math;\">Saroj Khan was a famous Choreographer. National Awards</span><span style=\"font-family: Cambria Math;\">&nbsp;&rArr; </span><span style=\"font-family: Cambria Math;\">200</span><span style=\"font-family: Cambria Math;\">7 &rarr; </span><span style=\"font-family: Cambria Math;\">Best Choreography &rarr; </span><span style=\"font-family: Cambria Math;\">Jab We Met. 2005 (</span><span style=\"font-family: Cambria Math;\">Sringaram</span><span style=\"font-family: Cambria Math;\">), 2002 (</span><span style=\"font-family: Cambria Math;\">Devdas</span><span style=\"font-family: Cambria Math;\">).</span></p>\n",
+    "question_index": 6
+  },
+  {
+    "question": " <p>8. </span><span style=\"font-family:Cambria Math\">How many players are th</span><span style=\"font-family:Cambria Math\">ere in a Field Hockey team?</span></p>",
+    "options": [
+      "7",
+      "11",
+      "15",
+      "19"
+    ],
+    "correct_option_id": 1,
+    "solution": " <p><span style=\"font-family:Cambria Math\">8.(</span><span style=\"font-family:Cambria Math\">b) </span><span style=\"font-family:Cambria Math\">Field Hockey team consists of Eleven Players in each team. The pitch on which field hockey is played is 91.4m long and 55m wide.</span></p>",
+    "question_index": 7
+  },
+  {
+    "question": "<p>9.<span style=\"font-family: Cambria Math;\"> Who is the first trans woman to win a Padma Shri award for Bharatanatyam?</span></p>\n",
+    "options": [
+      "Bishesh Huirem",
+      "Narthaki Nataraj",
+      "Sruthy Sithara",
+      "Sadhana Mishra"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">9.(</span><span style=\"font-family: Cambria Math;\">b) </span><span style=\"font-family: Cambria Math;\">Narthaki</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">Nataraj</span><span style=\"font-family: Cambria Math;\"> is the first trans woman to win a Padma Shri Award for </span><span style=\"font-family: Cambria Math;\">Bharatnatyam</span><span style=\"font-family: Cambria Math;\">.</span></p>\r\n<p><span style=\"font-family: Cambria Math;\">Kalaimamani</span><span style=\"font-family: Cambria Math;\"> Award of Tamil Nadu Government in 2007, </span><span style=\"font-family: Cambria Math;\">Nritya</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">Choodamani</span><span style=\"font-family: Cambria Math;\"> Award from Krishna </span><span style=\"font-family: Cambria Math;\">Gana</span><span style=\"font-family: Cambria Math;\"> Sabha in </span><span style=\"font-family: Cambria Math;\">2009,Sangeet</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">Natak</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">Akademi</span><span style=\"font-family: Cambria Math;\"> Award in 2011, </span><span style=\"font-family: Cambria Math;\">Vetri</span><span style=\"font-family: Cambria Math;\"> Award from University of Madras in 2013</span></p>\r\n<p><span style=\"font-family: Cambria Math;\">Honorary Doctorate from </span><span style=\"font-family: Cambria Math;\">Periyar</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">Maniammai</span><span style=\"font-family: Cambria Math;\"> University 2016, ICCR </span><span style=\"font-family: Cambria Math;\">E</span><span style=\"font-family: Cambria Math;\">mpanelled</span><span style=\"font-family: Cambria Math;\"> Dance Artist in Outstanding Category 2017.</span></p>\n",
+    "question_index": 8
+  },
+  {
+    "question": " <p>10. </span><span style=\"font-family:Cambria Math\">Assam and most of the</span><span style=\"font-family:Cambria Math\"> Peninsular states have _____ population densities.</span></p>",
+    "options": [
+      "high to very high",
+      "very low",
+      "moderate",
+      "moderate to high"
+    ],
+    "correct_option_id": 2,
+    "solution": " <p><span style=\"font-family:Cambria Math\">10.(</span><span style=\"font-family:Cambria Math\">c) </span><span style=\"font-family:Cambria Math\">Assam and most of the Peninsular states have moderate population densities. The Population density in Assam is 398 persons. </span></p>",
+    "question_index": 9
+  },
+  {
+    "question": " <p>11. </span><span style=\"font-family:Cambria Math\">Freedom in Exile is the autobiography of ________.</span></p>",
+    "options": [
+      "Nelson Mandela",
+      "APJ Abdul Kalam",
+      "Dalai Lama",
+      "Mahatma Gandhi"
+    ],
+    "correct_option_id": 2,
+    "solution": " <p><span style=\\\"font-family:Cambria Math\\\">11.(</span><span style=\\\"font-family:Cambria Math\\\">c) </span><span style=\\\"font-family:Cambria Math\\\">‘Freedom in Exile’ </span><span style=\\\"font-family:Cambria Math\\\"> Dalai Lama, ‘Long Walk to Freedom’ </span><span style=\\\"font-family:Cambria Math\\\"> Nelson Mandela, \\'The Wings of Fire\\' </span><span style=\\\"font-family:Cambria Math\\\"> APJ Abdul Kalam,  The Story of My Experiments with Truth </span><span style=\\\"font-family:Cambria Math\\\"> Mahatma Gandhi.</span></p>",
+    "question_index": 10
+  },
+  {
+    "question": "<p>12. <span style=\"font-family: Cambria Math;\">To which state of India is the Hornbill festival related?</span></p>\n",
+    "options": [
+      "Kerala",
+      "Karnataka",
+      "Nagaland",
+      "Bihar"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">12.(</span><span style=\"font-family: Cambria Math;\">c) Nagaland&rsquo;s Festival &nbsp;&rarr; </span><span style=\"font-family: Cambria Math;\">Hornbill Festival, </span><span style=\"font-family: Cambria Math;\">Aoleng</span><span style=\"font-family: Cambria Math;\"> Festival, </span><span style=\"font-family: Cambria Math;\">Sekrenyi</span><span style=\"font-family: Cambria Math;\"> Festival, </span><span style=\"font-family: Cambria Math;\">Moatsii</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">Mong</span><span style=\"font-family: Cambria Math;\">, </span><span style=\"font-family: Cambria Math;\">Mim</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">Kut</span><span style=\"font-family: Cambria Math;\"> Festival, </span><span style=\"font-family: Cambria Math;\">Bushu</span><span style=\"font-family: Cambria Math;\"> Dima.</span></p>\n",
+    "question_index": 11
+  },
+  {
+    "question": "<p>13.<span style=\"font-family: Cambria Math;\"> Dr N </span><span style=\"font-family: Cambria Math;\">Rajam</span><span style=\"font-family: Cambria Math;\"> is known</span><span style=\"font-family: Cambria Math;\"> for playing the ________.</span></p>\n",
+    "options": [
+      "veena",
+      "guitar",
+      "violin",
+      "flute"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">13.(</span><span style=\"font-family: Cambria Math;\">c) Popular Violinist in India &nbsp;&rarr;&nbsp; </span><span style=\"font-family: Cambria Math;\">Dr. N </span><span style=\"font-family: Cambria Math;\">Rajam</span><span style=\"font-family: Cambria Math;\">, </span><span style=\"font-family: Cambria Math;\">Abhijith</span><span style=\"font-family: Cambria Math;\"> P. S. Nair, B. Sasikumar, </span><span style=\"font-family: Cambria Math;\">Harikumar</span><span style=\"font-family: Cambria Math;\"> Sivan, </span><span style=\"font-family: Cambria Math;\">Embar</span><span style=\"font-family: Cambria Math;\"> Kannan, Kala Ramnath, Sunita </span><span style=\"font-family: Cambria Math;\">Bhuyan</span><span style=\"font-family: Cambria Math;\">, </span><span style=\"font-family: Cambria Math;\">Akkarai</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">Subbalakshmi</span><span style=\"font-family: Cambria Math;\">, </span><span style=\"font-family: Cambria Math;\">Vittal</span><span style=\"font-family: Cambria Math;\"> Ramamurthy, </span><span style=\"font-family: Cambria Math;\">Ragini</span><span style=\"font-family: Cambria Math;\"> Shankar, </span><span style=\"font-family: Cambria Math;\">Manoj</span><span style=\"font-family: Cambria Math;\"> George, </span><span style=\"font-family: Cambria Math;\">Gagan</span><span style=\"font-family: Cambria Math;\"> Chandra Chatterjee, Sangeeta </span><span style=\"font-family: Cambria Math;\">Shanka</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">etc</span></p>\n",
+    "question_index": 12
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\"> Tanjore </span><span style=\"font-family: Cambria Math;\">Balasaraswati</span><span style=\"font-family: Cambria Math;\"> was known for which classical dance form?</span></p>\n",
+    "options": [
+      "Bihu",
+      "Bharatanatyam",
+      "Manipuri",
+      "Odissi"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">14</span><span style=\"font-family: Cambria Math;\">.(</span><span style=\"font-family: Cambria Math;\">b) Tanjore </span><span style=\"font-family: Cambria Math;\">Balasaraswati</span><span style=\"font-family: Cambria Math;\"> &nbsp;&rarr;&nbsp; </span><span style=\"font-family: Cambria Math;\">Bharatnatyam.</span><span style=\"font-family: Cambria Math;\"> In 1981 she was awarded the Sangeetha Kala </span><span style=\"font-family: Cambria Math;\">Shikhamani</span><span style=\"font-family: Cambria Math;\"> award of The Indian Fine Arts Society, Chennai. </span><span style=\"font-family: Cambria Math;\">Padmabhushan</span><span style=\"font-family: Cambria Math;\"> (1957), Padma Vibhushan (1977).</span></p>\n",
+    "question_index": 13
+  },
+  {
+    "question": " <p><span style=\"font-family:Cambria Math\">15.</span><span style=\"font-family:Cambria Math\"> ‘Unfinished: A Memoir’ is the autobiography of ______.</span></p>",
+    "options": [
+      "Priyanka Chopra Jonas",
+      "Deepika Padukone",
+      "Kareena Kapoor",
+      "Alia Bhatt"
+    ],
+    "correct_option_id": 0,
+    "solution": " <p><span style=\"font-family:Cambria Math\">15.(</span><span style=\"font-family:Cambria Math\">a) </span><span style=\"font-family:Cambria Math\">‘Unfinished: A Memoir’ is the autobiography of Priyanka Chopra Jonas.</span></p>",
+    "question_index": 14
+  }
+];
     </script>
-    
+
     <!-- Central JS Controller -->
     <script src="../js/mock-core.js"></script>
 </body>

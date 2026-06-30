@@ -3,43 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aether Mocks</title>
+    <title>Mocks Wallah</title>
     <!-- Fonts & Icons -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    
+
     <!-- Central Stylesheet -->
     <link rel="stylesheet" href="../css/mock-main.css">
-    
+
     <!-- Math Formula Rendering (KaTeX/MathJax) -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    
+
     <!-- Timer Config -->
-    <meta name="exam-duration" content="60">
+    <meta name="exam-duration" content="40">
 </head>
 <body>
     <!-- Welcome Screen -->
     <div class="welcome-screen" id="welcomeScreen">
         <div class="welcome-container">
             <div class="welcome-header" style="margin-bottom: 24px;">
-                <h1 style="font-size: 2rem; font-weight: 700; color: #0f172a; margin-bottom: 8px;"><i class="fas fa-graduation-cap" style="color: #3b82f6;"></i> Aether Mocks</h1>
-                <p style="color: #64748b;">Computer Based Test Portal</p>
+                <h1 style="font-size: 2rem; font-weight: 700; color: var(--text-main); margin-bottom: 8px;"><i class="fas fa-graduation-cap" style="color: var(--primary);"></i> Mocks Wallah</h1>
+                <p style="color: var(--text-muted);">Computer Based Test Portal</p>
             </div>
-            
+
             <div class="test-details" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-bottom: 32px; text-align: left;">
-                <div class="detail-item" style="padding: 12px; background: #f8fafc; border-radius: 8px; border: 1px solid #e2e8f0;">
-                    <div class="detail-label" style="font-size: 0.8rem; color: #64748b;">Total Questions</div>
-                    <div class="detail-value" style="font-size: 1.1rem; font-weight: 600; color: #0f172a;">10</div>
+                <div class="detail-item" style="padding: 12px; background: var(--bg-color); border-radius: 8px; border: 1px solid var(--border-color);">
+                    <div class="detail-label" style="font-size: 0.8rem; color: var(--text-muted);">Total Questions</div>
+                    <div class="detail-value" style="font-size: 1.1rem; font-weight: 600; color: var(--text-main);">20</div>
                 </div>
-                <div class="detail-item" style="padding: 12px; background: #f8fafc; border-radius: 8px; border: 1px solid #e2e8f0;">
-                    <div class="detail-label" style="font-size: 0.8rem; color: #64748b;">Duration</div>
-                    <div class="detail-value" style="font-size: 1.1rem; font-weight: 600; color: #0f172a;">60 mins</div>
+                <div class="detail-item" style="padding: 12px; background: var(--bg-color); border-radius: 8px; border: 1px solid var(--border-color);">
+                    <div class="detail-label" style="font-size: 0.8rem; color: var(--text-muted);">Duration</div>
+                    <div class="detail-value" style="font-size: 1.1rem; font-weight: 600; color: var(--text-main);">40 mins</div>
                 </div>
             </div>
-            
+
             <div class="welcome-actions">
                 <button class="btn btn-primary" id="startBtn" onclick="document.getElementById('welcomeScreen').style.display='none'; document.getElementById('examContainer').style.display='flex';" style="font-size: 1.1rem; padding: 12px 32px; width: 100%;">
                     <i class="fas fa-play" style="margin-right: 8px;"></i> Start Test
@@ -47,12 +47,12 @@
             </div>
         </div>
     </div>
-    
+
     <!-- Main Exam Interface -->
     <div class="exam-container" id="examContainer" style="display: none; height: 100vh; flex-direction: column;">
         <!-- Top Header -->
         <div class="exam-header">
-            <div class="exam-title">Aether Mocks</div>
+            <div class="exam-title">Mocks Wallah</div>
             <div class="header-actions" style="display: flex; align-items: center; gap: 12px;">
                 <button class="btn-icon" id="themeToggleBtn" title="Switch to Dark Mode"><i class="fas fa-moon"></i></button>
                 <button class="btn-icon" id="fullscreenToggleBtn" title="Toggle Fullscreen"><i class="fas fa-expand"></i></button>
@@ -62,14 +62,14 @@
                 </div>
             </div>
         </div>
-        
+
         <!-- Main Content -->
         <div class="mock-container">
             <!-- Question Area -->
             <div class="question-view">
                 <!-- Dynamically populated question container -->
                 <div id="questionContainer" style="flex: 1; display: flex; flex-direction: column; gap: 24px;"></div>
-                
+
                 <!-- Controls -->
                 <div class="nav-controls">
                     <button class="btn btn-secondary btn-prev"><i class="fas fa-chevron-left" style="margin-right: 8px;"></i> Previous</button>
@@ -79,40 +79,281 @@
                     <button class="btn btn-primary btn-next">Next <i class="fas fa-chevron-right" style="margin-left: 8px;"></i></button>
                 </div>
             </div>
-            
+
             <!-- Desktop Navigator Sidebar -->
             <div class="sidebar">
                 <div class="sidebar-section-title">Summary Status</div>
                 <div class="stats-grid">
                     <div class="stat-item">
-                        <div class="stat-count" id="stat-answered" style="color: #10b981;">0</div>
+                        <div class="stat-count" id="stat-answered" style="color: var(--success);">0</div>
                         <div class="stat-name">Answered</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-count" id="stat-flagged" style="color: #f59e0b;">0</div>
+                        <div class="stat-count" id="stat-flagged" style="color: var(--warning);">0</div>
                         <div class="stat-name">Flagged</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-count" id="stat-not-answered" style="color: #64748b;">0</div>
+                        <div class="stat-count" id="stat-not-answered" style="color: var(--text-muted);">0</div>
                         <div class="stat-name">Unanswered</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-count" id="stat-not-visited" style="color: #94a3b8;">0</div>
+                        <div class="stat-count" id="stat-not-visited" style="color: var(--text-muted);">0</div>
                         <div class="stat-name">Not Visited</div>
                     </div>
                 </div>
-                
+
                 <div class="sidebar-section-title" style="margin-top: 16px;">Question Navigator</div>
                 <div class="questions-grid"></div>
             </div>
         </div>
     </div>
-    
+
     <!-- Inject Question Data -->
     <script>
-        const questions = [];
+        const questions = [
+  {
+    "question": "<p>1. Which of the following festivals is held on a new moon day?</p>",
+    "options": [
+      "Mahavir Jayanti",
+      "Kali Puja",
+      "Dussehra",
+      "Holi"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p>1.(b) <strong><span style=\"font-family: Palanquin Dark;\">Kali Puja </span></strong><span style=\"font-family: Palanquin Dark;\">is celebrated on the new moon day of the Hindu month Kartik.</span><span style=\"font-family: Palanquin Dark;\"> </span><strong><span style=\"font-family: Palanquin Dark;\">Mahavir Jayanti</span></strong><span style=\"font-family: Palanquin Dark;\"> is celebrated as the</span><span style=\"font-family: Palanquin Dark;\"> birth anniversary of Lord Mahavir. Lord Mahavira is the <strong>24th Tirthankara</strong> of Jainism.</span><span style=\"font-family: Palanquin Dark;\"> <strong>Dussehra</strong></span><span style=\"font-family: Palanquin Dark;\">, also known as Vijayadashami or &ldquo;the day of victory,&rdquo; comes after the nine nights of Navratri. </span><strong><span style=\"font-family: Palanquin Dark;\">Holi</span></strong><span style=\"font-family: Palanquin Dark;\"> is celebrated on the full moon day in the month of Phalgun and so it also signifies the arrival of spring. </span></p>",
+    "question_index": 0
+  },
+  {
+    "question": "<p>2.<span style=\"font-family: Palanquin Dark;\"> A &lsquo;Nattuvanar&rsquo; conducts a ______ dance recital.&nbsp;</span></p>",
+    "options": [
+      "Kuchipudi",
+      "Odissi",
+      "Kathak",
+      "Bharatanatyam"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p>2.(d) <span style=\"font-family: Palanquin Dark;\">A <strong>&lsquo;Nattuvanar&rsquo;</strong> conducts a Bharatanatyam dance recital. </span><span style=\"font-family: Palanquin Dark;\">The term nattuvanar connotes a man who accompanied the devadasi dance in the capacity of a dance-master, music conductor, and vocal percussionist. </span><span style=\"font-family: Palanquin Dark;\"><strong>Bharatanatyam</strong>- Tamil Nadu and Southern India,<strong> Kuchipudi</strong>- Andhra Pradesh, <strong>Odissi</strong>- Odisha,<strong> Kathak</strong>- Uttar Pradesh.</span></p>\n<p><span style=\"font-family: Palanquin Dark;\"> </span></p>",
+    "question_index": 1
+  },
+  {
+    "question": "<p>3. <span style=\"font-family: Palanquin Dark;\">The fine for extinguishing public lamps may extend to ______ as per Section 141 of The Electricity Act, 2003.</span></p>",
+    "options": [
+      "₹2,000",
+      "₹3,000",
+      "₹2,500",
+      "₹5,000"
+    ],
+    "correct_option_id": 0,
+    "solution": "<p>3.(a) <span style=\"font-family: Palanquin Dark;\">The fine for extinguishing public lamps may extend to ₹2,000 as per <strong>Section 141 </strong>of The<strong> Electricity Act,</strong> <strong>2003</strong>. </span><span style=\"font-family: Palanquin Dark;\">The <strong>Electricity Act, 2003</strong> is an Act of the Parliament of India enacted to transform the power sector in India. </span></p>",
+    "question_index": 2
+  },
+  {
+    "question": "<p>4.<span style=\"font-family: Palanquin Dark;\"> Who among the following science fiction/ popular science writers wrote &lsquo;2001 : A Space Odyssey&rsquo; and held the position of a Professor at the Physical Research Laboratory, Ahmedabad?</span></p>",
+    "options": [
+      "Isaac Asimov",
+      "Arthur C Clarke",
+      "Jules Verne",
+      "HG Wells"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p>4.(b) <span style=\\\"font-family: Palanquin Dark;\\\">Famous books by</span><span style=\\\"font-family: Palanquin Dark;\\\"> <strong>Arthur C Clark</strong></span><span style=\\\"font-family: Palanquin Dark;\\\"><strong> </strong>are <strong>&lsquo;2001 : A Space Odyssey&rsquo;</strong>, &lsquo;Rama Series&rsquo;, \\'Childhood Ends&rsquo;, &lsquo;City and the Stars&rsquo;, &lsquo;Fountains of Paradise&rsquo;. </span><span style=\\\"font-family: Palanquin Dark;\\\"> <strong>Isaac </strong></span><strong><span style=\\\"font-family: Palanquin Dark;\\\">Asimov\\'s</span></strong><span style=\\\"font-family: Palanquin Dark;\\\"> most famous work is the Foundation series and robot stories.<strong> </strong></span><strong><span style=\\\"font-family: Palanquin Dark;\\\">Jules Verne</span></strong><span style=\\\"font-family: Palanquin Dark;\\\">- &lsquo;Journey to the Centre of the Earth&rsquo;, &lsquo;From the Earth to the Moon&rsquo;, and &lsquo;Twenty Thousand Leagues Under the Sea&rsquo;. </span><strong><span style=\\\"font-family: Palanquin Dark;\\\">HG Wells</span></strong><span style=\\\"font-family: Palanquin Dark;\\\">- &lsquo;The Time Machine&rsquo;, &lsquo;War of the Worlds&rsquo;, &lsquo;The Invisible Man&rsquo;.</span></p>",
+    "question_index": 3
+  },
+  {
+    "question": "<p>5. <span style=\"font-family: Palanquin Dark;\">Which of the following is a dance form that originated in Assam?</span></p>",
+    "options": [
+      "Sattriya",
+      "Lavani",
+      "Gotipua",
+      "Chhau"
+    ],
+    "correct_option_id": 0,
+    "solution": "<p>5.(a) <strong>Sattriya </strong><span style=\"font-family: Palanquin Dark;\">is a classical dance form that originated in Assam. </span><strong><span style=\"font-family: Palanquin Dark;\">Lavani </span></strong><span style=\"font-family: Palanquin Dark;\">is a dance form from Maharashtra. </span><strong><span style=\"font-family: Palanquin Dark;\">Gotipua</span></strong><span style=\"font-family: Palanquin Dark;\"><strong> </strong>is a dance form from Odisha. </span><strong><span style=\"font-family: Palanquin Dark;\">Chhau Dance</span></strong><span style=\"font-family: Palanquin Dark;\">- West Bengal, Jharkhand. </span><span style=\"font-family: Palanquin Dark;\">The Sangeet Natak Academy recognizes </span><strong><span style=\"font-family: Palanquin Dark;\">eight classical dances</span></strong><span style=\"font-family: Palanquin Dark;\">&ndash; Bharatanatyam (Tamil Nadu), Kathak(Uttar Pradesh), Kuchipudi (Andhra Pradesh), Odissi (Odisha), Kathakali (Kerala), Gaudiya Nritya (West Bengal), Sattriya(Assam), Manipuri(Manipur) and Mohiniyattam(Kerala). </span></p>",
+    "question_index": 4
+  },
+  {
+    "question": "<p>6.<span style=\"font-family: Palanquin Dark;\"> Who among the following is the author of the book &lsquo;Mrs Funnybones&rsquo;?&nbsp;</span></p>",
+    "options": [
+      "Rekha",
+      "Juhi Chawla",
+      "Twinkle Khanna",
+      "Sonali Bendre"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p>6.(c) <span style=\"font-family: Palanquin Dark;\">Twinkle Khanna is the author of the book <strong>&lsquo;Mrs Funnybones&rsquo;</strong>. &lsquo;Pyjamas are forgiving&rsquo; , &lsquo;The Legend of Laxmi Prasad&rsquo; are two books written by Twinkle Khanna. </span></p>",
+    "question_index": 5
+  },
+  {
+    "question": "<p>7.<span style=\"font-family: Palanquin Dark;\"> The Open Hand Monument in Chandigarh was designed by ______.&nbsp;</span></p>",
+    "options": [
+      "Matthew Nowicki",
+      "Maxwell Fry",
+      "Le Corbusier",
+      "Albert Mayer"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p>7.(c) <span style=\"font-family: Palanquin Dark;\">The </span><span style=\"font-family: Palanquin Dark;\"><strong>Open Hand Monumen</strong>t</span><span style=\"font-family: Palanquin Dark;\"> in Chandigarh was designed by Le Corbusier</span><span style=\"font-family: Palanquin Dark;\">. Chandigarh city </span><span style=\"font-family: Palanquin Dark;\">was designed by <strong>Le Corbusier</strong> </span><span style=\"font-family: Palanquin Dark;\">. <strong>Matthew Nowicki</strong> </span><span style=\"font-family: Palanquin Dark;\">was chief architect of the new Indian city of Chandigarh. </span><span style=\"font-family: Palanquin Dark;\"> </span><span style=\"font-family: Palanquin Dark;\"><strong>Albert Mayer</strong> </span><span style=\"font-family: Palanquin Dark;\">known for plan of Chandigarh. </span></p>\n<p><span style=\"font-family: Palanquin Dark;\"> </span></p>",
+    "question_index": 6
+  },
+  {
+    "question": "<p>8.<span style=\"font-family: Palanquin Dark;\"> &lsquo;Sangken&rsquo; is a festival </span><span style=\"font-family: Palanquin Dark;\">of the ______</span><span style=\"font-family: Palanquin Dark;\">.</span></p>",
+    "options": [
+      "Jains",
+      "Buddhists",
+      "Sikhs",
+      "Christians"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p>8.(b) <span style=\"font-family: Palanquin Dark;\">&lsquo;Sangken&rsquo; is a festival of the </span><strong><span style=\"font-family: Palanquin Dark;\">Buddhists</span></strong><span style=\"font-family: Palanquin Dark;\">. More Buddhists festivals include Buddha Purnima, Hemis Festival, Losar Festival, Lumbini Festival, Parinirvana Day, Rumtek Chaam Festival and Mani Rimdu Festival. Famous </span><strong><span style=\"font-family: Palanquin Dark;\">Jains </span></strong><span style=\"font-family: Palanquin Dark;\">Festivals are Paryushana, Janma kalayanak, Ashtanhika Parv, Nandishwar Ashtanika, Gyana Panchami, Pausha Dashmi. </span><span style=\"font-family: Palanquin Dark;\">Vaisakhi is the biggest </span><strong><span style=\"font-family: Palanquin Dark;\">Sikh </span></strong><span style=\"font-family: Palanquin Dark;\">festival. Easter, Christmas are the famous festivals of</span><span style=\"font-family: Palanquin Dark;\"> <strong>Christains</strong></span><span style=\"font-family: Palanquin Dark;\">.</span></p>\n<p><span style=\"font-family: Palanquin Dark;\"> </span></p>",
+    "question_index": 7
+  },
+  {
+    "question": "<p>9. <span style=\"font-family: Palanquin Dark;\">Honoured with Padma Vibushan and Padma Bhushan, Kishori Amonkar was a renowned personality related to which of the following fields?</span></p>",
+    "options": [
+      "Science",
+      "Economics",
+      "Dance",
+      "Music"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p>9.(d) <span style=\"font-family: Palanquin Dark;\">Honoured with Padma Vibushan and Padma Bhushan, Kishori Amonkar was a renowned </span><span style=\"font-family: Palanquin Dark;\">Hindustani classical music vocalist</span><span style=\"font-family: Palanquin Dark;\">. He is from Jaipur Gharana. </span></p>\n<p><span style=\"font-family: Palanquin Dark;\"> </span></p>",
+    "question_index": 8
+  },
+  {
+    "question": "<p>10.<span style=\"font-family: Palanquin Dark;\"> Which of the following musical instruments is also known as a &lsquo;Mangal Vadya&rsquo;?</span></p>",
+    "options": [
+      "Shehnai",
+      "Tabla",
+      "Santoor",
+      "Damaru"
+    ],
+    "correct_option_id": 0,
+    "solution": "<p>10.(a) <span style=\"font-family: Palanquin Dark;\">Shehnai is also known as a &lsquo;Mangal Vadya&rsquo;. </span><span style=\"font-family: Palanquin Dark;\"><strong>Ustad Bismillah Khan</strong> </span><span style=\"font-family: Palanquin Dark;\">is a famous Shehnai Player. Shehnai is a wind instrument made of wood and metal.</span></p>\n<p><span style=\"font-family: Palanquin Dark;\"> </span></p>",
+    "question_index": 9
+  },
+  {
+    "question": "<p>11. <span style=\"font-family: Palanquin Dark;\">Who among the following Indian musicians was a part of a band named &lsquo;Planet Drum&rsquo; along with Mickey Hart, Sikiru Adepoju, and Giovanni Hidalgo, whose first album received the 1992 Grammy Award for Best World Music Album, which was the first Grammy in this category?&nbsp;</span></p>",
+    "options": [
+      "Bhimsen Joshi",
+      "Zakir Hussain",
+      "Ravi Shankar",
+      "Hariprasad Chaurasia"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p>11.(b)<span style=\"font-family: Times New Roman;\"> <strong>Zakir Hussain</strong></span><span style=\"font-family: Times New Roman;\"> is the tabla virtuoso. </span><strong><span style=\"font-family: Times New Roman;\">Bhimsen Joshi</span></strong><span style=\"font-family: Times New Roman;\"> </span><span style=\"font-family: Times New Roman;\">is known for the khayal form of singing, as well as for his popular renditions of devotional music (bhajans and abhangs). </span><strong><span style=\"font-family: Times New Roman;\">Ravi Shankar</span></strong><span style=\"font-family: Times New Roman;\"> is a famous sitar player. </span><strong><span style=\"font-family: Times New Roman;\">Hariprasad Chaurasia</span></strong><span style=\"font-family: Times New Roman;\"> is a famous flute player. </span></p>\n<p><span style=\"font-family: Times New Roman;\"> </span></p>",
+    "question_index": 10
+  },
+  {
+    "question": "<p>12.<span style=\"font-family: Baloo;\"> Lalita is a form of folk music from ______.&nbsp;</span></p>",
+    "options": [
+      "Madhya Pradesh",
+      "Rajasthan",
+      "Maharashtra",
+      "Gujarat"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p>12.(c) <span style=\"font-family: Times New Roman;\">Lalita is a form of folk music from Maharashtra. Famous Folk music of Maharashtra are </span><span style=\"font-family: Times New Roman;\">Bhajan, Bharud, Gondhal, Kirtan, Lalita, Abhangas and Tumbadi singing. </span><span style=\"font-family: Times New Roman;\">Famous dance forms of Maharashtra are - Dhangari Gaja, Koli Dance, Lavani Dance, Povadas Dance,Tamasha.</span></p>\n<p><span style=\"font-family: Times New Roman;\"> </span></p>",
+    "question_index": 11
+  },
+  {
+    "question": "<p>13.<span style=\"font-family: Baloo;\"> In which Indian state is the &lsquo;Fatorpa Zatra&rsquo; celebrated?&nbsp;</span></p>",
+    "options": [
+      "Madhya Pradesh",
+      "Goa",
+      "Kerala",
+      "Himachal Pradesh"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p>13.(b) <span style=\"font-family: Times New Roman;\">&lsquo;<strong>Fatorpa Zatra</strong>&rsquo;</span><span style=\"font-family: Times New Roman;\">- </span><span style=\"font-family: Times New Roman;\">One of the most famous zatras of Goa is celebrated at the temple of Shantadurga Kuncolienkarin at Fatorpa in Quepem taluka.</span><span style=\"font-family: Times New Roman;\"> <strong>Famous</strong></span><strong><span style=\"font-family: Times New Roman;\"> </span><span style=\"font-family: Times New Roman;\">Temple Fairs in India</span></strong><span style=\"font-family: Times New Roman;\">- Puri Rath Yatra (Odisha), Kerala- (Thrissur Pooram, Kerala, Arattu Festival, Attuvela Mahotsavam), Chithirai Thiruvizha Festival, Tamil Nadu, Karnataka- (Vairamudi Garuda Utsavam Festival,Karaga Festival), Kotappakonda Temple Fair (Andhra Pradesh), Nanda Devi Festival (Uttarakhand), Vaikunth Chaturdashi Mela (Uttarakhand), Kaila Devi Fair (Rajasthan), Ambubasi Mela (Assam).</span></p>\n<p><span style=\"font-family: Times New Roman;\"> </span></p>",
+    "question_index": 12
+  },
+  {
+    "question": "<p>14.<span style=\"font-family: Baloo;\"> Who among the following is the author of the book &lsquo;The Coalition Years&rsquo;?</span></p>",
+    "options": [
+      "Giani Zail Singh",
+      "APJ Abdul Kalam",
+      "Pranab Mukherjee",
+      "KR Narayanan"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p>14.(c) <span style=\"font-family: Times New Roman;\"><strong>Famous books by Pranab Mukherjee are</strong> </span><span style=\"font-family: Times New Roman;\"> &lsquo;The Coalition Years&rsquo;, &lsquo;The Dramatic Decade: The Indira Gandhi Years&rsquo;, &lsquo;The Turbulent Years&rsquo;, &lsquo;Thoughts and Reflections&rsquo;. Famous Books by</span><span style=\"font-family: Times New Roman;\"> <strong>APJ Abdul Kalam</strong></span><span style=\"font-family: Times New Roman;\"> are &lsquo;Wings of Fire&rsquo;, &lsquo;Ignited Minds&rsquo;, &lsquo;Turning Points&rsquo;, &lsquo;Indomitable Spirit&rsquo;, &lsquo;India 2020&rsquo;, &lsquo;Forge your Future&rsquo;. </span></p>\n<p><span style=\"font-family: Times New Roman;\"> </span></p>",
+    "question_index": 13
+  },
+  {
+    "question": "<p>15.<span style=\"font-family: Times New Roman;\"> Which day has been declared by the World Health Organization as Hand Hygiene Day?</span></p>",
+    "options": [
+      "5th May",
+      "18th August",
+      "21st July",
+      "14th June"
+    ],
+    "correct_option_id": 0,
+    "solution": "<p>15.(a) <strong><span style=\"font-family: Times New Roman;\">5th May</span></strong><span style=\"font-family: Times New Roman;\"> has been declared by the World Health Organisation as Hand Hygiene Day. </span><span style=\"font-family: Times New Roman;\">National Ice Cream Pie Day is observed annually on </span><strong><span style=\"font-family: Times New Roman;\">August 18th</span><span style=\"font-family: Times New Roman;\">.</span><span style=\"font-family: Times New Roman;\"> 21st July</span></strong><span style=\"font-family: Times New Roman;\">- Martyr&rsquo;s Day. </span><strong><span style=\"font-family: Times New Roman;\">14th June</span></strong><span style=\"font-family: Times New Roman;\">- World Blood Donor Day.</span></p>\n<p><span style=\"font-family: Times New Roman;\"> </span></p>",
+    "question_index": 14
+  },
+  {
+    "question": "<p>16.<span style=\"font-family: Baloo;\"> Who among the following is an Indian professional tennis player?</span></p>",
+    "options": [
+      "Shanti Mallick",
+      "Ankita Raina",
+      "Aditi Chauhan",
+      "Bala Devi"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p>16.(b) <span style=\"font-family: Palanquin Dark;\"><strong>Ankita Raina</strong> is an Indian professional tennis player. (Shanti Mallick, Aditi Chauhan- Bala Devi - Footballer).</span></p>\n<p><span style=\"font-family: Palanquin Dark;\"> </span></p>",
+    "question_index": 15
+  },
+  {
+    "question": "<p>17. <span style=\"font-family: Palanquin Dark;\">Which of the following is a folk song genre popular in parts of West Bengal, Assam and Bangladesh?</span></p>",
+    "options": [
+      "Chalo",
+      "Roppi",
+      "Bhawaiya",
+      "Rekham Pada"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p>17.(c) <strong>Bhawaiya&nbsp;</strong><span style=\"font-family: Palanquin Dark;\"><strong> </strong>is a folk song genre popular in parts of West Bengal, Assam and Bangladesh. </span><strong><span style=\"font-family: Palanquin Dark;\">Chalo </span></strong><span style=\"font-family: Palanquin Dark;\">is a folk song of Haryana. </span><strong><span style=\"font-family: Palanquin Dark;\">Roppi </span></strong><span style=\"font-family: Palanquin Dark;\">is a folk song of </span><span style=\"font-family: Palanquin Dark;\">Arunachal Pradesh.</span><span style=\"font-family: Palanquin Dark;\"> <strong>Rekham Pada</strong></span><span style=\"font-family: Palanquin Dark;\"> is a folk dance popular in Arunachal Pradesh.</span></p>\n<p><span style=\"font-family: Palanquin Dark;\"> </span></p>",
+    "question_index": 16
+  },
+  {
+    "question": "<p>18. _<span style=\"font-family: Palanquin Dark;\">_____ is an annual three-day festival held at Bara Shaheed Dargah in Nellore</span></p>",
+    "options": [
+      "Bheldiya",
+      "Baishagu",
+      "Ali Ai Ligang",
+      "Rottela Panduga"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p>18.(d) <strong>Rottela Panduga</strong><span style=\"font-family: Palanquin Dark;\"> is an annual three-day festival held at Bara Shaheed Dargah in Nellore, Andhra Pradesh. </span><strong><span style=\"font-family: Palanquin Dark;\">Baishagu,</span><span style=\"font-family: Palanquin Dark;\"> </span><span style=\"font-family: Palanquin Dark;\">Ali Ai Ligang</span></strong><span style=\"font-family: Palanquin Dark;\">, </span><span style=\"font-family: Palanquin Dark;\">Barpeta, sabha, </span><span style=\"font-family: Palanquin Dark;\"><strong>Bhel Diya</strong> </span><span style=\"font-family: Palanquin Dark;\">Festival, Me-Dum-Me-Phi, Kamrup Bhatheli are famous festivals of Assam. </span><span style=\"font-family: Palanquin Dark;\"> </span></p>",
+    "question_index": 17
+  },
+  {
+    "question": "<p>19.<span style=\"font-family: Palanquin Dark;\"> ______ is a popular folk dance of Minicoy Island.</span></p>",
+    "options": [
+      "Leshalaptu",
+      "Aaluyattu",
+      "Lava",
+      "Moyashai"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p>19.(c) <span style=\"font-family: Palanquin Dark;\">Lava is a popular folk dance of Minicoy Island. </span><strong><span style=\"font-family: Palanquin Dark;\">Nagaland</span></strong><span style=\"font-family: Palanquin Dark;\"><strong> </strong>Famous folk dance- </span><strong><span style=\"font-family: Palanquin Dark;\">Leshalaptu</span><span style=\"font-family: Palanquin Dark;\">, </span><span style=\"font-family: Palanquin Dark;\">Aaluyattu</span><span style=\"font-family: Palanquin Dark;\">,</span><span style=\"font-family: Palanquin Dark;\"> </span><span style=\"font-family: Palanquin Dark;\">Moyashai</span></strong><span style=\"font-family: Palanquin Dark;\">, </span><span style=\"font-family: Palanquin Dark;\">Modse, Bamboo Dance, Agurshikukula, Butterfly Dance, Sadal Kekai, Changai Dance, Kuki Dance, Khamba Lim, Mayur Dance, Monyoasho, Rengma, Seecha and Kukui Kucho, Shankai, War Dance and Zeliang Dance .</span></p>\n<p><span style=\"font-family: Palanquin Dark;\"> </span></p>",
+    "question_index": 18
+  },
+  {
+    "question": "<p><span style=\"font-family: Times New Roman;\">The festival of Durga Puja is observed to celebrate the triumph of goddess Durga over ____</span></p>",
+    "options": [
+      "Jarasandha",
+      "Ravana",
+      "Hiranyakashipu",
+      "Mahishasura"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p>20.(d) <span style=\"font-family: Times New Roman;\">The festival of Durga Puja is observed to celebrate the triumph of goddess Durga over Mahishasura .&nbsp;</span><span style=\"font-family: Times New Roman;\">It is the famous festival of West Bengal, </span><span style=\"font-family: Times New Roman;\">Jarkhand</span><span style=\"font-family: Times New Roman;\">, Orissa. Durga Puja, a major festival of Hinduism, traditionally held for 10 days in the month of Ashvina (September&ndash;October). </span></p>",
+    "question_index": 19
+  }
+];
     </script>
-    
+
     <!-- Central JS Controller -->
     <script src="../js/mock-core.js"></script>
 </body>

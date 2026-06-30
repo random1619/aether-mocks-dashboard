@@ -3,43 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aether Mocks</title>
+    <title>Mocks Wallah</title>
     <!-- Fonts & Icons -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    
+
     <!-- Central Stylesheet -->
     <link rel="stylesheet" href="../css/mock-main.css">
-    
+
     <!-- Math Formula Rendering (KaTeX/MathJax) -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    
+
     <!-- Timer Config -->
-    <meta name="exam-duration" content="60">
+    <meta name="exam-duration" content="30">
 </head>
 <body>
     <!-- Welcome Screen -->
     <div class="welcome-screen" id="welcomeScreen">
         <div class="welcome-container">
             <div class="welcome-header" style="margin-bottom: 24px;">
-                <h1 style="font-size: 2rem; font-weight: 700; color: #0f172a; margin-bottom: 8px;"><i class="fas fa-graduation-cap" style="color: #3b82f6;"></i> Aether Mocks</h1>
-                <p style="color: #64748b;">Computer Based Test Portal</p>
+                <h1 style="font-size: 2rem; font-weight: 700; color: var(--text-main); margin-bottom: 8px;"><i class="fas fa-graduation-cap" style="color: var(--primary);"></i> Mocks Wallah</h1>
+                <p style="color: var(--text-muted);">Computer Based Test Portal</p>
             </div>
-            
+
             <div class="test-details" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-bottom: 32px; text-align: left;">
-                <div class="detail-item" style="padding: 12px; background: #f8fafc; border-radius: 8px; border: 1px solid #e2e8f0;">
-                    <div class="detail-label" style="font-size: 0.8rem; color: #64748b;">Total Questions</div>
-                    <div class="detail-value" style="font-size: 1.1rem; font-weight: 600; color: #0f172a;">10</div>
+                <div class="detail-item" style="padding: 12px; background: var(--bg-color); border-radius: 8px; border: 1px solid var(--border-color);">
+                    <div class="detail-label" style="font-size: 0.8rem; color: var(--text-muted);">Total Questions</div>
+                    <div class="detail-value" style="font-size: 1.1rem; font-weight: 600; color: var(--text-main);">15</div>
                 </div>
-                <div class="detail-item" style="padding: 12px; background: #f8fafc; border-radius: 8px; border: 1px solid #e2e8f0;">
-                    <div class="detail-label" style="font-size: 0.8rem; color: #64748b;">Duration</div>
-                    <div class="detail-value" style="font-size: 1.1rem; font-weight: 600; color: #0f172a;">60 mins</div>
+                <div class="detail-item" style="padding: 12px; background: var(--bg-color); border-radius: 8px; border: 1px solid var(--border-color);">
+                    <div class="detail-label" style="font-size: 0.8rem; color: var(--text-muted);">Duration</div>
+                    <div class="detail-value" style="font-size: 1.1rem; font-weight: 600; color: var(--text-main);">30 mins</div>
                 </div>
             </div>
-            
+
             <div class="welcome-actions">
                 <button class="btn btn-primary" id="startBtn" onclick="document.getElementById('welcomeScreen').style.display='none'; document.getElementById('examContainer').style.display='flex';" style="font-size: 1.1rem; padding: 12px 32px; width: 100%;">
                     <i class="fas fa-play" style="margin-right: 8px;"></i> Start Test
@@ -47,12 +47,12 @@
             </div>
         </div>
     </div>
-    
+
     <!-- Main Exam Interface -->
     <div class="exam-container" id="examContainer" style="display: none; height: 100vh; flex-direction: column;">
         <!-- Top Header -->
         <div class="exam-header">
-            <div class="exam-title">Aether Mocks</div>
+            <div class="exam-title">Mocks Wallah</div>
             <div class="header-actions" style="display: flex; align-items: center; gap: 12px;">
                 <button class="btn-icon" id="themeToggleBtn" title="Switch to Dark Mode"><i class="fas fa-moon"></i></button>
                 <button class="btn-icon" id="fullscreenToggleBtn" title="Toggle Fullscreen"><i class="fas fa-expand"></i></button>
@@ -62,14 +62,14 @@
                 </div>
             </div>
         </div>
-        
+
         <!-- Main Content -->
         <div class="mock-container">
             <!-- Question Area -->
             <div class="question-view">
                 <!-- Dynamically populated question container -->
                 <div id="questionContainer" style="flex: 1; display: flex; flex-direction: column; gap: 24px;"></div>
-                
+
                 <!-- Controls -->
                 <div class="nav-controls">
                     <button class="btn btn-secondary btn-prev"><i class="fas fa-chevron-left" style="margin-right: 8px;"></i> Previous</button>
@@ -79,40 +79,221 @@
                     <button class="btn btn-primary btn-next">Next <i class="fas fa-chevron-right" style="margin-left: 8px;"></i></button>
                 </div>
             </div>
-            
+
             <!-- Desktop Navigator Sidebar -->
             <div class="sidebar">
                 <div class="sidebar-section-title">Summary Status</div>
                 <div class="stats-grid">
                     <div class="stat-item">
-                        <div class="stat-count" id="stat-answered" style="color: #10b981;">0</div>
+                        <div class="stat-count" id="stat-answered" style="color: var(--success);">0</div>
                         <div class="stat-name">Answered</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-count" id="stat-flagged" style="color: #f59e0b;">0</div>
+                        <div class="stat-count" id="stat-flagged" style="color: var(--warning);">0</div>
                         <div class="stat-name">Flagged</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-count" id="stat-not-answered" style="color: #64748b;">0</div>
+                        <div class="stat-count" id="stat-not-answered" style="color: var(--text-muted);">0</div>
                         <div class="stat-name">Unanswered</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-count" id="stat-not-visited" style="color: #94a3b8;">0</div>
+                        <div class="stat-count" id="stat-not-visited" style="color: var(--text-muted);">0</div>
                         <div class="stat-name">Not Visited</div>
                     </div>
                 </div>
-                
+
                 <div class="sidebar-section-title" style="margin-top: 16px;">Question Navigator</div>
                 <div class="questions-grid"></div>
             </div>
         </div>
     </div>
-    
+
     <!-- Inject Question Data -->
     <script>
-        const questions = [];
+        const questions = [
+  {
+    "question": "<p><span style=\\\"font-family: Cambria Math;\\\"> \\'The Zoya Factor\\' is a novel written by __________</span></p>\\n",
+    "options": [
+      "Rajashree",
+      "Jerry Pinto",
+      "Suketu Mehta",
+      "Anuja Chauhan"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">1.</span><span style=\"font-family: Cambria Math;\">(</span><span style=\"font-family: Cambria Math;\">d)</span><span style=\"font-family: Cambria Math;\"> <strong>Anuja Chauhan.</strong><span style=\"font-weight: 400;\"> </span><strong>Books and their author: Anuja Chauhan - </strong><span style=\"font-weight: 400;\">&ldquo;Battle For Bittora&rdquo;, &ldquo;Those pricey Thakur Girls&rdquo;, &ldquo;The House That BJ Built&rdquo;.</span><strong> </strong><strong>Jerry Pinto - &ldquo;</strong><span style=\"font-weight: 400;\">Helen: the life and Times of an H-Bomb&rdquo;. </span><strong>Suketu Mehta - &ldquo;</strong><span style=\"font-weight: 400;\">This Land Is Our Land: An Immigrant&rsquo;s Manifesto&rdquo;, &ldquo;Maximum City: Bombay Lost and Found&rdquo;. </span><strong>Rajashree: &ldquo;</strong><span style=\"font-weight: 400;\">Trust me&rdquo;.</span></span></p>\n",
+    "question_index": 0
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\">2</span><span style=\"font-family: Cambria Math;\">. Hornbill festival is celebrated in which of the following states?</span></p>\n",
+    "options": [
+      "Nagaland",
+      "Ladakh",
+      "Rajasthan",
+      "Tamil Nadu"
+    ],
+    "correct_option_id": 0,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">2.(</span><span style=\"font-family: Cambria Math;\">a) <strong>Nagaland </strong><span style=\"font-weight: 400;\">(Celebrated 1 to 10 December)</span><strong>. Nagaland - </strong><span style=\"font-weight: 400;\">Sekrenyi</span><strong> (</strong><span style=\"font-weight: 400;\">the festival of purification), and</span><span style=\"font-weight: 400;\"> </span><span style=\"font-weight: 400;\">Aoleang (the festival of the Konyak Nagas). </span><strong>Ladakh - </strong><span style=\"font-weight: 400;\">Hemis Festival, Thiksey, Matho Nagrang Festival, Losar (New Year) Celebration. </span><strong>Rajasthan - </strong><span style=\"font-weight: 400;\">Teej festival, Kajli teej, Momasar Utsav, Pushkar fair. </span><strong>Tamil Nadu -</strong><span style=\"font-weight: 400;\"> Thiruvaiyaru Festival, Natyanjali Dance Festival, Mahamaham, Karthigai Deepam.</span></span></p>\n",
+    "question_index": 1
+  },
+  {
+    "question": "<p><span style=\\\"font-family: Cambria Math;\\\">Mrinalini Sarabhai who received Padma Shri\\'</span><span style=\\\"font-family: Cambria Math;\\\"> in the year 1965 was a recognized _________dancer.</span></p>\\n",
+    "options": [
+      "Odissi",
+      "Manipuri",
+      "Kuchipudi",
+      "Bharatanatyam"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">3.(</span><span style=\"font-family: Cambria Math;\">d) <strong>Bharatanatyam. Award received by Mrinalini Sarabhai:&nbsp; </strong><span style=\"font-weight: 400;\">Padma Bhushan (1992),&nbsp; Kerala Sangeetha Nataka Akademi Fellowship (1988), Dhirubhai Thakar Savyasachi Saraswat Award (2014). </span><strong>Odissi</strong><span style=\"font-weight: 400;\"> (Odisha) Dancers - Sonal Mansingh, Jhelum Paranjape,&nbsp; Mayadhar Raut. </span><strong>Manipuri</strong><span style=\"font-weight: 400;\"> (Manipur) Dancers - Darshana Jhaveri, Yumlembam, Gambhini Devi, Guru Bipin Sinh. </span><strong>Kuchipudi </strong><span style=\"font-weight: 400;\">(Andhra Pradesh) Dancers&nbsp; - Raja and Radha Reddy, Yamini Reddy, Kaushalya Reddy, Bhavana Reddy.</span></span></p>\n",
+    "question_index": 2
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\">4</span><span style=\"font-family: Cambria Math;\">. In Table Tennis, the length of upper surface of the table is______ </span></p>\n",
+    "options": [
+      "264 cm",
+      "780 cm",
+      "274 cm ",
+      "270 cm"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p>4.(c) <span style=\"font-family: Cambria Math;\"><strong>274 cm. Dimension of table-tennis table - </strong><span style=\"font-weight: 400;\">2.74 meters long, 1.525 m wide, and 0.76 m high. Table tennis (ping-pong&nbsp; /whiff-whaff) is the national sport of China. Table tennis was first played as an Olympic sport at the 1988 Summer Olympics in Seoul. The name table tennis was adopted in 1921&ndash;22. Table tennis was founded by David Foster. </span><strong>Players -</strong><span style=\"font-weight: 400;\"> Sharath Kamal Achanta, Ma Long, Manika Batra, Sharath Kamal, Liu Guoliang.</span></span></p>\n",
+    "question_index": 3
+  },
+  {
+    "question": "<p><span style=\\\"font-family: Cambria Math;\\\">In India, National Voters\\' Day is celebrated on</span><span style=\\\"font-family: Cambria Math;\\\"> ____________ </span></p>\\n",
+    "options": [
+      "26 March",
+      "24 February",
+      "27 December",
+      "25 January"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p><span style=\\\"font-family: Cambria Math;\\\">5.(</span><span style=\\\"font-family: Cambria Math;\\\">d) <strong>25 January. Other important days - </strong><span style=\\\"font-weight: 400;\\\">1 January - Global Family Day. 9 January - Pravasi Bharatiya Divas. 12 January - National youth day. 15 January - Thal Sena Divas (Army Day). 25 January - Indian Tourism Day. 21 February - International Mother Language Day. 24 February - Central Excise Day. 1 March - World Civil Defence Day. 23 March - Martyrs\\' Day.</span></span></p>\\n",
+    "question_index": 4
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\"> Giorgia Meloni recently became the first Woman Prime Minister of which </span><span style=\"font-family: Cambria Math;\">country ?</span></p>\n",
+    "options": [
+      "Austria",
+      "Italy",
+      "Spain",
+      "Ukraine"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">6.(</span><span style=\"font-family: Cambria Math;\">b) <strong>Italy. </strong><span style=\"font-weight: 400;\">First Female</span><strong> </strong><span style=\"font-weight: 400;\">Prime Minister of Some Countries: Austria - Brigitte Bierlein. Spain - Mar&iacute;a Teresa Fern&aacute;ndez de la Vega. Ukraine - Tymoshenko. India - Indira gandhi. Bangladesh - Sheikh Hasina Wazed. Pakistan - Benazier Bhutto.</span></span></p>\n",
+    "question_index": 5
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\"> Identify the Indian music personality. </span><span style=\"font-family: Cambria Math;\">Under him the shehnai came out of its ceremonial context and began to be acknowledged as a clas</span><span style=\"font-family: Cambria Math;\">sical music instrument.</span></p>\n",
+    "options": [
+      "Alla Rakha",
+      "Ustad Bismillah Khan",
+      "Pandit Ram Narayan",
+      "Ustad Bundu Khan"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">7.(</span><span style=\"font-family: Cambria Math;\">b)</span><span style=\"font-family: Cambria Math;\"> <strong>Ustad Bismillah Khan - Award:</strong><span style=\"font-weight: 400;\">&nbsp; Bharat Ratna (2001),&nbsp; Swathi Sangeetha Puraskaram (1998), Padma Vibhushan in 1980, Padma Bhushan (1968)</span><strong>. Tabla players - </strong><span style=\"font-weight: 400;\">Alla Rakha</span><strong>, </strong><span style=\"font-weight: 400;\">Zakir Husain, Ahmed Jan Thirakwa</span><strong>. Sarangi&nbsp; player - </strong><span style=\"font-weight: 400;\">Pandit Ram Narayan, Ustad Bundu Khan.</span><strong> Flute player</strong><span style=\"font-weight: 400;\"> - N Leela, Pannalal Ghosh, Rajendra Prasad, V </span><span style=\"font-weight: 400;\">Kunjamani, Hariprasad Chaurasia.</span></span></p>\n",
+    "question_index": 6
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\"> Bhoota Kola, a spirit worship ritual dance is of which state?</span></p>\n",
+    "options": [
+      "Andhra Pradesh",
+      "Tamil Nadu",
+      "Kerala",
+      "Karnataka"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">8.(</span><span style=\"font-family: Cambria Math;\">d) <strong>Karnataka. Dances of other states: - Andhra Pradesh - </strong><span style=\"font-weight: 400;\">Kuchipudi (classical), Vilasini Natyam, Veera Natyam, Tappeta Gullu, Butta Bommalu. </span><strong>Tamil Nadu - </strong><span style=\"font-weight: 400;\">Bharatanatyam (classical), Karakattam, Mayil Attam, Kummi, Oyilattam, Karagam. </span><strong>Kerala</strong><span style=\"font-weight: 400;\"> - Kathakali (classical), Mohiniyattam, Theyyam, Ottamthullal, Padayani.</span></span></p>\n",
+    "question_index": 7
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\"> \"Arthashastra\" was written by _________</span></p>\n",
+    "options": [
+      "Vishnu Sharma",
+      "Kalidasa",
+      "Chandragupta",
+      "Chanakya"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p><span style=\"font-family: Cambria Math;\">9.(</span><span style=\"font-family: Cambria Math;\">d) <strong>Chanakya </strong><span style=\"font-weight: 400;\">(Kau&#7789;ilya / Vishnugupta) </span><strong>-</strong><span style=\"font-weight: 400;\"> Assisted the first Mauryan emperor Chandragupta Maurya. Chandragupta -&nbsp; the founder of the Mauryan Empire in Ancient India. </span><strong>Books and their writers : Kalidasa - &ldquo;</strong><span style=\"font-weight: 400;\">Abhigyan shakuntalm&rdquo;, &ldquo;kalidaskalasushma&rdquo;, &ldquo;Kumarasambhava&rdquo;, &ldquo;Raghuvamsa&rdquo;, &ldquo;Malvika and Agnimitra&rdquo;, &ldquo;Meghaduta&rdquo;. </span><strong>Vishnu sharma -</strong><span style=\"font-weight: 400;\"> &ldquo;Panchatantra&rdquo;, &ldquo;Kalila and Dimna&rdquo;.</span></span></p>\n",
+    "question_index": 8
+  },
+  {
+    "question": "<p>10<span style=\"font-family: Cambria Math;\">. </span><span style=\"font-family: Cambria Math;\">The Pudh</span><span style=\"font-family: Cambria Math;\">umai Penn scheme is launched by which state government?</span></p>\n",
+    "options": [
+      "Tamil Nadu",
+      "Maharashtra",
+      "Andhra Pradesh",
+      "Kerala"
+    ],
+    "correct_option_id": 0,
+    "solution": "<p>10<span style=\"font-family: Cambria Math;\">.(a) <strong>Tamil Nadu.</strong><span style=\"font-weight: 400;\"> </span><strong>The Pudhumai Penn scheme: </strong><span style=\"font-weight: 400;\">Tamil Nadu Chief minister M K Stalin launched this Scheme on 5 September 2022.</span><strong> Aim : </strong><span style=\"font-weight: 400;\">To enhance the enrolment ratio of girls from Government schools to Higher Education Institutions. </span><strong>Beneficiaries</strong><span style=\"font-weight: 400;\"> : Girl students studying from class VI to XII in Government school. </span><strong>Benefits </strong><span style=\"font-weight: 400;\">: &#8377;1000 will be deposited in the bank account of the girl student.</span></span></p>\n",
+    "question_index": 9
+  },
+  {
+    "question": "<p>11<span style=\"font-family: Cambria Math;\">.</span><span style=\"font-family: Cambria Math;\"> The National Rural Employment Programme was merged with _____________ in 1989.</span></p>\n",
+    "options": [
+      "Indira Awas Yojana",
+      "Rural Landless Employment Guarantee Programme",
+      "Employment Assurance Scheme",
+      "Jawahar Rozgar Yojana"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p>11.(d) <span style=\"font-family: Cambria Math;\"><strong>Jawahar Rozgar Yojana -</strong><span style=\"font-weight: 400;\"> It was launched on </span><strong>1 April 1989 </strong><span style=\"font-weight: 400;\">by the veteran Prime Minister Lt. Atal Bihari Vajpayee by merging National Rural Employment Program (</span><strong>NREP</strong><span style=\"font-weight: 400;\">) and Rural Landless Employment Guarantee Programme (</span><strong>RLEGP</strong><span style=\"font-weight: 400;\">). It was replaced by Jawahar Gram Samridhi Yojna on 1 April 1999 and on 25 September 2001, merged with Sampoorna Grameen Rozgar Yojana. </span><strong>Indira Awaas Yojana (IAY)</strong><span style=\"font-weight: 400;\"> - 1985-86 (Now replaced by Pradhan Mantri Gramin Awas Yojana).</span></span></p>\n",
+    "question_index": 10
+  },
+  {
+    "question": "<p>12<span style=\\\"font-family: Cambria Math;\\\">.</span><span style=\\\"font-family: Cambria Math;\\\"> Rukmini Devi was featured in India Today\\'s list of 100 People Who Shaped India\\\". She was awarded with \\'Padma Bhushan\\' in the year 1956 and the Sangeet Natak Akademi Fellows</span><span style=\\\"font-family: Cambria Math;\\\">hip\\' in 1967. She was associated with which of the following dance?</span></p>\\n",
+    "options": [
+      "Bharatnatyam",
+      "Kathakali",
+      "Odissi",
+      "Manipuri"
+    ],
+    "correct_option_id": 0,
+    "solution": "<p>12<span style=\"font-family: Cambria Math;\">.(a) <strong>Bharatnatyam - </strong><span style=\"font-weight: 400;\">An</span><strong> </strong><span style=\"font-weight: 400;\">Indian classical dance form originated in Tamil Nadu. </span><strong>Dancers</strong><span style=\"font-weight: 400;\"> - Padma Subrahmanyam, Alarmel Valli, Yamini Krishnamurthy, and Mallika Sarabhai. </span><strong>Rukmini Devi </strong><span style=\"font-weight: 400;\">- First woman in Indian history to be nominated as a member of the Rajya Sabha. </span><strong>Awards - </strong><span style=\"font-weight: 400;\">Padma Bhushan (1956), Sangeet Natak Akademi Award</span><strong> </strong><span style=\"font-weight: 400;\">(1957), Kalidas Samman, Govt of Madhya Pradesh (1984). </span><strong>Kathakali - </strong><span style=\"font-weight: 400;\">Originated in Kerala.</span></span></p>\n",
+    "question_index": 11
+  },
+  {
+    "question": "<p>13<span style=\"font-family: Cambria Math;\">.</span><span style=\"font-family: Cambria Math;\"> Suggi is a famous folk dance form of ____________ state of India </span></p>\n",
+    "options": [
+      "Karnataka",
+      "Chhattisgarh",
+      "Punjab",
+      "Sikkim"
+    ],
+    "correct_option_id": 0,
+    "solution": "<p>13<span style=\"font-family: Cambria Math;\">.(a) <strong>Karnataka. Suggi </strong><span style=\"font-weight: 400;\">- A dance performed at the time of harvesting by the Halakki Vokkaliga tribe. </span><strong>Folk dance: Karnataka - </strong><span style=\"font-weight: 400;\">Yakshagan, Huttari, Kunitha, Karga, Lambi. </span><strong>Sikkim - </strong><span style=\"font-weight: 400;\">Yak Chaam, Denzong Gnenha, Tashi Yangku Dance, Khukuri Naach, Chutkey Naach. </span><strong>Punjab - </strong><span style=\"font-weight: 400;\">Bhangra, Giddha, Daff, Dhaman, Bhand. </span><strong>Chhattisgarh - </strong><span style=\"font-weight: 400;\">Saila, Sua Nacha, Panthi, Gendi, Pandavani.</span></span></p>\n",
+    "question_index": 12
+  },
+  {
+    "question": "<p>14<span style=\"font-family: Cambria Math;\">.</span><span style=\"font-family: Cambria Math;\"> &lsquo;&rsquo;Dreams </span><span style=\"font-family: Cambria Math;\">From</span><span style=\"font-family: Cambria Math;\"> My Father\" is an autobiography of _______________</span></p>\n",
+    "options": [
+      "Benito Mussolini",
+      "Anne Frank",
+      "Benjamin Franklin",
+      "Barack Obama"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p>14<span style=\\\"font-family: Cambria Math;\\\">.(d) <strong>Barack Obama - </strong><span style=\\\"font-weight: 400;\\\">An American politician who served as the 44th president (the first African-American) of the United States from 2009 to 2017. </span><strong>Other books</strong><span style=\\\"font-weight: 400;\\\"> (Barack Obama) - &ldquo;The Audacity of Hope&rdquo;, &ldquo;A Promised Land&rdquo;, &ldquo;Of Thee I Sing: A Letter to My Daughters&rdquo;, &ldquo;Renegades: Born in the USA&rdquo;. </span><strong>Books of Benjamin Franklin - &ldquo;</strong><span style=\\\"font-weight: 400;\\\">The Declaration of Independence and The Constitution of the United States&rdquo;, &ldquo;Poor Richard\\'s Almanack&rdquo; etc.</span></span></p>\\n",
+    "question_index": 13
+  },
+  {
+    "question": "<p>15<span style=\"font-family: Cambria Math;\">.</span><span style=\"font-family: Cambria Math;\"> Which among the following songs was composed by famous Indian musician Rahul Dev Burman?</span></p>\n",
+    "options": [
+      "Yeh Dosti Hum Nahi Todenge",
+      "Kesariya",
+      "Kisi Ki Muskurahaton Pe Ho Nisar",
+      "Ae Dil Hai Mushkil"
+    ],
+    "correct_option_id": 0,
+    "solution": "<p>15<span style=\"font-family: Cambria Math;\">.(a) <strong>Yeh Dosti Hum Nahi Todenge </strong><span style=\"font-weight: 400;\">(Sholay - 1975):</span><strong> Lyricist </strong><span style=\"font-weight: 400;\">- Anand Bakshi.</span><strong> Singer - </strong><span style=\"font-weight: 400;\">Manna Dey, Kishore Kumar.</span><strong> Famous Patriotic Songs:&nbsp; </strong><span style=\"font-weight: 400;\">Aye Mere Watan Ke Logo (Lata Mangeshkar),</span><strong> </strong><span style=\"font-weight: 400;\">Saare Jahan Se Accha (Muhammad Iqbal), Mere desh ki dharti (Mahendra Kapoor), Yeh Jo Des Hai Tera (A.R. Rahman), Sandese Aate Hai (Roop Kumar Rathod, Sonu Nigam). Kesariya (Sung by Arijit Singh), Ae Dil Hai Mushkil (Sung by Pritam and Arijit Singh).</span></span></p>\n",
+    "question_index": 14
+  }
+];
     </script>
-    
+
     <!-- Central JS Controller -->
     <script src="../js/mock-core.js"></script>
 </body>

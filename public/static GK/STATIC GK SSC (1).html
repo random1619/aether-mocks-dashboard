@@ -3,43 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aether Mocks</title>
+    <title>Mocks Wallah</title>
     <!-- Fonts & Icons -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    
+
     <!-- Central Stylesheet -->
     <link rel="stylesheet" href="../css/mock-main.css">
-    
+
     <!-- Math Formula Rendering (KaTeX/MathJax) -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    
+
     <!-- Timer Config -->
-    <meta name="exam-duration" content="60">
+    <meta name="exam-duration" content="30">
 </head>
 <body>
     <!-- Welcome Screen -->
     <div class="welcome-screen" id="welcomeScreen">
         <div class="welcome-container">
             <div class="welcome-header" style="margin-bottom: 24px;">
-                <h1 style="font-size: 2rem; font-weight: 700; color: #0f172a; margin-bottom: 8px;"><i class="fas fa-graduation-cap" style="color: #3b82f6;"></i> Aether Mocks</h1>
-                <p style="color: #64748b;">Computer Based Test Portal</p>
+                <h1 style="font-size: 2rem; font-weight: 700; color: var(--text-main); margin-bottom: 8px;"><i class="fas fa-graduation-cap" style="color: var(--primary);"></i> Mocks Wallah</h1>
+                <p style="color: var(--text-muted);">Computer Based Test Portal</p>
             </div>
-            
+
             <div class="test-details" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-bottom: 32px; text-align: left;">
-                <div class="detail-item" style="padding: 12px; background: #f8fafc; border-radius: 8px; border: 1px solid #e2e8f0;">
-                    <div class="detail-label" style="font-size: 0.8rem; color: #64748b;">Total Questions</div>
-                    <div class="detail-value" style="font-size: 1.1rem; font-weight: 600; color: #0f172a;">10</div>
+                <div class="detail-item" style="padding: 12px; background: var(--bg-color); border-radius: 8px; border: 1px solid var(--border-color);">
+                    <div class="detail-label" style="font-size: 0.8rem; color: var(--text-muted);">Total Questions</div>
+                    <div class="detail-value" style="font-size: 1.1rem; font-weight: 600; color: var(--text-main);">15</div>
                 </div>
-                <div class="detail-item" style="padding: 12px; background: #f8fafc; border-radius: 8px; border: 1px solid #e2e8f0;">
-                    <div class="detail-label" style="font-size: 0.8rem; color: #64748b;">Duration</div>
-                    <div class="detail-value" style="font-size: 1.1rem; font-weight: 600; color: #0f172a;">60 mins</div>
+                <div class="detail-item" style="padding: 12px; background: var(--bg-color); border-radius: 8px; border: 1px solid var(--border-color);">
+                    <div class="detail-label" style="font-size: 0.8rem; color: var(--text-muted);">Duration</div>
+                    <div class="detail-value" style="font-size: 1.1rem; font-weight: 600; color: var(--text-main);">30 mins</div>
                 </div>
             </div>
-            
+
             <div class="welcome-actions">
                 <button class="btn btn-primary" id="startBtn" onclick="document.getElementById('welcomeScreen').style.display='none'; document.getElementById('examContainer').style.display='flex';" style="font-size: 1.1rem; padding: 12px 32px; width: 100%;">
                     <i class="fas fa-play" style="margin-right: 8px;"></i> Start Test
@@ -47,12 +47,12 @@
             </div>
         </div>
     </div>
-    
+
     <!-- Main Exam Interface -->
     <div class="exam-container" id="examContainer" style="display: none; height: 100vh; flex-direction: column;">
         <!-- Top Header -->
         <div class="exam-header">
-            <div class="exam-title">Aether Mocks</div>
+            <div class="exam-title">Mocks Wallah</div>
             <div class="header-actions" style="display: flex; align-items: center; gap: 12px;">
                 <button class="btn-icon" id="themeToggleBtn" title="Switch to Dark Mode"><i class="fas fa-moon"></i></button>
                 <button class="btn-icon" id="fullscreenToggleBtn" title="Toggle Fullscreen"><i class="fas fa-expand"></i></button>
@@ -62,14 +62,14 @@
                 </div>
             </div>
         </div>
-        
+
         <!-- Main Content -->
         <div class="mock-container">
             <!-- Question Area -->
             <div class="question-view">
                 <!-- Dynamically populated question container -->
                 <div id="questionContainer" style="flex: 1; display: flex; flex-direction: column; gap: 24px;"></div>
-                
+
                 <!-- Controls -->
                 <div class="nav-controls">
                     <button class="btn btn-secondary btn-prev"><i class="fas fa-chevron-left" style="margin-right: 8px;"></i> Previous</button>
@@ -79,40 +79,221 @@
                     <button class="btn btn-primary btn-next">Next <i class="fas fa-chevron-right" style="margin-left: 8px;"></i></button>
                 </div>
             </div>
-            
+
             <!-- Desktop Navigator Sidebar -->
             <div class="sidebar">
                 <div class="sidebar-section-title">Summary Status</div>
                 <div class="stats-grid">
                     <div class="stat-item">
-                        <div class="stat-count" id="stat-answered" style="color: #10b981;">0</div>
+                        <div class="stat-count" id="stat-answered" style="color: var(--success);">0</div>
                         <div class="stat-name">Answered</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-count" id="stat-flagged" style="color: #f59e0b;">0</div>
+                        <div class="stat-count" id="stat-flagged" style="color: var(--warning);">0</div>
                         <div class="stat-name">Flagged</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-count" id="stat-not-answered" style="color: #64748b;">0</div>
+                        <div class="stat-count" id="stat-not-answered" style="color: var(--text-muted);">0</div>
                         <div class="stat-name">Unanswered</div>
                     </div>
                     <div class="stat-item">
-                        <div class="stat-count" id="stat-not-visited" style="color: #94a3b8;">0</div>
+                        <div class="stat-count" id="stat-not-visited" style="color: var(--text-muted);">0</div>
                         <div class="stat-name">Not Visited</div>
                     </div>
                 </div>
-                
+
                 <div class="sidebar-section-title" style="margin-top: 16px;">Question Navigator</div>
                 <div class="questions-grid"></div>
             </div>
         </div>
     </div>
-    
+
     <!-- Inject Question Data -->
     <script>
-        const questions = [];
+        const questions = [
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\">Mahatma Gandhi National Rural Employment Guarantee Act (MGNREGA) is an employment scheme that was launched in 2005 to provide social security by guaranteeing a minimum___________of days paid work per year to all the families whose adult members opt for uns</span><span style=\"font-family: Cambria Math;\">killed labour-intensive work.</span></p>\n",
+    "options": [
+      "100",
+      "150",
+      "120",
+      "200"
+    ],
+    "correct_option_id": 0,
+    "solution": "<p>1.(a) <strong>100.<span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">MGNREGA:</span></strong><span style=\"font-family: Cambria Math;\"><strong> </strong>It was launched under the Ministry of Rural development; Wages must be paid acco</span><span style=\"font-family: Cambria Math;\">rding to the statutory minimum wages specified for agricultural labourers in the state under the Minimum Wages Act, 1948. </span></p>\n",
+    "question_index": 0
+  },
+  {
+    "question": "<p><span style=\\\"font-family: Cambria Math;\\\"> India\\'s First open Rock Museum is located in which city?</span></p>\\n",
+    "options": [
+      "Varanasi",
+      "Chennai",
+      "Mysuru",
+      "Hyderabad"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p>2.(d) <strong>Hyderabad</strong> <span style=\"font-family: Cambria Math;\">city was founded by Mohammed Quli Qutub Shah (fifth sultan of Qutb Shahi dynasty) in 1591. Nizam Ali Khan (son of Asaf Jah I) shifted the capital to Hyderabad.</span><span style=\"font-family: Cambria Math;\"> <strong>Famous monuments of Hyderabad:</strong></span><span style=\"font-family: Cambria Math;\"> Char- Minar, Makka Masjid both built by Quli Qutub Shah. The Open</span><span style=\"font-family: Cambria Math;\"> Rock Museum, set up with the aim to educate and enlighten the masses about several lesser known facts, displays around 35 different types of rocks from different parts of India.</span></p>\n",
+    "question_index": 1
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\">Mohiniyattam dance form gets its name from Hindu God __________.</span></p>\n",
+    "options": [
+      "Kartikeya",
+      "Shiva",
+      "Vishnu",
+      "Krishna"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p>3.(c) <strong>Vishnu.</strong><span style=\"font-family: Cambria Math;\"> It is one of eight classical dance forms of India. </span><strong><span style=\"font-family: Cambria Math;\">Famous dancers</span></strong><span style=\"font-family: Cambria Math;\"> - Jayaprabha </span><span style=\"font-family: Cambria Math;\">Menon, Sunanda Nair, Pallavi Krishnan. Other Indian classical dance - Bharatanatyam (Tamil nadu), </span><span style=\"font-family: Cambria Math;\"><strong>Kathak</strong> </span><span style=\"font-family: Cambria Math;\">(Uttar pradesh) - attributed to god Krishna, Kuchipudi (Andhra pradesh) - </span><span style=\"font-family: Cambria Math;\">attributed to Tirtha Narayanayati, Kathakali (Kerala) - attributed to sage</span><span style=\"font-family: Cambria Math;\"> Bharata, Sattriya (Assam), Manipuri (Manipur) and Odissi (Odisha). Chhau dance (West Bengal, Jharkhand, Odisha) (approved by the Ministry of Culture).</span></p>\n",
+    "question_index": 2
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\">\"World Refugee Day\" is observed every year on______.</span></p>\n",
+    "options": [
+      "20th june",
+      "22th june",
+      "18th june",
+      "17th june"
+    ],
+    "correct_option_id": 0,
+    "solution": "<p>4.(a) <strong>20th june</strong><span style=\"font-family: Cambria Math;\"><strong>.</strong> 2023 Theme: </span><span style=\"font-family: Cambria Math;\"><strong>&ldquo;Whoever, Whatever, Whenever.&rdquo;</strong> </span><span style=\"font-family: Cambria Math;\">First time: </span><strong><span style=\"font-family: Cambria Math;\">2001.</span></strong><span style=\"font-family: Cambria Math;\"> It is designated as an International Day by the UN (United Nations). It celebrates the strength and courage of people who have been forced to flee their home country to escape conflict or persecution.</span></p>\n",
+    "question_index": 3
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\">Who wa</span><span style=\"font-family: Cambria Math;\">s the first Indian to get the Oscar for lifetime achievements in cinema in 1992?</span></p>\n",
+    "options": [
+      "Tarun Majumdar",
+      "K Viswanath",
+      "Satyajit Ray",
+      "T Rama Rao"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p>5.(c) <strong><span style=\"font-family: Cambria Math;\">Satyajit Ray</span></strong><span style=\"font-family: Cambria Math;\"> was the first Indian who received such an award from the Academy of Motion Pictures, Arts and Science. </span><strong><span style=\"font-family: Cambria Math;\">Awards:-</span></strong><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\"> Dadasaheb Phalke Award (1984), Bharat Ratna (1992). Honorary Award at the 64th Academy Awards (1991),</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">Padma Shri (1958), Sangeet Natak Akademi Puraskar (1959), Padma Bhushan (1965), JLCCA Ramon Magsaysay Award (1967), Padma Vibhushan (1976) etc. </span><strong><span style=\"font-family: Cambria Math;\">Bhanu Ath</span><span style=\"font-family: Cambria Math;\">aiya</span></strong><span style=\"font-family: Cambria Math;\"> was the first Indian to win the Oscar Award for costume designing.</span></p>\n",
+    "question_index": 4
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\">Which of the following pair of \"player-sports\" is correct?</span></p>\r\n<p><span style=\"font-family: Cambria Math;\">I. Manpreet Singh - Boxing</span></p>\r\n<p><span style=\"font-family: Cambria Math;\">II. Neeraj Chopra - Javelin Throw</span></p>\n",
+    "options": [
+      "Neither I nor II",
+      "Both I and II",
+      "Only II",
+      "Only I"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p>6.(c) <span style=\"font-family: Cambria Math;\">Only II </span><span style=\"font-family: Cambria Math;\">.</span><span style=\"font-family: Cambria Math;\"> Olympic gold medallist </span><span style=\"font-family: Cambria Math;\"><strong>Neeraj Chopra</strong> (</span><span style=\"font-family: Cambria Math;\">javelin thrower</span><span style=\"font-family: Cambria Math;\">)</span><span style=\"font-family: Cambria Math;\"> became the first Indian to win the prest</span><span style=\"font-family: Cambria Math;\">igious Diamond League Finals title. </span><strong><span style=\"font-family: Cambria Math;\">Other Awards</span></strong><span style=\"font-family: Cambria Math;\"><strong>:</strong> Arjuna Award (2018), Major Dhyan Chand Khel Ratna Award (2021), Padma Shri (2022).</span><span style=\"font-family: Cambria Math;\"> <strong>Manpreet Singh</strong></span><span style=\"font-family: Cambria Math;\"><strong>,</strong> won the silver medal in the 2010 Asian Games. </span></p>\n",
+    "question_index": 5
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\">Whi</span><span style=\"font-family: Cambria Math;\">ch of the following dance is related to Odissi dance?</span></p>\n",
+    "options": [
+      "Shovana Narayan",
+      "Birju Maharaj",
+      "Sujata Mohapatra",
+      "Rukmini Devi"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p>7.(c) <strong>Sujata Mohapatra</strong><span style=\"font-family: Cambria Math;\"> (born 27 June 1968) is an Indian classical dancer and teacher of</span><span style=\"font-family: Cambria Math;\"> <strong>Odissi</strong> </span><span style=\"font-family: Cambria Math;\">dancing style. Daughter in law of </span><strong><span style=\"font-family: Cambria Math;\">Kelucharan Mohapatra</span><span style=\"font-family: Cambria Math;\">. </span><span style=\"font-family: Cambria Math;\">Birju Maharaj</span></strong><span style=\"font-family: Cambria Math;\">- Kathak. </span><span style=\"font-family: Cambria Math;\"><strong>Rukmini Devi Arundale </strong>(</span><span style=\"font-family: Cambria Math;\">first woman in Indian history to be nominated as a member of the Rajya Sabha</span><span style=\"font-family: Cambria Math;\">)</span><span style=\"font-family: Cambria Math;\">- Bharatanatyam. </span><strong><span style=\"font-family: Cambria Math;\">Shovana Narayan-</span></strong><span style=\"font-family: Cambria Math;\"> Kathak. </span></p>\n",
+    "question_index": 6
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\"> Flight Lieutenant______ had created history in May 2019 by becoming the first woman to</span><span style=\"font-family: Cambria Math;\"> qualify for combat missions on a fighter jet.</span></p>\n",
+    "options": [
+      "Priya Jhingan",
+      "Harita Kaur Deol",
+      "Bhawana Kanth",
+      "Shanti Tigga"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p>8.(c) <span style=\"font-family: Cambria Math;\"> <strong>Bhawana Kanth</strong></span><strong><span style=\"font-family: Cambria Math;\">. </span></strong><span style=\"font-family: Cambria Math;\"><strong>Priya Jinghan:</strong> </span><span style=\"font-family: Cambria Math;\">The First Lady Cadet to join the Indian Army Officer. </span><span style=\"font-family: Cambria Math;\"><strong>Harita Kaur Deol:</strong> </span><span style=\"font-family: Cambria Math;\">the first Indian woman to fly solo in an Avro HS-748 aircraft. </span><strong><span style=\"font-family: Cambria Math;\">Shanti Tigga:</span></strong><span style=\"font-family: Cambria Math;\"> She was the first female jawan in the Indian Army. </span></p>\n",
+    "question_index": 7
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\"> Indian Army&rsquo;s 1st women combat aviator is ___________ . </span></p>\n",
+    "options": [
+      "Punita Arora",
+      "Divya Ajit Kumar",
+      "Abhilasha Barak",
+      "Priya Semwal"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p>9.<span style=\"font-family: Cambria Math;\">(c) <strong>Abhilasha Barak.</strong> </span><span style=\"font-family: Cambria Math;\">The Army Aviation Corps is a form of the Army that was for</span><span style=\"font-family: Cambria Math;\">med in November 1986. </span><strong><span style=\"font-family: Cambria Math;\">Punita Arora</span></strong><span style=\"font-family: Cambria Math;\"> was the first woman Lieutenant General of the Indian Army. She held the ranks of Lieutenant General in the Indian Army and Surgeon Vice Admiral in the Navy.</span><span style=\"font-family: Cambria Math;\"> <strong>Divya Ajit Kumar</strong></span><span style=\"font-family: Cambria Math;\"> is the first woman to be conferred by the Army</span><span style=\"font-family: Cambria Math;\"> with the Sword of Honour.</span></p>\n",
+    "question_index": 8
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\">Raja Parba, also known as Mithuna Sankranti, is a ____________ day-long festival of womanhood celebrated in Odisha, India. </span></p>\n",
+    "options": [
+      "five",
+      "six",
+      "four",
+      "three"
+    ],
+    "correct_option_id": 3,
+    "solution": "<p>10.<span style=\"font-family: Cambria Math;\">(d) <strong>three.</strong></span><strong><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\"> Raja Parba</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\">festival </span><span style=\"font-family: Cambria Math;\">(Odisha)</span></strong><span style=\"font-family: Cambria Math;\"><strong> -</strong> </span><span style=\"font-family: Cambria Math;\">The first day is called Pahili Raja, the second day is Mithun Sankranti, the third day is called Bhoodah or Basi Raja. </span><span style=\"font-family: Cambria Math;\"><strong>Other festivals of Odisha -</strong> </span><span style=\"font-family: Cambria Math;\">Ratha Jatra, Magha Saptami, Makara Mela, Chhau festival,</span><span style=\"font-family: Cambria Math;\"> Puri Beach festival, Naukhai, Chatar Jatra, Durga Puja, Kalinga Mahotsav, Chandan Yatra,Konark Dance festival, Mahabisuva Sankranti </span><span style=\"font-family: Nirmala UI;\">&#2404;</span><span style=\"font-family: Cambria Math;\"> </span></p>\n",
+    "question_index": 9
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\">&lsquo;281 and beyond&rsquo; is the autobiography of which veteran cricketer? </span></p>\n",
+    "options": [
+      "Kapil Dev",
+      "VVS Laxman",
+      "Sourav Ganguly",
+      "Ajinkya Rahane"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p>11.<span style=\\\"font-family: Cambria Math;\\\">(b) <strong>VVS Laxman. &lsquo;281 and beyond&rsquo;</strong></span><span style=\\\"font-family: Cambria Math;\\\"><strong> </strong>is the autobiography of VVS Laxman.</span><span style=\\\"font-family: Cambria Math;\\\"> <strong>Kapil Dev\\'s autobiography -</strong></span><span style=\\\"font-family: Cambria Math;\\\"> He has written four books &ndash; three autobiographical and one book on Sikhism. Autobiographical works include &mdash; By God\\'s Decree which came out in 1985, Cricket My Style in 1987, and Straight from the Heart in 2004. His latest book titled We, The Sikhs was re</span><span style=\\\"font-family: Cambria Math;\\\">leased in 2019. </span><strong><span style=\\\"font-family: Cambria Math;\\\">A Century is Not Enough</span></strong><span style=\\\"font-family: Cambria Math;\\\"><strong> -</strong> Sourav Ganguly, </span><strong><span style=\\\"font-family: Cambria Math;\\\">Playing It My Way</span></strong><span style=\\\"font-family: Cambria Math;\\\"> - Sachin Tendulkar.</span></p>\\n",
+    "question_index": 10
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\"> Birju Maharaj was a noted dancer of ________ .</span></p>\n",
+    "options": [
+      "Bharatnatyam",
+      "Manipuri",
+      "Kathak",
+      "Sattriya"
+    ],
+    "correct_option_id": 2,
+    "solution": "<p>12.(c) <strong>Kathak.</strong><span style=\"font-family: Cambria Math;\"> He was from Lucknow Gharana and recipient of the Padma Vibhushan (1986). </span><span style=\"font-family: Cambria Math;\">Manipuri dancers -</span><span style=\"font-family: Cambria Math;\"> Guru Amubi Singh, Elam Endira Devi. </span><strong><span style=\"font-family: Cambria Math;\">Bharatnatyam dancers -</span></strong><span style=\"font-family: Cambria Math;\"><strong> </strong>Padma Subrahmanyam, R Muthukannamal; </span><span style=\"font-family: Cambria Math;\"><strong>Sattriya dancer -</strong> </span><span style=\"font-family: Cambria Math;\">Indira Bora. </span></p>\n",
+    "question_index": 11
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\"> Who among the followi</span><span style=\"font-family: Cambria Math;\">ng was famously known as the \"The parrot of India\"? </span></p>\n",
+    "options": [
+      "Amir Khusro",
+      "Lata Mangeshkar",
+      "Pandit Ravishankar",
+      "Kalidas"
+    ],
+    "correct_option_id": 0,
+    "solution": "<p>13.(a) <strong>Amir Khusro :</strong> <span style=\\\"font-family: Cambria Math;\\\">He is a poet in Delhi Sultanate.</span><span style=\\\"font-family: Cambria Math;\\\"> </span><span style=\\\"font-family: Cambria Math;\\\"><strong>Lata Mangeshka</strong>r</span><span style=\\\"font-family: Cambria Math;\\\"> -</span><span style=\\\"font-family: Cambria Math;\\\"> </span><span style=\\\"font-family: Cambria Math;\\\">Queen of Melody\\\", \\\"Nightingale of India\\\", and \\\"Voice of the Millennium\\\". </span><strong><span style=\\\"font-family: Cambria Math;\\\">Pandit Ravi Shankar</span></strong><span style=\\\"font-family: Cambria Math;\\\"><strong> </strong>was an Indian musician and composer, best </span><span style=\\\"font-family: Cambria Math;\\\">known for popularizing the Indian classical instrument Sitar all over the world. </span><span style=\\\"font-family: Cambria Math;\\\"><strong>Kalidasa</strong> </span><span style=\\\"font-family: Cambria Math;\\\">was a Classical Sanskrit author who is often considered ancient India\\'s greatest poet and playwright.</span></p>\\n",
+    "question_index": 12
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\"> Which institution launched a list of 50 iconic Indian heritage textiles?</span></p>\n",
+    "options": [
+      "Ministry of textile",
+      "NITI Aayog",
+      "Ministry of Culture",
+      "UNESCO\\r\\n "
+    ],
+    "correct_option_id": 3,
+    "solution": "<p>14.(d) <strong>UNESCO</strong> <span style=\"font-family: Cambria Math;\">(United Nations Educational, Scientific and Cultural Organization). Established - 16 November 1945. Headquarters - Paris. </span><strong><span style=\"font-family: Cambria Math;\">Some important Indian Heritage Textiles</span></strong><span style=\"font-family: Cambria Math;\"><strong>: </strong>Toda embroidery and Sungadi (Tamil Nadu), Himroo weaves (Hyderabad), Bandha tie and dye weavi</span><span style=\"font-family: Cambria Math;\">ng (Sambalpur, Odisha), Kunbi weaves (Goa). </span></p>\n",
+    "question_index": 13
+  },
+  {
+    "question": "<p><span style=\"font-family: Cambria Math;\"> \"Advanced Light Helicopter (ALH) MK III\" has been manufacturer by which organization?</span></p>\n",
+    "options": [
+      "ISRO",
+      "HAL",
+      "DRDO",
+      "BHEL"
+    ],
+    "correct_option_id": 1,
+    "solution": "<p>15.(b)<span style=\"font-family: Cambria Math;\"> </span><strong><span style=\"font-family: Cambria Math;\">HAL.</span></strong><span style=\"font-family: Cambria Math;\"> The ALH Mk-III helicopters, indigenously manufactured by Hindustan Aeronautics Limited</span><span style=\"font-family: Cambria Math;\"> </span><span style=\"font-family: Cambria Math;\"><strong>(HAL). Features:</strong></span><span style=\"font-family: Cambria Math;\"> state-of-the-art equipment including advanced </span><strong><span style=\"font-family: Cambria Math;\">RADAR</span></strong><span style=\"font-family: Cambria Math;\"> as well as Electro optical sensors, Shakti engines, full glass cockpit, high-intensity searchlight, advanced communication systems, automatic identification system as well as search-and-r</span><span style=\"font-family: Cambria Math;\">escue homer. </span><span style=\"font-family: Cambria Math;\"><strong>HAL:</strong> </span><span style=\"font-family: Cambria Math;\">Established - 23 Dec 1940. Headquarters - Bengaluru. </span></p>\n",
+    "question_index": 14
+  }
+];
     </script>
-    
+
     <!-- Central JS Controller -->
     <script src="../js/mock-core.js"></script>
 </body>
