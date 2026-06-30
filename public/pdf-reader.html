@@ -18,20 +18,22 @@
     padding: 0;
 }
 :root {
-    --bg-main: #0f172a;
-    --bg-sidebar: #1e293b;
-    --bg-toolbar: #1e293b;
+    --bg-main: #0b0f19;
+    --bg-sidebar: #131a2e;
+    --bg-toolbar: #131a2e;
     --text-main: #f8fafc;
-    --text-muted: #94a3b8;
-    --border-color: #334155;
+    --text-muted: #64748b;
+    --border-color: #1e293b;
     --primary: #06b6d4;
     --primary-hover: #0891b2;
     --primary-glow: rgba(6, 182, 212, 0.15);
-    --yellow-hl: rgba(253, 224, 71, 0.4);
-    --green-hl: rgba(74, 222, 128, 0.4);
-    --pink-hl: rgba(244, 114, 182, 0.4);
-    --blue-hl: rgba(96, 165, 250, 0.4);
-    --sidebar-width: 280px;
+    
+    --yellow-hl: rgba(253, 224, 71, 0.45);
+    --green-hl: rgba(74, 222, 128, 0.45);
+    --pink-hl: rgba(244, 114, 182, 0.45);
+    --blue-hl: rgba(96, 165, 250, 0.45);
+    
+    --sidebar-width: 300px;
     --toolbar-height: 56px;
     --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -50,19 +52,18 @@ body {
     height: var(--toolbar-height);
     background-color: var(--bg-toolbar);
     border-bottom: 1px solid var(--border-color);
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
     align-items: center;
-    justify-content: space-between;
     padding: 0 1.25rem;
-    gap: 1rem;
     z-index: 10;
     flex-shrink: 0;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.15);
 }
 .toolbar-left {
     display: flex;
     align-items: center;
-    gap: 1rem;
+    gap: 0.75rem;
     min-width: 0;
 }
 .back-btn {
@@ -79,6 +80,7 @@ body {
     align-items: center;
     gap: 0.35rem;
     transition: all 0.2s var(--ease-in-out);
+    white-space: nowrap;
 }
 .back-btn:hover {
     background-color: var(--border-color);
@@ -96,9 +98,14 @@ body {
 .toolbar-center {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: 0.75rem;
+}
+.nav-group {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
     background: var(--bg-main);
-    padding: 2px;
+    padding: 3px;
     border-radius: 8px;
     border: 1px solid var(--border-color);
 }
@@ -106,8 +113,8 @@ body {
     background: transparent;
     border: none;
     color: var(--text-main);
-    width: 32px;
-    height: 32px;
+    width: 30px;
+    height: 30px;
     border-radius: 6px;
     cursor: pointer;
     display: flex;
@@ -126,13 +133,24 @@ body {
     font-family: 'Fira Code', monospace;
     font-size: 0.8rem;
     padding: 0 0.5rem;
-    min-width: 90px;
+    min-width: 80px;
     text-align: center;
+}
+
+.zoom-group {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    background: var(--bg-main);
+    padding: 3px;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
 }
 
 .toolbar-right {
     display: flex;
     align-items: center;
+    justify-content: flex-end;
     gap: 0.75rem;
 }
 
@@ -142,21 +160,22 @@ body {
     background: var(--bg-main);
     border: 1px solid var(--border-color);
     border-radius: 8px;
-    padding: 2px;
-    gap: 2px;
+    padding: 3px;
+    gap: 3px;
 }
 .tool-btn {
     background: transparent;
     border: none;
     color: var(--text-muted);
-    width: 32px;
-    height: 32px;
+    width: 30px;
+    height: 30px;
     border-radius: 6px;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
     transition: all 0.2s;
+    position: relative;
 }
 .tool-btn:hover {
     color: var(--text-main);
@@ -168,7 +187,7 @@ body {
     box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.2);
 }
 
-/* Color Picker */
+/* Color Picker Dropdown */
 .color-picker {
     display: flex;
     gap: 4px;
@@ -176,24 +195,38 @@ body {
     padding: 0 4px;
 }
 .color-swatch {
-    width: 20px;
-    height: 20px;
+    width: 18px;
+    height: 18px;
     border-radius: 50%;
     cursor: pointer;
     border: 2px solid transparent;
     transition: transform 0.15s;
 }
 .color-swatch:hover {
-    transform: scale(1.15);
+    transform: scale(1.2);
 }
 .color-swatch.active {
     border-color: var(--text-main);
-    transform: scale(1.15);
+    transform: scale(1.2);
 }
 .swatch-yellow { background-color: #fde047; }
 .swatch-green { background-color: #4ade80; }
 .swatch-pink { background-color: #f472b6; }
 .swatch-blue { background-color: #60a5fa; }
+
+/* Dropdown select custom styling */
+.tool-select {
+    height: 30px;
+    background: var(--bg-main);
+    border: 1px solid var(--border-color);
+    color: var(--text-main);
+    border-radius: 6px;
+    padding: 0 6px;
+    font-family: inherit;
+    font-size: 0.78rem;
+    outline: none;
+    cursor: pointer;
+}
 
 /* ─── Main View Workspace ─── */
 .workspace {
@@ -203,7 +236,7 @@ body {
     position: relative;
 }
 
-/* Sidebar for other PDFs */
+/* Sidebar for PDFs and Bookmarks */
 .sidebar {
     width: var(--sidebar-width);
     background-color: var(--bg-sidebar);
@@ -213,15 +246,35 @@ body {
     flex-shrink: 0;
     transition: transform 0.3s var(--ease-in-out);
 }
-.sidebar-header {
-    padding: 1rem 1.25rem;
+.sidebar-tabs {
+    display: flex;
     border-bottom: 1px solid var(--border-color);
+    background: rgba(0,0,0,0.1);
+}
+.sidebar-tab {
+    flex: 1;
+    padding: 0.75rem;
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    font-family: inherit;
     font-size: 0.78rem;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.05em;
-    color: var(--text-muted);
+    cursor: pointer;
+    text-align: center;
+    border-bottom: 2px solid transparent;
+    transition: all 0.2s;
 }
+.sidebar-tab:hover {
+    color: var(--text-main);
+}
+.sidebar-tab.active {
+    color: var(--primary);
+    border-bottom-color: var(--primary);
+}
+
 .sidebar-search {
     padding: 0.75rem 1rem;
     border-bottom: 1px solid var(--border-color);
@@ -263,7 +316,7 @@ body {
     color: var(--text-main);
 }
 .sidebar-item.active {
-    background-color: var(--border-color);
+    background-color: rgba(255,255,255,0.06);
     color: var(--primary);
     font-weight: 600;
 }
@@ -281,12 +334,14 @@ body {
     padding: 2rem;
     background-color: var(--bg-main);
     position: relative;
+    scroll-behavior: smooth;
 }
 .viewer-container {
     position: relative;
-    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3), 0 8px 10px -6px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 12px 30px -6px rgba(0, 0, 0, 0.4);
     background-color: #fff;
     margin: 0 auto;
+    transition: transform 0.25s var(--ease-in-out);
 }
 #pdfCanvas {
     display: block;
@@ -299,18 +354,33 @@ body {
     cursor: crosshair;
 }
 
+/* Text Box Overlays */
+.text-box-input {
+    position: absolute;
+    z-index: 100;
+    background: var(--bg-sidebar);
+    color: var(--text-main);
+    border: 1px solid var(--primary);
+    outline: none;
+    font-family: 'Outfit', sans-serif;
+    font-size: 14px;
+    padding: 4px 8px;
+    border-radius: 4px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+
 /* Status Notifications */
 .status-msg {
     position: fixed;
     bottom: 1.5rem;
     right: 1.5rem;
-    background: #10b981;
+    background: #0ea5e9;
     color: #fff;
     padding: 0.6rem 1.2rem;
     border-radius: 8px;
     font-size: 0.85rem;
     font-weight: 600;
-    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.2);
+    box-shadow: 0 4px 12px rgba(14, 165, 233, 0.25);
     z-index: 50;
     opacity: 0;
     transform: translateY(10px);
@@ -326,6 +396,18 @@ body {
     outline: 2px solid var(--primary);
     outline-offset: 2px;
 }
+
+@media(max-width: 900px) {
+    .sidebar {
+        display: none;
+    }
+    .toolbar {
+        grid-template-columns: auto 1fr;
+    }
+    .toolbar-center {
+        display: none;
+    }
+}
 </style>
 </head>
 <body>
@@ -340,76 +422,106 @@ body {
         <div class="pdf-title" id="pdfName">Loading Document…</div>
     </div>
 
-    <!-- Paging Controls -->
+    <!-- Paging & Navigation Center -->
     <div class="toolbar-center">
-        <button class="nav-btn" id="prevPageBtn" title="Previous Page" aria-label="Previous Page">
-            <i data-lucide="chevron-left" style="width: 18px; height: 18px;"></i>
-        </button>
-        <span class="page-display"><span id="pageNum">0</span> / <span id="pageCount">0</span></span>
-        <button class="nav-btn" id="nextPageBtn" title="Next Page" aria-label="Next Page">
-            <i data-lucide="chevron-right" style="width: 18px; height: 18px;"></i>
-        </button>
+        <!-- Paging Navigation -->
+        <div class="nav-group">
+            <button class="nav-btn" id="prevPageBtn" title="Previous Page">
+                <i data-lucide="chevron-left" style="width: 16px; height: 16px;"></i>
+            </button>
+            <span class="page-display"><span id="pageNum">0</span> / <span id="pageCount">0</span></span>
+            <button class="nav-btn" id="nextPageBtn" title="Next Page">
+                <i data-lucide="chevron-right" style="width: 16px; height: 16px;"></i>
+            </button>
+        </div>
+
+        <!-- Zoom Options -->
+        <div class="zoom-group">
+            <button class="nav-btn" id="zoomOutBtn" title="Zoom Out">
+                <i data-lucide="zoom-out" style="width: 16px; height: 16px;"></i>
+            </button>
+            <span class="page-display" id="zoomLabel" style="min-width:60px;">130%</span>
+            <button class="nav-btn" id="zoomInBtn" title="Zoom In">
+                <i data-lucide="zoom-in" style="width: 16px; height: 16px;"></i>
+            </button>
+        </div>
+
+        <!-- Page Actions -->
+        <div class="zoom-group">
+            <button class="nav-btn" id="actionRotate" title="Rotate Page 90° Clockwise">
+                <i data-lucide="rotate-cw" style="width: 16px; height: 16px;"></i>
+            </button>
+        </div>
     </div>
 
-    <!-- Toolbar Tools -->
+    <!-- Annotations & System Actions -->
     <div class="toolbar-right">
-        <!-- Straight-line Highlighter lock -->
-        <button class="tool-btn" id="lockLineBtn" title="Lock Horizontal Straight Highlighting" aria-label="Lock Horizontal Straight Highlighting">
-            <i data-lucide="grip-horizontal" style="width: 18px; height: 18px;"></i>
-        </button>
+        <!-- Tool Selection Group -->
+        <div class="btn-group">
+            <button class="tool-btn active" id="toolSelect" title="Select / Pan Mode">
+                <i data-lucide="mouse-pointer" style="width: 16px; height: 16px;"></i>
+            </button>
+            <button class="tool-btn" id="toolDraw" title="Highlighter / Draw Pen Mode">
+                <i data-lucide="highlighter" id="drawIndicatorIcon" style="width: 16px; height: 16px;"></i>
+            </button>
+            <button class="tool-btn" id="toolText" title="Add Text Annotation">
+                <i data-lucide="type" style="width: 16px; height: 16px;"></i>
+            </button>
+            <button class="tool-btn" id="toolErase" title="Eraser Mode">
+                <i data-lucide="eraser" style="width: 16px; height: 16px;"></i>
+            </button>
+        </div>
 
-        <!-- Highlighter Type Selection -->
-        <select class="sort-select" id="highlighterType" title="Highlighter Tip/Style" style="height:32px; background:var(--bg-main); border:1px solid var(--border-color); color:var(--text-main); border-radius:6px; padding:0 6px; font-family:inherit; font-size:0.8rem; outline:none; cursor:pointer;">
+        <!-- Highlighter/Pen Tip dropdown -->
+        <select class="tool-select" id="highlighterType" title="Tip shape or Stroke style" style="display:none;">
             <option value="chisel">Chisel Tip</option>
             <option value="round">Round Tip</option>
             <option value="underline">Underline</option>
             <option value="box">Box Block</option>
+            <option value="opaque-free">Opaque Pen</option>
+            <option value="opaque-line">Opaque Line</option>
         </select>
 
-        <!-- Highlighter Colors -->
-        <div class="color-picker" id="colorPicker">
+        <!-- Colors Selection -->
+        <div class="color-picker" id="colorPicker" style="display:none;">
             <div class="color-swatch swatch-yellow active" data-color="yellow"></div>
             <div class="color-swatch swatch-green" data-color="green"></div>
             <div class="color-swatch swatch-pink" data-color="pink"></div>
             <div class="color-swatch swatch-blue" data-color="blue"></div>
         </div>
 
-        <!-- Tool Selection -->
+        <!-- Action Items (Undo, Clear, Bookmark, Fullscreen, Save) -->
         <div class="btn-group">
-            <button class="tool-btn active" id="toolDraw" title="Highlighter Pen" aria-label="Highlighter Pen">
-                <i data-lucide="highlighter" style="width: 18px; height: 18px;"></i>
+            <button class="tool-btn" id="actionUndo" title="Undo Last Annotation">
+                <i data-lucide="undo-2" style="width: 16px; height: 16px;"></i>
             </button>
-            <button class="tool-btn" id="toolErase" title="Eraser" aria-label="Eraser">
-                <i data-lucide="eraser" style="width: 18px; height: 18px;"></i>
+            <button class="tool-btn" id="actionClear" title="Clear Page Annotations">
+                <i data-lucide="trash-2" style="width: 16px; height: 16px;"></i>
+            </button>
+            <button class="tool-btn" id="actionBookmark" title="Bookmark This Page">
+                <i data-lucide="bookmark" id="bookmarkIcon" style="width: 16px; height: 16px;"></i>
             </button>
         </div>
 
-        <!-- Action Tools -->
-        <div class="btn-group">
-            <button class="tool-btn" id="actionUndo" title="Undo Last Drawing" aria-label="Undo Last Drawing">
-                <i data-lucide="undo-2" style="width: 18px; height: 18px;"></i>
-            </button>
-            <button class="tool-btn" id="actionClear" title="Clear All Drawings" aria-label="Clear All Drawings">
-                <i data-lucide="trash-2" style="width: 18px; height: 18px;"></i>
-            </button>
-        </div>
-
-        <!-- Save Indicator & Fullscreen -->
-        <button class="tool-btn" id="actionSave" title="Save Annotations Locally" aria-label="Save Annotations Locally">
-            <i data-lucide="save" style="width: 18px; height: 18px;"></i>
+        <button class="tool-btn" id="actionSave" title="Save All Document Annotations" style="color:var(--primary)">
+            <i data-lucide="save" style="width: 16px; height: 16px;"></i>
         </button>
-        <button class="tool-btn" id="actionFullscreen" title="Toggle Fullscreen" aria-label="Toggle Fullscreen">
-            <i data-lucide="maximize" id="fullscreenIcon" style="width: 18px; height: 18px;"></i>
+        <button class="tool-btn" id="actionFullscreen" title="Toggle Fullscreen">
+            <i data-lucide="maximize" id="fullscreenIcon" style="width: 16px; height: 16px;"></i>
         </button>
     </div>
 </header>
 
 <div class="workspace">
-    <!-- Sidebar List -->
+    <!-- Sidebar Panel -->
     <aside class="sidebar">
-        <div class="sidebar-header">GK Vault PDFs</div>
-        
-        <!-- Local Scheme file:// Warning & Picker -->
+        <!-- Tabs -->
+        <div class="sidebar-tabs">
+            <button class="sidebar-tab active" id="tabFiles">Files</button>
+            <button class="sidebar-tab" id="tabBookmarks">Bookmarks</button>
+        </div>
+
+        <!-- Local Scheme file:// Warning Banner -->
         <input type="file" id="localFilePicker" accept=".pdf" style="display:none">
         <div class="local-file-warning" id="localWarning" style="display:none; padding: 0.85rem; margin: 0.75rem; background: #7f1d1d; border: 1px solid #ef4444; border-radius: 8px; font-size: 0.75rem; line-height: 1.4;">
             <p style="font-weight:700; margin-bottom: 0.25rem; color:#fff;">⚠️ CORS Block (Local File Scheme)</p>
@@ -419,13 +531,21 @@ body {
             </button>
         </div>
 
-        <div class="sidebar-search">
-            <input type="text" id="sidebarSearch" placeholder="Search files…">
+        <!-- Files Section -->
+        <div id="sidebarFilesSection" style="display: flex; flex-direction: column; flex: 1; min-height: 0;">
+            <div class="sidebar-search">
+                <input type="text" id="sidebarSearch" placeholder="Search files…">
+            </div>
+            <div class="sidebar-list" id="pdfList"></div>
         </div>
-        <div class="sidebar-list" id="pdfList"></div>
+
+        <!-- Bookmarks Section -->
+        <div id="sidebarBookmarksSection" style="display: none; flex-direction: column; flex: 1; min-height: 0;">
+            <div class="sidebar-list" id="bookmarksList"></div>
+        </div>
     </aside>
 
-    <!-- Main Viewer Viewport -->
+    <!-- Viewer Space -->
     <main class="viewer-viewport">
         <div class="viewer-container" id="viewerContainer">
             <canvas id="pdfCanvas"></canvas>
@@ -441,16 +561,7 @@ body {
 // Configure PDF.js worker
 pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
 
-function htmlEnc(s) {
-    return String(s)
-        .replace(/&/g, '&amp;')
-        .replace(/"/g, '&quot;')
-        .replace(/'/g, '&#39;')
-        .replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;');
-}
-
-// Ink Highlighter color definitions
+// Highlighter presets
 const HIGHLIGHT_COLORS = {
     yellow: 'rgba(253, 224, 71, 0.45)',
     green: 'rgba(74, 222, 128, 0.45)',
@@ -458,17 +569,28 @@ const HIGHLIGHT_COLORS = {
     blue: 'rgba(96, 165, 250, 0.45)'
 };
 
+// Pen opaque presets
+const OPAQUE_COLORS = {
+    yellow: '#fde047',
+    green: '#4ade80',
+    pink: '#f472b6',
+    blue: '#60a5fa'
+};
+
 // Application State
 let pdfDoc = null;
 let currentPath = '';
 let currentNum = 1;
 let currentZoom = 1.3;
-let activeTool = 'draw'; // 'draw' or 'erase'
+let currentRotation = 0;
+
+let activeTool = 'select'; // 'select', 'draw', 'text', 'erase'
 let activeColor = 'yellow';
-let lockHorizontalLine = true; // Default straight highlighting for lines of text
-let highlighterType = 'chisel'; // 'chisel', 'round', 'underline', 'box'
+let highlighterType = 'chisel'; // 'chisel', 'round', 'underline', 'box', 'opaque-free', 'opaque-line'
+
 let isDrawing = false;
-let drawings = {}; // key: filepath, value: { pageNum: [pathArray] }
+let drawings = {}; // key: filepath, value: { pageNum: [pathObjects] }
+let bookmarks = {}; // key: filepath, value: [pageNumbers]
 let currentPathPoints = [];
 
 // DOM Elements
@@ -480,14 +602,26 @@ const viewerContainer = document.getElementById('viewerContainer');
 const pdfNameDisplay = document.getElementById('pdfName');
 const pageNumDisplay = document.getElementById('pageNum');
 const pageCountDisplay = document.getElementById('pageCount');
+const zoomLabel = document.getElementById('zoomLabel');
 
-// Initialize Drawing State
+function htmlEnc(s) {
+    return String(s)
+        .replace(/&/g, '&amp;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;');
+}
+
+// Local storage management
 function loadDrawings() {
     drawings = JSON.parse(localStorage.getItem('pdf_annotations') || '{}');
+    bookmarks = JSON.parse(localStorage.getItem('pdf_bookmarks') || '{}');
 }
 function saveDrawings() {
     localStorage.setItem('pdf_annotations', JSON.stringify(drawings));
-    showStatus('Annotations Saved Locally!');
+    localStorage.setItem('pdf_bookmarks', JSON.stringify(bookmarks));
+    showStatus('Document Annotations Saved!');
 }
 
 function showStatus(text) {
@@ -497,20 +631,21 @@ function showStatus(text) {
     setTimeout(() => el.classList.remove('show'), 2000);
 }
 
-// Render PDF Page with overlay canvas resize
+// PDF.js Page Rendering
 async function renderPage(num) {
     if (!pdfDoc) return;
     currentNum = num;
     pageNumDisplay.textContent = num;
     
-    // Disable navigation if on boundary
     document.getElementById('prevPageBtn').disabled = (num <= 1);
     document.getElementById('nextPageBtn').disabled = (num >= pdfDoc.numPages);
+    
+    // Update active page bookmark icon state
+    updateBookmarkIconState();
 
     const page = await pdfDoc.getPage(num);
-    const viewport = page.getViewport({ scale: currentZoom });
+    const viewport = page.getViewport({ scale: currentZoom, rotation: currentRotation });
     
-    // Set matching dimensions
     canvas.width = viewport.width;
     canvas.height = viewport.height;
     drawCanvas.width = viewport.width;
@@ -526,13 +661,17 @@ async function renderPage(num) {
     
     await page.render(renderCtx).promise;
     
-    // Clear and redraw vector drawings
+    // Redraw vector annotations
     redrawAnnotations();
 }
 
-// Redraw vector paths stored relative to canvas proportions
+// Redraw vector annotations relative to canvas width/height
 function redrawAnnotations() {
     dCtx.clearRect(0, 0, drawCanvas.width, drawCanvas.height);
+    
+    // Remove temporary input boxes
+    document.querySelectorAll('.text-box-input').forEach(el => el.remove());
+
     const fileDrawings = drawings[currentPath] || {};
     const pageDrawings = fileDrawings[currentNum] || [];
 
@@ -545,18 +684,30 @@ function redrawAnnotations() {
             
             dCtx.fillStyle = HIGHLIGHT_COLORS[path.color] || HIGHLIGHT_COLORS.yellow;
             dCtx.fillRect(startX, startY, endX - startX, endY - startY);
+        } else if (path.type === 'text') {
+            const startX = path.points[0].x * drawCanvas.width;
+            const startY = path.points[0].y * drawCanvas.height;
+            
+            dCtx.fillStyle = OPAQUE_COLORS[path.color] || OPAQUE_COLORS.yellow;
+            dCtx.font = "bold 14px 'Outfit', sans-serif";
+            dCtx.fillText(path.text, startX, startY);
         } else {
             dCtx.beginPath();
             
-            // Set styles based on path type
+            const isOpaque = path.type.startsWith('opaque');
+            
             if (path.type === 'underline') {
                 dCtx.lineWidth = 3;
                 dCtx.lineCap = 'round';
                 dCtx.lineJoin = 'round';
-                // Underline gets solid/darker tone of the highlight color
                 dCtx.strokeStyle = path.color === 'yellow' ? '#d97706' : 
                                    path.color === 'green' ? '#15803d' : 
                                    path.color === 'pink' ? '#db2777' : '#2563eb';
+            } else if (isOpaque) {
+                dCtx.lineWidth = 3; // Thinner for writing pen
+                dCtx.lineCap = 'round';
+                dCtx.lineJoin = 'round';
+                dCtx.strokeStyle = OPAQUE_COLORS[path.color] || OPAQUE_COLORS.yellow;
             } else {
                 dCtx.lineWidth = (path.widthPercent || 0.02) * drawCanvas.width;
                 dCtx.lineCap = path.type === 'round' ? 'round' : 'square';
@@ -575,7 +726,7 @@ function redrawAnnotations() {
     });
 }
 
-// Mouse/Touch Drawing Logic
+// Coordinate Helpers
 function getCanvasCoords(e) {
     const rect = drawCanvas.getBoundingClientRect();
     const clientX = e.touches ? e.touches[0].clientX : e.clientX;
@@ -586,6 +737,7 @@ function getCanvasCoords(e) {
     };
 }
 
+// Drawing Actions
 function startDraw(e) {
     if (activeTool !== 'draw') return;
     isDrawing = true;
@@ -598,23 +750,25 @@ function draw(e) {
     e.preventDefault();
     const coords = getCanvasCoords(e);
     
-    if (lockHorizontalLine && highlighterType !== 'box' && currentPathPoints.length > 0) {
-        // Force horizontal straight highlighting (lock Y coordinate to initial click)
+    // Lock horizontal line for Chisel/Round/Underline/OpaqueLine
+    const isLineLock = highlighterType === 'underline' || highlighterType === 'opaque-line' || (highlighterType === 'chisel' && e.shiftKey);
+    if (isLineLock && currentPathPoints.length > 0) {
         coords.y = currentPathPoints[0].y;
     }
     
     currentPathPoints.push(coords);
-
     dCtx.clearRect(0, 0, drawCanvas.width, drawCanvas.height);
-    redrawAnnotations(); // draw old paths first
+    redrawAnnotations();
 
-    // Draw active path
+    // Render active drawing path
     if (highlighterType === 'box') {
         const start = currentPathPoints[0];
         dCtx.fillStyle = HIGHLIGHT_COLORS[activeColor];
         dCtx.fillRect(start.x, start.y, coords.x - start.x, coords.y - start.y);
     } else {
         dCtx.beginPath();
+        const isOpaque = highlighterType.startsWith('opaque');
+        
         if (highlighterType === 'underline') {
             dCtx.lineWidth = 3;
             dCtx.lineCap = 'round';
@@ -622,6 +776,11 @@ function draw(e) {
             dCtx.strokeStyle = activeColor === 'yellow' ? '#d97706' : 
                                activeColor === 'green' ? '#15803d' : 
                                activeColor === 'pink' ? '#db2777' : '#2563eb';
+        } else if (isOpaque) {
+            dCtx.lineWidth = 3;
+            dCtx.lineCap = 'round';
+            dCtx.lineJoin = 'round';
+            dCtx.strokeStyle = OPAQUE_COLORS[activeColor];
         } else {
             dCtx.lineWidth = 18;
             dCtx.lineCap = highlighterType === 'round' ? 'round' : 'square';
@@ -644,7 +803,6 @@ function endDraw() {
     if (currentPathPoints.length > 1) {
         let savedPoints;
         if (highlighterType === 'box') {
-            // Box block only needs start and end points
             savedPoints = [
                 { x: currentPathPoints[0].x / drawCanvas.width, y: currentPathPoints[0].y / drawCanvas.height },
                 { x: currentPathPoints[currentPathPoints.length - 1].x / drawCanvas.width, y: currentPathPoints[currentPathPoints.length - 1].y / drawCanvas.height }
@@ -670,7 +828,56 @@ function endDraw() {
     redrawAnnotations();
 }
 
-// Eraser Action - click/draw to erase entire path
+// Text Annotation Tool Handler
+function handleTextAdd(e) {
+    if (activeTool !== 'text') return;
+    
+    // Remove existing inputs first
+    document.querySelectorAll('.text-box-input').forEach(el => el.remove());
+    
+    const coords = getCanvasCoords(e);
+    
+    // Create absolute text input element
+    const input = document.createElement('input');
+    input.type = 'text';
+    input.className = 'text-box-input';
+    input.placeholder = 'Type note and press Enter…';
+    
+    // Position input relative to drawing container
+    const rect = drawCanvas.getBoundingClientRect();
+    input.style.left = coords.x + 'px';
+    input.style.top = (coords.y - 12) + 'px';
+    
+    viewerContainer.appendChild(input);
+    input.focus();
+    
+    // Save on Enter
+    input.addEventListener('keydown', e => {
+        if (e.key === 'Enter') {
+            const val = input.value.trim();
+            if (val) {
+                if (!drawings[currentPath]) drawings[currentPath] = {};
+                if (!drawings[currentPath][currentNum]) drawings[currentPath][currentNum] = [];
+                
+                drawings[currentPath][currentNum].push({
+                    type: 'text',
+                    color: activeColor,
+                    text: val,
+                    points: [{ x: coords.x / drawCanvas.width, y: coords.y / drawCanvas.height }]
+                });
+                redrawAnnotations();
+            }
+            input.remove();
+        }
+    });
+    
+    // Close if clicked away empty
+    input.addEventListener('blur', () => {
+        setTimeout(() => input.remove(), 100);
+    });
+}
+
+// Eraser Logic
 function handleEraser(e) {
     if (activeTool !== 'erase') return;
     const coords = getCanvasCoords(e);
@@ -680,7 +887,6 @@ function handleEraser(e) {
     const fileDrawings = drawings[currentPath] || {};
     const pageDrawings = fileDrawings[currentNum] || [];
     
-    // Check if clicked close to any path segment
     let hitIndex = -1;
     for (let i = pageDrawings.length - 1; i >= 0; i--) {
         const path = pageDrawings[i];
@@ -701,58 +907,44 @@ function handleEraser(e) {
     }
 }
 
-// Navigation Load
-async function loadPDF(source) {
-    try {
-        let loadingTask;
-        if (typeof source === 'string') {
-            currentPath = source;
-            // Clean title
-            const filename = source.split('/').pop().replace(/\.pdf$/i, '');
-            pdfNameDisplay.textContent = filename;
-            loadingTask = pdfjsLib.getDocument(source);
-        } else if (source instanceof File) {
-            currentPath = source.name;
-            pdfNameDisplay.textContent = source.name.replace(/\.pdf$/i, '');
-            
-            // Read file as arrayBuffer to bypass local CORS rules
-            const arrayBuffer = await source.arrayBuffer();
-            loadingTask = pdfjsLib.getDocument({ data: arrayBuffer });
-        } else {
-            return;
-        }
-        
-        pdfDoc = await loadingTask.promise;
-        pageCountDisplay.textContent = pdfDoc.numPages;
-        
-        // Hide warning if load succeeded
-        document.getElementById('localWarning').style.display = 'none';
-
-        // Highlight active item in sidebar list
-        if (typeof source === 'string') {
-            document.querySelectorAll('.sidebar-item').forEach(el => {
-                el.classList.toggle('active', el.dataset.path === source);
-            });
-        }
-
-        renderPage(1);
-    } catch(err) {
-        console.error('Error loading PDF:', err);
-        pdfNameDisplay.textContent = 'Error Loading PDF File';
-        
-        // Display manual file chooser warning if running on file:// scheme
-        if (window.location.protocol === 'file:') {
-            document.getElementById('localWarning').style.display = 'block';
-        }
+// Navigation & Bookmark Toggle
+function updateBookmarkIconState() {
+    const isBookmarked = (bookmarks[currentPath] || []).includes(currentNum);
+    const icon = document.getElementById('bookmarkIcon');
+    if (isBookmarked) {
+        icon.setAttribute('data-lucide', 'bookmark-minus');
+        icon.parentElement.style.color = 'var(--primary)';
+    } else {
+        icon.setAttribute('data-lucide', 'bookmark');
+        icon.parentElement.style.color = 'inherit';
     }
+    if (typeof lucide !== 'undefined') lucide.createIcons();
 }
 
-// Sidebars list building
+function toggleBookmark() {
+    if (!currentPath) return;
+    if (!bookmarks[currentPath]) bookmarks[currentPath] = [];
+    
+    const index = bookmarks[currentPath].indexOf(currentNum);
+    if (index > -1) {
+        // Remove bookmark
+        bookmarks[currentPath].splice(index, 1);
+        showStatus(`Bookmark Removed (Page ${currentNum})`);
+    } else {
+        // Add bookmark
+        bookmarks[currentPath].push(currentNum);
+        bookmarks[currentPath].sort((a,b)=>a-b);
+        showStatus(`Page ${currentNum} Bookmarked!`);
+    }
+    updateBookmarkIconState();
+    buildBookmarksList();
+}
+
+// Sidebar list generators
 function buildSidebar(searchQuery = '') {
     const list = document.getElementById('pdfList');
     list.innerHTML = '';
     
-    // Filter PDFs from generated metadata
     const pdfs = MOCK_DATA.filter(m => m.path.includes('pdf-reader.html?file='));
     const filtered = pdfs.filter(m => m.name.toLowerCase().includes(searchQuery.toLowerCase()));
 
@@ -774,15 +966,78 @@ function buildSidebar(searchQuery = '') {
     if (typeof lucide !== 'undefined') lucide.createIcons();
 }
 
-// UI Event Handlers
+function buildBookmarksList() {
+    const list = document.getElementById('bookmarksList');
+    list.innerHTML = '';
+    
+    const fileBookmarks = bookmarks[currentPath] || [];
+    if (fileBookmarks.length === 0) {
+        list.innerHTML = `<div style="text-align:center; padding: 2rem; font-size:0.8rem; color:var(--text-muted);">No page bookmarks for this document.</div>`;
+        return;
+    }
+    
+    fileBookmarks.forEach(pageNo => {
+        const item = document.createElement('div');
+        item.className = 'sidebar-item';
+        item.innerHTML = `<i data-lucide="bookmark" style="width:16px;height:16px;"></i> <span>Page ${pageNo}</span>`;
+        item.addEventListener('click', () => {
+            renderPage(pageNo);
+        });
+        list.appendChild(item);
+    });
+    
+    if (typeof lucide !== 'undefined') lucide.createIcons();
+}
+
+// Document Load
+async function loadPDF(source) {
+    try {
+        let loadingTask;
+        if (typeof source === 'string') {
+            currentPath = source;
+            const filename = source.split('/').pop().replace(/\.pdf$/i, '');
+            pdfNameDisplay.textContent = filename;
+            loadingTask = pdfjsLib.getDocument(source);
+        } else if (source instanceof File) {
+            currentPath = source.name;
+            pdfNameDisplay.textContent = source.name.replace(/\.pdf$/i, '');
+            const arrayBuffer = await source.arrayBuffer();
+            loadingTask = pdfjsLib.getDocument({ data: arrayBuffer });
+        } else {
+            return;
+        }
+        
+        pdfDoc = await loadingTask.promise;
+        pageCountDisplay.textContent = pdfDoc.numPages;
+        
+        document.getElementById('localWarning').style.display = 'none';
+
+        if (typeof source === 'string') {
+            document.querySelectorAll('.sidebar-item').forEach(el => {
+                el.classList.toggle('active', el.dataset.path === source);
+            });
+        }
+        
+        currentRotation = 0;
+        renderPage(1);
+        buildBookmarksList();
+    } catch(err) {
+        console.error('Error loading PDF:', err);
+        pdfNameDisplay.textContent = 'Error Loading PDF File';
+        
+        if (window.location.protocol === 'file:') {
+            document.getElementById('localWarning').style.display = 'block';
+        }
+    }
+}
+
+// UI Bindings
 document.addEventListener('DOMContentLoaded', () => {
     loadDrawings();
 
-    // Query Parameter load
     const params = new URLSearchParams(window.location.search);
     const fileParam = params.get('file') || 'Current affairs PDF/Appointment 2026-01-08.pdf';
     
-    // Check if loaded locally via file://
     if (window.location.protocol === 'file:') {
         document.getElementById('localWarning').style.display = 'block';
     }
@@ -790,13 +1045,10 @@ document.addEventListener('DOMContentLoaded', () => {
     buildSidebar();
     loadPDF(fileParam);
 
-    // Local file picker binder
-    const picker = document.getElementById('localFilePicker');
-    picker.addEventListener('change', e => {
+    // Local file input
+    document.getElementById('localFilePicker').addEventListener('change', e => {
         const file = e.target.files[0];
-        if (file) {
-            loadPDF(file);
-        }
+        if (file) loadPDF(file);
     });
 
     // Sidebar search
@@ -804,7 +1056,7 @@ document.addEventListener('DOMContentLoaded', () => {
         buildSidebar(e.target.value);
     });
 
-    // Paging
+    // Paging Action events
     document.getElementById('prevPageBtn').addEventListener('click', () => {
         if (currentNum > 1) renderPage(currentNum - 1);
     });
@@ -812,29 +1064,74 @@ document.addEventListener('DOMContentLoaded', () => {
         if (currentNum < pdfDoc.numPages) renderPage(currentNum + 1);
     });
 
-    // Tools setup
+    // Zooming Actions
+    document.getElementById('zoomInBtn').addEventListener('click', () => {
+        currentZoom = Math.min(3.0, currentZoom + 0.15);
+        zoomLabel.textContent = Math.round(currentZoom * 100) + '%';
+        renderPage(currentNum);
+    });
+    document.getElementById('zoomOutBtn').addEventListener('click', () => {
+        currentZoom = Math.max(0.6, currentZoom - 0.15);
+        zoomLabel.textContent = Math.round(currentZoom * 100) + '%';
+        renderPage(currentNum);
+    });
+
+    // Rotate Action
+    document.getElementById('actionRotate').addEventListener('click', () => {
+        currentRotation = (currentRotation + 90) % 360;
+        renderPage(currentNum);
+    });
+
+    // Tool Picker
+    document.getElementById('toolSelect').addEventListener('click', () => {
+        activeTool = 'select';
+        document.querySelectorAll('.tool-btn').forEach(btn => btn.classList.remove('active'));
+        document.getElementById('toolSelect').classList.add('active');
+        document.getElementById('highlighterType').style.display = 'none';
+        document.getElementById('colorPicker').style.display = 'none';
+        drawCanvas.style.cursor = 'default';
+    });
+
     document.getElementById('toolDraw').addEventListener('click', () => {
         activeTool = 'draw';
+        document.querySelectorAll('.tool-btn').forEach(btn => btn.classList.remove('active'));
         document.getElementById('toolDraw').classList.add('active');
-        document.getElementById('toolErase').classList.remove('active');
+        document.getElementById('highlighterType').style.display = 'block';
+        document.getElementById('colorPicker').style.display = 'flex';
         drawCanvas.style.cursor = 'crosshair';
     });
+
+    document.getElementById('toolText').addEventListener('click', () => {
+        activeTool = 'text';
+        document.querySelectorAll('.tool-btn').forEach(btn => btn.classList.remove('active'));
+        document.getElementById('toolText').classList.add('active');
+        document.getElementById('highlighterType').style.display = 'none';
+        document.getElementById('colorPicker').style.display = 'flex';
+        drawCanvas.style.cursor = 'text';
+    });
+
     document.getElementById('toolErase').addEventListener('click', () => {
         activeTool = 'erase';
+        document.querySelectorAll('.tool-btn').forEach(btn => btn.classList.remove('active'));
         document.getElementById('toolErase').classList.add('active');
-        document.getElementById('toolDraw').classList.remove('active');
+        document.getElementById('highlighterType').style.display = 'none';
+        document.getElementById('colorPicker').style.display = 'none';
         drawCanvas.style.cursor = 'cell';
     });
 
-    // Straight line lock toggle
-    const lockBtn = document.getElementById('lockLineBtn');
-    lockBtn.classList.toggle('active', lockHorizontalLine);
-    lockBtn.addEventListener('click', () => {
-        lockHorizontalLine = !lockHorizontalLine;
-        lockBtn.classList.toggle('active', lockHorizontalLine);
+    // Highlighter dropdown
+    document.getElementById('highlighterType').addEventListener('change', e => {
+        highlighterType = e.target.value;
+        const icon = document.getElementById('drawIndicatorIcon');
+        if (highlighterType.startsWith('opaque')) {
+            icon.setAttribute('data-lucide', 'pen-tool');
+        } else {
+            icon.setAttribute('data-lucide', 'highlighter');
+        }
+        if (typeof lucide !== 'undefined') lucide.createIcons();
     });
 
-    // Color Swatch Selection
+    // Color swatches picker
     document.getElementById('colorPicker').addEventListener('click', e => {
         const swatch = e.target.closest('.color-swatch');
         if (!swatch) return;
@@ -843,7 +1140,22 @@ document.addEventListener('DOMContentLoaded', () => {
         activeColor = swatch.dataset.color;
     });
 
-    // Undo / Clear
+    // Sidebar Tabs
+    document.getElementById('tabFiles').addEventListener('click', () => {
+        document.getElementById('tabFiles').classList.add('active');
+        document.getElementById('tabBookmarks').classList.remove('active');
+        document.getElementById('sidebarFilesSection').style.display = 'flex';
+        document.getElementById('sidebarBookmarksSection').style.display = 'none';
+    });
+    document.getElementById('tabBookmarks').addEventListener('click', () => {
+        document.getElementById('tabBookmarks').classList.add('active');
+        document.getElementById('tabFiles').classList.remove('active');
+        document.getElementById('sidebarBookmarksSection').style.display = 'flex';
+        document.getElementById('sidebarFilesSection').style.display = 'none';
+        buildBookmarksList();
+    });
+
+    // Undo / Clear / Bookmark / Fullscreen
     document.getElementById('actionUndo').addEventListener('click', () => {
         if (drawings[currentPath] && drawings[currentPath][currentNum]) {
             drawings[currentPath][currentNum].pop();
@@ -851,58 +1163,50 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
     document.getElementById('actionClear').addEventListener('click', () => {
-        if (confirm('Are you sure you want to clear all annotations on this page?')) {
+        if (confirm('Clear all annotations on this page?')) {
             if (drawings[currentPath] && drawings[currentPath][currentNum]) {
                 drawings[currentPath][currentNum] = [];
                 redrawAnnotations();
             }
         }
     });
-
-    // Save
+    document.getElementById('actionBookmark').addEventListener('click', toggleBookmark);
     document.getElementById('actionSave').addEventListener('click', saveDrawings);
 
-    // Fullscreen Toggle
     document.getElementById('actionFullscreen').addEventListener('click', () => {
         if (!document.fullscreenElement) {
             document.documentElement.requestFullscreen().catch(err => {
-                console.error(`Error attempting to enable fullscreen: ${err.message}`);
+                console.error(`Error entering fullscreen: ${err.message}`);
             });
         } else {
             document.exitFullscreen();
         }
     });
-
     document.addEventListener('fullscreenchange', () => {
-        const iconEl = document.getElementById('fullscreenIcon');
+        const icon = document.getElementById('fullscreenIcon');
         if (document.fullscreenElement) {
-            iconEl.setAttribute('data-lucide', 'minimize');
+            icon.setAttribute('data-lucide', 'minimize');
         } else {
-            iconEl.setAttribute('data-lucide', 'maximize');
+            icon.setAttribute('data-lucide', 'maximize');
         }
         if (typeof lucide !== 'undefined') lucide.createIcons();
     });
 
-    // Highlighter Type Dropdown change
-    document.getElementById('highlighterType').addEventListener('change', e => {
-        highlighterType = e.target.value;
-    });
-
-    // Mouse Draw binds
+    // Mouse & Touch binds
     drawCanvas.addEventListener('mousedown', startDraw);
     drawCanvas.addEventListener('mousemove', draw);
     window.addEventListener('mouseup', endDraw);
-    drawCanvas.addEventListener('click', handleEraser);
+    drawCanvas.addEventListener('click', e => {
+        handleTextAdd(e);
+        handleEraser(e);
+    });
 
-    // Mobile touch drawing binds
     drawCanvas.addEventListener('touchstart', startDraw, { passive: false });
     drawCanvas.addEventListener('touchmove', draw, { passive: false });
     drawCanvas.addEventListener('touchend', endDraw);
 
-    // Init icons
     if (typeof lucide !== 'undefined') lucide.createIcons();
 });
 </script>
 </body>
 </html>
-
