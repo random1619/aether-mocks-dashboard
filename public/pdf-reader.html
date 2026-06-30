@@ -1192,6 +1192,79 @@ document.addEventListener('DOMContentLoaded', () => {
         if (typeof lucide !== 'undefined') lucide.createIcons();
     });
 
+    // Keyboard Shortcuts Binding
+    document.addEventListener('keydown', e => {
+        // Ignore shortcuts when editing text inputs
+        const activeTag = document.activeElement.tagName;
+        if (activeTag === 'INPUT' || activeTag === 'TEXTAREA') {
+            return;
+        }
+
+        const isCtrl = e.ctrlKey || e.metaKey;
+
+        switch (e.key.toLowerCase()) {
+            case 'arrowleft':
+            case 'pageup':
+                e.preventDefault();
+                if (currentNum > 1) renderPage(currentNum - 1);
+                break;
+            case 'arrowright':
+            case 'pagedown':
+                e.preventDefault();
+                if (currentNum < pdfDoc.numPages) renderPage(currentNum + 1);
+                break;
+            case '=':
+            case '+':
+                if (isCtrl) e.preventDefault();
+                document.getElementById('zoomInBtn').click();
+                break;
+            case '-':
+                if (isCtrl) e.preventDefault();
+                document.getElementById('zoomOutBtn').click();
+                break;
+            case 'v':
+                document.getElementById('toolSelect').click();
+                showStatus('Mode: Select / Pan');
+                break;
+            case 'h':
+                document.getElementById('toolDraw').click();
+                showStatus('Mode: Highlighter');
+                break;
+            case 't':
+                document.getElementById('toolText').click();
+                showStatus('Mode: Text Annotation');
+                break;
+            case 'e':
+                document.getElementById('toolErase').click();
+                showStatus('Mode: Eraser');
+                break;
+            case 'r':
+                e.preventDefault();
+                document.getElementById('actionRotate').click();
+                break;
+            case 'b':
+                e.preventDefault();
+                toggleBookmark();
+                break;
+            case 'z':
+                if (isCtrl) {
+                    e.preventDefault();
+                    document.getElementById('actionUndo').click();
+                }
+                break;
+            case 's':
+                if (isCtrl) {
+                    e.preventDefault();
+                    saveDrawings();
+                }
+                break;
+            case 'f':
+                e.preventDefault();
+                document.getElementById('actionFullscreen').click();
+                break;
+        }
+    });
+
     // Mouse & Touch binds
     drawCanvas.addEventListener('mousedown', startDraw);
     drawCanvas.addEventListener('mousemove', draw);
