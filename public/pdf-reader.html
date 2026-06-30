@@ -213,6 +213,10 @@ body {
 .swatch-green { background-color: #4ade80; }
 .swatch-pink { background-color: #f472b6; }
 .swatch-blue { background-color: #60a5fa; }
+.swatch-orange { background-color: #fb923c; }
+.swatch-purple { background-color: #c084fc; }
+.swatch-red { background-color: #f87171; }
+.swatch-teal { background-color: #2dd4bf; }
 
 /* Dropdown select custom styling */
 .tool-select {
@@ -498,6 +502,10 @@ body {
             <div class="color-swatch swatch-green" data-color="green"></div>
             <div class="color-swatch swatch-pink" data-color="pink"></div>
             <div class="color-swatch swatch-blue" data-color="blue"></div>
+            <div class="color-swatch swatch-orange" data-color="orange"></div>
+            <div class="color-swatch swatch-purple" data-color="purple"></div>
+            <div class="color-swatch swatch-red" data-color="red"></div>
+            <div class="color-swatch swatch-teal" data-color="teal"></div>
         </div>
 
         <!-- Action Items (Undo, Clear, Bookmark, Fullscreen, Save) -->
@@ -576,7 +584,11 @@ const HIGHLIGHT_COLORS = {
     yellow: 'rgba(253, 224, 71, 0.45)',
     green: 'rgba(74, 222, 128, 0.45)',
     pink: 'rgba(244, 114, 182, 0.45)',
-    blue: 'rgba(96, 165, 250, 0.45)'
+    blue: 'rgba(96, 165, 250, 0.45)',
+    orange: 'rgba(251, 146, 60, 0.45)',
+    purple: 'rgba(192, 132, 252, 0.45)',
+    red: 'rgba(248, 113, 113, 0.45)',
+    teal: 'rgba(45, 212, 191, 0.45)'
 };
 
 // Pen opaque presets
@@ -584,8 +596,25 @@ const OPAQUE_COLORS = {
     yellow: '#fde047',
     green: '#4ade80',
     pink: '#f472b6',
-    blue: '#60a5fa'
+    blue: '#60a5fa',
+    orange: '#fb923c',
+    purple: '#c084fc',
+    red: '#f87171',
+    teal: '#2dd4bf'
 };
+
+// Underline solid presets
+const UNDERLINE_COLORS = {
+    yellow: '#d97706',
+    green: '#15803d',
+    pink: '#db2777',
+    blue: '#2563eb',
+    orange: '#ea580c',
+    purple: '#9333ea',
+    red: '#dc2626',
+    teal: '#0d9488'
+};
+
 
 // Application State
 let pdfDoc = null;
@@ -710,9 +739,7 @@ function redrawAnnotations() {
                 dCtx.lineWidth = 3;
                 dCtx.lineCap = 'round';
                 dCtx.lineJoin = 'round';
-                dCtx.strokeStyle = path.color === 'yellow' ? '#d97706' : 
-                                   path.color === 'green' ? '#15803d' : 
-                                   path.color === 'pink' ? '#db2777' : '#2563eb';
+                dCtx.strokeStyle = UNDERLINE_COLORS[path.color] || UNDERLINE_COLORS.yellow;
             } else if (isOpaque) {
                 dCtx.lineWidth = 3; // Thinner for writing pen
                 dCtx.lineCap = 'round';
@@ -783,9 +810,7 @@ function draw(e) {
             dCtx.lineWidth = 3;
             dCtx.lineCap = 'round';
             dCtx.lineJoin = 'round';
-            dCtx.strokeStyle = activeColor === 'yellow' ? '#d97706' : 
-                               activeColor === 'green' ? '#15803d' : 
-                               activeColor === 'pink' ? '#db2777' : '#2563eb';
+            dCtx.strokeStyle = UNDERLINE_COLORS[activeColor] || UNDERLINE_COLORS.yellow;
         } else if (isOpaque) {
             dCtx.lineWidth = 3;
             dCtx.lineCap = 'round';
